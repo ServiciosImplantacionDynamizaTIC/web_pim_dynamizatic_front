@@ -25,6 +25,8 @@ const Idioma = () => {
                 editarComponente={<EditarIdioma />}
                 columnas={columnas}
                 deleteRegistro={deleteIdioma}
+                validarEliminar={{ campo: 'nombre', valores: ['Español', 'Inglés'] }} // No permitir eliminar estos idiomas
+                validarEditar={{ campo: 'nombre', valores: ['Español', 'Inglés'] }} // No permitir editar estos idiomas
             />
         </div>
     );

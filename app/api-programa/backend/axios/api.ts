@@ -3506,6 +3506,24 @@ export interface Empresa {
      * @memberof Empresa
      */
     'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Empresa
+     */
+    'servicio'?: string | null;
 }
 /**
  * 
@@ -3695,6 +3713,24 @@ export interface EmpresaPartial {
      * @memberof EmpresaPartial
      */
     'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaPartial
+     */
+    'servicio'?: string | null;
 }
 /**
  * (tsType: EmpresaWithRelations, schemaOptions: { includeRelations: true })
@@ -3804,6 +3840,24 @@ export interface EmpresaWithRelations {
      * @memberof EmpresaWithRelations
      */
     'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof EmpresaWithRelations
+     */
+    'servicio'?: string | null;
 }
 /**
  * 
@@ -9189,6 +9243,24 @@ export interface NewEmpresa {
      * @memberof NewEmpresa
      */
     'escala'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'password'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewEmpresa
+     */
+    'servicio'?: string | null;
 }
 /**
  * (tsType: Omit<GrupoAtributo, \'id\'>, schemaOptions: { title: \'NewGrupoAtributo\', exclude: [ \'id\' ] })
@@ -43986,6 +44058,44 @@ export const TraduccionLiteralControllerApiAxiosParamCreator = function (configu
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionLiteralControllerBuscarTraduccionLiteral: async (iso?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/buscarTraduccionLiteral`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (iso !== undefined) {
+                localVarQueryParameter['iso'] = iso;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -44312,11 +44422,21 @@ export const TraduccionLiteralControllerApiFp = function(configuration?: Configu
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionLiteralControllerBuscarTraduccionLiteral(iso?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionLiteralControllerBuscarTraduccionLiteral(iso, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+        async traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionLiteralControllerCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -44346,7 +44466,7 @@ export const TraduccionLiteralControllerApiFp = function(configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TraduccionLiteralWithRelations>>> {
+        async traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionLiteralControllerFind(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -44406,11 +44526,20 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
     return {
         /**
          * 
+         * @param {string} [iso] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionLiteralControllerBuscarTraduccionLiteral(iso?: string, options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionLiteralControllerBuscarTraduccionLiteral(iso, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+        traduccionLiteralControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
             return localVarFp.traduccionLiteralControllerCount(where, options).then((request) => request(axios, basePath));
         },
         /**
@@ -44437,7 +44566,7 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: any): AxiosPromise<Array<TraduccionLiteralWithRelations>> {
+        traduccionLiteralControllerFind(filter?: TraduccionLiteralFilter1, options?: any): AxiosPromise<object> {
             return localVarFp.traduccionLiteralControllerFind(filter, options).then((request) => request(axios, basePath));
         },
         /**
@@ -44490,6 +44619,17 @@ export const TraduccionLiteralControllerApiFactory = function (configuration?: C
  * @extends {BaseAPI}
  */
 export class TraduccionLiteralControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [iso] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionLiteralControllerApi
+     */
+    public traduccionLiteralControllerBuscarTraduccionLiteral(iso?: string, options?: AxiosRequestConfig) {
+        return TraduccionLiteralControllerApiFp(this.configuration).traduccionLiteralControllerBuscarTraduccionLiteral(iso, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
