@@ -17,8 +17,8 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
     const [pantallaDashboardSeleccionada, setPantallaDashboardSeleccionada] = useState(null);
     const intl = useIntl();
     const pantallasDashboard = [
-        { nombre: intl.formatMessage({ id: 'Roles' }), url: '/tablas-maestras/rol/' },
-        { nombre: intl.formatMessage({ id: 'Examenes' }), url: '/examenes/' },
+        { nombre: intl.formatMessage({ id: 'Empresas' }), url: '/empresas/' },
+        { nombre: intl.formatMessage({ id: 'Usuarios' }), url: '/usuarios/' },
 
     ];
     useEffect(() => {
@@ -90,13 +90,18 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                 }
             } else {
                 //Si se edita un registro existente Hacemos el patch del registro
-                delete objGuardar.nombreEmpresa;
-                objGuardar['usuarioModificacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                const registroActualizar = {
+                    activoSn: objGuardar.activoSn,
+                    empresaId: getUsuarioSesion()?.empresaId,
+                    nombre: objGuardar.nombre,
+                    muestraEmpresa: objGuardar.muestraEmpresa,
+                    usuarioModificacion: usuarioActual,
+                    dashboardUrl: objGuardar.dashboardUrl
+                }
                 if(pantallaDashboardSeleccionada){
                     objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
                 }
-                await patchRol(objGuardar.id, objGuardar);
+                await patchRol(objGuardar.id, registroActualizar);
                 setIdEditar(null)
                 setRegistroResult("editado");
             }

@@ -19,7 +19,7 @@ const Rol = () => {
                 getRegistros={getRol}
                 getRegistrosCount={getRolCount}
                 botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Prueba"}
+                controlador={"Roles"}
                 editarComponente={<EditarRoles />}
                 columnas={columnas}
                 deleteRegistro={deleteRol}

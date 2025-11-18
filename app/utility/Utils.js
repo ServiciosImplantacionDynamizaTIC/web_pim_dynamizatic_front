@@ -158,3 +158,19 @@ export function calcularDiferenciaDias(fechaISO) {
   const fechaActual = new Date();
   return differenceInDays(fechaComparacion, fechaActual);
 }
+
+//
+//Comprobamos que la url existe
+//
+export async function verificarUrlExiste(url) {
+    try {
+        const response = await fetch(url, { 
+            method: 'HEAD',
+            cache: 'no-cache'
+        });
+        return response.ok;
+    } catch (error) {
+        console.warn('Error verificando URL:', error);
+        return false;
+    }
+};
