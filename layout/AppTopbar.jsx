@@ -4,6 +4,8 @@ import { getIdiomas } from '@/app/api-endpoints/idioma';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
+import { devuelveBasePath, getUsuarioSesion, verificarUrlExiste } from "@/app/utility/Utils";
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);
@@ -27,28 +29,42 @@ const AppTopbar = React.forwardRef((props, ref) => {
 
         const fetchData = async () => {
             await obtenerListaIdiomas();
-            // await obtenerAvatarUsuario();
+            await obtenerAvatarUsuario();
             //Si el rol del usuario tiene permisos para ver la empresa
-            // if (await obtenerRolUsuario()) {
-            //     obtenerNombreEmpresa();
-            //     //obtenerLogoEmpresa()
-            // }
+            if (await obtenerRolUsuario()) {
+                obtenerNombreEmpresa();
+                //obtenerLogoEmpresa()
+            }
 
         }
         fetchData();
     }, []);
 
-    // const obtenerAvatarUsuario = async () => {
-    //     let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
-    //     if (avatar.length > 0){
-    //         avatar = avatar[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
-    //         setAvatar(`${devuelveBasePath()}${avatar}`);
-    //     }
-    //     else{
-    //         setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
-    //     }
-
-    // }
+    const obtenerAvatarUsuario = async () => {
+        let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
+        if (avatar.length > 0){
+            const urlOriginal = avatar[0].url;
+            const urlRedimensionada = urlOriginal.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
+            
+            // Construir las URLs completas
+            const urlCompletaRedimensionada = `${devuelveBasePath()}${urlRedimensionada}`;
+            const urlCompletaOriginal = `${devuelveBasePath()}${urlOriginal}`;
+            
+            // Verificar si existe la imagen redimensionada
+            const existeRedimensionada = await verificarUrlExiste(urlCompletaRedimensionada);
+            
+            if (existeRedimensionada) {
+                console.log('Usando imagen redimensionada:', urlCompletaRedimensionada);
+                setAvatar(urlCompletaRedimensionada);
+            } else {
+                console.log('Imagen redimensionada no encontrada, usando original:', urlCompletaOriginal);
+                setAvatar(urlCompletaOriginal);
+            }
+        }
+        else{
+            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+        }
+    }
 
     const obtenerListaIdiomas = async () => {
         // const filtro = {
@@ -74,33 +90,31 @@ const AppTopbar = React.forwardRef((props, ref) => {
         setDropdownValues(jsonDeIdiomas);
     }
 
-    // const obtenerRolUsuario = async () => {
-    //     const usuario = getUsuarioSesion();
-    //     const queryParamsRol = {
-    //         where: {
-    //             and: {
-    //                 id: usuario.rolId
-    //             }
-    //         },
-    //     };
-    //     const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
-    //     //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
-    //     return rol[0].muestraEmpresa === 'S'
-    // }
+    const obtenerRolUsuario = async () => {
+        const usuario = getUsuarioSesion();
+        const queryParamsRol = {
+            where: {
+                and: {
+                    id: usuario.rolId
+                }
+            },
+        };
+        const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
+        //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
+        return rol[0].muestraEmpresa === 'S'
+    }
 
-    // const obtenerNombreEmpresa = async () => {
-    //     const queryParamsTiposArchivo = {
-    //         where: {
-    //             and: {
-    //                 id: Number(localStorage.getItem('empresa'))
-    //             }
-
-    //         },
-    //     };
-    //     const empresa = await getVistaEmpresaMoneda(JSON.stringify(queryParamsTiposArchivo));
-    //     setEmpresaNombre(empresa[0].nombre)
-    // }
-
+    const obtenerNombreEmpresa = async () => {
+        const queryParamsTiposArchivo = {
+            where: {
+                and: {
+                    id: Number(localStorage.getItem('empresa'))
+                }
+            },
+        };
+        const empresa = await getVistaEmpresaMoneda(JSON.stringify(queryParamsTiposArchivo));
+        setEmpresaNombre(empresa[0].nombre)
+    }
 
 
     const cambiarIdioma = (idioma) => {
