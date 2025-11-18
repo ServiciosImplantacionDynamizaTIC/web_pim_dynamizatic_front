@@ -80,7 +80,7 @@ const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro
                             usuarioCreacion: usuarioActual,
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
-                            valor: objGuardar[idioma.nombre],
+                            valor: objGuardar[idioma.nombre.toLowerCase()],
                         }
                         if (objTraduccion.valor && objTraduccion.valor.length > 0) {
                             await postTraduccionLiteral(objTraduccion);
@@ -105,7 +105,7 @@ const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro
                             usuarioCreacion: usuarioActual,
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
-                            valor: objGuardar[idioma.nombre],
+                            valor: objGuardar[idioma.nombre.toLowerCase()],
                             id: objGuardar.id
                         }
                         if (objTraduccion.valor && objTraduccion.valor.length > 0) {

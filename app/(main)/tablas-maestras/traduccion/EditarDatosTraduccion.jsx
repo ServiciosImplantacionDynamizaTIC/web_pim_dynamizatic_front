@@ -23,11 +23,11 @@ const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardan
                     <div key={idioma.id} className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
                         <label htmlFor={`valor-${idioma.nombre}`}>{idioma.nombre}</label>
                         <InputText 
-                            value={traduccion[idioma.nombre] || ''}
+                            value={traduccion[idioma.nombre.toLowerCase()] || ''}
                             placeholder={intl.formatMessage({ id: 'Valor de la traduccion en' }) + ' ' + idioma.nombre}
                             onChange={(e) => setTraduccion({ 
                                 ...traduccion, 
-                                [idioma.nombre]: e.target.value 
+                                [idioma.nombre.toLowerCase()]: e.target.value 
                             })}
                             rows={5} 
                             cols={30} 

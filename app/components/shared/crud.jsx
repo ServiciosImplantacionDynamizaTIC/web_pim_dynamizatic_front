@@ -29,7 +29,7 @@ import { useRouter } from 'next/navigation';
 import { useTheme } from "@/app/providers/ThemeProvider";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar }) => {
     const intl = useIntl()
     const router = useRouter();
     const { themeConfig } = useTheme(); // Hook para obtener el tema actual
@@ -592,6 +592,34 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             }} className="p-column-filter" showClear />;
     };
 
+    // Función para validar si se puede eliminar un registro
+    const puedeEliminarRegistro = (rowData) => {
+        // Si no hay validación, permitir eliminar
+        if (!validarEliminar) return true;
+        
+        if (validarEliminar.campo && validarEliminar.valores) {
+            const valorCampo = rowData[validarEliminar.campo];
+            // Retornar true si el valor NO está en la lista (permitir eliminar)
+            return !validarEliminar.valores.includes(valorCampo);
+        }
+        
+        return true;
+    };
+
+    // Función para validar si se puede editar un registro
+    const puedeEditarRegistro = (rowData) => {
+        // Si no hay validación, permitir editar
+        if (!validarEditar) return true;
+        
+        if (validarEditar.campo && validarEditar.valores) {
+            const valorCampo = rowData[validarEditar.campo];
+            // Retornar true si el valor NO está en la lista (permitir editar)
+            return !validarEditar.valores.includes(valorCampo);
+        }
+        
+        return true;
+    };
+
     const botonesDeAccionTemplate = (rowData) => {
 
         return (
@@ -606,7 +634,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         onClick={() => verRegistro(rowData)}
                     />
                 )}
-                {(botones.includes('editar') && puedeEditar) && (
+                {(botones.includes('editar') && puedeEditar && puedeEditarRegistro(rowData)) && (
                     <Button
                         icon="pi pi-pencil"
                         className="mr-2"
@@ -616,7 +644,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         onClick={() => editarRegistro(rowData)}
                     />
                 )}
-                {(botones.includes('eliminar') && puedeBorrar) && (
+                {(botones.includes('eliminar') && puedeBorrar && puedeEliminarRegistro(rowData)) && (
                     <Button
                         icon="pi pi-trash"
                         rounded

@@ -121,6 +121,10 @@ const EditarCorreoPlantilla = ({
                     objGuardar['idiomaId'] = registroSeleccionado.id;
                 }
 
+                if (objGuardar.activoSn === '') {
+                    objGuardar.activoSn = 'N';
+                }
+
                 try {
                     // Hacemos el insert del registro
                     const nuevoRegistro = await postPlantillaEmail(objGuardar);
@@ -180,6 +184,10 @@ const EditarCorreoPlantilla = ({
                 delete objGuardar.nombreIdioma;
                 delete objGuardar.archivos;
                 delete objGuardar.iso;
+                
+                if (objGuardar.activoSn === '') {
+                    objGuardar.activoSn = 'N';
+                }
                 
                 await patchPlantillaEmail(objGuardar.id, objGuardar);
                 await editarArchivos(correoPlantilla, seccion)
