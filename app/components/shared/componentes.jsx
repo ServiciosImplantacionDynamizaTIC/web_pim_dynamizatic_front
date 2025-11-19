@@ -4,12 +4,14 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from 'primereact/dropdown';
-import React from "react";
+import React, { useState } from "react";
 import { parse } from 'json2csv';
 import { devuelveBasePath, getUsuarioSesion } from "../../utility/Utils";
 import { useIntl } from 'react-intl'
 import { compruebaPermiso, getVistaEmpresaRolPermiso } from "../../api-endpoints/permisos";
 import { Tooltip } from 'primereact/tooltip';
+import VisualizadorDeImagen from './VisualizadorDeImagen';
+import { getUrlImagenMiniatura, getUrlImagenGrande, UrlEsImagen as esUrlImagenUtil } from '../../utility/ImageUtils';
 // import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 
 const templateGenerico = (campo, cabecera) => (rowData) => {
@@ -70,11 +72,12 @@ export async function obtenerArchivosSeccion(registro, seccion) {
 
                 //Si solo existe 1, se guarda en forma de variable
                 if (tipoArchivo.multiple !== 'S') {
-                    //Guarda el archivo redimensionado en el registro
+                    //Guarda el archivo en el registro
                     let url = archivos[0].url;
-                    if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+                    if (url !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
                         if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                            url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+                            // Para imágenes, usar la miniatura (200x200)
+                            url = getUrlImagenMiniatura(archivos[0].url);
                         }
                         //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
                         //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
@@ -91,8 +94,9 @@ export async function obtenerArchivosSeccion(registro, seccion) {
                     const archivosArray = []
                     for (const archivo of archivos) {
                         let url = archivo.url;
-                        if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-                            url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+                        if (esUrlImagenUtil(url) && url !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
+                            // Para imágenes, usar la miniatura (200x200)
+                            url = getUrlImagenMiniatura(archivo.url);
                         }
                         archivosArray.push({ url: url, id: archivo.id });
                     }
@@ -112,7 +116,18 @@ export async function obtenerArchivosSeccion(registro, seccion) {
 }
 
 const comprobarImagen = (campo, cabecera) => (rowData) => {
-    if (rowData[campo] !== null && !esUrlImagen(rowData[campo])) {
+    // Estado local para el visor de imágenes dentro del scope del componente
+    const [visualizadorDeImagenVisible, setVisualizadorDeImagenVisible] = useState(false);
+    const [selectedImage, setSelectedImage] = useState('');
+
+    const handleImageClick = (imageUrl) => {
+        // Convertir thumbnail a webUrl (1250x850)
+        const webImageUrl = getUrlImagenGrande(imageUrl);
+        setSelectedImage(webImageUrl);
+        setVisualizadorDeImagenVisible(true);
+    };
+
+    if (rowData[campo] !== null && !esUrlImagenUtil(rowData[campo])) {
         return (
             <>
                 <a style={{ color: 'black' }} href={`${devuelveBasePath()}${rowData[campo]}`} target="_blank">
@@ -122,12 +137,27 @@ const comprobarImagen = (campo, cabecera) => (rowData) => {
             </>
         );
     }
+    
     return (
         <>
-            <a href={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNLE/imagen-no-disponible.jpeg"}`} target="_blank">
-                <img src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/sistemaNLE/imagen-no-disponible.jpeg"}`} alt="Imagen" style={{ width: '100px', height: 'auto' }} />
-            </a>
+            <div 
+                onClick={() => handleImageClick(rowData[campo] || "/multimedia/Sistema/200x200_imagen-no-disponible.jpeg")}
+                style={{ cursor: 'pointer' }}
+            >
+                <img 
+                    src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/Sistema/200x200_imagen-no-disponible.jpeg"}`} 
+                    alt="Imagen" 
+                    style={{ width: '100px', height: 'auto' }} 
+                />
+            </div>
             <span className="p-column-title">{cabecera}</span>
+            
+            <VisualizadorDeImagen
+                visible={visualizadorDeImagenVisible}
+                onHide={() => setVisualizadorDeImagenVisible(false)}
+                imageUrl={selectedImage}
+                altText={cabecera}
+            />
         </>
     );
 
@@ -135,12 +165,7 @@ const comprobarImagen = (campo, cabecera) => (rowData) => {
 
 //Funcion para comprobar a traves de solo el url si un archivo es una imagen
 const esUrlImagen = (url) => {
-    if (!url) return false;
-    // Extraer la extensión del archivo buscando el último punto
-    const extension = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-
-    // Devolver el tipo basado en la extensión
-    return extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'webp' || extension === 'tiff' || extension === 'avif';
+    return esUrlImagenUtil(url);
 }
 
 const manejarCambioImagen = (event) => {

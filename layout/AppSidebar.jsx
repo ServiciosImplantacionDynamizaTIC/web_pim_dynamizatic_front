@@ -10,7 +10,7 @@ const AppSidebar = () => {
   const { setLayoutState } = useContext(LayoutContext);
 
   const base = devuelveBasePath();
-  const FALLBACK = `${base}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`;
+  const FALLBACK = `${base}/multimedia/Sistema/imagen-no-disponible.jpeg`;
 
   const [logoEmpresaUrl] = useState(
     typeof window !== "undefined" ? localStorage.getItem("logoEmpresaUrl") || "" : ""
