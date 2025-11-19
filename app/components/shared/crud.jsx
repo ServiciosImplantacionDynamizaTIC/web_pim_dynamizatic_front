@@ -7,6 +7,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { comprobarImagen, templateGenerico, Header, esUrlImagen, DescargarCSVDialog, getIdiomaDefecto, tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { formatearFechaDate, formatearFechaHoraDate, formatearFechaLocal_a_toISOString, formatNumber, getUsuarioSesion } from "@/app/utility/Utils";
+import { getUrlImagenMiniatura, UrlEsImagen } from "@/app/utility/ImageUtils";
 import CodigoQR from "./codigo_qr";
 import { Divider } from "primereact/divider";
 import { postEnviarQR } from "@/app/api-endpoints/plantilla_email";
@@ -177,6 +178,23 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                     }
                 }
             }
+            
+            //Comprueba si hay columnas de tipo imagen sin sección definida y convierte las URLs a thumbnails
+            if (!seccion && columnas.some(obj => obj.tipo === 'imagen')) {
+                for (const columna of columnas) {
+                    if (columna.tipo === 'imagen') {
+                        for (const registro of registros) {
+                            if (registro[columna.campo] && registro[columna.campo] !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
+                                if (UrlEsImagen(registro[columna.campo])) {
+                                    // Convertir a thumbnail (200x200)
+                                    registro[columna.campo] = getUrlImagenMiniatura(registro[columna.campo]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
             //Si seccion no es null significa que la pantalla del crud tiene archivos, por lo que hay que obtenerlos
             if (seccion) {
                 //Obtiene los tipos de archivo de la seccion
@@ -209,11 +227,12 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
                             //Si solo existe 1, se guarda en forma de variable
                             if (tipoArchivo.multiple !== 'S') {
-                                //Guarda el archivo redimensionado en el registro
+                                //Guarda el archivo en el registro
                                 let url = archivos[0].url;
-                                if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+                                if (url !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
                                     if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                                        url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+                                        // Para imágenes, usar la miniatura (200x200)
+                                        url = getUrlImagenMiniatura(archivos[0].url);
                                     }
                                     //El id y el url de la imagen se almacenan en variables simples separades en vez de un objeto, para que a la
                                     //hora de mostrar las imagenes se pueda acceder al url con un simple rowData.campo
@@ -230,8 +249,9 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 const archivosArray = []
                                 for (const archivo of archivos) {
                                     let url = archivo.url;
-                                    if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
-                                        url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+                                    if (UrlEsImagen(url) && url !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
+                                        // Para imágenes, usar la miniatura (200x200)
+                                        url = getUrlImagenMiniatura(archivo.url);
                                     }
                                     archivosArray.push({ url: url, id: archivo.id });
                                 }

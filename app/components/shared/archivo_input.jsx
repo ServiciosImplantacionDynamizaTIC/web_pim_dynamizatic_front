@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Button } from "primereact/button";
 import { devuelveBasePath } from "../../utility/Utils";
 import { useIntl } from "react-intl";
+import VisualizadorDeImagen from './VisualizadorDeImagen';
+import { getUrlImagenMiniatura, getUrlImagenGrande, esUrlImagen as esUrlImagenUtil } from '../../utility/ImageUtils';
 
 const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campoNombre }) => {
     const intl = useIntl();
@@ -11,6 +13,8 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
     const [inputArchivo, setInputArchivo] = useState(null);
     const [labelArchivo, setLabelArchivo] = useState(null);
     const [cargarUrlCliente, setCargarUrlCliente] = useState(false);
+    const [visualizadorDeImagenVisible, setVisualizadorDeImagenVisible] = useState(false);
+    const [imagenSeleccionada, setImagenSeleccionada] = useState('');
     useEffect(() => {
         if (primeraCarga) {
             setPrimeraCarga(false)
@@ -30,7 +34,7 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                         mostrarImagen(archivoUrl);
                     }
                     else {
-                        mostrarImagen(`${(devuelveBasePath())}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+                        mostrarImagen(`${(devuelveBasePath())}/multimedia/Sistema/imagen-no-disponible.jpeg`);
                     }
 
                 }
@@ -74,7 +78,7 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                 );
                 setInputArchivo(_inputArchivo);
 
-                mostrarImagen(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+                mostrarImagen(`${devuelveBasePath()}/multimedia/Sistema/imagen-no-disponible.jpeg`);
             } else {
                 const _inputArchivo = (
                     <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
@@ -123,67 +127,107 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
     const mostrarImagen = (imgUrl) => {
         if (divImagen.current) {
             divImagen.current.innerHTML = '';
-            const imgA = document.createElement('a');
-            imgA.href = imgUrl;
-            imgA.target = '_blank'
+            
+            // Crear contenedor clickeable
+            const imgContainer = document.createElement('div');
+            imgContainer.style.cursor = 'pointer';
+            imgContainer.style.width = '100%';
+            
             const img = document.createElement('img');
-            img.src = imgUrl;
+            
+            // Si es una URL del servidor (string), convertir a thumbnail (Imagen miniatura 200x200)
+            if (typeof imgUrl === 'string' && !imgUrl.includes('blob:') && imgUrl.includes('/multimedia/')) {
+                const thumbnailUrl = getUrlImagenMiniatura(imgUrl);
+                img.src = thumbnailUrl;
+                
+                // Al hacer clic, mostrar en el viewer con la versión 1250x850
+                imgContainer.onclick = () => {
+                    // Extraer solo la parte de la URL sin el basePath
+                    const urlSinBase = imgUrl.replace(devuelveBasePath(), '');
+                    const webUrl = getUrlImagenGrande(urlSinBase);
+                    setImagenSeleccionada(webUrl);
+                    setVisualizadorDeImagenVisible(true);
+                };
+            } else {
+                // Para URLs temporales (blob) o imagen no disponible
+                img.src = imgUrl;
+                
+                // Si es la imagen no disponible, no hacer nada al clic
+                if (!imgUrl.includes('imagen-no-disponible')) {
+                    imgContainer.onclick = () => {
+                        const urlSinBase = imgUrl.replace(devuelveBasePath(), '');
+                        setImagenSeleccionada(urlSinBase);
+                        setVisualizadorDeImagenVisible(true);
+                    };
+                }
+            }
+            
             img.setAttribute('width', '100%');
-            imgA.append(img)
-            divImagen.current.append(imgA);
+            imgContainer.append(img);
+            divImagen.current.append(imgContainer);
         }
     };
 
     return (
-        <div className='grid formgrid text-center' width='100%' style={{ gap: '0px' }}>
-            <div
-                ref={divImagen}
-                className='col-2 field'
-                style={{
-                    display: 'flex',
-                    minWidth: '0px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                {archivoIcono}
-            </div>
-            <div className="col-10 field flex flex-column">
-                <label style={{textAlign: 'left'}} htmlFor="imagen">{intl.formatMessage({ id: archivoHeader })}</label>
-                <div className="flex" >
-                    <label
-                        className="inputtext p-component flex-1 w-100"
-                        style={{
-                            border: '1px solid #ccc',
-                            padding: '6px 12px',
-                            whiteSpace: 'nowrap',
-                            textOverflow: 'ellipsis',
-                            minWidth: '0px',        
-                            overflow: 'hidden',
-                            textAlign: 'left',
-                        }}
-                    >
-                        {labelArchivo && labelArchivo.length > 20 ? `${labelArchivo.substring(0, 20)}...` : labelArchivo}
-                    </label>
-                    <label
-                        className="inputtext p-component flex-0 flex-shrink-0"
-                        style={{
-                            border: '1px solid #ccc',
-                            padding: '6px 12px',
-                            cursor: 'pointer',
-                        }}
-                    >
-                        Subir
-                        {inputArchivo}
-                    </label>
-                    <Button
-                        onClick={limpiarArchivoHandler}
-                        className="ml-2 p-button p-component p-button-icon-only p-button-rounded p-button-danger"
-                    >
-                        <span className="p-button-icon p-c pi pi-times"></span>
-                    </Button>
+        <>
+            <div className='grid formgrid text-center' width='100%' style={{ gap: '0px' }}>
+                <div
+                    ref={divImagen}
+                    className='col-2 field'
+                    style={{
+                        display: 'flex',
+                        minWidth: '0px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                    {archivoIcono}
+                </div>
+                <div className="col-10 field flex flex-column">
+                    <label style={{textAlign: 'left'}} htmlFor="imagen">{intl.formatMessage({ id: archivoHeader })}</label>
+                    <div className="flex" >
+                        <label
+                            className="inputtext p-component flex-1 w-100"
+                            style={{
+                                border: '1px solid #ccc',
+                                padding: '6px 12px',
+                                whiteSpace: 'nowrap',
+                                textOverflow: 'ellipsis',
+                                minWidth: '0px',        
+                                overflow: 'hidden',
+                                textAlign: 'left',
+                            }}
+                        >
+                            {labelArchivo && labelArchivo.length > 20 ? `${labelArchivo.substring(0, 20)}...` : labelArchivo}
+                        </label>
+                        <label
+                            className="inputtext p-component flex-0 flex-shrink-0"
+                            style={{
+                                border: '1px solid #ccc',
+                                padding: '6px 12px',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            Subir
+                            {inputArchivo}
+                        </label>
+                        <Button
+                            onClick={limpiarArchivoHandler}
+                            className="ml-2 p-button p-component p-button-icon-only p-button-rounded p-button-danger"
+                        >
+                            <span className="p-button-icon p-c pi pi-times"></span>
+                        </Button>
+                    </div>
                 </div>
             </div>
-        </div>
+            
+            {/* Visor de imágenes ampliadas */}
+            <VisualizadorDeImagen
+                visible={visualizadorDeImagenVisible}
+                onHide={() => setVisualizadorDeImagenVisible(false)}
+                imageUrl={imagenSeleccionada}
+                altText={intl.formatMessage({ id: archivoHeader })}
+            />
+        </>
     );
 };
 

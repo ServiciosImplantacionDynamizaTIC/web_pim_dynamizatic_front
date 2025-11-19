@@ -13,6 +13,7 @@ import { registrarLoginExitoso, registrarLoginFallido, registrarAccesoBloqueado,
  import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
 import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
 import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
+import { getUrlImagenMiniatura } from "@/app/utility/ImageUtils";
 
 interface AuthContextProps {
   usuarioAutenticado: boolean;
@@ -218,7 +219,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     
     if (await compruebaRolUsuario({ ...data })) {
       //Si tiene que mostrar la empresa, obtenemos el logo
-      localStorage.setItem('logoEmpresaUrl', await obtenerLogoEmpresa());
+      const logoUrl = await obtenerLogoEmpresa();
+      if (logoUrl) {
+        localStorage.setItem('logoEmpresaUrl', logoUrl);
+      }
     }
 
     //Obtiene la ip del usuario usando la API de ipify, es de codigo abierto y tiene usos infinitos
@@ -272,7 +276,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
     const archivoLogo = await getVistaArchivoEmpresa(JSON.stringify(queryParamsArchivo))
     if (Array.isArray(archivoLogo) && archivoLogo.length > 0) {
-      return archivoLogo[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
+      // Usar la miniatura (200x200) para el logo de empresa
+      return getUrlImagenMiniatura(archivoLogo[0].url);
     }
     return null;
   }

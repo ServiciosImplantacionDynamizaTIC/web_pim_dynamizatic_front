@@ -87,7 +87,7 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         //                 if (tipoArchivo.multiple !== 'S') {
         //                     //Guarda el archivo redimensionado en el registro
         //                     let url = archivos[0].url;
-        //                     if (url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+        //                     if (url !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
         //                         if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
         //                             url = archivos[0].url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
         //                         }
@@ -106,7 +106,7 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
         //                     const archivosArray = []
         //                     for (const archivo of archivos) {
         //                         let url = archivo.url;
-        //                         if (esUrlImagen(url) && url !== '/multimedia/sistemaNLE/imagen-no-disponible.jpeg') {
+        //                         if (esUrlImagen(url) && url !== '/multimedia/Sistema/imagen-no-disponible.jpeg') {
         //                             url = archivo.url.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$11250x850_$2');
         //                         }
         //                         archivosArray.push({ url: url, id: archivo.id });
@@ -257,14 +257,14 @@ const CrudIconos = ({ getRegistros, editarComponente, editarComponenteParametros
                                     >
                                         {jsonIconos && campoIcono && (
                                             <img
-                                                src={`${(devuelveBasePath())}${jsonIconos[registro[campoIcono]] || iconoPorDefecto || '/multimedia/sistemaNLE/imagen-no-disponible.jpeg'}`}
+                                                src={`${(devuelveBasePath())}${jsonIconos[registro[campoIcono]] || iconoPorDefecto || '/multimedia/Sistema/imagen-no-disponible.jpeg'}`}
                                                 alt=""
                                                 style={{ width: '100%', objectFit: 'cover' }}
                                             />
                                         )}
                                         {campoIconoCustom && (
                                             <img
-                                                src={`${(devuelveBasePath())}${registro[campoIconoCustom] || iconoPorDefecto || '/multimedia/sistemaNLE/imagen-no-disponible.jpeg'}`}
+                                                src={`${(devuelveBasePath())}${registro[campoIconoCustom] || iconoPorDefecto || '/multimedia/Sistema/imagen-no-disponible.jpeg'}`}
                                                 alt=""
                                                 style={{ width: '100%', objectFit: 'cover' }}
                                             />

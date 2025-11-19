@@ -13,7 +13,6 @@ const Empresa = () => {
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },      
         { campo: 'logo', header: intl.formatMessage({ id: 'Logo' }), tipo: 'imagen' },
         { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
-
     ]
     
     return (

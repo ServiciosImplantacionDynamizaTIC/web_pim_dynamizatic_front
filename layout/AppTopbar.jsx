@@ -5,6 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
+import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { devuelveBasePath, getUsuarioSesion, verificarUrlExiste } from "@/app/utility/Utils";
 
 const AppTopbar = React.forwardRef((props, ref) => {
@@ -44,7 +45,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
         let avatar = await getUsuarioAvatar(getUsuarioSesion()?.id);
         if (avatar.length > 0){
             const urlOriginal = avatar[0].url;
-            const urlRedimensionada = urlOriginal.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$132x32_$2');
+            const urlRedimensionada = urlOriginal.replace(/(\/[^\/]+\/)([^\/]+\.\w+)$/, '$1200x200_$2'); // Imagen Miniatura
             
             // Construir las URLs completas
             const urlCompletaRedimensionada = `${devuelveBasePath()}${urlRedimensionada}`;
@@ -62,7 +63,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
             }
         }
         else{
-            setAvatar(`${devuelveBasePath()}/multimedia/sistemaNLE/imagen-no-disponible.jpeg`);
+            setAvatar(`${devuelveBasePath()}/multimedia/Sistema/200x200_imagen-no-disponible.jpeg`);
         }
     }
 
