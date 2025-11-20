@@ -10,6 +10,7 @@ import { devuelveBasePath, getUsuarioSesion } from "../../utility/Utils";
 import { useIntl } from 'react-intl'
 import { compruebaPermiso, getVistaEmpresaRolPermiso } from "../../api-endpoints/permisos";
 import { Tooltip } from 'primereact/tooltip';
+import { delimiter } from "path";
 // import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 
 const templateGenerico = (campo, cabecera) => (rowData) => {
@@ -390,7 +391,7 @@ const opcionesActivoSnTemplate = (option, obtenerSeverity) => {
  */
 const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
     try {
-        const csv = parse(registros, { fields: encabezados, header: true });
+        const csv = parse(registros, { fields: encabezados, header: true, delimiter: ';' });
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
