@@ -103,6 +103,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/log-acceso",
           "icon": "pi pi-fw pi-user-edit"
         },
+        "Logs de acciones": {
+          "path": "/tablas-maestras/log-acciones",
+          "icon": "pi pi-fw pi-history"
+        },
+        "Configuración de logs": {
+          "path": "/tablas-maestras/configuracion-logs",
+          "icon": "pi pi-fw pi-cog"
+        },
         "Permisos": {
           "path": "/tablas-maestras/permiso",
           "icon": "pi pi-fw pi-user-edit"
