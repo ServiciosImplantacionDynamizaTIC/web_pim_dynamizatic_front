@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl'
 const PasswordHistorico = ({usuarioId}) => {
     const intl = useIntl()
     const columnas = [
-        { campo: 'password', header: intl.formatMessage({ id: 'Contraseña' }), style: { wordBreak: 'break-all', whiteSpace: 'normal' } },
+        { campo: 'password', header: intl.formatMessage({ id: 'Contraseña' }), tipo: 'string' },
         { campo: 'fechaCreacion', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'fechaHora' },
     ]
 
