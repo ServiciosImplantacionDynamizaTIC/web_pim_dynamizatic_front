@@ -133,6 +133,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Usuarios-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
+                { header: intl.formatMessage({ id: 'Ver Histórico Contraseñas' }), seccion: 'Usuarios-VerHistoricoPassword' },
 
             ];
             // Obtenemos los roles

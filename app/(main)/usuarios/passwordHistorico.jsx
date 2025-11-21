@@ -1,5 +1,5 @@
 "use client";
-import { getUsuarioPasswordHistoricos, getUsuarioPasswordHistoricosCount } from "@/app/api-endpoints/usuario_password_historico";
+import { getUsuarioPasswordHistoricos, getUsuarioPasswordHistoricosCount, deleteUsuarioPasswordHistorico } from "@/app/api-endpoints/usuario_password_historico";
 import Crud from "../../components/shared/crud";
 import { useIntl } from 'react-intl'
 
@@ -10,8 +10,6 @@ const PasswordHistorico = ({usuarioId}) => {
         { campo: 'fechaCreacion', header: intl.formatMessage({ id: 'Fecha' }), tipo: 'fechaHora' },
     ]
 
-
-
     return (
         <div>
             <Crud
@@ -21,7 +19,7 @@ const PasswordHistorico = ({usuarioId}) => {
                 botones={['descargarCSV']}
                 filtradoBase={{ usuarioId:  usuarioId}}
                 columnas={columnas}
-                //deleteRegistro={deleteArchivo}
+                //deleteRegistro={deleteUsuarioPasswordHistorico}
             />
         </div>
     );
