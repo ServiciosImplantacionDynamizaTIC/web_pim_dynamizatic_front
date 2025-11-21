@@ -15,11 +15,13 @@ const Seccion = () => {
                 headerCrud={intl.formatMessage({ id: 'Secciones' })}
                 getRegistros={getSecciones}
                 getRegistrosCount={getSeccionesCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo','ver', 'editar', 'descargarCSV']}
                 controlador={"Secciones"}
                 editarComponente={<EditarSeccion />}
                 columnas={columnas}
                 deleteRegistro={deleteSeccion}
+                //validarEliminar={{ campo: 'nombre', valores: ['Correo plantilla'] }} // No permitir eliminar esta seccion
+                validarEditar={{ campo: 'nombre', valores: ['Correo plantilla'] }} // No permitir editar esta seccion
             />
         </div>
     );

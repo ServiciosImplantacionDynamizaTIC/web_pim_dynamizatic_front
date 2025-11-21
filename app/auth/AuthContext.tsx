@@ -124,7 +124,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/rol",
           "icon": "pi pi-fw pi-user-edit"
         },
-        "Sección": {
+        "Secciones": {
           "path": "/tablas-maestras/seccion",
           "icon": "pi pi-fw pi-user-edit"
         },
