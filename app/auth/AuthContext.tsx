@@ -104,6 +104,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/log-acceso",
           "icon": "pi pi-fw pi-user-edit"
         },
+        "Logs de sincronización": {
+          "path": "/tablas-maestras/log-sincronizacion",
+          "icon": "pi pi-fw pi-sync"
+        },
         "Permisos": {
           "path": "/tablas-maestras/permiso",
           "icon": "pi pi-fw pi-user-edit"

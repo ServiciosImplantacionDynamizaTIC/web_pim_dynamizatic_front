@@ -53,6 +53,11 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Logs de acceso' }), seccion: 'Logs de acceso' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de acceso-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de acceso-Ver' },
+                
+                // Logs de sincronización
+                { header: intl.formatMessage({ id: 'Logs de sincronización' }), seccion: 'Logs de sincronización' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de sincronización-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de sincronización-Ver' },
 
                 // Tipos de archivo
                 { header: intl.formatMessage({ id: 'Tipos de archivo' }), seccion: 'Tipos de archivo' },
