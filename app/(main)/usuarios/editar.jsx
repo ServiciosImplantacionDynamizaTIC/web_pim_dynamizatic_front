@@ -3,14 +3,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
+import { TabView, TabPanel } from 'primereact/tabview';
 import { getUsuarios, postUsuario, patchUsuario } from "@/app/api-endpoints/usuario";
 import { getRol } from "@/app/api-endpoints/rol";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosUsuario from "./EditarDatosUsuario";
+import PasswordHistorico from "./passwordHistorico";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
@@ -26,6 +29,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [puedeVerHistorico, setPuedeVerHistorico] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
     const [listaRoles, setListaRoles] = useState([]);
@@ -65,6 +69,11 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
+                    
+            // Verificar permiso para ver historial de contraseñas
+            const permiso = await tieneUsuarioPermiso('Usuarios', 'VerHistoricoPassword');
+            setPuedeVerHistorico(!!permiso);
+
         };
         fetchData();
     }, [idEditar, rowData]);  
@@ -194,6 +203,16 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             isEdit={isEdit}
                         />
                         
+                        <Divider type="solid" />
+                        
+                        {puedeVerHistorico && idEditar !== 0 && (
+                            <TabView scrollable>
+                                <TabPanel header={intl.formatMessage({ id: 'Historico de contraseñas' })}>
+                                    <PasswordHistorico usuarioId={idEditar}/>
+                                </TabPanel>
+                            </TabView>
+                        )}
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
