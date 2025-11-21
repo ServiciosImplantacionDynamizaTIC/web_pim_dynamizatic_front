@@ -3243,6 +3243,309 @@
         "operationId": "ConfiguracionDisenoController.find"
       }
     },
+    "/configuracion-limpieza-logs/count": {
+      "get": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "count",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ConfiguracionLimpiezaLogs model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ConfiguracionLimpiezaLogs.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ConfiguracionLimpiezaLogs>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ConfiguracionLimpiezaLogsController.count"
+      }
+    },
+    "/configuracion-limpieza-logs/{id}": {
+      "put": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ConfiguracionLimpiezaLogs PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguracionLimpiezaLogs"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ConfiguracionLimpiezaLogsController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ConfiguracionLimpiezaLogs PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguracionLimpiezaLogsPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ConfiguracionLimpiezaLogsController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ConfiguracionLimpiezaLogs model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionLimpiezaLogsWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionLimpiezaLogs.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ConfiguracionLimpiezaLogsController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ConfiguracionLimpiezaLogs DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ConfiguracionLimpiezaLogsController.deleteById"
+      }
+    },
+    "/configuracion-limpieza-logs": {
+      "post": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "create",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ConfiguracionLimpiezaLogs model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionLimpiezaLogs"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewConfiguracionLimpiezaLogs"
+              }
+            }
+          }
+        },
+        "operationId": "ConfiguracionLimpiezaLogsController.create"
+      },
+      "patch": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ConfiguracionLimpiezaLogs PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ConfiguracionLimpiezaLogs.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ConfiguracionLimpiezaLogs>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfiguracionLimpiezaLogsPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ConfiguracionLimpiezaLogsController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ConfiguracionLimpiezaLogsController",
+        "x-operation-name": "find",
+        "tags": [
+          "ConfiguracionLimpiezaLogsController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ConfiguracionLimpiezaLogs model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConfiguracionLimpiezaLogsWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfiguracionLimpiezaLogs.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ConfiguracionLimpiezaLogsController.find"
+      }
+    },
     "/empresas/count": {
       "get": {
         "x-controller-name": "EmpresaController",
@@ -4603,6 +4906,50 @@
         "operationId": "FileUploadController.imageUpload"
       }
     },
+    "/limpiaLog": {
+      "get": {
+        "x-controller-name": "LimpiaLogController",
+        "x-operation-name": "limpiaLog",
+        "tags": [
+          "LimpiaLogController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Programa el cron diario que limpia las tablas configuradas en configuracion_limpieza_logs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "LimpiaLogController.limpiaLog"
+      }
+    },
+    "/limpiaLogManual": {
+      "get": {
+        "x-controller-name": "LimpiaLogController",
+        "x-operation-name": "limpiaLogManual",
+        "tags": [
+          "LimpiaLogController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ejecuta ahora mismo la limpieza de logs configurados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "LimpiaLogController.limpiaLogManual"
+      }
+    },
     "/log-accesos/count": {
       "get": {
         "x-controller-name": "LogAccesoController",
@@ -4904,6 +5251,309 @@
           }
         ],
         "operationId": "LogAccesoController.find"
+      }
+    },
+    "/log-accions/count": {
+      "get": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "count",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogAccion model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LogAccion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LogAccion>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogAccionController.count"
+      }
+    },
+    "/log-accions/{id}": {
+      "put": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LogAccion PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogAccion"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "LogAccionController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LogAccion PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogAccionPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "LogAccionController.updateById"
+      },
+      "get": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "findById",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogAccion model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogAccionWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogAccion.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogAccionController.findById"
+      },
+      "delete": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LogAccion DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "LogAccionController.deleteById"
+      }
+    },
+    "/log-accions": {
+      "post": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "create",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogAccion model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogAccion"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLogAccion"
+              }
+            }
+          }
+        },
+        "operationId": "LogAccionController.create"
+      },
+      "patch": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogAccion PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LogAccion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LogAccion>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogAccionPartial"
+              }
+            }
+          }
+        },
+        "operationId": "LogAccionController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "LogAccionController",
+        "x-operation-name": "find",
+        "tags": [
+          "LogAccionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of LogAccion model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogAccionWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogAccion.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogAccionController.find"
       }
     },
     "/log-exportacions/count": {
@@ -21819,6 +22469,249 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<LogExportacion>"
       },
+      "LogAccion": {
+        "title": "LogAccion",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "segundos": {
+            "type": "number",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "endPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "controller": {
+            "type": "string",
+            "nullable": true
+          },
+          "funcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewLogAccion": {
+        "title": "NewLogAccion",
+        "type": "object",
+        "description": "(tsType: Omit<LogAccion, 'id'>, schemaOptions: { title: 'NewLogAccion', exclude: [ 'id' ] })",
+        "properties": {
+          "url": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "segundos": {
+            "type": "number",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "endPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "controller": {
+            "type": "string",
+            "nullable": true
+          },
+          "funcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<LogAccion, 'id'>"
+      },
+      "LogAccionWithRelations": {
+        "title": "LogAccionWithRelations",
+        "type": "object",
+        "description": "(tsType: LogAccionWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "segundos": {
+            "type": "number",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "endPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "controller": {
+            "type": "string",
+            "nullable": true
+          },
+          "funcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "LogAccionWithRelations"
+      },
+      "LogAccionPartial": {
+        "title": "LogAccionPartial",
+        "type": "object",
+        "description": "(tsType: Partial<LogAccion>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "segundos": {
+            "type": "number",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreEmpresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "endPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "controller": {
+            "type": "string",
+            "nullable": true
+          },
+          "funcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<LogAccion>"
+      },
       "LogAcceso": {
         "title": "LogAcceso",
         "type": "object",
@@ -23078,6 +23971,159 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Empresa>"
       },
+      "ConfiguracionLimpiezaLogs": {
+        "title": "ConfiguracionLimpiezaLogs",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "nombreTabla": {
+            "type": "string"
+          },
+          "numeroDiasRetencion": {
+            "type": "number"
+          },
+          "campoFechaTabla": {
+            "type": "string"
+          },
+          "fechaUltimoBorrado": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaUltimaEjecucion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombreTabla",
+          "numeroDiasRetencion",
+          "campoFechaTabla"
+        ],
+        "additionalProperties": false
+      },
+      "NewConfiguracionLimpiezaLogs": {
+        "title": "NewConfiguracionLimpiezaLogs",
+        "type": "object",
+        "description": "(tsType: Omit<ConfiguracionLimpiezaLogs, 'id'>, schemaOptions: { title: 'NewConfiguracionLimpiezaLogs', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number"
+          },
+          "nombreTabla": {
+            "type": "string"
+          },
+          "numeroDiasRetencion": {
+            "type": "number"
+          },
+          "campoFechaTabla": {
+            "type": "string"
+          },
+          "fechaUltimoBorrado": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaUltimaEjecucion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombreTabla",
+          "numeroDiasRetencion",
+          "campoFechaTabla"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ConfiguracionLimpiezaLogs, 'id'>"
+      },
+      "ConfiguracionLimpiezaLogsWithRelations": {
+        "title": "ConfiguracionLimpiezaLogsWithRelations",
+        "type": "object",
+        "description": "(tsType: ConfiguracionLimpiezaLogsWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "nombreTabla": {
+            "type": "string"
+          },
+          "numeroDiasRetencion": {
+            "type": "number"
+          },
+          "campoFechaTabla": {
+            "type": "string"
+          },
+          "fechaUltimoBorrado": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaUltimaEjecucion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombreTabla",
+          "numeroDiasRetencion",
+          "campoFechaTabla"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ConfiguracionLimpiezaLogsWithRelations"
+      },
+      "ConfiguracionLimpiezaLogsPartial": {
+        "title": "ConfiguracionLimpiezaLogsPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ConfiguracionLimpiezaLogs>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number"
+          },
+          "nombreTabla": {
+            "type": "string"
+          },
+          "numeroDiasRetencion": {
+            "type": "number"
+          },
+          "campoFechaTabla": {
+            "type": "string"
+          },
+          "fechaUltimoBorrado": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaUltimaEjecucion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activo": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ConfiguracionLimpiezaLogs>"
+      },	
       "ConfiguracionDiseno": {
         "title": "ConfiguracionDiseno",
         "type": "object",
@@ -27815,6 +28861,185 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ConfiguracionDiseno>"
       },
+      "ConfiguracionLimpiezaLogs.Filter": {
+        "type": "object",
+        "title": "ConfiguracionLimpiezaLogs.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombreTabla": {
+                    "type": "boolean"
+                  },
+                  "numeroDiasRetencion": {
+                    "type": "boolean"
+                  },
+                  "campoFechaTabla": {
+                    "type": "boolean"
+                  },
+                  "fechaUltimoBorrado": {
+                    "type": "boolean"
+                  },
+                  "fechaUltimaEjecucion": {
+                    "type": "boolean"
+                  },
+                  "activo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombreTabla",
+                    "numeroDiasRetencion",
+                    "campoFechaTabla",
+                    "fechaUltimoBorrado",
+                    "fechaUltimaEjecucion",
+                    "activo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ConfiguracionLimpiezaLogs.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ConfiguracionLimpiezaLogs>"
+      },
+      "ConfiguracionLimpiezaLogs.Filter1": {
+        "type": "object",
+        "title": "ConfiguracionLimpiezaLogs.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ConfiguracionLimpiezaLogs.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombreTabla": {
+                    "type": "boolean"
+                  },
+                  "numeroDiasRetencion": {
+                    "type": "boolean"
+                  },
+                  "campoFechaTabla": {
+                    "type": "boolean"
+                  },
+                  "fechaUltimoBorrado": {
+                    "type": "boolean"
+                  },
+                  "fechaUltimaEjecucion": {
+                    "type": "boolean"
+                  },
+                  "activo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombreTabla",
+                    "numeroDiasRetencion",
+                    "campoFechaTabla",
+                    "fechaUltimoBorrado",
+                    "fechaUltimaEjecucion",
+                    "activo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ConfiguracionLimpiezaLogs.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ConfiguracionLimpiezaLogs>"
+      },
       "Empresa.Filter": {
         "type": "object",
         "title": "Empresa.Filter",
@@ -28885,6 +30110,225 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<LogAcceso>"
+      },
+      "LogAccion.Filter": {
+        "type": "object",
+        "title": "LogAccion.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "url": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaFin": {
+                    "type": "boolean"
+                  },
+                  "segundos": {
+                    "type": "boolean"
+                  },
+                  "resultado": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombreEmpresa": {
+                    "type": "boolean"
+                  },
+                  "endPoint": {
+                    "type": "boolean"
+                  },
+                  "tipo": {
+                    "type": "boolean"
+                  },
+                  "controller": {
+                    "type": "boolean"
+                  },
+                  "funcion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "url",
+                    "fechaInicio",
+                    "fechaFin",
+                    "segundos",
+                    "resultado",
+                    "usuarioId",
+                    "empresaId",
+                    "nombreEmpresa",
+                    "endPoint",
+                    "tipo",
+                    "controller",
+                    "funcion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "LogAccion.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<LogAccion>"
+      },
+      "LogAccion.Filter1": {
+        "type": "object",
+        "title": "LogAccion.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "LogAccion.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "url": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaFin": {
+                    "type": "boolean"
+                  },
+                  "segundos": {
+                    "type": "boolean"
+                  },
+                  "resultado": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombreEmpresa": {
+                    "type": "boolean"
+                  },
+                  "endPoint": {
+                    "type": "boolean"
+                  },
+                  "tipo": {
+                    "type": "boolean"
+                  },
+                  "controller": {
+                    "type": "boolean"
+                  },
+                  "funcion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "url",
+                    "fechaInicio",
+                    "fechaFin",
+                    "segundos",
+                    "resultado",
+                    "usuarioId",
+                    "empresaId",
+                    "nombreEmpresa",
+                    "endPoint",
+                    "tipo",
+                    "controller",
+                    "funcion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "LogAccion.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<LogAccion>"
       },
       "LogExportacion.Filter": {
         "type": "object",

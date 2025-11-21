@@ -3401,6 +3401,251 @@ export interface ConfiguracionDisenoWithRelations {
 /**
  * 
  * @export
+ * @interface ConfiguracionLimpiezaLogs
+ */
+export interface ConfiguracionLimpiezaLogs {
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'nombreTabla': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'numeroDiasRetencion': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'campoFechaTabla': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'fechaUltimoBorrado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'fechaUltimaEjecucion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogs
+     */
+    'activo'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ConfiguracionLimpiezaLogsFilter
+ */
+export interface ConfiguracionLimpiezaLogsFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ConfiguracionLimpiezaLogsFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ConfiguracionLimpiezaLogsFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ConfiguracionLimpiezaLogsFilter1
+ */
+export interface ConfiguracionLimpiezaLogsFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ConfiguracionLimpiezaLogsFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof ConfiguracionLimpiezaLogsFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ConfiguracionLimpiezaLogsFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<ConfiguracionLimpiezaLogs>, schemaOptions: { partial: true })
+ * @export
+ * @interface ConfiguracionLimpiezaLogsPartial
+ */
+export interface ConfiguracionLimpiezaLogsPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'nombreTabla'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'numeroDiasRetencion'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'campoFechaTabla'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'fechaUltimoBorrado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'fechaUltimaEjecucion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsPartial
+     */
+    'activo'?: string;
+}
+/**
+ * (tsType: ConfiguracionLimpiezaLogsWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface ConfiguracionLimpiezaLogsWithRelations
+ */
+export interface ConfiguracionLimpiezaLogsWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'nombreTabla': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'numeroDiasRetencion': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'campoFechaTabla': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'fechaUltimoBorrado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'fechaUltimaEjecucion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ConfiguracionLimpiezaLogsWithRelations
+     */
+    'activo'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Empresa
  */
 export interface Empresa {
@@ -5209,6 +5454,341 @@ export enum LogAccesoWithRelationsResultadoEnum {
     Bloqueado = 'bloqueado'
 }
 
+/**
+ * 
+ * @export
+ * @interface LogAccion
+ */
+export interface LogAccion {
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccion
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'fechaInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'fechaFin'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccion
+     */
+    'segundos'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'resultado'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccion
+     */
+    'usuarioId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccion
+     */
+    'empresaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'nombreEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'endPoint'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'tipo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'controller'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccion
+     */
+    'funcion'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface LogAccionFilter
+ */
+export interface LogAccionFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof LogAccionFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof LogAccionFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface LogAccionFilter1
+ */
+export interface LogAccionFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof LogAccionFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof LogAccionFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof LogAccionFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<LogAccion>, schemaOptions: { partial: true })
+ * @export
+ * @interface LogAccionPartial
+ */
+export interface LogAccionPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'fechaInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'fechaFin'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionPartial
+     */
+    'segundos'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'resultado'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionPartial
+     */
+    'usuarioId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionPartial
+     */
+    'empresaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'nombreEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'endPoint'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'tipo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'controller'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionPartial
+     */
+    'funcion'?: string | null;
+}
+/**
+ * (tsType: LogAccionWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface LogAccionWithRelations
+ */
+export interface LogAccionWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'fechaInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'fechaFin'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionWithRelations
+     */
+    'segundos'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'resultado'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionWithRelations
+     */
+    'usuarioId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof LogAccionWithRelations
+     */
+    'empresaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'nombreEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'endPoint'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'tipo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'controller'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LogAccionWithRelations
+     */
+    'funcion'?: string | null;
+}
 /**
  * 
  * @export
@@ -9142,6 +9722,55 @@ export interface NewConfiguracionDiseno {
     'usuarioModificacion'?: number | null;
 }
 /**
+ * (tsType: Omit<ConfiguracionLimpiezaLogs, \'id\'>, schemaOptions: { title: \'NewConfiguracionLimpiezaLogs\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewConfiguracionLimpiezaLogs
+ */
+export interface NewConfiguracionLimpiezaLogs {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'nombreTabla': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'numeroDiasRetencion': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'campoFechaTabla': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'fechaUltimoBorrado'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'fechaUltimaEjecucion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewConfiguracionLimpiezaLogs
+     */
+    'activo'?: string;
+}
+/**
  * (tsType: Omit<Empresa, \'id\'>, schemaOptions: { title: \'NewEmpresa\', exclude: [ \'id\' ] })
  * @export
  * @interface NewEmpresa
@@ -9529,6 +10158,85 @@ export enum NewLogAccesoResultadoEnum {
     Bloqueado = 'bloqueado'
 }
 
+/**
+ * (tsType: Omit<LogAccion, \'id\'>, schemaOptions: { title: \'NewLogAccion\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewLogAccion
+ */
+export interface NewLogAccion {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'fechaInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'fechaFin'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewLogAccion
+     */
+    'segundos'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'resultado'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewLogAccion
+     */
+    'usuarioId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewLogAccion
+     */
+    'empresaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'nombreEmpresa'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'endPoint'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'tipo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'controller'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewLogAccion
+     */
+    'funcion'?: string | null;
+}
 /**
  * (tsType: Omit<LogExportacion, \'id\'>, schemaOptions: { title: \'NewLogExportacion\', exclude: [ \'id\' ] })
  * @export
@@ -24494,6 +25202,612 @@ export class ConfiguracionDisenoControllerApi extends BaseAPI {
 
 
 /**
+ * ConfiguracionLimpiezaLogsControllerApi - axios parameter creator
+ * @export
+ */
+export const ConfiguracionLimpiezaLogsControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/configuracion-limpieza-logs/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewConfiguracionLimpiezaLogs} [newConfiguracionLimpiezaLogs] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerCreate: async (newConfiguracionLimpiezaLogs?: NewConfiguracionLimpiezaLogs, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/configuracion-limpieza-logs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newConfiguracionLimpiezaLogs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configuracionLimpiezaLogsControllerDeleteById', 'id', id)
+            const localVarPath = `/configuracion-limpieza-logs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ConfiguracionLimpiezaLogsFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerFind: async (filter?: ConfiguracionLimpiezaLogsFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/configuracion-limpieza-logs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogsFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerFindById: async (id: number, filter?: ConfiguracionLimpiezaLogsFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configuracionLimpiezaLogsControllerFindById', 'id', id)
+            const localVarPath = `/configuracion-limpieza-logs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogs} [configuracionLimpiezaLogs] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerReplaceById: async (id: number, configuracionLimpiezaLogs?: ConfiguracionLimpiezaLogs, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configuracionLimpiezaLogsControllerReplaceById', 'id', id)
+            const localVarPath = `/configuracion-limpieza-logs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(configuracionLimpiezaLogs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerUpdateAll: async (where?: { [key: string]: object; }, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/configuracion-limpieza-logs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(configuracionLimpiezaLogsPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerUpdateById: async (id: number, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configuracionLimpiezaLogsControllerUpdateById', 'id', id)
+            const localVarPath = `/configuracion-limpieza-logs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(configuracionLimpiezaLogsPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ConfiguracionLimpiezaLogsControllerApi - functional programming interface
+ * @export
+ */
+export const ConfiguracionLimpiezaLogsControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ConfiguracionLimpiezaLogsControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewConfiguracionLimpiezaLogs} [newConfiguracionLimpiezaLogs] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerCreate(newConfiguracionLimpiezaLogs?: NewConfiguracionLimpiezaLogs, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConfiguracionLimpiezaLogs>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerCreate(newConfiguracionLimpiezaLogs, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {ConfiguracionLimpiezaLogsFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerFind(filter?: ConfiguracionLimpiezaLogsFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConfiguracionLimpiezaLogsWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogsFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerFindById(id: number, filter?: ConfiguracionLimpiezaLogsFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConfiguracionLimpiezaLogsWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogs} [configuracionLimpiezaLogs] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerReplaceById(id: number, configuracionLimpiezaLogs?: ConfiguracionLimpiezaLogs, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerReplaceById(id, configuracionLimpiezaLogs, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerUpdateAll(where?: { [key: string]: object; }, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerUpdateAll(where, configuracionLimpiezaLogsPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configuracionLimpiezaLogsControllerUpdateById(id: number, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configuracionLimpiezaLogsControllerUpdateById(id, configuracionLimpiezaLogsPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ConfiguracionLimpiezaLogsControllerApi - factory interface
+ * @export
+ */
+export const ConfiguracionLimpiezaLogsControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ConfiguracionLimpiezaLogsControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.configuracionLimpiezaLogsControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewConfiguracionLimpiezaLogs} [newConfiguracionLimpiezaLogs] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerCreate(newConfiguracionLimpiezaLogs?: NewConfiguracionLimpiezaLogs, options?: any): AxiosPromise<ConfiguracionLimpiezaLogs> {
+            return localVarFp.configuracionLimpiezaLogsControllerCreate(newConfiguracionLimpiezaLogs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.configuracionLimpiezaLogsControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ConfiguracionLimpiezaLogsFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerFind(filter?: ConfiguracionLimpiezaLogsFilter1, options?: any): AxiosPromise<Array<ConfiguracionLimpiezaLogsWithRelations>> {
+            return localVarFp.configuracionLimpiezaLogsControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogsFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerFindById(id: number, filter?: ConfiguracionLimpiezaLogsFilter, options?: any): AxiosPromise<ConfiguracionLimpiezaLogsWithRelations> {
+            return localVarFp.configuracionLimpiezaLogsControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogs} [configuracionLimpiezaLogs] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerReplaceById(id: number, configuracionLimpiezaLogs?: ConfiguracionLimpiezaLogs, options?: any): AxiosPromise<any> {
+            return localVarFp.configuracionLimpiezaLogsControllerReplaceById(id, configuracionLimpiezaLogs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerUpdateAll(where?: { [key: string]: object; }, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.configuracionLimpiezaLogsControllerUpdateAll(where, configuracionLimpiezaLogsPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configuracionLimpiezaLogsControllerUpdateById(id: number, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.configuracionLimpiezaLogsControllerUpdateById(id, configuracionLimpiezaLogsPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ConfiguracionLimpiezaLogsControllerApi - object-oriented interface
+ * @export
+ * @class ConfiguracionLimpiezaLogsControllerApi
+ * @extends {BaseAPI}
+ */
+export class ConfiguracionLimpiezaLogsControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewConfiguracionLimpiezaLogs} [newConfiguracionLimpiezaLogs] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerCreate(newConfiguracionLimpiezaLogs?: NewConfiguracionLimpiezaLogs, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerCreate(newConfiguracionLimpiezaLogs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ConfiguracionLimpiezaLogsFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerFind(filter?: ConfiguracionLimpiezaLogsFilter1, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ConfiguracionLimpiezaLogsFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerFindById(id: number, filter?: ConfiguracionLimpiezaLogsFilter, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ConfiguracionLimpiezaLogs} [configuracionLimpiezaLogs] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerReplaceById(id: number, configuracionLimpiezaLogs?: ConfiguracionLimpiezaLogs, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerReplaceById(id, configuracionLimpiezaLogs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerUpdateAll(where?: { [key: string]: object; }, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerUpdateAll(where, configuracionLimpiezaLogsPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ConfiguracionLimpiezaLogsPartial} [configuracionLimpiezaLogsPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConfiguracionLimpiezaLogsControllerApi
+     */
+    public configuracionLimpiezaLogsControllerUpdateById(id: number, configuracionLimpiezaLogsPartial?: ConfiguracionLimpiezaLogsPartial, options?: AxiosRequestConfig) {
+        return ConfiguracionLimpiezaLogsControllerApiFp(this.configuration).configuracionLimpiezaLogsControllerUpdateById(id, configuracionLimpiezaLogsPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * EmpresaControllerApi - axios parameter creator
  * @export
  */
@@ -27417,6 +28731,164 @@ export class IdiomaControllerApi extends BaseAPI {
 
 
 /**
+ * LimpiaLogControllerApi - axios parameter creator
+ * @export
+ */
+export const LimpiaLogControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        limpiaLogControllerLimpiaLog: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/limpiaLog`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        limpiaLogControllerLimpiaLogManual: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/limpiaLogManual`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LimpiaLogControllerApi - functional programming interface
+ * @export
+ */
+export const LimpiaLogControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LimpiaLogControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async limpiaLogControllerLimpiaLog(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.limpiaLogControllerLimpiaLog(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async limpiaLogControllerLimpiaLogManual(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.limpiaLogControllerLimpiaLogManual(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * LimpiaLogControllerApi - factory interface
+ * @export
+ */
+export const LimpiaLogControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LimpiaLogControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        limpiaLogControllerLimpiaLog(options?: any): AxiosPromise<object> {
+            return localVarFp.limpiaLogControllerLimpiaLog(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        limpiaLogControllerLimpiaLogManual(options?: any): AxiosPromise<object> {
+            return localVarFp.limpiaLogControllerLimpiaLogManual(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * LimpiaLogControllerApi - object-oriented interface
+ * @export
+ * @class LimpiaLogControllerApi
+ * @extends {BaseAPI}
+ */
+export class LimpiaLogControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LimpiaLogControllerApi
+     */
+    public limpiaLogControllerLimpiaLog(options?: AxiosRequestConfig) {
+        return LimpiaLogControllerApiFp(this.configuration).limpiaLogControllerLimpiaLog(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LimpiaLogControllerApi
+     */
+    public limpiaLogControllerLimpiaLogManual(options?: AxiosRequestConfig) {
+        return LimpiaLogControllerApiFp(this.configuration).limpiaLogControllerLimpiaLogManual(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * LogAccesoControllerApi - axios parameter creator
  * @export
  */
@@ -28018,6 +29490,612 @@ export class LogAccesoControllerApi extends BaseAPI {
      */
     public logAccesoControllerUpdateById(id: number, logAccesoPartial?: LogAccesoPartial, options?: AxiosRequestConfig) {
         return LogAccesoControllerApiFp(this.configuration).logAccesoControllerUpdateById(id, logAccesoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * LogAccionControllerApi - axios parameter creator
+ * @export
+ */
+export const LogAccionControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log-accions/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewLogAccion} [newLogAccion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerCreate: async (newLogAccion?: NewLogAccion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log-accions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newLogAccion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('logAccionControllerDeleteById', 'id', id)
+            const localVarPath = `/log-accions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {LogAccionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerFind: async (filter?: LogAccionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log-accions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerFindById: async (id: number, filter?: LogAccionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('logAccionControllerFindById', 'id', id)
+            const localVarPath = `/log-accions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccion} [logAccion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerReplaceById: async (id: number, logAccion?: LogAccion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('logAccionControllerReplaceById', 'id', id)
+            const localVarPath = `/log-accions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(logAccion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {LogAccionPartial} [logAccionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerUpdateAll: async (where?: { [key: string]: object; }, logAccionPartial?: LogAccionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log-accions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(logAccionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccionPartial} [logAccionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerUpdateById: async (id: number, logAccionPartial?: LogAccionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('logAccionControllerUpdateById', 'id', id)
+            const localVarPath = `/log-accions/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(logAccionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LogAccionControllerApi - functional programming interface
+ * @export
+ */
+export const LogAccionControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LogAccionControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewLogAccion} [newLogAccion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerCreate(newLogAccion?: NewLogAccion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LogAccion>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerCreate(newLogAccion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {LogAccionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerFind(filter?: LogAccionFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LogAccionWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerFindById(id: number, filter?: LogAccionFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LogAccionWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccion} [logAccion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerReplaceById(id: number, logAccion?: LogAccion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerReplaceById(id, logAccion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {LogAccionPartial} [logAccionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerUpdateAll(where?: { [key: string]: object; }, logAccionPartial?: LogAccionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerUpdateAll(where, logAccionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccionPartial} [logAccionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logAccionControllerUpdateById(id: number, logAccionPartial?: LogAccionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logAccionControllerUpdateById(id, logAccionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * LogAccionControllerApi - factory interface
+ * @export
+ */
+export const LogAccionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LogAccionControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.logAccionControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewLogAccion} [newLogAccion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerCreate(newLogAccion?: NewLogAccion, options?: any): AxiosPromise<LogAccion> {
+            return localVarFp.logAccionControllerCreate(newLogAccion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.logAccionControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {LogAccionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerFind(filter?: LogAccionFilter1, options?: any): AxiosPromise<Array<LogAccionWithRelations>> {
+            return localVarFp.logAccionControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerFindById(id: number, filter?: LogAccionFilter, options?: any): AxiosPromise<LogAccionWithRelations> {
+            return localVarFp.logAccionControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccion} [logAccion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerReplaceById(id: number, logAccion?: LogAccion, options?: any): AxiosPromise<any> {
+            return localVarFp.logAccionControllerReplaceById(id, logAccion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {LogAccionPartial} [logAccionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerUpdateAll(where?: { [key: string]: object; }, logAccionPartial?: LogAccionPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.logAccionControllerUpdateAll(where, logAccionPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {LogAccionPartial} [logAccionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logAccionControllerUpdateById(id: number, logAccionPartial?: LogAccionPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.logAccionControllerUpdateById(id, logAccionPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * LogAccionControllerApi - object-oriented interface
+ * @export
+ * @class LogAccionControllerApi
+ * @extends {BaseAPI}
+ */
+export class LogAccionControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewLogAccion} [newLogAccion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerCreate(newLogAccion?: NewLogAccion, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerCreate(newLogAccion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {LogAccionFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerFind(filter?: LogAccionFilter1, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {LogAccionFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerFindById(id: number, filter?: LogAccionFilter, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {LogAccion} [logAccion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerReplaceById(id: number, logAccion?: LogAccion, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerReplaceById(id, logAccion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {LogAccionPartial} [logAccionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerUpdateAll(where?: { [key: string]: object; }, logAccionPartial?: LogAccionPartial, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerUpdateAll(where, logAccionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {LogAccionPartial} [logAccionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LogAccionControllerApi
+     */
+    public logAccionControllerUpdateById(id: number, logAccionPartial?: LogAccionPartial, options?: AxiosRequestConfig) {
+        return LogAccionControllerApiFp(this.configuration).logAccionControllerUpdateById(id, logAccionPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
