@@ -301,7 +301,7 @@ const Permiso = () => {
                         className="datatable-responsive"
                         ref={referenciaDataTable}
                         header={header}
-                        dataKey="id"
+                        dataKey="seccion"
                         value={columnaPrincipal}
                         responsiveLayout="scroll"
                         rowClassName={rowClass}
@@ -312,9 +312,9 @@ const Permiso = () => {
                             headerStyle={{ minWidth: "15rem" }}
                             body={nombrePermisos}
                         />
-                        {columnasRoles.map((columna, index) => (
+                        {columnasRoles.map((columna) => (
                             <Column
-                                key={index}
+                                key={`column-${columna}`}
                                 field={columna}
                                 header={columna}
                                 headerStyle={{ minWidth: "15rem" }}

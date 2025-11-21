@@ -8,7 +8,7 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 const TipoArchivo = () => {
     const intl = useIntl();
     const columnas = [
- 
+
         { campo: 'nombreSeccion', header: intl.formatMessage({ id: 'Seccion' }), tipo: 'foraneo' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
@@ -20,10 +20,10 @@ const TipoArchivo = () => {
                 headerCrud={intl.formatMessage({ id: 'Tipos de archivo' })}
                 getRegistros={getVistaTipoArchivoEmpresaSeccion}
                 getRegistrosCount={getVistaTipoArchivoEmpresaSeccionCount}
-                getRegistrosForaneos={{ 'nombreSeccion': getSecciones}}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                getRegistrosForaneos={{ 'nombreSeccion': getSecciones }}
+                botones={['nuevo', 'ver', 'editar', 'descargarCSV']}
                 controlador={"Tipos de archivo"}
-                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
+                filtradoBase={{ empresaId: getUsuarioSesion()?.empresaId }}
                 editarComponente={<EditarTipoArchivo />}
                 columnas={columnas}
                 deleteRegistro={deleteTipoArchivo}
