@@ -72,7 +72,7 @@ const ConfiguracionLogsPage = () => {
                 nombreTabla: tabla,
                 numeroDiasRetencion: dias,
                 empresaId: empresaId,
-                activo: 'S',
+                activoSn: 'S',
                 campoFechaTabla: camposFecha[tabla] || 'fecha'
             };
             console.log(`Creando ${tabla}, datos:`, data);
