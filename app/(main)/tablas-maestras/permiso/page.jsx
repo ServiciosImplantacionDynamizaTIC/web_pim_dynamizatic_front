@@ -135,6 +135,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
                 { header: intl.formatMessage({ id: 'Ver Histórico Contraseñas' }), seccion: 'Usuarios-VerHistoricoPassword' },
 
+                // Parámetros globales
+                { header: intl.formatMessage({ id: 'Parámetros globales' }), seccion: 'Parámetros globales' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Parámetros globales-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Parámetros globales-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Parámetros globales-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Parámetros globales-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parámetros globales-Borrar' },
+
             ];
             // Obtenemos los roles
             const filtroRol = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId } } });

@@ -41,12 +41,12 @@ export const deleteLogAcceso = async (idLogAcceso) => {
 
 export const getEmpresasActivas = async () => {
     try {
-        const filtro = {
+        const filtro = JSON.stringify({
             where: {
                 activoSn: 'S'
             },
             order: ['nombre ASC']
-        }
+        })
         const { data: dataEmpresas } = await apiEmpresa.empresaControllerFind(filtro)
         return dataEmpresas
     } catch (error) {
@@ -57,12 +57,12 @@ export const getEmpresasActivas = async () => {
 
 export const getUsuariosActivos = async () => {
     try {
-        const filtro = {
+        const filtro = JSON.stringify({
             where: {
                 activoSn: 'S'
             },
             order: ['nombre ASC']
-        }
+        })
         const { data: dataUsuarios } = await apiUsuario.usuariosControllerFind(filtro)
         return dataUsuarios
     } catch (error) {
