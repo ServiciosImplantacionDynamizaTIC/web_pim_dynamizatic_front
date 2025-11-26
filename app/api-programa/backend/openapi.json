@@ -23938,7 +23938,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "activo": {
+          "activoSn": {
             "type": "string"
           }
         },
@@ -23975,7 +23975,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "activo": {
+          "activoSn": {
             "type": "string"
           }
         },
@@ -24016,7 +24016,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "activo": {
+          "activoSn": {
             "type": "string"
           }
         },
@@ -24057,7 +24057,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "activo": {
+          "activoSn": {
             "type": "string"
           }
         },
@@ -28857,7 +28857,7 @@
                   "fechaUltimaEjecucion": {
                     "type": "boolean"
                   },
-                  "activo": {
+                  "activoSn": {
                     "type": "boolean"
                   }
                 },
@@ -28875,7 +28875,7 @@
                     "campoFechaTabla",
                     "fechaUltimoBorrado",
                     "fechaUltimaEjecucion",
-                    "activo"
+                    "activoSn"
                   ],
                   "example": "id"
                 },
@@ -28949,7 +28949,7 @@
                   "fechaUltimaEjecucion": {
                     "type": "boolean"
                   },
-                  "activo": {
+                  "activoSn": {
                     "type": "boolean"
                   }
                 },
@@ -28967,7 +28967,7 @@
                     "campoFechaTabla",
                     "fechaUltimoBorrado",
                     "fechaUltimaEjecucion",
-                    "activo"
+                    "activoSn"
                   ],
                   "example": "id"
                 },

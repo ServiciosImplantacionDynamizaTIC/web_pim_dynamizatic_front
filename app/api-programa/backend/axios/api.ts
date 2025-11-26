@@ -3451,7 +3451,7 @@ export interface ConfiguracionLimpiezaLogs {
      * @type {string}
      * @memberof ConfiguracionLimpiezaLogs
      */
-    'activo'?: string;
+    'activoSn'?: string;
 }
 /**
  * 
@@ -3586,7 +3586,7 @@ export interface ConfiguracionLimpiezaLogsPartial {
      * @type {string}
      * @memberof ConfiguracionLimpiezaLogsPartial
      */
-    'activo'?: string;
+    'activoSn'?: string;
 }
 /**
  * (tsType: ConfiguracionLimpiezaLogsWithRelations, schemaOptions: { includeRelations: true })
@@ -3641,7 +3641,7 @@ export interface ConfiguracionLimpiezaLogsWithRelations {
      * @type {string}
      * @memberof ConfiguracionLimpiezaLogsWithRelations
      */
-    'activo'?: string;
+    'activoSn'?: string;
 }
 /**
  * 
@@ -9714,7 +9714,7 @@ export interface NewConfiguracionLimpiezaLogs {
      * @type {string}
      * @memberof NewConfiguracionLimpiezaLogs
      */
-    'activo'?: string;
+    'activoSn'?: string;
 }
 /**
  * (tsType: Omit<Empresa, \'id\'>, schemaOptions: { title: \'NewEmpresa\', exclude: [ \'id\' ] })
