@@ -22,15 +22,9 @@ const ParametroGlobal = () => {
         usuarioModificacion: getUsuariosActivos
     };
 
-    // Validar que solo se pueda editar/eliminar si modificable es 'S'
-    const validarEditar = {
-        campo: 'modificable',
-        valores: ['N'] // No permitir editar si modificable es 'N'
-    };
-
     const validarEliminar = {
-        campo: 'modificable',
-        valores: ['N'] // No permitir eliminar si modificable es 'N'
+        campo: 'clave',
+        valores: ['correosEnvioLimpiezaLog'] // Claves que no se permiten eliminar
     };
 
     return (
@@ -43,7 +37,6 @@ const ParametroGlobal = () => {
                     empresaId: Number(localStorage.getItem('empresa'))
                 }}
                 botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                validarEditar={validarEditar}
                 validarEliminar={validarEliminar}
                 controlador={"Parámetros globales"}
                 editarComponente={<EditarParametroGlobal />}

@@ -25,7 +25,7 @@ const EditarDatosParametroGlobal = ({ parametroGlobal, setParametroGlobal, estad
                         placeholder={intl.formatMessage({ id: 'Ej: correosEnvioLogSincro' })}
                         onChange={(e) => manejarCambio('clave', e.target.value)}
                         maxLength={100}
-                        disabled={!editable || estadoGuardando}
+                        disabled={parametroGlobal.id}
                         className={estadoGuardando && (!parametroGlobal.clave || parametroGlobal.clave.trim() === '') ? 'p-invalid' : ''}
                     />
                 </div>
