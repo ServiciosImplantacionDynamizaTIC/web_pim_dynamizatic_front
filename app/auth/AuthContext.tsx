@@ -147,6 +147,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Traducciones": {
           "path": "/tablas-maestras/traduccion",
           "icon": "pi pi-fw pi-user-edit"
+        },
+        "Parámetros globales": {
+          "path": "/tablas-maestras/parametro-global",
+          "icon": "pi pi-fw pi-cog"
         }
       }
     }

@@ -1059,37 +1059,6 @@
         "operationId": "PermisoController.buscarPermiso"
       }
     },
-    "/buscarTraduccionLiteral": {
-      "get": {
-        "x-controller-name": "TraduccionLiteralController",
-        "x-operation-name": "buscarTraduccionLiteral",
-        "tags": [
-          "TraduccionLiteralController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Devuelve la traducción basada en el código ISO",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "iso",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "operationId": "TraduccionLiteralController.buscarTraduccionLiteral"
-      }
-    },
     "/calendarios-disponibilidades/count": {
       "get": {
         "x-controller-name": "CalendariosDisponibilidadController",
@@ -13290,11 +13259,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Devuelve el count de las traducciones y sus idiomas",
+            "description": "TraduccionLiteral model count",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/loopback.Count"
                 }
               }
             }
@@ -13555,11 +13524,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Devuelve las traducciones y sus idiomas",
+            "description": "Array of TraduccionLiteral model instances",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraduccionLiteralWithRelations"
+                  }
                 }
               }
             }
@@ -15880,48 +15852,6 @@
         "additionalProperties": false,
         "x-typescript-type": "TraduccionLiteral"
       },
-      "TraduccionLiteralPartial": {
-        "title": "TraduccionLiteralPartial",
-        "type": "object",
-        "description": "(tsType: Partial<TraduccionLiteral>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "clave": {
-            "type": "string",
-            "nullable": false
-          },
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
-          "valor": {
-            "type": "string",
-            "nullable": false
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<TraduccionLiteral>"
-      },
       "TraduccionLiteralWithRelations": {
         "title": "TraduccionLiteralWithRelations",
         "type": "object",
@@ -15969,6 +15899,48 @@
         ],
         "additionalProperties": false,
         "x-typescript-type": "TraduccionLiteralWithRelations"
+      },
+      "TraduccionLiteralPartial": {
+        "title": "TraduccionLiteralPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TraduccionLiteral>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clave": {
+            "type": "string",
+            "nullable": false
+          },
+          "idiomaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TraduccionLiteral>"
       },
       "TraduccionContenido": {
         "title": "TraduccionContenido",
@@ -19430,6 +19402,10 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
           "clave": {
             "type": "string",
             "nullable": false
@@ -19488,6 +19464,10 @@
         "type": "object",
         "description": "(tsType: Omit<ParametroGlobal, 'id'>, schemaOptions: { title: 'NewParametroGlobal', exclude: [ 'id' ] })",
         "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
           "clave": {
             "type": "string",
             "nullable": false
@@ -19550,6 +19530,10 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
+          },
           "clave": {
             "type": "string",
             "nullable": false
@@ -19611,6 +19595,10 @@
         "properties": {
           "id": {
             "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": true
           },
           "clave": {
             "type": "string",
@@ -23677,18 +23665,6 @@
           "escala": {
             "type": "number",
             "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
           }
         },
         "required": [
@@ -23765,18 +23741,6 @@
           },
           "escala": {
             "type": "number",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -23860,18 +23824,6 @@
           "escala": {
             "type": "number",
             "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
-            "nullable": true
           }
         },
         "required": [
@@ -23953,18 +23905,6 @@
           },
           "escala": {
             "type": "number",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "servicio": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -29125,15 +29065,6 @@
                   },
                   "escala": {
                     "type": "boolean"
-                  },
-                  "email": {
-                    "type": "boolean"
-                  },
-                  "password": {
-                    "type": "boolean"
-                  },
-                  "servicio": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -29159,10 +29090,7 @@
                     "temaMenu",
                     "esquemaColor",
                     "tema",
-                    "escala",
-                    "email",
-                    "password",
-                    "servicio"
+                    "escala"
                   ],
                   "example": "id"
                 },
@@ -29265,15 +29193,6 @@
                   },
                   "escala": {
                     "type": "boolean"
-                  },
-                  "email": {
-                    "type": "boolean"
-                  },
-                  "password": {
-                    "type": "boolean"
-                  },
-                  "servicio": {
-                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -29299,10 +29218,7 @@
                     "temaMenu",
                     "esquemaColor",
                     "tema",
-                    "escala",
-                    "email",
-                    "password",
-                    "servicio"
+                    "escala"
                   ],
                   "example": "id"
                 },
@@ -32540,6 +32456,9 @@
                 "type": "object",
                 "properties": {
                   "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
                     "type": "boolean"
                   },
                   "clave": {
