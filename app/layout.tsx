@@ -14,6 +14,8 @@ import "primereact/resources/primereact.css";
 import "../styles/demo/Demos.scss";
 import "../styles/layout/layout.scss";
 import IntlProviderWrapper from '@/app/utility/Traducciones.js'; //-> Archivo con la configuración de las traducciones
+import { IdiomaProvider } from './contexts/IdiomaContext';
+import IdiomaDebugInfo from './components/IdiomaDebugInfo';
 
 import locales from "@/app/utility/locales.json"; //-> Archivo Json con la configuración de PrimeReact de palabras traducidas al español
 import AutoLogout from './global';
@@ -125,30 +127,33 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 )}
             </head>
             <body>
-                <IntlProviderWrapper>
-                    <PrimeReactProvider>
-                        {/*
-                        Controlamos el tema de la empresa de forma global
-                        */}
-                        <ThemeProvider>
-                            {/* Componente que actualiza el tema dinámicamente basado en login/logout */}
-                            <DynamicThemeManager />
-                            {/* Envolvemos el Layout Principal con <AuthProvider> para comprobar que el usuario se encuentre atenticado */}
-                            <AuthProvider>
-                                <AutoLogout /> {/* Llama al componente AutoLogout al cargar la aplicación */}
-                                <AbilityProvider> {/* Envolvemos con AbilityProvider */}
-                                    <MenuProvider>
-                                        <LayoutProvider>
-                                            <LayoutContainer>
-                                                {children}
-                                            </LayoutContainer>
-                                        </LayoutProvider>
-                                    </MenuProvider>
-                                </AbilityProvider>
-                            </AuthProvider>
-                        </ThemeProvider>
-                    </PrimeReactProvider>
-                </IntlProviderWrapper>
+                <IdiomaProvider>
+                    <IntlProviderWrapper>
+                        <PrimeReactProvider>
+                            {/*
+                            Controlamos el tema de la empresa de forma global
+                            */}
+                            <ThemeProvider>
+                                {/* Componente que actualiza el tema dinámicamente basado en login/logout */}
+                                <DynamicThemeManager />
+                                {/* Envolvemos el Layout Principal con <AuthProvider> para comprobar que el usuario se encuentre atenticado */}
+                                <AuthProvider>
+                                    <AutoLogout /> {/* Llama al componente AutoLogout al cargar la aplicación */}
+                                    <AbilityProvider> {/* Envolvemos con AbilityProvider */}
+                                        <MenuProvider>
+                                            <LayoutProvider>
+                                                <LayoutContainer>
+                                                    {children}
+                                                    <IdiomaDebugInfo />
+                                                </LayoutContainer>
+                                            </LayoutProvider>
+                                        </MenuProvider>
+                                    </AbilityProvider>
+                                </AuthProvider>
+                            </ThemeProvider>
+                        </PrimeReactProvider>
+                    </IntlProviderWrapper>
+                </IdiomaProvider>
             </body>
         </html>
     );

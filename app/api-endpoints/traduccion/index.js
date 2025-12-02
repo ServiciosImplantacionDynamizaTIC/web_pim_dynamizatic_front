@@ -40,18 +40,54 @@ export const deleteTraduccionLiteral = async (idTraduccion) => {
 
 export const buscaTraduccionLiteral = async (iso) => {
     try {
-        const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerBuscarTraduccionLiteral(iso);
+        console.log('🔍 Buscando traducciones para idioma:', iso);
+        
+        // Usar el filtro para buscar traducciones por idioma ISO
+        const filtro = {
+            where: {
+                idioma: iso
+            }
+        };
+        
+        const { data: dataTraduccionLiterales } = await apiTraduccion.traduccionLiteralControllerFind(filtro);
+        
+        console.log('✅ Traducciones raw obtenidas:', dataTraduccionLiterales);
+        console.log('🔍 Primera traducción de ejemplo:', dataTraduccionLiterales[0]);
+        console.log('🔍 Estructura de la primera traducción:', {
+            clave: dataTraduccionLiterales[0]?.clave,
+            valor: dataTraduccionLiterales[0]?.valor,
+            idioma: dataTraduccionLiterales[0]?.idioma,
+            keys: Object.keys(dataTraduccionLiterales[0] || {})
+        });
+        
         const newLanguageObj = {}; // {"Announcements": "Comunicados"}
 
-        dataTraduccionLiterales?.forEach(traduccion => {
+        dataTraduccionLiterales?.forEach((traduccion, index) => {
+            console.log(`🔍 Procesando traducción ${index}:`, {
+                clave: traduccion?.clave,
+                valor: traduccion?.valor,
+                valorLength: traduccion?.valor?.length,
+                tieneValor: !!(traduccion?.valor?.length)
+            });
+            
             if (traduccion?.valor?.length) {
                 newLanguageObj[`${traduccion.clave}`] = traduccion.valor;
+                console.log(`✅ Agregada: ${traduccion.clave} = ${traduccion.valor}`);
+            } else {
+                console.log(`❌ NO agregada: ${traduccion.clave}, valor: "${traduccion.valor}"`);
             }
         });
 
+        console.log('✅ Objeto de traducciones procesado:', newLanguageObj);
         return newLanguageObj;
     } catch (error) {
-        console.log(error);
+        console.error('❌ Error en buscaTraduccionLiteral:', error);
+        console.error('Error details:', {
+            message: error.message,
+            status: error.status,
+            data: error.response?.data
+        });
+        return {}; // Devolver objeto vacío en caso de error
     }
 };
 

@@ -7,11 +7,15 @@ import { InputText } from 'primereact/inputtext';
 import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { devuelveBasePath, getUsuarioSesion, verificarUrlExiste } from "@/app/utility/Utils";
+import { useIdiomas } from '@/app/contexts/IdiomaContext';
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
     const [avatar, setAvatar] = useState(null);
+    
+    // Usar el contexto de idiomas
+    const { idiomaActual, idiomasDisponibles, cambiarIdioma, isLoading } = useIdiomas();
 
     const onConfigButtonClick = () => {
         showConfigSidebar();
@@ -21,22 +25,16 @@ const AppTopbar = React.forwardRef((props, ref) => {
         menubutton: menubuttonRef.current,
     }));
 
-    const [dropdownValue, setDropdownValue] = useState(null);
-    const [dropdownValues, setDropdownValues] = useState([]);
     const [logoEmpresaUrl, setLogoEmpresaUrl] = useState(null);
     const [empresaNombre, setEmpresaNombre] = useState('');
     useEffect(() => {
-
-
         const fetchData = async () => {
-            await obtenerListaIdiomas();
             await obtenerAvatarUsuario();
             //Si el rol del usuario tiene permisos para ver la empresa
             if (await obtenerRolUsuario()) {
                 obtenerNombreEmpresa();
                 //obtenerLogoEmpresa()
             }
-
         }
         fetchData();
     }, []);
@@ -67,29 +65,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
         }
     }
 
-    const obtenerListaIdiomas = async () => {
-        // const filtro = {
-        //     where: {
-        //         and: {
-        //             activo_sn: 'S'
-        //         }
-        //     }
-        // }
-        // const registrosIdiomas = await getIdiomas(JSON.stringify(filtro));
-        const registrosIdiomas = await getIdiomas();
-        const jsonDeIdiomas = registrosIdiomas.map((idioma) => ({
-            name: idioma.nombre,
-            code: idioma.iso
-        })).sort((a, b) => a.name.localeCompare(b.name));;
-        const idiomaGuardado = localStorage.getItem("idioma");
-        if (idiomaGuardado) {
-            const idiomaEncontrado = jsonDeIdiomas.find((idioma) => idioma.code === idiomaGuardado);
-            if (idiomaEncontrado) {
-                setDropdownValue(idiomaEncontrado);
-            }
-        }
-        setDropdownValues(jsonDeIdiomas);
-    }
+
 
     const obtenerRolUsuario = async () => {
         const usuario = getUsuarioSesion();
@@ -118,10 +94,14 @@ const AppTopbar = React.forwardRef((props, ref) => {
     }
 
 
-    const cambiarIdioma = (idioma) => {
-        setDropdownValue(idioma);
-        localStorage.setItem("idioma", idioma.code);
-        window.location.reload();
+    const handleCambiarIdioma = (idiomaSeleccionado) => {
+        // Cambiar el idioma usando el contexto
+        cambiarIdioma(idiomaSeleccionado.code);
+        
+        // Recargar la página para aplicar las traducciones (comportamiento original)
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
     }
 
     return (
@@ -174,11 +154,12 @@ const AppTopbar = React.forwardRef((props, ref) => {
                     </li>
                     <li className="ml-3">
                         <Dropdown
-                            value={dropdownValue}
-                            onChange={(e) => cambiarIdioma(e.value)}
-                            options={dropdownValues}
+                            value={idiomasDisponibles.find(idioma => idioma.iso === idiomaActual.iso)}
+                            onChange={(e) => handleCambiarIdioma(e.value)}
+                            options={idiomasDisponibles}
                             optionLabel="name"
-                            placeholder="Select"
+                            placeholder="Seleccionar idioma"
+                            disabled={isLoading}
                         />
                     </li>
                     <li className="topbar-profile">
