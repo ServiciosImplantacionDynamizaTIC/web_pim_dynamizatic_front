@@ -12,6 +12,7 @@ import AppFooter from './AppFooter';
 import { LayoutContext } from './context/layoutcontext';
 import type { AppTopbarRef, ChildContainerProps } from '@/types';
 import { getUsuarioSesion } from '@/app/utility/Utils';
+import { useHidratacion } from '@/hooks/useHydration';
 
 const LayoutContainer = (props: ChildContainerProps) => {
     const {
@@ -27,6 +28,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const estaHidratado = useHidratacion();
     const [bindMenuOutsideClickListener, unbindMenuOutsideClickListener] = useEventListener({
         type: "click",
         listener: (event) => {
@@ -174,9 +176,12 @@ const LayoutContainer = (props: ChildContainerProps) => {
         "layout-sidebar-anchored": layoutState.anchored,
     });
 
+    // Obtener sesión del usuario solo después de la hidratación para prevenir desajustes SSR
+    const usuarioSesion = estaHidratado ? getUsuarioSesion() : null;
+
     return (
         <React.Fragment>
-            {getUsuarioSesion() && <div className={classNames("layout-container", containerClass)}>
+            {usuarioSesion && <div className={classNames("layout-container", containerClass)}>
                 <div
                     ref={sidebarRef}
                     className="layout-sidebar"
@@ -194,7 +199,7 @@ const LayoutContainer = (props: ChildContainerProps) => {
                 <div className="layout-mask"></div>
 
             </div>}
-            {getUsuarioSesion() === null && 
+            {usuarioSesion === null && 
            <div className="layout-content">{props.children}</div>}
 
         </React.Fragment>
