@@ -1059,6 +1059,37 @@
         "operationId": "PermisoController.buscarPermiso"
       }
     },
+    "/buscarTraduccionLiteral": {
+      "get": {
+        "x-controller-name": "TraduccionLiteralController",
+        "x-operation-name": "buscarTraduccionLiteral",
+        "tags": [
+          "TraduccionLiteralController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve la traducción basada en el código ISO",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "iso",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "TraduccionLiteralController.buscarTraduccionLiteral"
+      }
+    },
     "/calendarios-disponibilidades/count": {
       "get": {
         "x-controller-name": "CalendariosDisponibilidadController",
@@ -4906,7 +4937,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ejecuta ahora mismo la limpieza de logs configurados.",
+            "description": "Ejecuta ahora mismo la limpieza de logs configurados para todas las empresas.",
             "content": {
               "application/json": {
                 "schema": {
@@ -13259,11 +13290,11 @@
         ],
         "responses": {
           "200": {
-            "description": "TraduccionLiteral model count",
+            "description": "Devuelve el count de las traducciones y sus idiomas",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
+                  "type": "object"
                 }
               }
             }
@@ -13524,14 +13555,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Array of TraduccionLiteral model instances",
+            "description": "Devuelve las traducciones y sus idiomas",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TraduccionLiteralWithRelations"
-                  }
+                  "type": "object"
                 }
               }
             }
@@ -23665,6 +23693,18 @@
           "escala": {
             "type": "number",
             "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true			
           }
         },
         "required": [
@@ -23742,6 +23782,18 @@
           "escala": {
             "type": "number",
             "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true		
           }
         },
         "required": [
@@ -23824,6 +23876,18 @@
           "escala": {
             "type": "number",
             "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true		
           }
         },
         "required": [
@@ -23906,6 +23970,18 @@
           "escala": {
             "type": "number",
             "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "servicio": {
+            "type": "string",
+            "nullable": true			
           }
         },
         "additionalProperties": false,
@@ -29065,6 +29141,15 @@
                   },
                   "escala": {
                     "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "servicio": {
+                    "type": "boolean"		 
                   }
                 },
                 "additionalProperties": false
@@ -29090,7 +29175,10 @@
                     "temaMenu",
                     "esquemaColor",
                     "tema",
-                    "escala"
+                    "escala",
+                    "email",
+                    "password",
+                    "servicio"  
                   ],
                   "example": "id"
                 },
@@ -29193,6 +29281,15 @@
                   },
                   "escala": {
                     "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "servicio": {
+                    "type": "boolean"			 
                   }
                 },
                 "additionalProperties": false
@@ -29218,7 +29315,10 @@
                     "temaMenu",
                     "esquemaColor",
                     "tema",
-                    "escala"
+                    "escala",
+                    "email",
+                    "password",
+                    "servicio"
                   ],
                   "example": "id"
                 },
@@ -32559,6 +32659,9 @@
                 "type": "object",
                 "properties": {
                   "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
                     "type": "boolean"
                   },
                   "clave": {
