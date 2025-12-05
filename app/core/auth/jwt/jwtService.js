@@ -8,6 +8,7 @@ import axios from 'axios'
 import jwtDefaultConfig from './jwtDefaultConfig'
 import { UsuariosControllerApi, settings } from '@/app/api-programa'
 import { getAccessToken } from '@/app/utility/Utils'
+import { getIdiomaIdFromStorage } from '@/app/contexts/IdiomaContext'
 
 const api = new UsuariosControllerApi(settings)
 
@@ -32,6 +33,13 @@ export default class JwtService {
         if (accessToken) {
           config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
         }
+                
+        // I M P O R T A N T E - Agregar header x-idioma-id para todas las peticiones, esto permite que el Backend devuelva los datos traducidos en el idioma correcto.
+        const idiomaId = getIdiomaIdFromStorage()
+        if (idiomaId) {
+          config.headers['x-idioma-id'] = idiomaId
+        }
+        
         return config
       },
       error => Promise.reject(error)

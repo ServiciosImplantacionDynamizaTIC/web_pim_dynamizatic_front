@@ -78,6 +78,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
         // const registrosIdiomas = await getIdiomas(JSON.stringify(filtro));
         const registrosIdiomas = await getIdiomas();
         const jsonDeIdiomas = registrosIdiomas.map((idioma) => ({
+            id: idioma.id,
             name: idioma.nombre,
             code: idioma.iso
         })).sort((a, b) => a.name.localeCompare(b.name));;
@@ -121,6 +122,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
     const cambiarIdioma = (idioma) => {
         setDropdownValue(idioma);
         localStorage.setItem("idioma", idioma.code);
+        localStorage.setItem('idiomaId', idioma.id.toString());
         window.location.reload();
     }
 
