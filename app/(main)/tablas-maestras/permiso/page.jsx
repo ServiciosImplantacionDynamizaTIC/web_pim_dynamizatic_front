@@ -119,6 +119,62 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
 
+                // Grupos de Atributos
+                { header: intl.formatMessage({ id: 'Grupos de Atributos' }), seccion: 'GrupoAtributos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GrupoAtributos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GrupoAtributos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GrupoAtributos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GrupoAtributos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GrupoAtributos-Borrar' },
+
+                // Atributos
+                { header: intl.formatMessage({ id: 'Atributos' }), seccion: 'Atributos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Atributos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Atributos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Atributos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Atributos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Atributos-Borrar' },
+
+                // Catálogos
+                { header: intl.formatMessage({ id: 'Catálogos' }), seccion: 'Catalogos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Catalogos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Catalogos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Catalogos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Catalogos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Catalogos-Borrar' },
+
+                // Categorías
+                { header: intl.formatMessage({ id: 'Categorías' }), seccion: 'Categorias' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Categorias-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Categorias-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Categorias-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Categorias-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Categorias-Borrar' },
+
+                // Iconos
+                { header: intl.formatMessage({ id: 'Iconos' }), seccion: 'Iconos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Iconos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Iconos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Iconos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Iconos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Iconos-Borrar' },
+
+                // Marcas
+                { header: intl.formatMessage({ id: 'Marcas' }), seccion: 'Marcas' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Marcas-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Marcas-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Marcas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Marcas-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Marcas-Borrar' },
+
+                // Multimedia
+                { header: intl.formatMessage({ id: 'Multimedia' }), seccion: 'Multimedia' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Multimedia-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Multimedia-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Multimedia-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Multimedia-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Multimedia-Borrar' },
+
             ];
             // Obtenemos los roles
             const filtroRol = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId } } });

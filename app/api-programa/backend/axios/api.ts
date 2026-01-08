@@ -373,12 +373,6 @@ export interface Atributo {
      * @type {number}
      * @memberof Atributo
      */
-    'empresaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -470,7 +464,7 @@ export enum AtributoTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -570,12 +564,6 @@ export interface AtributoPartial {
      * @type {number}
      * @memberof AtributoPartial
      */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -667,7 +655,7 @@ export enum AtributoPartialTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -682,12 +670,6 @@ export interface AtributoWithRelations {
      * @memberof AtributoWithRelations
      */
     'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'empresaId': number;
     /**
      * 
      * @type {number}
@@ -784,7 +766,7 @@ export enum AtributoWithRelationsTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -1912,8 +1894,7 @@ export interface Catalogo {
 export enum CatalogoTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -1921,9 +1902,9 @@ export enum CatalogoTipoEnum {
     */
 export enum CatalogoEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -2099,8 +2080,7 @@ export interface CatalogoPartial {
 export enum CatalogoPartialTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -2108,9 +2088,9 @@ export enum CatalogoPartialTipoEnum {
     */
 export enum CatalogoPartialEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -2469,8 +2449,7 @@ export interface CatalogoWithRelations {
 export enum CatalogoWithRelationsTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -2478,9 +2457,9 @@ export enum CatalogoWithRelationsTipoEnum {
     */
 export enum CatalogoWithRelationsEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -7988,7 +7967,7 @@ export interface Multimedia {
      * @type {number}
      * @memberof Multimedia
      */
-    'tamanoBytes'?: number | null;
+    'tamañoBytes'?: number | null;
     /**
      * 
      * @type {string}
@@ -8183,7 +8162,7 @@ export interface MultimediaPartial {
      * @type {number}
      * @memberof MultimediaPartial
      */
-    'tamanoBytes'?: number | null;
+    'tamañoBytes'?: number | null;
     /**
      * 
      * @type {string}
@@ -8298,7 +8277,7 @@ export interface MultimediaWithRelations {
      * @type {number}
      * @memberof MultimediaWithRelations
      */
-    'tamanoBytes'?: number | null;
+    'tamañoBytes'?: number | null;
     /**
      * 
      * @type {string}
@@ -8432,12 +8411,6 @@ export interface NewAtributo {
      * @type {number}
      * @memberof NewAtributo
      */
-    'empresaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -8529,7 +8502,7 @@ export enum NewAtributoTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -8865,8 +8838,7 @@ export interface NewCatalogo {
 export enum NewCatalogoTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -8874,9 +8846,9 @@ export enum NewCatalogoTipoEnum {
     */
 export enum NewCatalogoEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -10231,7 +10203,7 @@ export interface NewMultimedia {
      * @type {number}
      * @memberof NewMultimedia
      */
-    'tamanoBytes'?: number | null;
+    'tamañoBytes'?: number | null;
     /**
      * 
      * @type {string}

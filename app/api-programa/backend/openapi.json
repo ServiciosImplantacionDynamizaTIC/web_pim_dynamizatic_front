@@ -19450,7 +19450,7 @@
             "type": "string",
             "nullable": true
           },
-          "tamanoBytes": {
+          "tamañoBytes": {
             "type": "number",
             "nullable": true
           },
@@ -19533,7 +19533,7 @@
             "type": "string",
             "nullable": true
           },
-          "tamanoBytes": {
+          "tamañoBytes": {
             "type": "number",
             "nullable": true
           },
@@ -19620,7 +19620,7 @@
             "type": "string",
             "nullable": true
           },
-          "tamanoBytes": {
+          "tamañoBytes": {
             "type": "number",
             "nullable": true
           },
@@ -19707,7 +19707,7 @@
             "type": "string",
             "nullable": true
           },
-          "tamanoBytes": {
+          "tamañoBytes": {
             "type": "number",
             "nullable": true
           },
@@ -23794,8 +23794,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -23803,9 +23802,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -23873,8 +23872,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -23882,9 +23880,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -23956,8 +23954,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -23965,9 +23962,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -24039,8 +24036,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -24048,9 +24044,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -25095,10 +25091,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
           "grupoAtributoId": {
             "type": "number",
             "nullable": true
@@ -25120,7 +25112,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -25167,7 +25159,6 @@
           }
         },
         "required": [
-          "empresaId",
           "nombre",
           "tipoDato",
           "usuarioCreacion"
@@ -25179,10 +25170,6 @@
         "type": "object",
         "description": "(tsType: Omit<Atributo, 'id'>, schemaOptions: { title: 'NewAtributo', exclude: [ 'id' ] })",
         "properties": {
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
           "grupoAtributoId": {
             "type": "number",
             "nullable": true
@@ -25204,7 +25191,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -25251,7 +25238,6 @@
           }
         },
         "required": [
-          "empresaId",
           "nombre",
           "tipoDato",
           "usuarioCreacion"
@@ -25267,10 +25253,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
           "grupoAtributoId": {
             "type": "number",
             "nullable": true
@@ -25292,7 +25274,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -25339,7 +25321,6 @@
           }
         },
         "required": [
-          "empresaId",
           "nombre",
           "tipoDato",
           "usuarioCreacion"
@@ -25354,10 +25335,6 @@
         "properties": {
           "id": {
             "type": "number"
-          },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
           },
           "grupoAtributoId": {
             "type": "number",
@@ -25380,7 +25357,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -25954,9 +25931,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "grupoAtributoId": {
                     "type": "boolean"
                   },
@@ -26008,7 +25982,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "grupoAtributoId",
                     "nombre",
                     "descripcion",
@@ -26078,9 +26051,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "grupoAtributoId": {
                     "type": "boolean"
                   },
@@ -26132,7 +26102,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "grupoAtributoId",
                     "nombre",
                     "descripcion",
@@ -30631,7 +30600,7 @@
                   "archivoGrande": {
                     "type": "boolean"
                   },
-                  "tamanoBytes": {
+                  "tamañoBytes": {
                     "type": "boolean"
                   },
                   "activoSn": {
@@ -30667,7 +30636,7 @@
                     "archivoThumbnail",
                     "archivoMedio",
                     "archivoGrande",
-                    "tamanoBytes",
+                    "tamañoBytes",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -30755,7 +30724,7 @@
                   "archivoGrande": {
                     "type": "boolean"
                   },
-                  "tamanoBytes": {
+                  "tamañoBytes": {
                     "type": "boolean"
                   },
                   "activoSn": {
@@ -30791,7 +30760,7 @@
                     "archivoThumbnail",
                     "archivoMedio",
                     "archivoGrande",
-                    "tamanoBytes",
+                    "tamañoBytes",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
