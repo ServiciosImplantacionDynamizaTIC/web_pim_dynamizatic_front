@@ -9,9 +9,8 @@ const Marca = () => {
     const intl = useIntl();
 
     const columnas = [
+        { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
-        { campo: 'logo', header: intl.formatMessage({ id: 'Logo' }), tipo: 'imagen' },
         { campo: 'sitioWeb', header: intl.formatMessage({ id: 'Sitio Web' }), tipo: 'string' },
         { campo: 'paisOrigen', header: intl.formatMessage({ id: 'País Origen' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
@@ -27,6 +26,7 @@ const Marca = () => {
                 controlador={"Marcas"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarMarca />}
+                seccion={"Marcas"}
                 columnas={columnas}
                 deleteRegistro={deleteMarca}
             />

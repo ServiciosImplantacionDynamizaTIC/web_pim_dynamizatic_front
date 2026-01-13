@@ -9,9 +9,8 @@ const Icono = () => {
     const intl = useIntl();
 
     const columnas = [
+        { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
-        { campo: 'archivo', header: intl.formatMessage({ id: 'Archivo' }), tipo: 'string' },
         { campo: 'tipo', header: intl.formatMessage({ id: 'Tipo' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
@@ -22,10 +21,11 @@ const Icono = () => {
                 headerCrud={intl.formatMessage({ id: 'Iconos' })}
                 getRegistros={getIconos}
                 getRegistrosCount={getIconosCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Iconos"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarIcono />}
+                seccion={"Iconos"}
                 columnas={columnas}
                 deleteRegistro={deleteIcono}
             />

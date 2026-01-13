@@ -76,16 +76,6 @@ const EditarDatosIcono = ({ icono, setIcono, estadoGuardando, isEdit, listaTipoA
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <ArchivoInput
-                            registro={icono}
-                            setRegistro={setIcono}
-                            archivoTipo="imagen"
-                            archivoHeader={intl.formatMessage({ id: 'Archivo' })}
-                            campoNombre="archivo"
-                        />
-                    </div>
-
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="tipo">{intl.formatMessage({ id: 'Tipo' })}</label>
                         <Dropdown 
                             id="tipo"

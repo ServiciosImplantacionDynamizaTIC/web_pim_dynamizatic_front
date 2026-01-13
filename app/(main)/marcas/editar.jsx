@@ -16,7 +16,6 @@ const EditarMarca = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
     const [marca, setMarca] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
-        logo: "",
         sitioWeb: "",
         paisOrigen: "",
         activoSn: "S"
@@ -45,7 +44,7 @@ const EditarMarca = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
 
     const validaciones = async () => {
         const validaNombre = marca.nombre === undefined || marca.nombre === "";
-        const validaLogo = marca.logo === undefined || marca.logo === "" || marca.logo === null;
+        /*const validaLogo = marca.logo === undefined || marca.logo === "" || marca.logo === null;
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -55,9 +54,9 @@ const EditarMarca = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                 detail: intl.formatMessage({ id: 'Las imagenes deben de tener el formato correcto' }),
                 life: 3000,
             });
-        }
+        }*/
         
-        return (!validaNombre && !validaLogo);
+        return (!validaNombre /*&& !validaLogo*/);
     };
 
     const guardarMarca = async () => {
@@ -69,13 +68,16 @@ const EditarMarca = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             const usuarioActual = getUsuarioSesion()?.id;
 
             if (idEditar === 0) {
-                delete objGuardar.id;
-                objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
-                if (objGuardar.activoSn === '') {
-                    objGuardar.activoSn = 'S';
-                }
-                
+
+                objGuardar= {
+                    empresaId: getUsuarioSesion()?.empresaId,
+                    nombre: objGuardar.nombre,
+                    descripcion: objGuardar.descripcion,
+                    sitioWeb: objGuardar.sitioWeb,
+                    paisOrigen: objGuardar.paisOrigen,
+                    activoSn: objGuardar.activoSn || 'N',
+                    usuarioCreacion: usuarioActual,
+                };
                 const nuevoRegistro = await postMarca(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -95,7 +97,6 @@ const EditarMarca = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                     id: objGuardar.id,
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
-                    logo: objGuardar.logo,
                     sitioWeb: objGuardar.sitioWeb,
                     paisOrigen: objGuardar.paisOrigen,
                     activoSn: objGuardar.activoSn || 'N',

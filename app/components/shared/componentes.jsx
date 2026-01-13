@@ -10,6 +10,7 @@ import { devuelveBasePath, getUsuarioSesion } from "../../utility/Utils";
 import { useIntl } from 'react-intl'
 import { compruebaPermiso, getVistaEmpresaRolPermiso } from "../../api-endpoints/permisos";
 import { Tooltip } from 'primereact/tooltip';
+import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
 // import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 
 const templateGenerico = (campo, cabecera) => (rowData) => {

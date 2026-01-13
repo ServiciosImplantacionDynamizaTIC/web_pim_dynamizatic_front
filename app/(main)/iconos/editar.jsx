@@ -16,7 +16,6 @@ const EditarIcono = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
     const [icono, setIcono] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
-        archivo: "",
         tipo: "",
         activoSn: "S"
     });
@@ -44,7 +43,7 @@ const EditarIcono = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
 
     const validaciones = async () => {
         const validaNombre = icono.nombre === undefined || icono.nombre === "";
-        const validaArchivo = icono.archivo === undefined || icono.archivo === "" || icono.archivo === null;
+        /*const validaArchivo = icono.archivo === undefined || icono.archivo === "" || icono.archivo === null;
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -54,9 +53,9 @@ const EditarIcono = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                 detail: intl.formatMessage({ id: 'Las imagenes deben de tener el formato correcto' }),
                 life: 3000,
             });
-        }
+        }*/
         
-        return (!validaNombre && !validaArchivo);
+        return (!validaNombre /*&& !validaArchivo*/);
     };
 
     const guardarIcono = async () => {
@@ -68,13 +67,15 @@ const EditarIcono = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
             const usuarioActual = getUsuarioSesion()?.id;
 
             if (idEditar === 0) {
-                delete objGuardar.id;
-                objGuardar['usuarioCreacion'] = usuarioActual;
-                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
-                
-                if (objGuardar.activoSn === '') {
-                    objGuardar.activoSn = 'S';
-                }
+
+                objGuardar = {
+                    empresaId: getUsuarioSesion()?.empresaId,
+                    nombre: objGuardar.nombre,
+                    descripcion: objGuardar.descripcion,
+                    tipo: objGuardar.tipo,
+                    activoSn: objGuardar.activoSn || 'N',
+                    usuarioCreacion: usuarioActual,
+                };
                 
                 const nuevoRegistro = await postIcono(objGuardar);
 
@@ -95,7 +96,6 @@ const EditarIcono = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistr
                     id: objGuardar.id,
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
-                    archivo: objGuardar.archivo,
                     tipo: objGuardar.tipo,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,

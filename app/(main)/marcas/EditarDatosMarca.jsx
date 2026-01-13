@@ -68,16 +68,6 @@ const EditarDatosMarca = ({ marca, setMarca, estadoGuardando, isEdit, listaTipoA
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <ArchivoInput
-                            registro={marca}
-                            setRegistro={setMarca}
-                            archivoTipo="imagen"
-                            archivoHeader={intl.formatMessage({ id: 'Logo' })}
-                            campoNombre="logo"
-                        />
-                    </div>
-
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="sitioWeb">{intl.formatMessage({ id: 'Sitio Web' })}</label>
                         <InputText 
                             id="sitioWeb"

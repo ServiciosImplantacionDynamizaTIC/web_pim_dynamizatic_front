@@ -22293,7 +22293,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -22325,7 +22325,6 @@
         "required": [
           "empresaId",
           "nombre",
-          "archivo",
           "usuarioCreacion"
         ],
         "additionalProperties": false
@@ -22349,7 +22348,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -22381,7 +22380,6 @@
         "required": [
           "empresaId",
           "nombre",
-          "archivo",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -22409,7 +22407,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -22441,7 +22439,6 @@
         "required": [
           "empresaId",
           "nombre",
-          "archivo",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -22469,7 +22466,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",

@@ -4154,7 +4154,7 @@ export interface Icono {
      * @type {string}
      * @memberof Icono
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -4307,7 +4307,7 @@ export interface IconoPartial {
      * @type {string}
      * @memberof IconoPartial
      */
-    'archivo'?: string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -4380,7 +4380,7 @@ export interface IconoWithRelations {
      * @type {string}
      * @memberof IconoWithRelations
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -9324,7 +9324,7 @@ export interface NewIcono {
      * @type {string}
      * @memberof NewIcono
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
