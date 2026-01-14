@@ -151,6 +151,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Parámetros globales": {
           "path": "/tablas-maestras/parametro-global",
           "icon": "pi pi-fw pi-cog"
+        },
+        "GrupoAtributos": {
+          "path": "/grupo-atributos",
+          "icon": "pi pi-fw pi-sitemap"
+        },
+        "Atributos": {
+          "path": "/atributos",
+          "icon": "pi pi-fw pi-tags"
+        },
+        "Catalogos": {
+          "path": "/catalogos",
+          "icon": "pi pi-fw pi-book"
+        },
+        "Categorias": {
+          "path": "/categorias",
+          "icon": "pi pi-fw pi-folder"
+        },
+        "Iconos": {
+          "path": "/iconos",
+          "icon": "pi pi-fw pi-image"
+        },
+        "Marcas": {
+          "path": "/marcas",
+          "icon": "pi pi-fw pi-star"
+        },
+        "Multimedia": {
+          "path": "/multimedia",
+          "icon": "pi pi-fw pi-camera"
         }
       }
     }

@@ -13,6 +13,7 @@ import { Tooltip } from 'primereact/tooltip';
 import VisualizadorDeImagen from './VisualizadorDeImagen';
 import { getUrlImagenMiniatura, getUrlImagenGrande, UrlEsImagen as esUrlImagenUtil } from '../../utility/ImageUtils';
 import { delimiter } from "path";
+import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
 // import { getVistaEmpresaRolPermiso } from "@/app/api-endpoints/permisos";
 
 const templateGenerico = (campo, cabecera) => (rowData) => {

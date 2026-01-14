@@ -373,12 +373,6 @@ export interface Atributo {
      * @type {number}
      * @memberof Atributo
      */
-    'empresaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -470,7 +464,7 @@ export enum AtributoTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -570,12 +564,6 @@ export interface AtributoPartial {
      * @type {number}
      * @memberof AtributoPartial
      */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -667,7 +655,7 @@ export enum AtributoPartialTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -682,12 +670,6 @@ export interface AtributoWithRelations {
      * @memberof AtributoWithRelations
      */
     'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'empresaId': number;
     /**
      * 
      * @type {number}
@@ -784,7 +766,7 @@ export enum AtributoWithRelationsTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -1912,8 +1894,7 @@ export interface Catalogo {
 export enum CatalogoTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -1921,9 +1902,9 @@ export enum CatalogoTipoEnum {
     */
 export enum CatalogoEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -2099,8 +2080,7 @@ export interface CatalogoPartial {
 export enum CatalogoPartialTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -2108,9 +2088,9 @@ export enum CatalogoPartialTipoEnum {
     */
 export enum CatalogoPartialEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -2469,8 +2449,7 @@ export interface CatalogoWithRelations {
 export enum CatalogoWithRelationsTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -2478,9 +2457,9 @@ export enum CatalogoWithRelationsTipoEnum {
     */
 export enum CatalogoWithRelationsEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -4420,7 +4399,7 @@ export interface Icono {
      * @type {string}
      * @memberof Icono
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -4573,7 +4552,7 @@ export interface IconoPartial {
      * @type {string}
      * @memberof IconoPartial
      */
-    'archivo'?: string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -4646,7 +4625,7 @@ export interface IconoWithRelations {
      * @type {string}
      * @memberof IconoWithRelations
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -5014,13 +4993,13 @@ export interface InlineObject5 {
      * @type {string}
      * @memberof InlineObject5
      */
-    'mail': string;
+    'text': string;
     /**
-     * 
+     * Código del idioma destino (ej: en, de, it, fr)
      * @type {string}
      * @memberof InlineObject5
      */
-    'password': string;
+    'targetLanguage': string;
 }
 /**
  * 
@@ -5033,7 +5012,13 @@ export interface InlineObject6 {
      * @type {string}
      * @memberof InlineObject6
      */
-    'email'?: string;
+    'mail': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'password': string;
 }
 /**
  * 
@@ -5046,29 +5031,42 @@ export interface InlineObject7 {
      * @type {string}
      * @memberof InlineObject7
      */
+    'email'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject8
+ */
+export interface InlineObject8 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
     'nombre': string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject7
+     * @memberof InlineObject8
      */
     'mail': string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject7
+     * @memberof InlineObject8
      */
     'password': string;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject7
+     * @memberof InlineObject8
      */
     'empresaId'?: number;
     /**
      * 
      * @type {number}
-     * @memberof InlineObject7
+     * @memberof InlineObject8
      */
     'rolId'?: number;
 }
@@ -5083,25 +5081,25 @@ export interface InlineResponse200 {
      * @type {string}
      * @memberof InlineResponse200
      */
-    'accessToken'?: string;
+    'original'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse200
      */
-    'expiresIn'?: string;
+    'translated'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse200
      */
-    'refreshToken'?: string;
+    'targetLang'?: string;
     /**
      * 
-     * @type {Usuario}
+     * @type {string}
      * @memberof InlineResponse200
      */
-    'userData'?: Usuario;
+    'service'?: string;
 }
 /**
  * 
@@ -5111,14 +5109,45 @@ export interface InlineResponse200 {
 export interface InlineResponse2001 {
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof InlineResponse2001
+     */
+    'accessToken'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    'expiresIn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    'refreshToken'?: string;
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse2001
+     */
+    'userData'?: Usuario;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2002
+ */
+export interface InlineResponse2002 {
+    /**
+     * 
+     * @type {object}
+     * @memberof InlineResponse2002
      */
     'user'?: object;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2001
+     * @memberof InlineResponse2002
      */
     'token'?: string;
 }
@@ -8517,6 +8546,12 @@ export interface Multimedia {
     'empresaId': number;
     /**
      * 
+     * @type {number}
+     * @memberof Multimedia
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof Multimedia
      */
@@ -8532,43 +8567,7 @@ export interface Multimedia {
      * @type {string}
      * @memberof Multimedia
      */
-    'tipo': MultimediaTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoOriginal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Multimedia
-     */
-    'tamanoBytes'?: number | null;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -8600,18 +8599,6 @@ export interface Multimedia {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MultimediaTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * 
  * @export
@@ -8712,6 +8699,12 @@ export interface MultimediaPartial {
     'empresaId'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof MultimediaPartial
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof MultimediaPartial
      */
@@ -8727,43 +8720,7 @@ export interface MultimediaPartial {
      * @type {string}
      * @memberof MultimediaPartial
      */
-    'tipo'?: MultimediaPartialTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoOriginal'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaPartial
-     */
-    'tamanoBytes'?: number | null;
+    'tipo'?: string;
     /**
      * 
      * @type {string}
@@ -8795,18 +8752,6 @@ export interface MultimediaPartial {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MultimediaPartialTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * (tsType: MultimediaWithRelations, schemaOptions: { includeRelations: true })
  * @export
@@ -8827,6 +8772,12 @@ export interface MultimediaWithRelations {
     'empresaId': number;
     /**
      * 
+     * @type {number}
+     * @memberof MultimediaWithRelations
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof MultimediaWithRelations
      */
@@ -8842,43 +8793,7 @@ export interface MultimediaWithRelations {
      * @type {string}
      * @memberof MultimediaWithRelations
      */
-    'tipo': MultimediaWithRelationsTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoOriginal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaWithRelations
-     */
-    'tamanoBytes'?: number | null;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -8910,18 +8825,6 @@ export interface MultimediaWithRelations {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MultimediaWithRelationsTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * (tsType: Omit<Archivo, \'id\'>, schemaOptions: { title: \'NewArchivo\', exclude: [ \'id\' ] })
  * @export
@@ -9007,12 +8910,6 @@ export interface NewArchivo {
  * @interface NewAtributo
  */
 export interface NewAtributo {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
-    'empresaId': number;
     /**
      * 
      * @type {number}
@@ -9109,7 +9006,7 @@ export enum NewAtributoTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -9445,8 +9342,7 @@ export interface NewCatalogo {
 export enum NewCatalogoTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -9454,9 +9350,9 @@ export enum NewCatalogoTipoEnum {
     */
 export enum NewCatalogoEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -9981,7 +9877,7 @@ export interface NewIcono {
      * @type {string}
      * @memberof NewIcono
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -10888,6 +10784,12 @@ export interface NewMultimedia {
     'empresaId': number;
     /**
      * 
+     * @type {number}
+     * @memberof NewMultimedia
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof NewMultimedia
      */
@@ -10903,43 +10805,7 @@ export interface NewMultimedia {
      * @type {string}
      * @memberof NewMultimedia
      */
-    'tipo': NewMultimediaTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoOriginal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewMultimedia
-     */
-    'tamanoBytes'?: number | null;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -10971,18 +10837,6 @@ export interface NewMultimedia {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum NewMultimediaTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * (tsType: Omit<Notificacion, \'id\'>, schemaOptions: { title: \'NewNotificacion\', exclude: [ \'id\' ] })
  * @export
@@ -12228,6 +12082,61 @@ export interface NewTraduccionContenido {
      * 
      * @type {number}
      * @memberof NewTraduccionContenido
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * (tsType: Omit<TraduccionExclusiones, \'id\'>, schemaOptions: { title: \'NewTraduccionExclusiones\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTraduccionExclusiones
+ */
+export interface NewTraduccionExclusiones {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'tipoExclusion': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'valor': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTraduccionExclusiones
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTraduccionExclusiones
      */
     'usuarioModificacion'?: number | null;
 }
@@ -17791,6 +17700,269 @@ export interface TraduccionContenidoWithRelations {
      * 
      * @type {number}
      * @memberof TraduccionContenidoWithRelations
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TraduccionExclusiones
+ */
+export interface TraduccionExclusiones {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusiones
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'tipoExclusion': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'valor': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusiones
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusiones
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TraduccionExclusionesFilter
+ */
+export interface TraduccionExclusionesFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TraduccionExclusionesFilter1
+ */
+export interface TraduccionExclusionesFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TraduccionExclusiones>, schemaOptions: { partial: true })
+ * @export
+ * @interface TraduccionExclusionesPartial
+ */
+export interface TraduccionExclusionesPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'tipoExclusion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * (tsType: TraduccionExclusionesWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TraduccionExclusionesWithRelations
+ */
+export interface TraduccionExclusionesWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'tipoExclusion': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'valor': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesWithRelations
      */
     'usuarioModificacion'?: number | null;
 }
@@ -45787,6 +45959,109 @@ export const TraduccionContenidoControllerApiAxiosParamCreator = function (confi
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIA: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traducirContenidoConIA`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIAManual: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traducirContenidoConIA_manual`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {InlineObject5} [inlineObject5] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirTextoEndpoint: async (inlineObject5?: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/translate/mymemory`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject5, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {TraduccionContenidoPartial} [traduccionContenidoPartial] 
          * @param {*} [options] Override http request option.
@@ -45942,6 +46217,34 @@ export const TraduccionContenidoControllerApiFp = function(configuration?: Confi
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionContenidoControllerTraducirContenidoConIA(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionContenidoControllerTraducirContenidoConIA(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionContenidoControllerTraducirContenidoConIAManual(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionContenidoControllerTraducirContenidoConIAManual(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {InlineObject5} [inlineObject5] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionContenidoControllerTraducirTextoEndpoint(inlineObject5?: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionContenidoControllerTraducirTextoEndpoint(inlineObject5, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {TraduccionContenidoPartial} [traduccionContenidoPartial] 
          * @param {*} [options] Override http request option.
@@ -46027,6 +46330,31 @@ export const TraduccionContenidoControllerApiFactory = function (configuration?:
          */
         traduccionContenidoControllerReplaceById(id: number, traduccionContenido?: TraduccionContenido, options?: any): AxiosPromise<any> {
             return localVarFp.traduccionContenidoControllerReplaceById(id, traduccionContenido, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIA(options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionContenidoControllerTraducirContenidoConIA(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIAManual(options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionContenidoControllerTraducirContenidoConIAManual(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {InlineObject5} [inlineObject5] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirTextoEndpoint(inlineObject5?: InlineObject5, options?: any): AxiosPromise<InlineResponse200> {
+            return localVarFp.traduccionContenidoControllerTraducirTextoEndpoint(inlineObject5, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -46128,6 +46456,37 @@ export class TraduccionContenidoControllerApi extends BaseAPI {
 
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionContenidoControllerApi
+     */
+    public traduccionContenidoControllerTraducirContenidoConIA(options?: AxiosRequestConfig) {
+        return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerTraducirContenidoConIA(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionContenidoControllerApi
+     */
+    public traduccionContenidoControllerTraducirContenidoConIAManual(options?: AxiosRequestConfig) {
+        return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerTraducirContenidoConIAManual(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {InlineObject5} [inlineObject5] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionContenidoControllerApi
+     */
+    public traduccionContenidoControllerTraducirTextoEndpoint(inlineObject5?: InlineObject5, options?: AxiosRequestConfig) {
+        return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerTraducirTextoEndpoint(inlineObject5, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {TraduccionContenidoPartial} [traduccionContenidoPartial] 
      * @param {*} [options] Override http request option.
@@ -46148,6 +46507,612 @@ export class TraduccionContenidoControllerApi extends BaseAPI {
      */
     public traduccionContenidoControllerUpdateById(id: number, traduccionContenidoPartial?: TraduccionContenidoPartial, options?: AxiosRequestConfig) {
         return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerUpdateById(id, traduccionContenidoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TraduccionExclusionesControllerApi - axios parameter creator
+ * @export
+ */
+export const TraduccionExclusionesControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCreate: async (newTraduccionExclusiones?: NewTraduccionExclusiones, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTraduccionExclusiones, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerDeleteById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TraduccionExclusionesFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFind: async (filter?: TraduccionExclusionesFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFindById: async (id: number, filter?: TraduccionExclusionesFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerFindById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusiones} [traduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerReplaceById: async (id: number, traduccionExclusiones?: TraduccionExclusiones, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerReplaceById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(traduccionExclusiones, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateAll: async (where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(traduccionExclusionesPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateById: async (id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerUpdateById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(traduccionExclusionesPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TraduccionExclusionesControllerApi - functional programming interface
+ * @export
+ */
+export const TraduccionExclusionesControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TraduccionExclusionesControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerCreate(newTraduccionExclusiones?: NewTraduccionExclusiones, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TraduccionExclusiones>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerCreate(newTraduccionExclusiones, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TraduccionExclusionesFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerFind(filter?: TraduccionExclusionesFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TraduccionExclusionesWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerFindById(id: number, filter?: TraduccionExclusionesFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TraduccionExclusionesWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusiones} [traduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerReplaceById(id: number, traduccionExclusiones?: TraduccionExclusiones, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerReplaceById(id, traduccionExclusiones, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerUpdateAll(where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerUpdateAll(where, traduccionExclusionesPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerUpdateById(id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerUpdateById(id, traduccionExclusionesPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TraduccionExclusionesControllerApi - factory interface
+ * @export
+ */
+export const TraduccionExclusionesControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TraduccionExclusionesControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.traduccionExclusionesControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCreate(newTraduccionExclusiones?: NewTraduccionExclusiones, options?: any): AxiosPromise<TraduccionExclusiones> {
+            return localVarFp.traduccionExclusionesControllerCreate(newTraduccionExclusiones, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.traduccionExclusionesControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TraduccionExclusionesFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFind(filter?: TraduccionExclusionesFilter1, options?: any): AxiosPromise<Array<TraduccionExclusionesWithRelations>> {
+            return localVarFp.traduccionExclusionesControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFindById(id: number, filter?: TraduccionExclusionesFilter, options?: any): AxiosPromise<TraduccionExclusionesWithRelations> {
+            return localVarFp.traduccionExclusionesControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusiones} [traduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerReplaceById(id: number, traduccionExclusiones?: TraduccionExclusiones, options?: any): AxiosPromise<any> {
+            return localVarFp.traduccionExclusionesControllerReplaceById(id, traduccionExclusiones, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateAll(where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.traduccionExclusionesControllerUpdateAll(where, traduccionExclusionesPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateById(id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.traduccionExclusionesControllerUpdateById(id, traduccionExclusionesPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TraduccionExclusionesControllerApi - object-oriented interface
+ * @export
+ * @class TraduccionExclusionesControllerApi
+ * @extends {BaseAPI}
+ */
+export class TraduccionExclusionesControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerCreate(newTraduccionExclusiones?: NewTraduccionExclusiones, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerCreate(newTraduccionExclusiones, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TraduccionExclusionesFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerFind(filter?: TraduccionExclusionesFilter1, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TraduccionExclusionesFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerFindById(id: number, filter?: TraduccionExclusionesFilter, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TraduccionExclusiones} [traduccionExclusiones] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerReplaceById(id: number, traduccionExclusiones?: TraduccionExclusiones, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerReplaceById(id, traduccionExclusiones, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerUpdateAll(where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerUpdateAll(where, traduccionExclusionesPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerUpdateById(id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerUpdateById(id, traduccionExclusionesPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -48238,13 +49203,13 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject5} inlineObject5 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerLogin: async (inlineObject5: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'inlineObject5' is not null or undefined
-            assertParamExists('usuariosControllerLogin', 'inlineObject5', inlineObject5)
+        usuariosControllerLogin: async (inlineObject6: InlineObject6, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject6' is not null or undefined
+            assertParamExists('usuariosControllerLogin', 'inlineObject6', inlineObject6)
             const localVarPath = `/usuarios/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -48268,7 +49233,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject5, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject6, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -48314,13 +49279,13 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject6} inlineObject6 
+         * @param {InlineObject7} inlineObject7 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRecuperarPassword: async (inlineObject6: InlineObject6, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'inlineObject6' is not null or undefined
-            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject6', inlineObject6)
+        usuariosControllerRecuperarPassword: async (inlineObject7: InlineObject7, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'inlineObject7' is not null or undefined
+            assertParamExists('usuariosControllerRecuperarPassword', 'inlineObject7', inlineObject7)
             const localVarPath = `/usuarios/recuperarPassword`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -48344,7 +49309,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject6, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject7, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -48353,11 +49318,11 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * 
-         * @param {InlineObject7} [inlineObject7] 
+         * @param {InlineObject8} [inlineObject8] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister: async (inlineObject7?: InlineObject7, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usuariosControllerRegister: async (inlineObject8?: InlineObject8, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/usuarios/register`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -48381,7 +49346,7 @@ export const UsuariosControllerApiAxiosParamCreator = function (configuration?: 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject7, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject8, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -48729,12 +49694,12 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject5} inlineObject5 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerLogin(inlineObject5: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject5, options);
+        async usuariosControllerLogin(inlineObject6: InlineObject6, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerLogin(inlineObject6, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -48749,22 +49714,22 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {InlineObject6} inlineObject6 
+         * @param {InlineObject7} inlineObject7 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRecuperarPassword(inlineObject6: InlineObject6, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject6, options);
+        async usuariosControllerRecuperarPassword(inlineObject7: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRecuperarPassword(inlineObject7, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {InlineObject7} [inlineObject7] 
+         * @param {InlineObject8} [inlineObject8] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerRegister(inlineObject7?: InlineObject7, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject7, options);
+        async usuariosControllerRegister(inlineObject8?: InlineObject8, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerRegister(inlineObject8, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -48899,12 +49864,12 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject5} inlineObject5 
+         * @param {InlineObject6} inlineObject6 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerLogin(inlineObject5: InlineObject5, options?: any): AxiosPromise<InlineResponse200> {
-            return localVarFp.usuariosControllerLogin(inlineObject5, options).then((request) => request(axios, basePath));
+        usuariosControllerLogin(inlineObject6: InlineObject6, options?: any): AxiosPromise<InlineResponse2001> {
+            return localVarFp.usuariosControllerLogin(inlineObject6, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -48917,21 +49882,21 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {InlineObject6} inlineObject6 
+         * @param {InlineObject7} inlineObject7 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRecuperarPassword(inlineObject6: InlineObject6, options?: any): AxiosPromise<void> {
-            return localVarFp.usuariosControllerRecuperarPassword(inlineObject6, options).then((request) => request(axios, basePath));
+        usuariosControllerRecuperarPassword(inlineObject7: InlineObject7, options?: any): AxiosPromise<void> {
+            return localVarFp.usuariosControllerRecuperarPassword(inlineObject7, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {InlineObject7} [inlineObject7] 
+         * @param {InlineObject8} [inlineObject8] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerRegister(inlineObject7?: InlineObject7, options?: any): AxiosPromise<InlineResponse2001> {
-            return localVarFp.usuariosControllerRegister(inlineObject7, options).then((request) => request(axios, basePath));
+        usuariosControllerRegister(inlineObject8?: InlineObject8, options?: any): AxiosPromise<InlineResponse2002> {
+            return localVarFp.usuariosControllerRegister(inlineObject8, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -49068,13 +50033,13 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject5} inlineObject5 
+     * @param {InlineObject6} inlineObject6 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerLogin(inlineObject5: InlineObject5, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject5, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerLogin(inlineObject6: InlineObject6, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerLogin(inlineObject6, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -49090,24 +50055,24 @@ export class UsuariosControllerApi extends BaseAPI {
 
     /**
      * 
-     * @param {InlineObject6} inlineObject6 
+     * @param {InlineObject7} inlineObject7 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRecuperarPassword(inlineObject6: InlineObject6, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject6, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerRecuperarPassword(inlineObject7: InlineObject7, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRecuperarPassword(inlineObject7, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {InlineObject7} [inlineObject7] 
+     * @param {InlineObject8} [inlineObject8] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsuariosControllerApi
      */
-    public usuariosControllerRegister(inlineObject7?: InlineObject7, options?: AxiosRequestConfig) {
-        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject7, options).then((request) => request(this.axios, this.basePath));
+    public usuariosControllerRegister(inlineObject8?: InlineObject8, options?: AxiosRequestConfig) {
+        return UsuariosControllerApiFp(this.configuration).usuariosControllerRegister(inlineObject8, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
