@@ -7,7 +7,6 @@ import { InputText } from 'primereact/inputtext';
 import { getUsuarioAvatar } from "@/app/api-endpoints/usuario";
 import { getVistaEmpresaRol } from "@/app/api-endpoints/rol";
 import { devuelveBasePath, getUsuarioSesion, verificarUrlExiste } from "@/app/utility/Utils";
-import { getVistaEmpresaRol } from '@/app/api-endpoints/rol';
 
 const AppTopbar = React.forwardRef((props, ref) => {
     const { onMenuToggle, showProfileSidebar, showConfigSidebar } = useContext(LayoutContext);

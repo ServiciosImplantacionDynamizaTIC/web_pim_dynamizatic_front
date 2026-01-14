@@ -12,11 +12,9 @@ const Multimedia = () => {
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
         { campo: 'tipo', header: intl.formatMessage({ id: 'Tipo' }), tipo: 'string' },
-        { campo: 'formato', header: intl.formatMessage({ id: 'Formato' }), tipo: 'string' },
-        { campo: 'archivoOriginal', header: intl.formatMessage({ id: 'Archivo' }), tipo: 'string' },
+        { campo: 'categoriaNombre', header: intl.formatMessage({ id: 'Categoría' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
-    ]
-    
+    ];
     return (
         <div>
             <Crud
