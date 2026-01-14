@@ -17,12 +17,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         nombre: "",
         descripcion: "",
         tipo: "imagen",
-        formato: "",
-        archivoOriginal: "",
-        archivoThumbnail: "",
-        archivoMedio: "",
-        archivoGrande: "",
-        tamañoBytes: null,
+        categoriaId: null,
         activoSn: "S"
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -49,7 +44,6 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
 
     const validaciones = async () => {
         const validaNombre = multimedia.nombre === undefined || multimedia.nombre === "";
-        const validaArchivoOriginal = multimedia.archivoOriginal === undefined || multimedia.archivoOriginal === "";
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -61,7 +55,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
             });
         }
         
-        return (!validaNombre && !validaArchivoOriginal);
+        return (!validaNombre);
     };
 
     const guardarMultimedia = async () => {
@@ -100,12 +94,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
                     tipo: objGuardar.tipo || "imagen",
-                    formato: objGuardar.formato,
-                    archivoOriginal: objGuardar.archivoOriginal,
-                    archivoThumbnail: objGuardar.archivoThumbnail,
-                    archivoMedio: objGuardar.archivoMedio,
-                    archivoGrande: objGuardar.archivoGrande,
-                    tamañoBytes: objGuardar.tamañoBytes,
+                    categoriaId: objGuardar.categoriaId,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                 };
