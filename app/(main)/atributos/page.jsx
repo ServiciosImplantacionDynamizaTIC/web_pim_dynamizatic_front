@@ -23,10 +23,11 @@ const Atributo = () => {
                 headerCrud={intl.formatMessage({ id: 'Atributos' })}
                 getRegistros={getAtributos}
                 getRegistrosCount={getAtributosCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Atributos"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarAtributo />}
+                seccion={"Atributos"}
                 columnas={columnas}
                 deleteRegistro={deleteAtributo}
             />

@@ -22,10 +22,11 @@ const Categoria = () => {
                 headerCrud={intl.formatMessage({ id: 'Categorías' })}
                 getRegistros={getCategorias}
                 getRegistrosCount={getCategoriasCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Categorias"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarCategoria />}
+                seccion={"Categorias"}
                 columnas={columnas}
                 deleteRegistro={deleteCategoria}
             />

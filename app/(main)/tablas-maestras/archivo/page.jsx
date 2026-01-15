@@ -8,7 +8,7 @@ const Archivo = () => {
     const columnas = [
         { campo: 'tabla', header: intl.formatMessage({ id: 'Tabla' }), tipo: 'string' },
         { campo: 'tablaId', header: 'ID', tipo: 'string' },
-        { campo: 'url', header: intl.formatMessage({ id: 'Archivo' }), tipo: 'imagen' },
+        { campo: 'urlee', header: intl.formatMessage({ id: 'Archivo' }), tipo: 'imagen' },
         { campo: 'url', header: 'Url', tipo: 'string' },
     ]
 

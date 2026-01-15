@@ -49,6 +49,23 @@ const EditarCatalogo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         const validaTipo = catalogo.tipo === undefined || catalogo.tipo === "";
         const validaEstado = catalogo.estado === undefined || catalogo.estado === "";
         const validaImagenes = validacionesImagenes();
+        
+        // Validar que la fecha de vencimiento no sea anterior a la fecha de publicación
+        let validaFechas = false;
+        if (catalogo.fechaPublicacion && catalogo.fechaVencimiento) {
+            const fechaPublicacion = new Date(catalogo.fechaPublicacion);
+            const fechaVencimiento = new Date(catalogo.fechaVencimiento);
+            
+            if (fechaVencimiento < fechaPublicacion) {
+                validaFechas = true;
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'La fecha de vencimiento no puede ser anterior a la fecha de publicación' }),
+                    life: 3000,
+                });
+            }
+        }
 
         if (validaImagenes) {
             toast.current?.show({
@@ -59,7 +76,7 @@ const EditarCatalogo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             });
         }
         
-        return (!validaNombre && !validaTipo && !validaEstado);
+        return (!validaNombre && !validaTipo && !validaEstado && !validaFechas);
     };
 
     const guardarCatalogo = async () => {

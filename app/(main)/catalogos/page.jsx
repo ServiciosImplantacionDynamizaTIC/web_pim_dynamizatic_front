@@ -22,10 +22,11 @@ const Catalogo = () => {
                 headerCrud={intl.formatMessage({ id: 'Catálogos' })}
                 getRegistros={getCatalogos}
                 getRegistrosCount={getCatalogosCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Catalogos"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarCatalogo />}
+                seccion={"Catalogos"}
                 columnas={columnas}
                 deleteRegistro={deleteCatalogo}
             />

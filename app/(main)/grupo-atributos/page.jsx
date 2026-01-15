@@ -20,9 +20,11 @@ const GrupoAtributo = () => {
                 headerCrud={intl.formatMessage({ id: 'Grupos de Atributos' })}
                 getRegistros={getGrupoAtributos}
                 getRegistrosCount={getGrupoAtributosCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"GrupoAtributos"}
+                editarComponente={<EditarGrupoAtributo />}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
+                seccion={"GrupoAtributos"}
                 columnas={columnas}
                 deleteRegistro={deleteGrupoAtributo}
             />

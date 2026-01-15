@@ -99,7 +99,7 @@ const EditarRol = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroR
                     dashboardUrl: objGuardar.dashboardUrl
                 }
                 if(pantallaDashboardSeleccionada){
-                    objGuardar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
+                    registroActualizar['dashboardUrl'] = pantallasDashboard.find(dashboard => dashboard.nombre === pantallaDashboardSeleccionada).url;
                 }
                 await patchRol(objGuardar.id, registroActualizar);
                 setIdEditar(null)

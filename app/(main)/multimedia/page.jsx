@@ -10,7 +10,6 @@ const Multimedia = () => {
 
     const columnas = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
         { campo: 'tipo', header: intl.formatMessage({ id: 'Tipo' }), tipo: 'string' },
         { campo: 'categoriaNombre', header: intl.formatMessage({ id: 'Categoría' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
@@ -21,10 +20,11 @@ const Multimedia = () => {
                 headerCrud={intl.formatMessage({ id: 'Multimedia' })}
                 getRegistros={getMultimedias}
                 getRegistrosCount={getMultimediasCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Multimedia"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarMultimedia />}
+                seccion={"Multimedias"}
                 columnas={columnas}
                 deleteRegistro={deleteMultimedia}
             />

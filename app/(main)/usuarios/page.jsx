@@ -37,7 +37,7 @@ const Usuario = () => {
                     controlador={"Usuarios"}
                     registroEditar={idUsuario}
                     editarComponente={<EditarUsuario />}
-                    seccion={"Usuario"}
+                    seccion={"Usuarios"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
                 />

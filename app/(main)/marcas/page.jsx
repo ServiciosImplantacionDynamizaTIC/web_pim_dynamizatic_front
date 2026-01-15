@@ -22,7 +22,7 @@ const Marca = () => {
                 headerCrud={intl.formatMessage({ id: 'Marcas' })}
                 getRegistros={getMarcas}
                 getRegistrosCount={getMarcasCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Marcas"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarMarca />}
