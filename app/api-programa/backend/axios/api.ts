@@ -10923,7 +10923,7 @@ export interface NewParametroGlobal {
      * @type {number}
      * @memberof NewParametroGlobal
      */
-    'empresaId'?: number | null;
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -12800,7 +12800,7 @@ export interface ParametroGlobal {
      * @type {number}
      * @memberof ParametroGlobal
      */
-    'empresaId'?: number | null;
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -12966,7 +12966,7 @@ export interface ParametroGlobalPartial {
      * @type {number}
      * @memberof ParametroGlobalPartial
      */
-    'empresaId'?: number | null;
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -13052,7 +13052,7 @@ export interface ParametroGlobalWithRelations {
      * @type {number}
      * @memberof ParametroGlobalWithRelations
      */
-    'empresaId'?: number | null;
+    'empresaId': number;
     /**
      * 
      * @type {string}

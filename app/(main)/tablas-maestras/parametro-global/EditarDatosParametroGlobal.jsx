@@ -5,7 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { useIntl } from 'react-intl';
 
-const EditarDatosParametroGlobal = ({ parametroGlobal, setParametroGlobal, estadoGuardando, opcionesTipoDato, opcionesModificable, editable }) => {
+const EditarDatosParametroGlobal = ({ parametroGlobal, setParametroGlobal, estadoGuardando, opcionesTipoDato, editable }) => {
     const intl = useIntl();
 
     const manejarCambio = (campo, valor) => {
@@ -57,22 +57,6 @@ const EditarDatosParametroGlobal = ({ parametroGlobal, setParametroGlobal, estad
                         onChange={(e) => manejarCambio('tipoDato', e.value)}
                         disabled={!editable || estadoGuardando}
                         className={estadoGuardando && !parametroGlobal.tipoDato ? 'p-invalid' : ''}
-                    />
-                </div>
-
-                {/* Modificable */}
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                    <label htmlFor="modificable">{intl.formatMessage({ id: 'Modificable' })} *</label>
-                    <Dropdown
-                        id="modificable"
-                        value={parametroGlobal.modificable}
-                        options={opcionesModificable}
-                        optionLabel="label"
-                        optionValue="value"
-                        placeholder={intl.formatMessage({ id: 'Seleccione una opción' })}
-                        onChange={(e) => manejarCambio('modificable', e.value)}
-                        disabled={!editable || estadoGuardando}
-                        className={estadoGuardando && !parametroGlobal.modificable ? 'p-invalid' : ''}
                     />
                 </div>
 

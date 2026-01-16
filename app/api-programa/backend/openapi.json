@@ -19973,7 +19973,7 @@
           },
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -20022,6 +20022,7 @@
           }
         },
         "required": [
+          "empresaId",
           "clave",
           "tipoDato",
           "usuarioCreacion"
@@ -20035,7 +20036,7 @@
         "properties": {
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -20084,6 +20085,7 @@
           }
         },
         "required": [
+          "empresaId",
           "clave",
           "tipoDato",
           "usuarioCreacion"
@@ -20101,7 +20103,7 @@
           },
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -20150,6 +20152,7 @@
           }
         },
         "required": [
+          "empresaId",
           "clave",
           "tipoDato",
           "usuarioCreacion"
@@ -20167,7 +20170,7 @@
           },
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",

@@ -5,7 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
 import { getIdiomas } from "@/app/api-endpoints/idioma";
 
-const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardando, idiomas }) => {
+const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardando, idiomas, estaEditando }) => {
     const intl = useIntl();
     return (
         <Fieldset legend={intl.formatMessage({ id: 'Datos para la traduccion' })}>	
@@ -16,7 +16,9 @@ const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardan
                         placeholder={intl.formatMessage({ id: 'Clave de la traduccion' })}
                         onChange={(e) => setTraduccion({ ...traduccion, clave: e.target.value })}
                         className={`${(estadoGuardando && traduccion.clave === "") ? "p-invalid" : ""}`}
-                        rows={5} cols={30} />
+                        rows={5} cols={30} 
+                        disabled={estaEditando}
+                    />
                 </div>
 
                 {idiomas.map(idioma => (

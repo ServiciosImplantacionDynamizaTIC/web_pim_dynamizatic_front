@@ -157,6 +157,7 @@ const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro
                             setTraduccion={setTraduccion}
                             idiomas={listaIdiomas}
                             estadoGuardando={estadoGuardando}
+                            estaEditando={idEditar !== 0}
                         />
 
                         <div className="flex justify-content-end mt-2">
