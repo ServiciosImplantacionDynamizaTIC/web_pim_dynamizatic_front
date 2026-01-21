@@ -22,5 +22,16 @@ export const borrarFichero = async (imagenUrl) => {
     return dataFichero
 }
 
+export const borrarCarpeta = async (carpetaUrl) => {
+    const { data: dataFichero } = await apiFileUpload.fileUploadControllerDeleteFolderByName(carpetaUrl)
+    return dataFichero
+}
 
-
+export const deleteArchivoEmpresaPorTablaId = async (parametrosArchivo) => {
+    const { data: dataFichero } = await apiFileUpload.fileUploadControllerDeleteFileByTableId(
+        parametrosArchivo.empresaId, 
+        parametrosArchivo.tabla, 
+        parametrosArchivo.tablaId
+    )
+    return dataFichero
+}

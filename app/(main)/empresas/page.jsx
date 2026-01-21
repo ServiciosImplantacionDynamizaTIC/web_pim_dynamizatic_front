@@ -25,7 +25,7 @@ const Empresa = () => {
                 controlador={"Empresas"}
                 empresaId={null}
                 editarComponente={<EditarEmpresa />}
-                seccion={"Empresa"}
+                seccion={"Empresas"}
                 columnas={columnas}
                 deleteRegistro={deleteEmpresa}
             />

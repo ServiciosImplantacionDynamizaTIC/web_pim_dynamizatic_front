@@ -12,7 +12,6 @@ const ParametroGlobal = () => {
         { campo: 'valor', header: intl.formatMessage({ id: 'Valor' }), tipo: 'string' },
         { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
         { campo: 'tipoDato', header: intl.formatMessage({ id: 'Tipo de Dato' }), tipo: 'string' },
-        { campo: 'modificable', header: intl.formatMessage({ id: 'Modificable' }), tipo: 'booleano' },
         { campo: 'fechaCreacion', header: intl.formatMessage({ id: 'Fecha Creación' }), tipo: 'fechaHora' },
     ];
 

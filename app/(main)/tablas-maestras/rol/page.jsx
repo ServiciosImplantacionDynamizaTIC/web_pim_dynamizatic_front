@@ -9,6 +9,7 @@ const Rol = () => {
     const columnas = [
  
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
+        { campo: 'dashboardUrl', header: intl.formatMessage({ id: 'Página inicio' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
 

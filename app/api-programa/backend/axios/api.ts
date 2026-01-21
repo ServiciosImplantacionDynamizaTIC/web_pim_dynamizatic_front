@@ -373,12 +373,6 @@ export interface Atributo {
      * @type {number}
      * @memberof Atributo
      */
-    'empresaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -470,7 +464,7 @@ export enum AtributoTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -570,12 +564,6 @@ export interface AtributoPartial {
      * @type {number}
      * @memberof AtributoPartial
      */
-    'empresaId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
     'grupoAtributoId'?: number | null;
     /**
      * 
@@ -667,7 +655,7 @@ export enum AtributoPartialTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -682,12 +670,6 @@ export interface AtributoWithRelations {
      * @memberof AtributoWithRelations
      */
     'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'empresaId': number;
     /**
      * 
      * @type {number}
@@ -784,7 +766,7 @@ export enum AtributoWithRelationsTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -1912,8 +1894,7 @@ export interface Catalogo {
 export enum CatalogoTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -1921,9 +1902,9 @@ export enum CatalogoTipoEnum {
     */
 export enum CatalogoEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -2099,8 +2080,7 @@ export interface CatalogoPartial {
 export enum CatalogoPartialTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -2108,9 +2088,9 @@ export enum CatalogoPartialTipoEnum {
     */
 export enum CatalogoPartialEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -2469,8 +2449,7 @@ export interface CatalogoWithRelations {
 export enum CatalogoWithRelationsTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -2478,9 +2457,9 @@ export enum CatalogoWithRelationsTipoEnum {
     */
 export enum CatalogoWithRelationsEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -4420,7 +4399,7 @@ export interface Icono {
      * @type {string}
      * @memberof Icono
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -4573,7 +4552,7 @@ export interface IconoPartial {
      * @type {string}
      * @memberof IconoPartial
      */
-    'archivo'?: string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -4646,7 +4625,7 @@ export interface IconoWithRelations {
      * @type {string}
      * @memberof IconoWithRelations
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -8517,6 +8496,12 @@ export interface Multimedia {
     'empresaId': number;
     /**
      * 
+     * @type {number}
+     * @memberof Multimedia
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof Multimedia
      */
@@ -8532,43 +8517,7 @@ export interface Multimedia {
      * @type {string}
      * @memberof Multimedia
      */
-    'tipo': MultimediaTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoOriginal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Multimedia
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Multimedia
-     */
-    'tamanoBytes'?: number | null;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -8600,18 +8549,6 @@ export interface Multimedia {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MultimediaTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * 
  * @export
@@ -8712,6 +8649,12 @@ export interface MultimediaPartial {
     'empresaId'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof MultimediaPartial
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof MultimediaPartial
      */
@@ -8727,43 +8670,7 @@ export interface MultimediaPartial {
      * @type {string}
      * @memberof MultimediaPartial
      */
-    'tipo'?: MultimediaPartialTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoOriginal'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaPartial
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaPartial
-     */
-    'tamanoBytes'?: number | null;
+    'tipo'?: string;
     /**
      * 
      * @type {string}
@@ -8795,18 +8702,6 @@ export interface MultimediaPartial {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MultimediaPartialTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * (tsType: MultimediaWithRelations, schemaOptions: { includeRelations: true })
  * @export
@@ -8827,6 +8722,12 @@ export interface MultimediaWithRelations {
     'empresaId': number;
     /**
      * 
+     * @type {number}
+     * @memberof MultimediaWithRelations
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof MultimediaWithRelations
      */
@@ -8842,43 +8743,7 @@ export interface MultimediaWithRelations {
      * @type {string}
      * @memberof MultimediaWithRelations
      */
-    'tipo': MultimediaWithRelationsTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoOriginal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MultimediaWithRelations
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaWithRelations
-     */
-    'tamanoBytes'?: number | null;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -8910,18 +8775,6 @@ export interface MultimediaWithRelations {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MultimediaWithRelationsTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * (tsType: Omit<Archivo, \'id\'>, schemaOptions: { title: \'NewArchivo\', exclude: [ \'id\' ] })
  * @export
@@ -9007,12 +8860,6 @@ export interface NewArchivo {
  * @interface NewAtributo
  */
 export interface NewAtributo {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
-    'empresaId': number;
     /**
      * 
      * @type {number}
@@ -9109,7 +8956,7 @@ export enum NewAtributoTipoDatoEnum {
     Fecha = 'fecha',
     Booleano = 'booleano',
     Lista = 'lista',
-    Archivo = 'archivo'
+    Multiselect = 'multiselect'
 }
 
 /**
@@ -9445,8 +9292,7 @@ export interface NewCatalogo {
 export enum NewCatalogoTipoEnum {
     Digital = 'digital',
     Impreso = 'impreso',
-    Web = 'web',
-    App = 'app'
+    Web = 'web'
 }
 /**
     * @export
@@ -9454,9 +9300,9 @@ export enum NewCatalogoTipoEnum {
     */
 export enum NewCatalogoEstadoEnum {
     Borrador = 'borrador',
-    Revision = 'revision',
-    Aprobado = 'aprobado',
-    Publicado = 'publicado'
+    Activo = 'activo',
+    Inactivo = 'inactivo',
+    Archivado = 'archivado'
 }
 
 /**
@@ -9981,7 +9827,7 @@ export interface NewIcono {
      * @type {string}
      * @memberof NewIcono
      */
-    'archivo': string;
+    'archivo'?: string | null;
     /**
      * 
      * @type {string}
@@ -10888,6 +10734,12 @@ export interface NewMultimedia {
     'empresaId': number;
     /**
      * 
+     * @type {number}
+     * @memberof NewMultimedia
+     */
+    'categoriaId'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof NewMultimedia
      */
@@ -10903,43 +10755,7 @@ export interface NewMultimedia {
      * @type {string}
      * @memberof NewMultimedia
      */
-    'tipo': NewMultimediaTipoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'formato'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoOriginal': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoThumbnail'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoMedio'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewMultimedia
-     */
-    'archivoGrande'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewMultimedia
-     */
-    'tamanoBytes'?: number | null;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -10971,18 +10787,6 @@ export interface NewMultimedia {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum NewMultimediaTipoEnum {
-    Imagen = 'imagen',
-    Video = 'video',
-    Audio = 'audio',
-    Documento = 'documento'
-}
-
 /**
  * (tsType: Omit<Notificacion, \'id\'>, schemaOptions: { title: \'NewNotificacion\', exclude: [ \'id\' ] })
  * @export
@@ -11119,7 +10923,7 @@ export interface NewParametroGlobal {
      * @type {number}
      * @memberof NewParametroGlobal
      */
-    'empresaId'?: number | null;
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -11144,12 +10948,6 @@ export interface NewParametroGlobal {
      * @memberof NewParametroGlobal
      */
     'tipoDato': NewParametroGlobalTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametroGlobal
-     */
-    'modificable'?: string | null;
     /**
      * 
      * @type {string}
@@ -12232,6 +12030,61 @@ export interface NewTraduccionContenido {
     'usuarioModificacion'?: number | null;
 }
 /**
+ * (tsType: Omit<TraduccionExclusiones, \'id\'>, schemaOptions: { title: \'NewTraduccionExclusiones\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTraduccionExclusiones
+ */
+export interface NewTraduccionExclusiones {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'tipoExclusion': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'valor': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTraduccionExclusiones
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTraduccionExclusiones
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTraduccionExclusiones
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
  * (tsType: TraduccionLiteral, schemaOptions: { title: \'NewTraduccionLiteral\' })
  * @export
  * @interface NewTraduccionLiteral
@@ -12941,7 +12794,7 @@ export interface ParametroGlobal {
      * @type {number}
      * @memberof ParametroGlobal
      */
-    'empresaId'?: number | null;
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -12966,12 +12819,6 @@ export interface ParametroGlobal {
      * @memberof ParametroGlobal
      */
     'tipoDato': ParametroGlobalTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametroGlobal
-     */
-    'modificable'?: string | null;
     /**
      * 
      * @type {string}
@@ -13107,7 +12954,7 @@ export interface ParametroGlobalPartial {
      * @type {number}
      * @memberof ParametroGlobalPartial
      */
-    'empresaId'?: number | null;
+    'empresaId'?: number;
     /**
      * 
      * @type {string}
@@ -13132,12 +12979,6 @@ export interface ParametroGlobalPartial {
      * @memberof ParametroGlobalPartial
      */
     'tipoDato'?: ParametroGlobalPartialTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametroGlobalPartial
-     */
-    'modificable'?: string | null;
     /**
      * 
      * @type {string}
@@ -13193,7 +13034,7 @@ export interface ParametroGlobalWithRelations {
      * @type {number}
      * @memberof ParametroGlobalWithRelations
      */
-    'empresaId'?: number | null;
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -13218,12 +13059,6 @@ export interface ParametroGlobalWithRelations {
      * @memberof ParametroGlobalWithRelations
      */
     'tipoDato': ParametroGlobalWithRelationsTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametroGlobalWithRelations
-     */
-    'modificable'?: string | null;
     /**
      * 
      * @type {string}
@@ -17791,6 +17626,269 @@ export interface TraduccionContenidoWithRelations {
      * 
      * @type {number}
      * @memberof TraduccionContenidoWithRelations
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TraduccionExclusiones
+ */
+export interface TraduccionExclusiones {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusiones
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'tipoExclusion': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'valor': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusiones
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusiones
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusiones
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TraduccionExclusionesFilter
+ */
+export interface TraduccionExclusionesFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TraduccionExclusionesFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TraduccionExclusionesFilter1
+ */
+export interface TraduccionExclusionesFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TraduccionExclusionesFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TraduccionExclusiones>, schemaOptions: { partial: true })
+ * @export
+ * @interface TraduccionExclusionesPartial
+ */
+export interface TraduccionExclusionesPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'tipoExclusion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'valor'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesPartial
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * (tsType: TraduccionExclusionesWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TraduccionExclusionesWithRelations
+ */
+export interface TraduccionExclusionesWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'tipoExclusion': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'valor': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'fechaCreacion'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'fechaModificacion'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesWithRelations
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TraduccionExclusionesWithRelations
      */
     'usuarioModificacion'?: number | null;
 }
@@ -26668,6 +26766,88 @@ export const FileUploadControllerApiAxiosParamCreator = function (configuration?
         },
         /**
          * 
+         * @param {number} empresaId 
+         * @param {string} tabla 
+         * @param {number} tablaId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFileByTableId: async (empresaId: number, tabla: string, tablaId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'empresaId' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFileByTableId', 'empresaId', empresaId)
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFileByTableId', 'tabla', tabla)
+            // verify required parameter 'tablaId' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFileByTableId', 'tablaId', tablaId)
+            const localVarPath = `/files/table/{empresaId}/{tabla}/{tablaId}`
+                .replace(`{${"empresaId"}}`, encodeURIComponent(String(empresaId)))
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)))
+                .replace(`{${"tablaId"}}`, encodeURIComponent(String(tablaId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} folderPath 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFolderByName: async (folderPath: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderPath' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFolderByName', 'folderPath', folderPath)
+            const localVarPath = `/folders/{folderPath}`
+                .replace(`{${"folderPath"}}`, encodeURIComponent(String(folderPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} folderPathDir 
          * @param {string} fileName 
          * @param {any} [file] 
@@ -26800,6 +26980,28 @@ export const FileUploadControllerApiFp = function(configuration?: Configuration)
         },
         /**
          * 
+         * @param {number} empresaId 
+         * @param {string} tabla 
+         * @param {number} tablaId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileUploadControllerDeleteFileByTableId(empresaId: number, tabla: string, tablaId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileUploadControllerDeleteFileByTableId(empresaId, tabla, tablaId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} folderPath 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileUploadControllerDeleteFolderByName(folderPath: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileUploadControllerDeleteFolderByName(folderPath, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} folderPathDir 
          * @param {string} fileName 
          * @param {any} [file] 
@@ -26851,6 +27053,26 @@ export const FileUploadControllerApiFactory = function (configuration?: Configur
          */
         fileUploadControllerDeleteFileByName(imagen: string, options?: any): AxiosPromise<any> {
             return localVarFp.fileUploadControllerDeleteFileByName(imagen, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} empresaId 
+         * @param {string} tabla 
+         * @param {number} tablaId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFileByTableId(empresaId: number, tabla: string, tablaId: number, options?: any): AxiosPromise<any> {
+            return localVarFp.fileUploadControllerDeleteFileByTableId(empresaId, tabla, tablaId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} folderPath 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFolderByName(folderPath: string, options?: any): AxiosPromise<any> {
+            return localVarFp.fileUploadControllerDeleteFolderByName(folderPath, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -26906,6 +27128,30 @@ export class FileUploadControllerApi extends BaseAPI {
      */
     public fileUploadControllerDeleteFileByName(imagen: string, options?: AxiosRequestConfig) {
         return FileUploadControllerApiFp(this.configuration).fileUploadControllerDeleteFileByName(imagen, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} empresaId 
+     * @param {string} tabla 
+     * @param {number} tablaId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileUploadControllerApi
+     */
+    public fileUploadControllerDeleteFileByTableId(empresaId: number, tabla: string, tablaId: number, options?: AxiosRequestConfig) {
+        return FileUploadControllerApiFp(this.configuration).fileUploadControllerDeleteFileByTableId(empresaId, tabla, tablaId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} folderPath 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileUploadControllerApi
+     */
+    public fileUploadControllerDeleteFolderByName(folderPath: string, options?: AxiosRequestConfig) {
+        return FileUploadControllerApiFp(this.configuration).fileUploadControllerDeleteFolderByName(folderPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -45787,6 +46033,72 @@ export const TraduccionContenidoControllerApiAxiosParamCreator = function (confi
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIA: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traducirContenidoConIA`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIAManual: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traducirContenidoConIA_manual`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {TraduccionContenidoPartial} [traduccionContenidoPartial] 
          * @param {*} [options] Override http request option.
@@ -45942,6 +46254,24 @@ export const TraduccionContenidoControllerApiFp = function(configuration?: Confi
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionContenidoControllerTraducirContenidoConIA(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionContenidoControllerTraducirContenidoConIA(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionContenidoControllerTraducirContenidoConIAManual(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionContenidoControllerTraducirContenidoConIAManual(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {{ [key: string]: object; }} [where] 
          * @param {TraduccionContenidoPartial} [traduccionContenidoPartial] 
          * @param {*} [options] Override http request option.
@@ -46027,6 +46357,22 @@ export const TraduccionContenidoControllerApiFactory = function (configuration?:
          */
         traduccionContenidoControllerReplaceById(id: number, traduccionContenido?: TraduccionContenido, options?: any): AxiosPromise<any> {
             return localVarFp.traduccionContenidoControllerReplaceById(id, traduccionContenido, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIA(options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionContenidoControllerTraducirContenidoConIA(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionContenidoControllerTraducirContenidoConIAManual(options?: any): AxiosPromise<object> {
+            return localVarFp.traduccionContenidoControllerTraducirContenidoConIAManual(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -46128,6 +46474,26 @@ export class TraduccionContenidoControllerApi extends BaseAPI {
 
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionContenidoControllerApi
+     */
+    public traduccionContenidoControllerTraducirContenidoConIA(options?: AxiosRequestConfig) {
+        return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerTraducirContenidoConIA(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionContenidoControllerApi
+     */
+    public traduccionContenidoControllerTraducirContenidoConIAManual(options?: AxiosRequestConfig) {
+        return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerTraducirContenidoConIAManual(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {TraduccionContenidoPartial} [traduccionContenidoPartial] 
      * @param {*} [options] Override http request option.
@@ -46148,6 +46514,612 @@ export class TraduccionContenidoControllerApi extends BaseAPI {
      */
     public traduccionContenidoControllerUpdateById(id: number, traduccionContenidoPartial?: TraduccionContenidoPartial, options?: AxiosRequestConfig) {
         return TraduccionContenidoControllerApiFp(this.configuration).traduccionContenidoControllerUpdateById(id, traduccionContenidoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TraduccionExclusionesControllerApi - axios parameter creator
+ * @export
+ */
+export const TraduccionExclusionesControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCreate: async (newTraduccionExclusiones?: NewTraduccionExclusiones, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTraduccionExclusiones, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerDeleteById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TraduccionExclusionesFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFind: async (filter?: TraduccionExclusionesFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFindById: async (id: number, filter?: TraduccionExclusionesFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerFindById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusiones} [traduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerReplaceById: async (id: number, traduccionExclusiones?: TraduccionExclusiones, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerReplaceById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(traduccionExclusiones, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateAll: async (where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/traduccion-exclusiones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(traduccionExclusionesPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateById: async (id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('traduccionExclusionesControllerUpdateById', 'id', id)
+            const localVarPath = `/traduccion-exclusiones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(traduccionExclusionesPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TraduccionExclusionesControllerApi - functional programming interface
+ * @export
+ */
+export const TraduccionExclusionesControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TraduccionExclusionesControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerCreate(newTraduccionExclusiones?: NewTraduccionExclusiones, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TraduccionExclusiones>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerCreate(newTraduccionExclusiones, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TraduccionExclusionesFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerFind(filter?: TraduccionExclusionesFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TraduccionExclusionesWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerFindById(id: number, filter?: TraduccionExclusionesFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TraduccionExclusionesWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusiones} [traduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerReplaceById(id: number, traduccionExclusiones?: TraduccionExclusiones, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerReplaceById(id, traduccionExclusiones, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerUpdateAll(where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerUpdateAll(where, traduccionExclusionesPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async traduccionExclusionesControllerUpdateById(id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.traduccionExclusionesControllerUpdateById(id, traduccionExclusionesPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TraduccionExclusionesControllerApi - factory interface
+ * @export
+ */
+export const TraduccionExclusionesControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TraduccionExclusionesControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.traduccionExclusionesControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerCreate(newTraduccionExclusiones?: NewTraduccionExclusiones, options?: any): AxiosPromise<TraduccionExclusiones> {
+            return localVarFp.traduccionExclusionesControllerCreate(newTraduccionExclusiones, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.traduccionExclusionesControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TraduccionExclusionesFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFind(filter?: TraduccionExclusionesFilter1, options?: any): AxiosPromise<Array<TraduccionExclusionesWithRelations>> {
+            return localVarFp.traduccionExclusionesControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerFindById(id: number, filter?: TraduccionExclusionesFilter, options?: any): AxiosPromise<TraduccionExclusionesWithRelations> {
+            return localVarFp.traduccionExclusionesControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusiones} [traduccionExclusiones] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerReplaceById(id: number, traduccionExclusiones?: TraduccionExclusiones, options?: any): AxiosPromise<any> {
+            return localVarFp.traduccionExclusionesControllerReplaceById(id, traduccionExclusiones, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateAll(where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.traduccionExclusionesControllerUpdateAll(where, traduccionExclusionesPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        traduccionExclusionesControllerUpdateById(id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.traduccionExclusionesControllerUpdateById(id, traduccionExclusionesPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TraduccionExclusionesControllerApi - object-oriented interface
+ * @export
+ * @class TraduccionExclusionesControllerApi
+ * @extends {BaseAPI}
+ */
+export class TraduccionExclusionesControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTraduccionExclusiones} [newTraduccionExclusiones] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerCreate(newTraduccionExclusiones?: NewTraduccionExclusiones, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerCreate(newTraduccionExclusiones, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TraduccionExclusionesFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerFind(filter?: TraduccionExclusionesFilter1, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TraduccionExclusionesFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerFindById(id: number, filter?: TraduccionExclusionesFilter, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TraduccionExclusiones} [traduccionExclusiones] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerReplaceById(id: number, traduccionExclusiones?: TraduccionExclusiones, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerReplaceById(id, traduccionExclusiones, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerUpdateAll(where?: { [key: string]: object; }, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerUpdateAll(where, traduccionExclusionesPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TraduccionExclusionesPartial} [traduccionExclusionesPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TraduccionExclusionesControllerApi
+     */
+    public traduccionExclusionesControllerUpdateById(id: number, traduccionExclusionesPartial?: TraduccionExclusionesPartial, options?: AxiosRequestConfig) {
+        return TraduccionExclusionesControllerApiFp(this.configuration).traduccionExclusionesControllerUpdateById(id, traduccionExclusionesPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

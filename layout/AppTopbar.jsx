@@ -32,10 +32,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
             await obtenerListaIdiomas();
             await obtenerAvatarUsuario();
             //Si el rol del usuario tiene permisos para ver la empresa
-            if (await obtenerRolUsuario()) {
-                obtenerNombreEmpresa();
-                //obtenerLogoEmpresa()
-            }
+            obtenerEmpresaPorUsuario();
 
         }
         fetchData();
@@ -92,7 +89,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
         setDropdownValues(jsonDeIdiomas);
     }
 
-    const obtenerRolUsuario = async () => {
+    const obtenerEmpresaPorUsuario = async () => {
         const usuario = getUsuarioSesion();
         const queryParamsRol = {
             where: {
@@ -101,9 +98,12 @@ const AppTopbar = React.forwardRef((props, ref) => {
                 }
             },
         };
-        const rol = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
-        //setMuestraEmpresa(rol[0].muestraEmpresa === 'S')
-        return rol[0].muestraEmpresa === 'S'
+        const empresa = await getVistaEmpresaRol(JSON.stringify(queryParamsRol));
+        //
+        //Si el rol del usuario tiene permisos para ver la empresa se asocia el nombre a la varialbe EmpresaNombre
+        //
+        if (empresa[0].muestraEmpresa === 'S')
+            setEmpresaNombre(empresa[0].nombreEmpresa)
     }
 
     const obtenerNombreEmpresa = async () => {
@@ -114,7 +114,7 @@ const AppTopbar = React.forwardRef((props, ref) => {
                 }
             },
         };
-        const empresa = await getVistaEmpresaMoneda(JSON.stringify(queryParamsTiposArchivo));
+        const empresa = await getVistaEmpresa(JSON.stringify(queryParamsTiposArchivo));
         setEmpresaNombre(empresa[0].nombre)
     }
 

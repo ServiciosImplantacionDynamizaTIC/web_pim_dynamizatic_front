@@ -3849,6 +3849,54 @@
         "operationId": "EmpresaController.find"
       }
     },
+    "/files/table/{empresaId}/{tabla}/{tablaId}": {
+      "delete": {
+        "x-controller-name": "FileUploadController",
+        "x-operation-name": "deleteFileByTableId",
+        "tags": [
+          "FileUploadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Files DELETE by table ID success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "empresaId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "tablaId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "FileUploadController.deleteFileByTableId"
+      }
+    },
     "/files/{imagen}": {
       "delete": {
         "x-controller-name": "FileUploadController",
@@ -3937,6 +3985,38 @@
           "required": true
         },
         "operationId": "FileUploadController.fileUpload"
+      }
+    },
+    "/folders/{folderPath}": {
+      "delete": {
+        "x-controller-name": "FileUploadController",
+        "x-operation-name": "deleteFolderByName",
+        "tags": [
+          "FileUploadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Folder DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "folderPath",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "FileUploadController.deleteFolderByName"
       }
     },
     "/grupo-atributos/count": {
@@ -13281,6 +13361,309 @@
         "operationId": "TraduccionContenidoController.find"
       }
     },
+    "/traduccion-exclusiones/count": {
+      "get": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "count",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TraduccionExclusiones model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TraduccionExclusiones.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TraduccionExclusiones>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TraduccionExclusionesController.count"
+      }
+    },
+    "/traduccion-exclusiones/{id}": {
+      "put": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TraduccionExclusiones PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TraduccionExclusiones"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TraduccionExclusionesController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TraduccionExclusiones PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TraduccionExclusionesPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TraduccionExclusionesController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TraduccionExclusiones model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TraduccionExclusionesWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TraduccionExclusiones.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TraduccionExclusionesController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TraduccionExclusiones DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TraduccionExclusionesController.deleteById"
+      }
+    },
+    "/traduccion-exclusiones": {
+      "post": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "create",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TraduccionExclusiones model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TraduccionExclusiones"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTraduccionExclusiones"
+              }
+            }
+          }
+        },
+        "operationId": "TraduccionExclusionesController.create"
+      },
+      "patch": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TraduccionExclusiones PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TraduccionExclusiones.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TraduccionExclusiones>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TraduccionExclusionesPartial"
+              }
+            }
+          }
+        },
+        "operationId": "TraduccionExclusionesController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "TraduccionExclusionesController",
+        "x-operation-name": "find",
+        "tags": [
+          "TraduccionExclusionesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TraduccionExclusiones model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TraduccionExclusionesWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TraduccionExclusiones.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TraduccionExclusionesController.find"
+      }
+    },
     "/traduccion-literals/count": {
       "get": {
         "x-controller-name": "TraduccionLiteralController",
@@ -13579,6 +13962,50 @@
           }
         ],
         "operationId": "TraduccionLiteralController.find"
+      }
+    },
+    "/traducirContenidoConIA": {
+      "get": {
+        "x-controller-name": "TraduccionContenidoController",
+        "x-operation-name": "traducirContenidoConIA",
+        "tags": [
+          "TraduccionContenidoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Traduce textos del contenido usando IA - Proceso automático nocturno",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TraduccionContenidoController.traducirContenidoConIA"
+      }
+    },
+    "/traducirContenidoConIA_manual": {
+      "get": {
+        "x-controller-name": "TraduccionContenidoController",
+        "x-operation-name": "traducirContenidoConIAManual",
+        "tags": [
+          "TraduccionContenidoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Traduce textos del contenido usando IA - Proceso Manual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TraduccionContenidoController.traducirContenidoConIAManual"
       }
     },
     "/usuario-credenciales/count": {
@@ -15880,6 +16307,48 @@
         "additionalProperties": false,
         "x-typescript-type": "TraduccionLiteral"
       },
+      "TraduccionLiteralPartial": {
+        "title": "TraduccionLiteralPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TraduccionLiteral>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "clave": {
+            "type": "string",
+            "nullable": false
+          },
+          "idiomaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TraduccionLiteral>"
+      },
       "TraduccionLiteralWithRelations": {
         "title": "TraduccionLiteralWithRelations",
         "type": "object",
@@ -15928,39 +16397,191 @@
         "additionalProperties": false,
         "x-typescript-type": "TraduccionLiteralWithRelations"
       },
-      "TraduccionLiteralPartial": {
-        "title": "TraduccionLiteralPartial",
+      "TraduccionExclusiones": {
+        "title": "TraduccionExclusiones",
         "type": "object",
-        "description": "(tsType: Partial<TraduccionLiteral>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
-            "type": "number"
-          },
-          "clave": {
-            "type": "string",
+            "type": "number",
             "nullable": false
           },
-          "idiomaId": {
-            "type": "number",
+          "tipoExclusion": {
+            "type": "string",
             "nullable": false
           },
           "valor": {
             "type": "string",
             "nullable": false
           },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": false
           },
           "fechaModificacion": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
+            "nullable": false
           },
           "usuarioCreacion": {
             "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tipoExclusion",
+          "valor"
+        ],
+        "additionalProperties": false
+      },
+      "NewTraduccionExclusiones": {
+        "title": "NewTraduccionExclusiones",
+        "type": "object",
+        "description": "(tsType: Omit<TraduccionExclusiones, 'id'>, schemaOptions: { title: 'NewTraduccionExclusiones', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoExclusion": {
+            "type": "string",
             "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tipoExclusion",
+          "valor"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TraduccionExclusiones, 'id'>"
+      },
+      "TraduccionExclusionesWithRelations": {
+        "title": "TraduccionExclusionesWithRelations",
+        "type": "object",
+        "description": "(tsType: TraduccionExclusionesWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoExclusion": {
+            "type": "string",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tipoExclusion",
+          "valor"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TraduccionExclusionesWithRelations"
+      },
+      "TraduccionExclusionesPartial": {
+        "title": "TraduccionExclusionesPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TraduccionExclusiones>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoExclusion": {
+            "type": "string",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
           },
           "usuarioModificacion": {
             "type": "number",
@@ -15968,7 +16589,7 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "Partial<TraduccionLiteral>"
+        "x-typescript-type": "Partial<TraduccionExclusiones>"
       },
       "TraduccionContenido": {
         "title": "TraduccionContenido",
@@ -19432,7 +20053,7 @@
           },
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -19457,10 +20078,6 @@
               "json"
             ]
           },
-          "modificable": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -19481,6 +20098,7 @@
           }
         },
         "required": [
+          "empresaId",
           "clave",
           "tipoDato",
           "usuarioCreacion"
@@ -19494,7 +20112,7 @@
         "properties": {
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -19519,10 +20137,6 @@
               "json"
             ]
           },
-          "modificable": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -19543,6 +20157,7 @@
           }
         },
         "required": [
+          "empresaId",
           "clave",
           "tipoDato",
           "usuarioCreacion"
@@ -19560,7 +20175,7 @@
           },
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -19584,10 +20199,6 @@
               "booleano",
               "json"
             ]
-          },
-          "modificable": {
-            "type": "string",
-            "nullable": true
           },
           "fechaCreacion": {
             "type": "string",
@@ -19609,6 +20220,7 @@
           }
         },
         "required": [
+          "empresaId",
           "clave",
           "tipoDato",
           "usuarioCreacion"
@@ -19626,7 +20238,7 @@
           },
           "empresaId": {
             "type": "number",
-            "nullable": true
+            "nullable": false
           },
           "clave": {
             "type": "string",
@@ -19650,10 +20262,6 @@
               "booleano",
               "json"
             ]
-          },
-          "modificable": {
-            "type": "string",
-            "nullable": true
           },
           "fechaCreacion": {
             "type": "string",
@@ -20078,6 +20686,10 @@
             "type": "number",
             "nullable": false
           },
+          "categoriaId": {
+            "type": "number",
+            "nullable": true
+          },
           "nombre": {
             "type": "string",
             "nullable": false
@@ -20088,37 +20700,7 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false,
-            "enum": [
-              "imagen",
-              "video",
-              "audio",
-              "documento"
-            ]
-          },
-          "formato": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoOriginal": {
-            "type": "string",
             "nullable": false
-          },
-          "archivoThumbnail": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoMedio": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoGrande": {
-            "type": "string",
-            "nullable": true
-          },
-          "tamanoBytes": {
-            "type": "number",
-            "nullable": true
           },
           "activoSn": {
             "type": "string",
@@ -20147,7 +20729,6 @@
           "empresaId",
           "nombre",
           "tipo",
-          "archivoOriginal",
           "usuarioCreacion"
         ],
         "additionalProperties": false
@@ -20161,6 +20742,10 @@
             "type": "number",
             "nullable": false
           },
+          "categoriaId": {
+            "type": "number",
+            "nullable": true
+          },
           "nombre": {
             "type": "string",
             "nullable": false
@@ -20171,37 +20756,7 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false,
-            "enum": [
-              "imagen",
-              "video",
-              "audio",
-              "documento"
-            ]
-          },
-          "formato": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoOriginal": {
-            "type": "string",
             "nullable": false
-          },
-          "archivoThumbnail": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoMedio": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoGrande": {
-            "type": "string",
-            "nullable": true
-          },
-          "tamanoBytes": {
-            "type": "number",
-            "nullable": true
           },
           "activoSn": {
             "type": "string",
@@ -20230,7 +20785,6 @@
           "empresaId",
           "nombre",
           "tipo",
-          "archivoOriginal",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -20248,6 +20802,10 @@
             "type": "number",
             "nullable": false
           },
+          "categoriaId": {
+            "type": "number",
+            "nullable": true
+          },
           "nombre": {
             "type": "string",
             "nullable": false
@@ -20258,37 +20816,7 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false,
-            "enum": [
-              "imagen",
-              "video",
-              "audio",
-              "documento"
-            ]
-          },
-          "formato": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoOriginal": {
-            "type": "string",
             "nullable": false
-          },
-          "archivoThumbnail": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoMedio": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoGrande": {
-            "type": "string",
-            "nullable": true
-          },
-          "tamanoBytes": {
-            "type": "number",
-            "nullable": true
           },
           "activoSn": {
             "type": "string",
@@ -20317,7 +20845,6 @@
           "empresaId",
           "nombre",
           "tipo",
-          "archivoOriginal",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -20335,6 +20862,10 @@
             "type": "number",
             "nullable": false
           },
+          "categoriaId": {
+            "type": "number",
+            "nullable": true
+          },
           "nombre": {
             "type": "string",
             "nullable": false
@@ -20345,37 +20876,7 @@
           },
           "tipo": {
             "type": "string",
-            "nullable": false,
-            "enum": [
-              "imagen",
-              "video",
-              "audio",
-              "documento"
-            ]
-          },
-          "formato": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoOriginal": {
-            "type": "string",
             "nullable": false
-          },
-          "archivoThumbnail": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoMedio": {
-            "type": "string",
-            "nullable": true
-          },
-          "archivoGrande": {
-            "type": "string",
-            "nullable": true
-          },
-          "tamanoBytes": {
-            "type": "number",
-            "nullable": true
           },
           "activoSn": {
             "type": "string",
@@ -23202,7 +23703,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -23234,7 +23735,6 @@
         "required": [
           "empresaId",
           "nombre",
-          "archivo",
           "usuarioCreacion"
         ],
         "additionalProperties": false
@@ -23258,7 +23758,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -23290,7 +23790,6 @@
         "required": [
           "empresaId",
           "nombre",
-          "archivo",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -23318,7 +23817,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -23350,7 +23849,6 @@
         "required": [
           "empresaId",
           "nombre",
-          "archivo",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -23378,7 +23876,7 @@
           },
           "archivo": {
             "type": "string",
-            "nullable": false
+            "nullable": true
           },
           "tipo": {
             "type": "string",
@@ -23704,7 +24202,7 @@
           },
           "servicio": {
             "type": "string",
-            "nullable": true			
+            "nullable": true
           }
         },
         "required": [
@@ -23793,7 +24291,7 @@
           },
           "servicio": {
             "type": "string",
-            "nullable": true		
+            "nullable": true
           }
         },
         "required": [
@@ -23887,7 +24385,7 @@
           },
           "servicio": {
             "type": "string",
-            "nullable": true		
+            "nullable": true
           }
         },
         "required": [
@@ -23981,7 +24479,7 @@
           },
           "servicio": {
             "type": "string",
-            "nullable": true			
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -24139,7 +24637,7 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<ConfiguracionLimpiezaLogs>"
-      },	
+      },
       "ConfiguracionDiseno": {
         "title": "ConfiguracionDiseno",
         "type": "object",
@@ -24856,8 +25354,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -24865,9 +25362,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -24935,8 +25432,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -24944,9 +25440,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -25018,8 +25514,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -25027,9 +25522,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -25101,8 +25596,7 @@
             "enum": [
               "digital",
               "impreso",
-              "web",
-              "app"
+              "web"
             ]
           },
           "estado": {
@@ -25110,9 +25604,9 @@
             "nullable": false,
             "enum": [
               "borrador",
-              "revision",
-              "aprobado",
-              "publicado"
+              "activo",
+              "inactivo",
+              "archivado"
             ]
           },
           "fechaPublicacion": {
@@ -26157,10 +26651,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
           "grupoAtributoId": {
             "type": "number",
             "nullable": true
@@ -26182,7 +26672,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -26229,7 +26719,6 @@
           }
         },
         "required": [
-          "empresaId",
           "nombre",
           "tipoDato",
           "usuarioCreacion"
@@ -26241,10 +26730,6 @@
         "type": "object",
         "description": "(tsType: Omit<Atributo, 'id'>, schemaOptions: { title: 'NewAtributo', exclude: [ 'id' ] })",
         "properties": {
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
           "grupoAtributoId": {
             "type": "number",
             "nullable": true
@@ -26266,7 +26751,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -26313,7 +26798,6 @@
           }
         },
         "required": [
-          "empresaId",
           "nombre",
           "tipoDato",
           "usuarioCreacion"
@@ -26329,10 +26813,6 @@
           "id": {
             "type": "number"
           },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
-          },
           "grupoAtributoId": {
             "type": "number",
             "nullable": true
@@ -26354,7 +26834,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -26401,7 +26881,6 @@
           }
         },
         "required": [
-          "empresaId",
           "nombre",
           "tipoDato",
           "usuarioCreacion"
@@ -26416,10 +26895,6 @@
         "properties": {
           "id": {
             "type": "number"
-          },
-          "empresaId": {
-            "type": "number",
-            "nullable": false
           },
           "grupoAtributoId": {
             "type": "number",
@@ -26442,7 +26917,7 @@
               "fecha",
               "booleano",
               "lista",
-              "archivo"
+              "multiselect"
             ]
           },
           "unidadMedida": {
@@ -27016,9 +27491,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "grupoAtributoId": {
                     "type": "boolean"
                   },
@@ -27070,7 +27542,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "grupoAtributoId",
                     "nombre",
                     "descripcion",
@@ -27140,9 +27611,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "empresaId": {
-                    "type": "boolean"
-                  },
                   "grupoAtributoId": {
                     "type": "boolean"
                   },
@@ -27194,7 +27662,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "empresaId",
                     "grupoAtributoId",
                     "nombre",
                     "descripcion",
@@ -29149,7 +29616,7 @@
                     "type": "boolean"
                   },
                   "servicio": {
-                    "type": "boolean"		 
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -29178,7 +29645,7 @@
                     "escala",
                     "email",
                     "password",
-                    "servicio"  
+                    "servicio"
                   ],
                   "example": "id"
                 },
@@ -29289,7 +29756,7 @@
                     "type": "boolean"
                   },
                   "servicio": {
-                    "type": "boolean"			 
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -32067,6 +32534,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "categoriaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -32074,24 +32544,6 @@
                     "type": "boolean"
                   },
                   "tipo": {
-                    "type": "boolean"
-                  },
-                  "formato": {
-                    "type": "boolean"
-                  },
-                  "archivoOriginal": {
-                    "type": "boolean"
-                  },
-                  "archivoThumbnail": {
-                    "type": "boolean"
-                  },
-                  "archivoMedio": {
-                    "type": "boolean"
-                  },
-                  "archivoGrande": {
-                    "type": "boolean"
-                  },
-                  "tamanoBytes": {
                     "type": "boolean"
                   },
                   "activoSn": {
@@ -32119,15 +32571,10 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "categoriaId",
                     "nombre",
                     "descripcion",
                     "tipo",
-                    "formato",
-                    "archivoOriginal",
-                    "archivoThumbnail",
-                    "archivoMedio",
-                    "archivoGrande",
-                    "tamanoBytes",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -32191,6 +32638,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "categoriaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -32198,24 +32648,6 @@
                     "type": "boolean"
                   },
                   "tipo": {
-                    "type": "boolean"
-                  },
-                  "formato": {
-                    "type": "boolean"
-                  },
-                  "archivoOriginal": {
-                    "type": "boolean"
-                  },
-                  "archivoThumbnail": {
-                    "type": "boolean"
-                  },
-                  "archivoMedio": {
-                    "type": "boolean"
-                  },
-                  "archivoGrande": {
-                    "type": "boolean"
-                  },
-                  "tamanoBytes": {
                     "type": "boolean"
                   },
                   "activoSn": {
@@ -32243,15 +32675,10 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "categoriaId",
                     "nombre",
                     "descripcion",
                     "tipo",
-                    "formato",
-                    "archivoOriginal",
-                    "archivoThumbnail",
-                    "archivoMedio",
-                    "archivoGrande",
-                    "tamanoBytes",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -32573,9 +33000,6 @@
                   "tipoDato": {
                     "type": "boolean"
                   },
-                  "modificable": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -32597,11 +33021,11 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "clave",
                     "valor",
                     "descripcion",
                     "tipoDato",
-                    "modificable",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -32676,9 +33100,6 @@
                   "tipoDato": {
                     "type": "boolean"
                   },
-                  "modificable": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -32700,11 +33121,11 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "clave",
                     "valor",
                     "descripcion",
                     "tipoDato",
-                    "modificable",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -35634,6 +36055,193 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TraduccionContenido>"
+      },
+      "TraduccionExclusiones.Filter": {
+        "type": "object",
+        "title": "TraduccionExclusiones.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoExclusion": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoExclusion",
+                    "valor",
+                    "descripcion",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TraduccionExclusiones.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TraduccionExclusiones>"
+      },
+      "TraduccionExclusiones.Filter1": {
+        "type": "object",
+        "title": "TraduccionExclusiones.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TraduccionExclusiones.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoExclusion": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoExclusion",
+                    "valor",
+                    "descripcion",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TraduccionExclusiones.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TraduccionExclusiones>"
       },
       "TraduccionLiteral.Filter": {
         "type": "object",

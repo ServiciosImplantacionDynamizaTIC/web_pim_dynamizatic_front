@@ -24,11 +24,6 @@ const EditarParametroGlobal = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
         { label: 'JSON', value: 'json' }
     ];
 
-    const opcionesModificable = [
-        { label: intl.formatMessage({ id: 'Sí' }), value: 'S' },
-        { label: intl.formatMessage({ id: 'No' }), value: 'N' }
-    ];
-
     useEffect(() => {
         const fetchData = async () => {
             if (idEditar !== 0) {
@@ -38,8 +33,7 @@ const EditarParametroGlobal = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                 // Inicializar con valores por defecto para nuevo registro
                 setParametroGlobal({
                     ...emptyRegistro,
-                    tipoDato: 'texto',
-                    modificable: 'S'
+                    tipoDato: 'texto'
                 });
             }
         };
@@ -82,9 +76,7 @@ const EditarParametroGlobal = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                     }
                     if (objGuardar.descripcion) {
                         objGuardar.descripcion = objGuardar.descripcion.trim();
-                    }
-                    
-                    console.log('Objeto a enviar (crear):', objGuardar);
+                    }                    
                     
                     await postParametroGlobal(objGuardar);
                     toast.current?.show({
@@ -114,12 +106,9 @@ const EditarParametroGlobal = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                         valor: objGuardar.valor ? objGuardar.valor.trim() : objGuardar.valor,
                         descripcion: objGuardar.descripcion ? objGuardar.descripcion.trim() : objGuardar.descripcion,
                         tipoDato: objGuardar.tipoDato,
-                        modificable: objGuardar.modificable,
                         usuarioCreacion: objGuardar.usuarioCreacion,
                         usuarioModificacion: usuarioActual,
                     };
-                    
-                    console.log('Objeto a enviar (editar):', parametroAeditar);
                     
                     await patchParametroGlobal(objGuardar.id, parametroAeditar);
                     toast.current?.show({
@@ -159,8 +148,7 @@ const EditarParametroGlobal = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
 
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
     
-    // Determinar si se puede editar: nuevo registro O (editable Y modificable='S')
-    const puedeEditar = idEditar === 0 || (editable && parametroGlobal.modificable === 'S');
+    const puedeEditar = idEditar === 0 || (editable);
 
     return (
         <div>
@@ -174,7 +162,6 @@ const EditarParametroGlobal = ({ idEditar, setIdEditar, rowData, emptyRegistro, 
                             setParametroGlobal={setParametroGlobal}
                             estadoGuardando={estadoGuardando}
                             opcionesTipoDato={opcionesTipoDato}
-                            opcionesModificable={opcionesModificable}
                             editable={puedeEditar}
                         />
 
