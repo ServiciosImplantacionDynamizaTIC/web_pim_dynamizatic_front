@@ -107,10 +107,10 @@ export const insertarArchivo = async (registro, id, tipoArchivo, seccion, usuari
             //Comprueba si el tipo de archivo es una imagen para la subida
             let response = null;
             if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                response = await postSubirImagen(seccion, archivo.name, archivo);
+                response = await postSubirImagen(seccion+'/'+id, archivo.name, archivo);
             }
             else {
-                response = await postSubirFichero(seccion, archivo.name, archivo);
+                response = await postSubirFichero(seccion+'/'+id, archivo.name, archivo);
             }
             //Hace el insert en la tabla de archivos
             const objArchivo = {}

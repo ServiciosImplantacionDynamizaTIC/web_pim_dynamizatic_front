@@ -21,7 +21,7 @@ import { Badge } from 'primereact/badge';
 import { Paginator } from 'primereact/paginator';
 import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
 import { getVistaArchivoEmpresa } from "@/app/api-endpoints/archivo";
-import { borrarFichero } from "@/app/api-endpoints/ficheros"
+import { deleteArchivoEmpresaPorTablaId, borrarCarpeta } from "@/app/api-endpoints/ficheros"
 import { useIntl } from 'react-intl'
 import { formatPhoneNumberIntl } from 'react-phone-number-input'
 import PhoneInput from 'react-phone-input-2'
@@ -836,37 +836,26 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const eliminarRegistro = async () => {
         try {
+            //
             //Si tiene la seccion declarada, significa que tiene archivos, por lo que hay que borrar los archivos
+            //
             if (seccion) {
-                for (const tipoArchivo of registrosTipoArchivos) {
-                    if (registro[(tipoArchivo.nombre).toLowerCase()] !== null) {
-                        //Si el archivo es unico
-                        if (typeof registro[(tipoArchivo.nombre).toLowerCase()] === 'string') {
-                            //Borra la version sin redimensionar
-                            const url = (registro[(tipoArchivo.nombre).toLowerCase()]).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
-                            await borrarFichero(url);
-                            if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                                //Tambien borra la version redimensionada
-                                await borrarFichero(registro[(tipoArchivo.nombre).toLowerCase()]);
-                            }
-                        }
-                        //En cambio si el archivo contiene vario se borran todos
-                        else if ((Array.isArray(registro[(tipoArchivo.nombre).toLowerCase()]))) {
-                            for (const archivo of registro[(tipoArchivo.nombre).toLowerCase()]) {
-                                const url = (archivo.url).replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
-                                await borrarFichero(url);
-                                //Comprueba la extension del archivo para comprobar el tipo, porque al ser un campo con multiples archivos
-                                //ya no sirve comprobarlo por el tipoArchivo
-                                const imagenExtensionesRegex = /\.(jpeg|png|webp|tiff|avif|jpg)$/i;
-                                if (imagenExtensionesRegex.test(archivo.url)) {
-                                    //Tambien borra la version sin redimensionar
-                                    await borrarFichero(archivo.url);
-                                }
-                            }
-                        }
+                //
+                //Obtenemos el nombre de la carpeta donde se guardan los archivos y la eliminamos
+                //
+                const carpetaConImagenes = registrosTipoArchivos[0].nombreSeccion + '/' + registro.id + '/';
+                await borrarCarpeta(carpetaConImagenes);
+                //
+                //Obtenemos la empresaId, la tabla y el identificador del registro para borrar los archivos de la bbdd
+                //
+                const parametrosArchivo = {
+                    empresaId: registrosTipoArchivos[0].empresaId,
+                    tabla: registrosTipoArchivos[0].nombreSeccion,
+                    tablaId: registro.id
+                };
+                await deleteArchivoEmpresaPorTablaId(parametrosArchivo);
+                //
 
-                    }
-                }
             }
             // Si se han asignado parametros customizados para eliminar, se elimina a partir de esos campos 
             // PARA QUE FUNCIONE ESTOS TIENEN QUE SER IDS, ESTO ES SOLO PARA CASOS DONDE EL CRUD TRATA DE UNA VISTA CON VARIOS IDS

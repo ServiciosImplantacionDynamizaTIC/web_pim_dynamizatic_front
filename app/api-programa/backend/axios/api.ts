@@ -10953,12 +10953,6 @@ export interface NewParametroGlobal {
      * @type {string}
      * @memberof NewParametroGlobal
      */
-    'modificable'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewParametroGlobal
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -12830,12 +12824,6 @@ export interface ParametroGlobal {
      * @type {string}
      * @memberof ParametroGlobal
      */
-    'modificable'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametroGlobal
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -12996,12 +12984,6 @@ export interface ParametroGlobalPartial {
      * @type {string}
      * @memberof ParametroGlobalPartial
      */
-    'modificable'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametroGlobalPartial
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -13077,12 +13059,6 @@ export interface ParametroGlobalWithRelations {
      * @memberof ParametroGlobalWithRelations
      */
     'tipoDato': ParametroGlobalWithRelationsTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ParametroGlobalWithRelations
-     */
-    'modificable'?: string | null;
     /**
      * 
      * @type {string}
@@ -26790,6 +26766,88 @@ export const FileUploadControllerApiAxiosParamCreator = function (configuration?
         },
         /**
          * 
+         * @param {number} empresaId 
+         * @param {string} tabla 
+         * @param {number} tablaId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFileByTableId: async (empresaId: number, tabla: string, tablaId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'empresaId' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFileByTableId', 'empresaId', empresaId)
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFileByTableId', 'tabla', tabla)
+            // verify required parameter 'tablaId' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFileByTableId', 'tablaId', tablaId)
+            const localVarPath = `/files/table/{empresaId}/{tabla}/{tablaId}`
+                .replace(`{${"empresaId"}}`, encodeURIComponent(String(empresaId)))
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)))
+                .replace(`{${"tablaId"}}`, encodeURIComponent(String(tablaId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} folderPath 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFolderByName: async (folderPath: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderPath' is not null or undefined
+            assertParamExists('fileUploadControllerDeleteFolderByName', 'folderPath', folderPath)
+            const localVarPath = `/folders/{folderPath}`
+                .replace(`{${"folderPath"}}`, encodeURIComponent(String(folderPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} folderPathDir 
          * @param {string} fileName 
          * @param {any} [file] 
@@ -26922,6 +26980,28 @@ export const FileUploadControllerApiFp = function(configuration?: Configuration)
         },
         /**
          * 
+         * @param {number} empresaId 
+         * @param {string} tabla 
+         * @param {number} tablaId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileUploadControllerDeleteFileByTableId(empresaId: number, tabla: string, tablaId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileUploadControllerDeleteFileByTableId(empresaId, tabla, tablaId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} folderPath 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileUploadControllerDeleteFolderByName(folderPath: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileUploadControllerDeleteFolderByName(folderPath, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} folderPathDir 
          * @param {string} fileName 
          * @param {any} [file] 
@@ -26973,6 +27053,26 @@ export const FileUploadControllerApiFactory = function (configuration?: Configur
          */
         fileUploadControllerDeleteFileByName(imagen: string, options?: any): AxiosPromise<any> {
             return localVarFp.fileUploadControllerDeleteFileByName(imagen, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} empresaId 
+         * @param {string} tabla 
+         * @param {number} tablaId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFileByTableId(empresaId: number, tabla: string, tablaId: number, options?: any): AxiosPromise<any> {
+            return localVarFp.fileUploadControllerDeleteFileByTableId(empresaId, tabla, tablaId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} folderPath 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileUploadControllerDeleteFolderByName(folderPath: string, options?: any): AxiosPromise<any> {
+            return localVarFp.fileUploadControllerDeleteFolderByName(folderPath, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -27028,6 +27128,30 @@ export class FileUploadControllerApi extends BaseAPI {
      */
     public fileUploadControllerDeleteFileByName(imagen: string, options?: AxiosRequestConfig) {
         return FileUploadControllerApiFp(this.configuration).fileUploadControllerDeleteFileByName(imagen, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} empresaId 
+     * @param {string} tabla 
+     * @param {number} tablaId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileUploadControllerApi
+     */
+    public fileUploadControllerDeleteFileByTableId(empresaId: number, tabla: string, tablaId: number, options?: AxiosRequestConfig) {
+        return FileUploadControllerApiFp(this.configuration).fileUploadControllerDeleteFileByTableId(empresaId, tabla, tablaId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} folderPath 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileUploadControllerApi
+     */
+    public fileUploadControllerDeleteFolderByName(folderPath: string, options?: AxiosRequestConfig) {
+        return FileUploadControllerApiFp(this.configuration).fileUploadControllerDeleteFolderByName(folderPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

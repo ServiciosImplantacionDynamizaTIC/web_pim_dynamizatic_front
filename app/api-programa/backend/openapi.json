@@ -3849,6 +3849,54 @@
         "operationId": "EmpresaController.find"
       }
     },
+    "/files/table/{empresaId}/{tabla}/{tablaId}": {
+      "delete": {
+        "x-controller-name": "FileUploadController",
+        "x-operation-name": "deleteFileByTableId",
+        "tags": [
+          "FileUploadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Files DELETE by table ID success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "empresaId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "tablaId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "FileUploadController.deleteFileByTableId"
+      }
+    },
     "/files/{imagen}": {
       "delete": {
         "x-controller-name": "FileUploadController",
@@ -3937,6 +3985,38 @@
           "required": true
         },
         "operationId": "FileUploadController.fileUpload"
+      }
+    },
+    "/folders/{folderPath}": {
+      "delete": {
+        "x-controller-name": "FileUploadController",
+        "x-operation-name": "deleteFolderByName",
+        "tags": [
+          "FileUploadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Folder DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "folderPath",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "FileUploadController.deleteFolderByName"
       }
     },
     "/grupo-atributos/count": {
@@ -19998,10 +20078,6 @@
               "json"
             ]
           },
-          "modificable": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -20060,10 +20136,6 @@
               "booleano",
               "json"
             ]
-          },
-          "modificable": {
-            "type": "string",
-            "nullable": true
           },
           "fechaCreacion": {
             "type": "string",
@@ -20128,10 +20200,6 @@
               "json"
             ]
           },
-          "modificable": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -20194,10 +20262,6 @@
               "booleano",
               "json"
             ]
-          },
-          "modificable": {
-            "type": "string",
-            "nullable": true
           },
           "fechaCreacion": {
             "type": "string",
@@ -32936,9 +33000,6 @@
                   "tipoDato": {
                     "type": "boolean"
                   },
-                  "modificable": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -32965,7 +33026,6 @@
                     "valor",
                     "descripcion",
                     "tipoDato",
-                    "modificable",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -33040,9 +33100,6 @@
                   "tipoDato": {
                     "type": "boolean"
                   },
-                  "modificable": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -33069,7 +33126,6 @@
                     "valor",
                     "descripcion",
                     "tipoDato",
-                    "modificable",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
