@@ -18,8 +18,13 @@ export const postSubirFichero = async (ruta, nombre, imagen) => {
 }
 
 export const borrarFichero = async (imagenUrl) => {
-    const { data: dataFichero } = await apiFileUpload.fileUploadControllerDeleteFileByName(imagenUrl)
-    return dataFichero
+    //
+    //Evito que se borre el fichero de imagen-no-disponible
+    //
+    if(imagenUrl.indexOf('imagen-no-disponible') === -1){
+        const { data: dataFichero } = await apiFileUpload.fileUploadControllerDeleteFileByName(imagenUrl)
+        return dataFichero
+    }
 }
 
 export const borrarCarpeta = async (carpetaUrl) => {

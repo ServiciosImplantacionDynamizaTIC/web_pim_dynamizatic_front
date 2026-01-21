@@ -3,11 +3,10 @@ import { Button } from "primereact/button";
 import { devuelveBasePath } from "../../utility/Utils";
 import { useIntl } from "react-intl";
 import VisualizadorDeImagen from './VisualizadorDeImagen';
-import { getUrlImagenMiniatura, getUrlImagenGrande, esUrlImagen as esUrlImagenUtil } from '../../utility/ImageUtils';
+import { getUrlImagenMiniatura, getUrlImagenGrande } from '../../utility/ImageUtils';
 
 const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campoNombre }) => {
     const intl = useIntl();
-    const divImagen = useRef(null); // Usa useRef para el contenedor de la imagen
     const [archivoIcono, setArchivoIcono] = useState(null);
     const [primeraCarga, setPrimeraCarga] = useState(true);
     const [inputArchivo, setInputArchivo] = useState(null);
@@ -15,6 +14,7 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
     const [cargarUrlCliente, setCargarUrlCliente] = useState(false);
     const [visualizadorDeImagenVisible, setVisualizadorDeImagenVisible] = useState(false);
     const [imagenSeleccionada, setImagenSeleccionada] = useState('');
+    const [contenidoImagen, setContenidoImagen] = useState(null); // Nuevo estado para manejar el contenido de la imagen
     useEffect(() => {
         if (primeraCarga) {
             setPrimeraCarga(false)
@@ -22,77 +22,69 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
             registro[campoNombre] = registro[campoNombre];
         }
     }, []);
+    
+    // Funciones auxiliares
+    const crearInputArchivo = (esImagen = false) => {
+        const accept = esImagen ? ".jpg, .jpeg, .png, .webp, .tiff, .avif" : undefined;
+        return <input accept={accept} onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />;
+    };
+
+    const configurarArchivoNoImagen = (archivo) => {
+        setInputArchivo(crearInputArchivo());
+        
+        if (typeof archivo === 'string') {
+            const iconoArchivo = <i className="pi pi-file text-6xl"></i>;
+            const esArchivoNoDisponible = archivo.includes('imagen-no-disponible');
+            
+            const archivoIcono = esArchivoNoDisponible ? iconoArchivo : (
+                <a href={`${devuelveBasePath()}${archivo}`} target="_blank" rel="noopener noreferrer">
+                    {iconoArchivo}
+                </a>
+            );
+            setArchivoIcono(archivoIcono);
+        } else {
+            setArchivoIcono(<i className="pi pi-file text-6xl"></i>);
+        }
+        setContenidoImagen(null);
+    };
+    
     useEffect(() => {
+        const esImagen = archivoTipo.toLowerCase() === 'imagen';
+        
         if (registro[campoNombre]) {
             if (typeof registro[campoNombre] !== 'string') {
-                //Si el cliente ha cargado una imagen, se muestra si es valida
+                // Cliente ha cargado un archivo
                 const archivoUrl = URL.createObjectURL(registro[campoNombre]);
                 setLabelArchivo(registro[campoNombre].name);
-                if (archivoTipo.toLowerCase() === 'imagen') {
+                
+                if (esImagen) {
                     const tiposPermitidos = ["image/jpeg", "image/png", "image/webp", "image/tiff", "image/avif"];
-                    if (tiposPermitidos.includes(registro[campoNombre].type)) {
-                        mostrarImagen(archivoUrl);
-                    }
-                    else {
-                        mostrarImagen(`${(devuelveBasePath())}/multimedia/Sistema/imagen-no-disponible.jpeg`);
-                    }
-
+                    const imagenValida = tiposPermitidos.includes(registro[campoNombre].type);
+                    const urlImagen = imagenValida ? archivoUrl : `${devuelveBasePath()}/multimedia/Sistema/imagen-no-disponible.jpeg`;
+                    mostrarImagen(urlImagen);
+                } else {
+                    configurarArchivoNoImagen(registro[campoNombre]);
                 }
-                else {
-                    const _inputArchivo = (
-                        <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
-                    );
-                    setInputArchivo(_inputArchivo);
-
-                    const _archivoIcono = (
-                        <i className="pi pi-file text-6xl"></i>
-                    );
-                    setArchivoIcono(_archivoIcono);
-                }
-            }
-            else {
-                // Si ya hay una imagen previamente cargada en el registro, la mostramos
+            } else {
+                // Archivo previamente cargado
                 setLabelArchivo(registro[campoNombre].split('/').pop());
-                if (archivoTipo.toLowerCase() === 'imagen') {
+                
+                if (esImagen) {
                     mostrarImagen(`${devuelveBasePath()}${registro[campoNombre]}`);
+                } else {
+                    configurarArchivoNoImagen(registro[campoNombre]);
                 }
-                else {
-                    const _inputArchivo = (
-                        <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
-                    );
-                    setInputArchivo(_inputArchivo);
-
-                    const _archivoIcono = (
-                        <a href={`${devuelveBasePath()}${registro[campoNombre]}`} target="_blank" rel="noopener noreferrer">
-                            <i className="pi pi-file text-6xl"></i>
-                        </a>
-                    );
-                    setArchivoIcono(_archivoIcono);
-                }
-
             }
-        }
-        else {
-            if (archivoTipo.toLowerCase() === 'imagen') {
-                //Depende del tipo del archivo crea el input
-                const _inputArchivo = (
-                    <input accept=".jpg, .jpeg, .png, .webp, .tiff, .avif" onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
-                );
-                setInputArchivo(_inputArchivo);
-
+        } else {
+            // Sin archivo
+            setLabelArchivo(intl.formatMessage({ id: 'Seleccione un archivo' }));
+            
+            if (esImagen) {
+                setInputArchivo(crearInputArchivo(true));
                 mostrarImagen(`${devuelveBasePath()}/multimedia/Sistema/imagen-no-disponible.jpeg`);
             } else {
-                const _inputArchivo = (
-                    <input onChange={cambioArchivoHandler} type='file' style={{ display: 'none' }} />
-                );
-                setInputArchivo(_inputArchivo);
-
-                const _archivoIcono = (
-                    <i className="pi pi-file text-6xl"></i>
-                );
-                setArchivoIcono(_archivoIcono);
+                configurarArchivoNoImagen(null);
             }
-            setLabelArchivo(intl.formatMessage({ id: 'Seleccione un archivo' }));
         }
     }, [registro[campoNombre]]);
 
@@ -108,73 +100,80 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
     };
 
     const limpiarArchivoHandler = () => {
-        if (divImagen.current) {
-            divImagen.current.innerHTML = '';
-            const imgIcon = document.createElement('i');
+        try{
+            setLabelArchivo(intl.formatMessage({ id: 'Seleccione un archivo' }));
+            //
+            // Limpiamos la imágen o el archivo mostrado
+            //
             if (archivoTipo.toLowerCase() === 'imagen') {
-                imgIcon.className = 'pi pi-image text-6xl';
+                setContenidoImagen(
+                    <i className="pi pi-image text-6xl"></i>
+                );
+            } else {
+                setArchivoIcono(
+                    <i className="pi pi-file text-6xl"></i>
+                );
             }
-            else {
-                imgIcon.className = 'pi pi-file text-6xl';
-            }
-            divImagen.current.append(imgIcon);
+            //
+            // Cambiamos el registro para eliminar el archivo asociado
+            //
+            const _registro = { ...registro };
+            _registro[campoNombre] = null;
+            setRegistro(_registro);
+        } catch (error) {
+            console.error("Error al limpiar el archivo:", error);
         }
-        setLabelArchivo(intl.formatMessage({ id: 'Seleccione un archivo' }));
-        // Realiza los cambios al registro
-        const _registro = { ...registro };
-        _registro[campoNombre] = null;
-        setRegistro(_registro);
     };
 
     const mostrarImagen = (imgUrl) => {
-        if (divImagen.current) {
-            divImagen.current.innerHTML = '';
-            
-            // Crear contenedor clickeable
-            const imgContainer = document.createElement('div');
-            imgContainer.style.cursor = 'pointer';
-            imgContainer.style.width = '100%';
-            
-            const img = document.createElement('img');
-            
-            // Si es una URL del servidor (string), convertir a thumbnail (Imagen miniatura 200x200)
-            if (typeof imgUrl === 'string' && !imgUrl.includes('blob:') && imgUrl.includes('/multimedia/')) {
-                const thumbnailUrl = getUrlImagenMiniatura(imgUrl);
-                img.src = thumbnailUrl;
-                
-                // Al hacer clic, mostrar en el viewer con la versión 1250x850
-                imgContainer.onclick = () => {
+        //
+        // Creamos el contenido de la imagen con la funcionalidad de visor ampliado
+        //
+        const handleClick = () => {
+            if (!imgUrl.includes('imagen-no-disponible')) {
+                let urlParaVisor;
+                if (typeof imgUrl === 'string' && !imgUrl.includes('blob:') && imgUrl.includes('/multimedia/')) {
                     // Extraer solo la parte de la URL sin el basePath
                     const urlSinBase = imgUrl.replace(devuelveBasePath(), '');
-                    const webUrl = getUrlImagenGrande(urlSinBase);
-                    setImagenSeleccionada(webUrl);
-                    setVisualizadorDeImagenVisible(true);
-                };
-            } else {
-                // Para URLs temporales (blob) o imagen no disponible
-                img.src = imgUrl;
-                
-                // Si es la imagen no disponible, no hacer nada al clic
-                if (!imgUrl.includes('imagen-no-disponible')) {
-                    imgContainer.onclick = () => {
-                        const urlSinBase = imgUrl.replace(devuelveBasePath(), '');
-                        setImagenSeleccionada(urlSinBase);
-                        setVisualizadorDeImagenVisible(true);
-                    };
+                    urlParaVisor = getUrlImagenGrande(urlSinBase);
+                } else {
+                    urlParaVisor = imgUrl.replace(devuelveBasePath(), '');
                 }
+                setImagenSeleccionada(urlParaVisor);
+                setVisualizadorDeImagenVisible(true);
             }
-            
-            img.setAttribute('width', '100%');
-            imgContainer.append(img);
-            divImagen.current.append(imgContainer);
+        };
+
+        let imagenSrc = imgUrl;
+        // Si es una URL del servidor (string), convertir a thumbnail
+        if (typeof imgUrl === 'string' && !imgUrl.includes('blob:') && imgUrl.includes('/multimedia/')) {
+            imagenSrc = getUrlImagenMiniatura(imgUrl);
         }
+
+        const contenidoImg = (
+            <div 
+                style={{ 
+                    cursor: imgUrl.includes('imagen-no-disponible') ? 'default' : 'pointer', 
+                    width: '100%' 
+                }}
+                onClick={handleClick}
+            >
+                <img 
+                    src={imagenSrc} 
+                    alt="Imagen" 
+                    style={{ width: '100%' }}
+                />
+            </div>
+        );
+
+        setContenidoImagen(contenidoImg);
+        setArchivoIcono(null);
     };
 
     return (
         <>
             <div className='grid formgrid text-center' width='100%' style={{ gap: '0px' }}>
                 <div
-                    ref={divImagen}
                     className='col-2 field'
                     style={{
                         display: 'flex',
@@ -182,7 +181,7 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
-                    {archivoIcono}
+                    {contenidoImagen || archivoIcono}
                 </div>
                 <div className="col-10 field flex flex-column">
                     <label style={{textAlign: 'left'}} htmlFor="imagen">{intl.formatMessage({ id: archivoHeader })}</label>
