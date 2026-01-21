@@ -16,14 +16,17 @@ export const editarArchivos = async (registro, id, listaTipoArchivos, listaTipoA
     for (const tipoArchivo of listaTipoArchivos) {
         const archivos = registro[(tipoArchivo.nombre).toLowerCase()];
         const esArray = Array.isArray(archivos);
-        
-        //Comprueba que si ha añadido una imagen
+        //
+        //Comprueba si se ha añadido una imagen
+        //
         const hayArchivosNuevos = esArray ? 
             archivos?.some(archivo => archivo?.type !== undefined) : 
             archivos?.type !== undefined;
 
         if (hayArchivosNuevos) {
+            //
             //Si ya existia antes una imagen, hay que eliminarla junto a su version redimensionada
+            //
             if (listaTipoArchivosAntiguos[tipoArchivo['nombre']] !== null) {
                 const archivosAntiguos = Array.isArray(listaTipoArchivosAntiguos[tipoArchivo['nombre']]) ? 
                     listaTipoArchivosAntiguos[tipoArchivo['nombre']] : 
@@ -33,27 +36,24 @@ export const editarArchivos = async (registro, id, listaTipoArchivos, listaTipoA
                     if (archivoAntiguo) {
                         const urlArchivo = archivoAntiguo.url || archivoAntiguo;
                         await borrarFichero(urlArchivo);
-                        //Tambien borra la version sin redimensionar
-                        if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                            const url = urlArchivo.replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
-                            await borrarFichero(url);
-                        }
-                        // Eliminar registro del archivo si tiene id
+                        //
+                        // Eliminar registro del archivo y el registro de la tabla archivo si tiene id
+                        //*
                         if (archivoAntiguo.id) {
                             await deleteArchivo(archivoAntiguo.id);
-                        } else {
-                            if (registro.imagenId) {
-                                await deleteArchivo(registro.imagenId);
-                            }
                         }
                     }
                 }
             }
+            //
             //Se inserta la imagen modificada
+            //
             await insertarArchivo(registro, id, tipoArchivo, seccion, usuario)
         }
         else {
+            //
             //Si ya existia antes una imagen, hay que eliminarla junto a su version redimensionada
+            //
             const archivosFueronEliminados = esArray ? 
                 (archivos === null || archivos.length === 0) : 
                 archivos === null;
@@ -67,20 +67,12 @@ export const editarArchivos = async (registro, id, listaTipoArchivos, listaTipoA
                     if (archivoAntiguo) {
                         const urlArchivo = archivoAntiguo.url || archivoAntiguo;
                         await borrarFichero(urlArchivo);
-                        //Tambien borra la version sin redimensionar
-                        if ((tipoArchivo.tipo).toLowerCase() === 'imagen') {
-                            const url = urlArchivo.replace(/(\/[^\/]+\/)1250x850_([^\/]+\.\w+)$/, '$1$2');
-                            await borrarFichero(url);
-                        }
-                        // Eliminar registro del archivo si tiene id
+                        //
+                        // Eliminar registro del archivo y el registro de la tabla archivo si tiene id
+                        //
                         if (archivoAntiguo.id) {
                             await deleteArchivo(archivoAntiguo.id);
-                        } else {
-                            if (registro.imagenId) {
-                                await deleteArchivo(registro.imagenId);
-                            }
-                        }
-
+                        } 
                     }
                 }
             }
