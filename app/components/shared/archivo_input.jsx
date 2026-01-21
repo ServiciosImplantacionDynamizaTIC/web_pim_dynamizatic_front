@@ -63,7 +63,9 @@ const ArchivoInput = ({ registro, setRegistro, archivoTipo, archivoHeader, campo
                     setInputArchivo(_inputArchivo);
 
                     const _archivoIcono = (
-                        <i className="pi pi-file text-6xl"></i>
+                        <a href={`${devuelveBasePath()}${registro[campoNombre]}`} target="_blank" rel="noopener noreferrer">
+                            <i className="pi pi-file text-6xl"></i>
+                        </a>
                     );
                     setArchivoIcono(_archivoIcono);
                 }
