@@ -7,11 +7,14 @@ import { InputNumber } from 'primereact/inputnumber';
 import ArchivoMultipleInput from "../../components/shared/archivo_multiple_input";
 import ArchivoInput from "../../components/shared/archivo_input";
 import { InputSwitch } from 'primereact/inputswitch';
+import { FileUpload } from 'primereact/fileupload';
+import { Image } from 'primereact/image';
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
+import { devuelveBasePath } from "../../utility/Utils";
 
 const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, listaTipoArchivos }) => {
     const intl = useIntl();
@@ -22,6 +25,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, l
     const [cargandoCategorias, setCargandoCategorias] = useState(false);
     const [cargandoMarcas, setCargandoMarcas] = useState(false);
     const [cargandoEstados, setCargandoEstados] = useState(false);
+    const [imagenPrincipalPreview, setImagenPrincipalPreview] = useState(null);
 
     // Cargar categorías
     useEffect(() => {
@@ -147,12 +151,78 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, l
         setProducto(_producto);
     };
 
+    const manejarSeleccionImagenPrincipal = (e) => {
+        const file = e.files[0];
+        if (file) {
+            // Crear URL temporal para mostrar la vista previa
+            const imageUrl = URL.createObjectURL(file);
+            setImagenPrincipalPreview(imageUrl);
+            
+            // Guardar el archivo en el producto para procesarlo al guardar
+            setProducto({ ...producto, imagenPrincipalFile: file, imagenPrincipal: imageUrl });
+        }
+    };
+
+    const eliminarImagenPrincipal = () => {
+        if (imagenPrincipalPreview && imagenPrincipalPreview.startsWith('blob:')) {
+            URL.revokeObjectURL(imagenPrincipalPreview);
+        }
+        setImagenPrincipalPreview(null);
+        setProducto({ ...producto, imagenPrincipal: null, imagenPrincipalFile: null });
+    };
+
+    // Efecto para cargar la imagen existente si está editando
+    useEffect(() => {
+        if (producto.imagenPrincipal && !imagenPrincipalPreview) {
+            setImagenPrincipalPreview(devuelveBasePath() + producto.imagenPrincipal);
+        }
+    }, [producto.imagenPrincipal]);
+
     return (
         <>
             <Fieldset legend={intl.formatMessage({ id: 'Información básica' })} collapsed={false} toggleable>
                 <div className="formgrid grid">
-                    
-                    <div className="flex flex-column field gap-2 mt-2 col-12">
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="imagenPrincipal">{intl.formatMessage({ id: 'Imagen principal' })}</label>
+                        <div className="flex gap-3 align-items-start">
+                            <div className="flex-1">
+                                {imagenPrincipalPreview && (
+                                    <div className="flex flex-column align-items-start gap-2">
+                                        <Image
+                                            src={imagenPrincipalPreview}
+                                            alt="Vista previa imagen principal"
+                                            width="160"
+                                            height="160"
+                                            className="border-round shadow-2"
+                                            style={{ objectFit: 'cover' }}
+                                            preview
+                                        />
+                                        <button
+                                            type="button"
+                                            className="p-button p-button-sm p-button-danger p-button-text"
+                                            onClick={eliminarImagenPrincipal}
+                                            disabled={estadoGuardando}
+                                            title={intl.formatMessage({ id: 'Eliminar imagen' })}
+                                        >
+                                            <i className="pi pi-trash"></i>&nbsp;{intl.formatMessage({ id: 'Eliminar imagen' })}
+                                        </button>
+                                    </div>
+                                )}
+                                <FileUpload
+                                    id="imagenPrincipal"
+                                    mode="basic"
+                                    accept="image/*"
+                                    maxFileSize={2000000}
+                                    onSelect={manejarSeleccionImagenPrincipal}
+                                    chooseLabel={intl.formatMessage({ id: 'Seleccionar imagen' })}
+                                    disabled={estadoGuardando}
+                                    className="w-full"
+                                />
+                                <small className="text-muted">{intl.formatMessage({ id: 'Formatos soportados: JPG, PNG, GIF. Máximo 2MB' })}</small>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-8">
                         <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                         <InputText 
                             id="nombre"
@@ -233,6 +303,8 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, l
                             showClear
                         />
                     </div>
+
+                    
                 </div>
 
                 <div className="formgrid grid">

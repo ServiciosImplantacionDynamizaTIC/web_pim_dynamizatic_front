@@ -4,6 +4,7 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { getProducto, postProducto, patchProducto } from "@/app/api-endpoints/producto";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
+import { postSubirImagen, borrarFichero } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -75,6 +76,22 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         return (!validaSku && !validaNombre && !validaCategoria && !validaEstado);
     };
 
+    const procesarImagenPrincipal = async (productoId) => {
+        // Si hay un archivo de imagen seleccionado, subirlo al servidor
+        if (producto.imagenPrincipalFile) {
+            try {
+                const carpeta = `producto/${productoId}`;
+                const response = await postSubirImagen(carpeta, producto.imagenPrincipalFile.name, producto.imagenPrincipalFile);
+                return response.originalUrl;
+            } catch (error) {
+                console.error('Error subiendo imagen principal:', error);
+                return null;
+            }
+        }
+        // Si no hay archivo nuevo pero hay una URL existente (editando), mantenerla
+        return producto.imagenPrincipal && !producto.imagenPrincipal.startsWith('blob:') ? producto.imagenPrincipal : null;
+    };
+
     const guardarProducto = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
@@ -97,7 +114,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     puntosClave: objGuardar.puntosClave,
                     estadoId: objGuardar.estadoId,
                     finalizadoSn: objGuardar.finalizadoSn || 'N',
-                    imagenPrincipal: objGuardar.imagenPrincipal,
+                    imagenPrincipal: '', // Se procesará después de crear el registro
                     activoSn: objGuardar.activoSn || 'S',
                     usuarioCreacion: usuarioActual,
                 };
@@ -105,6 +122,12 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 const nuevoRegistro = await postProducto(objGuardar);
 
                 if (nuevoRegistro?.id) {
+                    // Procesar imagen principal después de crear el registro
+                    const rutaImagen = await procesarImagenPrincipal(nuevoRegistro.id);
+                    if (rutaImagen) {
+                        await patchProducto(nuevoRegistro.id, { imagenPrincipal: rutaImagen });
+                    }
+                    
                     await procesarArchivosNuevoRegistro(producto, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
                     setRegistroResult("insertado");
                     setIdEditar(null);
@@ -117,6 +140,9 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     });
                 }
             } else {
+                // Procesar imagen principal antes de actualizar
+                const rutaImagen = await procesarImagenPrincipal(objGuardar.id);
+                
                 const productoAeditar = {
                     id: objGuardar.id,
                     categoriaId: objGuardar.categoriaId,
@@ -129,7 +155,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     puntosClave: objGuardar.puntosClave,
                     estadoId: objGuardar.estadoId,
                     finalizadoSn: objGuardar.finalizadoSn || 'N',
-                    imagenPrincipal: objGuardar.imagenPrincipal,
+                    imagenPrincipal: rutaImagen,
                     activoSn: objGuardar.activoSn || 'S',
                     usuarioModificacion: usuarioActual,
                 };
