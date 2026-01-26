@@ -179,7 +179,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Multimedia": {
           "path": "/multimedia",
           "icon": "pi pi-fw pi-camera"
+        },
+        "Estados": {
+          "path": "/estados",
+          "icon": "pi pi-fw pi-camera"
         }
+      },
+      "Datos productos": {
+        "Productos": {
+          "path": "/productos",
+          "icon": "pi pi-fw pi-box"
+        },
       }
     }
  

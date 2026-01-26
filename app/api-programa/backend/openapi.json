@@ -10,6 +10,38 @@
     }
   },
   "paths": {
+    "/archivos/by-url/{urlTexto}": {
+      "delete": {
+        "x-controller-name": "ArchivoController",
+        "x-operation-name": "deleteByUrl",
+        "tags": [
+          "ArchivoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Archivos DELETE by URL success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "urlTexto",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ArchivoController.deleteByUrl"
+      }
+    },
     "/archivos/count": {
       "get": {
         "x-controller-name": "ArchivoController",
@@ -3847,6 +3879,309 @@
           }
         ],
         "operationId": "EmpresaController.find"
+      }
+    },
+    "/estados/count": {
+      "get": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "count",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Estado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Estado>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EstadoController.count"
+      }
+    },
+    "/estados/{id}": {
+      "put": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Estado"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EstadoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EstadoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EstadoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EstadoController.deleteById"
+      }
+    },
+    "/estados": {
+      "post": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "create",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEstado"
+              }
+            }
+          }
+        },
+        "operationId": "EstadoController.create"
+      },
+      "patch": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Estado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Estado>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EstadoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "find",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Estado model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EstadoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EstadoController.find"
       }
     },
     "/files/table/{empresaId}/{tabla}/{tablaId}": {
@@ -18040,28 +18375,13 @@
             "type": "string",
             "nullable": true
           },
-          "tituloSeo": {
-            "type": "string",
-            "nullable": true
-          },
-          "palabrasClave": {
-            "type": "string",
-            "nullable": true
-          },
           "puntosClave": {
             "type": "string",
             "nullable": true
           },
-          "estado": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "borrador",
-              "revision",
-              "aprobado",
-              "publicado",
-              "archivado"
-            ]
+          "estadoId": {
+            "type": "number",
+            "nullable": false
           },
           "finalizadoSn": {
             "type": "string",
@@ -18069,22 +18389,6 @@
           },
           "imagenPrincipal": {
             "type": "string",
-            "nullable": true
-          },
-          "ordenAtributos": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensiones": {
-            "type": "string",
-            "nullable": true
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -18115,7 +18419,7 @@
           "categoriaId",
           "sku",
           "nombre",
-          "estado",
+          "estadoId",
           "usuarioCreacion"
         ],
         "additionalProperties": false
@@ -18157,28 +18461,13 @@
             "type": "string",
             "nullable": true
           },
-          "tituloSeo": {
-            "type": "string",
-            "nullable": true
-          },
-          "palabrasClave": {
-            "type": "string",
-            "nullable": true
-          },
           "puntosClave": {
             "type": "string",
             "nullable": true
           },
-          "estado": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "borrador",
-              "revision",
-              "aprobado",
-              "publicado",
-              "archivado"
-            ]
+          "estadoId": {
+            "type": "number",
+            "nullable": false
           },
           "finalizadoSn": {
             "type": "string",
@@ -18186,22 +18475,6 @@
           },
           "imagenPrincipal": {
             "type": "string",
-            "nullable": true
-          },
-          "ordenAtributos": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensiones": {
-            "type": "string",
-            "nullable": true
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -18232,7 +18505,7 @@
           "categoriaId",
           "sku",
           "nombre",
-          "estado",
+          "estadoId",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -18278,28 +18551,13 @@
             "type": "string",
             "nullable": true
           },
-          "tituloSeo": {
-            "type": "string",
-            "nullable": true
-          },
-          "palabrasClave": {
-            "type": "string",
-            "nullable": true
-          },
           "puntosClave": {
             "type": "string",
             "nullable": true
           },
-          "estado": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "borrador",
-              "revision",
-              "aprobado",
-              "publicado",
-              "archivado"
-            ]
+          "estadoId": {
+            "type": "number",
+            "nullable": false
           },
           "finalizadoSn": {
             "type": "string",
@@ -18307,22 +18565,6 @@
           },
           "imagenPrincipal": {
             "type": "string",
-            "nullable": true
-          },
-          "ordenAtributos": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensiones": {
-            "type": "string",
-            "nullable": true
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -18353,7 +18595,7 @@
           "categoriaId",
           "sku",
           "nombre",
-          "estado",
+          "estadoId",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -18399,28 +18641,13 @@
             "type": "string",
             "nullable": true
           },
-          "tituloSeo": {
-            "type": "string",
-            "nullable": true
-          },
-          "palabrasClave": {
-            "type": "string",
-            "nullable": true
-          },
           "puntosClave": {
             "type": "string",
             "nullable": true
           },
-          "estado": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "borrador",
-              "revision",
-              "aprobado",
-              "publicado",
-              "archivado"
-            ]
+          "estadoId": {
+            "type": "number",
+            "nullable": false
           },
           "finalizadoSn": {
             "type": "string",
@@ -18428,22 +18655,6 @@
           },
           "imagenPrincipal": {
             "type": "string",
-            "nullable": true
-          },
-          "ordenAtributos": {
-            "type": "string",
-            "nullable": true
-          },
-          "dimensiones": {
-            "type": "string",
-            "nullable": true
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "peso": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -24117,6 +24328,81 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<GrupoAtributo>"
+      },
+      "Estado": {
+        "title": "Estado",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewEstado": {
+        "title": "NewEstado",
+        "type": "object",
+        "description": "(tsType: Omit<Estado, 'id'>, schemaOptions: { title: 'NewEstado', exclude: [ 'id' ] })",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Estado, 'id'>"
+      },
+      "EstadoWithRelations": {
+        "title": "EstadoWithRelations",
+        "type": "object",
+        "description": "(tsType: EstadoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "EstadoWithRelations"
+      },
+      "EstadoPartial": {
+        "title": "EstadoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Estado>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Estado>"
       },
       "Empresa": {
         "title": "Empresa",
@@ -29798,6 +30084,145 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Empresa>"
       },
+      "Estado.Filter": {
+        "type": "object",
+        "title": "Estado.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "nombre",
+                    "descripcion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Estado.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Estado>"
+      },
+      "Estado.Filter1": {
+        "type": "object",
+        "title": "Estado.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Estado.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "nombre",
+                    "descripcion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Estado.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Estado>"
+      },
       "GrupoAtributo.Filter": {
         "type": "object",
         "title": "GrupoAtributo.Filter",
@@ -34609,34 +35034,16 @@
                   "descripcionLarga": {
                     "type": "boolean"
                   },
-                  "tituloSeo": {
-                    "type": "boolean"
-                  },
-                  "palabrasClave": {
-                    "type": "boolean"
-                  },
                   "puntosClave": {
                     "type": "boolean"
                   },
-                  "estado": {
+                  "estadoId": {
                     "type": "boolean"
                   },
                   "finalizadoSn": {
                     "type": "boolean"
                   },
                   "imagenPrincipal": {
-                    "type": "boolean"
-                  },
-                  "ordenAtributos": {
-                    "type": "boolean"
-                  },
-                  "dimensiones": {
-                    "type": "boolean"
-                  },
-                  "color": {
-                    "type": "boolean"
-                  },
-                  "peso": {
                     "type": "boolean"
                   },
                   "activoSn": {
@@ -34671,16 +35078,10 @@
                     "nombre",
                     "descripcionCorta",
                     "descripcionLarga",
-                    "tituloSeo",
-                    "palabrasClave",
                     "puntosClave",
-                    "estado",
+                    "estadoId",
                     "finalizadoSn",
                     "imagenPrincipal",
-                    "ordenAtributos",
-                    "dimensiones",
-                    "color",
-                    "peso",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -34765,34 +35166,16 @@
                   "descripcionLarga": {
                     "type": "boolean"
                   },
-                  "tituloSeo": {
-                    "type": "boolean"
-                  },
-                  "palabrasClave": {
-                    "type": "boolean"
-                  },
                   "puntosClave": {
                     "type": "boolean"
                   },
-                  "estado": {
+                  "estadoId": {
                     "type": "boolean"
                   },
                   "finalizadoSn": {
                     "type": "boolean"
                   },
                   "imagenPrincipal": {
-                    "type": "boolean"
-                  },
-                  "ordenAtributos": {
-                    "type": "boolean"
-                  },
-                  "dimensiones": {
-                    "type": "boolean"
-                  },
-                  "color": {
-                    "type": "boolean"
-                  },
-                  "peso": {
                     "type": "boolean"
                   },
                   "activoSn": {
@@ -34827,16 +35210,10 @@
                     "nombre",
                     "descripcionCorta",
                     "descripcionLarga",
-                    "tituloSeo",
-                    "palabrasClave",
                     "puntosClave",
-                    "estado",
+                    "estadoId",
                     "finalizadoSn",
                     "imagenPrincipal",
-                    "ordenAtributos",
-                    "dimensiones",
-                    "color",
-                    "peso",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
