@@ -839,7 +839,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             //
             //Si tiene la seccion declarada, significa que tiene archivos, por lo que hay que borrar los archivos
             //
-            if (seccion && registrosTipoArchivos && registrosTipoArchivos.length > 0) {
+            if (seccion) {
                 //
                 //Obtenemos el nombre de la carpeta donde se guardan los archivos y la eliminamos
                 //

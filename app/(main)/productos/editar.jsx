@@ -2,10 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
+import { TabView, TabPanel } from 'primereact/tabview';
 import { getProducto, postProducto, patchProducto } from "@/app/api-endpoints/producto";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import { postSubirImagen, borrarFichero } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
+import ProductoSeo from "../producto-seo/page";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -61,7 +63,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         const validaNombre = producto.nombre === undefined || producto.nombre === "";
         const validaCategoria = producto.categoriaId === undefined || producto.categoriaId === null || producto.categoriaId === "";
         const validaEstado = producto.estadoId === undefined || producto.estadoId === null || producto.estadoId === "";
-        
+        const validaMarca = producto.marcaId === undefined || producto.marcaId === null || producto.marcaId === "";
         /*const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -73,7 +75,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             });
         }*/
         
-        return (!validaSku && !validaNombre && !validaCategoria && !validaEstado);
+        return (!validaSku && !validaNombre && !validaCategoria && !validaEstado && !validaMarca);
     };
 
     const procesarImagenPrincipal = async (productoId) => {
@@ -199,6 +201,17 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
                         />
+                        
+                        {idEditar && idEditar !== 0 && (
+                            <div className="mt-4">
+                                <TabView scrollable>
+                                    <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>
+                                        <ProductoSeo
+                                        idProducto={idEditar} />
+                                    </TabPanel>
+                                </TabView>
+                            </div>
+                        )}
                        
                         <div className="flex justify-content-end mt-2">
                             {editable && (

@@ -11575,6 +11575,341 @@
         "operationId": "ProductoMultimediaController.find"
       }
     },
+    "/producto-seos/by-producto/{productoId}": {
+      "get": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "findByProductoId",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoSeo model instance by productoId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoSeoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productoId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoSeoController.findByProductoId"
+      }
+    },
+    "/producto-seos/count": {
+      "get": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "count",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoSeo model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoSeo.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoSeo>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoSeoController.count"
+      }
+    },
+    "/producto-seos/{id}": {
+      "put": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoSeo PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoSeo"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoSeoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoSeo PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoSeoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoSeoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoSeo model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoSeoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoSeo.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoSeoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoSeo DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoSeoController.deleteById"
+      }
+    },
+    "/producto-seos": {
+      "post": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "create",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoSeo model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoSeo"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProductoSeo"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoSeoController.create"
+      },
+      "patch": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoSeo PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoSeo.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoSeo>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoSeoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoSeoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ProductoSeoController",
+        "x-operation-name": "find",
+        "tags": [
+          "ProductoSeoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ProductoSeo model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoSeoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoSeo.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoSeoController.find"
+      }
+    },
     "/productos/count": {
       "get": {
         "x-controller-name": "ProductoController",
@@ -18682,6 +19017,357 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<Producto>"
+      },
+      "ProductoSeo": {
+        "title": "ProductoSeo",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "metaTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaRobots": {
+            "type": "string",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlCanonnica": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClave": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClaveDs": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewProductoSeo": {
+        "title": "NewProductoSeo",
+        "type": "object",
+        "description": "(tsType: Omit<ProductoSeo, 'id'>, schemaOptions: { title: 'NewProductoSeo', exclude: [ 'id' ] })",
+        "properties": {
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "metaTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaRobots": {
+            "type": "string",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlCanonnica": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClave": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClaveDs": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ProductoSeo, 'id'>"
+      },
+      "ProductoSeoWithRelations": {
+        "title": "ProductoSeoWithRelations",
+        "type": "object",
+        "description": "(tsType: ProductoSeoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "metaTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaRobots": {
+            "type": "string",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlCanonnica": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClave": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClaveDs": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ProductoSeoWithRelations"
+      },
+      "ProductoSeoPartial": {
+        "title": "ProductoSeoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ProductoSeo>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "metaTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaRobots": {
+            "type": "string",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlCanonnica": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "ogImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterTitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterDescripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitterImagenUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClave": {
+            "type": "string",
+            "nullable": true
+          },
+          "palabrasClaveDs": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ProductoSeo>"
       },
       "ProductoMultimedia": {
         "title": "ProductoMultimedia",
@@ -34971,6 +35657,273 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ProductoMultimedia>"
+      },
+      "ProductoSeo.Filter": {
+        "type": "object",
+        "title": "ProductoSeo.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "metaTitulo": {
+                    "type": "boolean"
+                  },
+                  "metaDescripcion": {
+                    "type": "boolean"
+                  },
+                  "metaRobots": {
+                    "type": "boolean"
+                  },
+                  "slug": {
+                    "type": "boolean"
+                  },
+                  "urlCanonnica": {
+                    "type": "boolean"
+                  },
+                  "ogTitulo": {
+                    "type": "boolean"
+                  },
+                  "ogDescripcion": {
+                    "type": "boolean"
+                  },
+                  "ogImagenUrl": {
+                    "type": "boolean"
+                  },
+                  "twitterTitulo": {
+                    "type": "boolean"
+                  },
+                  "twitterDescripcion": {
+                    "type": "boolean"
+                  },
+                  "twitterImagenUrl": {
+                    "type": "boolean"
+                  },
+                  "palabrasClave": {
+                    "type": "boolean"
+                  },
+                  "palabrasClaveDs": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "metaTitulo",
+                    "metaDescripcion",
+                    "metaRobots",
+                    "slug",
+                    "urlCanonnica",
+                    "ogTitulo",
+                    "ogDescripcion",
+                    "ogImagenUrl",
+                    "twitterTitulo",
+                    "twitterDescripcion",
+                    "twitterImagenUrl",
+                    "palabrasClave",
+                    "palabrasClaveDs",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoSeo.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoSeo>"
+      },
+      "ProductoSeo.Filter1": {
+        "type": "object",
+        "title": "ProductoSeo.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ProductoSeo.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "metaTitulo": {
+                    "type": "boolean"
+                  },
+                  "metaDescripcion": {
+                    "type": "boolean"
+                  },
+                  "metaRobots": {
+                    "type": "boolean"
+                  },
+                  "slug": {
+                    "type": "boolean"
+                  },
+                  "urlCanonnica": {
+                    "type": "boolean"
+                  },
+                  "ogTitulo": {
+                    "type": "boolean"
+                  },
+                  "ogDescripcion": {
+                    "type": "boolean"
+                  },
+                  "ogImagenUrl": {
+                    "type": "boolean"
+                  },
+                  "twitterTitulo": {
+                    "type": "boolean"
+                  },
+                  "twitterDescripcion": {
+                    "type": "boolean"
+                  },
+                  "twitterImagenUrl": {
+                    "type": "boolean"
+                  },
+                  "palabrasClave": {
+                    "type": "boolean"
+                  },
+                  "palabrasClaveDs": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "metaTitulo",
+                    "metaDescripcion",
+                    "metaRobots",
+                    "slug",
+                    "urlCanonnica",
+                    "ogTitulo",
+                    "ogDescripcion",
+                    "ogImagenUrl",
+                    "twitterTitulo",
+                    "twitterDescripcion",
+                    "twitterImagenUrl",
+                    "palabrasClave",
+                    "palabrasClaveDs",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoSeo.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoSeo>"
       },
       "Producto.Filter": {
         "type": "object",

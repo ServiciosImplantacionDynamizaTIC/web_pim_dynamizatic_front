@@ -11733,6 +11733,121 @@ export enum NewProductoMultimediaTipoUsoEnum {
 }
 
 /**
+ * (tsType: Omit<ProductoSeo, \'id\'>, schemaOptions: { title: \'NewProductoSeo\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewProductoSeo
+ */
+export interface NewProductoSeo {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoSeo
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'metaTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'metaDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'metaRobots'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'slug'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'urlCanonnica'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'ogTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'ogDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'ogImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'twitterTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'twitterDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'twitterImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'palabrasClave'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'palabrasClaveDs'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoSeo
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoSeo
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoSeo
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
  * (tsType: Omit<RefrescarToken, \'id\'>, schemaOptions: { title: \'NewRefrescarToken\', exclude: [ \'id\' ] })
  * @export
  * @interface NewRefrescarToken
@@ -15635,6 +15750,449 @@ export interface ProductoPartial {
      * 
      * @type {number}
      * @memberof ProductoPartial
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoSeo
+ */
+export interface ProductoSeo {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeo
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeo
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'metaTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'metaDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'metaRobots'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'slug'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'urlCanonnica'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'ogTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'ogDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'ogImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'twitterTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'twitterDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'twitterImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'palabrasClave'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'palabrasClaveDs'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeo
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeo
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeo
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoSeoFilter
+ */
+export interface ProductoSeoFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoSeoFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoSeoFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoSeoFilter1
+ */
+export interface ProductoSeoFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoSeoFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof ProductoSeoFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoSeoFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<ProductoSeo>, schemaOptions: { partial: true })
+ * @export
+ * @interface ProductoSeoPartial
+ */
+export interface ProductoSeoPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoPartial
+     */
+    'productoId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'metaTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'metaDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'metaRobots'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'slug'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'urlCanonnica'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'ogTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'ogDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'ogImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'twitterTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'twitterDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'twitterImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'palabrasClave'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'palabrasClaveDs'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoPartial
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * (tsType: ProductoSeoWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface ProductoSeoWithRelations
+ */
+export interface ProductoSeoWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoWithRelations
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'metaTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'metaDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'metaRobots'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'slug'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'urlCanonnica'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'ogTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'ogDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'ogImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'twitterTitulo'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'twitterDescripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'twitterImagenUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'palabrasClave'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'palabrasClaveDs'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoSeoWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoWithRelations
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoSeoWithRelations
      */
     'usuarioModificacion'?: number | null;
 }
@@ -43069,6 +43627,679 @@ export class ProductoMultimediaControllerApi extends BaseAPI {
      */
     public productoMultimediaControllerUpdateById(id: number, productoMultimediaPartial?: ProductoMultimediaPartial, options?: AxiosRequestConfig) {
         return ProductoMultimediaControllerApiFp(this.configuration).productoMultimediaControllerUpdateById(id, productoMultimediaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ProductoSeoControllerApi - axios parameter creator
+ * @export
+ */
+export const ProductoSeoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-seos/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewProductoSeo} [newProductoSeo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerCreate: async (newProductoSeo?: NewProductoSeo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-seos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newProductoSeo, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoSeoControllerDeleteById', 'id', id)
+            const localVarPath = `/producto-seos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ProductoSeoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerFind: async (filter?: ProductoSeoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-seos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerFindById: async (id: number, filter?: ProductoSeoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoSeoControllerFindById', 'id', id)
+            const localVarPath = `/producto-seos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} productoId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerFindByProductoId: async (productoId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productoId' is not null or undefined
+            assertParamExists('productoSeoControllerFindByProductoId', 'productoId', productoId)
+            const localVarPath = `/producto-seos/by-producto/{productoId}`
+                .replace(`{${"productoId"}}`, encodeURIComponent(String(productoId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeo} [productoSeo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerReplaceById: async (id: number, productoSeo?: ProductoSeo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoSeoControllerReplaceById', 'id', id)
+            const localVarPath = `/producto-seos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoSeo, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoSeoPartial} [productoSeoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerUpdateAll: async (where?: { [key: string]: object; }, productoSeoPartial?: ProductoSeoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-seos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoSeoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeoPartial} [productoSeoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerUpdateById: async (id: number, productoSeoPartial?: ProductoSeoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoSeoControllerUpdateById', 'id', id)
+            const localVarPath = `/producto-seos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoSeoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProductoSeoControllerApi - functional programming interface
+ * @export
+ */
+export const ProductoSeoControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProductoSeoControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewProductoSeo} [newProductoSeo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerCreate(newProductoSeo?: NewProductoSeo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoSeo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerCreate(newProductoSeo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {ProductoSeoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerFind(filter?: ProductoSeoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProductoSeoWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerFindById(id: number, filter?: ProductoSeoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoSeoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} productoId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerFindByProductoId(productoId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoSeoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerFindByProductoId(productoId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeo} [productoSeo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerReplaceById(id: number, productoSeo?: ProductoSeo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerReplaceById(id, productoSeo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoSeoPartial} [productoSeoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerUpdateAll(where?: { [key: string]: object; }, productoSeoPartial?: ProductoSeoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerUpdateAll(where, productoSeoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeoPartial} [productoSeoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoSeoControllerUpdateById(id: number, productoSeoPartial?: ProductoSeoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoSeoControllerUpdateById(id, productoSeoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProductoSeoControllerApi - factory interface
+ * @export
+ */
+export const ProductoSeoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProductoSeoControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoSeoControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewProductoSeo} [newProductoSeo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerCreate(newProductoSeo?: NewProductoSeo, options?: any): AxiosPromise<ProductoSeo> {
+            return localVarFp.productoSeoControllerCreate(newProductoSeo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.productoSeoControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ProductoSeoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerFind(filter?: ProductoSeoFilter1, options?: any): AxiosPromise<Array<ProductoSeoWithRelations>> {
+            return localVarFp.productoSeoControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerFindById(id: number, filter?: ProductoSeoFilter, options?: any): AxiosPromise<ProductoSeoWithRelations> {
+            return localVarFp.productoSeoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} productoId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerFindByProductoId(productoId: number, options?: any): AxiosPromise<ProductoSeoWithRelations> {
+            return localVarFp.productoSeoControllerFindByProductoId(productoId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeo} [productoSeo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerReplaceById(id: number, productoSeo?: ProductoSeo, options?: any): AxiosPromise<any> {
+            return localVarFp.productoSeoControllerReplaceById(id, productoSeo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoSeoPartial} [productoSeoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerUpdateAll(where?: { [key: string]: object; }, productoSeoPartial?: ProductoSeoPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoSeoControllerUpdateAll(where, productoSeoPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoSeoPartial} [productoSeoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoSeoControllerUpdateById(id: number, productoSeoPartial?: ProductoSeoPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.productoSeoControllerUpdateById(id, productoSeoPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProductoSeoControllerApi - object-oriented interface
+ * @export
+ * @class ProductoSeoControllerApi
+ * @extends {BaseAPI}
+ */
+export class ProductoSeoControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewProductoSeo} [newProductoSeo] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerCreate(newProductoSeo?: NewProductoSeo, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerCreate(newProductoSeo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ProductoSeoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerFind(filter?: ProductoSeoFilter1, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoSeoFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerFindById(id: number, filter?: ProductoSeoFilter, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} productoId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerFindByProductoId(productoId: number, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerFindByProductoId(productoId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoSeo} [productoSeo] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerReplaceById(id: number, productoSeo?: ProductoSeo, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerReplaceById(id, productoSeo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {ProductoSeoPartial} [productoSeoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerUpdateAll(where?: { [key: string]: object; }, productoSeoPartial?: ProductoSeoPartial, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerUpdateAll(where, productoSeoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoSeoPartial} [productoSeoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoSeoControllerApi
+     */
+    public productoSeoControllerUpdateById(id: number, productoSeoPartial?: ProductoSeoPartial, options?: AxiosRequestConfig) {
+        return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerUpdateById(id, productoSeoPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

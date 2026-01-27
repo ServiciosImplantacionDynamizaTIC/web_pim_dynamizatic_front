@@ -276,7 +276,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, l
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="marca">{intl.formatMessage({ id: 'Marca' })}</label>
+                        <label htmlFor="marca"><b>{intl.formatMessage({ id: 'Marca' })}*</b></label>
                         <Dropdown 
                             id="marca"
                             value={producto.marcaId || null}

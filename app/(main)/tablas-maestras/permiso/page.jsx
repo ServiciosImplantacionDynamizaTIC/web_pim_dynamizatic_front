@@ -215,6 +215,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados-Borrar' },
 
+                //ProductoSeo
+                { header: intl.formatMessage({ id: 'SEO de Productos' }), seccion: 'ProductoSeo' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoSeo-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoSeo-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoSeo-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoSeo-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoSeo-Borrar' },
+
             ];
             // Obtenemos los roles
             const filtroRol = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId } } });
