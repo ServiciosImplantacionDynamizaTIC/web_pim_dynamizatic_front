@@ -8,7 +8,7 @@ const ProductoSeo = ({ idProducto }) => {
     const intl = useIntl();
 
     const columnas = [
-        { campo: 'meta_titulo', header: intl.formatMessage({ id: 'Meta Título' }), tipo: 'string' },
+        { campo: 'metaTitulo', header: intl.formatMessage({ id: 'Meta Título' }), tipo: 'string' },
         { campo: 'slug', header: intl.formatMessage({ id: 'Slug' }), tipo: 'string' },
    ]
     
@@ -22,7 +22,24 @@ const ProductoSeo = ({ idProducto }) => {
                 botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"ProductoSeo"}
                 filtradoBase={idProducto ?  { productoId: idProducto } : {}}
-                editarComponente={<EditarProductoSeo />}
+                editarComponente={<EditarProductoSeo 
+                    idProducto={idProducto}
+                    emptyRegistro={{
+                        productoId: idProducto,
+                        metaTitulo: "",
+                        metaDescripcion: "",
+                        metaRobots: "",
+                        slug: "",
+                        urlCanonica: "",
+                        ogTitulo: "",
+                        ogDescripcion: "",
+                        ogImagenUrl: "",
+                        twitterTitulo: "",
+                        twitterDescripcion: "",
+                        twitterImagenUrl: "",
+                        palabrasClave: "",
+                        palabrasClaveDos: ""
+                    }} />}
                 columnas={columnas}
             />
         </div>

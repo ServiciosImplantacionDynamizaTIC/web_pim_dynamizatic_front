@@ -7,7 +7,7 @@ import { getProductos } from "@/app/api-endpoints/producto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, editable }) => {
+const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, editable, idProducto }) => {
     const intl = useIntl();
     
     const [productos, setProductos] = useState([]);
@@ -18,20 +18,41 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
         const cargarProductos = async () => {
             setCargandoProductos(true);
             try {
-                const filtro = JSON.stringify({
-                    where: {
-                        and: {
-                            empresaId: getUsuarioSesion()?.empresaId,
-                            activoSn: 'S' 
+                let filtro;
+                if (idProducto) {
+                    // Si tenemos un idProducto específico, filtrar solo ese producto
+                    filtro = JSON.stringify({
+                        where: {
+                            and: {
+                                id: idProducto,
+                                empresaId: getUsuarioSesion()?.empresaId,
+                                activoSn: 'S' 
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    // Si no hay idProducto específico, cargar todos los productos activos
+                    filtro = JSON.stringify({
+                        where: {
+                            and: {
+                                empresaId: getUsuarioSesion()?.empresaId,
+                                activoSn: 'S' 
+                            }
+                        }
+                    });
+                }
+                
                 const data = await getProductos(filtro);
                 const productosFormateados = data.map(prod => ({
                     label: `${prod.sku} - ${prod.nombre}`,
                     value: prod.id
                 }));
                 setProductos(productosFormateados);
+                
+                // Si solo hay un producto (el específico), seleccionarlo automáticamente
+                if (idProducto && productosFormateados.length === 1 && !productoSeo.productoId) {
+                    setProductoSeo({ ...productoSeo, productoId: idProducto });
+                }
             } catch (error) {
                 console.error('Error cargando productos:', error);
             } finally {
@@ -40,7 +61,7 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
         };
 
         cargarProductos();
-    }, []);
+    }, [idProducto]); // Agregar idProducto como dependencia
 
     // Opciones predefinidas para meta_robots
     const opcionesMetaRobots = [
@@ -60,7 +81,7 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
 
     return (
         <>
-            <Fieldset legend={intl.formatMessage({ id: 'Información del Producto' })} collapsed={false} toggleable>
+            <Fieldset legend={intl.formatMessage({ id: 'Información del Producto' })} collapsed={false} toggleable style={{display: idProducto ? 'none' : 'block'}}>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="productoId">{intl.formatMessage({ id: 'Producto' })} *</label>
@@ -70,23 +91,23 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                             options={productos}
                             onChange={(e) => manejarCambioInput(e, 'productoId')}
                             placeholder={intl.formatMessage({ id: 'Selecciona un producto' })}
-                            disabled={estadoGuardando || !editable}
+                            disabled={estadoGuardando || !editable || !!idProducto} // Deshabilitar si hay idProducto específico
                             loading={cargandoProductos}
-                            filter
-                            showClear
+                            filter={!idProducto} // Solo permitir filtro si no hay idProducto específico
+                            showClear={!idProducto} // Solo mostrar limpiar si no hay idProducto específico
                         />
                     </div>
                 </div>
             </Fieldset>
-
+            <br/>
             <Fieldset legend={intl.formatMessage({ id: 'Metadatos SEO' })} collapsed={false} toggleable>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="meta_titulo">{intl.formatMessage({ id: 'Meta Título' })}</label>
+                        <label htmlFor="metaTitulo">{intl.formatMessage({ id: 'Meta Título' })}</label>
                         <InputText
-                            id="meta_titulo"
-                            value={productoSeo.meta_titulo || ''}
-                            onChange={(e) => manejarCambioInput(e, 'meta_titulo')}
+                            id="metaTitulo"
+                            value={productoSeo.metaTitulo || ''}
+                            onChange={(e) => manejarCambioInput(e, 'metaTitulo')}
                             disabled={estadoGuardando || !editable}
                             maxLength={255}
                         />
@@ -106,11 +127,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12">
-                        <label htmlFor="meta_descripcion">{intl.formatMessage({ id: 'Meta Descripción' })}</label>
+                        <label htmlFor="metaDescripcion">{intl.formatMessage({ id: 'Meta Descripción' })}</label>
                         <InputTextarea
-                            id="meta_descripcion"
-                            value={productoSeo.meta_descripcion || ''}
-                            onChange={(e) => manejarCambioInput(e, 'meta_descripcion')}
+                            id="metaDescripcion"
+                            value={productoSeo.metaDescripcion || ''}
+                            onChange={(e) => manejarCambioInput(e, 'metaDescripcion')}
                             disabled={estadoGuardando || !editable}
                             rows={3}
                             maxLength={320}
@@ -120,12 +141,12 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="meta_robots">{intl.formatMessage({ id: 'Meta Robots' })}</label>
+                        <label htmlFor="metaRobots">{intl.formatMessage({ id: 'Meta Robots' })}</label>
                         <Dropdown
-                            id="meta_robots"
-                            value={productoSeo.meta_robots}
+                            id="metaRobots"
+                            value={productoSeo.metaRobots || ''}
                             options={opcionesMetaRobots}
-                            onChange={(e) => manejarCambioInput(e, 'meta_robots')}
+                            onChange={(e) => manejarCambioInput(e, 'metaRobots')}
                             placeholder={intl.formatMessage({ id: 'Selecciona directiva robots' })}
                             disabled={estadoGuardando || !editable}
                             showClear
@@ -133,11 +154,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="url_canoncia">{intl.formatMessage({ id: 'URL Canónica' })}</label>
+                        <label htmlFor="urlCanonica">{intl.formatMessage({ id: 'URL Canónica' })}</label>
                         <InputText
-                            id="url_canoncia"
-                            value={productoSeo.url_canoncia || ''}
-                            onChange={(e) => manejarCambioInput(e, 'url_canoncia')}
+                            id="urlCanonica"
+                            value={productoSeo.urlCanonica || ''}
+                            onChange={(e) => manejarCambioInput(e, 'urlCanonica')}
                             disabled={estadoGuardando || !editable}
                             maxLength={255}
                         />
@@ -145,15 +166,15 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
                 </div>
             </Fieldset>
-
+            <br/>
             <Fieldset legend={intl.formatMessage({ id: 'Open Graph (Facebook)' })} collapsed={true} toggleable>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="og_titulo">{intl.formatMessage({ id: 'OG Título' })}</label>
+                        <label htmlFor="ogTitulo">{intl.formatMessage({ id: 'OG Título' })}</label>
                         <InputText
-                            id="og_titulo"
-                            value={productoSeo.og_titulo || ''}
-                            onChange={(e) => manejarCambioInput(e, 'og_titulo')}
+                            id="ogTitulo"
+                            value={productoSeo.ogTitulo || ''}
+                            onChange={(e) => manejarCambioInput(e, 'ogTitulo')}
                             disabled={estadoGuardando || !editable}
                             maxLength={255}
                         />
@@ -161,11 +182,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="og_imagen_url">{intl.formatMessage({ id: 'OG Imagen URL' })}</label>
+                        <label htmlFor="ogImagenUrl">{intl.formatMessage({ id: 'OG Imagen URL' })}</label>
                         <InputText
-                            id="og_imagen_url"
-                            value={productoSeo.og_imagen_url || ''}
-                            onChange={(e) => manejarCambioInput(e, 'og_imagen_url')}
+                            id="ogImagenUrl"
+                            value={productoSeo.ogImagenUrl || ''}
+                            onChange={(e) => manejarCambioInput(e, 'ogImagenUrl')}
                             disabled={estadoGuardando || !editable}
                             maxLength={255}
                         />
@@ -173,11 +194,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12">
-                        <label htmlFor="og_descripcion">{intl.formatMessage({ id: 'OG Descripción' })}</label>
+                        <label htmlFor="ogDescripcion">{intl.formatMessage({ id: 'OG Descripción' })}</label>
                         <InputTextarea
-                            id="og_descripcion"
-                            value={productoSeo.og_descripcion || ''}
-                            onChange={(e) => manejarCambioInput(e, 'og_descripcion')}
+                            id="ogDescripcion"
+                            value={productoSeo.ogDescripcion || ''}
+                            onChange={(e) => manejarCambioInput(e, 'ogDescripcion')}
                             disabled={estadoGuardando || !editable}
                             rows={3}
                             maxLength={320}
@@ -187,15 +208,15 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
                 </div>
             </Fieldset>
-
+            <br/>
             <Fieldset legend={intl.formatMessage({ id: 'Twitter Cards' })} collapsed={true} toggleable>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="twitter_titulo">{intl.formatMessage({ id: 'Twitter Título' })}</label>
+                        <label htmlFor="twitterTitulo">{intl.formatMessage({ id: 'Twitter Título' })}</label>
                         <InputText
-                            id="twitter_titulo"
-                            value={productoSeo.twitter_titulo || ''}
-                            onChange={(e) => manejarCambioInput(e, 'twitter_titulo')}
+                            id="twitterTitulo"
+                            value={productoSeo.twitterTitulo || ''}
+                            onChange={(e) => manejarCambioInput(e, 'twitterTitulo')}
                             disabled={estadoGuardando || !editable}
                             maxLength={255}
                         />
@@ -203,11 +224,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="twitter_imagen_url">{intl.formatMessage({ id: 'Twitter Imagen URL' })}</label>
+                        <label htmlFor="twitterImagenUrl">{intl.formatMessage({ id: 'Twitter Imagen URL' })}</label>
                         <InputText
-                            id="twitter_imagen_url"
-                            value={productoSeo.twitter_imagen_url || ''}
-                            onChange={(e) => manejarCambioInput(e, 'twitter_imagen_url')}
+                            id="twitterImagenUrl"
+                            value={productoSeo.twitterImagenUrl || ''}
+                            onChange={(e) => manejarCambioInput(e, 'twitterImagenUrl')}
                             disabled={estadoGuardando || !editable}
                             maxLength={255}
                         />
@@ -215,11 +236,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12">
-                        <label htmlFor="twitter_descripcion">{intl.formatMessage({ id: 'Twitter Descripción' })}</label>
+                        <label htmlFor="twitterDescripcion">{intl.formatMessage({ id: 'Twitter Descripción' })}</label>
                         <InputTextarea
-                            id="twitter_descripcion"
-                            value={productoSeo.twitter_descripcion || ''}
-                            onChange={(e) => manejarCambioInput(e, 'twitter_descripcion')}
+                            id="twitterDescripcion"
+                            value={productoSeo.twitterDescripcion || ''}
+                            onChange={(e) => manejarCambioInput(e, 'twitterDescripcion')}
                             disabled={estadoGuardando || !editable}
                             rows={3}
                             maxLength={320}
@@ -229,15 +250,15 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
                 </div>
             </Fieldset>
-
+            <br/>
             <Fieldset legend={intl.formatMessage({ id: 'Palabras Clave' })} collapsed={true} toggleable>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="palabras_clave">{intl.formatMessage({ id: 'Palabras Clave Principales' })}</label>
+                        <label htmlFor="palabrasClave">{intl.formatMessage({ id: 'Palabras Clave Principales' })}</label>
                         <InputTextarea
-                            id="palabras_clave"
-                            value={productoSeo.palabras_clave || ''}
-                            onChange={(e) => manejarCambioInput(e, 'palabras_clave')}
+                            id="palabrasClave"
+                            value={productoSeo.palabrasClave || ''}
+                            onChange={(e) => manejarCambioInput(e, 'palabrasClave')}
                             disabled={estadoGuardando || !editable}
                             rows={3}
                             maxLength={1000}
@@ -247,11 +268,11 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="palabras_clave_dos">{intl.formatMessage({ id: 'Palabras Clave Secundarias' })}</label>
+                        <label htmlFor="palabrasClaveDos">{intl.formatMessage({ id: 'Palabras Clave Secundarias' })}</label>
                         <InputTextarea
-                            id="palabras_clave_dos"
-                            value={productoSeo.palabras_clave_dos || ''}
-                            onChange={(e) => manejarCambioInput(e, 'palabras_clave_dos')}
+                            id="palabrasClaveDos"
+                            value={productoSeo.palabrasClaveDos || ''}
+                            onChange={(e) => manejarCambioInput(e, 'palabrasClaveDos')}
                             disabled={estadoGuardando || !editable}
                             rows={3}
                             maxLength={1000}

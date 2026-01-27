@@ -19077,7 +19077,7 @@
             "type": "string",
             "nullable": true
           },
-          "palabrasClaveDs": {
+          "palabrasClaveDos": {
             "type": "string",
             "nullable": true
           },
@@ -19163,7 +19163,7 @@
             "type": "string",
             "nullable": true
           },
-          "palabrasClaveDs": {
+          "palabrasClaveDos": {
             "type": "string",
             "nullable": true
           },
@@ -19253,7 +19253,7 @@
             "type": "string",
             "nullable": true
           },
-          "palabrasClaveDs": {
+          "palabrasClaveDos": {
             "type": "string",
             "nullable": true
           },
@@ -19343,7 +19343,7 @@
             "type": "string",
             "nullable": true
           },
-          "palabrasClaveDs": {
+          "palabrasClaveDos": {
             "type": "string",
             "nullable": true
           },
@@ -35735,7 +35735,7 @@
                   "palabrasClave": {
                     "type": "boolean"
                   },
-                  "palabrasClaveDs": {
+                  "palabrasClaveDos": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -35772,7 +35772,7 @@
                     "twitterDescripcion",
                     "twitterImagenUrl",
                     "palabrasClave",
-                    "palabrasClaveDs",
+                    "palabrasClaveDos",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -35871,7 +35871,7 @@
                   "palabrasClave": {
                     "type": "boolean"
                   },
-                  "palabrasClaveDs": {
+                  "palabrasClaveDos": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -35908,7 +35908,7 @@
                     "twitterDescripcion",
                     "twitterImagenUrl",
                     "palabrasClave",
-                    "palabrasClaveDs",
+                    "palabrasClaveDos",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",

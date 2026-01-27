@@ -8,25 +8,25 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarProductoSeo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarProductoSeo = ({ idEditar: idEditarSeo, setIdEditar: setIdEditarSeo, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, idProducto }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
     const [productoSeo, setProductoSeo] = useState(emptyRegistro || {
         productoId: null,
-        meta_titulo: "",
-        meta_descripcion: "",
-        meta_robots: "",
+        metaTitulo: "",
+        metaDescripcion: "",
+        metaRobots: "",
         slug: "",
-        url_canoncia: "",
-        og_titulo: "",
-        og_descripcion: "",
-        og_imagen_url: "",
-        twitter_titulo: "",
-        twitter_descripcion: "",
-        twitter_imagen_url: "",
-        palabras_clave: "",
-        palabras_clave_dos: ""
+        urlCanonica: "",
+        ogTitulo: "",
+        ogDescripcion: "",
+        ogImagenUrl: "",
+        twitterTitulo: "",
+        twitterDescripcion: "",
+        twitterImagenUrl: "",
+        palabrasClave: "",
+        palabrasClaveDos: ""
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -34,14 +34,14 @@ const EditarProductoSeo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
 
     useEffect(() => {
         const fetchData = async () => {
-            if (idEditar !== 0) {
-                const registro = rowData.find((element) => element.id === idEditar);
+            if (idEditarSeo !== 0) {
+                const registro = rowData.find((element) => element.id === idEditarSeo);
                 setProductoSeo(registro);
                 setIsEdit(true);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [idEditarSeo, rowData]);
 
     const guardarProductoSeo = async () => {
         setEstadoGuardando(true);
@@ -67,7 +67,7 @@ const EditarProductoSeo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
 
             let resultado;
             if (isEdit) {
-                resultado = await patchProductoSeo(idEditar, productoSeoDataLimpio);
+                resultado = await patchProductoSeo(idEditarSeo, productoSeoDataLimpio);
             } else {
                 resultado = await postProductoSeo(productoSeoDataLimpio);
             }
@@ -83,7 +83,8 @@ const EditarProductoSeo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 life: 3000
             });
 
-            setIdEditar(0);
+            setIdEditarSeo(null);  // null para volver al CRUD
+            setIsEdit(false);
         } catch (error) {
             console.error('Error al guardar:', error);
             toast.current.show({
@@ -99,52 +100,58 @@ const EditarProductoSeo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
     };
 
     const cancelarEdicion = () => {
-        setIdEditar(0);
-        setProductoSeo(emptyRegistro || {
-            productoId: null,
-            meta_titulo: "",
-            meta_descripcion: "",
-            meta_robots: "",
+        setIdEditarSeo(null);  // null para volver al CRUD
+        setIsEdit(false);
+        // Usar el emptyRegistro si está disponible, o crear uno nuevo manteniendo el idProducto
+        const registroReset = emptyRegistro || {
+            productoId: idProducto || null,
+            metaTitulo: "",
+            metaDescripcion: "",
+            metaRobots: "",
             slug: "",
-            url_canoncia: "",
-            og_titulo: "",
-            og_descripcion: "",
-            og_imagen_url: "",
-            twitter_titulo: "",
-            twitter_descripcion: "",
-            twitter_imagen_url: "",
-            palabras_clave: "",
-            palabras_clave_dos: ""
-        });
+            urlCanonica: "",
+            ogTitulo: "",
+            ogDescripcion: "",
+            ogImagenUrl: "",
+            twitterTitulo: "",
+            twitterDescripcion: "",
+            twitterImagenUrl: "",
+            palabrasClave: "",
+            palabrasClaveDos: ""
+        };
+        setProductoSeo(registroReset);
     };
 
     return (
-        <div className="card p-fluid">
-            <Toast ref={toast} />
-            
-            <EditarDatosProductoSeo
-                productoSeo={productoSeo}
-                setProductoSeo={setProductoSeo}
-                estadoGuardando={estadoGuardando}
-                editable={editable}
-            />
+        <div>
+            <div className="grid ProductoSeo">
+                <div className="col-12">
+                    <div className="card">
+                        <Toast ref={toast} />
+                        
+                        <EditarDatosProductoSeo
+                            productoSeo={productoSeo}
+                            setProductoSeo={setProductoSeo}
+                            estadoGuardando={estadoGuardando}
+                            editable={editable}
+                            idProducto={idProducto}
+                        />
 
-            <div className="p-d-flex p-jc-between p-mt-4">
-                <Button
-                    type="button"
-                    label={intl.formatMessage({ id: 'Cancelar' })}
-                    className="p-button-secondary"
-                    onClick={cancelarEdicion}
-                    disabled={estadoGuardandoBoton}
-                />
-                <Button
-                    type="button"
-                    label={intl.formatMessage({ id: 'Guardar' })}
-                    className="p-button-primary"
-                    onClick={guardarProductoSeo}
-                    loading={estadoGuardandoBoton}
-                    disabled={estadoGuardandoBoton || !editable}
-                />
+                        <div className="flex justify-content-end mt-2">
+                            {editable && (
+                                <Button
+                                    label={intl.formatMessage({ id: 'Guardar' })}
+                                    className="mr-2"
+                                    onClick={guardarProductoSeo}
+                                    loading={estadoGuardandoBoton}
+                                    disabled={estadoGuardandoBoton || !editable}
+                                />
+                            )}
+                            <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
         </div>
     );

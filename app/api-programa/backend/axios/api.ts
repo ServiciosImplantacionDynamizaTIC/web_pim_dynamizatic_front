@@ -11821,7 +11821,7 @@ export interface NewProductoSeo {
      * @type {string}
      * @memberof NewProductoSeo
      */
-    'palabrasClaveDs'?: string | null;
+    'palabrasClaveDos'?: string | null;
     /**
      * 
      * @type {string}
@@ -15848,7 +15848,7 @@ export interface ProductoSeo {
      * @type {string}
      * @memberof ProductoSeo
      */
-    'palabrasClaveDs'?: string | null;
+    'palabrasClaveDos'?: string | null;
     /**
      * 
      * @type {string}
@@ -16049,7 +16049,7 @@ export interface ProductoSeoPartial {
      * @type {string}
      * @memberof ProductoSeoPartial
      */
-    'palabrasClaveDs'?: string | null;
+    'palabrasClaveDos'?: string | null;
     /**
      * 
      * @type {string}
@@ -16170,7 +16170,7 @@ export interface ProductoSeoWithRelations {
      * @type {string}
      * @memberof ProductoSeoWithRelations
      */
-    'palabrasClaveDs'?: string | null;
+    'palabrasClaveDos'?: string | null;
     /**
      * 
      * @type {string}
