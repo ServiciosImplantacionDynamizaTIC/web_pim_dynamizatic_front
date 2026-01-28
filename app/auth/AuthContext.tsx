@@ -160,6 +160,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/atributos",
           "icon": "pi pi-fw pi-tags"
         },
+        "Campos Dinamicos": {
+          "path": "/campos-dinamicos",
+          "icon": "pi pi-fw pi-list"
+        },
         "Catalogos": {
           "path": "/catalogos",
           "icon": "pi pi-fw pi-book"
