@@ -43,7 +43,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
     useEffect(() => {
         const fetchData = async () => {
-            if (idEditar !== 0) {
+            if (idEditar && idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
                 setProducto(registro);
                 
@@ -102,7 +102,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             let objGuardar = { ...producto };
             const usuarioActual = getUsuarioSesion()?.id;
 
-            if (idEditar === 0) {
+            if (!idEditar || idEditar === 0) {
 
                 objGuardar = {
                     empresaId: getUsuarioSesion()?.empresaId,
@@ -185,7 +185,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         setIdEditar(null);
     };
 
-    const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
+    const header = (idEditar && idEditar > 0) ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
 
     return (
         <div>
@@ -202,7 +202,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             isEdit={isEdit}
                         />
                         
-                        {idEditar && idEditar !== 0 && (
+                        {(idEditar != null && idEditar !== 0) && (
                             <div className="mt-4">
                                 <TabView scrollable>
                                     <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>

@@ -68,11 +68,11 @@ const EditarProductoSeo = ({ idEditar: idEditarSeo, setIdEditar: setIdEditarSeo,
             let resultado;
             if (isEdit) {
                 resultado = await patchProductoSeo(idEditarSeo, productoSeoDataLimpio);
+                setRegistroResult("editado");
             } else {
                 resultado = await postProductoSeo(productoSeoDataLimpio);
+                setRegistroResult("insertado");
             }
-
-            setRegistroResult(resultado);
             
             toast.current.show({
                 severity: 'success',

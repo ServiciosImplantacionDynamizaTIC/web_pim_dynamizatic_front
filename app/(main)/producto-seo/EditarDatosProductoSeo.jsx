@@ -49,10 +49,6 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                 }));
                 setProductos(productosFormateados);
                 
-                // Si solo hay un producto (el específico), seleccionarlo automáticamente
-                if (idProducto && productosFormateados.length === 1 && !productoSeo.productoId) {
-                    setProductoSeo({ ...productoSeo, productoId: idProducto });
-                }
             } catch (error) {
                 console.error('Error cargando productos:', error);
             } finally {
@@ -61,7 +57,23 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
         };
 
         cargarProductos();
-    }, [idProducto]); // Agregar idProducto como dependencia
+    }, [idProducto]);
+    //
+    // Efecto separado para auto-seleccionar el producto cuando está disponible
+    //
+    useEffect(() => {
+        if (idProducto && productos.length === 1 && productos[0].value === idProducto) {
+            setProductoSeo(prev => {
+                //
+                // Solo actualizar si no tiene productoId o es diferente
+                //
+                if (!prev.productoId || prev.productoId !== idProducto) {
+                    return { ...prev, productoId: idProducto };
+                }
+                return prev;
+            });
+        }
+    }, [idProducto, productos]);
 
     // Opciones predefinidas para meta_robots
     const opcionesMetaRobots = [

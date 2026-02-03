@@ -19045,7 +19045,7 @@
             "type": "string",
             "nullable": true
           },
-          "urlCanonnica": {
+          "urlCanonica": {
             "type": "string",
             "nullable": true
           },
@@ -19131,7 +19131,7 @@
             "type": "string",
             "nullable": true
           },
-          "urlCanonnica": {
+          "urlCanonica": {
             "type": "string",
             "nullable": true
           },
@@ -19221,7 +19221,7 @@
             "type": "string",
             "nullable": true
           },
-          "urlCanonnica": {
+          "urlCanonica": {
             "type": "string",
             "nullable": true
           },
@@ -19311,7 +19311,7 @@
             "type": "string",
             "nullable": true
           },
-          "urlCanonnica": {
+          "urlCanonica": {
             "type": "string",
             "nullable": true
           },
@@ -35711,7 +35711,7 @@
                   "slug": {
                     "type": "boolean"
                   },
-                  "urlCanonnica": {
+                  "urlCanonica": {
                     "type": "boolean"
                   },
                   "ogTitulo": {
@@ -35764,7 +35764,7 @@
                     "metaDescripcion",
                     "metaRobots",
                     "slug",
-                    "urlCanonnica",
+                    "urlCanonica",
                     "ogTitulo",
                     "ogDescripcion",
                     "ogImagenUrl",
@@ -35847,7 +35847,7 @@
                   "slug": {
                     "type": "boolean"
                   },
-                  "urlCanonnica": {
+                  "urlCanonica": {
                     "type": "boolean"
                   },
                   "ogTitulo": {
@@ -35900,7 +35900,7 @@
                     "metaDescripcion",
                     "metaRobots",
                     "slug",
-                    "urlCanonnica",
+                    "urlCanonica",
                     "ogTitulo",
                     "ogDescripcion",
                     "ogImagenUrl",

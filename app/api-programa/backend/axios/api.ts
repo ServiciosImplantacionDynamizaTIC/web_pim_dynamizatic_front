@@ -11773,7 +11773,7 @@ export interface NewProductoSeo {
      * @type {string}
      * @memberof NewProductoSeo
      */
-    'urlCanonnica'?: string | null;
+    'urlCanonica'?: string | null;
     /**
      * 
      * @type {string}
@@ -15800,7 +15800,7 @@ export interface ProductoSeo {
      * @type {string}
      * @memberof ProductoSeo
      */
-    'urlCanonnica'?: string | null;
+    'urlCanonica'?: string | null;
     /**
      * 
      * @type {string}
@@ -16001,7 +16001,7 @@ export interface ProductoSeoPartial {
      * @type {string}
      * @memberof ProductoSeoPartial
      */
-    'urlCanonnica'?: string | null;
+    'urlCanonica'?: string | null;
     /**
      * 
      * @type {string}
@@ -16122,7 +16122,7 @@ export interface ProductoSeoWithRelations {
      * @type {string}
      * @memberof ProductoSeoWithRelations
      */
-    'urlCanonnica'?: string | null;
+    'urlCanonica'?: string | null;
     /**
      * 
      * @type {string}
