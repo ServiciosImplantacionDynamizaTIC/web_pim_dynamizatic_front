@@ -131,8 +131,21 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     }
                     
                     await procesarArchivosNuevoRegistro(producto, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
+                    
+                    // Actualizar el producto con los datos del registro recién creado
+                    const productoActualizado = { 
+                        ...producto, 
+                        id: nuevoRegistro.id,
+                        imagenPrincipal: rutaImagen || producto.imagenPrincipal || ""
+                    };
+                    setProducto(productoActualizado);
+                    
+                    // Crear lista de archivos antiguos para el nuevo registro
+                    const _listaArchivosAntiguos = crearListaArchivosAntiguos(productoActualizado, listaTipoArchivos);
+                    setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
+                    
                     setRegistroResult("insertado");
-                    setIdEditar(null);
+                    setIdEditar(nuevoRegistro.id);
                 } else {
                     toast.current?.show({
                         severity: 'error',
