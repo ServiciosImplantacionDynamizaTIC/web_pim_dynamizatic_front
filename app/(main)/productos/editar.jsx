@@ -199,7 +199,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             setProducto={setProducto}
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
-                            isEdit={isEdit}
+                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
                         />
                         
                         {(idEditar != null && idEditar !== 0) && (
@@ -207,7 +207,8 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                 <TabView scrollable>
                                     <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>
                                         <ProductoSeo
-                                        idProducto={idEditar} />
+                                        idProducto={idEditar}
+                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                 </TabView>
                             </div>

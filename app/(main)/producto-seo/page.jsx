@@ -4,13 +4,20 @@ import Crud from "../../components/shared/crud";
 import EditarProductoSeo from "./editar";
 import { useIntl } from 'react-intl'
 
-const ProductoSeo = ({ idProducto }) => {
+const ProductoSeo = ({ idProducto, estoyEditandoProducto }) => {
     const intl = useIntl();
 
     const columnas = [
         { campo: 'metaTitulo', header: intl.formatMessage({ id: 'Meta Título' }), tipo: 'string' },
         { campo: 'slug', header: intl.formatMessage({ id: 'Slug' }), tipo: 'string' },
    ]
+
+   // 
+   // Si estoy editando el producto muestro todos los botones (manteniendo permisos). Pero si solo estoy viendo el producto, limito los botones a ver y descargarCSV
+   //
+    const botones = estoyEditandoProducto 
+        ? ['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']
+        : ['ver', 'descargarCSV'];
     
     return (
         <div>
@@ -19,7 +26,7 @@ const ProductoSeo = ({ idProducto }) => {
                 getRegistros={() => getProductosSeo(JSON.stringify(({ where: {and: { productoId: idProducto }}})))}
                 getRegistrosCount={() => getProductosSeoCount(JSON.stringify(({ where: {and: { productoId: idProducto }}})))}
                 deleteRegistro={deleteProductoSeo}
-                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={botones}
                 controlador={"ProductoSeo"}
                 filtradoBase={idProducto ?  { productoId: idProducto } : {}}
                 editarComponente={<EditarProductoSeo 

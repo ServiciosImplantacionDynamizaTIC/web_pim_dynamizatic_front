@@ -16,7 +16,7 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import { devuelveBasePath } from "../../utility/Utils";
 
-const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, listaTipoArchivos }) => {
+const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEditandoProducto, listaTipoArchivos }) => {
     const intl = useIntl();
     
     const [categorias, setCategorias] = useState([]);
@@ -197,28 +197,35 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, isEdit, l
                                             style={{ objectFit: 'cover' }}
                                             preview
                                         />
-                                        <button
-                                            type="button"
-                                            className="p-button p-button-sm p-button-danger p-button-text"
-                                            onClick={eliminarImagenPrincipal}
-                                            disabled={estadoGuardando}
-                                            title={intl.formatMessage({ id: 'Eliminar imagen' })}
-                                        >
-                                            <i className="pi pi-trash"></i>&nbsp;{intl.formatMessage({ id: 'Eliminar imagen' })}
-                                        </button>
+                                        {estoyEditandoProducto && (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    className="p-button p-button-sm p-button-danger p-button-text"
+                                                    onClick={eliminarImagenPrincipal}
+                                                    disabled={estadoGuardando}
+                                                    title={intl.formatMessage({ id: 'Eliminar imagen' })}
+                                                >
+                                                    <i className="pi pi-trash"></i>&nbsp;{intl.formatMessage({ id: 'Eliminar imagen' })}
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                 )}
-                                <FileUpload
-                                    id="imagenPrincipal"
-                                    mode="basic"
-                                    accept="image/*"
-                                    maxFileSize={2000000}
-                                    onSelect={manejarSeleccionImagenPrincipal}
-                                    chooseLabel={intl.formatMessage({ id: 'Seleccionar imagen' })}
-                                    disabled={estadoGuardando}
-                                    className="w-full"
-                                />
-                                <small className="text-muted">{intl.formatMessage({ id: 'Formatos soportados: JPG, PNG, GIF. Máximo 2MB' })}</small>
+                                {estoyEditandoProducto && (<>
+                                    <FileUpload
+                                        id="imagenPrincipal"
+                                        mode="basic"
+                                        accept="image/*"
+                                        maxFileSize={2000000}
+                                        onSelect={manejarSeleccionImagenPrincipal}
+                                        chooseLabel={intl.formatMessage({ id: 'Seleccionar imagen' })}
+                                        disabled={estadoGuardando}
+                                        className="w-full"
+                                    />
+                                    <small className="text-muted">{intl.formatMessage({ id: 'Formatos soportados: JPG, PNG, GIF. Máximo 2MB' })}</small>
+                                    </>
+                                )}
                             </div>                            
                         </div>
                     </div>
