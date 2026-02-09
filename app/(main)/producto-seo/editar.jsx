@@ -56,21 +56,13 @@ const EditarProductoSeo = ({ idEditar: idEditarSeo, setIdEditar: setIdEditarSeo,
                     ? { usuarioModificacion: usuarioSesion.id } 
                     : { usuarioCreacion: usuarioSesion.id })
             };
-            //
-            // Limpiamos los campos nulos, undefined y vacíos
-            //
-            const productoSeoDataLimpio = Object.fromEntries(
-                Object.entries(productoSeoData).filter(([key, value]) => 
-                    value !== null && value !== undefined && value !== ""
-                )
-            );
 
             let resultado;
             if (isEdit) {
-                resultado = await patchProductoSeo(idEditarSeo, productoSeoDataLimpio);
+                resultado = await patchProductoSeo(idEditarSeo, productoSeoData);
                 setRegistroResult("editado");
             } else {
-                resultado = await postProductoSeo(productoSeoDataLimpio);
+                resultado = await postProductoSeo(productoSeoData);
                 setRegistroResult("insertado");
             }
             

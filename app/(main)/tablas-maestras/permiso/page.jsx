@@ -214,7 +214,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Estados-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados-Borrar' },
-
+                
+                //Marketplace
+                { header: intl.formatMessage({ id: 'Marketplaces' }), seccion: 'Marketplaces' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Marketplaces-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Marketplaces-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Marketplaces-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Marketplaces-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Marketplaces-Borrar' },
                 //ProductoSeo
                 { header: intl.formatMessage({ id: 'SEO de Productos' }), seccion: 'ProductoSeo' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoSeo-Acceder' },
@@ -223,6 +230,21 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoSeo-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoSeo-Borrar' },
 
+                //ProductoIcono
+                { header: intl.formatMessage({ id: 'Iconos de Productos' }), seccion: 'ProductoIcono' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoIcono-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoIcono-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoIcono-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoIcono-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoIcono-Borrar' },
+                
+                //ProductoMarketplace
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos' }), seccion: 'ProductoMarketplace' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoMarketplace-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoMarketplace-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoMarketplace-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoMarketplace-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoMarketplace-Borrar' },
             ];
             // Obtenemos los roles
             const filtroRol = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId } } });

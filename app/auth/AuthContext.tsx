@@ -172,6 +172,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/iconos",
           "icon": "pi pi-fw pi-image"
         },
+        "Marketplaces": {
+          "path": "/marketplaces",
+          "icon": "pi pi-fw pi-image"
+        },
         "Marcas": {
           "path": "/marcas",
           "icon": "pi pi-fw pi-star"

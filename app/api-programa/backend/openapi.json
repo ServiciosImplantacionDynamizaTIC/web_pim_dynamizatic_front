@@ -22409,14 +22409,7 @@
             "nullable": false
           },
           "tipo": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "ecommerce",
-              "social",
-              "b2b",
-              "catalogo"
-            ]
+            "type": "string"
           },
           "urlApi": {
             "type": "string",
@@ -22480,14 +22473,7 @@
             "nullable": false
           },
           "tipo": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "ecommerce",
-              "social",
-              "b2b",
-              "catalogo"
-            ]
+            "type": "string"
           },
           "urlApi": {
             "type": "string",
@@ -22555,14 +22541,7 @@
             "nullable": false
           },
           "tipo": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "ecommerce",
-              "social",
-              "b2b",
-              "catalogo"
-            ]
+            "type": "string"
           },
           "urlApi": {
             "type": "string",
@@ -22630,14 +22609,7 @@
             "nullable": false
           },
           "tipo": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "ecommerce",
-              "social",
-              "b2b",
-              "catalogo"
-            ]
+            "type": "string"
           },
           "urlApi": {
             "type": "string",

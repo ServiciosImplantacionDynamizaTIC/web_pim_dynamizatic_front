@@ -7500,7 +7500,7 @@ export interface Marketplace {
      * @type {string}
      * @memberof Marketplace
      */
-    'tipo': MarketplaceTipoEnum;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -7556,18 +7556,6 @@ export interface Marketplace {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MarketplaceTipoEnum {
-    Ecommerce = 'ecommerce',
-    Social = 'social',
-    B2b = 'b2b',
-    Catalogo = 'catalogo'
-}
-
 /**
  * 
  * @export
@@ -7677,7 +7665,7 @@ export interface MarketplacePartial {
      * @type {string}
      * @memberof MarketplacePartial
      */
-    'tipo'?: MarketplacePartialTipoEnum;
+    'tipo'?: string;
     /**
      * 
      * @type {string}
@@ -7733,18 +7721,6 @@ export interface MarketplacePartial {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MarketplacePartialTipoEnum {
-    Ecommerce = 'ecommerce',
-    Social = 'social',
-    B2b = 'b2b',
-    Catalogo = 'catalogo'
-}
-
 /**
  * (tsType: MarketplaceWithRelations, schemaOptions: { includeRelations: true })
  * @export
@@ -7774,7 +7750,7 @@ export interface MarketplaceWithRelations {
      * @type {string}
      * @memberof MarketplaceWithRelations
      */
-    'tipo': MarketplaceWithRelationsTipoEnum;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -7830,18 +7806,6 @@ export interface MarketplaceWithRelations {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum MarketplaceWithRelationsTipoEnum {
-    Ecommerce = 'ecommerce',
-    Social = 'social',
-    B2b = 'b2b',
-    Catalogo = 'catalogo'
-}
-
 /**
  * 
  * @export
@@ -10661,7 +10625,7 @@ export interface NewMarketplace {
      * @type {string}
      * @memberof NewMarketplace
      */
-    'tipo': NewMarketplaceTipoEnum;
+    'tipo': string;
     /**
      * 
      * @type {string}
@@ -10717,18 +10681,6 @@ export interface NewMarketplace {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum NewMarketplaceTipoEnum {
-    Ecommerce = 'ecommerce',
-    Social = 'social',
-    B2b = 'b2b',
-    Catalogo = 'catalogo'
-}
-
 /**
  * (tsType: Omit<MensajePlantilla, \'id\'>, schemaOptions: { title: \'NewMensajePlantilla\', exclude: [ \'id\' ] })
  * @export

@@ -8,6 +8,8 @@ import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validar
 import { postSubirImagen, borrarFichero } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
 import ProductoSeo from "../producto-seo/page";
+import ProductoIcono from "../producto-icono/page";
+import ProductoMarketplace from "../producto-marketplace/page";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -220,6 +222,16 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                 <TabView scrollable>
                                     <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>
                                         <ProductoSeo
+                                        idProducto={idEditar}
+                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                    </TabPanel>
+                                    <TabPanel header={intl.formatMessage({ id: 'Iconos del Producto' })}>
+                                        <ProductoIcono
+                                        idProducto={idEditar}
+                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                    </TabPanel>
+                                    <TabPanel header={intl.formatMessage({ id: 'Marketplaces del Producto' })}>
+                                        <ProductoMarketplace
                                         idProducto={idEditar}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
