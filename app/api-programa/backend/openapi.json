@@ -14031,6 +14031,915 @@
         "operationId": "TipoArchivoController.find"
       }
     },
+    "/tipo-producto-atributo-detalles/count": {
+      "get": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoAtributoDetalle model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProductoAtributoDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProductoAtributoDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoAtributoDetalleController.count"
+      }
+    },
+    "/tipo-producto-atributo-detalles/{id}": {
+      "put": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoAtributoDetalle PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoAtributoDetalle"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoAtributoDetalleController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoAtributoDetalle PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoAtributoDetallePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoAtributoDetalleController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoAtributoDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoAtributoDetalleWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoAtributoDetalle.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoAtributoDetalleController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoAtributoDetalle DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoProductoAtributoDetalleController.deleteById"
+      }
+    },
+    "/tipo-producto-atributo-detalles": {
+      "post": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoAtributoDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoAtributoDetalle"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoProductoAtributoDetalle"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoAtributoDetalleController.create"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoAtributoDetalle PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProductoAtributoDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProductoAtributoDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoAtributoDetallePartial"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoAtributoDetalleController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoAtributoDetalleController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoProductoAtributoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoProductoAtributoDetalle model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoProductoAtributoDetalleWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoAtributoDetalle.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoAtributoDetalleController.find"
+      }
+    },
+    "/tipo-producto-multimedia-detalles/count": {
+      "get": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoMultimediaDetalle model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProductoMultimediaDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProductoMultimediaDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoMultimediaDetalleController.count"
+      }
+    },
+    "/tipo-producto-multimedia-detalles/{id}": {
+      "put": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoMultimediaDetalle PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoMultimediaDetalle"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoMultimediaDetalleController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoMultimediaDetalle PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoMultimediaDetallePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoMultimediaDetalleController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoMultimediaDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoMultimediaDetalleWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoMultimediaDetalle.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoMultimediaDetalleController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoMultimediaDetalle DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoProductoMultimediaDetalleController.deleteById"
+      }
+    },
+    "/tipo-producto-multimedia-detalles": {
+      "post": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoMultimediaDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoMultimediaDetalle"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoProductoMultimediaDetalle"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoMultimediaDetalleController.create"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoMultimediaDetalle PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProductoMultimediaDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProductoMultimediaDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoMultimediaDetallePartial"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoMultimediaDetalleController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoMultimediaDetalleController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoProductoMultimediaDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoProductoMultimediaDetalle model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoProductoMultimediaDetalleWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoMultimediaDetalle.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoMultimediaDetalleController.find"
+      }
+    },
+    "/tipo-productos/count": {
+      "get": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProducto model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProducto.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProducto>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoController.count"
+      }
+    },
+    "/tipo-productos/{id}": {
+      "put": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProducto PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProducto"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProducto PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProducto model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProducto.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProducto DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoProductoController.deleteById"
+      }
+    },
+    "/tipo-productos": {
+      "post": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProducto model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProducto"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoProducto"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoController.create"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProducto PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProducto.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProducto>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoProductoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoProducto model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoProductoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProducto.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoController.find"
+      }
+    },
     "/traduccion-contenidos/count": {
       "get": {
         "x-controller-name": "TraduccionContenidoController",
@@ -17783,6 +18692,268 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<TraduccionContenido>"
       },
+      "TipoProducto": {
+        "title": "TipoProducto",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId"
+        ],
+        "additionalProperties": false
+      },
+      "NewTipoProducto": {
+        "title": "NewTipoProducto",
+        "type": "object",
+        "description": "(tsType: Omit<TipoProducto, 'id'>, schemaOptions: { title: 'NewTipoProducto', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoProducto, 'id'>"
+      },
+      "TipoProductoWithRelations": {
+        "title": "TipoProductoWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoProductoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TipoProductoWithRelations"
+      },
+      "TipoProductoPartial": {
+        "title": "TipoProductoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoProducto>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoProducto>"
+      },
+      "TipoProductoMultimediaDetalle": {
+        "title": "TipoProductoMultimediaDetalle",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "multimediaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "productoId",
+          "multimediaId"
+        ],
+        "additionalProperties": false
+      },
+      "NewTipoProductoMultimediaDetalle": {
+        "title": "NewTipoProductoMultimediaDetalle",
+        "type": "object",
+        "description": "(tsType: Omit<TipoProductoMultimediaDetalle, 'id'>, schemaOptions: { title: 'NewTipoProductoMultimediaDetalle', exclude: [ 'id' ] })",
+        "properties": {
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "multimediaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "productoId",
+          "multimediaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoProductoMultimediaDetalle, 'id'>"
+      },
+      "TipoProductoMultimediaDetalleWithRelations": {
+        "title": "TipoProductoMultimediaDetalleWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoProductoMultimediaDetalleWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "multimediaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "productoId",
+          "multimediaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TipoProductoMultimediaDetalleWithRelations"
+      },
+      "TipoProductoMultimediaDetallePartial": {
+        "title": "TipoProductoMultimediaDetallePartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoProductoMultimediaDetalle>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "multimediaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoProductoMultimediaDetalle>"
+      },
+      "TipoProductoAtributoDetalle": {
+        "title": "TipoProductoAtributoDetalle",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "atributoId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewTipoProductoAtributoDetalle": {
+        "title": "NewTipoProductoAtributoDetalle",
+        "type": "object",
+        "description": "(tsType: Omit<TipoProductoAtributoDetalle, 'id'>, schemaOptions: { title: 'NewTipoProductoAtributoDetalle', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "atributoId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoProductoAtributoDetalle, 'id'>"
+      },
+      "TipoProductoAtributoDetalleWithRelations": {
+        "title": "TipoProductoAtributoDetalleWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoProductoAtributoDetalleWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "atributoId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "TipoProductoAtributoDetalleWithRelations"
+      },
+      "TipoProductoAtributoDetallePartial": {
+        "title": "TipoProductoAtributoDetallePartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoProductoAtributoDetalle>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "atributoId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoProductoAtributoDetalle>"
+      },
       "TipoArchivo": {
         "title": "TipoArchivo",
         "type": "object",
@@ -18985,6 +20156,10 @@
             "type": "number",
             "nullable": false
           },
+          "tipoProducto": {
+            "type": "number",
+            "nullable": false
+          },
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -19054,6 +20229,7 @@
         },
         "required": [
           "empresaId",
+          "tipoProducto",
           "categoriaId",
           "sku",
           "nombre",
@@ -19071,6 +20247,10 @@
             "type": "number",
             "nullable": false
           },
+          "tipoProducto": {
+            "type": "number",
+            "nullable": false
+          },
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -19140,6 +20320,7 @@
         },
         "required": [
           "empresaId",
+          "tipoProducto",
           "categoriaId",
           "sku",
           "nombre",
@@ -19161,6 +20342,10 @@
             "type": "number",
             "nullable": false
           },
+          "tipoProducto": {
+            "type": "number",
+            "nullable": false
+          },
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -19230,6 +20415,7 @@
         },
         "required": [
           "empresaId",
+          "tipoProducto",
           "categoriaId",
           "sku",
           "nombre",
@@ -19248,6 +20434,10 @@
             "type": "number"
           },
           "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoProducto": {
             "type": "number",
             "nullable": false
           },
@@ -36541,6 +37731,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "tipoProducto": {
+                    "type": "boolean"
+                  },
                   "categoriaId": {
                     "type": "boolean"
                   },
@@ -36599,6 +37792,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "tipoProducto",
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -36673,6 +37867,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "tipoProducto": {
+                    "type": "boolean"
+                  },
                   "categoriaId": {
                     "type": "boolean"
                   },
@@ -36731,6 +37928,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "tipoProducto",
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -37765,6 +38963,431 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoArchivo>"
+      },
+      "TipoProductoAtributoDetalle.Filter": {
+        "type": "object",
+        "title": "TipoProductoAtributoDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoProductoId": {
+                    "type": "boolean"
+                  },
+                  "atributoId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoProductoId",
+                    "atributoId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProductoAtributoDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProductoAtributoDetalle>"
+      },
+      "TipoProductoAtributoDetalle.Filter1": {
+        "type": "object",
+        "title": "TipoProductoAtributoDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoProductoAtributoDetalle.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoProductoId": {
+                    "type": "boolean"
+                  },
+                  "atributoId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoProductoId",
+                    "atributoId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProductoAtributoDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProductoAtributoDetalle>"
+      },
+      "TipoProductoMultimediaDetalle.Filter": {
+        "type": "object",
+        "title": "TipoProductoMultimediaDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "multimediaId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "multimediaId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProductoMultimediaDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProductoMultimediaDetalle>"
+      },
+      "TipoProductoMultimediaDetalle.Filter1": {
+        "type": "object",
+        "title": "TipoProductoMultimediaDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoProductoMultimediaDetalle.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "multimediaId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "multimediaId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProductoMultimediaDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProductoMultimediaDetalle>"
+      },
+      "TipoProducto.Filter": {
+        "type": "object",
+        "title": "TipoProducto.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProducto.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProducto>"
+      },
+      "TipoProducto.Filter1": {
+        "type": "object",
+        "title": "TipoProducto.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoProducto.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProducto.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProducto>"
       },
       "TraduccionContenido.Filter": {
         "type": "object",

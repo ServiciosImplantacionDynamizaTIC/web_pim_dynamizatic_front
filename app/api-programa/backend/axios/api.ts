@@ -11257,6 +11257,12 @@ export interface NewProducto {
      * @type {number}
      * @memberof NewProducto
      */
+    'tipoProducto': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProducto
+     */
     'categoriaId': number;
     /**
      * 
@@ -12166,6 +12172,69 @@ export interface NewTipoArchivo {
      * @memberof NewTipoArchivo
      */
     'activoSn'?: string | null;
+}
+/**
+ * (tsType: Omit<TipoProducto, \'id\'>, schemaOptions: { title: \'NewTipoProducto\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoProducto
+ */
+export interface NewTipoProducto {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProducto
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoProducto
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoProducto
+     */
+    'descripcion'?: string | null;
+}
+/**
+ * (tsType: Omit<TipoProductoAtributoDetalle, \'id\'>, schemaOptions: { title: \'NewTipoProductoAtributoDetalle\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoProductoAtributoDetalle
+ */
+export interface NewTipoProductoAtributoDetalle {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProductoAtributoDetalle
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProductoAtributoDetalle
+     */
+    'atributoId'?: number | null;
+}
+/**
+ * (tsType: Omit<TipoProductoMultimediaDetalle, \'id\'>, schemaOptions: { title: \'NewTipoProductoMultimediaDetalle\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoProductoMultimediaDetalle
+ */
+export interface NewTipoProductoMultimediaDetalle {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProductoMultimediaDetalle
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProductoMultimediaDetalle
+     */
+    'multimediaId': number;
 }
 /**
  * (tsType: Omit<TraduccionContenido, \'id\'>, schemaOptions: { title: \'NewTraduccionContenido\', exclude: [ \'id\' ] })
@@ -13925,6 +13994,12 @@ export interface Producto {
      * @memberof Producto
      */
     'empresaId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Producto
+     */
+    'tipoProducto': number;
     /**
      * 
      * @type {number}
@@ -15834,6 +15909,12 @@ export interface ProductoPartial {
      * @type {number}
      * @memberof ProductoPartial
      */
+    'tipoProducto'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPartial
+     */
     'categoriaId'?: number;
     /**
      * 
@@ -16387,6 +16468,12 @@ export interface ProductoWithRelations {
      * @memberof ProductoWithRelations
      */
     'empresaId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoWithRelations
+     */
+    'tipoProducto': number;
     /**
      * 
      * @type {number}
@@ -18056,6 +18143,489 @@ export interface TipoArchivoWithRelations {
      * @memberof TipoArchivoWithRelations
      */
     'activoSn'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProducto
+ */
+export interface TipoProducto {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProducto
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProducto
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProducto
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProducto
+     */
+    'descripcion'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoAtributoDetalle
+ */
+export interface TipoProductoAtributoDetalle {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalle
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalle
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalle
+     */
+    'atributoId'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoAtributoDetalleFilter
+ */
+export interface TipoProductoAtributoDetalleFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoAtributoDetalleFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoAtributoDetalleFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoAtributoDetalleFilter1
+ */
+export interface TipoProductoAtributoDetalleFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoAtributoDetalleFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoProductoAtributoDetalleFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoAtributoDetalleFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoProductoAtributoDetalle>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoProductoAtributoDetallePartial
+ */
+export interface TipoProductoAtributoDetallePartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetallePartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetallePartial
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetallePartial
+     */
+    'atributoId'?: number | null;
+}
+/**
+ * (tsType: TipoProductoAtributoDetalleWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoProductoAtributoDetalleWithRelations
+ */
+export interface TipoProductoAtributoDetalleWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleWithRelations
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoAtributoDetalleWithRelations
+     */
+    'atributoId'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoFilter
+ */
+export interface TipoProductoFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoFilter1
+ */
+export interface TipoProductoFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoProductoFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoMultimediaDetalle
+ */
+export interface TipoProductoMultimediaDetalle {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalle
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalle
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalle
+     */
+    'multimediaId': number;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoMultimediaDetalleFilter
+ */
+export interface TipoProductoMultimediaDetalleFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoMultimediaDetalleFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoMultimediaDetalleFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoMultimediaDetalleFilter1
+ */
+export interface TipoProductoMultimediaDetalleFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoMultimediaDetalleFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoProductoMultimediaDetalleFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoMultimediaDetalleFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoProductoMultimediaDetalle>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoProductoMultimediaDetallePartial
+ */
+export interface TipoProductoMultimediaDetallePartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetallePartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetallePartial
+     */
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetallePartial
+     */
+    'multimediaId'?: number;
+}
+/**
+ * (tsType: TipoProductoMultimediaDetalleWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoProductoMultimediaDetalleWithRelations
+ */
+export interface TipoProductoMultimediaDetalleWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleWithRelations
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoMultimediaDetalleWithRelations
+     */
+    'multimediaId': number;
+}
+/**
+ * (tsType: Partial<TipoProducto>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoProductoPartial
+ */
+export interface TipoProductoPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoPartial
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoPartial
+     */
+    'descripcion'?: string | null;
+}
+/**
+ * (tsType: TipoProductoWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoProductoWithRelations
+ */
+export interface TipoProductoWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoWithRelations
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoWithRelations
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoWithRelations
+     */
+    'descripcion'?: string | null;
 }
 /**
  * 
@@ -48449,6 +49019,1824 @@ export class TipoArchivoControllerApi extends BaseAPI {
      */
     public tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return TipoArchivoControllerApiFp(this.configuration).tipoArchivoControllerVistaTipoArchivoEmpresaSeccionCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoProductoAtributoDetalleControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoProductoAtributoDetalleControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-atributo-detalles/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerCreate: async (newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-atributo-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoProductoAtributoDetalle, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoAtributoDetalleControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoProductoAtributoDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerFind: async (filter?: TipoProductoAtributoDetalleFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-atributo-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerFindById: async (id: number, filter?: TipoProductoAtributoDetalleFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoAtributoDetalleControllerFindById', 'id', id)
+            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerReplaceById: async (id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoAtributoDetalleControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoAtributoDetalle, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerUpdateAll: async (where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-atributo-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoAtributoDetallePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerUpdateById: async (id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoAtributoDetalleControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoAtributoDetallePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoProductoAtributoDetalleControllerApi - functional programming interface
+ * @export
+ */
+export const TipoProductoAtributoDetalleControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoProductoAtributoDetalleControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoAtributoDetalle>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoProductoAtributoDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerFind(filter?: TipoProductoAtributoDetalleFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoProductoAtributoDetalleWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerFindById(id: number, filter?: TipoProductoAtributoDetalleFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoAtributoDetalleWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerReplaceById(id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerReplaceById(id, tipoProductoAtributoDetalle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerUpdateAll(where, tipoProductoAtributoDetallePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoAtributoDetalleControllerUpdateById(id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerUpdateById(id, tipoProductoAtributoDetallePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoProductoAtributoDetalleControllerApi - factory interface
+ * @export
+ */
+export const TipoProductoAtributoDetalleControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoProductoAtributoDetalleControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoAtributoDetalleControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options?: any): AxiosPromise<TipoProductoAtributoDetalle> {
+            return localVarFp.tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoAtributoDetalleControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoProductoAtributoDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerFind(filter?: TipoProductoAtributoDetalleFilter1, options?: any): AxiosPromise<Array<TipoProductoAtributoDetalleWithRelations>> {
+            return localVarFp.tipoProductoAtributoDetalleControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerFindById(id: number, filter?: TipoProductoAtributoDetalleFilter, options?: any): AxiosPromise<TipoProductoAtributoDetalleWithRelations> {
+            return localVarFp.tipoProductoAtributoDetalleControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerReplaceById(id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoAtributoDetalleControllerReplaceById(id, tipoProductoAtributoDetalle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoAtributoDetalleControllerUpdateAll(where, tipoProductoAtributoDetallePartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoAtributoDetalleControllerUpdateById(id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoAtributoDetalleControllerUpdateById(id, tipoProductoAtributoDetallePartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoProductoAtributoDetalleControllerApi - object-oriented interface
+ * @export
+ * @class TipoProductoAtributoDetalleControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoProductoAtributoDetalleControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoProductoAtributoDetalleFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerFind(filter?: TipoProductoAtributoDetalleFilter1, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoAtributoDetalleFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerFindById(id: number, filter?: TipoProductoAtributoDetalleFilter, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerReplaceById(id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerReplaceById(id, tipoProductoAtributoDetalle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerUpdateAll(where, tipoProductoAtributoDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoAtributoDetalleControllerApi
+     */
+    public tipoProductoAtributoDetalleControllerUpdateById(id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig) {
+        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerUpdateById(id, tipoProductoAtributoDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoProductoControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoProductoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-productos/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoProducto} [newTipoProducto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerCreate: async (newTipoProducto?: NewTipoProducto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-productos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoProducto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-productos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoProductoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerFind: async (filter?: TipoProductoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-productos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerFindById: async (id: number, filter?: TipoProductoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoControllerFindById', 'id', id)
+            const localVarPath = `/tipo-productos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProducto} [tipoProducto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerReplaceById: async (id: number, tipoProducto?: TipoProducto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-productos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProducto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoPartial} [tipoProductoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerUpdateAll: async (where?: { [key: string]: object; }, tipoProductoPartial?: TipoProductoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-productos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPartial} [tipoProductoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerUpdateById: async (id: number, tipoProductoPartial?: TipoProductoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-productos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoProductoControllerApi - functional programming interface
+ * @export
+ */
+export const TipoProductoControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoProductoControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoProducto} [newTipoProducto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerCreate(newTipoProducto?: NewTipoProducto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProducto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerCreate(newTipoProducto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoProductoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerFind(filter?: TipoProductoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoProductoWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerFindById(id: number, filter?: TipoProductoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProducto} [tipoProducto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerReplaceById(id: number, tipoProducto?: TipoProducto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerReplaceById(id, tipoProducto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoPartial} [tipoProductoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoPartial?: TipoProductoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerUpdateAll(where, tipoProductoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPartial} [tipoProductoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoControllerUpdateById(id: number, tipoProductoPartial?: TipoProductoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoControllerUpdateById(id, tipoProductoPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoProductoControllerApi - factory interface
+ * @export
+ */
+export const TipoProductoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoProductoControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoProducto} [newTipoProducto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerCreate(newTipoProducto?: NewTipoProducto, options?: any): AxiosPromise<TipoProducto> {
+            return localVarFp.tipoProductoControllerCreate(newTipoProducto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoProductoFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerFind(filter?: TipoProductoFilter1, options?: any): AxiosPromise<Array<TipoProductoWithRelations>> {
+            return localVarFp.tipoProductoControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerFindById(id: number, filter?: TipoProductoFilter, options?: any): AxiosPromise<TipoProductoWithRelations> {
+            return localVarFp.tipoProductoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProducto} [tipoProducto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerReplaceById(id: number, tipoProducto?: TipoProducto, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoControllerReplaceById(id, tipoProducto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoPartial} [tipoProductoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoPartial?: TipoProductoPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoControllerUpdateAll(where, tipoProductoPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPartial} [tipoProductoPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoControllerUpdateById(id: number, tipoProductoPartial?: TipoProductoPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoControllerUpdateById(id, tipoProductoPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoProductoControllerApi - object-oriented interface
+ * @export
+ * @class TipoProductoControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoProductoControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoProducto} [newTipoProducto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerCreate(newTipoProducto?: NewTipoProducto, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerCreate(newTipoProducto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoProductoFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerFind(filter?: TipoProductoFilter1, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerFindById(id: number, filter?: TipoProductoFilter, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProducto} [tipoProducto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerReplaceById(id: number, tipoProducto?: TipoProducto, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerReplaceById(id, tipoProducto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TipoProductoPartial} [tipoProductoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoPartial?: TipoProductoPartial, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerUpdateAll(where, tipoProductoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoPartial} [tipoProductoPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoControllerApi
+     */
+    public tipoProductoControllerUpdateById(id: number, tipoProductoPartial?: TipoProductoPartial, options?: AxiosRequestConfig) {
+        return TipoProductoControllerApiFp(this.configuration).tipoProductoControllerUpdateById(id, tipoProductoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoProductoMultimediaDetalleControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoProductoMultimediaDetalleControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-multimedia-detalles/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoProductoMultimediaDetalle} [newTipoProductoMultimediaDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerCreate: async (newTipoProductoMultimediaDetalle?: NewTipoProductoMultimediaDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-multimedia-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoProductoMultimediaDetalle, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoMultimediaDetalleControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-producto-multimedia-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoProductoMultimediaDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerFind: async (filter?: TipoProductoMultimediaDetalleFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-multimedia-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerFindById: async (id: number, filter?: TipoProductoMultimediaDetalleFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoMultimediaDetalleControllerFindById', 'id', id)
+            const localVarPath = `/tipo-producto-multimedia-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetalle} [tipoProductoMultimediaDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerReplaceById: async (id: number, tipoProductoMultimediaDetalle?: TipoProductoMultimediaDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoMultimediaDetalleControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-producto-multimedia-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoMultimediaDetalle, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerUpdateAll: async (where?: { [key: string]: object; }, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-multimedia-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoMultimediaDetallePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerUpdateById: async (id: number, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoMultimediaDetalleControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-producto-multimedia-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoMultimediaDetallePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoProductoMultimediaDetalleControllerApi - functional programming interface
+ * @export
+ */
+export const TipoProductoMultimediaDetalleControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoProductoMultimediaDetalleControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoProductoMultimediaDetalle} [newTipoProductoMultimediaDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerCreate(newTipoProductoMultimediaDetalle?: NewTipoProductoMultimediaDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoMultimediaDetalle>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerCreate(newTipoProductoMultimediaDetalle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoProductoMultimediaDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerFind(filter?: TipoProductoMultimediaDetalleFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoProductoMultimediaDetalleWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerFindById(id: number, filter?: TipoProductoMultimediaDetalleFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoMultimediaDetalleWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetalle} [tipoProductoMultimediaDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerReplaceById(id: number, tipoProductoMultimediaDetalle?: TipoProductoMultimediaDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerReplaceById(id, tipoProductoMultimediaDetalle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerUpdateAll(where, tipoProductoMultimediaDetallePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoMultimediaDetalleControllerUpdateById(id: number, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoMultimediaDetalleControllerUpdateById(id, tipoProductoMultimediaDetallePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoProductoMultimediaDetalleControllerApi - factory interface
+ * @export
+ */
+export const TipoProductoMultimediaDetalleControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoProductoMultimediaDetalleControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoProductoMultimediaDetalle} [newTipoProductoMultimediaDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerCreate(newTipoProductoMultimediaDetalle?: NewTipoProductoMultimediaDetalle, options?: any): AxiosPromise<TipoProductoMultimediaDetalle> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerCreate(newTipoProductoMultimediaDetalle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoProductoMultimediaDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerFind(filter?: TipoProductoMultimediaDetalleFilter1, options?: any): AxiosPromise<Array<TipoProductoMultimediaDetalleWithRelations>> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerFindById(id: number, filter?: TipoProductoMultimediaDetalleFilter, options?: any): AxiosPromise<TipoProductoMultimediaDetalleWithRelations> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetalle} [tipoProductoMultimediaDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerReplaceById(id: number, tipoProductoMultimediaDetalle?: TipoProductoMultimediaDetalle, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerReplaceById(id, tipoProductoMultimediaDetalle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerUpdateAll(where, tipoProductoMultimediaDetallePartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoMultimediaDetalleControllerUpdateById(id: number, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoMultimediaDetalleControllerUpdateById(id, tipoProductoMultimediaDetallePartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoProductoMultimediaDetalleControllerApi - object-oriented interface
+ * @export
+ * @class TipoProductoMultimediaDetalleControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoProductoMultimediaDetalleControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoProductoMultimediaDetalle} [newTipoProductoMultimediaDetalle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerCreate(newTipoProductoMultimediaDetalle?: NewTipoProductoMultimediaDetalle, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerCreate(newTipoProductoMultimediaDetalle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoProductoMultimediaDetalleFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerFind(filter?: TipoProductoMultimediaDetalleFilter1, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoMultimediaDetalleFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerFindById(id: number, filter?: TipoProductoMultimediaDetalleFilter, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoMultimediaDetalle} [tipoProductoMultimediaDetalle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerReplaceById(id: number, tipoProductoMultimediaDetalle?: TipoProductoMultimediaDetalle, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerReplaceById(id, tipoProductoMultimediaDetalle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerUpdateAll(where, tipoProductoMultimediaDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoMultimediaDetallePartial} [tipoProductoMultimediaDetallePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoMultimediaDetalleControllerApi
+     */
+    public tipoProductoMultimediaDetalleControllerUpdateById(id: number, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: AxiosRequestConfig) {
+        return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerUpdateById(id, tipoProductoMultimediaDetallePartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
