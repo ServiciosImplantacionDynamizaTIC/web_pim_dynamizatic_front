@@ -10969,6 +10969,309 @@
         "operationId": "ProductoIconoController.find"
       }
     },
+    "/producto-marketplace-sincronizaciones/count": {
+      "get": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "count",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMarketplaceSincronizacion model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoMarketplaceSincronizacion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoMarketplaceSincronizacion>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoMarketplaceSincronizacionController.count"
+      }
+    },
+    "/producto-marketplace-sincronizaciones/{id}": {
+      "put": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoMarketplaceSincronizacion PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoMarketplaceSincronizacionController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoMarketplaceSincronizacion PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoMarketplaceSincronizacionPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoMarketplaceSincronizacionController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMarketplaceSincronizacion model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMarketplaceSincronizacionWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoMarketplaceSincronizacionController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoMarketplaceSincronizacion DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoMarketplaceSincronizacionController.deleteById"
+      }
+    },
+    "/producto-marketplace-sincronizaciones": {
+      "post": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "create",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMarketplaceSincronizacion model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProductoMarketplaceSincronizacion"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoMarketplaceSincronizacionController.create"
+      },
+      "patch": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMarketplaceSincronizacion PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoMarketplaceSincronizacion.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoMarketplaceSincronizacion>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoMarketplaceSincronizacionPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoMarketplaceSincronizacionController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ProductoMarketplaceSincronizacionController",
+        "x-operation-name": "find",
+        "tags": [
+          "ProductoMarketplaceSincronizacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ProductoMarketplaceSincronizacion model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoMarketplaceSincronizacionWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoMarketplaceSincronizacionController.find"
+      }
+    },
     "/producto-marketplaces/count": {
       "get": {
         "x-controller-name": "ProductoMarketplaceController",
@@ -19634,25 +19937,6 @@
             "type": "string",
             "nullable": true
           },
-          "fechaUltimaSincronizacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "estadoSincronizacion": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "pendiente",
-              "sincronizado",
-              "error",
-              "procesando"
-            ]
-          },
-          "mensajeError": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -19705,25 +19989,6 @@
             "nullable": true
           },
           "activoEnMarketplace": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaUltimaSincronizacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "estadoSincronizacion": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "pendiente",
-              "sincronizado",
-              "error",
-              "procesando"
-            ]
-          },
-          "mensajeError": {
             "type": "string",
             "nullable": true
           },
@@ -19786,25 +20051,6 @@
             "type": "string",
             "nullable": true
           },
-          "fechaUltimaSincronizacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "estadoSincronizacion": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "pendiente",
-              "sincronizado",
-              "error",
-              "procesando"
-            ]
-          },
-          "mensajeError": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -19864,25 +20110,6 @@
             "type": "string",
             "nullable": true
           },
-          "fechaUltimaSincronizacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "estadoSincronizacion": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "pendiente",
-              "sincronizado",
-              "error",
-              "procesando"
-            ]
-          },
-          "mensajeError": {
-            "type": "string",
-            "nullable": true
-          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -19904,6 +20131,139 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<ProductoMarketplace>"
+      },
+      "ProductoMarketplaceSincronizacion": {
+        "title": "ProductoMarketplaceSincronizacion",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoMarketplaceId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoMarketplace": {
+            "$ref": "#/components/schemas/ProductoMarketplace"
+          }
+        },
+        "required": [
+          "productoMarketplaceId"
+        ],
+        "additionalProperties": false
+      },
+      "NewProductoMarketplaceSincronizacion": {
+        "title": "NewProductoMarketplaceSincronizacion",
+        "type": "object",
+        "description": "(tsType: Omit<ProductoMarketplaceSincronizacion, 'id'>, schemaOptions: { title: 'NewProductoMarketplaceSincronizacion', exclude: [ 'id' ] })",
+        "properties": {
+          "productoMarketplaceId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoMarketplace": {
+            "$ref": "#/components/schemas/ProductoMarketplace"
+          }
+        },
+        "required": [
+          "productoMarketplaceId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ProductoMarketplaceSincronizacion, 'id'>"
+      },
+      "ProductoMarketplaceSincronizacionWithRelations": {
+        "title": "ProductoMarketplaceSincronizacionWithRelations",
+        "type": "object",
+        "description": "(tsType: ProductoMarketplaceSincronizacionWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoMarketplaceId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoMarketplace": {
+            "$ref": "#/components/schemas/ProductoMarketplace"
+          },
+          "foreignKey": {}
+        },
+        "required": [
+          "productoMarketplaceId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ProductoMarketplaceSincronizacionWithRelations"
+      },
+      "ProductoMarketplaceSincronizacionPartial": {
+        "title": "ProductoMarketplaceSincronizacionPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ProductoMarketplaceSincronizacion>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoMarketplaceId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoMarketplace": {
+            "$ref": "#/components/schemas/ProductoMarketplace"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ProductoMarketplaceSincronizacion>"
       },
       "ProductoIcono": {
         "title": "ProductoIcono",
@@ -35208,6 +35568,273 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ProductoIcono>"
       },
+      "ProductoMarketplaceSincronizacion.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "ProductoMarketplaceSincronizacion.ScopeFilter"
+      },
+      "ProductoMarketplaceSincronizacion.IncludeFilter.Items": {
+        "title": "ProductoMarketplaceSincronizacion.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "productoMarketplace"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion.ScopeFilter"
+          }
+        }
+      },
+      "ProductoMarketplaceSincronizacion.Filter": {
+        "type": "object",
+        "title": "ProductoMarketplaceSincronizacion.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoMarketplaceId": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "fecha": {
+                    "type": "boolean"
+                  },
+                  "mensaje": {
+                    "type": "boolean"
+                  },
+                  "productoMarketplace": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoMarketplaceId",
+                    "estado",
+                    "fecha",
+                    "mensaje",
+                    "productoMarketplace"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoMarketplaceSincronizacion.Fields"
+          },
+          "include": {
+            "title": "ProductoMarketplaceSincronizacion.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoMarketplaceSincronizacion>"
+      },
+      "ProductoMarketplaceSincronizacion.Filter1": {
+        "type": "object",
+        "title": "ProductoMarketplaceSincronizacion.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ProductoMarketplaceSincronizacion.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoMarketplaceId": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "fecha": {
+                    "type": "boolean"
+                  },
+                  "mensaje": {
+                    "type": "boolean"
+                  },
+                  "productoMarketplace": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoMarketplaceId",
+                    "estado",
+                    "fecha",
+                    "mensaje",
+                    "productoMarketplace"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoMarketplaceSincronizacion.Fields"
+          },
+          "include": {
+            "title": "ProductoMarketplaceSincronizacion.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductoMarketplaceSincronizacion.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoMarketplaceSincronizacion>"
+      },
       "ProductoMarketplace.Filter": {
         "type": "object",
         "title": "ProductoMarketplace.Filter",
@@ -35264,15 +35891,6 @@
                   "activoEnMarketplace": {
                     "type": "boolean"
                   },
-                  "fechaUltimaSincronizacion": {
-                    "type": "boolean"
-                  },
-                  "estadoSincronizacion": {
-                    "type": "boolean"
-                  },
-                  "mensajeError": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -35300,9 +35918,6 @@
                     "descripcionPersonalizada",
                     "palabrasClavePersonalizadas",
                     "activoEnMarketplace",
-                    "fechaUltimaSincronizacion",
-                    "estadoSincronizacion",
-                    "mensajeError",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -35380,15 +35995,6 @@
                   "activoEnMarketplace": {
                     "type": "boolean"
                   },
-                  "fechaUltimaSincronizacion": {
-                    "type": "boolean"
-                  },
-                  "estadoSincronizacion": {
-                    "type": "boolean"
-                  },
-                  "mensajeError": {
-                    "type": "boolean"
-                  },
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -35416,9 +36022,6 @@
                     "descripcionPersonalizada",
                     "palabrasClavePersonalizadas",
                     "activoEnMarketplace",
-                    "fechaUltimaSincronizacion",
-                    "estadoSincronizacion",
-                    "mensajeError",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",

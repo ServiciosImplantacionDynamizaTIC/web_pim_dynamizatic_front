@@ -199,7 +199,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Multimedia-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Multimedia-Borrar' },
 
-                // Multimedia
+                // Productos
                 { header: intl.formatMessage({ id: 'Productos' }), seccion: 'Productos' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Productos-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Productos-Ver' },
@@ -245,6 +245,12 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoMarketplace-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoMarketplace-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoMarketplace-Borrar' },
+                
+                //Logs de sincronización Marketplaces
+                { header: intl.formatMessage({ id: 'Logs de sincronización Marketplaces' }), seccion: 'Logs de sincronización Marketplaces' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de sincronización Marketplaces-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de sincronización Marketplaces-Ver' },
+
             ];
             // Obtenemos los roles
             const filtroRol = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId } } });

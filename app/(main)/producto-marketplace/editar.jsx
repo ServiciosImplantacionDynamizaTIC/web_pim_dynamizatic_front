@@ -26,17 +26,14 @@ const EditarProductoMarketplace = ({ idEditar: idEditarMarketplace, setIdEditar:
 
     useEffect(() => {
         const fetchData = async () => {
-            if (idEditarMarketplace && idEditarMarketplace !== 0) {
+            if (idEditarMarketplace !== 0) {
                 const registro = rowData.find((element) => element.id === idEditarMarketplace);
                 setProductoMarketplace(registro);
                 setIsEdit(true);
-            } else {
-                setIsEdit(false);
-                setProductoMarketplace(emptyRegistro);
             }
         };
         fetchData();
-    }, [idEditarMarketplace, rowData, emptyRegistro]);
+    }, [idEditarMarketplace, rowData]);
 
     const validaciones = async () => {
         const validaProducto = productoMarketplace.productoId === undefined || productoMarketplace.productoId === null || productoMarketplace.productoId === "";
@@ -66,66 +63,59 @@ const EditarProductoMarketplace = ({ idEditar: idEditarMarketplace, setIdEditar:
     const guardarProductoMarketplace = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        
-        if (await validaciones()) {
-            const usuarioActual = getUsuarioSesion()?.id;
-            let objGuardar = { ...productoMarketplace };
 
-            if (!idEditarMarketplace || idEditarMarketplace === 0) {
-                objGuardar = {
-                    ...objGuardar,
-                    usuarioCreacion: usuarioActual,
-                };
+        if (await validaciones()) {
+            try {
+                const usuarioSesion = getUsuarioSesion();
                 
-                try {
-                    const nuevoRegistro = await postProductoMarketplace(objGuardar);
-                    
-                    if (nuevoRegistro?.id) {
-                        setRegistroResult("insertado");
-                        setIdEditarMarketplace(nuevoRegistro.id);
-                        toast.current?.show({
-                            severity: 'success',
-                            summary: intl.formatMessage({ id: 'Éxito' }),
-                            detail: intl.formatMessage({ id: 'Registro guardado correctamente' }),
-                            life: 3000,
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error creando producto-marketplace:', error);
-                    toast.current?.show({
-                        severity: 'error',
-                        summary: 'ERROR',
-                        detail: intl.formatMessage({ id: 'Error al guardar el registro' }),
-                        life: 3000,
-                    });
-                }
-            } else {
-                objGuardar = {
-                    ...objGuardar,
-                    usuarioModificacion: usuarioActual,
+                const productoMarketplaceData = {
+                    productoId: productoMarketplace.productoId,
+                    marketplaceId: productoMarketplace.marketplaceId,
+                    tituloPersonalizado: productoMarketplace.tituloPersonalizado,
+                    descripcionPersonalizada: productoMarketplace.descripcionPersonalizada,
+                    palabrasClavePersonalizadas: productoMarketplace.palabrasClavePersonalizadas,
+                    activoEnMarketplace: productoMarketplace.activoEnMarketplace,
+                    estadoSincronizacion: productoMarketplace.estadoSincronizacion,
+                    ...(isEdit 
+                        ? { usuarioModificacion: usuarioSesion.id } 
+                        : { usuarioCreacion: usuarioSesion.id })
                 };
-                
-                try {
-                    const registroEditado = await patchProductoMarketplace(idEditarMarketplace, objGuardar);
-                    
-                    if (registroEditado) {
-                        setRegistroResult("editado");
-                        toast.current?.show({
-                            severity: 'success',
-                            summary: intl.formatMessage({ id: 'Éxito' }),
-                            detail: intl.formatMessage({ id: 'Registro actualizado correctamente' }),
-                            life: 3000,
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error editando producto-marketplace:', error);
-                    toast.current?.show({
-                        severity: 'error',
-                        summary: 'ERROR',
-                        detail: intl.formatMessage({ id: 'Error al actualizar el registro' }),
-                        life: 3000,
-                    });
+
+                // Limpiamos los campos nulos, undefined y vacíos
+                const productoMarketplaceDataLimpio = Object.fromEntries(
+                    Object.entries(productoMarketplaceData).filter(([key, value]) => 
+                        value !== null && value !== undefined && value !== ""
+                    )
+                );
+
+                let resultado;
+                if (isEdit) {
+                    resultado = await patchProductoMarketplace(idEditarMarketplace, productoMarketplaceDataLimpio);
+                    setRegistroResult("editado");
+                } else {
+                    resultado = await postProductoMarketplace(productoMarketplaceDataLimpio);
+                    setRegistroResult("insertado");
                 }
+                
+                toast.current.show({
+                    severity: 'success',
+                    summary: intl.formatMessage({ id: 'Éxito' }),
+                    detail: intl.formatMessage({ 
+                        id: isEdit ? 'Registro actualizado correctamente' : 'Registro creado correctamente' 
+                    }),
+                    life: 3000
+                });
+
+                setIdEditarMarketplace(null);  // null para volver al CRUD
+                setIsEdit(false);
+            } catch (error) {
+                console.error('Error al guardar:', error);
+                toast.current.show({
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'Error' }),
+                    detail: intl.formatMessage({ id: 'Error al guardar el registro' }),
+                    life: 3000
+                });
             }
         }
         
@@ -134,34 +124,45 @@ const EditarProductoMarketplace = ({ idEditar: idEditarMarketplace, setIdEditar:
     };
 
     const cancelarEdicion = () => {
-        setIdEditarMarketplace(0);
+        setIdEditarMarketplace(null);  // null para volver al CRUD
+        setIsEdit(false);
+        // Usar el emptyRegistro si está disponible, o crear uno nuevo manteniendo el idProducto
+        const registroReset = emptyRegistro || {
+            productoId: idProducto || null,
+            marketplaceId: null,
+            tituloPersonalizado: "",
+            descripcionPersonalizada: "",
+            palabrasClavePersonalizadas: "",
+            activoEnMarketplace: "S",
+            estadoSincronizacion: "pendiente"
+        };
+        setProductoMarketplace(registroReset);
     };
-
-    const header = (idEditarMarketplace && idEditarMarketplace > 0) ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
 
     return (
         <div>
             <div className="grid ProductoMarketplace">
                 <div className="col-12">
                     <div className="card">
-                        <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Marketplace de Producto' })).toLowerCase()}</h2>
+                        <Toast ref={toast} />
+                        
                         <EditarDatosProductoMarketplace
                             productoMarketplace={productoMarketplace}
                             setProductoMarketplace={setProductoMarketplace}
                             estadoGuardando={estadoGuardando}
                             editable={editable}
                             idProducto={idProducto}
+                            rowData={rowData}
                         />
                        
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
-                                    icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                    onClick={guardarProductoMarketplace}
+                                    label={intl.formatMessage({ id: 'Guardar' })}
                                     className="mr-2"
-                                    disabled={estadoGuardandoBoton}
+                                    onClick={guardarProductoMarketplace}
+                                    loading={estadoGuardandoBoton}
+                                    disabled={estadoGuardandoBoton || !editable}
                                 />
                             )}
                             <Button label={intl.formatMessage({ id: 'Cancelar' })} onClick={cancelarEdicion} className="p-button-secondary" />

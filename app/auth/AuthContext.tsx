@@ -112,6 +112,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/log-acciones",
           "icon": "pi pi-fw pi-history"
         },
+        "Logs de sincronización Marketplaces": {
+          "path": "/producto-marketplace-sincronizacion",
+          "icon": "pi pi-fw pi-history"
+        },
         "Configuración de logs": {
           "path": "/tablas-maestras/configuracion-logs",
           "icon": "pi pi-fw pi-cog"

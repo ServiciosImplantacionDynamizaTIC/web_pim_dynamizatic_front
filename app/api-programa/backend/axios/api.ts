@@ -11561,24 +11561,6 @@ export interface NewProductoMarketplace {
      * @type {string}
      * @memberof NewProductoMarketplace
      */
-    'fechaUltimaSincronizacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoMarketplace
-     */
-    'estadoSincronizacion'?: NewProductoMarketplaceEstadoSincronizacionEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoMarketplace
-     */
-    'mensajeError'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoMarketplace
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -11599,18 +11581,43 @@ export interface NewProductoMarketplace {
      */
     'usuarioModificacion'?: number | null;
 }
-
 /**
-    * @export
-    * @enum {string}
-    */
-export enum NewProductoMarketplaceEstadoSincronizacionEnum {
-    Pendiente = 'pendiente',
-    Sincronizado = 'sincronizado',
-    Error = 'error',
-    Procesando = 'procesando'
+ * (tsType: Omit<ProductoMarketplaceSincronizacion, \'id\'>, schemaOptions: { title: \'NewProductoMarketplaceSincronizacion\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewProductoMarketplaceSincronizacion
+ */
+export interface NewProductoMarketplaceSincronizacion {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoMarketplaceSincronizacion
+     */
+    'productoMarketplaceId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoMarketplaceSincronizacion
+     */
+    'estado'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoMarketplaceSincronizacion
+     */
+    'fecha'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoMarketplaceSincronizacion
+     */
+    'mensaje'?: string | null;
+    /**
+     * 
+     * @type {ProductoMarketplace}
+     * @memberof NewProductoMarketplaceSincronizacion
+     */
+    'productoMarketplace'?: ProductoMarketplace;
 }
-
 /**
  * (tsType: Omit<ProductoMultimedia, \'id\'>, schemaOptions: { title: \'NewProductoMultimedia\', exclude: [ \'id\' ] })
  * @export
@@ -14937,24 +14944,6 @@ export interface ProductoMarketplace {
      * @type {string}
      * @memberof ProductoMarketplace
      */
-    'fechaUltimaSincronizacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplace
-     */
-    'estadoSincronizacion'?: ProductoMarketplaceEstadoSincronizacionEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplace
-     */
-    'mensajeError'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplace
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -14975,18 +14964,6 @@ export interface ProductoMarketplace {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ProductoMarketplaceEstadoSincronizacionEnum {
-    Pendiente = 'pendiente',
-    Sincronizado = 'sincronizado',
-    Error = 'error',
-    Procesando = 'procesando'
-}
-
 /**
  * 
  * @export
@@ -15120,24 +15097,6 @@ export interface ProductoMarketplacePartial {
      * @type {string}
      * @memberof ProductoMarketplacePartial
      */
-    'fechaUltimaSincronizacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplacePartial
-     */
-    'estadoSincronizacion'?: ProductoMarketplacePartialEstadoSincronizacionEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplacePartial
-     */
-    'mensajeError'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplacePartial
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -15158,18 +15117,310 @@ export interface ProductoMarketplacePartial {
      */
     'usuarioModificacion'?: number | null;
 }
+/**
+ * 
+ * @export
+ * @interface ProductoMarketplaceSincronizacion
+ */
+export interface ProductoMarketplaceSincronizacion {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacion
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacion
+     */
+    'productoMarketplaceId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacion
+     */
+    'estado'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacion
+     */
+    'fecha'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacion
+     */
+    'mensaje'?: string | null;
+    /**
+     * 
+     * @type {ProductoMarketplace}
+     * @memberof ProductoMarketplaceSincronizacion
+     */
+    'productoMarketplace'?: ProductoMarketplace;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoMarketplaceSincronizacionFilter
+ */
+export interface ProductoMarketplaceSincronizacionFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoMarketplaceSincronizacionFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoMarketplaceSincronizacionFilter
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<ProductoMarketplaceSincronizacionIncludeFilterItems | string>}
+     * @memberof ProductoMarketplaceSincronizacionFilter
+     */
+    'include'?: Array<ProductoMarketplaceSincronizacionIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoMarketplaceSincronizacionFilter1
+ */
+export interface ProductoMarketplaceSincronizacionFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'fields'?: object | Set<string>;
+    /**
+     * 
+     * @type {Array<ProductoMarketplaceSincronizacionIncludeFilterItems | string>}
+     * @memberof ProductoMarketplaceSincronizacionFilter1
+     */
+    'include'?: Array<ProductoMarketplaceSincronizacionIncludeFilterItems | string>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoMarketplaceSincronizacionIncludeFilterItems
+ */
+export interface ProductoMarketplaceSincronizacionIncludeFilterItems {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionIncludeFilterItems
+     */
+    'relation'?: ProductoMarketplaceSincronizacionIncludeFilterItemsRelationEnum;
+    /**
+     * 
+     * @type {ProductoMarketplaceSincronizacionScopeFilter}
+     * @memberof ProductoMarketplaceSincronizacionIncludeFilterItems
+     */
+    'scope'?: ProductoMarketplaceSincronizacionScopeFilter;
+}
 
 /**
     * @export
     * @enum {string}
     */
-export enum ProductoMarketplacePartialEstadoSincronizacionEnum {
-    Pendiente = 'pendiente',
-    Sincronizado = 'sincronizado',
-    Error = 'error',
-    Procesando = 'procesando'
+export enum ProductoMarketplaceSincronizacionIncludeFilterItemsRelationEnum {
+    ProductoMarketplace = 'productoMarketplace'
 }
 
+/**
+ * (tsType: Partial<ProductoMarketplaceSincronizacion>, schemaOptions: { partial: true })
+ * @export
+ * @interface ProductoMarketplaceSincronizacionPartial
+ */
+export interface ProductoMarketplaceSincronizacionPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionPartial
+     */
+    'productoMarketplaceId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionPartial
+     */
+    'estado'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionPartial
+     */
+    'fecha'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionPartial
+     */
+    'mensaje'?: string | null;
+    /**
+     * 
+     * @type {ProductoMarketplace}
+     * @memberof ProductoMarketplaceSincronizacionPartial
+     */
+    'productoMarketplace'?: ProductoMarketplace;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoMarketplaceSincronizacionScopeFilter
+ */
+export interface ProductoMarketplaceSincronizacionScopeFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {any | Set<string>}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'fields'?: any | Set<string>;
+    /**
+     * 
+     * @type {Array<{ [key: string]: object; }>}
+     * @memberof ProductoMarketplaceSincronizacionScopeFilter
+     */
+    'include'?: Array<{ [key: string]: object; }>;
+}
+/**
+ * (tsType: ProductoMarketplaceSincronizacionWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface ProductoMarketplaceSincronizacionWithRelations
+ */
+export interface ProductoMarketplaceSincronizacionWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'productoMarketplaceId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'estado'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'fecha'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'mensaje'?: string | null;
+    /**
+     * 
+     * @type {ProductoMarketplace}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'productoMarketplace'?: ProductoMarketplace;
+    /**
+     * 
+     * @type {any}
+     * @memberof ProductoMarketplaceSincronizacionWithRelations
+     */
+    'foreignKey'?: any;
+}
 /**
  * (tsType: ProductoMarketplaceWithRelations, schemaOptions: { includeRelations: true })
  * @export
@@ -15223,24 +15474,6 @@ export interface ProductoMarketplaceWithRelations {
      * @type {string}
      * @memberof ProductoMarketplaceWithRelations
      */
-    'fechaUltimaSincronizacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplaceWithRelations
-     */
-    'estadoSincronizacion'?: ProductoMarketplaceWithRelationsEstadoSincronizacionEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplaceWithRelations
-     */
-    'mensajeError'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMarketplaceWithRelations
-     */
     'fechaCreacion'?: string | null;
     /**
      * 
@@ -15261,18 +15494,6 @@ export interface ProductoMarketplaceWithRelations {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ProductoMarketplaceWithRelationsEstadoSincronizacionEnum {
-    Pendiente = 'pendiente',
-    Sincronizado = 'sincronizado',
-    Error = 'error',
-    Procesando = 'procesando'
-}
-
 /**
  * 
  * @export
@@ -42973,6 +43194,612 @@ export class ProductoMarketplaceControllerApi extends BaseAPI {
      */
     public productoMarketplaceControllerUpdateById(id: number, productoMarketplacePartial?: ProductoMarketplacePartial, options?: AxiosRequestConfig) {
         return ProductoMarketplaceControllerApiFp(this.configuration).productoMarketplaceControllerUpdateById(id, productoMarketplacePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ProductoMarketplaceSincronizacionControllerApi - axios parameter creator
+ * @export
+ */
+export const ProductoMarketplaceSincronizacionControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-marketplace-sincronizaciones/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewProductoMarketplaceSincronizacion} [newProductoMarketplaceSincronizacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerCreate: async (newProductoMarketplaceSincronizacion?: NewProductoMarketplaceSincronizacion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-marketplace-sincronizaciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newProductoMarketplaceSincronizacion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoMarketplaceSincronizacionControllerDeleteById', 'id', id)
+            const localVarPath = `/producto-marketplace-sincronizaciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ProductoMarketplaceSincronizacionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerFind: async (filter?: ProductoMarketplaceSincronizacionFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-marketplace-sincronizaciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerFindById: async (id: number, filter?: ProductoMarketplaceSincronizacionFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoMarketplaceSincronizacionControllerFindById', 'id', id)
+            const localVarPath = `/producto-marketplace-sincronizaciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacion} [productoMarketplaceSincronizacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerReplaceById: async (id: number, productoMarketplaceSincronizacion?: ProductoMarketplaceSincronizacion, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoMarketplaceSincronizacionControllerReplaceById', 'id', id)
+            const localVarPath = `/producto-marketplace-sincronizaciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoMarketplaceSincronizacion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerUpdateAll: async (where?: { [key: string]: object; }, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-marketplace-sincronizaciones`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoMarketplaceSincronizacionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerUpdateById: async (id: number, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoMarketplaceSincronizacionControllerUpdateById', 'id', id)
+            const localVarPath = `/producto-marketplace-sincronizaciones/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoMarketplaceSincronizacionPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProductoMarketplaceSincronizacionControllerApi - functional programming interface
+ * @export
+ */
+export const ProductoMarketplaceSincronizacionControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProductoMarketplaceSincronizacionControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewProductoMarketplaceSincronizacion} [newProductoMarketplaceSincronizacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerCreate(newProductoMarketplaceSincronizacion?: NewProductoMarketplaceSincronizacion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoMarketplaceSincronizacion>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerCreate(newProductoMarketplaceSincronizacion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {ProductoMarketplaceSincronizacionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerFind(filter?: ProductoMarketplaceSincronizacionFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProductoMarketplaceSincronizacionWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerFindById(id: number, filter?: ProductoMarketplaceSincronizacionFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoMarketplaceSincronizacionWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacion} [productoMarketplaceSincronizacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerReplaceById(id: number, productoMarketplaceSincronizacion?: ProductoMarketplaceSincronizacion, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerReplaceById(id, productoMarketplaceSincronizacion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerUpdateAll(where?: { [key: string]: object; }, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerUpdateAll(where, productoMarketplaceSincronizacionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoMarketplaceSincronizacionControllerUpdateById(id: number, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoMarketplaceSincronizacionControllerUpdateById(id, productoMarketplaceSincronizacionPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProductoMarketplaceSincronizacionControllerApi - factory interface
+ * @export
+ */
+export const ProductoMarketplaceSincronizacionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProductoMarketplaceSincronizacionControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoMarketplaceSincronizacionControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewProductoMarketplaceSincronizacion} [newProductoMarketplaceSincronizacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerCreate(newProductoMarketplaceSincronizacion?: NewProductoMarketplaceSincronizacion, options?: any): AxiosPromise<ProductoMarketplaceSincronizacion> {
+            return localVarFp.productoMarketplaceSincronizacionControllerCreate(newProductoMarketplaceSincronizacion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.productoMarketplaceSincronizacionControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ProductoMarketplaceSincronizacionFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerFind(filter?: ProductoMarketplaceSincronizacionFilter1, options?: any): AxiosPromise<Array<ProductoMarketplaceSincronizacionWithRelations>> {
+            return localVarFp.productoMarketplaceSincronizacionControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacionFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerFindById(id: number, filter?: ProductoMarketplaceSincronizacionFilter, options?: any): AxiosPromise<ProductoMarketplaceSincronizacionWithRelations> {
+            return localVarFp.productoMarketplaceSincronizacionControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacion} [productoMarketplaceSincronizacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerReplaceById(id: number, productoMarketplaceSincronizacion?: ProductoMarketplaceSincronizacion, options?: any): AxiosPromise<any> {
+            return localVarFp.productoMarketplaceSincronizacionControllerReplaceById(id, productoMarketplaceSincronizacion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerUpdateAll(where?: { [key: string]: object; }, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoMarketplaceSincronizacionControllerUpdateAll(where, productoMarketplaceSincronizacionPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoMarketplaceSincronizacionControllerUpdateById(id: number, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.productoMarketplaceSincronizacionControllerUpdateById(id, productoMarketplaceSincronizacionPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProductoMarketplaceSincronizacionControllerApi - object-oriented interface
+ * @export
+ * @class ProductoMarketplaceSincronizacionControllerApi
+ * @extends {BaseAPI}
+ */
+export class ProductoMarketplaceSincronizacionControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewProductoMarketplaceSincronizacion} [newProductoMarketplaceSincronizacion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerCreate(newProductoMarketplaceSincronizacion?: NewProductoMarketplaceSincronizacion, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerCreate(newProductoMarketplaceSincronizacion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ProductoMarketplaceSincronizacionFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerFind(filter?: ProductoMarketplaceSincronizacionFilter1, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoMarketplaceSincronizacionFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerFindById(id: number, filter?: ProductoMarketplaceSincronizacionFilter, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoMarketplaceSincronizacion} [productoMarketplaceSincronizacion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerReplaceById(id: number, productoMarketplaceSincronizacion?: ProductoMarketplaceSincronizacion, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerReplaceById(id, productoMarketplaceSincronizacion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerUpdateAll(where?: { [key: string]: object; }, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerUpdateAll(where, productoMarketplaceSincronizacionPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoMarketplaceSincronizacionPartial} [productoMarketplaceSincronizacionPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoMarketplaceSincronizacionControllerApi
+     */
+    public productoMarketplaceSincronizacionControllerUpdateById(id: number, productoMarketplaceSincronizacionPartial?: ProductoMarketplaceSincronizacionPartial, options?: AxiosRequestConfig) {
+        return ProductoMarketplaceSincronizacionControllerApiFp(this.configuration).productoMarketplaceSincronizacionControllerUpdateById(id, productoMarketplaceSincronizacionPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
