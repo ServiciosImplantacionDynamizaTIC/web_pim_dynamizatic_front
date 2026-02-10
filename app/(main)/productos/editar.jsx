@@ -13,6 +13,7 @@ import ProductoMarketplace from "../producto-marketplace/page";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
+import ProductoAtributo from "../producto-atributo/page";
 
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
@@ -232,6 +233,11 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Marketplaces del Producto' })}>
                                         <ProductoMarketplace
+                                        idProducto={idEditar}
+                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                    </TabPanel>
+                                    <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
+                                        <ProductoAtributo
                                         idProducto={idEditar}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
