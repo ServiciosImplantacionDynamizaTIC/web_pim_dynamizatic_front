@@ -15,7 +15,9 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
     const [tipoProducto, setTipoProducto] = useState(emptyRegistro || {
         empresaId: usuarioSesion?.empresaId,
         nombre: "",
-        descripcion: ""
+        descripcion: "",
+        atributosIds: [],
+        multimediasIds: []
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -23,10 +25,21 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
 
     useEffect(() => {
         const fetchData = async () => {
-            if (idEditarTipo !== 0) {
+            if (idEditarTipo && idEditarTipo !== 0) {
                 const registro = rowData.find((element) => element.id === idEditarTipo);
                 setTipoProducto(registro);
                 setIsEdit(true);
+            } else {
+                // Resetear cuando no hay ID para editar (crear nuevo)
+                setIsEdit(false);
+                const registroReset = emptyRegistro || {
+                    empresaId: usuarioSesion?.empresaId,
+                    nombre: "",
+                    descripcion: "",
+                    atributosIds: [],
+                    multimediasIds: []
+                };
+                setTipoProducto(registroReset);
             }
         };
         fetchData();
@@ -71,18 +84,24 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
         setEstadoGuardandoBoton(true);
 
         if (await validaciones()) {
-            try {
-                const tipoProductoData = {
-                    empresaId: tipoProducto.empresaId || usuarioSesion?.empresaId,
-                    nombre: tipoProducto.nombre.trim(),
-                    descripcion: tipoProducto.descripcion?.trim() || null
-                };
-
+            try {                
                 let resultado;
                 if (isEdit) {
+                    const tipoProductoData = {
+                        empresaId: tipoProducto.empresaId || usuarioSesion?.empresaId,
+                        nombre: tipoProducto.nombre.trim(),
+                        descripcion: tipoProducto.descripcion?.trim() || null,
+                        atributosIds: tipoProducto.atributosIds || [],
+                        multimediasIds: tipoProducto.multimediasIds || []
+                    };
                     resultado = await patchTipoProducto(idEditarTipo, tipoProductoData);
                     setRegistroResult("editado");
                 } else {
+                    const tipoProductoData = {
+                        empresaId: tipoProducto.empresaId || usuarioSesion?.empresaId,
+                        nombre: tipoProducto.nombre.trim(),
+                        descripcion: tipoProducto.descripcion?.trim() || null
+                    };
                     resultado = await postTipoProducto(tipoProductoData);
                     setRegistroResult("insertado");
                 }
@@ -119,7 +138,9 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
         const registroReset = emptyRegistro || {
             empresaId: usuarioSesion?.empresaId,
             nombre: "",
-            descripcion: ""
+            descripcion: "",
+            atributosIds: [],
+            multimediasIds: []
         };
         setTipoProducto(registroReset);
     };
@@ -136,6 +157,8 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                             setTipoProducto={setTipoProducto}
                             estadoGuardando={estadoGuardando}
                             editable={editable}
+                            isEdit={isEdit}
+                            idTipo={idEditarTipo}
                         />
                        
                         <div className="flex justify-content-end mt-2">

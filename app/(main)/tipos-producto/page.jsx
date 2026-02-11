@@ -30,7 +30,9 @@ const TiposProducto = () => {
                     emptyRegistro={{
                         empresaId: usuarioSesion?.empresaId,
                         nombre: "",
-                        descripcion: ""
+                        descripcion: "",
+                        atributosIds: [],
+                        multimediasIds: []
                     }} />}
                 columnas={columnas}
             />

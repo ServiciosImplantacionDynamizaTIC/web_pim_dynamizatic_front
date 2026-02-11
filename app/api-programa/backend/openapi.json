@@ -14748,7 +14748,30 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TipoProductoPartial"
+                "type": "object",
+                "properties": {
+                  "empresaId": {
+                    "type": "number"
+                  },
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "descripcion": {
+                    "type": "string"
+                  },
+                  "atributosIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "multimediasIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
               }
             }
           },
@@ -18799,7 +18822,7 @@
           "id": {
             "type": "number"
           },
-          "productoId": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -18809,7 +18832,7 @@
           }
         },
         "required": [
-          "productoId",
+          "tipoProductoId",
           "multimediaId"
         ],
         "additionalProperties": false
@@ -18819,7 +18842,7 @@
         "type": "object",
         "description": "(tsType: Omit<TipoProductoMultimediaDetalle, 'id'>, schemaOptions: { title: 'NewTipoProductoMultimediaDetalle', exclude: [ 'id' ] })",
         "properties": {
-          "productoId": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -18829,7 +18852,7 @@
           }
         },
         "required": [
-          "productoId",
+          "tipoProductoId",
           "multimediaId"
         ],
         "additionalProperties": false,
@@ -18843,7 +18866,7 @@
           "id": {
             "type": "number"
           },
-          "productoId": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -18853,7 +18876,7 @@
           }
         },
         "required": [
-          "productoId",
+          "tipoProductoId",
           "multimediaId"
         ],
         "additionalProperties": false,
@@ -18867,7 +18890,7 @@
           "id": {
             "type": "number"
           },
-          "productoId": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -39141,7 +39164,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "productoId": {
+                  "tipoProductoId": {
                     "type": "boolean"
                   },
                   "multimediaId": {
@@ -39156,7 +39179,7 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "productoId",
+                    "tipoProductoId",
                     "multimediaId"
                   ],
                   "example": "id"
@@ -39213,7 +39236,7 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "productoId": {
+                  "tipoProductoId": {
                     "type": "boolean"
                   },
                   "multimediaId": {
@@ -39228,7 +39251,7 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "productoId",
+                    "tipoProductoId",
                     "multimediaId"
                   ],
                   "example": "id"
