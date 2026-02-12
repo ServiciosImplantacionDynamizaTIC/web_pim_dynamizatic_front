@@ -90,6 +90,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     const tipoProductoData = {
                         empresaId: tipoProducto.empresaId || usuarioSesion?.empresaId,
                         nombre: tipoProducto.nombre.trim(),
+                        activoSn: tipoProducto.activoSn || 'S',
                         descripcion: tipoProducto.descripcion?.trim() || null,
                         atributosIds: tipoProducto.atributosIds || [],
                         multimediasIds: tipoProducto.multimediasIds || []
@@ -100,6 +101,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     const tipoProductoData = {
                         empresaId: tipoProducto.empresaId || usuarioSesion?.empresaId,
                         nombre: tipoProducto.nombre.trim(),
+                        activoSn: tipoProducto.activoSn || 'S',
                         descripcion: tipoProducto.descripcion?.trim() || null
                     };
                     resultado = await postTipoProducto(tipoProductoData);

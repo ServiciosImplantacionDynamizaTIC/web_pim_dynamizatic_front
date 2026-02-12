@@ -12,7 +12,7 @@ import { Image } from 'primereact/image';
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
-import { getTiposProducto } from "@/app/api-endpoints/tipo_producto";
+import { getTiposProducto, getTipoProducto } from "@/app/api-endpoints/tipo_producto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import { devuelveBasePath } from "../../utility/Utils";
@@ -128,10 +128,31 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                     }
                 });
                 const data = await getTiposProducto(filtro);
-                const tiposProductoFormateados = data.map(tipo => ({
+                let tiposProductoFormateados = data.map(tipo => ({
                     label: tipo.nombre,
                     value: tipo.id
                 }));
+
+                // Si el producto tiene un tipoProductoId asignado, verificar si está en la lista
+                if (producto?.tipoProductoId) {
+                    const tipoExisteEnLista = tiposProductoFormateados.some(tipo => tipo.value === producto.tipoProductoId);
+                    
+                    // Si no existe (porque está inactivo), cargarlo individualmente
+                    if (!tipoExisteEnLista) {
+                        try {
+                            const tipoInactivo = await getTipoProducto(producto.tipoProductoId);
+                            if (tipoInactivo) {
+                                tiposProductoFormateados.unshift({
+                                    label: `${tipoInactivo.nombre}`,
+                                    value: tipoInactivo.id
+                                });
+                            }
+                        } catch (error) {
+                            console.error('Error cargando tipo de producto inactivo:', error);
+                        }
+                    }
+                }
+
                 setTiposProducto(tiposProductoFormateados);
             } catch (error) {
                 console.error('Error cargando tipos de producto:', error);
@@ -141,7 +162,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
         };
 
         cargarTiposProducto();
-    }, []);
+    }, [producto?.tipoProductoId]);
     
     //Crear inputs de archivos
     const inputsDinamicos = [];
