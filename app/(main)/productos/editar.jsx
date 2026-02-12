@@ -67,6 +67,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         const validaCategoria = producto.categoriaId === undefined || producto.categoriaId === null || producto.categoriaId === "";
         const validaEstado = producto.estadoId === undefined || producto.estadoId === null || producto.estadoId === "";
         const validaMarca = producto.marcaId === undefined || producto.marcaId === null || producto.marcaId === "";
+        const validaTipoProducto = producto.tipoProductoId === undefined || producto.tipoProductoId === null || producto.tipoProductoId.length === 0;
         /*const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -78,7 +79,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             });
         }*/
         
-        return (!validaSku && !validaNombre && !validaCategoria && !validaEstado && !validaMarca);
+        return (!validaSku && !validaNombre && !validaCategoria && !validaEstado && !validaMarca && !validaTipoProducto);
     };
 
     const procesarImagenPrincipal = async (productoId) => {
@@ -122,6 +123,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     imagenPrincipal: '', // Se procesará después de crear el registro
                     activoSn: objGuardar.activoSn || 'S',
                     usuarioCreacion: usuarioActual,
+                    tipoProductoId: objGuardar.tipoProductoId || []
                 };
                 
                 const nuevoRegistro = await postProducto(objGuardar);
@@ -176,6 +178,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     imagenPrincipal: rutaImagen,
                     activoSn: objGuardar.activoSn || 'S',
                     usuarioModificacion: usuarioActual,
+                    tipoProductoId: objGuardar.tipoProductoId || []
                 };
                 
                 await patchProducto(objGuardar.id, productoAeditar);

@@ -11294,7 +11294,7 @@ export interface NewProducto {
      * @type {number}
      * @memberof NewProducto
      */
-    'tipoProducto': number;
+    'tipoProductoId': number;
     /**
      * 
      * @type {number}
@@ -12234,6 +12234,36 @@ export interface NewTipoProducto {
      * @memberof NewTipoProducto
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoProducto
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoProducto
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoProducto
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProducto
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProducto
+     */
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: Omit<TipoProductoAtributoDetalle, \'id\'>, schemaOptions: { title: \'NewTipoProductoAtributoDetalle\', exclude: [ \'id\' ] })
@@ -14036,7 +14066,7 @@ export interface Producto {
      * @type {number}
      * @memberof Producto
      */
-    'tipoProducto': number;
+    'tipoProductoId': number;
     /**
      * 
      * @type {number}
@@ -15946,7 +15976,7 @@ export interface ProductoPartial {
      * @type {number}
      * @memberof ProductoPartial
      */
-    'tipoProducto'?: number;
+    'tipoProductoId'?: number;
     /**
      * 
      * @type {number}
@@ -16510,7 +16540,7 @@ export interface ProductoWithRelations {
      * @type {number}
      * @memberof ProductoWithRelations
      */
-    'tipoProducto': number;
+    'tipoProductoId': number;
     /**
      * 
      * @type {number}
@@ -18211,6 +18241,36 @@ export interface TipoProducto {
      * @memberof TipoProducto
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProducto
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProducto
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProducto
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProducto
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProducto
+     */
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 
@@ -18632,6 +18692,36 @@ export interface TipoProductoPartial {
      * @memberof TipoProductoPartial
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPartial
+     */
+    'usuarioModificacion'?: number | null;
 }
 /**
  * (tsType: TipoProductoWithRelations, schemaOptions: { includeRelations: true })
@@ -18663,6 +18753,36 @@ export interface TipoProductoWithRelations {
      * @memberof TipoProductoWithRelations
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoProductoWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoWithRelations
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoWithRelations
+     */
+    'usuarioModificacion'?: number | null;
 }
 /**
  * 

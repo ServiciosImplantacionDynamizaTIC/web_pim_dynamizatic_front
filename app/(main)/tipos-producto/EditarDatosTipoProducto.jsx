@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { InputSwitch } from 'primereact/inputswitch';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Checkbox } from 'primereact/checkbox';
 import { ProgressSpinner } from 'primereact/progressspinner';
@@ -63,7 +64,9 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
             try {
                 const filtro = JSON.stringify({
                     where: {
-                        tipoProductoId: tipoProducto.id
+                        and: {
+                            tipoProductoId: tipoProducto.id
+                        }
                     }
                 });
                 
@@ -121,7 +124,9 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
             try {
                 const filtro = JSON.stringify({
                     where: {
-                        tipoProductoId: tipoProducto.id
+                        and: {
+                            tipoProductoId: tipoProducto.id
+                        }
                     }
                 });
                 
@@ -153,6 +158,14 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;
         setTipoProducto(prev => ({ ...prev, [nombreCampo]: valor }));
+    };
+
+    const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
+        const valor = (e.target && e.target.value) || "";
+        let _tipoProducto = { ...tipoProducto };
+        const esTrue = valor === true ? 'S' : 'N';
+        _tipoProducto[`${nombreInputSwitch}`] = esTrue;
+        setTipoProducto(_tipoProducto);
     };
 
     const manejarCambioAtributo = (atributoId, isChecked) => {
@@ -228,6 +241,18 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                             {intl.formatMessage({ id: 'Máximo 500 caracteres' })}
                             {tipoProducto?.descripcion && ` - ${tipoProducto.descripcion.length}/500`}
                         </small>
+                    </div>
+                </div>
+                
+                <div className="formgrid grid">
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="activo" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
+                        <InputSwitch
+                            id="activo"
+                            checked={tipoProducto?.activoSn === 'S'}
+                            onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
+                            disabled={!editable || estadoGuardando}
+                        />
                     </div>
                 </div>
             </Fieldset>

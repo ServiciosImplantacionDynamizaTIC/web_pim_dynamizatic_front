@@ -18733,10 +18733,33 @@
           "descripcion": {
             "type": "string",
             "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuarioCreacion"
         ],
         "additionalProperties": false
       },
@@ -18756,10 +18779,33 @@
           "descripcion": {
             "type": "string",
             "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<TipoProducto, 'id'>"
@@ -18783,10 +18829,33 @@
           "descripcion": {
             "type": "string",
             "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
-          "empresaId"
+          "empresaId",
+          "usuarioCreacion"
         ],
         "additionalProperties": false,
         "x-typescript-type": "TipoProductoWithRelations"
@@ -18809,6 +18878,28 @@
           },
           "descripcion": {
             "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
             "nullable": true
           }
         },
@@ -20179,7 +20270,7 @@
             "type": "number",
             "nullable": false
           },
-          "tipoProducto": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -20252,7 +20343,7 @@
         },
         "required": [
           "empresaId",
-          "tipoProducto",
+          "tipoProductoId",
           "categoriaId",
           "sku",
           "nombre",
@@ -20270,7 +20361,7 @@
             "type": "number",
             "nullable": false
           },
-          "tipoProducto": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -20343,7 +20434,7 @@
         },
         "required": [
           "empresaId",
-          "tipoProducto",
+          "tipoProductoId",
           "categoriaId",
           "sku",
           "nombre",
@@ -20365,7 +20456,7 @@
             "type": "number",
             "nullable": false
           },
-          "tipoProducto": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -20438,7 +20529,7 @@
         },
         "required": [
           "empresaId",
-          "tipoProducto",
+          "tipoProductoId",
           "categoriaId",
           "sku",
           "nombre",
@@ -20460,7 +20551,7 @@
             "type": "number",
             "nullable": false
           },
-          "tipoProducto": {
+          "tipoProductoId": {
             "type": "number",
             "nullable": false
           },
@@ -37754,7 +37845,7 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "tipoProducto": {
+                  "tipoProductoId": {
                     "type": "boolean"
                   },
                   "categoriaId": {
@@ -37815,7 +37906,7 @@
                   "enum": [
                     "id",
                     "empresaId",
-                    "tipoProducto",
+                    "tipoProductoId",
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -37890,7 +37981,7 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "tipoProducto": {
+                  "tipoProductoId": {
                     "type": "boolean"
                   },
                   "categoriaId": {
@@ -37951,7 +38042,7 @@
                   "enum": [
                     "id",
                     "empresaId",
-                    "tipoProducto",
+                    "tipoProductoId",
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -39311,6 +39402,21 @@
                   },
                   "descripcion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -39323,7 +39429,12 @@
                     "id",
                     "empresaId",
                     "nombre",
-                    "descripcion"
+                    "descripcion",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -39387,6 +39498,21 @@
                   },
                   "descripcion": {
                     "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -39399,7 +39525,12 @@
                     "id",
                     "empresaId",
                     "nombre",
-                    "descripcion"
+                    "descripcion",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },

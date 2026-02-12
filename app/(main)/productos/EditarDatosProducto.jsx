@@ -12,6 +12,7 @@ import { Image } from 'primereact/image';
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
+import { getTiposProducto } from "@/app/api-endpoints/tipo_producto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import { devuelveBasePath } from "../../utility/Utils";
@@ -22,9 +23,11 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
     const [categorias, setCategorias] = useState([]);
     const [marcas, setMarcas] = useState([]);
     const [estados, setEstados] = useState([]);
+    const [tiposProducto, setTiposProducto] = useState([]);
     const [cargandoCategorias, setCargandoCategorias] = useState(false);
     const [cargandoMarcas, setCargandoMarcas] = useState(false);
     const [cargandoEstados, setCargandoEstados] = useState(false);
+    const [cargandoTiposProducto, setCargandoTiposProducto] = useState(false);
     const [imagenPrincipalPreview, setImagenPrincipalPreview] = useState(null);
 
     // Cargar categorías
@@ -110,6 +113,35 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
 
         cargarEstados();
     }, []);
+
+    // Cargar tipos de producto
+    useEffect(() => {
+        const cargarTiposProducto = async () => {
+            setCargandoTiposProducto(true);
+            try {
+                const filtro = JSON.stringify({
+                    where: {
+                        and: {
+                             empresaId: getUsuarioSesion()?.empresaId,
+                             activoSn: 'S' 
+                            }
+                    }
+                });
+                const data = await getTiposProducto(filtro);
+                const tiposProductoFormateados = data.map(tipo => ({
+                    label: tipo.nombre,
+                    value: tipo.id
+                }));
+                setTiposProducto(tiposProductoFormateados);
+            } catch (error) {
+                console.error('Error cargando tipos de producto:', error);
+            } finally {
+                setCargandoTiposProducto(false);
+            }
+        };
+
+        cargarTiposProducto();
+    }, []);
     
     //Crear inputs de archivos
     const inputsDinamicos = [];
@@ -173,10 +205,10 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
 
     // Efecto para cargar la imagen existente si está editando
     useEffect(() => {
-        if (producto.imagenPrincipal && !imagenPrincipalPreview) {
+        if (producto?.imagenPrincipal && !imagenPrincipalPreview) {
             setImagenPrincipalPreview(devuelveBasePath() + producto.imagenPrincipal);
         }
-    }, [producto.imagenPrincipal]);
+    }, [producto?.imagenPrincipal]);
 
     return (
         <>
@@ -233,10 +265,10 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                         <InputText 
                             id="nombre"
-                            value={producto.nombre || ''}
+                            value={producto?.nombre || ''}
                             placeholder={intl.formatMessage({ id: 'Nombre del producto' })}
                             onChange={(e) => setProducto({ ...producto, nombre: e.target.value })}
-                            className={`${(estadoGuardando && !producto.nombre) ? "p-invalid" : ""}`}
+                            className={`${(estadoGuardando && !producto?.nombre) ? "p-invalid" : ""}`}
                             maxLength={200}
                             disabled={estadoGuardando}
                         />
@@ -246,10 +278,10 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="sku"><b>{intl.formatMessage({ id: 'SKU' })}*</b></label>
                         <InputText 
                             id="sku"
-                            value={producto.sku || ''}
+                            value={producto?.sku || ''}
                             placeholder={intl.formatMessage({ id: 'Código SKU del producto' })}
                             onChange={(e) => setProducto({ ...producto, sku: e.target.value })}
-                            className={`${(estadoGuardando && !producto.sku) ? "p-invalid" : ""}`}
+                            className={`${(estadoGuardando && !producto?.sku) ? "p-invalid" : ""}`}
                             maxLength={100}
                             disabled={estadoGuardando}
                         />
@@ -259,7 +291,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="ean">{intl.formatMessage({ id: 'EAN' })}</label>
                         <InputText 
                             id="ean"
-                            value={producto.ean || ''}
+                            value={producto?.ean || ''}
                             placeholder={intl.formatMessage({ id: 'Código EAN del producto' })}
                             onChange={(e) => setProducto({ ...producto, ean: e.target.value })}
                             maxLength={50}
@@ -271,11 +303,11 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="categoria"><b>{intl.formatMessage({ id: 'Categoría' })}*</b></label>
                         <Dropdown 
                             id="categoria"
-                            value={producto.categoriaId || null}
+                            value={producto?.categoriaId || null}
                             options={categorias}
                             onChange={(e) => setProducto({ ...producto, categoriaId: e.value })}
                             placeholder={intl.formatMessage({ id: 'Selecciona una categoría' })}
-                            className={`${(estadoGuardando && !producto.categoriaId) ? "p-invalid" : ""}`}
+                            className={`${(estadoGuardando && !producto?.categoriaId) ? "p-invalid" : ""}`}
                             disabled={estadoGuardando || cargandoCategorias}
                             loading={cargandoCategorias}
                             showClear
@@ -286,7 +318,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="marca"><b>{intl.formatMessage({ id: 'Marca' })}*</b></label>
                         <Dropdown 
                             id="marca"
-                            value={producto.marcaId || null}
+                            value={producto?.marcaId || null}
                             options={marcas}
                             onChange={(e) => setProducto({ ...producto, marcaId: e.value })}
                             placeholder={intl.formatMessage({ id: 'Selecciona una marca' })}
@@ -300,13 +332,27 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="estado"><b>{intl.formatMessage({ id: 'Estado' })}*</b></label>
                         <Dropdown 
                             id="estado"
-                            value={producto.estadoId || null}
+                            value={producto?.estadoId || null}
                             options={estados}
                             onChange={(e) => setProducto({ ...producto, estadoId: e.value })}
                             placeholder={intl.formatMessage({ id: 'Selecciona un estado' })}
-                            className={`${(estadoGuardando && !producto.estadoId) ? "p-invalid" : ""}`}
+                            className={`${(estadoGuardando && !producto?.estadoId) ? "p-invalid" : ""}`}
                             disabled={estadoGuardando || cargandoEstados}
                             loading={cargandoEstados}
+                            showClear
+                        />
+                    </div>
+
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                        <label htmlFor="tipoProducto"><b>{intl.formatMessage({ id: 'Tipo de producto' })}</b></label>
+                        <Dropdown 
+                            id="tipoProducto"
+                            value={producto?.tipoProductoId || null}
+                            options={tiposProducto}
+                            onChange={(e) => setProducto({ ...producto, tipoProductoId: e.value })}
+                            placeholder={intl.formatMessage({ id: 'Selecciona un tipo de producto' })}
+                            disabled={estadoGuardando || cargandoTiposProducto}
+                            loading={cargandoTiposProducto}
                             showClear
                         />
                     </div>
@@ -320,7 +366,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="activo" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
                         <InputSwitch
                             id="activo"
-                            checked={producto.activoSn === 'S'}
+                            checked={producto?.activoSn === 'S'}
                             onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
                             disabled={estadoGuardando}
                         />
@@ -330,7 +376,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="finalizado" className="font-bold block">{intl.formatMessage({ id: 'Finalizado' })}</label>
                         <InputSwitch
                             id="finalizado"
-                            checked={producto.finalizadoSn === 'S'}
+                            checked={producto?.finalizadoSn === 'S'}
                             onChange={(e) => manejarCambioInputSwitch(e, "finalizadoSn")}
                             disabled={estadoGuardando}
                         />
@@ -344,7 +390,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="descripcionCorta">{intl.formatMessage({ id: 'Descripción corta' })}</label>
                         <InputTextarea 
                             id="descripcionCorta"
-                            value={producto.descripcionCorta || ''}
+                            value={producto?.descripcionCorta || ''}
                             placeholder={intl.formatMessage({ id: 'Descripción breve del producto' })}
                             onChange={(e) => setProducto({ ...producto, descripcionCorta: e.target.value })}
                             rows={3}
@@ -357,7 +403,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="descripcionLarga">{intl.formatMessage({ id: 'Descripción larga' })}</label>
                         <InputTextarea 
                             id="descripcionLarga"
-                            value={producto.descripcionLarga || ''}
+                            value={producto?.descripcionLarga || ''}
                             placeholder={intl.formatMessage({ id: 'Descripción detallada del producto' })}
                             onChange={(e) => setProducto({ ...producto, descripcionLarga: e.target.value })}
                             rows={5}
@@ -369,7 +415,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                         <label htmlFor="puntosClave">{intl.formatMessage({ id: 'Puntos clave' })}</label>
                         <InputTextarea 
                             id="puntosClave"
-                            value={producto.puntosClave || ''}
+                            value={producto?.puntosClave || ''}
                             placeholder={intl.formatMessage({ id: 'Características destacadas del producto' })}
                             onChange={(e) => setProducto({ ...producto, puntosClave: e.target.value })}
                             rows={4}

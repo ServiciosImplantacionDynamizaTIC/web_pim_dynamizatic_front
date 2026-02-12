@@ -12,6 +12,7 @@ const TiposProducto = () => {
     const columnas = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'descripcion', header: intl.formatMessage({ id: 'Descripción' }), tipo: 'string' },
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
    ]
 
     const filtradoBase = { empresaId: usuarioSesion?.empresaId };
@@ -32,7 +33,8 @@ const TiposProducto = () => {
                         nombre: "",
                         descripcion: "",
                         atributosIds: [],
-                        multimediasIds: []
+                        multimediasIds: [],
+                        activoSn: 'S'
                     }} />}
                 columnas={columnas}
             />
