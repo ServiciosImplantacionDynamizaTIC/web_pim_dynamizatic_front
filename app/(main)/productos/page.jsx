@@ -12,7 +12,6 @@ const Producto = () => {
         { campo: 'imagenPrincipal', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
         { campo: 'sku', header: intl.formatMessage({ id: 'SKU' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'CategoriaNombre', header: intl.formatMessage({ id: 'Categoría' }), tipo: 'string' },
         { campo: 'MarcaNombre', header: intl.formatMessage({ id: 'Marca' }), tipo: 'string' },
         { campo: 'EstadoNombre', header: intl.formatMessage({ id: 'Estado' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },

@@ -17,7 +17,6 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         nombre: "",
         descripcion: "",
         tipo: "imagen",
-        categoriaId: null,
         activoSn: "S"
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -44,6 +43,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
 
     const validaciones = async () => {
         const validaNombre = multimedia.nombre === undefined || multimedia.nombre === "";
+        const validaTipo = multimedia.tipo === undefined || multimedia.tipo === "";
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -55,7 +55,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
             });
         }
         
-        return (!validaNombre);
+        return (!validaNombre && !validaTipo);
     };
 
     const guardarMultimedia = async () => {
@@ -94,7 +94,6 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
                     tipo: objGuardar.tipo || "imagen",
-                    categoriaId: objGuardar.categoriaId,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                 };

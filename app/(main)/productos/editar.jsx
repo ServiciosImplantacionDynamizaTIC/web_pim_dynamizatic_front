@@ -35,7 +35,6 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         dimensiones: "",
         color: "",
         peso: null,
-        categoriaId: null,
         marcaId: null,
         activoSn: "S"
     });

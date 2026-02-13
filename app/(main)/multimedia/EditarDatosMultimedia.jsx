@@ -102,7 +102,7 @@ const EditarDatosMultimedia = ({ multimedia, setMultimedia, estadoGuardando, isE
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="tipo">{intl.formatMessage({ id: 'Tipo' })}</label>
+                        <label htmlFor="tipo"><b>{intl.formatMessage({ id: 'Tipo' })}</b></label>
                         <Dropdown
                             id="tipo"
                             value={multimedia.tipo}
@@ -110,19 +110,6 @@ const EditarDatosMultimedia = ({ multimedia, setMultimedia, estadoGuardando, isE
                             onChange={(e) => setMultimedia({ ...multimedia, tipo: e.value })}
                             placeholder={intl.formatMessage({ id: 'Seleccionar tipo' })}
                             disabled={estadoGuardando}
-                        />
-                    </div>
-
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="categoriaId">{intl.formatMessage({ id: 'Categoría' })}</label>
-                        <Dropdown
-                            id="categoriaId"
-                            value={multimedia.categoriaId}
-                            options={categorias}
-                            onChange={(e) => setMultimedia({ ...multimedia, categoriaId: e.value })}
-                            placeholder={intl.formatMessage({ id: 'Seleccionar categoría' })}
-                            disabled={estadoGuardando}
-                            showClear
                         />
                     </div>
 

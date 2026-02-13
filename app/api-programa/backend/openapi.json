@@ -23247,10 +23247,6 @@
             "type": "number",
             "nullable": false
           },
-          "categoriaId": {
-            "type": "number",
-            "nullable": true
-          },
           "nombre": {
             "type": "string",
             "nullable": false
@@ -23302,10 +23298,6 @@
           "empresaId": {
             "type": "number",
             "nullable": false
-          },
-          "categoriaId": {
-            "type": "number",
-            "nullable": true
           },
           "nombre": {
             "type": "string",
@@ -23363,10 +23355,6 @@
             "type": "number",
             "nullable": false
           },
-          "categoriaId": {
-            "type": "number",
-            "nullable": true
-          },
           "nombre": {
             "type": "string",
             "nullable": false
@@ -23422,10 +23410,6 @@
           "empresaId": {
             "type": "number",
             "nullable": false
-          },
-          "categoriaId": {
-            "type": "number",
-            "nullable": true
           },
           "nombre": {
             "type": "string",
@@ -35281,9 +35265,6 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "categoriaId": {
-                    "type": "boolean"
-                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -35318,7 +35299,6 @@
                   "enum": [
                     "id",
                     "empresaId",
-                    "categoriaId",
                     "nombre",
                     "descripcion",
                     "tipo",
@@ -35385,9 +35365,6 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "categoriaId": {
-                    "type": "boolean"
-                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -35422,7 +35399,6 @@
                   "enum": [
                     "id",
                     "empresaId",
-                    "categoriaId",
                     "nombre",
                     "descripcion",
                     "tipo",
