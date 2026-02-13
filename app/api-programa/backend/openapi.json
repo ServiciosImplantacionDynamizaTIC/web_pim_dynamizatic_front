@@ -12755,6 +12755,438 @@
         "operationId": "TareaController.find"
       }
     },
+    "/tenants/check-permissions": {
+      "get": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "checkPermissions",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Verificar permisos del usuario para crear tenants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hasPermission": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "userInfo": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string"
+                        },
+                        "rolId": {
+                          "type": "number"
+                        },
+                        "empresaId": {
+                          "type": "number"
+                        },
+                        "tenant": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TenantController.checkPermissions"
+      }
+    },
+    "/tenants/close-all-connections": {
+      "post": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "closeAllConnections",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cerrar todas las conexiones de tenants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TenantController.closeAllConnections"
+      }
+    },
+    "/tenants/config/{subdominio}": {
+      "get": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "getTenantConfig",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Obtener configuración del tenant",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "empresaId": {
+                      "type": "number"
+                    },
+                    "subdominio": {
+                      "type": "string"
+                    },
+                    "dbNombre": {
+                      "type": "string"
+                    },
+                    "dbHost": {
+                      "type": "string"
+                    },
+                    "dbPuerto": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subdominio",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TenantController.getTenantConfig"
+      }
+    },
+    "/tenants/encrypt-password": {
+      "post": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "encryptPassword",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Encriptar password de base de datos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "encryptedPassword": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "password"
+                ],
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "description": "Password de MySQL a encriptar",
+                    "example": "mi_password_mysql"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Password a encriptar",
+          "required": true
+        },
+        "operationId": "TenantController.encryptPassword"
+      }
+    },
+    "/tenants/provision": {
+      "post": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "provisionTenant",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Crear nuevo tenant",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "empresaId": {
+                      "type": "number"
+                    },
+                    "subdominio": {
+                      "type": "string"
+                    },
+                    "dbNombre": {
+                      "type": "string"
+                    },
+                    "adminEmail": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "empresaNombre",
+                  "empresaCodigo",
+                  "subdominio",
+                  "plan",
+                  "adminNombre",
+                  "adminEmail",
+                  "adminPassword"
+                ],
+                "properties": {
+                  "empresaNombre": {
+                    "type": "string",
+                    "description": "Nombre de la empresa cliente",
+                    "example": "Zara España"
+                  },
+                  "empresaCodigo": {
+                    "type": "string",
+                    "description": "Código único de la empresa",
+                    "example": "ZARA"
+                  },
+                  "subdominio": {
+                    "type": "string",
+                    "description": "Subdominio único (sin espacios ni caracteres especiales)",
+                    "example": "pim_zara"
+                  },
+                  "plan": {
+                    "type": "string",
+                    "description": "Plan de suscripción",
+                    "example": "profesional"
+                  },
+                  "adminNombre": {
+                    "type": "string",
+                    "description": "Nombre del administrador inicial",
+                    "example": "Admin Zara"
+                  },
+                  "adminEmail": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Email del administrador inicial",
+                    "example": "admin@zara.com"
+                  },
+                  "adminPassword": {
+                    "type": "string",
+                    "description": "Password del administrador (se hasheará con bcrypt)",
+                    "example": "Password123!"
+                  },
+                  "maxProductos": {
+                    "type": "number",
+                    "description": "Máximo número de productos permitidos (opcional)",
+                    "example": 1000
+                  },
+                  "maxUsuarios": {
+                    "type": "number",
+                    "description": "Máximo número de usuarios permitidos (opcional)",
+                    "example": 10
+                  },
+                  "dbHost": {
+                    "type": "string",
+                    "description": "Host MySQL (opcional, usa default del .env)",
+                    "example": "localhost"
+                  },
+                  "dbUsuario": {
+                    "type": "string",
+                    "description": "Usuario MySQL (opcional, usa default del .env)",
+                    "example": "root"
+                  },
+                  "dbPassword": {
+                    "type": "string",
+                    "description": "Password MySQL (opcional, usa default del .env)",
+                    "example": ""
+                  },
+                  "dbPuerto": {
+                    "type": "number",
+                    "description": "Puerto MySQL (opcional, usa default del .env)",
+                    "example": 3306
+                  },
+                  "usuarioCreacion": {
+                    "type": "number",
+                    "description": "ID del usuario que crea el tenant",
+                    "example": 1
+                  },
+                  "tiempoInactividad": {
+                    "type": "number",
+                    "description": "Tiempo de inactividad en minutos (opcional)",
+                    "example": 100
+                  },
+                  "temaRipple": {
+                    "type": "boolean",
+                    "description": "Activar efecto ripple (opcional)",
+                    "example": false
+                  },
+                  "estiloInput": {
+                    "type": "string",
+                    "description": "Estilo de los inputs (opcional)",
+                    "example": "outlined"
+                  },
+                  "modoMenu": {
+                    "type": "string",
+                    "description": "Modo del menú (opcional)",
+                    "example": "static"
+                  },
+                  "temaMenu": {
+                    "type": "string",
+                    "description": "Tema del menú (opcional)",
+                    "example": "colorScheme"
+                  },
+                  "esquemaColor": {
+                    "type": "string",
+                    "description": "Esquema de color (opcional)",
+                    "example": "light"
+                  },
+                  "tema": {
+                    "type": "string",
+                    "description": "Tema visual (opcional)",
+                    "example": "mitema"
+                  },
+                  "escala": {
+                    "type": "number",
+                    "description": "Escala de la interfaz (opcional)",
+                    "example": 14
+                  }
+                }
+              }
+            }
+          },
+          "description": "Datos para crear un nuevo tenant",
+          "required": true
+        },
+        "operationId": "TenantController.provisionTenant"
+      }
+    },
+    "/tenants/validate/{subdominio}": {
+      "get": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "validateTenant",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Validar si un tenant existe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "exists": {
+                      "type": "boolean"
+                    },
+                    "subdominio": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subdominio",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TenantController.validateTenant"
+      }
+    },
+    "/tenants/{subdominio}": {
+      "delete": {
+        "x-controller-name": "TenantController",
+        "x-operation-name": "deleteTenant",
+        "tags": [
+          "TenantController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Eliminar tenant completo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subdominio",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TenantController.deleteTenant"
+      }
+    },
     "/tipo-archivos/count": {
       "get": {
         "x-controller-name": "TipoArchivoController",
@@ -24203,6 +24635,30 @@
           "servicio": {
             "type": "string",
             "nullable": true
+          },
+          "esMatriz": {
+            "type": "string",
+            "nullable": true
+          },
+          "tieneBbddPropia": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxProductos": {
+            "type": "number",
+            "nullable": true
+          },
+          "maxUsuarios": {
+            "type": "number",
+            "nullable": true
+          },
+          "subdominio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -24290,6 +24746,30 @@
             "nullable": true
           },
           "servicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "esMatriz": {
+            "type": "string",
+            "nullable": true
+          },
+          "tieneBbddPropia": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxProductos": {
+            "type": "number",
+            "nullable": true
+          },
+          "maxUsuarios": {
+            "type": "number",
+            "nullable": true
+          },
+          "subdominio": {
             "type": "string",
             "nullable": true
           }
@@ -24386,6 +24866,30 @@
           "servicio": {
             "type": "string",
             "nullable": true
+          },
+          "esMatriz": {
+            "type": "string",
+            "nullable": true
+          },
+          "tieneBbddPropia": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxProductos": {
+            "type": "number",
+            "nullable": true
+          },
+          "maxUsuarios": {
+            "type": "number",
+            "nullable": true
+          },
+          "subdominio": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -24478,6 +24982,30 @@
             "nullable": true
           },
           "servicio": {
+            "type": "string",
+            "nullable": true
+          },
+          "esMatriz": {
+            "type": "string",
+            "nullable": true
+          },
+          "tieneBbddPropia": {
+            "type": "string",
+            "nullable": true
+          },
+          "plan": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxProductos": {
+            "type": "number",
+            "nullable": true
+          },
+          "maxUsuarios": {
+            "type": "number",
+            "nullable": true
+          },
+          "subdominio": {
             "type": "string",
             "nullable": true
           }
@@ -29617,6 +30145,24 @@
                   },
                   "servicio": {
                     "type": "boolean"
+                  },
+                  "esMatriz": {
+                    "type": "boolean"
+                  },
+                  "tieneBbddPropia": {
+                    "type": "boolean"
+                  },
+                  "plan": {
+                    "type": "boolean"
+                  },
+                  "maxProductos": {
+                    "type": "boolean"
+                  },
+                  "maxUsuarios": {
+                    "type": "boolean"
+                  },
+                  "subdominio": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -29645,7 +30191,13 @@
                     "escala",
                     "email",
                     "password",
-                    "servicio"
+                    "servicio",
+                    "esMatriz",
+                    "tieneBbddPropia",
+                    "plan",
+                    "maxProductos",
+                    "maxUsuarios",
+                    "subdominio"
                   ],
                   "example": "id"
                 },
@@ -29757,6 +30309,24 @@
                   },
                   "servicio": {
                     "type": "boolean"
+                  },
+                  "esMatriz": {
+                    "type": "boolean"
+                  },
+                  "tieneBbddPropia": {
+                    "type": "boolean"
+                  },
+                  "plan": {
+                    "type": "boolean"
+                  },
+                  "maxProductos": {
+                    "type": "boolean"
+                  },
+                  "maxUsuarios": {
+                    "type": "boolean"
+                  },
+                  "subdominio": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -29785,7 +30355,13 @@
                     "escala",
                     "email",
                     "password",
-                    "servicio"
+                    "servicio",
+                    "esMatriz",
+                    "tieneBbddPropia",
+                    "plan",
+                    "maxProductos",
+                    "maxUsuarios",
+                    "subdominio"
                   ],
                   "example": "id"
                 },
@@ -37096,7 +37672,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }

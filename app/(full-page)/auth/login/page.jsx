@@ -12,6 +12,10 @@ import { useAuth } from "@/app/auth/AuthContext";
 import jwt from "@/app/auth/jwt/useJwt";
 import { useRouter } from 'next/navigation';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { getCurrentTenant, isValidTenant } from "@/app/utility/TenantUtils";
+import { checkProvisioningPermissions } from "@/app/api-endpoints/tenant";
+import { obtenerRolDashboard } from "@/app/api-endpoints/rol";
+
 const Login = () => {
     const router = useRouter();
     const config = jwt.jwtConfig;
@@ -28,9 +32,28 @@ const Login = () => {
     const [registroUsuario, setRegistroUsuario] = useState(true);
     const [deshabilitarLink, setDeshabilitarLink] = useState(false);
     const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
+    const [tenant, setTenant] = useState(null);
+    const [tenantValido, setTenantValido] = useState(false);
+    const [validacionCompletada, setValidacionCompletada] = useState(false);
 
-
+    // Detectar y validar tenant al cargar la página (Multi-tenant)
     useEffect(() => {
+        // Solo ejecutar una vez
+        if (validacionCompletada) return;
+
+        const currentTenant = getCurrentTenant();
+
+        if (!isValidTenant(currentTenant)) {
+            setValidacionCompletada(true);
+            router.push('/tenant-error');
+            return;
+        }
+
+        setTenant(currentTenant);
+        setTenantValido(true);
+        setValidacionCompletada(true);
+
+        // Procesar hash de URL (login automático)
         const hash = window.location.hash;
         const obj = {};
         try {
@@ -69,33 +92,43 @@ const Login = () => {
                 localStorage.removeItem('toastMensaje');
             }
         }
-
-    }, []);
+    }, [router, validacionCompletada]);
 
     //Funcion para acotar codigo
     const loginGenerico = async (usuario, password) => {
-        const res = await jwt.login({ mail: usuario, password });
-        //Si el login da excepcion, lanza una excepcion y se captura en el catch
-        if (res.data.message) {
-            throw new Error(res.data.message);
+        try {
+            const res = await jwt.login({ mail: usuario, password });
+            //Si el login da excepcion, lanza una excepcion y se captura en el catch
+            if (res.data.message) {
+                throw new Error(res.data.message);
+            }
+            const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken };
+            return data;
+        } catch (error) {
+            console.error('Error en login:', error);
+            throw error;
         }
-        const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken };
-
-        console.log('Usuario autenticado: ', data);
-
-        return data;
     }
 
     //El login que tiene que hacer para registrar al usuario
     const loginRegistro = async (usuario, password) => {
+        // No permitir login si el tenant no es válido
+        if (!tenantValido || !tenant) {
+            setMessage('Error: No se pudo detectar el tenant. Recarga la página.');
+            return;
+        }
+
         bloquearPantalla(true);
         try {
             const data = await loginGenerico(usuario, password);
             if (data.accessToken) {
-                loginSinDashboard(data.accessToken, rememberMe, data);
+                // Pasar el tenant al login (Multi-tenant)
+                loginSinDashboard(data.accessToken, rememberMe, data, tenant);
                 //await almacenarLogin(data);
                 //Obtenemos los roles del sistema
                 const rol = localStorage.getItem('rol');
+                // Restaurar cursor antes de redireccionar
+                document.body.style.cursor = 'default';
                 if (rol === 'Familia_acogida') {
                     document.cookie = `CrearRegistro=true; max-age=60; path=/; secure;`;
                     router.push(`/familia_acogida/`);
@@ -103,35 +136,62 @@ const Login = () => {
                 else {
                     router.push(`/usuarios/?usuario=0`)
                 }
-
-
-
-                bloquearPantalla(false);
             } else {
                 console.error('El token es undefined');
+                setMessage('Error en la autenticación. Intenta de nuevo.');
                 bloquearPantalla(false);
             }
         } catch (error) {
+            console.error('Error en login de registro:', error);
             setMessage('Las credenciales del usuario son incorrectas.');
             bloquearPantalla(false);
         }
     }
 
     const manejarLogin = async () => {
+        // No permitir login si el tenant no es válido
+        if (!tenantValido || !tenant) {
+            setMessage('Error: No se pudo detectar el tenant. Recarga la página.');
+            return;
+        }
+
         bloquearPantalla(true);
         try {
             const data = await loginGenerico(usuario, password);
             if (data.accessToken) {
-                login(data.accessToken, rememberMe, data);
-                //await almacenarLogin(data);
-                bloquearPantalla(false);
+                // Primero guardamos el token y datos básicos SIN redirigir
+                loginSinDashboard(data.accessToken, rememberMe, data, tenant);
+                
+                // Verificar si tiene permisos para provisioning
+                let tienePermisos = false;
+                try {
+                    const permissionCheck = await checkProvisioningPermissions();
+                    tienePermisos = permissionCheck.hasPermission;
+                } catch (permError) {
+                    // Usuario sin permisos de provisioning
+                }
+                
+                if (tienePermisos) {
+                    // Tiene permisos → Redirigir a provisioning
+                    document.body.style.cursor = 'default';
+                    router.push('/provision');
+                } else {
+                    // No tiene permisos → Obtener dashboard y redirigir
+                    document.body.style.cursor = 'default';
+                    const dashboard = await obtenerRolDashboard();
+                    router.push(dashboard);
+                }
             } else {
                 console.error('El token es undefined');
+                setMessage('Error en la autenticación. Intenta de nuevo.');
                 bloquearPantalla(false);
             }
         } catch (error) {
+            console.error('Error en login:', error);
             setMessage('Las credenciales del usuario son incorrectas.');
             bloquearPantalla(false);
+            // Restaurar cursor si hay error
+            document.body.style.cursor = 'default';
         }
     }
 
