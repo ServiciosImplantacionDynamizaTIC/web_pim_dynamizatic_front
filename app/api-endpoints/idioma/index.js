@@ -8,8 +8,12 @@ export const getIdiomas = async (filtro) => {
     return dataIdiomas
 }
 export const getIdioma = async (filtro) => {
-    const { data: dataIdiomas } = await apiIdioma.idiomaControllerFindById(filtro)
-    return dataIdiomas
+    try {
+        const { data: dataIdiomas } = await apiIdioma.idiomaControllerFindById(filtro)
+        return dataIdiomas
+    } catch (error) {
+        console.log(error)
+    }
 }
 export const getIdiomasCount = async (filtro) => {
     const { data: dataIdiomas } = await apiIdioma.idiomaControllerCount(filtro)

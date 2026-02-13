@@ -14,38 +14,61 @@ import { registrarLoginExitoso, registrarLoginFallido, registrarAccesoBloqueado,
 import { getVistaTipoArchivoEmpresaSeccion } from "@/app/api-endpoints/tipo_archivo";
 import { obtenerTodosLosPermisos } from "@/app/components/shared/componentes";
 import { getUrlImagenMiniatura } from "@/app/utility/ImageUtils";
+import {
+  getCurrentTenant,
+  saveTenantToLocalStorage,
+  clearTenantFromLocalStorage
+} from "@/app/utility/TenantUtils";
 
 interface AuthContextProps {
   usuarioAutenticado: boolean;
-  login: (token: string, rememberMe: boolean, data: any) => void;
-  loginSinDashboard: (token: string, rememberMe: boolean, data: any) => void;
+  tenant: string | null;
+  login: (token: string, rememberMe: boolean, data: any, tenant?: string) => void;
+  loginSinDashboard: (token: string, rememberMe: boolean, data: any, tenant?: string) => void;
   logout: () => void;
+  getTenant: () => string | null;
   registrarAccesoFallido: (empresaId: number, usuarioId: number, motivoFallo: string) => Promise<void>;
   registrarAccesoBloqueado: (empresaId: number, usuarioId: number, motivoFallo: string) => Promise<void>;
+  getMenuLateral: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [usuarioAutenticado, setUsuarioAutenticado] = useState(false);
+  const [tenant, setTenant] = useState<string | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const config = jwt.jwtConfig;
 
+  // Inicializar tenant al montar el componente
+  useEffect(() => {
+    const currentTenant = getCurrentTenant();
+    setTenant(currentTenant);
+  }, []);
+
   useEffect(() => {
     const token = Cookies.get('authToken');
     //Si usuario esta autenticado o esta en la pagina de publica de autenticacion, se le permite el acceso
-    if (token || pathname.includes('/auth/')) {
+    // También permitir acceso a la página de error de tenant y provisioning
+    if (token || pathname.includes('/auth/') || pathname.includes('/tenant-error') || pathname.includes('/provision')) {
       setUsuarioAutenticado(true);
     } else {
       setUsuarioAutenticado(false);
       router.push('/auth/login');
     }
-  }, [router]);
+  }, [router, pathname]);
 
-  const login = async (token: string, rememberMe: boolean, data: any) => {
+  const login = async (token: string, rememberMe: boolean, data: any, tenantParam?: string) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
     setUsuarioAutenticado(true);
+
+    // Guardar tenant si se proporciona
+    if (tenantParam) {
+      saveTenantToLocalStorage(tenantParam);
+      setTenant(tenantParam);
+    }
+
     await almacenarLogin(data);
     //
     //Al loguearnos creamos un evento indicando la empresaId y userId para que el gestor de temas dinamicos pueda actualizar el tema
@@ -62,13 +85,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       //
       window.dispatchEvent(loginEvent);
     }
-    
+
     router.push(await obtenerRolDashboard());
   };
 
   //Login que se usa cuando no queremos redirigir al usuario, util para cuando queremos entrar para hacer el registro del usuario
-  const loginSinDashboard = async (token: string, rememberMe: boolean, data: any) => {
+  const loginSinDashboard = async (token: string, rememberMe: boolean, data: any, tenantParam?: string) => {
     Cookies.set('authToken', token, { expires: rememberMe ? 7 : undefined });
+
+    // Guardar tenant si se proporciona
+    if (tenantParam) {
+      saveTenantToLocalStorage(tenantParam);
+      setTenant(tenantParam);
+    }
+
     await almacenarLogin(data);
     setUsuarioAutenticado(true);
     //router.push(await obtenerRolDashboard());
@@ -214,7 +244,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         temaRipple: empresa.temaRipple || 'N'
       };
       localStorage.setItem('empresaThemeConfig', JSON.stringify(themeConfig));
-      console.log('💾 Configuración de tema almacenada:', themeConfig);
     }
     
     if (await compruebaRolUsuario({ ...data })) {
@@ -301,6 +330,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     Cookies.remove('authToken');
     localStorage.clear();
 
+    // Limpiar tenant del estado y localStorage
+    clearTenantFromLocalStorage();
+    setTenant(null);
+
     // Disparar evento personalizado para notificar el logout
     if (typeof window !== 'undefined') {
       const logoutEvent = new CustomEvent('user-logged-out');
@@ -323,6 +356,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   };
 
+  // Función para obtener el tenant actual
+  const getTenant = (): string | null => {
+    return tenant;
+  };
+
   // Función para registrar accesos fallidos
   const registrarAccesoFallido = async (empresaId: number, usuarioId: number, motivoFallo: string) => {
     try {
@@ -342,7 +380,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ usuarioAutenticado, login, logout, loginSinDashboard, registrarAccesoFallido, registrarAccesoBloqueado }}>
+    <AuthContext.Provider
+      value={{
+        usuarioAutenticado,
+        tenant,
+        login,
+        logout,
+        loginSinDashboard,
+        getTenant,
+        registrarAccesoFallido,
+        registrarAccesoBloqueado,
+        getMenuLateral
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

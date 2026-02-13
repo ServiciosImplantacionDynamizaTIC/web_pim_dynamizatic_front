@@ -8,6 +8,7 @@ import axios from 'axios'
 import jwtDefaultConfig from './jwtDefaultConfig'
 import { UsuariosControllerApi, settings } from '@/app/api-programa'
 import { getAccessToken } from '@/app/utility/Utils'
+import { getCurrentTenant } from '@/app/utility/TenantUtils'
 
 const api = new UsuariosControllerApi(settings)
 
@@ -32,6 +33,13 @@ export default class JwtService {
         if (accessToken) {
           config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
         }
+
+        // Añade el header X-Tenant con el tenant actual (multi-tenant)
+        const tenant = getCurrentTenant()
+        if (tenant) {
+          config.headers['X-Tenant'] = tenant
+        }
+
         return config
       },
       error => Promise.reject(error)
