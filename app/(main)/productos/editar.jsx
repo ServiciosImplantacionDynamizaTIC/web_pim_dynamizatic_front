@@ -241,6 +241,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                     <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
                                         <ProductoAtributo
                                         idProducto={idEditar}
+                                        tipoProductoId={producto.tipoProductoId}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                 </TabView>

@@ -39,7 +39,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                             activoSn: 'S' 
                         }
                     },
-                    order: 'nombre ASC'
+                    order: 'orden ASC'
                 });
                 
                 const data = await getAtributos(filtro);
@@ -305,14 +305,24 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                                                 <div className="font-bold">{atributo.nombre}</div>
                                                                 {atributo.descripcion && (
                                                                     <small className="p-text-secondary block mt-1">
-                                                                        {atributo.descripcion}
+                                                                        <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {atributo.descripcion}
                                                                     </small>
                                                                 )}
                                                                 {atributo.unidadMedida && (
-                                                                    <small className="p-text-secondary block">
-                                                                        {intl.formatMessage({ id: 'Unidad' })}: {atributo.unidadMedida}
+                                                                    <small className="p-text-secondary block mt-1">
+                                                                        <b>{intl.formatMessage({ id: 'Unidad Medida' })}:</b> {atributo.unidadMedida}
                                                                     </small>
                                                                 )}
+                                                                {atributo.valoresPermitidos && (
+                                                                    <small className="p-text-secondary block mt-1">
+                                                                        <b>{intl.formatMessage({ id: 'Valores Permitidos' })}:</b> {atributo.valoresPermitidos}
+                                                                    </small>
+                                                                )}
+                                                                {atributo.orden && (
+                                                                    <small className="p-text-secondary block mt-1">
+                                                                        <b>{intl.formatMessage({ id: 'Orden' })}:</b> {atributo.orden}
+                                                                    </small>
+                                                                )}                                                                
                                                             </div>
                                                         </label>
                                                     </div>
