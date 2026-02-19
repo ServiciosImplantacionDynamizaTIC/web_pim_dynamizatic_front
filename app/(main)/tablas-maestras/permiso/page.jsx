@@ -259,6 +259,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Atributos de Productos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Atributos de Productos-Borrar' },
 
+                //Multimedia de Productos
+                { header: intl.formatMessage({ id: 'Multimedia de Productos' }), seccion: 'Multimedia de Productos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Multimedia de Productos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Multimedia de Productos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Multimedia de Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Multimedia de Productos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Multimedia de Productos-Borrar' },
+
                 //Tipos de Producto
                 { header: intl.formatMessage({ id: 'Tipos de Producto' }), seccion: 'Tipos de Producto' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de Producto-Acceder' },
@@ -266,6 +274,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de Producto-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de Producto-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de Producto-Borrar' },
+
+                //Tipos de Uso Multimedia
+                { header: intl.formatMessage({ id: 'Tipos de Uso Multimedia' }), seccion: 'Tipos de Uso Multimedia' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de Uso Multimedia-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de Uso Multimedia-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de Uso Multimedia-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de Uso Multimedia-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de Uso Multimedia-Borrar' },
 
             ];
             // Obtenemos los roles

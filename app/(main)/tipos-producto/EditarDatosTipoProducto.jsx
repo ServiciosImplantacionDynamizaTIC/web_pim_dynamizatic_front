@@ -72,7 +72,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                 
                 const detalles = await getTipoProductoAtributoDetalles(filtro);
                 if (detalles && detalles.length > 0) {
-                    const atributosIds = detalles.map(detalle => detalle.atributoId);
+                    const atributosIds = detalles.map(detalle => detalle.id);
                     setAtributosSeleccionados(atributosIds);
                 }
             } catch (error) {
@@ -386,17 +386,12 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                                                 </div>
                                                                 {multimedia.descripcion && (
                                                                     <small className="p-text-secondary block mt-1">
-                                                                        {multimedia.descripcion}
+                                                                        <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {multimedia.descripcion}
                                                                     </small>
                                                                 )}
-                                                                {multimedia.tipoArchivo && (
+                                                                {multimedia.tipo && (
                                                                     <small className="p-text-secondary block">
-                                                                        {intl.formatMessage({ id: 'Tipo' })}: {multimedia.tipoArchivo}
-                                                                    </small>
-                                                                )}
-                                                                {multimedia.tamaño && (
-                                                                    <small className="p-text-secondary block">
-                                                                        {intl.formatMessage({ id: 'Tamaño' })}: {multimedia.tamaño}
+                                                                        <b>{intl.formatMessage({ id: 'Tipo' })}:</b> {multimedia.tipo}
                                                                     </small>
                                                                 )}
                                                             </div>

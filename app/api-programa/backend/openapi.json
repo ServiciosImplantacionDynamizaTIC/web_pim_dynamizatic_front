@@ -14963,6 +14963,309 @@
         "operationId": "TipoProductoController.find"
       }
     },
+    "/tipo-uso-multimedias/count": {
+      "get": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoUsoMultimedia model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoUsoMultimedia.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoUsoMultimedia>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoUsoMultimediaController.count"
+      }
+    },
+    "/tipo-uso-multimedias/{id}": {
+      "put": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoUsoMultimedia PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsoMultimedia"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoUsoMultimediaController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoUsoMultimedia PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsoMultimedia"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoUsoMultimediaController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoUsoMultimedia model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsoMultimediaWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsoMultimedia.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoUsoMultimediaController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoUsoMultimedia DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoUsoMultimediaController.deleteById"
+      }
+    },
+    "/tipo-uso-multimedias": {
+      "post": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoUsoMultimedia model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsoMultimedia"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoUsoMultimedia"
+              }
+            }
+          }
+        },
+        "operationId": "TipoUsoMultimediaController.create"
+      },
+      "patch": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoUsoMultimedia PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoUsoMultimedia.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoUsoMultimedia>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsoMultimediaPartial"
+              }
+            }
+          }
+        },
+        "operationId": "TipoUsoMultimediaController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "TipoUsoMultimediaController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoUsoMultimediaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoUsoMultimedia model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoUsoMultimediaWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsoMultimedia.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoUsoMultimediaController.find"
+      }
+    },
     "/traduccion-contenidos/count": {
       "get": {
         "x-controller-name": "TraduccionContenidoController",
@@ -18715,6 +19018,194 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<TraduccionContenido>"
       },
+      "TipoUsoMultimedia": {
+        "title": "TipoUsoMultimedia",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId"
+        ],
+        "additionalProperties": false
+      },
+      "NewTipoUsoMultimedia": {
+        "title": "NewTipoUsoMultimedia",
+        "type": "object",
+        "description": "(tsType: Omit<TipoUsoMultimedia, 'id'>, schemaOptions: { title: 'NewTipoUsoMultimedia', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoUsoMultimedia, 'id'>"
+      },
+      "TipoUsoMultimediaWithRelations": {
+        "title": "TipoUsoMultimediaWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoUsoMultimediaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TipoUsoMultimediaWithRelations"
+      },
+      "TipoUsoMultimediaPartial": {
+        "title": "TipoUsoMultimediaPartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoUsoMultimedia>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoUsoMultimedia>"
+      },
       "TipoProducto": {
         "title": "TipoProducto",
         "type": "object",
@@ -20991,21 +21482,11 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUso": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "galeria",
-              "principal",
-              "miniatura",
-              "detalle"
-            ]
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
           },
-          "esPrincipal": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
+          "ordenEnGrupo": {
             "type": "number",
             "nullable": true
           },
@@ -21031,6 +21512,7 @@
         "required": [
           "productoId",
           "multimediaId",
+          "tipoUsoMultimediaId",
           "usuarioCreacion"
         ],
         "additionalProperties": false
@@ -21048,21 +21530,11 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUso": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "galeria",
-              "principal",
-              "miniatura",
-              "detalle"
-            ]
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
           },
-          "esPrincipal": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
+          "ordenEnGrupo": {
             "type": "number",
             "nullable": true
           },
@@ -21088,6 +21560,7 @@
         "required": [
           "productoId",
           "multimediaId",
+          "tipoUsoMultimediaId",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -21109,21 +21582,11 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUso": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "galeria",
-              "principal",
-              "miniatura",
-              "detalle"
-            ]
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
           },
-          "esPrincipal": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
+          "ordenEnGrupo": {
             "type": "number",
             "nullable": true
           },
@@ -21149,6 +21612,7 @@
         "required": [
           "productoId",
           "multimediaId",
+          "tipoUsoMultimediaId",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -21170,21 +21634,11 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUso": {
-            "type": "string",
-            "nullable": true,
-            "enum": [
-              "galeria",
-              "principal",
-              "miniatura",
-              "detalle"
-            ]
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
           },
-          "esPrincipal": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
+          "ordenEnGrupo": {
             "type": "number",
             "nullable": true
           },
@@ -23280,6 +23734,10 @@
           "usuarioModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -23330,6 +23788,10 @@
             "nullable": false
           },
           "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -23388,6 +23850,10 @@
           "usuarioModificacion": {
             "type": "number",
             "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -23442,6 +23908,10 @@
             "nullable": false
           },
           "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -35288,6 +35758,9 @@
                   },
                   "usuarioModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -35306,7 +35779,8 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuarioModificacion"
+                    "usuarioModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -35388,6 +35862,9 @@
                   },
                   "usuarioModificacion": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -35406,7 +35883,8 @@
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuarioModificacion"
+                    "usuarioModificacion",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -37362,13 +37840,10 @@
                   "multimediaId": {
                     "type": "boolean"
                   },
-                  "tipoUso": {
+                  "tipoUsoMultimediaId": {
                     "type": "boolean"
                   },
-                  "esPrincipal": {
-                    "type": "boolean"
-                  },
-                  "orden": {
+                  "ordenEnGrupo": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -37394,9 +37869,8 @@
                     "id",
                     "productoId",
                     "multimediaId",
-                    "tipoUso",
-                    "esPrincipal",
-                    "orden",
+                    "tipoUsoMultimediaId",
+                    "ordenEnGrupo",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -37462,13 +37936,10 @@
                   "multimediaId": {
                     "type": "boolean"
                   },
-                  "tipoUso": {
+                  "tipoUsoMultimediaId": {
                     "type": "boolean"
                   },
-                  "esPrincipal": {
-                    "type": "boolean"
-                  },
-                  "orden": {
+                  "ordenEnGrupo": {
                     "type": "boolean"
                   },
                   "fechaCreacion": {
@@ -37494,9 +37965,8 @@
                     "id",
                     "productoId",
                     "multimediaId",
-                    "tipoUso",
-                    "esPrincipal",
-                    "orden",
+                    "tipoUsoMultimediaId",
+                    "ordenEnGrupo",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
@@ -39518,6 +39988,193 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoProducto>"
+      },
+      "TipoUsoMultimedia.Filter": {
+        "type": "object",
+        "title": "TipoUsoMultimedia.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion",
+                    "activoSn"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoUsoMultimedia.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoUsoMultimedia>"
+      },
+      "TipoUsoMultimedia.Filter1": {
+        "type": "object",
+        "title": "TipoUsoMultimedia.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoUsoMultimedia.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion",
+                    "activoSn"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoUsoMultimedia.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoUsoMultimedia>"
       },
       "TraduccionContenido.Filter": {
         "type": "object",

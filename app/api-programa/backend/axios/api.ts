@@ -8652,12 +8652,6 @@ export interface Multimedia {
     'empresaId': number;
     /**
      * 
-     * @type {number}
-     * @memberof Multimedia
-     */
-    'categoriaId'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof Multimedia
      */
@@ -8704,6 +8698,12 @@ export interface Multimedia {
      * @memberof Multimedia
      */
     'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Multimedia
+     */
+    'orden'?: number | null;
 }
 /**
  * 
@@ -8805,12 +8805,6 @@ export interface MultimediaPartial {
     'empresaId'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof MultimediaPartial
-     */
-    'categoriaId'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof MultimediaPartial
      */
@@ -8857,6 +8851,12 @@ export interface MultimediaPartial {
      * @memberof MultimediaPartial
      */
     'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof MultimediaPartial
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: MultimediaWithRelations, schemaOptions: { includeRelations: true })
@@ -8876,12 +8876,6 @@ export interface MultimediaWithRelations {
      * @memberof MultimediaWithRelations
      */
     'empresaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaWithRelations
-     */
-    'categoriaId'?: number | null;
     /**
      * 
      * @type {string}
@@ -8930,6 +8924,12 @@ export interface MultimediaWithRelations {
      * @memberof MultimediaWithRelations
      */
     'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof MultimediaWithRelations
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<Archivo, \'id\'>, schemaOptions: { title: \'NewArchivo\', exclude: [ \'id\' ] })
@@ -10897,12 +10897,6 @@ export interface NewMultimedia {
     'empresaId': number;
     /**
      * 
-     * @type {number}
-     * @memberof NewMultimedia
-     */
-    'categoriaId'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof NewMultimedia
      */
@@ -10949,6 +10943,12 @@ export interface NewMultimedia {
      * @memberof NewMultimedia
      */
     'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewMultimedia
+     */
+    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<Notificacion, \'id\'>, schemaOptions: { title: \'NewNotificacion\', exclude: [ \'id\' ] })
@@ -11681,22 +11681,16 @@ export interface NewProductoMultimedia {
     'multimediaId': number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof NewProductoMultimedia
      */
-    'tipoUso'?: NewProductoMultimediaTipoUsoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoMultimedia
-     */
-    'esPrincipal'?: string | null;
+    'tipoUsoMultimediaId': number;
     /**
      * 
      * @type {number}
      * @memberof NewProductoMultimedia
      */
-    'orden'?: number | null;
+    'ordenEnGrupo'?: number | null;
     /**
      * 
      * @type {string}
@@ -11722,18 +11716,6 @@ export interface NewProductoMultimedia {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum NewProductoMultimediaTipoUsoEnum {
-    Galeria = 'galeria',
-    Principal = 'principal',
-    Miniatura = 'miniatura',
-    Detalle = 'detalle'
-}
-
 /**
  * (tsType: Omit<ProductoSeo, \'id\'>, schemaOptions: { title: \'NewProductoSeo\', exclude: [ \'id\' ] })
  * @export
@@ -12302,6 +12284,61 @@ export interface NewTipoProductoMultimediaDetalle {
      * @memberof NewTipoProductoMultimediaDetalle
      */
     'multimediaId': number;
+}
+/**
+ * (tsType: Omit<TipoUsoMultimedia, \'id\'>, schemaOptions: { title: \'NewTipoUsoMultimedia\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoUsoMultimedia
+ */
+export interface NewTipoUsoMultimedia {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewTipoUsoMultimedia
+     */
+    'activoSn'?: string | null;
 }
 /**
  * (tsType: Omit<TraduccionContenido, \'id\'>, schemaOptions: { title: \'NewTraduccionContenido\', exclude: [ \'id\' ] })
@@ -15662,22 +15699,16 @@ export interface ProductoMultimedia {
     'multimediaId': number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ProductoMultimedia
      */
-    'tipoUso'?: ProductoMultimediaTipoUsoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMultimedia
-     */
-    'esPrincipal'?: string | null;
+    'tipoUsoMultimediaId': number;
     /**
      * 
      * @type {number}
      * @memberof ProductoMultimedia
      */
-    'orden'?: number | null;
+    'ordenEnGrupo'?: number | null;
     /**
      * 
      * @type {string}
@@ -15703,18 +15734,6 @@ export interface ProductoMultimedia {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ProductoMultimediaTipoUsoEnum {
-    Galeria = 'galeria',
-    Principal = 'principal',
-    Miniatura = 'miniatura',
-    Detalle = 'detalle'
-}
-
 /**
  * 
  * @export
@@ -15821,22 +15840,16 @@ export interface ProductoMultimediaPartial {
     'multimediaId'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ProductoMultimediaPartial
      */
-    'tipoUso'?: ProductoMultimediaPartialTipoUsoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMultimediaPartial
-     */
-    'esPrincipal'?: string | null;
+    'tipoUsoMultimediaId'?: number;
     /**
      * 
      * @type {number}
      * @memberof ProductoMultimediaPartial
      */
-    'orden'?: number | null;
+    'ordenEnGrupo'?: number | null;
     /**
      * 
      * @type {string}
@@ -15862,18 +15875,6 @@ export interface ProductoMultimediaPartial {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ProductoMultimediaPartialTipoUsoEnum {
-    Galeria = 'galeria',
-    Principal = 'principal',
-    Miniatura = 'miniatura',
-    Detalle = 'detalle'
-}
-
 /**
  * (tsType: ProductoMultimediaWithRelations, schemaOptions: { includeRelations: true })
  * @export
@@ -15900,22 +15901,16 @@ export interface ProductoMultimediaWithRelations {
     'multimediaId': number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof ProductoMultimediaWithRelations
      */
-    'tipoUso'?: ProductoMultimediaWithRelationsTipoUsoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoMultimediaWithRelations
-     */
-    'esPrincipal'?: string | null;
+    'tipoUsoMultimediaId': number;
     /**
      * 
      * @type {number}
      * @memberof ProductoMultimediaWithRelations
      */
-    'orden'?: number | null;
+    'ordenEnGrupo'?: number | null;
     /**
      * 
      * @type {string}
@@ -15941,18 +15936,6 @@ export interface ProductoMultimediaWithRelations {
      */
     'usuarioModificacion'?: number | null;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ProductoMultimediaWithRelationsTipoUsoEnum {
-    Galeria = 'galeria',
-    Principal = 'principal',
-    Miniatura = 'miniatura',
-    Detalle = 'detalle'
-}
-
 /**
  * (tsType: Partial<Producto>, schemaOptions: { partial: true })
  * @export
@@ -18783,6 +18766,269 @@ export interface TipoProductoWithRelations {
      * @memberof TipoProductoWithRelations
      */
     'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoUsoMultimedia
+ */
+export interface TipoUsoMultimedia {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimedia
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimedia
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimedia
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimedia
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimedia
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimedia
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimedia
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimedia
+     */
+    'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimedia
+     */
+    'activoSn'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoUsoMultimediaFilter
+ */
+export interface TipoUsoMultimediaFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoUsoMultimediaFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoUsoMultimediaFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoUsoMultimediaFilter1
+ */
+export interface TipoUsoMultimediaFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoUsoMultimediaFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoUsoMultimediaFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoUsoMultimediaFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoUsoMultimedia>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoUsoMultimediaPartial
+ */
+export interface TipoUsoMultimediaPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaPartial
+     */
+    'activoSn'?: string | null;
+}
+/**
+ * (tsType: TipoUsoMultimediaWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoUsoMultimediaWithRelations
+ */
+export interface TipoUsoMultimediaWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'empresaId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'nombre'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'usuarioCreacion'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'usuarioModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TipoUsoMultimediaWithRelations
+     */
+    'activoSn'?: string | null;
 }
 /**
  * 
@@ -50994,6 +51240,612 @@ export class TipoProductoMultimediaDetalleControllerApi extends BaseAPI {
      */
     public tipoProductoMultimediaDetalleControllerUpdateById(id: number, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: AxiosRequestConfig) {
         return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerUpdateById(id, tipoProductoMultimediaDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoUsoMultimediaControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoUsoMultimediaControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-uso-multimedias/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoUsoMultimedia} [newTipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerCreate: async (newTipoUsoMultimedia?: NewTipoUsoMultimedia, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-uso-multimedias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoUsoMultimedia, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoUsoMultimediaControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-uso-multimedias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoUsoMultimediaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerFind: async (filter?: TipoUsoMultimediaFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-uso-multimedias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimediaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerFindById: async (id: number, filter?: TipoUsoMultimediaFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoUsoMultimediaControllerFindById', 'id', id)
+            const localVarPath = `/tipo-uso-multimedias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerReplaceById: async (id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoUsoMultimediaControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-uso-multimedias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoUsoMultimedia, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoUsoMultimediaPartial} [tipoUsoMultimediaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerUpdateAll: async (where?: { [key: string]: object; }, tipoUsoMultimediaPartial?: TipoUsoMultimediaPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-uso-multimedias`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoUsoMultimediaPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerUpdateById: async (id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoUsoMultimediaControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-uso-multimedias/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoUsoMultimedia, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoUsoMultimediaControllerApi - functional programming interface
+ * @export
+ */
+export const TipoUsoMultimediaControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoUsoMultimediaControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoUsoMultimedia} [newTipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerCreate(newTipoUsoMultimedia?: NewTipoUsoMultimedia, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoUsoMultimedia>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerCreate(newTipoUsoMultimedia, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoUsoMultimediaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerFind(filter?: TipoUsoMultimediaFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoUsoMultimediaWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimediaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerFindById(id: number, filter?: TipoUsoMultimediaFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoUsoMultimediaWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerReplaceById(id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerReplaceById(id, tipoUsoMultimedia, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoUsoMultimediaPartial} [tipoUsoMultimediaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerUpdateAll(where?: { [key: string]: object; }, tipoUsoMultimediaPartial?: TipoUsoMultimediaPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerUpdateAll(where, tipoUsoMultimediaPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoUsoMultimediaControllerUpdateById(id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoUsoMultimediaControllerUpdateById(id, tipoUsoMultimedia, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoUsoMultimediaControllerApi - factory interface
+ * @export
+ */
+export const TipoUsoMultimediaControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoUsoMultimediaControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoUsoMultimediaControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoUsoMultimedia} [newTipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerCreate(newTipoUsoMultimedia?: NewTipoUsoMultimedia, options?: any): AxiosPromise<TipoUsoMultimedia> {
+            return localVarFp.tipoUsoMultimediaControllerCreate(newTipoUsoMultimedia, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoUsoMultimediaControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoUsoMultimediaFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerFind(filter?: TipoUsoMultimediaFilter1, options?: any): AxiosPromise<Array<TipoUsoMultimediaWithRelations>> {
+            return localVarFp.tipoUsoMultimediaControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimediaFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerFindById(id: number, filter?: TipoUsoMultimediaFilter, options?: any): AxiosPromise<TipoUsoMultimediaWithRelations> {
+            return localVarFp.tipoUsoMultimediaControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerReplaceById(id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoUsoMultimediaControllerReplaceById(id, tipoUsoMultimedia, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoUsoMultimediaPartial} [tipoUsoMultimediaPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerUpdateAll(where?: { [key: string]: object; }, tipoUsoMultimediaPartial?: TipoUsoMultimediaPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoUsoMultimediaControllerUpdateAll(where, tipoUsoMultimediaPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoUsoMultimediaControllerUpdateById(id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoUsoMultimediaControllerUpdateById(id, tipoUsoMultimedia, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoUsoMultimediaControllerApi - object-oriented interface
+ * @export
+ * @class TipoUsoMultimediaControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoUsoMultimediaControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoUsoMultimedia} [newTipoUsoMultimedia] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerCreate(newTipoUsoMultimedia?: NewTipoUsoMultimedia, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerCreate(newTipoUsoMultimedia, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoUsoMultimediaFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerFind(filter?: TipoUsoMultimediaFilter1, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoUsoMultimediaFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerFindById(id: number, filter?: TipoUsoMultimediaFilter, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerReplaceById(id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerReplaceById(id, tipoUsoMultimedia, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TipoUsoMultimediaPartial} [tipoUsoMultimediaPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerUpdateAll(where?: { [key: string]: object; }, tipoUsoMultimediaPartial?: TipoUsoMultimediaPartial, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerUpdateAll(where, tipoUsoMultimediaPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoUsoMultimedia} [tipoUsoMultimedia] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoUsoMultimediaControllerApi
+     */
+    public tipoUsoMultimediaControllerUpdateById(id: number, tipoUsoMultimedia?: TipoUsoMultimedia, options?: AxiosRequestConfig) {
+        return TipoUsoMultimediaControllerApiFp(this.configuration).tipoUsoMultimediaControllerUpdateById(id, tipoUsoMultimedia, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
