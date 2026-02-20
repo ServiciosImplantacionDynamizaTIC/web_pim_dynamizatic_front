@@ -65,7 +65,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                         archivo: valor.multimediaNombre,
                         url: valor.multimediaUrl,
                         tipoUsoMultimediaId: valor.tipoUsoMultimediaId,
-                        orden: valor.orden
+                        ordenEnGrupo: valor.ordenEnGrupo || 0
                     };
                 });
                 
@@ -226,7 +226,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                 {/* Tipo de uso */}
                 <div>
                     <label className="block text-sm font-medium mb-1">
-                        {intl.formatMessage({ id: 'Tipo de Uso' })}
+                        <b>{intl.formatMessage({ id: 'Tipo de Uso' })}*</b>
                     </label>
                     <Dropdown
                         value={valorActual.tipoUsoMultimediaId}
@@ -242,60 +242,85 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         );
     };
 
+    const validacionesGuardarMultimedia = (datosMultimedia) => {
+        if (!datosMultimedia.tipoUsoMultimediaId) {
+            toast.current?.show({
+                severity: 'error',
+                summary: intl.formatMessage({ id: 'Error' }),
+                detail: intl.formatMessage({ id: 'El tipo de uso es obligatorio' }),
+                life: 3000,
+            });
+            return false;
+        }
+        return true;
+    }
+
     const guardarMultimedia = async () => {
         setGuardando(true);
         const usuario = getUsuarioSesion();
 
         try {
             const promesasGuardado = [];
+            let esCorrecto = true;
 
             for (const [multimediaId, valores] of Object.entries(valoresMultimedia)) {
-                // Solo guardar si hay un archivo
-                if (valores.url && valores.archivo) {
+                //
+                //Comprueba que la variable esCorrecto sea true ya que en el momento en el que un multimedia no cumpla las validaciones, se establecerá a false y se parará el proceso de guardado
+                //
+                if (esCorrecto) {
                     const datosMultimedia = {
                         productoId: idProducto,
                         multimediaId: parseInt(multimediaId),
                         tipoUsoMultimediaId: valores.tipoUsoMultimediaId,
-                        orden: valores.orden || 0,
+                        ordenEnGrupo: valores.ordenEnGrupo || 0,
                         usuarioCreacion: usuario.id,
                         usuarioModificacion: usuario.id
                     };
-
-                    if (valores.id) {
-                        // Actualizar existente
-                        promesasGuardado.push(patchProductoMultimedia(valores.id, datosMultimedia));
-                    } else {
-                        // Crear nuevo
-                        promesasGuardado.push(postProductoMultimedia(datosMultimedia));
+                    //
+                    //Lanzamos las validaciones, si encontramos algún error, se establecerá la variable esCorrecto a false y se parará el proceso de guardado
+                    //
+                    if(esCorrecto = validacionesGuardarMultimedia(datosMultimedia)){
+                        if (valores.id) {
+                            // Actualizar existente
+                            promesasGuardado.push(patchProductoMultimedia(valores.id, datosMultimedia));
+                        } else {
+                            // Crear nuevo
+                            promesasGuardado.push(postProductoMultimedia(datosMultimedia));
+                        }
                     }
                 }
             }
+            //
+            //Si todos los multimedia tratados cumplen las validaciones, guardamos los cambios
+            //
+            if (esCorrecto) {
 
-            await Promise.all(promesasGuardado);
+                await Promise.all(promesasGuardado);
 
-            toast.current?.show({
-                severity: 'success',
-                summary: intl.formatMessage({ id: 'Éxito' }),
-                detail: intl.formatMessage({ id: 'Multimedia guardado correctamente' }),
-                life: 3000,
-            });
+                toast.current?.show({
+                    severity: 'success',
+                    summary: intl.formatMessage({ id: 'Éxito' }),
+                    detail: intl.formatMessage({ id: 'Multimedia guardado correctamente' }),
+                    life: 3000,
+                });
 
-            // Recargar los datos
-            const filtroProductoMultimedia = JSON.stringify({
-                where: { and: { productoId: idProducto }}
-            });
-            const valoresData = await getProductosMultimedia(filtroProductoMultimedia);
-            const valoresMap = {};
-            valoresData.forEach(valor => {
-                valoresMap[valor.multimediaId] = {
-                    id: valor.id,
-                    archivo: valor.multimediaNombre,
-                    url: valor.multimediaUrl,
-                    tipoUsoMultimediaId: valor.tipoUsoMultimediaId,
-                    orden: valor.orden
-                };
-            });
-            setValoresMultimedia(valoresMap);
+                // Recargar los datos
+                /*const filtroProductoMultimedia = JSON.stringify({
+                    where: { and: { productoId: idProducto }}
+                });
+                const valoresData = await getProductosMultimedia(filtroProductoMultimedia);
+                const valoresMap = {};
+                valoresData.forEach(valor => {
+                    valoresMap[valor.multimediaId] = {
+                        id: valor.id,
+                        archivo: valor.multimediaNombre,
+                        url: valor.multimediaUrl,
+                        tipoUsoMultimediaId: valor.tipoUsoMultimediaId,
+                        ordenEnGrupo: valor.ordenEnGrupo || 0
+                    };
+                });
+                setValoresMultimedia(valoresMap);*/
+            }
 
         } catch (error) {
             console.error('Error guardando multimedia:', error);
@@ -336,8 +361,8 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                     {multimediaDefinidos
                         .sort((a, b) => {
                             // Obtener el orden de cada multimedia
-                            const ordenA = valoresMultimedia[a.id]?.orden || 0;
-                            const ordenB = valoresMultimedia[b.id]?.orden || 0;
+                            const ordenA = valoresMultimedia[a.id]?.ordenEnGrupo || 0;
+                            const ordenB = valoresMultimedia[b.id]?.ordenEnGrupo || 0;
                             
                             // Ordenar por orden del multimedia, luego por nombre
                             if (ordenA !== ordenB) {
@@ -362,8 +387,8 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                                 <div className="flex align-items-center mb-2">
                                     <InputNumber
                                         id={`orden_${multimediaDetalle.id}`}
-                                        value={valorActual.orden || 0}
-                                        onChange={(e) => actualizarValorMultimedia(multimediaDetalle.id, 'orden', e.value || 0)}
+                                        value={valorActual.ordenEnGrupo || 0}
+                                        onChange={(e) => actualizarValorMultimedia(multimediaDetalle.id, 'ordenEnGrupo', e.value || 0)}
                                         disabled={!estoyEditandoProducto || guardando}
                                         min={0}
                                         max={999}
