@@ -87,6 +87,17 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         cargarDatos();
     }, [idProducto, tipoProductoId]);
 
+    // Limpiar URLs de objeto al desmontar el componente
+    useEffect(() => {
+        return () => {
+            Object.values(valoresMultimedia).forEach(valor => {
+                if (valor.url && valor.url.startsWith('blob:')) {
+                    URL.revokeObjectURL(valor.url);
+                }
+            });
+        };
+    }, []);
+
     const actualizarValorMultimedia = (multimediaId, campo, valor) => {
         setValoresMultimedia(prev => ({
             ...prev,
@@ -97,6 +108,20 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         }));
     };
 
+    const seleccionarArchivo = (multimediaDetalle, archivo) => {
+        // Crear URL local para previsualización inmediata
+        const urlLocal = URL.createObjectURL(archivo);
+        
+        // Actualizar el estado con la información del archivo seleccionado
+        actualizarValorMultimedia(multimediaDetalle.id, 'archivo', archivo.name);
+        actualizarValorMultimedia(multimediaDetalle.id, 'url', urlLocal);
+        actualizarValorMultimedia(multimediaDetalle.id, 'archivoLocal', archivo);
+        actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', true);
+        
+        // Subir automáticamente el archivo
+        subirArchivo(multimediaDetalle, archivo);
+    };
+
     const subirArchivo = async (multimediaDetalle, archivo) => {
         setSubiendo(prev => ({ ...prev, [multimediaDetalle.id]: true }));
         
@@ -104,8 +129,16 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
             const carpeta = `producto/${idProducto}/multimedia`;
             const response = await postSubirImagen(carpeta, archivo.name, archivo);
             
+            // Limpiar la URL local y actualizar con la URL del servidor
+            const valorActual = valoresMultimedia[multimediaDetalle.id];
+            if (valorActual?.url && valorActual.url.startsWith('blob:')) {
+                URL.revokeObjectURL(valorActual.url);
+            }
+            
             actualizarValorMultimedia(multimediaDetalle.id, 'archivo', archivo.name);
             actualizarValorMultimedia(multimediaDetalle.id, 'url', response.originalUrl);
+            actualizarValorMultimedia(multimediaDetalle.id, 'archivoLocal', null);
+            actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', false);
             
             toast.current?.show({
                 severity: 'success',
@@ -116,6 +149,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
             
         } catch (error) {
             console.error('Error subiendo archivo:', error);
+            // En caso de error, mantener la previsualización local
             toast.current?.show({
                 severity: 'error',
                 summary: 'Error',
@@ -129,6 +163,12 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
 
     const eliminarMultimedia = async (multimediaDetalleId) => {
         const valorActual = valoresMultimedia[multimediaDetalleId];
+        
+        // Limpiar URL local si existe
+        if (valorActual?.url && valorActual.url.startsWith('blob:')) {
+            URL.revokeObjectURL(valorActual.url);
+        }
+        
         if (valorActual?.id) {
             try {
                 await deleteProductoMultimedia(valorActual.id);
@@ -174,43 +214,100 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                         mode="basic"
                         accept="image/*,video/*,audio/*,.pdf"
                         maxFileSize={10000000} // 10MB
-                        onSelect={(e) => subirArchivo(multimediaDetalle, e.files[0])}
+                        onSelect={(e) => seleccionarArchivo(multimediaDetalle, e.files[0])}
                         disabled={deshabilitado || estaSubiendo}
-                        auto={true}
+                        auto={false}
                         chooseLabel={estaSubiendo ? 
                             intl.formatMessage({ id: 'Subiendo...' }) : 
                             intl.formatMessage({ id: 'Seleccionar archivo' })
                         }
                         className="w-full"
                     />
+                    {valorActual.pendienteSubir && (
+                        <small className="text-orange-500 mt-1 block">
+                            <i className="pi pi-clock mr-1"></i>
+                            {intl.formatMessage({ id: 'Subiendo archivo...' })}
+                        </small>
+                    )}
                 </div>
 
                 {/* Previsualización del archivo */}
                 {valorActual.url && (
                     <div className="flex align-items-center gap-2">
-                        {valorActual.archivo && valorActual.archivo.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
-                            <Image
-                                src={valorActual.url}
-                                alt={valorActual.archivo}
-                                width="100"
-                                height="100"
-                                preview
-                                className="border-round"
-                            />
-                        ) : (
-                            <div className="flex align-items-center gap-2 p-2 border-1 border-round surface-border">
-                                <i className="pi pi-file text-2xl"></i>
-                                <span className="text-sm">{valorActual.archivo}</span>
-                            </div>
+                        {valorActual.archivo && (
+                            <>
+                                {/* Previsualización de imágenes */}
+                                {valorActual.archivo.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i) ? (
+                                    <Image
+                                        src={valorActual.url}
+                                        alt={valorActual.archivo}
+                                        width="100"
+                                        height="100"
+                                        preview
+                                        className="border-round shadow-2"
+                                    />
+                                ) : valorActual.archivo.match(/\.(mp4|webm|ogg|avi|mov)$/i) ? (
+                                    /* Previsualización de videos */
+                                    <div className="border-round overflow-hidden shadow-2">
+                                        <video 
+                                            width="100" 
+                                            height="100" 
+                                            controls 
+                                            style={{ objectFit: 'cover' }}
+                                        >
+                                            <source src={valorActual.url} />
+                                            Tu navegador no soporta el elemento video.
+                                        </video>
+                                    </div>
+                                ) : valorActual.archivo.match(/\.(mp3|wav|ogg|flac|m4a)$/i) ? (
+                                    /* Previsualización de audio */
+                                    <div className="flex align-items-center gap-2 p-3 border-1 border-round surface-border shadow-2" style={{minWidth: '100px'}}>
+                                        <i className="pi pi-volume-up text-2xl text-blue-500"></i>
+                                        <div>
+                                            <div className="text-sm font-medium">{intl.formatMessage({ id: 'Audio' })}</div>
+                                            <audio controls style={{width: '150px', height: '30px'}}>
+                                                <source src={valorActual.url} />
+                                                Tu navegador no soporta el elemento audio.
+                                            </audio>
+                                        </div>
+                                    </div>
+                                ) : valorActual.archivo.match(/\.pdf$/i) ? (
+                                    /* Previsualización de PDF */
+                                    <div className="flex align-items-center gap-2 p-3 border-1 border-round surface-border shadow-2">
+                                        <i className="pi pi-file-pdf text-2xl text-red-500"></i>
+                                        <span className="text-sm font-medium">{intl.formatMessage({ id: 'Documento PDF' })}</span>
+                                    </div>
+                                ) : (
+                                    /* Otros archivos */
+                                    <div className="flex align-items-center gap-2 p-3 border-1 border-round surface-border shadow-2">
+                                        <i className="pi pi-file text-2xl text-gray-500"></i>
+                                        <span className="text-sm font-medium">{valorActual.archivo}</span>
+                                    </div>
+                                )}
+                            </>
                         )}
-                        <a 
-                            href={valorActual.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-blue-500 text-sm"
-                        >
-                            {intl.formatMessage({ id: 'Ver archivo' })}
-                        </a>
+                        
+                        {/* Información y acciones */}
+                        <div className="flex flex-column gap-1">
+                            <span className="text-xs text-gray-600">{valorActual.archivo}</span>
+                            {valorActual.pendienteSubir ? (
+                                <span className="text-xs text-orange-500">
+                                    <i className="pi pi-clock mr-1"></i>
+                                    {intl.formatMessage({ id: 'Subiendo...' })}
+                                </span>
+                            ) : (
+                                <a 
+                                    href={valorActual.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-blue-500 text-xs"
+                                >
+                                    <i className="pi pi-external-link mr-1"></i>
+                                    {intl.formatMessage({ id: 'Ver archivo' })}
+                                </a>
+                            )}
+                        </div>
+                        
                         {estoyEditandoProducto && (
                             <Button
                                 icon="pi pi-trash"
