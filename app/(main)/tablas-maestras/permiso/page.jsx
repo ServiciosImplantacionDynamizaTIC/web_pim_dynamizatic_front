@@ -159,6 +159,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Atributos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Atributos-Borrar' },
 
+                // Campos Dinamicos
+                { header: intl.formatMessage({ id: 'Campos Dinamicos' }), seccion: 'Campos Dinamicos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Campos Dinamicos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Campos Dinamicos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Campos Dinamicos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Campos Dinamicos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Campos Dinamicos-Borrar' },
+
                 // Catálogos
                 { header: intl.formatMessage({ id: 'Catálogos' }), seccion: 'Catalogos' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Catalogos-Acceder' },

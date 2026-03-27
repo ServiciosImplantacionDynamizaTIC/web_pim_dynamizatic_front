@@ -880,7 +880,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             obtenerDatos();
         } catch (error) {
             //Si ha habido un error borrando el registro lo muestra
-            if (error.message === 'Request failed with status code 500' || error.response.data.error.message === "No se pudo eliminar el registro porque tiene otros registros relacionados.") {
+            if (error?.message === 'Request failed with status code 500' || error?.response?.data?.error?.message === "No se pudo eliminar el registro porque tiene otros registros relacionados.") {
                 toast.current?.show({
                     severity: "error",
                     summary: "ERROR",
@@ -892,8 +892,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 toast.current?.show({
                     severity: "error",
                     summary: "ERROR",
-                    detail: error.message,
-
+                    detail: error?.message,
                 });
             }
 
