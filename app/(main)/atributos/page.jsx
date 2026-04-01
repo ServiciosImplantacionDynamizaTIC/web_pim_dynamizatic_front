@@ -1,5 +1,6 @@
 "use client";
 import { deleteAtributo, getAtributos, getAtributosCount } from "@/app/api-endpoints/atributo";
+import { getProductosAtributo } from "@/app/api-endpoints/producto_atributo";
 import Crud from "../../components/shared/crud";
 import EditarAtributo from "./editar";
 import { useIntl } from 'react-intl'
@@ -7,6 +8,18 @@ import { getUsuarioSesion } from "../../utility/Utils";
 
 const Atributo = () => {
     const intl = useIntl();
+
+    const eliminarAtributoConValidacion = async (id) => {
+        const filtro = JSON.stringify({ where: { and: { atributoId: id } } });
+        const productosAtributo = await getProductosAtributo(filtro);
+        if (productosAtributo && productosAtributo.length > 0) {
+            const tieneValor = productosAtributo.some(productoAtributo => productoAtributo.valor !== null && productoAtributo.valor !== undefined && productoAtributo.valor !== '');
+            if (tieneValor) {
+                throw new Error(intl.formatMessage({ id: 'No se puede eliminar el atributo porque tiene valores asignados a un producto' }));
+            }
+        }
+        return await deleteAtributo(id);
+    };
 
     const columnas = [
         { campo: 'grupoAtributoNombre', header: intl.formatMessage({ id: 'Grupo Atributo' }), tipo: 'string' },
@@ -29,7 +42,7 @@ const Atributo = () => {
                 editarComponente={<EditarAtributo />}
                 seccion={"Atributos"}
                 columnas={columnas}
-                deleteRegistro={deleteAtributo}
+                deleteRegistro={eliminarAtributoConValidacion}
             />
         </div>
     );
