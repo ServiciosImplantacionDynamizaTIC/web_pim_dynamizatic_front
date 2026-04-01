@@ -56,6 +56,9 @@ const EditarProductoSeo = ({ idEditar: idEditarSeo, setIdEditar: setIdEditarSeo,
                     ? { usuarioModificacion: usuarioSesion.id } 
                     : { usuarioCreacion: usuarioSesion.id })
             };
+            if (!isEdit) {
+                delete productoSeoData.id;
+            }
 
             let resultado;
             if (isEdit) {

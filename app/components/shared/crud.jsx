@@ -892,7 +892,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 toast.current?.show({
                     severity: "error",
                     summary: "ERROR",
-                    detail: error?.message,
+                    detail: error?.message || intl.formatMessage({ id: 'Ha ocurrido un error al eliminar el registro.' }),
+                    life: 3000,
                 });
             }
 

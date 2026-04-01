@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -9,6 +9,7 @@ import ArchivoInput from "../../components/shared/archivo_input";
 import { InputSwitch } from 'primereact/inputswitch';
 import { FileUpload } from 'primereact/fileupload';
 import { Image } from 'primereact/image';
+import { Toast } from 'primereact/toast';
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
@@ -19,6 +20,7 @@ import { devuelveBasePath } from "../../utility/Utils";
 
 const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEditandoProducto, listaTipoArchivos }) => {
     const intl = useIntl();
+    const toast = useRef(null);
     
     const [categorias, setCategorias] = useState([]);
     const [marcas, setMarcas] = useState([]);
@@ -233,6 +235,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
 
     return (
         <>
+            <Toast ref={toast} />
             <Fieldset legend={intl.formatMessage({ id: 'Información básica' })} collapsed={false} toggleable>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
@@ -272,6 +275,14 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                                         accept="image/*"
                                         maxFileSize={2000000}
                                         onSelect={manejarSeleccionImagenPrincipal}
+                                        onValidationFail={() => {
+                                            toast.current?.show({
+                                                severity: 'error',
+                                                summary: intl.formatMessage({ id: 'Archivo demasiado grande' }),
+                                                detail: intl.formatMessage({ id: 'La imagen supera el tamaño máximo permitido de 2MB. Por favor, selecciona una imagen más pequeña.' }),
+                                                life: 5000
+                                            });
+                                        }}
                                         chooseLabel={intl.formatMessage({ id: 'Seleccionar imagen' })}
                                         disabled={estadoGuardando}
                                         className="w-full"
@@ -309,12 +320,13 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="ean">{intl.formatMessage({ id: 'EAN' })}</label>
+                        <label htmlFor="ean"><b>{intl.formatMessage({ id: 'EAN' })}*</b></label>
                         <InputText 
                             id="ean"
                             value={producto?.ean || ''}
                             placeholder={intl.formatMessage({ id: 'Código EAN del producto' })}
                             onChange={(e) => setProducto({ ...producto, ean: e.target.value })}
+                            className={`${(estadoGuardando && !producto?.ean) ? "p-invalid" : ""}`}
                             maxLength={50}
                             disabled={estadoGuardando}
                         />
@@ -330,7 +342,6 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             placeholder={intl.formatMessage({ id: 'Selecciona una categoría' })}
                             className={`${(estadoGuardando && !producto?.categoriaId) ? "p-invalid" : ""}`}
                             disabled={estadoGuardando || cargandoCategorias}
-                            loading={cargandoCategorias}
                             showClear
                         />
                     </div>
@@ -344,7 +355,6 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             onChange={(e) => setProducto({ ...producto, marcaId: e.value })}
                             placeholder={intl.formatMessage({ id: 'Selecciona una marca' })}
                             disabled={estadoGuardando || cargandoMarcas}
-                            loading={cargandoMarcas}
                             showClear
                         />
                     </div>
@@ -359,13 +369,12 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             placeholder={intl.formatMessage({ id: 'Selecciona un estado' })}
                             className={`${(estadoGuardando && !producto?.estadoId) ? "p-invalid" : ""}`}
                             disabled={estadoGuardando || cargandoEstados}
-                            loading={cargandoEstados}
                             showClear
                         />
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="tipoProducto"><b>{intl.formatMessage({ id: 'Tipo de producto' })}</b></label>
+                        <label htmlFor="tipoProducto"><b>{intl.formatMessage({ id: 'Tipo de producto' })}*</b></label>
                         <Dropdown 
                             id="tipoProducto"
                             value={producto?.tipoProductoId || null}
@@ -373,7 +382,6 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             onChange={(e) => setProducto({ ...producto, tipoProductoId: e.value })}
                             placeholder={intl.formatMessage({ id: 'Selecciona un tipo de producto' })}
                             disabled={estadoGuardando || cargandoTiposProducto}
-                            loading={cargandoTiposProducto}
                             showClear
                         />
                     </div>

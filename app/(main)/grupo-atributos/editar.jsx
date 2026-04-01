@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getGrupoAtributo, postGrupoAtributo, patchGrupoAtributo } from "@/app/api-endpoints/grupo_atributo";
+import { getGrupoAtributo, getGrupoAtributos, postGrupoAtributo, patchGrupoAtributo } from "@/app/api-endpoints/grupo_atributo";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosGrupoAtributo from "./EditarDatosGrupoAtributo";
 import 'primeicons/primeicons.css';
@@ -12,7 +12,7 @@ import { useIntl } from 'react-intl';
 const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
-    
+
     const [grupoAtributo, setGrupoAtributo] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
@@ -29,13 +29,13 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
                 setGrupoAtributo(registro);
-                
+
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);  
+    }, [idEditar, rowData]);
 
     const validacionesImagenes = () => {
         return validarImagenes(grupoAtributo, listaTipoArchivos);
@@ -52,15 +52,65 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                 detail: intl.formatMessage({ id: 'Las imagenes deben de tener el formato correcto' }),
                 life: 3000,
             });
+            return false;
         }
-        
-        return (!validaNombre);
+
+        // if (validaNombre) {
+        //     toast.current?.show({
+        //         severity: 'error',
+        //         summary: 'ERROR',
+        //         detail: intl.formatMessage({ id: 'El nombre es obligatorio' }),
+        //         life: 3000,
+        //     });
+        //     return false;
+        // }
+
+        // Validación de duplicados
+        try {
+            const filtro = JSON.stringify({
+                where: {
+                    and: {
+                        nombre: grupoAtributo.nombre.trim(),
+                        empresaId: getUsuarioSesion()?.empresaId
+                    }
+                }
+            });
+
+            const existentes = await getGrupoAtributos(filtro);
+            const duplicado = existentes.find(g => g.id !== grupoAtributo.id);
+
+            if (duplicado) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Ya existe un Grupo de Atributos con el mismo nombre, asigna uno diferente' }),
+                    life: 5000,
+                });
+                return false;
+            }
+        } catch (error) {
+            console.error('Error validando duplicados:', error);
+            return false;
+        }
+
+        // Validación final de campos obligatorios
+        if (validaNombre) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' }),
+                life: 3000,
+            });
+            return false;
+        }
+
+        return true;
     };
 
     const guardarGrupoAtributo = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        
+
         if (await validaciones()) {
             let objGuardar = { ...grupoAtributo };
             const usuarioActual = getUsuarioSesion()?.id;
@@ -73,7 +123,7 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
                 }
-                
+
                 const nuevoRegistro = await postGrupoAtributo(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -98,21 +148,12 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     usuarioModificacion: usuarioActual,
                     empresaId: getUsuarioSesion()?.empresaId,
                 };
-                
+
                 await patchGrupoAtributo(objGuardar.id, grupoAtributoAeditar);
                 await editarArchivos(grupoAtributo, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
-        } else {
-            let errorMessage = intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' });
-                        
-            toast.current?.show({
-                severity: 'error',
-                summary: 'ERROR',
-                detail: errorMessage,
-                life: 3000,
-            });
         }
         setEstadoGuardandoBoton(false);
         setEstadoGuardando(false);
@@ -138,11 +179,11 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
                         />
-                       
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarGrupoAtributo}
                                     className="mr-2"

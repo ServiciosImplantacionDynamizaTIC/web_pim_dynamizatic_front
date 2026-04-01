@@ -10,6 +10,9 @@ const ProductoSeo = ({ idProducto, estoyEditandoProducto }) => {
     const columnas = [
         { campo: 'metaTitulo', header: intl.formatMessage({ id: 'Meta Título' }), tipo: 'string' },
         { campo: 'slug', header: intl.formatMessage({ id: 'Slug' }), tipo: 'string' },
+        { campo: 'metaDescripcion', header: intl.formatMessage({ id: 'Meta Descripción' }), tipo: 'string' },
+        { campo: 'metaRobots', header: intl.formatMessage({ id: 'Meta Robots' }), tipo: 'string' },
+        { campo: 'urlCanonica', header: intl.formatMessage({ id: 'URL Canónica' }), tipo: 'string' },
    ]
 
    // 

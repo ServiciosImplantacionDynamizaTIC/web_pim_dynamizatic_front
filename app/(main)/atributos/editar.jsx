@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getAtributo, postAtributo, patchAtributo } from "@/app/api-endpoints/atributo";
+import { getAtributo, postAtributo, patchAtributo, getAtributos } from "@/app/api-endpoints/atributo";
 import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosAtributo from "./EditarDatosAtributo";
@@ -13,7 +13,7 @@ import { useIntl } from 'react-intl';
 const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
-    
+
     const [atributo, setAtributo] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
@@ -36,7 +36,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         const fetchData = async () => {
             // Cargar grupos de atributos disponibles
             try {
-                const filtro = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId, activoSn: 'S' },  } });
+                const filtro = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId, activoSn: 'S' }, } });
                 const grupoAtributos = await getGrupoAtributos(filtro);
                 setListaGrupoAtributos(grupoAtributos || []);
             } catch (error) {
@@ -47,13 +47,13 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
                 setAtributo(registro);
-                
+
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);  
+    }, [idEditar, rowData]);
 
     const validacionesImagenes = () => {
         return validarImagenes(atributo, listaTipoArchivos);
@@ -72,15 +72,57 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 detail: intl.formatMessage({ id: 'Las imagenes deben de tener el formato correcto' }),
                 life: 3000,
             });
+            return false;
         }
-        
-        return (!validaNombre && !validaTipoDato && !validaGrupoAtributo);
+
+        // Validación de duplicados
+        if (!validaNombre && !validaGrupoAtributo) {
+            try {
+                const filtro = JSON.stringify({
+                    where: {
+                        and: {
+                            grupoAtributoId: atributo.grupoAtributoId,
+                            nombre: atributo.nombre.trim()
+                        }
+                    }
+                });
+
+                const existentes = await getAtributos(filtro);
+                const duplicado = existentes.find(a => a.id !== atributo.id);
+
+                if (duplicado) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'Ya existe un atributo con ese nombre dentro del grupo de atributos.' }),
+                        life: 5000,
+                    });
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error validando duplicados:', error);
+                return false;
+            }
+        }
+
+        // Validación final de campos obligatorios
+        if (validaNombre || validaTipoDato || validaGrupoAtributo) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' }),
+                life: 3000,
+            });
+            return false;
+        }
+
+        return true;
     };
 
     const guardarAtributo = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        
+
         if (await validaciones()) {
             let objGuardar = { ...atributo };
             objGuardar['orden'] = objGuardar.orden || 0;
@@ -90,11 +132,11 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
-                
+
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
                 }
-                
+
                 const nuevoRegistro = await postAtributo(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -124,21 +166,12 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                 };
-                
+
                 await patchAtributo(objGuardar.id, atributoAeditar);
                 await editarArchivos(atributo, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
-        } else {
-            let errorMessage = intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' });
-                        
-            toast.current?.show({
-                severity: 'error',
-                summary: 'ERROR',
-                detail: errorMessage,
-                life: 3000,
-            });
         }
         setEstadoGuardandoBoton(false);
         setEstadoGuardando(false);
@@ -165,11 +198,11 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             isEdit={isEdit}
                             listaGrupoAtributos={listaGrupoAtributos}
                         />
-                       
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarAtributo}
                                     className="mr-2"

@@ -104,7 +104,7 @@ const EditarDatosProductoSeo = ({ productoSeo, setProductoSeo, estadoGuardando, 
                             onChange={(e) => manejarCambioInput(e, 'productoId')}
                             placeholder={intl.formatMessage({ id: 'Selecciona un producto' })}
                             disabled={estadoGuardando || !editable || !!idProducto} // Deshabilitar si hay idProducto específico
-                            loading={cargandoProductos}
+                            // loading={cargandoProductos}
                             filter={!idProducto} // Solo permitir filtro si no hay idProducto específico
                             showClear={!idProducto} // Solo mostrar limpiar si no hay idProducto específico
                         />

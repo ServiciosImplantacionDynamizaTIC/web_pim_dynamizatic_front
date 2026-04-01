@@ -166,7 +166,6 @@ const EditarDatosProductoMarketplace = ({ productoMarketplace, setProductoMarket
                             onChange={(e) => manejarCambioDropdown(e, 'productoId')}
                             placeholder={cargandoProductos ? intl.formatMessage({ id: 'Cargando productos...' }) : intl.formatMessage({ id: 'Seleccione un producto' })}
                             disabled={!editable || estadoGuardando || cargandoProductos || (idProducto && productos.length === 1)}
-                            loading={cargandoProductos}
                             filter
                             showClear
                             className={(!productoMarketplace?.productoId) ? 'p-invalid' : ''}
@@ -186,7 +185,6 @@ const EditarDatosProductoMarketplace = ({ productoMarketplace, setProductoMarket
                             onChange={manejarCambioMarketplace}
                             placeholder={cargandoMarketplaces ? intl.formatMessage({ id: 'Cargando marketplaces...' }) : intl.formatMessage({ id: 'Seleccione un marketplace' })}
                             disabled={!editable || estadoGuardando || cargandoMarketplaces}
-                            loading={cargandoMarketplaces}
                             filter
                             showClear
                             className={(!productoMarketplace?.marketplaceId) ? 'p-invalid' : ''}
@@ -206,7 +204,7 @@ const EditarDatosProductoMarketplace = ({ productoMarketplace, setProductoMarket
                     <div className="flex flex-column field gap-2 mt-2 col-12">
                         <label htmlFor="tituloPersonalizado">{intl.formatMessage({ id: 'Título Personalizado' })}</label>
                         <InputText
-                            inputId="tituloPersonalizado"
+                            id="tituloPersonalizado"
                             value={productoMarketplace?.tituloPersonalizado || ''}
                             onChange={(e) => manejarCambioInput(e, 'tituloPersonalizado')}
                             disabled={!editable || estadoGuardando}
@@ -218,7 +216,7 @@ const EditarDatosProductoMarketplace = ({ productoMarketplace, setProductoMarket
                     <div className="flex flex-column field gap-2 mt-2 col-12">
                         <label htmlFor="descripcionPersonalizada">{intl.formatMessage({ id: 'Descripción Personalizada' })}</label>
                         <InputTextarea
-                            inputId="descripcionPersonalizada"
+                            id="descripcionPersonalizada"
                             value={productoMarketplace?.descripcionPersonalizada || ''}
                             onChange={(e) => manejarCambioInput(e, 'descripcionPersonalizada')}
                             disabled={!editable || estadoGuardando}
@@ -230,7 +228,7 @@ const EditarDatosProductoMarketplace = ({ productoMarketplace, setProductoMarket
                     <div className="flex flex-column field gap-2 mt-2 col-12">
                         <label htmlFor="palabrasClavePersonalizadas">{intl.formatMessage({ id: 'Palabras Clave Personalizadas' })}</label>
                         <InputText
-                            inputId="palabrasClavePersonalizadas"
+                            id="palabrasClavePersonalizadas"
                             value={productoMarketplace?.palabrasClavePersonalizadas || ''}
                             onChange={(e) => manejarCambioInput(e, 'palabrasClavePersonalizadas')}
                             disabled={!editable || estadoGuardando}
