@@ -9,7 +9,7 @@ const Atributo = () => {
     const intl = useIntl();
 
     const columnas = [
-        { campo: 'grupoAtributonombre', header: intl.formatMessage({ id: 'Grupo Atributo' }), tipo: 'string' },
+        { campo: 'grupoAtributoNombre', header: intl.formatMessage({ id: 'Grupo Atributo' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'tipoDato', header: intl.formatMessage({ id: 'Tipo de Dato' }), tipo: 'string' },
         { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad Medida' }), tipo: 'string' },
@@ -25,7 +25,7 @@ const Atributo = () => {
                 getRegistrosCount={getAtributosCount}
                 botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Atributos"}
-                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
+                // filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarAtributo />}
                 seccion={"Atributos"}
                 columnas={columnas}

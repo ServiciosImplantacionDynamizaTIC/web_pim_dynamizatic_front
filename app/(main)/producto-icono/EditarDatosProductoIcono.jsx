@@ -162,7 +162,6 @@ const EditarDatosProductoIcono = ({ productoIcono, setProductoIcono, estadoGuard
                             onChange={(e) => manejarCambioDropdown(e, 'productoId')}
                             placeholder={cargandoProductos ? intl.formatMessage({ id: 'Cargando productos...' }) : intl.formatMessage({ id: 'Seleccione un producto' })}
                             disabled={!editable || estadoGuardando || cargandoProductos || (idProducto && productos.length === 1)}
-                            loading={cargandoProductos}
                             filter
                             showClear
                             className={(!productoIcono?.productoId) ? 'p-invalid' : ''}
@@ -197,7 +196,6 @@ const EditarDatosProductoIcono = ({ productoIcono, setProductoIcono, estadoGuard
                             onChange={manejarCambioIcono}
                             placeholder={cargandoIconos ? intl.formatMessage({ id: 'Cargando iconos...' }) : intl.formatMessage({ id: 'Seleccione un icono' })}
                             disabled={!editable || estadoGuardando || cargandoIconos}
-                            loading={cargandoIconos}
                             filter
                             showClear
                             className={(!productoIcono?.iconoId) ? 'p-invalid' : ''}
@@ -207,7 +205,7 @@ const EditarDatosProductoIcono = ({ productoIcono, setProductoIcono, estadoGuard
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="textoAsociado">{intl.formatMessage({ id: 'Texto Asociado' })}</label>
                         <InputText
-                            inputId="textoAsociado"
+                            id="textoAsociado"
                             value={productoIcono?.textoAsociado || ''}
                             onChange={(e) => manejarCambioInput(e, 'textoAsociado')}
                             disabled={!editable || estadoGuardando}

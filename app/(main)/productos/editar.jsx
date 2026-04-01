@@ -63,6 +63,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
     const validaciones = async () => {
         const validaSku = producto.sku === undefined || producto.sku === "";
+        const validaEan = producto.ean === undefined || producto.ean === "";
         const validaNombre = producto.nombre === undefined || producto.nombre === "";
         const validaCategoria = producto.categoriaId === undefined || producto.categoriaId === null || producto.categoriaId === "";
         const validaEstado = producto.estadoId === undefined || producto.estadoId === null || producto.estadoId === "";
@@ -79,7 +80,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             });
         }*/
         
-        return (!validaSku && !validaNombre && !validaCategoria && !validaEstado && !validaMarca && !validaTipoProducto);
+        return (!validaSku && !validaEan && !validaNombre && !validaCategoria && !validaEstado && !validaMarca && !validaTipoProducto);
     };
 
     const procesarImagenPrincipal = async (productoId) => {
@@ -151,6 +152,12 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     
                     setRegistroResult("insertado");
                     setIdEditar(nuevoRegistro.id);
+                    toast.current?.show({
+                        severity: 'success',
+                        summary: intl.formatMessage({ id: 'Producto creado' }),
+                        detail: intl.formatMessage({ id: 'El producto se ha creado correctamente. Ahora puedes completar el resto de información.' }),
+                        life: 5000,
+                    });
                 } else {
                     toast.current?.show({
                         severity: 'error',
@@ -242,13 +249,13 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                     <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
                                         <ProductoAtributo
                                         idProducto={idEditar}
-                                        tipoProductoId={producto.tipoProductoId}
+                                        tipoProductoId={producto?.tipoProductoId}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Multimedia del Producto' })}>
                                         <ProductoMultimedia
                                         idProducto={idEditar}
-                                        tipoProductoId={producto.tipoProductoId}
+                                        tipoProductoId={producto?.tipoProductoId}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                 </TabView>

@@ -8,11 +8,13 @@ const ProductoMarketplace = ({ idProducto, estoyEditandoProducto }) => {
     const intl = useIntl();
 
     const columnas = [
-        { campo: 'marketplace.nombre', header: intl.formatMessage({ id: 'Marketplace' }), tipo: 'string' },
+        { campo: 'marketplaceNombre', header: intl.formatMessage({ id: 'Marketplace' }), tipo: 'string' },
         { campo: 'tituloPersonalizado', header: intl.formatMessage({ id: 'Título Personalizado' }), tipo: 'string' },
-        { campo: 'activoEnMarketplace', header: intl.formatMessage({ id: 'Activo' }), tipo: 'sn' },
-        { campo: 'estadoSincronizacion', header: intl.formatMessage({ id: 'Estado Sincronización' }), tipo: 'string' },
-        { campo: 'fechaUltimaSincronizacion', header: intl.formatMessage({ id: 'Última Sincronización' }), tipo: 'fecha' },
+        { campo: 'descripcionPersonalizada', header: intl.formatMessage({ id: 'Descripción Personalizada' }), tipo: 'string' },
+        { campo: 'palabrasClavePersonalizadas', header: intl.formatMessage({ id: 'Palabras Clave Personalizadas' }), tipo: 'string' },
+        { campo: 'activoEnMarketplace', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
+        // { campo: 'estadoSincronizacion', header: intl.formatMessage({ id: 'Estado Sincronización' }), tipo: 'string' },
+        // { campo: 'fechaUltimaSincronizacion', header: intl.formatMessage({ id: 'Última Sincronización' }), tipo: 'string' },
    ]
 
    const botones = estoyEditandoProducto 

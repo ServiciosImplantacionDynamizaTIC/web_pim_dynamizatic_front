@@ -11,6 +11,7 @@ const ProductoIcono = ({ idProducto, estoyEditandoProducto }) => {
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'numero' },
         { campo: 'iconoNombre', header: intl.formatMessage({ id: 'Icono' }), tipo: 'string' },
         { campo: 'textoAsociado', header: intl.formatMessage({ id: 'Texto Asociado' }), tipo: 'string' },
+        { campo: 'fechaCreacion', header: intl.formatMessage({ id: 'Fecha de Creación' }), tipo: 'fecha' },
    ]
 
    // 
@@ -24,8 +25,8 @@ const ProductoIcono = ({ idProducto, estoyEditandoProducto }) => {
         <div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Iconos de Productos' })}
-                getRegistros={() => getProductosIcono(JSON.stringify(({ where: {and: { productoId: idProducto }}})))}
-                getRegistrosCount={() => getProductosIconoCount(JSON.stringify(({ where: {and: { productoId: idProducto }}})))}
+                getRegistros={() => getProductosIcono(JSON.stringify({ where: {and: { productoId: idProducto }}, order: "orden ASC, iconoNombre ASC" }))}
+                getRegistrosCount={() => getProductosIconoCount(JSON.stringify({ where: {and: { productoId: idProducto }}}))}
                 deleteRegistro={deleteProductoIcono}
                 botones={botones}
                 controlador={"ProductoIcono"}
