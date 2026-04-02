@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { getTipoProducto, postTipoProducto, patchTipoProducto } from "@/app/api-endpoints/tipo_producto";
+import { patchGrupoAtributo } from "@/app/api-endpoints/grupo_atributo";
+import { patchAtributo } from "@/app/api-endpoints/atributo";
 import EditarDatosTipoProducto from "./EditarDatosTipoProducto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -96,6 +98,23 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                         multimediasIds: tipoProducto.multimediasIds || []
                     };
                     resultado = await patchTipoProducto(idEditarTipo, tipoProductoData);
+
+                    // Guardar órdenes de grupos de atributos modificados
+                    if (tipoProducto._gruposOrdenModificados) {
+                        const promesasGrupos = Object.entries(tipoProducto._gruposOrdenModificados).map(
+                            ([grupoId, orden]) => patchGrupoAtributo(parseInt(grupoId), { orden })
+                        );
+                        await Promise.all(promesasGrupos);
+                    }
+
+                    // Guardar órdenes de atributos modificados
+                    if (tipoProducto._atributosOrdenModificados) {
+                        const promesasAtributos = Object.entries(tipoProducto._atributosOrdenModificados).map(
+                            ([atributoId, orden]) => patchAtributo(parseInt(atributoId), { orden })
+                        );
+                        await Promise.all(promesasAtributos);
+                    }
+
                     setRegistroResult("editado");
                 } else {
                     const tipoProductoData = {

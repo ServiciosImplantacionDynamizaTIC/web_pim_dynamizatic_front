@@ -7,32 +7,37 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { Checkbox } from 'primereact/checkbox';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { getAtributos } from "@/app/api-endpoints/atributo";
+import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
 import { getMultimedias } from "@/app/api-endpoints/multimedia";
 import { getTipoProductoAtributoDetalles } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
 import { getTipoProductoMultimediaDetalles } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
+import ListaCheckboxAgrupada from "@/app/components/shared/ListaCheckboxAgrupada";
 
 const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardando, editable, isEdit, idTipo }) => {
     const intl = useIntl();
     const usuarioSesion = getUsuarioSesion();
     
     const [atributos, setAtributos] = useState([]);
+    const [gruposAtributos, setGruposAtributos] = useState([]);
     const [multimedias, setMultimedias] = useState([]);
     const [cargandoAtributos, setCargandoAtributos] = useState(false);
     const [cargandoMultimedias, setCargandoMultimedias] = useState(false);
     const [atributosSeleccionados, setAtributosSeleccionados] = useState(tipoProducto?.atributosIds || []);
     const [multimediasSeleccionados, setMultimediasSeleccionados] = useState(tipoProducto?.multimediasIds || []);
     const [datosInicializeados, setDatosInicializeados] = useState(false);
+    const [gruposOrdenModificados, setGruposOrdenModificados] = useState({});
+    const [atributosOrdenModificados, setAtributosOrdenModificados] = useState({});
 
-    // Cargar atributos de la empresa
+    // Cargar atributos y sus grupos de la empresa
     useEffect(() => {
-        const cargarAtributos = async () => {
+        const cargarAtributosYGrupos = async () => {
             if (!isEdit || !idTipo) return;
             
             setCargandoAtributos(true);
             try {
-                const filtro = JSON.stringify({
+                const filtroActivos = JSON.stringify({
                     where: {
                         and: {
                             empresaId: usuarioSesion?.empresaId,
@@ -42,17 +47,22 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                     order: 'orden ASC'
                 });
                 
-                const data = await getAtributos(filtro);
-                setAtributos(data);
+                const [dataAtributos, dataGrupos] = await Promise.all([
+                    getAtributos(filtroActivos),
+                    getGrupoAtributos(filtroActivos)
+                ]);
+                
+                setAtributos(dataAtributos);
+                setGruposAtributos(dataGrupos);
             } catch (error) {
-                console.error('Error cargando atributos:', error);
+                console.error('Error cargando atributos y grupos:', error);
             } finally {
                 setCargandoAtributos(false);
             }
         };
 
         if (usuarioSesion?.empresaId && isEdit && idTipo) {
-            cargarAtributos();
+            cargarAtributosYGrupos();
         }
     }, [usuarioSesion?.empresaId, isEdit, idTipo]);
 
@@ -146,14 +156,16 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         }
     }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id, datosInicializeados]);
 
-    // Sincronizar selecciones con el tipo de producto
+    // Sincronizar selecciones y órdenes con el tipo de producto
     useEffect(() => {
         setTipoProducto(prev => ({
             ...prev,
             atributosIds: atributosSeleccionados,
-            multimediasIds: multimediasSeleccionados
+            multimediasIds: multimediasSeleccionados,
+            _gruposOrdenModificados: gruposOrdenModificados,
+            _atributosOrdenModificados: atributosOrdenModificados
         }));
-    }, [atributosSeleccionados, multimediasSeleccionados]);
+    }, [atributosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados]);
 
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;
@@ -168,29 +180,12 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         setTipoProducto(_tipoProducto);
     };
 
-    const manejarCambioAtributo = (atributoId, isChecked) => {
-        if (isChecked) {
-            setAtributosSeleccionados(prev => [...prev, atributoId]);
-        } else {
-            setAtributosSeleccionados(prev => prev.filter(id => id !== atributoId));
-        }
-    };
-
     const manejarCambioMultimedia = (multimediaId, isChecked) => {
         if (isChecked) {
             setMultimediasSeleccionados(prev => [...prev, multimediaId]);
         } else {
             setMultimediasSeleccionados(prev => prev.filter(id => id !== multimediaId));
         }
-    };
-
-    const seleccionarTodosAtributos = () => {
-        const todosIds = atributos.map(attr => attr.id);
-        setAtributosSeleccionados(todosIds);
-    };
-
-    const deseleccionarTodosAtributos = () => {
-        setAtributosSeleccionados([]);
     };
 
     const seleccionarTodosMultimedias = () => {
@@ -201,6 +196,41 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const deseleccionarTodosMultimedias = () => {
         setMultimediasSeleccionados([]);
     };
+
+    const manejarOrdenGrupoAtributo = (grupoId, nuevoOrden) => {
+        setGruposAtributos(prev => prev.map(g =>
+            g.id === grupoId ? { ...g, orden: nuevoOrden } : g
+        ));
+        setGruposOrdenModificados(prev => ({ ...prev, [grupoId]: nuevoOrden }));
+    };
+
+    const manejarOrdenAtributo = (atributoId, nuevoOrden) => {
+        setAtributos(prev => prev.map(a =>
+            a.id === atributoId ? { ...a, orden: nuevoOrden } : a
+        ));
+        setAtributosOrdenModificados(prev => ({ ...prev, [atributoId]: nuevoOrden }));
+    };
+
+    const renderItemAtributo = (atributo) => (
+        <div>
+            <div className="font-bold">{atributo.nombre}</div>
+            {atributo.descripcion && (
+                <small className="p-text-secondary block mt-1">
+                    <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {atributo.descripcion}
+                </small>
+            )}
+            {atributo.unidadMedida && (
+                <small className="p-text-secondary block mt-1">
+                    <b>{intl.formatMessage({ id: 'Unidad Medida' })}:</b> {atributo.unidadMedida}
+                </small>
+            )}
+            {atributo.valoresPermitidos && (
+                <small className="p-text-secondary block mt-1">
+                    <b>{intl.formatMessage({ id: 'Valores Permitidos' })}:</b> {atributo.valoresPermitidos}
+                </small>
+            )}
+        </div>
+    );
 
     return (
         <>
@@ -262,82 +292,25 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                     <div className="mt-4">
                         <TabView scrollable>
                             <TabPanel header={`${intl.formatMessage({ id: 'Atributos' })} (${atributosSeleccionados.length})`}>
-                                <Fieldset legend={intl.formatMessage({ id: 'Atributos Asociados' })} collapsed={false} toggleable>
-                                    <div className="flex justify-content-between align-items-center mb-3">
-                                        <h5>{intl.formatMessage({ id: 'Seleccione los atributos que pertenecen a este tipo de producto' })}</h5>
-                                        <div>
-                                            <button 
-                                                type="button" 
-                                                className="p-button p-button-text p-button-sm mr-2"
-                                                onClick={seleccionarTodosAtributos}
-                                                disabled={!editable || cargandoAtributos}
-                                            >
-                                                {intl.formatMessage({ id: 'Seleccionar Todos' })}
-                                            </button>
-                                            <button 
-                                                type="button" 
-                                                className="p-button p-button-text p-button-sm"
-                                                onClick={deseleccionarTodosAtributos}
-                                                disabled={!editable || cargandoAtributos}
-                                            >
-                                                {intl.formatMessage({ id: 'Deseleccionar Todos' })}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    {cargandoAtributos ? (
-                                        <div className="flex justify-content-center p-4">
-                                            <ProgressSpinner style={{width: '50px', height: '50px'}} />
-                                        </div>
-                                    ) : (
-                                        <div className="grid">
-                                            {atributos.map((atributo) => (
-                                                <div key={atributo.id} className="col-12 md:col-6 lg:col-4">
-                                                    <div className="field-checkbox p-3 border-1 border-round border-300 hover:border-primary transition-colors">
-                                                        <Checkbox 
-                                                            inputId={`atributo-${atributo.id}`}
-                                                            checked={atributosSeleccionados.includes(atributo.id)}
-                                                            onChange={(e) => manejarCambioAtributo(atributo.id, e.checked)}
-                                                            disabled={!editable || estadoGuardando}
-                                                        />
-                                                        <label htmlFor={`atributo-${atributo.id}`} className="ml-2 cursor-pointer">
-                                                            <div>
-                                                                <div className="font-bold">{atributo.nombre}</div>
-                                                                {atributo.descripcion && (
-                                                                    <small className="p-text-secondary block mt-1">
-                                                                        <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {atributo.descripcion}
-                                                                    </small>
-                                                                )}
-                                                                {atributo.unidadMedida && (
-                                                                    <small className="p-text-secondary block mt-1">
-                                                                        <b>{intl.formatMessage({ id: 'Unidad Medida' })}:</b> {atributo.unidadMedida}
-                                                                    </small>
-                                                                )}
-                                                                {atributo.valoresPermitidos && (
-                                                                    <small className="p-text-secondary block mt-1">
-                                                                        <b>{intl.formatMessage({ id: 'Valores Permitidos' })}:</b> {atributo.valoresPermitidos}
-                                                                    </small>
-                                                                )}
-                                                                {atributo.orden && (
-                                                                    <small className="p-text-secondary block mt-1">
-                                                                        <b>{intl.formatMessage({ id: 'Orden' })}:</b> {atributo.orden}
-                                                                    </small>
-                                                                )}                                                                
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                            {atributos.length === 0 && !cargandoAtributos && (
-                                                <div className="col-12">
-                                                    <div className="text-center p-4 text-500">
-                                                        {intl.formatMessage({ id: 'No hay atributos disponibles en su empresa' })}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </Fieldset>
+                                {/* <Fieldset legend={intl.formatMessage({ id: 'Atributos Asociados' })} collapsed={false} toggleable> */}
+                                    <ListaCheckboxAgrupada
+                                        items={atributos}
+                                        grupos={gruposAtributos}
+                                        seleccionados={atributosSeleccionados}
+                                        onSeleccionChange={setAtributosSeleccionados}
+                                        grupoIdField="grupoAtributoId"
+                                        cargando={cargandoAtributos}
+                                        editable={editable}
+                                        disabled={estadoGuardando}
+                                        renderItem={renderItemAtributo}
+                                        textoVacio={intl.formatMessage({ id: 'No hay atributos disponibles en su empresa' })}
+                                        titulo={intl.formatMessage({ id: 'Seleccione los atributos que pertenecen a este tipo de producto' })}
+                                        prefixId="atributo"
+                                        mostrarOrden={editable}
+                                        onOrdenGrupoChange={manejarOrdenGrupoAtributo}
+                                        onOrdenItemChange={manejarOrdenAtributo}
+                                    />
+                                {/* </Fieldset> */}
                             </TabPanel>
 
                             <TabPanel header={`${intl.formatMessage({ id: 'Multimedia' })} (${multimediasSeleccionados.length})`}>
