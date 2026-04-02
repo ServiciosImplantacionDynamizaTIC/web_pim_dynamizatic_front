@@ -26,12 +26,12 @@ export const deleteTipoProducto = async (idTipoProducto) => {
     try {
         const { data: dataTipoProducto } = await apiTipoProducto.tipoProductoControllerDeleteById(idTipoProducto)
         console.log('Respuesta deleteTipoProducto:', dataTipoProducto);
-        
+
         // Verificar si la respuesta contiene un error (cuando el backend devuelve 200 con error)
         if (dataTipoProducto && dataTipoProducto.error) {
             throw new Error(dataTipoProducto.error.message || 'Error al eliminar el registro');
         }
-        
+
         return dataTipoProducto
     } catch (error) {
         // Propagar el error para que el CRUD lo pueda capturar
@@ -41,6 +41,12 @@ export const deleteTipoProducto = async (idTipoProducto) => {
 }
 
 export const patchTipoProducto = async (idTipoProducto, objTipoProducto) => {
-    const { data: dataTipoProducto } = await apiTipoProducto.tipoProductoControllerUpdateById(idTipoProducto, objTipoProducto)
-    return dataTipoProducto
+    try {
+        const { data: dataTipoProducto } = await apiTipoProducto.tipoProductoControllerUpdateById(idTipoProducto, objTipoProducto)
+        return dataTipoProducto
+    } catch (error) {
+        console.error('Error en patchTipoProducto:', error);
+        throw error;
+    }
+
 }

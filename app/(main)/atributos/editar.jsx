@@ -127,7 +127,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             let objGuardar = { ...atributo };
             objGuardar['orden'] = objGuardar.orden || 0;
             const usuarioActual = getUsuarioSesion()?.id;
-            delete objGuardar.grupoAtributonombre;
+            delete objGuardar.grupoAtributoNombre;
 
             if (idEditar === 0) {
                 delete objGuardar.id;

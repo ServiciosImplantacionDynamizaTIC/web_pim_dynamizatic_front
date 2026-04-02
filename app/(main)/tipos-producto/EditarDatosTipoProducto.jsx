@@ -132,7 +132,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                 
                 const detalles = await getTipoProductoMultimediaDetalles(filtro);
                 if (detalles && detalles.length > 0) {
-                    const multimediasIds = detalles.map(detalle => detalle.multimediaId);
+                    const multimediasIds = detalles.map(detalle => detalle.id);
                     setMultimediasSeleccionados(multimediasIds);
                     setDatosInicializeados(true);
                 }
@@ -209,7 +209,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })} *</b></label>
                         <InputText
-                            inputId="nombre"
+                            id="nombre"
                             value={tipoProducto?.nombre || ''}
                             onChange={(e) => manejarCambioInput(e, 'nombre')}
                             disabled={!editable || estadoGuardando}
@@ -227,7 +227,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                     <div className="flex flex-column field gap-2 mt-2 col-12">
                         <label htmlFor="descripcion">{intl.formatMessage({ id: 'Descripción' })}</label>
                         <InputTextarea
-                            inputId="descripcion"
+                            id="descripcion"
                             value={tipoProducto?.descripcion || ''}
                             onChange={(e) => manejarCambioInput(e, 'descripcion')}
                             disabled={!editable || estadoGuardando}
