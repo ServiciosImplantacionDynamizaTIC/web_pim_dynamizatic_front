@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
@@ -28,13 +28,20 @@ import PhoneInput from 'react-phone-input-2'
 import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
 import { useTheme } from "@/app/providers/ThemeProvider";
-const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
+const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
-    botonesExtra }) => {
+    botonesExtra }, ref) => {
     const intl = useIntl()
     const router = useRouter();
     const { themeConfig } = useTheme(); // Hook para obtener el tema actual
+
+    // Exponer la función recargarDatos al componente padre
+    useImperativeHandle(ref, () => ({
+        recargarDatos: () => {
+            obtenerDatos();
+        }
+    }));
 
     // Función para obtener el color primario del tema actual
     const obtenerColorPrimario = () => {
@@ -1378,6 +1385,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             }
         </div>
     );
-};
+});
 
 export default Crud;
