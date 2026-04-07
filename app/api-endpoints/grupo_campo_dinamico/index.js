@@ -1,4 +1,4 @@
-import { GrupoCampoDinamicoControllerApi, settings } from "@/app/api-programa";
+﻿import { GrupoCampoDinamicoControllerApi, settings } from "@/app/api-programa";
 
 const apiGrupoCampoDinamico = new GrupoCampoDinamicoControllerApi(settings);
 
@@ -28,6 +28,12 @@ export const patchGrupoCampoDinamico = async (idRegistro, objRegistro) => {
 };
 
 export const deleteGrupoCampoDinamico = async (idRegistro) => {
+    const { data: estadoEliminacion } = await apiGrupoCampoDinamico.grupoCampoDinamicoControllerPuedeEliminar(idRegistro);
+
+    if (!estadoEliminacion?.puedeEliminar) {
+        throw new Error(estadoEliminacion?.motivo || "No se puede eliminar el grupo de campos dinámicos.");
+    }
+
     const { data: dataRegistro } = await apiGrupoCampoDinamico.grupoCampoDinamicoControllerDeleteById(idRegistro);
     return dataRegistro;
 };

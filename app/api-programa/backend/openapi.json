@@ -1463,6 +1463,38 @@
         "operationId": "CampoDinamicoController.count"
       }
     },
+    "/campo-dinamicos/{id}/puede-eliminar": {
+      "get": {
+        "x-controller-name": "CampoDinamicoController",
+        "x-operation-name": "puedeEliminar",
+        "tags": [
+          "CampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado de eliminación del campo dinámico"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "CampoDinamicoController.puedeEliminar"
+      }
+    },
     "/campo-dinamicos/{id}": {
       "put": {
         "x-controller-name": "CampoDinamicoController",
@@ -4996,6 +5028,38 @@
           }
         ],
         "operationId": "GrupoCampoDinamicoController.count"
+      }
+    },
+    "/grupo-campo-dinamicos/{id}/puede-eliminar": {
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "puedeEliminar",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado de eliminación del grupo de campos dinámicos"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoController.puedeEliminar"
       }
     },
     "/grupo-campo-dinamicos/{id}": {

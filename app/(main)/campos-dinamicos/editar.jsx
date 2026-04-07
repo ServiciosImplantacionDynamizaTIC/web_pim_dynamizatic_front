@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
@@ -30,6 +30,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
     const [opcionesCampo, setOpcionesCampo] = useState({
         multiselectSn: "N",
         valores: [],
+        tipoExtendido: null,
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -38,6 +39,8 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
 
     useEffect(() => {
         const fetchData = async () => {
+            setGruposSeleccionadosIds([]);
+
             try {
                 const filtro = JSON.stringify({
                     where: {
@@ -51,7 +54,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                 const grupos = await getGruposCampoDinamicos(filtro);
                 setGruposDisponibles(grupos || []);
             } catch (error) {
-                console.error("Error cargando grupos de campos dinamicos:", error);
+                console.error("Error cargando grupos de campos dinámicos:", error);
                 setGruposDisponibles([]);
             }
 
@@ -66,9 +69,10 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                             opcionesParseadas = {
                                 multiselectSn: json?.multiselectSn === "S" ? "S" : "N",
                                 valores: Array.isArray(json?.valores) ? json.valores : [],
+                                tipoExtendido: json?.tipoExtendido || null,
                             };
                         } catch (_error) {
-                            opcionesParseadas = { multiselectSn: "N", valores: [] };
+                            opcionesParseadas = { multiselectSn: "N", valores: [], tipoExtendido: null };
                         }
                     }
 
@@ -77,7 +81,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                         tipoCampo:
                             registro.tipoCampo === "select"
                                 ? (opcionesParseadas.multiselectSn === "S" ? "multiselect" : "lista")
-                                : (registro.tipoCampo || "texto"),
+                                : (opcionesParseadas.tipoExtendido || registro.tipoCampo || "texto"),
                     });
                     setOpcionesCampo(opcionesParseadas);
 
@@ -85,7 +89,9 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                         const detalles = await getGrupoCampoDinamicoDetalles(
                             JSON.stringify({
                                 where: {
-                                    campoDinamicoId: Number(registro.id),
+                                    and: {
+                                        campoDinamicoId: Number(registro.id),
+                                    },
                                 },
                                 order: ["id ASC"],
                             })
@@ -121,7 +127,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     obligatorioSn: "N",
                     orden: 0,
                 });
-                setOpcionesCampo({ multiselectSn: "N", valores: [] });
+                setOpcionesCampo({ multiselectSn: "N", valores: [], tipoExtendido: null });
                 setGruposSeleccionadosIds([]);
             }
         };
@@ -155,7 +161,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     toast.current?.show({
                         severity: "error",
                         summary: "ERROR",
-                        detail: intl.formatMessage({ id: "Ya existe un campo dinamico con ese nombre" }),
+                        detail: intl.formatMessage({ id: "Ya existe un campo dinámico con ese nombre" }),
                         life: 5000,
                     });
                     return false;
@@ -170,7 +176,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
             let detail = intl.formatMessage({ id: "Todos los campos obligatorios deben ser rellenados" });
 
             if (validaGrupo) {
-                detail = intl.formatMessage({ id: "Debe seleccionar un grupo de campos dinamicos" });
+                detail = intl.formatMessage({ id: "Debe seleccionar un grupo de campos dinámicos" });
             }
 
             toast.current?.show({
@@ -188,7 +194,11 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
     const guardarRelacionesGrupos = async (campoId, usuarioActual, idsSeleccionados) => {
         const detallesExistentes = await getGrupoCampoDinamicoDetalles(
             JSON.stringify({
-                where: { campoDinamicoId: Number(campoId) },
+                where: {
+                    and: {
+                        campoDinamicoId: Number(campoId),
+                    },
+                },
                 order: ["id ASC"],
             })
         );
@@ -246,19 +256,29 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
             const empresaActual = getUsuarioSesion()?.empresaId;
 
             const esLista = campoDinamico.tipoCampo === "lista" || campoDinamico.tipoCampo === "multiselect";
-            const opcionesFinal = esLista && (opcionesCampo?.valores || []).length
+            const esBooleano = campoDinamico.tipoCampo === "booleano";
+            const esTextoLargo = campoDinamico.tipoCampo === "texto largo";
+            const usaTipoExtendido = esBooleano || esTextoLargo;
+            const opcionesFinal = esLista
                 ? JSON.stringify({
                     multiselectSn: campoDinamico.tipoCampo === "multiselect" ? "S" : "N",
                     valores: opcionesCampo.valores,
+                    tipoExtendido: null,
                 })
-                : null;
+                : usaTipoExtendido
+                    ? JSON.stringify({
+                        multiselectSn: "N",
+                        valores: [],
+                        tipoExtendido: campoDinamico.tipoCampo,
+                    })
+                    : null;
 
             const objGuardar = {
                 empresaId: campoDinamico.empresaId || empresaActual,
                 nombre: campoDinamico.nombre.trim(),
                 etiqueta: campoDinamico.nombre.trim(),
                 descripcion: campoDinamico.descripcion || null,
-                tipoCampo: esLista ? "select" : (campoDinamico.tipoCampo || "texto"),
+                tipoCampo: esLista ? "select" : (usaTipoExtendido ? "texto" : (campoDinamico.tipoCampo || "texto")),
                 opciones: opcionesFinal,
                 obligatorioSn: campoDinamico.obligatorioSn || "N",
                 activoSn: campoDinamico.activoSn || "S",
@@ -292,7 +312,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     setIdEditar(null);
                 }
             } catch (error) {
-                console.error("Error guardando campo dinamico:", error);
+                console.error("Error guardando campo dinámico:", error);
                 const detallesError = error?.response?.data?.error?.details;
                 const detalleValidacion =
                     Array.isArray(detallesError) && detallesError.length > 0
@@ -333,7 +353,7 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {intl.formatMessage({ id: "Campo dinamico" }).toLowerCase()}</h2>
+                        <h2>{header} {intl.formatMessage({ id: "Campo dinámico" }).toLowerCase()}</h2>
 
                         <EditarDatosCampoDinamico
                             campoDinamico={campoDinamico}

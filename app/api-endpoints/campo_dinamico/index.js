@@ -1,4 +1,4 @@
-import { CampoDinamicoControllerApi, settings } from "@/app/api-programa";
+﻿import { CampoDinamicoControllerApi, settings } from "@/app/api-programa";
 
 const apiCampoDinamico = new CampoDinamicoControllerApi(settings);
 
@@ -23,6 +23,12 @@ export const postCampoDinamico = async (objCampoDinamico) => {
 };
 
 export const deleteCampoDinamico = async (idCampoDinamico) => {
+    const { data: estadoEliminacion } = await apiCampoDinamico.campoDinamicoControllerPuedeEliminar(idCampoDinamico);
+
+    if (!estadoEliminacion?.puedeEliminar) {
+        throw new Error(estadoEliminacion?.motivo || "No se puede eliminar el campo dinámico.");
+    }
+
     const { data: dataCampoDinamico } = await apiCampoDinamico.campoDinamicoControllerDeleteById(idCampoDinamico);
     return dataCampoDinamico;
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Fieldset } from "primereact/fieldset";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -32,10 +32,12 @@ const EditarDatosCampoDinamico = ({
 
     const tiposCampo = [
         { label: intl.formatMessage({ id: "Texto" }), value: "texto" },
-        { label: intl.formatMessage({ id: "Numero" }), value: "numero" },
+        { label: intl.formatMessage({ id: "Texto Largo" }), value: "texto largo" },
+        { label: intl.formatMessage({ id: "Número" }), value: "numero" },
         { label: intl.formatMessage({ id: "Fecha" }), value: "fecha" },
+        { label: intl.formatMessage({ id: "Booleano" }), value: "booleano" },
         { label: intl.formatMessage({ id: "Lista" }), value: "lista" },
-        { label: intl.formatMessage({ id: "Multiseleccion" }), value: "multiselect" },
+        { label: intl.formatMessage({ id: "Multiselección" }), value: "multiselect" },
     ];
 
     const mostrarCamposValores = campoDinamico.tipoCampo === "lista" || campoDinamico.tipoCampo === "multiselect";
@@ -113,11 +115,11 @@ const EditarDatosCampoDinamico = ({
 
     return (
         <>
-            <Fieldset legend={intl.formatMessage({ id: "Datos del campo dinamico" })}>
+            <Fieldset legend={intl.formatMessage({ id: "Datos del campo dinámico" })}>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                         <label htmlFor="gruposCampoDinamico">
-                            <b>{intl.formatMessage({ id: "Grupo de campos dinamicos" })}*</b>
+                            <b>{intl.formatMessage({ id: "Grupo de campos dinámicos" })}*</b>
                         </label>
                         <MultiSelect
                             inputId="gruposCampoDinamico"
@@ -154,7 +156,7 @@ const EditarDatosCampoDinamico = ({
                         <InputText
                             id="nombre"
                             value={campoDinamico.nombre}
-                            placeholder={intl.formatMessage({ id: "Nombre del campo dinamico" })}
+                            placeholder={intl.formatMessage({ id: "Nombre del campo dinámico" })}
                             onChange={(e) => setCampoDinamico({ ...campoDinamico, nombre: e.target.value })}
                             className={`${estadoGuardando && campoDinamico.nombre === "" ? "p-invalid" : ""}`}
                             maxLength={100}
@@ -167,7 +169,7 @@ const EditarDatosCampoDinamico = ({
                         <InputNumber
                             id="orden"
                             value={campoDinamico.orden || 0}
-                            placeholder={intl.formatMessage({ id: "Orden de visualizacion" })}
+                            placeholder={intl.formatMessage({ id: "Orden de visualización" })}
                             onValueChange={(e) => setCampoDinamico({ ...campoDinamico, orden: e.value || 0 })}
                             disabled={estadoGuardando || !editable}
                             min={0}
@@ -252,11 +254,11 @@ const EditarDatosCampoDinamico = ({
                     )}
 
                     <div className="flex flex-column field gap-2 mt-2 col-12">
-                        <label htmlFor="descripcion">{intl.formatMessage({ id: "Descripcion" })}</label>
+                        <label htmlFor="descripcion">{intl.formatMessage({ id: "Descripción" })}</label>
                         <InputTextarea
                             id="descripcion"
                             value={campoDinamico.descripcion || ""}
-                            placeholder={intl.formatMessage({ id: "Descripcion del campo dinamico" })}
+                            placeholder={intl.formatMessage({ id: "Descripción del campo dinámico" })}
                             onChange={(e) => setCampoDinamico({ ...campoDinamico, descripcion: e.target.value })}
                             rows={3}
                             disabled={estadoGuardando || !editable}

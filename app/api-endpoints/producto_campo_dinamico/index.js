@@ -1,4 +1,4 @@
-import { ProductoCampoDinamicoValorControllerApi, settings } from "@/app/api-programa";
+﻿import { ProductoCampoDinamicoValorControllerApi, settings } from "@/app/api-programa";
 
 const apiProductoCampoDinamico = new ProductoCampoDinamicoValorControllerApi(settings);
 

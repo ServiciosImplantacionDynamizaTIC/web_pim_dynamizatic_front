@@ -468,7 +468,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                         tipoProductoId={producto?.tipoProductoId}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Campos dinamicos' })}>
+                                    <TabPanel header={intl.formatMessage({ id: 'Campos dinámicos' })}>
                                         <ProductoCamposDinamicos
                                             key={`tab-campos-dinamicos-${idEditar ?? 0}`}
                                             idProducto={idEditar}

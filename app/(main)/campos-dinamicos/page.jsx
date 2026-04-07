@@ -4,7 +4,6 @@ import Crud from "../../components/shared/crud";
 import { useIntl } from "react-intl";
 import { getUsuarioSesion } from "../../utility/Utils";
 import { deleteCampoDinamico, getCamposDinamicos, getCamposDinamicosCount } from "@/app/api-endpoints/campo_dinamico";
-import { getProductoCampoDinamicos } from "@/app/api-endpoints/producto_campo_dinamico";
 import EditarCampoDinamico from "./editar";
 
 const CamposDinamicos = () => {
@@ -16,15 +15,6 @@ const CamposDinamicos = () => {
         { campo: "activoSn", header: intl.formatMessage({ id: "Activo" }), tipo: "booleano" },
     ];
 
-    const eliminarCampoDinamico = async (idCampoDinamico) => {
-        const filtroValores = JSON.stringify({where: { and: {campoDinamicoId: idCampoDinamico}}});
-        const valoresCampo = await getProductoCampoDinamicos(filtroValores);
-        if (valoresCampo && valoresCampo.length > 0) {
-            throw new Error("No se puede eliminar el campo dinamico porque ya tiene valores en productos.");
-        }
-        return deleteCampoDinamico(idCampoDinamico);
-    };
-
     return (
         <div>
             <Crud
@@ -35,8 +25,9 @@ const CamposDinamicos = () => {
                 controlador={"Campos Dinamicos"}
                 filtradoBase={{ empresaId: getUsuarioSesion()?.empresaId }}
                 editarComponente={<EditarCampoDinamico />}
+                seccion={"Campos Dinamicos"}
                 columnas={columnas}
-                deleteRegistro={eliminarCampoDinamico}
+                deleteRegistro={deleteCampoDinamico}
             />
         </div>
     );
