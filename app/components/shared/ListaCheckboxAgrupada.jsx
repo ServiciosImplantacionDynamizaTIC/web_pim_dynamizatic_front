@@ -50,6 +50,8 @@ const ListaCheckboxAgrupada = ({
 
     // Guardamos el orden original de los grupos (de la BD) para que no se reordenen dinámicamente
     const ordenOriginalGrupos = useRef(null);
+    // Guardamos el orden original de los ítems por grupo (de la BD) para que no se reordenen dinámicamente
+    const ordenOriginalItems = useRef(null);
 
     // Agrupar ítems por su grupo y ordenar
     const itemsAgrupados = useMemo(() => {
@@ -90,26 +92,44 @@ const ListaCheckboxAgrupada = ({
         // Aplicar el orden original guardado
         const gruposOrdenados = ordenOriginalGrupos.current
             ? gruposConItems.sort((a, b) => {
-                const idxA = ordenOriginalGrupos.current.indexOf(a.grupo.id);
-                const idxB = ordenOriginalGrupos.current.indexOf(b.grupo.id);
-                const posA = idxA === -1 ? Number.MAX_SAFE_INTEGER : idxA;
-                const posB = idxB === -1 ? Number.MAX_SAFE_INTEGER : idxB;
-                return posA - posB;
+                const indiceA = ordenOriginalGrupos.current.indexOf(a.grupo.id);
+                const indiceB = ordenOriginalGrupos.current.indexOf(b.grupo.id);
+                const posicionA = indiceA === -1 ? Number.MAX_SAFE_INTEGER : indiceA;
+                const posicionB = indiceB === -1 ? Number.MAX_SAFE_INTEGER : indiceB;
+                return posicionA - posicionB;
             })
             : gruposConItems;
 
-        // Ordenar ítems dentro de cada grupo por orden, luego por nombre (dinámico)
-        const ordenarItems = (arr) => {
+        // Ordenar ítems: usar el orden original de la BD (solo se establece una vez, igual que los grupos)
+        // Este metodo hace que el orden se mantenga fijo, aunque el usuario este cambiando el orden en la web, para evitar que se reordenen dinámicamente al hacer cambios
+        const ordenarItemsCongelado = (arr, grupoKey) => {
+            if (!ordenOriginalItems.current) ordenOriginalItems.current = {};
+
+            if (!ordenOriginalItems.current[grupoKey]) {
+                // Primera carga: calcular y congelar el orden
+                const copia = [...arr];
+                copia.sort((a, b) => {
+                    const ordenA = a.orden ?? Number.MAX_SAFE_INTEGER;
+                    const ordenB = b.orden ?? Number.MAX_SAFE_INTEGER;
+                    if (ordenA !== ordenB) return ordenA - ordenB;
+                    return (a.nombre || '').localeCompare(b.nombre || '');
+                });
+                ordenOriginalItems.current[grupoKey] = copia.map(i => i.id);
+            }
+
+            // Aplicar el orden original guardado
+            const ordenCongelado = ordenOriginalItems.current[grupoKey];
             arr.sort((a, b) => {
-                const ordenA = a.orden ?? Number.MAX_SAFE_INTEGER;
-                const ordenB = b.orden ?? Number.MAX_SAFE_INTEGER;
-                if (ordenA !== ordenB) return ordenA - ordenB;
-                return (a.nombre || '').localeCompare(b.nombre || '');
+                const indiceA = ordenCongelado.indexOf(a.id);
+                const indiceB = ordenCongelado.indexOf(b.id);
+                const posicionA = indiceA === -1 ? Number.MAX_SAFE_INTEGER : indiceA;
+                const posicionB = indiceB === -1 ? Number.MAX_SAFE_INTEGER : indiceB;
+                return posicionA - posicionB;
             });
         };
 
-        gruposOrdenados.forEach(g => ordenarItems(g.items));
-        ordenarItems(sinGrupo);
+        gruposOrdenados.forEach(g => ordenarItemsCongelado(g.items, `grupo_${g.grupo.id}`));
+        ordenarItemsCongelado(sinGrupo, 'sin_grupo');
 
         return { gruposOrdenados, sinGrupo };
     }, [items, grupos, grupoIdField, intl]);
@@ -281,7 +301,7 @@ const ListaCheckboxAgrupada = ({
 
             {itemsAgrupados.gruposOrdenados.map(renderGrupo)}
 
-            {itemsAgrupados.sinGrupo.length > 0 && (
+            {itemsAgrupados.sinGrupo.length > 0 && itemsAgrupados.gruposOrdenados.length > 0 && (
                 <Fieldset
                     legend={`${intl.formatMessage({ id: 'Sin grupo' })} (${contarSeleccionadosEnGrupo(itemsAgrupados.sinGrupo)}/${itemsAgrupados.sinGrupo.length})`}
                     collapsed={true}
@@ -295,6 +315,12 @@ const ListaCheckboxAgrupada = ({
                         {itemsAgrupados.sinGrupo.map(renderCheckboxItem)}
                     </div>
                 </Fieldset>
+            )}
+
+            {itemsAgrupados.sinGrupo.length > 0 && itemsAgrupados.gruposOrdenados.length === 0 && (
+                <div className="grid">
+                    {itemsAgrupados.sinGrupo.map(renderCheckboxItem)}
+                </div>
             )}
 
             {items.length === 0 && (

@@ -102,7 +102,7 @@ const EditarDatosMultimedia = ({ multimedia, setMultimedia, estadoGuardando, isE
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="tipo"><b>{intl.formatMessage({ id: 'Tipo' })}</b></label>
+                        <label htmlFor="tipo"><b>{intl.formatMessage({ id: 'Tipo' })}*</b></label>
                         <Dropdown
                             id="tipo"
                             value={multimedia.tipo}

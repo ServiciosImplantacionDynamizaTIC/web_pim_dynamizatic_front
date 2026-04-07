@@ -254,7 +254,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
             );
 
             toast.current?.show({
-                severity: 'warn',
+                severity: 'error',
                 summary: intl.formatMessage({ id: 'Campos obligatorios vacíos' }),
                 detail: detalle,
                 life: 6000,
@@ -410,7 +410,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     <div className="flex align-items-center mb-2">
                         {estoyEditandoProducto && (
                             <>
-                                <div className="flex flex-column align-items-center mr-2">
+                                {/* <div className="flex flex-column align-items-center mr-2">
                                     <label className="text-xs font-semibold mb-1">{intl.formatMessage({ id: 'Orden' })}</label>
                                     <InputNumber
                                         value={valorActual.ordenEnGrupo || 0}
@@ -422,7 +422,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                                         placeholder="0"
                                     />
                                 </div>
-                                <Divider layout="vertical" className="mx-2" />
+                                <Divider layout="vertical" className="mx-2" /> */}
                             </>
                         )}
                         <label className="block font-medium">

@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { getTipoProducto, postTipoProducto, patchTipoProducto } from "@/app/api-endpoints/tipo_producto";
 import { patchGrupoAtributo } from "@/app/api-endpoints/grupo_atributo";
 import { patchAtributo } from "@/app/api-endpoints/atributo";
+import { patchMultimedia } from "@/app/api-endpoints/multimedia";
 import EditarDatosTipoProducto from "./EditarDatosTipoProducto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -113,6 +114,14 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                             ([atributoId, orden]) => patchAtributo(parseInt(atributoId), { orden })
                         );
                         await Promise.all(promesasAtributos);
+                    }
+
+                    // Guardar órdenes de multimedia modificados
+                    if (tipoProducto._multimediasOrdenModificados) {
+                        const promesasMultimedias = Object.entries(tipoProducto._multimediasOrdenModificados).map(
+                            ([multimediaId, orden]) => patchMultimedia(parseInt(multimediaId), { orden })
+                        );
+                        await Promise.all(promesasMultimedias);
                     }
 
                     setRegistroResult("editado");

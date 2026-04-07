@@ -140,7 +140,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                 
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="tipoDato"><b>{intl.formatMessage({ id: 'Tipo de Dato' })}</b></label>
+                        <label htmlFor="tipoDato"><b>{intl.formatMessage({ id: 'Tipo de Dato' })}*</b></label>
                         <Dropdown
                             id="tipoDato"
                             value={atributo.tipoDato}

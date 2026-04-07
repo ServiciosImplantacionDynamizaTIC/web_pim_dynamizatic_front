@@ -29,6 +29,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const [datosInicializeados, setDatosInicializeados] = useState(false);
     const [gruposOrdenModificados, setGruposOrdenModificados] = useState({});
     const [atributosOrdenModificados, setAtributosOrdenModificados] = useState({});
+    const [multimediasOrdenModificados, setMultimediasOrdenModificados] = useState({});
 
     // Cargar atributos y sus grupos de la empresa
     useEffect(() => {
@@ -109,7 +110,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                             activoSn: 'S' 
                         }
                     },
-                    order: 'nombre ASC'
+                    order: 'orden ASC'
                 });
                 
                 const data = await getMultimedias(filtro);
@@ -163,9 +164,10 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
             atributosIds: atributosSeleccionados,
             multimediasIds: multimediasSeleccionados,
             _gruposOrdenModificados: gruposOrdenModificados,
-            _atributosOrdenModificados: atributosOrdenModificados
+            _atributosOrdenModificados: atributosOrdenModificados,
+            _multimediasOrdenModificados: multimediasOrdenModificados
         }));
-    }, [atributosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados]);
+    }, [atributosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados]);
 
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;
@@ -180,21 +182,11 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         setTipoProducto(_tipoProducto);
     };
 
-    const manejarCambioMultimedia = (multimediaId, isChecked) => {
-        if (isChecked) {
-            setMultimediasSeleccionados(prev => [...prev, multimediaId]);
-        } else {
-            setMultimediasSeleccionados(prev => prev.filter(id => id !== multimediaId));
-        }
-    };
-
-    const seleccionarTodosMultimedias = () => {
-        const todosIds = multimedias.map(media => media.id);
-        setMultimediasSeleccionados(todosIds);
-    };
-
-    const deseleccionarTodosMultimedias = () => {
-        setMultimediasSeleccionados([]);
+    const manejarOrdenMultimedia = (multimediaId, nuevoOrden) => {
+        setMultimedias(prev => prev.map(m =>
+            m.id === multimediaId ? { ...m, orden: nuevoOrden } : m
+        ));
+        setMultimediasOrdenModificados(prev => ({ ...prev, [multimediaId]: nuevoOrden }));
     };
 
     const manejarOrdenGrupoAtributo = (grupoId, nuevoOrden) => {
@@ -210,6 +202,22 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         ));
         setAtributosOrdenModificados(prev => ({ ...prev, [atributoId]: nuevoOrden }));
     };
+
+    const renderItemMultimedia = (multimedia) => (
+        <div>
+            <div className="font-bold">{multimedia.nombre || multimedia.nombreArchivo}</div>
+            {multimedia.tipo && (
+                <small className="p-text-secondary block mt-1">
+                    <b>{intl.formatMessage({ id: 'Tipo' })}:</b> {multimedia.tipo}
+                </small>
+            )}
+            {multimedia.descripcion && (
+                <small className="p-text-secondary block mt-1">
+                    <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {multimedia.descripcion}
+                </small>
+            )}
+        </div>
+    );
 
     const renderItemAtributo = (atributo) => (
         <div>
@@ -314,74 +322,22 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                             </TabPanel>
 
                             <TabPanel header={`${intl.formatMessage({ id: 'Multimedia' })} (${multimediasSeleccionados.length})`}>
-                                <Fieldset legend={intl.formatMessage({ id: 'Multimedia Asociado' })} collapsed={false} toggleable>
-                                    <div className="flex justify-content-between align-items-center mb-3">
-                                        <h5>{intl.formatMessage({ id: 'Seleccione los archivos multimedia que pertenecen a este tipo de producto' })}</h5>
-                                        <div>
-                                            <button 
-                                                type="button" 
-                                                className="p-button p-button-text p-button-sm mr-2"
-                                                onClick={seleccionarTodosMultimedias}
-                                                disabled={!editable || cargandoMultimedias}
-                                            >
-                                                {intl.formatMessage({ id: 'Seleccionar Todos' })}
-                                            </button>
-                                            <button 
-                                                type="button" 
-                                                className="p-button p-button-text p-button-sm"
-                                                onClick={deseleccionarTodosMultimedias}
-                                                disabled={!editable || cargandoMultimedias}
-                                            >
-                                                {intl.formatMessage({ id: 'Deseleccionar Todos' })}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    {cargandoMultimedias ? (
-                                        <div className="flex justify-content-center p-4">
-                                            <ProgressSpinner style={{width: '50px', height: '50px'}} />
-                                        </div>
-                                    ) : (
-                                        <div className="grid">
-                                            {multimedias.map((multimedia) => (
-                                                <div key={multimedia.id} className="col-12 md:col-6 lg:col-4">
-                                                    <div className="field-checkbox p-3 border-1 border-round border-300 hover:border-primary transition-colors">
-                                                        <Checkbox 
-                                                            inputId={`multimedia-${multimedia.id}`}
-                                                            checked={multimediasSeleccionados.includes(multimedia.id)}
-                                                            onChange={(e) => manejarCambioMultimedia(multimedia.id, e.checked)}
-                                                            disabled={!editable || estadoGuardando}
-                                                        />
-                                                        <label htmlFor={`multimedia-${multimedia.id}`} className="ml-2 cursor-pointer">
-                                                            <div>
-                                                                <div className="font-bold">
-                                                                    {multimedia.nombre || multimedia.nombreArchivo}
-                                                                </div>
-                                                                {multimedia.descripcion && (
-                                                                    <small className="p-text-secondary block mt-1">
-                                                                        <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {multimedia.descripcion}
-                                                                    </small>
-                                                                )}
-                                                                {multimedia.tipo && (
-                                                                    <small className="p-text-secondary block">
-                                                                        <b>{intl.formatMessage({ id: 'Tipo' })}:</b> {multimedia.tipo}
-                                                                    </small>
-                                                                )}
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                            {multimedias.length === 0 && !cargandoMultimedias && (
-                                                <div className="col-12">
-                                                    <div className="text-center p-4 text-500">
-                                                        {intl.formatMessage({ id: 'No hay archivos multimedia disponibles en su empresa' })}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </Fieldset>
+                                    <ListaCheckboxAgrupada
+                                        items={multimedias}
+                                        grupos={[]}
+                                        seleccionados={multimediasSeleccionados}
+                                        onSeleccionChange={setMultimediasSeleccionados}
+                                        grupoIdField="_sinGrupo"
+                                        cargando={cargandoMultimedias}
+                                        editable={editable}
+                                        disabled={estadoGuardando}
+                                        renderItem={renderItemMultimedia}
+                                        textoVacio={intl.formatMessage({ id: 'No hay archivos multimedia disponibles en su empresa' })}
+                                        titulo={intl.formatMessage({ id: 'Seleccione los archivos multimedia que pertenecen a este tipo de producto' })}
+                                        prefixId="multimedia"
+                                        mostrarOrden={editable}
+                                        onOrdenItemChange={manejarOrdenMultimedia}
+                                    />
                             </TabPanel>
                         </TabView>
                     </div>
