@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
-import { getProducto, postProducto, patchProducto } from "@/app/api-endpoints/producto";
-import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
-import { postSubirImagen, borrarFichero } from "@/app/api-endpoints/ficheros";
+import { MultiSelect } from "primereact/multiselect";
+import { postProducto, patchProducto } from "@/app/api-endpoints/producto";
+import { editarArchivos, procesarArchivosNuevoRegistro, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
+import { postSubirImagen } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
 import ProductoSeo from "../producto-seo/page";
 import ProductoIcono from "../producto-icono/page";
@@ -15,10 +16,14 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import ProductoAtributo from "../producto-atributo/page";
+import ProductoCamposDinamicos from "../producto-campos-dinamicos/page";
+import { getGruposCampoDinamicos } from "@/app/api-endpoints/grupo_campo_dinamico";
+import { getProductosGrupoCampoDinamico } from "@/app/api-endpoints/producto_grupo_campo_dinamico";
 
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
+    const productoActivoRef = useRef(idEditar ?? 0);
     
     const [producto, setProducto] = useState(emptyRegistro || {
         sku: "",
@@ -39,28 +44,142 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         marcaId: null,
         activoSn: "S"
     });
+    const [idsGruposCamposDinamicosSeleccionados, setIdsGruposCamposDinamicosSeleccionados] = useState([]);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
+    const [guardarGruposFn, setGuardarGruposFn] = useState(null);
+    const [guardarCamposFn, setGuardarCamposFn] = useState(null);
+    const [opcionesGruposCamposDinamicos, setOpcionesGruposCamposDinamicos] = useState([]);
+    const [cargandoGruposCamposDinamicos, setCargandoGruposCamposDinamicos] = useState(false);
+
+    const obtenerIdsUnicos = (lista = []) =>
+        Array.from(
+            new Set(
+                (lista || [])
+                    .map((id) => Number(id))
+                    .filter((id) => Number.isFinite(id) && id > 0)
+            )
+        );
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (idEditar && idEditar !== 0) {
-                const registro = rowData.find((element) => element.id === idEditar);
-                setProducto(registro);
-                
-                const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
-                setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
+        productoActivoRef.current = idEditar ?? 0;
+
+        // Al cambiar de producto, limpiamos primero cualquier estado dependiente
+        // para no arrastrar grupos o callbacks del producto anterior.
+        setIdsGruposCamposDinamicosSeleccionados([]);
+        setGuardarGruposFn(null);
+        setGuardarCamposFn(null);
+
+        if (idEditar && idEditar !== 0) {
+            const registro = rowData.find((element) => element.id === idEditar);
+            setProducto(registro);
+
+            const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
+            setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
+            return;
+        }
+
+        setProducto(emptyRegistro || {
+            sku: "",
+            ean: "",
+            nombre: "",
+            descripcionCorta: "",
+            descripcionLarga: "",
+            tituloSeo: "",
+            palabrasClave: "",
+            puntosClave: "",
+            estadoId: null,
+            finalizadoSn: "N",
+            imagenPrincipal: "",
+            ordenAtributos: "",
+            dimensiones: "",
+            color: "",
+            peso: null,
+            marcaId: null,
+            activoSn: "S"
+        });
+        setListaTipoArchivosAntiguos([]);
+    }, [emptyRegistro, idEditar, listaTipoArchivos, rowData]);  
+
+    useEffect(() => {
+        let ignorarRespuesta = false;
+
+        const cargarSelectorGruposCamposDinamicos = async () => {
+            setCargandoGruposCamposDinamicos(true);
+            setIdsGruposCamposDinamicosSeleccionados([]);
+
+            try {
+                const empresaId = getUsuarioSesion()?.empresaId;
+                const where = {
+                    ...(empresaId ? { empresaId } : {}),
+                    activoSn: "S",
+                };
+
+                const grupos = await getGruposCampoDinamicos(
+                    JSON.stringify({
+                        where,
+                        order: ["orden ASC", "nombre ASC"],
+                    })
+                );
+
+                if (ignorarRespuesta) {
+                    return;
+                }
+
+                setOpcionesGruposCamposDinamicos(
+                    (grupos || [])
+                        .map((grupo) => ({
+                            label: grupo?.nombre || `${grupo?.id}`,
+                            value: Number(grupo?.id || 0),
+                        }))
+                        .filter((opcion) => opcion.value > 0)
+                );
+
+                if (!idEditar || idEditar === 0) {
+                    return;
+                }
+
+                const productoIdActual = Number(idEditar);
+                const relaciones = await getProductosGrupoCampoDinamico(
+                    JSON.stringify({
+                        where: { and: { productoId: productoIdActual } },
+                        order: ["id ASC"],
+                    })
+                );
+
+                if (ignorarRespuesta || Number(idEditar) !== productoIdActual) {
+                    return;
+                }
+
+                const ids = obtenerIdsUnicos(
+                    (relaciones || []).map(
+                        (registro) => registro?.grupoCampoDinamicoId ?? registro?.grupo_campo_dinamico_id
+                    )
+                );
+                setIdsGruposCamposDinamicosSeleccionados(ids);
+            } catch (error) {
+                if (ignorarRespuesta) {
+                    return;
+                }
+                console.error("Error cargando selector de grupos de campos dinamicos:", error);
+                setOpcionesGruposCamposDinamicos([]);
+                setIdsGruposCamposDinamicosSeleccionados([]);
+            } finally {
+                if (!ignorarRespuesta) {
+                    setCargandoGruposCamposDinamicos(false);
+                }
             }
         };
-        fetchData();
-    }, [idEditar, rowData]);  
 
-    const validacionesImagenes = () => {
-        return validarImagenes(producto, listaTipoArchivos);
-    }
+        cargarSelectorGruposCamposDinamicos();
 
+        return () => {
+            ignorarRespuesta = true;
+        };
+    }, [idEditar]);
+
+    // Valida los campos obligatorios del formulario.
     const validaciones = async () => {
         const validaSku = producto.sku === undefined || producto.sku === "";
         const validaEan = producto.ean === undefined || producto.ean === "";
@@ -99,6 +218,54 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         return producto.imagenPrincipal && !producto.imagenPrincipal.startsWith('blob:') ? producto.imagenPrincipal : null;
     };
 
+    // Guarda la relacion entre el producto y los grupos seleccionados.
+    const guardarGruposCampoDinamicoProducto = async (idProductoGuardar, usuarioActual) => {
+        if (!guardarGruposFn) {
+            return true;
+        }
+        const idsActuales = obtenerIdsUnicos(idsGruposCamposDinamicosSeleccionados);
+        return guardarGruposFn(idProductoGuardar, usuarioActual, idsActuales);
+    };
+
+    // Guarda los valores de campos dinamicos del producto.
+    const guardarCamposDinamicosProducto = async () => {
+        if (!guardarCamposFn) {
+            return true;
+        }
+        return guardarCamposFn();
+    };
+
+    const manejarCambioGruposCamposDinamicos = async (idsSeleccionados = []) => {
+        const idsNormalizados = obtenerIdsUnicos(idsSeleccionados);
+        const productoIdActual = Number(idEditar || 0);
+        setIdsGruposCamposDinamicosSeleccionados(idsNormalizados);
+
+        // Si el producto ya existe, persistimos al momento para que la pestaña
+        // de campos dinamicos pueda cargar sin tener que guardar y reabrir.
+        if (!productoIdActual) {
+            return;
+        }
+
+        if (!guardarGruposFn) {
+            return;
+        }
+
+        try {
+            const usuarioActual = getUsuarioSesion()?.id;
+            await guardarGruposFn(productoIdActual, usuarioActual, idsNormalizados);
+
+            if (Number(productoActivoRef.current || 0) !== productoIdActual) {
+                return;
+            }
+
+            // Fuerza refresco de la dependencia por referencia para recargar datos.
+            setIdsGruposCamposDinamicosSeleccionados([...idsNormalizados]);
+        } catch (error) {
+            console.error("Error guardando grupos de campos dinamicos al vuelo:", error);
+        }
+    };
+
+    // Crea o actualiza el producto y guarda datos relacionados.
     const guardarProducto = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
@@ -137,6 +304,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     }
                     
                     await procesarArchivosNuevoRegistro(producto, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
+                    await guardarGruposCampoDinamicoProducto(nuevoRegistro.id, usuarioActual);
                     
                     // Actualizar el producto con los datos del registro recién creado
                     const productoActualizado = { 
@@ -190,6 +358,15 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 
                 await patchProducto(objGuardar.id, productoAeditar);
                 await editarArchivos(producto, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
+
+                await guardarGruposCampoDinamicoProducto(objGuardar.id, usuarioActual);
+                const guardadoCamposOk = await guardarCamposDinamicosProducto();
+                if (!guardadoCamposOk) {
+                    setEstadoGuardandoBoton(false);
+                    setEstadoGuardando(false);
+                    return;
+                }
+
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
@@ -226,6 +403,39 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                             estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
+                            selectorGruposCampoDinamico={
+                                <>
+                                    <div className="flex flex-column field gap-2 mt-2 col-12">
+                                        <label htmlFor="gruposCampoDinamico">
+                                            <b>{intl.formatMessage({ id: "Grupos de campos dinamicos" })}</b>
+                                        </label>
+                                        <MultiSelect
+                                            key={`multiselect-grupos-campos-dinamicos-${idEditar ?? 0}`}
+                                            inputId="gruposCampoDinamico"
+                                            value={obtenerIdsUnicos(idsGruposCamposDinamicosSeleccionados || [])}
+                                            options={opcionesGruposCamposDinamicos}
+                                            onChange={(e) => manejarCambioGruposCamposDinamicos(e.value || [])}
+                                            optionLabel="label"
+                                            optionValue="value"
+                                            placeholder={intl.formatMessage({ id: "Seleccionar grupos" })}
+                                            filter
+                                            display="chip"
+                                            className="w-full"
+                                            style={{ width: "100%" }}
+                                            panelStyle={{ minWidth: "36rem" }}
+                                            disabled={estadoGuardando || cargandoGruposCamposDinamicos}
+                                        />
+                                    </div>
+                                    <ProductoCamposDinamicos
+                                        key={`selector-grupos-campos-dinamicos-${idEditar ?? 0}`}
+                                        idProducto={idEditar}
+                                        idsGruposSeleccionadosExternos={idsGruposCamposDinamicosSeleccionados}
+                                        registrarGuardadoGrupos={true}
+                                        mostrarCampos={false}
+                                        onGuardarGruposListo={setGuardarGruposFn}
+                                    />
+                                </>
+                            }
                         />
                         
                         {(idEditar != null && idEditar !== 0) && (
@@ -257,6 +467,18 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                         idProducto={idEditar}
                                         tipoProductoId={producto?.tipoProductoId}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                    </TabPanel>
+                                    <TabPanel header={intl.formatMessage({ id: 'Campos dinamicos' })}>
+                                        <ProductoCamposDinamicos
+                                            key={`tab-campos-dinamicos-${idEditar ?? 0}`}
+                                            idProducto={idEditar}
+                                            idsGruposSeleccionadosExternos={idsGruposCamposDinamicosSeleccionados}
+                                            registrarGuardadoGrupos={true}
+                                            mostrarCampos={true}
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
+                                            onGuardarGruposListo={setGuardarGruposFn}
+                                            onGuardarCamposListo={setGuardarCamposFn}
+                                        />
                                     </TabPanel>
                                 </TabView>
                             </div>

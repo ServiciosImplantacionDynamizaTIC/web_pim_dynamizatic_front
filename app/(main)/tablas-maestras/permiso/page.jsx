@@ -167,6 +167,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Campos Dinamicos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Campos Dinamicos-Borrar' },
 
+                // Grupo Campos Dinamicos
+                { header: intl.formatMessage({ id: 'Grupo Campos Dinamicos' }), seccion: 'Grupo Campos Dinamicos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Grupo Campos Dinamicos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Grupo Campos Dinamicos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Grupo Campos Dinamicos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Grupo Campos Dinamicos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Grupo Campos Dinamicos-Borrar' },
+
                 // Catálogos
                 { header: intl.formatMessage({ id: 'Catálogos' }), seccion: 'Catalogos' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Catalogos-Acceder' },
@@ -274,6 +282,14 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Multimedia de Productos-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Multimedia de Productos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Multimedia de Productos-Borrar' },
+
+                //Campos dinamicos de Productos
+                { header: intl.formatMessage({ id: 'Campos dinamicos de Productos' }), seccion: 'Campos Dinamicos de Productos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Campos Dinamicos de Productos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Campos Dinamicos de Productos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Campos Dinamicos de Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Campos Dinamicos de Productos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Campos Dinamicos de Productos-Borrar' },
 
                 //Tipos de Producto
                 { header: intl.formatMessage({ id: 'Tipos de Producto' }), seccion: 'Tipos de Producto' },

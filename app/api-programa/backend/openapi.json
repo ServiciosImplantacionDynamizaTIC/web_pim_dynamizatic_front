@@ -4657,6 +4657,612 @@
         "operationId": "GrupoAtributoController.find"
       }
     },
+    "/grupo-campo-dinamico-detalles/count": {
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "count",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamicoDetalle model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "GrupoCampoDinamicoDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<GrupoCampoDinamicoDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoDetalleController.count"
+      }
+    },
+    "/grupo-campo-dinamico-detalles/{id}": {
+      "put": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "GrupoCampoDinamicoDetalle PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoCampoDinamicoDetalle"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "GrupoCampoDinamicoDetalleController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "GrupoCampoDinamicoDetalle PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoCampoDinamicoDetallePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "GrupoCampoDinamicoDetalleController.updateById"
+      },
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "findById",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamicoDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamicoDetalleWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamicoDetalle.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoDetalleController.findById"
+      },
+      "delete": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "GrupoCampoDinamicoDetalle DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoDetalleController.deleteById"
+      }
+    },
+    "/grupo-campo-dinamico-detalles": {
+      "post": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "create",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamicoDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamicoDetalle"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGrupoCampoDinamicoDetalle"
+              }
+            }
+          }
+        },
+        "operationId": "GrupoCampoDinamicoDetalleController.create"
+      },
+      "patch": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamicoDetalle PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "GrupoCampoDinamicoDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<GrupoCampoDinamicoDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoCampoDinamicoDetallePartial"
+              }
+            }
+          }
+        },
+        "operationId": "GrupoCampoDinamicoDetalleController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoDetalleController",
+        "x-operation-name": "find",
+        "tags": [
+          "GrupoCampoDinamicoDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of GrupoCampoDinamicoDetalle model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoCampoDinamicoDetalleWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamicoDetalle.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoDetalleController.find"
+      }
+    },
+    "/grupo-campo-dinamicos/count": {
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "count",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamico model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "GrupoCampoDinamico.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<GrupoCampoDinamico>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoController.count"
+      }
+    },
+    "/grupo-campo-dinamicos/{id}": {
+      "put": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "GrupoCampoDinamico PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoCampoDinamico"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "GrupoCampoDinamicoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "GrupoCampoDinamico PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoCampoDinamicoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "GrupoCampoDinamicoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamico model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamicoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamico.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "GrupoCampoDinamico DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoController.deleteById"
+      }
+    },
+    "/grupo-campo-dinamicos": {
+      "post": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "create",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamico model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamico"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGrupoCampoDinamico"
+              }
+            }
+          }
+        },
+        "operationId": "GrupoCampoDinamicoController.create"
+      },
+      "patch": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "GrupoCampoDinamico PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "GrupoCampoDinamico.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<GrupoCampoDinamico>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoCampoDinamicoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "GrupoCampoDinamicoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "GrupoCampoDinamicoController",
+        "x-operation-name": "find",
+        "tags": [
+          "GrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of GrupoCampoDinamico model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoCampoDinamicoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoCampoDinamico.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "GrupoCampoDinamicoController.find"
+      }
+    },
     "/iconos/count": {
       "get": {
         "x-controller-name": "IconoController",
@@ -10363,16 +10969,16 @@
         "operationId": "ProductoAtributoController.find"
       }
     },
-    "/producto-campo-dinamicos/count": {
+    "/producto-campo-dinamico-valores/count": {
       "get": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "count",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "200": {
-            "description": "ProductoCampoDinamico model count",
+            "description": "ProductoCampoDinamicoValor model count",
             "content": {
               "application/json": {
                 "schema": {
@@ -10390,23 +10996,23 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "title": "ProductoCampoDinamico.WhereFilter",
+                  "title": "ProductoCampoDinamicoValor.WhereFilter",
                   "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<ProductoCampoDinamico>"
+                  "x-typescript-type": "@loopback/repository#Where<ProductoCampoDinamicoValor>"
                 }
               }
             }
           }
         ],
-        "operationId": "ProductoCampoDinamicoController.count"
+        "operationId": "ProductoCampoDinamicoValorController.count"
       }
     },
-    "/producto-campo-dinamicos/{id}": {
+    "/producto-campo-dinamico-valores/{id}": {
       "put": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "replaceById",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "204": {
@@ -10414,7 +11020,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "ProductoCampoDinamico PUT success"
+                  "description": "ProductoCampoDinamicoValor PUT success"
                 }
               }
             }
@@ -10434,19 +11040,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductoCampoDinamico"
+                "$ref": "#/components/schemas/ProductoCampoDinamicoValor"
               }
             }
           },
           "x-parameter-index": 1
         },
-        "operationId": "ProductoCampoDinamicoController.replaceById"
+        "operationId": "ProductoCampoDinamicoValorController.replaceById"
       },
       "patch": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "updateById",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "204": {
@@ -10454,7 +11060,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "ProductoCampoDinamico PATCH success"
+                  "description": "ProductoCampoDinamicoValor PATCH success"
                 }
               }
             }
@@ -10474,27 +11080,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductoCampoDinamicoPartial"
+                "$ref": "#/components/schemas/ProductoCampoDinamicoValorPartial"
               }
             }
           },
           "x-parameter-index": 1
         },
-        "operationId": "ProductoCampoDinamicoController.updateById"
+        "operationId": "ProductoCampoDinamicoValorController.updateById"
       },
       "get": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "findById",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "200": {
-            "description": "ProductoCampoDinamico model instance",
+            "description": "ProductoCampoDinamicoValor model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductoCampoDinamicoWithRelations"
+                  "$ref": "#/components/schemas/ProductoCampoDinamicoValorWithRelations"
                 }
               }
             }
@@ -10515,19 +11121,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductoCampoDinamico.Filter"
+                  "$ref": "#/components/schemas/ProductoCampoDinamicoValor.Filter"
                 }
               }
             }
           }
         ],
-        "operationId": "ProductoCampoDinamicoController.findById"
+        "operationId": "ProductoCampoDinamicoValorController.findById"
       },
       "delete": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "deleteById",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "204": {
@@ -10535,7 +11141,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "ProductoCampoDinamico DELETE success"
+                  "description": "ProductoCampoDinamicoValor DELETE success"
                 }
               }
             }
@@ -10551,23 +11157,23 @@
             "required": true
           }
         ],
-        "operationId": "ProductoCampoDinamicoController.deleteById"
+        "operationId": "ProductoCampoDinamicoValorController.deleteById"
       }
     },
-    "/producto-campo-dinamicos": {
+    "/producto-campo-dinamico-valores": {
       "post": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "create",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "200": {
-            "description": "ProductoCampoDinamico model instance",
+            "description": "ProductoCampoDinamicoValor model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductoCampoDinamico"
+                  "$ref": "#/components/schemas/ProductoCampoDinamicoValor"
                 }
               }
             }
@@ -10577,22 +11183,22 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProductoCampoDinamico"
+                "$ref": "#/components/schemas/NewProductoCampoDinamicoValor"
               }
             }
           }
         },
-        "operationId": "ProductoCampoDinamicoController.create"
+        "operationId": "ProductoCampoDinamicoValorController.create"
       },
       "patch": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "updateAll",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "200": {
-            "description": "ProductoCampoDinamico PATCH success count",
+            "description": "ProductoCampoDinamicoValor PATCH success count",
             "content": {
               "application/json": {
                 "schema": {
@@ -10610,9 +11216,9 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "title": "ProductoCampoDinamico.WhereFilter",
+                  "title": "ProductoCampoDinamicoValor.WhereFilter",
                   "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<ProductoCampoDinamico>"
+                  "x-typescript-type": "@loopback/repository#Where<ProductoCampoDinamicoValor>"
                 }
               }
             }
@@ -10622,28 +11228,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductoCampoDinamicoPartial"
+                "$ref": "#/components/schemas/ProductoCampoDinamicoValorPartial"
               }
             }
           }
         },
-        "operationId": "ProductoCampoDinamicoController.updateAll"
+        "operationId": "ProductoCampoDinamicoValorController.updateAll"
       },
       "get": {
-        "x-controller-name": "ProductoCampoDinamicoController",
+        "x-controller-name": "ProductoCampoDinamicoValorController",
         "x-operation-name": "find",
         "tags": [
-          "ProductoCampoDinamicoController"
+          "ProductoCampoDinamicoValorController"
         ],
         "responses": {
           "200": {
-            "description": "Array of ProductoCampoDinamico model instances",
+            "description": "Array of ProductoCampoDinamicoValor model instances",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProductoCampoDinamicoWithRelations"
+                    "$ref": "#/components/schemas/ProductoCampoDinamicoValorWithRelations"
                   }
                 }
               }
@@ -10657,13 +11263,364 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductoCampoDinamico.Filter1"
+                  "$ref": "#/components/schemas/ProductoCampoDinamicoValor.Filter1"
                 }
               }
             }
           }
         ],
-        "operationId": "ProductoCampoDinamicoController.find"
+        "operationId": "ProductoCampoDinamicoValorController.find"
+      }
+    },
+    "/producto-campos-dinamicos-grupos/por-producto/{productoId}/agrupado": {
+      "get": {
+        "x-controller-name": "ProductoCamposDinamicosGruposController",
+        "x-operation-name": "findByProductoIdAgrupado",
+        "tags": [
+          "ProductoCamposDinamicosGruposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Campos dinamicos agrupados por grupo y listos para UI",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "grupos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "productoId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "grupos",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "ProductoCamposDinamicosGruposController.findByProductoIdAgrupado"
+      }
+    },
+    "/producto-grupo-campo-dinamicos/count": {
+      "get": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "count",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoGrupoCampoDinamico model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoGrupoCampoDinamico.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoGrupoCampoDinamico>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoGrupoCampoDinamicoController.count"
+      }
+    },
+    "/producto-grupo-campo-dinamicos/{id}": {
+      "put": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoGrupoCampoDinamico PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoGrupoCampoDinamico"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoGrupoCampoDinamicoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoGrupoCampoDinamico PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoGrupoCampoDinamicoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoGrupoCampoDinamicoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoGrupoCampoDinamico model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoGrupoCampoDinamicoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoGrupoCampoDinamico.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoGrupoCampoDinamicoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoGrupoCampoDinamico DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoGrupoCampoDinamicoController.deleteById"
+      }
+    },
+    "/producto-grupo-campo-dinamicos": {
+      "post": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "create",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoGrupoCampoDinamico model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoGrupoCampoDinamico"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProductoGrupoCampoDinamico"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoGrupoCampoDinamicoController.create"
+      },
+      "patch": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoGrupoCampoDinamico PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoGrupoCampoDinamico.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoGrupoCampoDinamico>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoGrupoCampoDinamicoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoGrupoCampoDinamicoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ProductoGrupoCampoDinamicoController",
+        "x-operation-name": "find",
+        "tags": [
+          "ProductoGrupoCampoDinamicoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ProductoGrupoCampoDinamico model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoGrupoCampoDinamicoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoGrupoCampoDinamico.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoGrupoCampoDinamicoController.find"
       }
     },
     "/producto-iconos/count": {
@@ -22217,8 +23174,170 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<ProductoIcono>"
       },
-      "ProductoCampoDinamico": {
-        "title": "ProductoCampoDinamico",
+      "ProductoGrupoCampoDinamico": {
+        "title": "ProductoGrupoCampoDinamico",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "grupoCampoDinamicoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewProductoGrupoCampoDinamico": {
+        "title": "NewProductoGrupoCampoDinamico",
+        "type": "object",
+        "description": "(tsType: Omit<ProductoGrupoCampoDinamico, 'id'>, schemaOptions: { title: 'NewProductoGrupoCampoDinamico', exclude: [ 'id' ] })",
+        "properties": {
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "grupoCampoDinamicoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ProductoGrupoCampoDinamico, 'id'>"
+      },
+      "ProductoGrupoCampoDinamicoWithRelations": {
+        "title": "ProductoGrupoCampoDinamicoWithRelations",
+        "type": "object",
+        "description": "(tsType: ProductoGrupoCampoDinamicoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "grupoCampoDinamicoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ProductoGrupoCampoDinamicoWithRelations"
+      },
+      "ProductoGrupoCampoDinamicoPartial": {
+        "title": "ProductoGrupoCampoDinamicoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ProductoGrupoCampoDinamico>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ProductoGrupoCampoDinamico>"
+      },
+      "ProductoCampoDinamicoValor": {
+        "title": "ProductoCampoDinamicoValor",
         "type": "object",
         "properties": {
           "id": {
@@ -22262,10 +23381,10 @@
         ],
         "additionalProperties": false
       },
-      "NewProductoCampoDinamico": {
-        "title": "NewProductoCampoDinamico",
+      "NewProductoCampoDinamicoValor": {
+        "title": "NewProductoCampoDinamicoValor",
         "type": "object",
-        "description": "(tsType: Omit<ProductoCampoDinamico, 'id'>, schemaOptions: { title: 'NewProductoCampoDinamico', exclude: [ 'id' ] })",
+        "description": "(tsType: Omit<ProductoCampoDinamicoValor, 'id'>, schemaOptions: { title: 'NewProductoCampoDinamicoValor', exclude: [ 'id' ] })",
         "properties": {
           "productoId": {
             "type": "number",
@@ -22304,12 +23423,12 @@
           "usuarioCreacion"
         ],
         "additionalProperties": false,
-        "x-typescript-type": "Omit<ProductoCampoDinamico, 'id'>"
+        "x-typescript-type": "Omit<ProductoCampoDinamicoValor, 'id'>"
       },
-      "ProductoCampoDinamicoWithRelations": {
-        "title": "ProductoCampoDinamicoWithRelations",
+      "ProductoCampoDinamicoValorWithRelations": {
+        "title": "ProductoCampoDinamicoValorWithRelations",
         "type": "object",
-        "description": "(tsType: ProductoCampoDinamicoWithRelations, schemaOptions: { includeRelations: true })",
+        "description": "(tsType: ProductoCampoDinamicoValorWithRelations, schemaOptions: { includeRelations: true })",
         "properties": {
           "id": {
             "type": "number"
@@ -22351,12 +23470,12 @@
           "usuarioCreacion"
         ],
         "additionalProperties": false,
-        "x-typescript-type": "ProductoCampoDinamicoWithRelations"
+        "x-typescript-type": "ProductoCampoDinamicoValorWithRelations"
       },
-      "ProductoCampoDinamicoPartial": {
-        "title": "ProductoCampoDinamicoPartial",
+      "ProductoCampoDinamicoValorPartial": {
+        "title": "ProductoCampoDinamicoValorPartial",
         "type": "object",
-        "description": "(tsType: Partial<ProductoCampoDinamico>, schemaOptions: { partial: true })",
+        "description": "(tsType: Partial<ProductoCampoDinamicoValor>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
             "type": "number"
@@ -22393,7 +23512,7 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "Partial<ProductoCampoDinamico>"
+        "x-typescript-type": "Partial<ProductoCampoDinamicoValor>"
       },
       "ProductoAtributo": {
         "title": "ProductoAtributo",
@@ -26894,6 +28013,378 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<Icono>"
+      },
+      "GrupoCampoDinamico": {
+        "title": "GrupoCampoDinamico",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombre",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewGrupoCampoDinamico": {
+        "title": "NewGrupoCampoDinamico",
+        "type": "object",
+        "description": "(tsType: Omit<GrupoCampoDinamico, 'id'>, schemaOptions: { title: 'NewGrupoCampoDinamico', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombre",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<GrupoCampoDinamico, 'id'>"
+      },
+      "GrupoCampoDinamicoWithRelations": {
+        "title": "GrupoCampoDinamicoWithRelations",
+        "type": "object",
+        "description": "(tsType: GrupoCampoDinamicoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombre",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "GrupoCampoDinamicoWithRelations"
+      },
+      "GrupoCampoDinamicoPartial": {
+        "title": "GrupoCampoDinamicoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<GrupoCampoDinamico>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<GrupoCampoDinamico>"
+      },
+      "GrupoCampoDinamicoDetalle": {
+        "title": "GrupoCampoDinamicoDetalle",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "campoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "grupoCampoDinamicoId",
+          "campoDinamicoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewGrupoCampoDinamicoDetalle": {
+        "title": "NewGrupoCampoDinamicoDetalle",
+        "type": "object",
+        "description": "(tsType: Omit<GrupoCampoDinamicoDetalle, 'id'>, schemaOptions: { title: 'NewGrupoCampoDinamicoDetalle', exclude: [ 'id' ] })",
+        "properties": {
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "campoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "grupoCampoDinamicoId",
+          "campoDinamicoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<GrupoCampoDinamicoDetalle, 'id'>"
+      },
+      "GrupoCampoDinamicoDetalleWithRelations": {
+        "title": "GrupoCampoDinamicoDetalleWithRelations",
+        "type": "object",
+        "description": "(tsType: GrupoCampoDinamicoDetalleWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "campoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "grupoCampoDinamicoId",
+          "campoDinamicoId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "GrupoCampoDinamicoDetalleWithRelations"
+      },
+      "GrupoCampoDinamicoDetallePartial": {
+        "title": "GrupoCampoDinamicoDetallePartial",
+        "type": "object",
+        "description": "(tsType: Partial<GrupoCampoDinamicoDetalle>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "grupoCampoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "campoDinamicoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<GrupoCampoDinamicoDetalle>"
       },
       "GrupoAtributo": {
         "title": "GrupoAtributo",
@@ -33194,6 +34685,372 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<GrupoAtributo>"
       },
+      "GrupoCampoDinamicoDetalle.Filter": {
+        "type": "object",
+        "title": "GrupoCampoDinamicoDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "grupoCampoDinamicoId": {
+                    "type": "boolean"
+                  },
+                  "campoDinamicoId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "grupoCampoDinamicoId",
+                    "campoDinamicoId",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "GrupoCampoDinamicoDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<GrupoCampoDinamicoDetalle>"
+      },
+      "GrupoCampoDinamicoDetalle.Filter1": {
+        "type": "object",
+        "title": "GrupoCampoDinamicoDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "GrupoCampoDinamicoDetalle.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "grupoCampoDinamicoId": {
+                    "type": "boolean"
+                  },
+                  "campoDinamicoId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "grupoCampoDinamicoId",
+                    "campoDinamicoId",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "GrupoCampoDinamicoDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<GrupoCampoDinamicoDetalle>"
+      },
+      "GrupoCampoDinamico.Filter": {
+        "type": "object",
+        "title": "GrupoCampoDinamico.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion",
+                    "orden",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "GrupoCampoDinamico.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<GrupoCampoDinamico>"
+      },
+      "GrupoCampoDinamico.Filter1": {
+        "type": "object",
+        "title": "GrupoCampoDinamico.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "GrupoCampoDinamico.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion",
+                    "orden",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "GrupoCampoDinamico.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<GrupoCampoDinamico>"
+      },
       "Icono.Filter": {
         "type": "object",
         "title": "Icono.Filter",
@@ -36960,9 +38817,9 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ProductoAtributo>"
       },
-      "ProductoCampoDinamico.Filter": {
+      "ProductoCampoDinamicoValor.Filter": {
         "type": "object",
-        "title": "ProductoCampoDinamico.Filter",
+        "title": "ProductoCampoDinamicoValor.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -37041,15 +38898,15 @@
                 "uniqueItems": true
               }
             ],
-            "title": "ProductoCampoDinamico.Fields"
+            "title": "ProductoCampoDinamicoValor.Fields"
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<ProductoCampoDinamico>"
+        "x-typescript-type": "@loopback/repository#Filter<ProductoCampoDinamicoValor>"
       },
-      "ProductoCampoDinamico.Filter1": {
+      "ProductoCampoDinamicoValor.Filter1": {
         "type": "object",
-        "title": "ProductoCampoDinamico.Filter",
+        "title": "ProductoCampoDinamicoValor.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -37078,7 +38935,7 @@
             ]
           },
           "where": {
-            "title": "ProductoCampoDinamico.WhereFilter",
+            "title": "ProductoCampoDinamicoValor.WhereFilter",
             "type": "object",
             "additionalProperties": true
           },
@@ -37133,11 +38990,182 @@
                 "uniqueItems": true
               }
             ],
-            "title": "ProductoCampoDinamico.Fields"
+            "title": "ProductoCampoDinamicoValor.Fields"
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<ProductoCampoDinamico>"
+        "x-typescript-type": "@loopback/repository#Filter<ProductoCampoDinamicoValor>"
+      },
+      "ProductoGrupoCampoDinamico.Filter": {
+        "type": "object",
+        "title": "ProductoGrupoCampoDinamico.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "grupoCampoDinamicoId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "grupoCampoDinamicoId",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoGrupoCampoDinamico.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoGrupoCampoDinamico>"
+      },
+      "ProductoGrupoCampoDinamico.Filter1": {
+        "type": "object",
+        "title": "ProductoGrupoCampoDinamico.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ProductoGrupoCampoDinamico.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "grupoCampoDinamicoId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "grupoCampoDinamicoId",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoGrupoCampoDinamico.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoGrupoCampoDinamico>"
       },
       "ProductoIcono.Filter": {
         "type": "object",
@@ -41411,7 +43439,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }

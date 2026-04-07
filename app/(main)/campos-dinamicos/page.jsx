@@ -3,9 +3,9 @@ import React from "react";
 import Crud from "../../components/shared/crud";
 import { useIntl } from "react-intl";
 import { getUsuarioSesion } from "../../utility/Utils";
-import { deleteCampoDinamico, getCampoDinamico, getCamposDinamicos, getCamposDinamicosCount } from "@/app/api-endpoints/campo_dinamico";
+import { deleteCampoDinamico, getCamposDinamicos, getCamposDinamicosCount } from "@/app/api-endpoints/campo_dinamico";
+import { getProductoCampoDinamicos } from "@/app/api-endpoints/producto_campo_dinamico";
 import EditarCampoDinamico from "./editar";
-import CamposDinamicosActivos from "@/app/components/shared/CamposDinamicosActivos";
 
 const CamposDinamicos = () => {
     const intl = useIntl();
@@ -17,22 +17,12 @@ const CamposDinamicos = () => {
     ];
 
     const eliminarCampoDinamico = async (idCampoDinamico) => {
-        const resultado = await deleteCampoDinamico(idCampoDinamico);
-        if (resultado?.statusCode >= 400 || resultado?.sqlMessage || resultado?.error?.sqlMessage) {
-            throw new Error(resultado?.sqlMessage || resultado?.error?.sqlMessage || "Error eliminando el registro");
+        const filtroValores = JSON.stringify({where: { and: {campoDinamicoId: idCampoDinamico}}});
+        const valoresCampo = await getProductoCampoDinamicos(filtroValores);
+        if (valoresCampo && valoresCampo.length > 0) {
+            throw new Error("No se puede eliminar el campo dinamico porque ya tiene valores en productos.");
         }
-        try {
-            const registro = await getCampoDinamico(idCampoDinamico);
-            if (registro?.id) {
-                throw new Error("No se pudo eliminar el registro porque tiene otros registros relacionados.");
-            }
-        } catch (error) {
-            const status = error?.response?.status;
-            if (status !== 404) {
-                throw error;
-            }
-        }
-        return resultado;
+        return deleteCampoDinamico(idCampoDinamico);
     };
 
     return (
@@ -48,8 +38,6 @@ const CamposDinamicos = () => {
                 columnas={columnas}
                 deleteRegistro={eliminarCampoDinamico}
             />
-
-            <CamposDinamicosActivos />
         </div>
     );
 };

@@ -2,7 +2,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { patchCampoDinamico, postCampoDinamico } from "@/app/api-endpoints/campo_dinamico";
+import { getCamposDinamicos, patchCampoDinamico, postCampoDinamico } from "@/app/api-endpoints/campo_dinamico";
+import { getGruposCampoDinamicos } from "@/app/api-endpoints/grupo_campo_dinamico";
+import {
+    getGrupoCampoDinamicoDetalles,
+    deleteGrupoCampoDinamicoDetalle,
+    postGrupoCampoDinamicoDetalle,
+} from "@/app/api-endpoints/grupo_campo_dinamico_detalle";
 import EditarDatosCampoDinamico from "./EditarDatosCampoDinamico";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
@@ -10,222 +16,335 @@ import { useIntl } from "react-intl";
 const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
-    const tipoConOpciones = "select";
 
-    // Estado principal del formulario
-    const [campoDinamico, setCampoDinamico] = useState(
-        emptyRegistro || {
-            nombre: "",
-            etiqueta: "",
-            tipoCampo: "texto",
-            opciones: null,
-            activoSn: "S",
-            obligatorioSn: "N",
-        }
-    );
-    // Estado auxiliar para opciones de lista
-    const [opcionesCampo, setOpcionesCampo] = useState({ multiselectSn: "N", valores: [] });
+    const [campoDinamico, setCampoDinamico] = useState(emptyRegistro || {
+        nombre: "",
+        etiqueta: "",
+        descripcion: "",
+        tipoCampo: "texto",
+        opciones: null,
+        activoSn: "S",
+        obligatorioSn: "N",
+        orden: 0,
+    });
+    const [opcionesCampo, setOpcionesCampo] = useState({
+        multiselectSn: "N",
+        valores: [],
+    });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
+    const [gruposDisponibles, setGruposDisponibles] = useState([]);
+    const [gruposSeleccionadosIds, setGruposSeleccionadosIds] = useState([]);
 
-    // Convierte el string de opciones en un objeto usable
-    const parsearOpciones = (opciones) => {
-        if (!opciones) {
-            return { multiselectSn: "N", valores: [] };
-        }
-        try {
-            const json = JSON.parse(opciones);
-            const valores = Array.isArray(json?.valores) ? json.valores : [];
-            return {
-                multiselectSn: json?.multiselectSn === "S" ? "S" : "N",
-                valores: valores.filter((valor) => typeof valor === "string" && valor.trim() !== ""),
-            };
-        } catch (error) {
-            const valores = opciones
-                .split(",")
-                .map((valor) => valor.trim())
-                .filter((valor) => valor !== "");
-            return { multiselectSn: "N", valores };
-        }
-    };
-
-    // Genera el JSON a persistir en la columna opciones
-    const construirOpciones = () => {
-        const valores = opcionesCampo.valores
-            .map((valor) => valor.trim())
-            .filter((valor) => valor !== "");
-        if (valores.length === 0) {
-            return null;
-        }
-        return JSON.stringify({
-            multiselectSn: opcionesCampo.multiselectSn === "S" ? "S" : "N",
-            valores,
-        });
-    };
-
-    // Carga datos del registro o reinicia el formulario
     useEffect(() => {
-        if (idEditar !== 0) {
-            const registro = rowData.find((element) => element.id === idEditar);
-            if (registro) {
-                setCampoDinamico(registro);
-                setOpcionesCampo(parsearOpciones(registro.opciones));
+        const fetchData = async () => {
+            try {
+                const filtro = JSON.stringify({
+                    where: {
+                        and: {
+                            empresaId: getUsuarioSesion()?.empresaId,
+                            activoSn: "S",
+                        },
+                    },
+                    order: ["orden ASC", "nombre ASC"],
+                });
+                const grupos = await getGruposCampoDinamicos(filtro);
+                setGruposDisponibles(grupos || []);
+            } catch (error) {
+                console.error("Error cargando grupos de campos dinamicos:", error);
+                setGruposDisponibles([]);
             }
-        } else {
-            setCampoDinamico({
-                ...emptyRegistro,
-                nombre: "",
-                etiqueta: "",
-                tipoCampo: "texto",
-                opciones: null,
-                activoSn: "S",
-                obligatorioSn: "N",
-            });
-            setOpcionesCampo({ multiselectSn: "N", valores: [] });
-        }
+
+            if (idEditar !== 0) {
+                const registro = rowData.find((element) => element.id === idEditar);
+
+                if (registro) {
+                    let opcionesParseadas = { multiselectSn: "N", valores: [] };
+                    if (registro.opciones) {
+                        try {
+                            const json = JSON.parse(registro.opciones);
+                            opcionesParseadas = {
+                                multiselectSn: json?.multiselectSn === "S" ? "S" : "N",
+                                valores: Array.isArray(json?.valores) ? json.valores : [],
+                            };
+                        } catch (_error) {
+                            opcionesParseadas = { multiselectSn: "N", valores: [] };
+                        }
+                    }
+
+                    setCampoDinamico({
+                        ...registro,
+                        tipoCampo:
+                            registro.tipoCampo === "select"
+                                ? (opcionesParseadas.multiselectSn === "S" ? "multiselect" : "lista")
+                                : (registro.tipoCampo || "texto"),
+                    });
+                    setOpcionesCampo(opcionesParseadas);
+
+                    try {
+                        const detalles = await getGrupoCampoDinamicoDetalles(
+                            JSON.stringify({
+                                where: {
+                                    campoDinamicoId: Number(registro.id),
+                                },
+                                order: ["id ASC"],
+                            })
+                        );
+
+                        const gruposIds = Array.from(
+                            new Set(
+                                (detalles || [])
+                                    .map((detalle) =>
+                                        Number(
+                                            detalle?.grupoCampoDinamicoId ??
+                                            detalle?.grupo_campo_dinamico_id ??
+                                            0
+                                        )
+                                    )
+                                    .filter((grupoId) => grupoId > 0)
+                            )
+                        );
+                        setGruposSeleccionadosIds(gruposIds);
+                    } catch (_error) {
+                        setGruposSeleccionadosIds([]);
+                    }
+                }
+            } else {
+                setCampoDinamico({
+                    ...(emptyRegistro || {}),
+                    nombre: "",
+                    etiqueta: "",
+                    descripcion: "",
+                    tipoCampo: "texto",
+                    opciones: null,
+                    activoSn: "S",
+                    obligatorioSn: "N",
+                    orden: 0,
+                });
+                setOpcionesCampo({ multiselectSn: "N", valores: [] });
+                setGruposSeleccionadosIds([]);
+            }
+        };
+
+        fetchData();
     }, [idEditar, rowData, emptyRegistro]);
 
-    // Validaciones minimas antes de guardar
-    const validaciones = async () => {
+    const validaciones = async (idsGruposSeleccionadosNormalizados) => {
         const validaNombre = !campoDinamico.nombre || campoDinamico.nombre.trim() === "";
         const validaTipoCampo = !campoDinamico.tipoCampo;
-        const requiereOpciones = campoDinamico.tipoCampo === tipoConOpciones;
-        const validaOpciones = requiereOpciones && opcionesCampo.valores.length === 0;
+        const validaGrupo = !idsGruposSeleccionadosNormalizados.length;
+        const esTipoConOpciones =
+            campoDinamico.tipoCampo === "lista" || campoDinamico.tipoCampo === "multiselect";
+        const validaOpciones = esTipoConOpciones && !(opcionesCampo?.valores || []).length;
 
-        const nombreNormalizado = (campoDinamico.nombre || "").trim().toLowerCase();
-        const tipoNormalizado = (campoDinamico.tipoCampo || "").trim().toLowerCase();
-        const duplicado = (rowData || []).some((registro) => {
-            if (idEditar && registro.id === idEditar) {
+        if (!validaNombre) {
+            try {
+                const filtro = JSON.stringify({
+                    where: {
+                        and: {
+                            empresaId: getUsuarioSesion()?.empresaId,
+                            nombre: campoDinamico.nombre.trim(),
+                        },
+                    },
+                });
+
+                const existentes = await getCamposDinamicos(filtro);
+                const duplicado = (existentes || []).find((campo) => campo.id !== campoDinamico.id);
+
+                if (duplicado) {
+                    toast.current?.show({
+                        severity: "error",
+                        summary: "ERROR",
+                        detail: intl.formatMessage({ id: "Ya existe un campo dinamico con ese nombre" }),
+                        life: 5000,
+                    });
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error validando duplicados:", error);
                 return false;
             }
-            const nombreRegistro = (registro.nombre || "").trim().toLowerCase();
-            const tipoRegistro = (registro.tipoCampo || "").trim().toLowerCase();
-            return nombreRegistro === nombreNormalizado && tipoRegistro === tipoNormalizado;
-        });
-
-        if (duplicado) {
-            toast.current?.show({
-                severity: "warn",
-                summary: "ERROR",
-                detail: intl.formatMessage({ id: "Ya existe un campo dinamico con ese nombre y tipo" }),
-                life: 4000,
-            });
-            return "duplicado";
         }
 
-        return !(validaNombre || validaTipoCampo || validaOpciones);
-    };
+        if (validaNombre || validaTipoCampo || validaGrupo || validaOpciones) {
+            let detail = intl.formatMessage({ id: "Todos los campos obligatorios deben ser rellenados" });
 
-    // Guarda en alta o edicion segun idEditar
-    const guardarCampoDinamico = async () => {
-        setEstadoGuardando(true);
-        setEstadoGuardandoBoton(true);
-        const resultadoValidacion = await validaciones();
-        if (resultadoValidacion !== true) {
-            if (resultadoValidacion !== "duplicado") {
-                toast.current?.show({
-                    severity: "warn",
-                    summary: intl.formatMessage({ id: "Campos obligatorios" }),
-                    detail: intl.formatMessage({ id: "Hay campos obligatorios sin rellenar" }),
-                    life: 4000,
-                });
+            if (validaGrupo) {
+                detail = intl.formatMessage({ id: "Debe seleccionar un grupo de campos dinamicos" });
             }
-            setEstadoGuardando(false);
-            setEstadoGuardandoBoton(false);
-            return;
-        }
-        const usuarioActual = getUsuarioSesion()?.id;
-        const empresaActual = getUsuarioSesion()?.empresaId ?? Number(localStorage.getItem("empresa"));
-        if (!usuarioActual || !empresaActual) {
+
             toast.current?.show({
                 severity: "error",
                 summary: "ERROR",
-                detail: intl.formatMessage({ id: "No se pudo obtener la empresa o el usuario actual" }),
-                life: 4000,
+                detail,
+                life: 3000,
             });
-            setEstadoGuardando(false);
-            setEstadoGuardandoBoton(false);
-            return;
+            return false;
         }
-        const requiereOpciones = campoDinamico.tipoCampo === tipoConOpciones;
-        const opcionesFinal = requiereOpciones ? construirOpciones() : null;
 
-        if (idEditar === 0) {
-            const nuevoRegistro = {
-                ...campoDinamico,
-                id: undefined,
-                empresaId: empresaActual,
-                nombre: campoDinamico.nombre.trim(),
-                etiqueta: campoDinamico.nombre.trim(),
-                tipoCampo: campoDinamico.tipoCampo || "texto",
-                opciones: opcionesFinal,
-                obligatorioSn: campoDinamico.obligatorioSn || "N",
-                activoSn: campoDinamico.activoSn || "S",
-                usuarioCreacion: usuarioActual,
-            };
-            try {
-                await postCampoDinamico(nuevoRegistro);
-                setRegistroResult("insertado");
-                setIdEditar(null);
-            } catch (error) {
-                console.error("Error creando campo dinamico:", error);
-                toast.current?.show({
-                    severity: "error",
-                    summary: "ERROR",
-                    detail: error.response?.data?.error?.message || intl.formatMessage({ id: "Ha ocurrido un error creando el registro" }),
-                    life: 5000,
+        return true;
+    };
+
+    const guardarRelacionesGrupos = async (campoId, usuarioActual, idsSeleccionados) => {
+        const detallesExistentes = await getGrupoCampoDinamicoDetalles(
+            JSON.stringify({
+                where: { campoDinamicoId: Number(campoId) },
+                order: ["id ASC"],
+            })
+        );
+
+        const mapaPorGrupo = new Map();
+        (detallesExistentes || []).forEach((detalle) => {
+            const grupoId = Number(
+                detalle?.grupoCampoDinamicoId ?? detalle?.grupo_campo_dinamico_id ?? 0
+            );
+            if (grupoId > 0 && !mapaPorGrupo.has(grupoId)) {
+                mapaPorGrupo.set(grupoId, detalle);
+            }
+        });
+
+        for (const grupoId of idsSeleccionados) {
+            const detalleExistente = mapaPorGrupo.get(grupoId);
+
+            if (detalleExistente?.id) {
+                continue;
+            } else {
+                await postGrupoCampoDinamicoDetalle({
+                    campoDinamicoId: Number(campoId),
+                    grupoCampoDinamicoId: grupoId,
+                    usuarioCreacion: usuarioActual,
                 });
             }
-        } else {
-            const campoAeditar = {
-                id: campoDinamico.id,
+        }
+
+        for (const detalle of detallesExistentes || []) {
+            const grupoId = Number(
+                detalle?.grupoCampoDinamicoId ?? detalle?.grupo_campo_dinamico_id ?? 0
+            );
+            if (!grupoId || idsSeleccionados.includes(grupoId)) {
+                continue;
+            }
+
+            await deleteGrupoCampoDinamicoDetalle(detalle.id);
+        }
+    };
+
+    const guardarCampoDinamico = async () => {
+        setEstadoGuardando(true);
+        setEstadoGuardandoBoton(true);
+
+        const idsGruposSeleccionadosNormalizados = Array.from(
+            new Set(
+                (gruposSeleccionadosIds || [])
+                    .map((grupoId) => Number(grupoId || 0))
+                    .filter((grupoId) => grupoId > 0)
+            )
+        );
+
+        if (await validaciones(idsGruposSeleccionadosNormalizados)) {
+            const usuarioActual = getUsuarioSesion()?.id;
+            const empresaActual = getUsuarioSesion()?.empresaId;
+
+            const esLista = campoDinamico.tipoCampo === "lista" || campoDinamico.tipoCampo === "multiselect";
+            const opcionesFinal = esLista && (opcionesCampo?.valores || []).length
+                ? JSON.stringify({
+                    multiselectSn: campoDinamico.tipoCampo === "multiselect" ? "S" : "N",
+                    valores: opcionesCampo.valores,
+                })
+                : null;
+
+            const objGuardar = {
                 empresaId: campoDinamico.empresaId || empresaActual,
                 nombre: campoDinamico.nombre.trim(),
                 etiqueta: campoDinamico.nombre.trim(),
-                tipoCampo: campoDinamico.tipoCampo || "texto",
+                descripcion: campoDinamico.descripcion || null,
+                tipoCampo: esLista ? "select" : (campoDinamico.tipoCampo || "texto"),
                 opciones: opcionesFinal,
                 obligatorioSn: campoDinamico.obligatorioSn || "N",
                 activoSn: campoDinamico.activoSn || "S",
-                usuarioCreacion: campoDinamico.usuarioCreacion,
-                usuarioModificacion: usuarioActual,
+                orden: Number(campoDinamico.orden || 0),
             };
+
             try {
-                await patchCampoDinamico(campoDinamico.id, campoAeditar);
-                setRegistroResult("editado");
-                setIdEditar(null);
+                let campoIdGuardado = campoDinamico.id;
+
+                if (idEditar === 0) {
+                    const nuevoRegistro = await postCampoDinamico({
+                        ...objGuardar,
+                        empresaId: empresaActual,
+                        usuarioCreacion: usuarioActual,
+                    });
+                    campoIdGuardado = nuevoRegistro?.id;
+                } else {
+                    await patchCampoDinamico(campoDinamico.id, {
+                        ...objGuardar,
+                        usuarioModificacion: usuarioActual,
+                    });
+                }
+
+                if (campoIdGuardado) {
+                    await guardarRelacionesGrupos(
+                        campoIdGuardado,
+                        usuarioActual,
+                        idsGruposSeleccionadosNormalizados
+                    );
+                    setRegistroResult(idEditar === 0 ? "insertado" : "editado");
+                    setIdEditar(null);
+                }
             } catch (error) {
-                console.error("Error editando campo dinamico:", error);
+                console.error("Error guardando campo dinamico:", error);
+                const detallesError = error?.response?.data?.error?.details;
+                const detalleValidacion =
+                    Array.isArray(detallesError) && detallesError.length > 0
+                        ? detallesError.map((d) => d?.message).filter(Boolean).join(" | ")
+                        : null;
+
                 toast.current?.show({
                     severity: "error",
                     summary: "ERROR",
-                    detail: error.response?.data?.error?.message || intl.formatMessage({ id: "Ha ocurrido un error editando el registro" }),
+                    detail:
+                        detalleValidacion ||
+                        error?.response?.data?.error?.message ||
+                        intl.formatMessage({
+                            id: idEditar === 0
+                                ? "Ha ocurrido un error creando el registro"
+                                : "Ha ocurrido un error editando el registro",
+                        }),
                     life: 5000,
                 });
             }
         }
-        setEstadoGuardando(false);
+
         setEstadoGuardandoBoton(false);
+        setEstadoGuardando(false);
     };
 
     const cancelarEdicion = () => {
         setIdEditar(null);
     };
 
-    const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: "Editar" }) : intl.formatMessage({ id: "Ver" })) : intl.formatMessage({ id: "Nuevo" });
+    const header = idEditar > 0
+        ? (editable ? intl.formatMessage({ id: "Editar" }) : intl.formatMessage({ id: "Ver" }))
+        : intl.formatMessage({ id: "Nuevo" });
 
     return (
         <div>
-            <div className="grid">
+            <div className="grid CampoDinamico">
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
                         <h2>{header} {intl.formatMessage({ id: "Campo dinamico" }).toLowerCase()}</h2>
+
                         <EditarDatosCampoDinamico
                             campoDinamico={campoDinamico}
                             setCampoDinamico={setCampoDinamico}
                             estadoGuardando={estadoGuardando}
                             opcionesCampo={opcionesCampo}
                             setOpcionesCampo={setOpcionesCampo}
+                            editable={editable}
+                            gruposDisponibles={gruposDisponibles}
+                            gruposSeleccionadosIds={gruposSeleccionadosIds}
+                            setGruposSeleccionadosIds={setGruposSeleccionadosIds}
                         />
 
                         <div className="flex justify-content-end mt-2">
@@ -238,7 +357,11 @@ const EditarCampoDinamico = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                                     disabled={estadoGuardandoBoton}
                                 />
                             )}
-                            <Button label={intl.formatMessage({ id: "Cancelar" })} onClick={cancelarEdicion} className="p-button-secondary" />
+                            <Button
+                                label={intl.formatMessage({ id: "Cancelar" })}
+                                onClick={cancelarEdicion}
+                                className="p-button-secondary"
+                            />
                         </div>
                     </div>
                 </div>

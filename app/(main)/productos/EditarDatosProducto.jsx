@@ -18,7 +18,14 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import { devuelveBasePath } from "../../utility/Utils";
 
-const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEditandoProducto, listaTipoArchivos }) => {
+const EditarDatosProducto = ({
+    producto,
+    setProducto,
+    estadoGuardando,
+    estoyEditandoProducto,
+    listaTipoArchivos,
+    selectorGruposCampoDinamico = null,
+}) => {
     const intl = useIntl();
     const toast = useRef(null);
     
@@ -238,6 +245,8 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
             <Toast ref={toast} />
             <Fieldset legend={intl.formatMessage({ id: 'Información básica' })} collapsed={false} toggleable>
                 <div className="formgrid grid">
+                    {selectorGruposCampoDinamico}
+
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                         <label htmlFor="imagenPrincipal">{intl.formatMessage({ id: 'Imagen principal' })}</label>
                         <div className="flex gap-3 align-items-start">
