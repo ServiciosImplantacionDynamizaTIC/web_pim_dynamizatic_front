@@ -30,7 +30,8 @@ import { useRouter } from 'next/navigation';
 import { useTheme } from "@/app/providers/ThemeProvider";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
+    botonesExtra }) => {
     const intl = useIntl()
     const router = useRouter();
     const { themeConfig } = useTheme(); // Hook para obtener el tema actual
@@ -95,6 +96,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [puedeEditar, setPuedeEditar] = useState(true);
     const [puedeBorrar, setPuedeBorrar] = useState(true);
     const [puedeRealizar, setPuedeRealizar] = useState(true);
+    const [permisosBotonesExtra, setPermisosBotonesExtra] = useState({});
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
@@ -312,6 +314,15 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setPuedeEditar(await tieneUsuarioPermiso(controlador, 'actualizar'))
         setPuedeBorrar(await tieneUsuarioPermiso(controlador, 'borrar'))
         setPuedeRealizar(await tieneUsuarioPermiso(controlador, 'actualizar'));
+
+        // Obtener permisos de los botones extra
+        if (botonesExtra && Array.isArray(botonesExtra)) {
+            const _permisosBotonesExtra = {};
+            for (const botonExtra of botonesExtra) {
+                _permisosBotonesExtra[botonExtra.boton.props.permiso] = await tieneUsuarioPermiso(controlador, botonExtra.boton.props.permiso);
+            }
+            setPermisosBotonesExtra(_permisosBotonesExtra);
+        }
 
     }
 
@@ -672,7 +683,22 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                         severity="warning"
                         onClick={() => confirmarEliminarRegistro(rowData)}
                     />
-                )}                
+                )}
+                {/* Botones extra personalizados */}
+                {botonesExtra && botonesExtra.length > 0 &&
+                    botonesExtra.map((botonExtra, index) => {
+                        if (permisosBotonesExtra[botonExtra.boton.props.permiso]) {
+                            return React.cloneElement(
+                                botonExtra.boton,
+                                {
+                                    key: `boton-extra-${index}`,
+                                    onClick: () => botonExtra.funcionOnClick(rowData)
+                                }
+                            );
+                        }
+                        return null;
+                    })
+                }
             </>
         );
     };
@@ -1261,7 +1287,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 {
                                     ...columnasDinamicas //Muestra las columnas generadas
                                 }
-                                {(botones.length > 0 && !(botones.length === 1 && botones.includes('descargarCSV'))) && (
+                                {((botones.length > 0 && !(botones.length === 1 && botones.includes('descargarCSV'))) || (botonesExtra && botonesExtra.length > 0)) && (
                                     <Column
                                         body={(rowData) => botonesDeAccionTemplate(rowData, botones)}
                                         header={intl.formatMessage({ id: 'Acciones' })}
