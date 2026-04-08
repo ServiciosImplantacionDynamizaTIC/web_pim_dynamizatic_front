@@ -269,8 +269,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     //Obtiene el idioma del usuario
     if (data && data.idiomaId) {
+      // getIdioma() puede devolver undefined si la llamada a la API falla (su catch no retorna nada),
+      // por eso TypeScript infiere el tipo como `Idioma | undefined`. Usamos ?. para acceder a
+      // `iso` de forma segura: si idioma es undefined, la expresión devuelve undefined y el || ''
+      // garantiza que siempre se guarda un string vacío como fallback.
       const idioma = await getIdioma(data.idiomaId);
-      localStorage.setItem('idioma', idioma.iso || '');
+      localStorage.setItem('idioma', idioma?.iso || '');
     }
 
     //Obtiene el timer de la empresa del usuario

@@ -41,7 +41,12 @@ export default function ProvisioningPage() {
   useEffect(() => {
     const verificarPermisos = async () => {
       try {
-        const response = await checkProvisioningPermissions();
+        // ASERCIÓN DE TIPO: checkProvisioningPermissions() está definida en un archivo .js
+        // (api-endpoints/tenant/index.js), por lo que TypeScript no puede inferir su tipo de
+        // retorno y lo trata como `object` genérico. Sabemos que devuelve un objeto con la
+        // forma de PermissionCheckResponse (definida en ./types.ts), así que usamos `as` para
+        // indicárselo a TypeScript y poder acceder a sus propiedades con tipado correcto.
+        const response = await checkProvisioningPermissions() as PermissionCheckResponse;
         
         if (response.hasPermission) {
           setIsInitializing(false);

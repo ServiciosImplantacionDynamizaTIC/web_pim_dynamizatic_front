@@ -54,75 +54,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="es" suppressHydrationWarning>
             <head>
-                {/* 
-                Creamos una función en javascript puro para que coja el tema correcto cuando recargamos la página una vez logueados, sino pierde el tema. 
+                {/*
+                El link del tema forma parte del JSX para que React lo conozca y no lo elimine durante la hidratación.
+                DynamicThemeManager actualiza el href dinámicamente según la empresa del usuario.
                 */}
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                        (function() {
-                            try {
-                                //
-                                // Detectamos la empresa actual del localStorage y nos guardamos el tema por defecto
-                                //
-                                const empresaId = localStorage.getItem('empresa');
-                                let themeHref = '/theme/theme-light/mitema/theme.css'; 
-                                //
-                                //Si existe la empresa cargamos su tema
-                                //
-                                if (empresaId) {
-                                    //                                    
-                                    // Intentamos obtener configuración de tema almacenada para cambiarlo
-                                    //
-                                    const empresaThemeConfig = localStorage.getItem('empresaThemeConfig');
-                                    
-                                    if (empresaThemeConfig) {
-                                        try {
-                                            //
-                                            //Intentamos cargar la información, en caso contrario cargamos los valores por defecto
-                                            //
-                                            const themeConfig = JSON.parse(empresaThemeConfig);
-                                            const colorScheme = themeConfig.esquemaColor || 'light';
-                                            const theme = themeConfig.tema || 'mitema';
-                                            
-                                            themeHref = '/theme/theme-' + colorScheme + '/' + theme + '/theme.css';
-                                        } catch (configErr) {
-                                            //
-                                            //Si ha ocurrido algun error obteniendo la información ponemos el tema por defecto
-                                            //
-                                            themeHref = '/theme/theme-light/mitema/theme.css';
-                                        }
-                                    } else {
-                                        //
-                                        //Si la empresa no tenía información del tema almacenado usamos el por defecto
-                                        //
-                                        themeHref = '/theme/theme-light/mitema/theme.css';
-                                    }
-                                } else {
-                                    //
-                                    //Si la empresa no tenía información del tema almacenado usamos el por defecto
-                                    //
-                                    themeHref = '/theme/theme-light/mitema/theme.css';
-                                }
-                                //
-                                // Escribimos el link del tema en el head
-                                //
-                                document.write('<link id="theme-link" href="' + themeHref + '" rel="stylesheet">');
-                                
-                            } catch (err) {
-                                //
-                                //Si ha habido algún error aplicamos el tema por defecto
-                                //
-                                document.write('<link id="theme-link" href="/theme/theme-light/mitema/theme.css" rel="stylesheet">');
-                            }
-                        })();
-                        `
-                    }}
-                />
-                {/* Helper de emergencia para desarrollo */}
-                {process.env.NODE_ENV === 'development' && (
-                    <script src="/theme-emergency.js"></script>
-                )}
+                <link id="theme-link" href="/theme/theme-light/mitema/theme.css" rel="stylesheet" />
             </head>
             <body>
                 <IntlProviderWrapper>
