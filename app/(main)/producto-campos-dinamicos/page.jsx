@@ -301,6 +301,7 @@ const ProductoCamposDinamicos = ({
                             obligatorioSn: campo?.obligatorioSn || "N",
                             orden: Number(campo?.ordenCampo ?? 0),
                             bloqueado: !!campo?.bloqueado,
+                            activoSn: campo?.activoCampoSn ?? null,
                         };
 
                         if (campoFormateado.id > 0 && !valoresMap[campoFormateado.id]) {
@@ -311,7 +312,7 @@ const ProductoCamposDinamicos = ({
                         }
 
                         return campoFormateado;
-                    }).filter((campo) => campo.id > 0),
+                    }).filter((campo) => campo.id > 0 && campo.activoSn !== "N"),
                 }));
 
                 setGruposCamposDinamicosDefinidos(gruposFormateados);

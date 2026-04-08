@@ -111,14 +111,14 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
             try {
                 const empresaId = getUsuarioSesion()?.empresaId;
-                const where = {
-                    ...(empresaId ? { empresaId } : {}),
-                    activoSn: "S",
-                };
-
                 const grupos = await getGruposCampoDinamicos(
                     JSON.stringify({
-                        where,
+                        where: {
+                            and: {
+                                ...(empresaId ? { empresaId } : {}),
+                                activoSn: "S",
+                            },
+                        },
                         order: ["orden ASC", "nombre ASC"],
                     })
                 );
