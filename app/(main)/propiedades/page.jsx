@@ -1,6 +1,6 @@
 "use client";
-import { deletePropiedad, gePropiedades, gePropiedadesCount } from "@/app/api-endpoints/atributo";
-import { getProductosPropiedad } from "@/app/api-endpoints/producto_atributo";
+import { deletePropiedad, gePropiedades, gePropiedadesCount } from "@/app/api-endpoints/propiedad";
+import { getProductosPropiedad } from "@/app/api-endpoints/producto_propiedad";
 import Crud from "../../components/shared/crud";
 import EditarPropiedad from "./editar";
 import { useIntl } from 'react-intl'

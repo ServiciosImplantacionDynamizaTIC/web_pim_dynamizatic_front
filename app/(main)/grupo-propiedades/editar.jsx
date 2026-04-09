@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getGrupoPropiedad, getGrupoPropiedades, postGrupoPropiedad, patchGrupoPropiedad } from "@/app/api-endpoints/grupo_atributo";
+import { getGrupoPropiedad, getGrupoPropiedades, postGrupoPropiedad, patchGrupoPropiedad } from "@/app/api-endpoints/grupo_propiedad";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosGrupoPropiedad from "./EditarDatosGrupoPropiedad";
 import 'primeicons/primeicons.css';

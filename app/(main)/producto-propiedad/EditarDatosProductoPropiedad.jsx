@@ -5,7 +5,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { getProductos } from "@/app/api-endpoints/producto";
-import { gePropiedades } from "@/app/api-endpoints/atributo";
+import { gePropiedades } from "@/app/api-endpoints/propiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 

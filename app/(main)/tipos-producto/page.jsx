@@ -1,6 +1,6 @@
 "use client";
 import { deleteTipoProducto, getTiposProducto, getTiposProductoCount, postTipoProducto } from "@/app/api-endpoints/tipo_producto";
-import { getTipoProductoPropiedadDetalles, postTipoProductoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
+import { getTipoProductoPropiedadDetalles, postTipoProductoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
 import { getTipoProductoMultimediaDetalles, postTipoProductoMultimediaDetalle } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import Crud from "../../components/shared/crud";
 import EditarTipoProducto from "./editar";

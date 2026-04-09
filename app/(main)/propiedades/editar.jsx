@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getPropiedad, postPropiedad, patchPropiedad, gePropiedades } from "@/app/api-endpoints/atributo";
-import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_atributo";
+import { getPropiedad, postPropiedad, patchPropiedad, gePropiedades } from "@/app/api-endpoints/propiedad";
+import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosPropiedad from "./EditarDatosPropiedad";
 import 'primeicons/primeicons.css';

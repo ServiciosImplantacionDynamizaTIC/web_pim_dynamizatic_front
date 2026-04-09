@@ -1,6 +1,6 @@
 "use client";
-import { deleteGrupoPropiedad, getGrupoPropiedades, getGrupoPropiedadesCount } from "@/app/api-endpoints/grupo_atributo";
-import { gePropiedades } from "@/app/api-endpoints/atributo";
+import { deleteGrupoPropiedad, getGrupoPropiedades, getGrupoPropiedadesCount } from "@/app/api-endpoints/grupo_propiedad";
+import { gePropiedades } from "@/app/api-endpoints/propiedad";
 import Crud from "../../components/shared/crud";
 import EditarGrupoPropiedad from "./editar";
 import { useIntl } from 'react-intl'

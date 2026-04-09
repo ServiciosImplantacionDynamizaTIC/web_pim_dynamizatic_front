@@ -14,9 +14,9 @@ import { InputSwitch } from "primereact/inputswitch";
 import { MultiSelect } from "primereact/multiselect";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { getProducto } from "@/app/api-endpoints/producto";
-import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
-import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_atributo";
-import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_atributo";
+import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
+import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
+import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { InputTextarea } from "primereact/inputtextarea";
 

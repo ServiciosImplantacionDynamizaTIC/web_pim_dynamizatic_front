@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getProductoPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_atributo";
+import { getProductoPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
 import EditarDatosProductoPropiedad from "./EditarDatosProductoPropiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';

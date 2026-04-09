@@ -14,7 +14,7 @@ import ProductoMultimedia from "../producto-multimedia/page";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
-import ProductoPropiedad from "../producto-atributo/page";
+import ProductoPropiedad from "../producto-propiedad/page";
 
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
