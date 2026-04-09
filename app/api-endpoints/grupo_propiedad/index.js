@@ -18,8 +18,13 @@ export const getGrupoPropiedad = async (id) => {
 }
 
 export const postGrupoPropiedad = async (objGrupoPropiedad) => {
-    const { data: dataGrupoPropiedad } = await apiGrupoPropiedad.grupoPropiedadControllerCreate(objGrupoPropiedad)
-    return dataGrupoPropiedad
+    try {
+        const { data: dataGrupoPropiedad } = await apiGrupoPropiedad.grupoPropiedadControllerCreate(objGrupoPropiedad)
+        return dataGrupoPropiedad
+    } catch (error) {
+        console.error('Error en postGrupoPropiedad:', error);
+        throw error;
+    }
 }
 
 export const deleteGrupoPropiedad = async (idGrupoPropiedad) => {

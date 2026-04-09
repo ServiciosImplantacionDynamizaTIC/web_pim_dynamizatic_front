@@ -9,15 +9,19 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, tipoDeGrupoPropiedad = 'grupo_atributos' }) => {
     const intl = useIntl();
     const toast = useRef(null);
+
+    const esGrupoAtributos = tipoDeGrupoPropiedad === 'grupo_atributos';
+    const nombreTipoSingular = esGrupoAtributos ? intl.formatMessage({ id: 'Grupo de Atributos' }) : intl.formatMessage({ id: 'Grupo de Campos Dinámicos' });
 
     const [grupoPropiedad, setGrupoPropiedad] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
         orden: 0,
-        activoSn: "S"
+        activoSn: "S",
+        tipoDeGrupoPropiedad: tipoDeGrupoPropiedad
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -71,7 +75,8 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                 where: {
                     and: {
                         nombre: grupoPropiedad.nombre.trim(),
-                        empresaId: getUsuarioSesion()?.empresaId
+                        empresaId: getUsuarioSesion()?.empresaId,
+                        tipoDeGrupoPropiedad: tipoDeGrupoPropiedad
                     }
                 }
             });
@@ -120,6 +125,7 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                objGuardar['tipoDeGrupoPropiedad'] = tipoDeGrupoPropiedad;
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
                 }
@@ -147,6 +153,7 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                     empresaId: getUsuarioSesion()?.empresaId,
+                    tipoDeGrupoPropiedad: tipoDeGrupoPropiedad,
                 };
 
                 await patchGrupoPropiedad(objGuardar.id, grupoPropiedadAeditar);
@@ -171,13 +178,14 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Grupo de Propiedad' })).toLowerCase()}</h2>
+                        <h2>{header} {nombreTipoSingular.toLowerCase()}</h2>
                         <EditarDatosGrupoPropiedad
                             grupoPropiedad={grupoPropiedad}
                             setGrupoPropiedad={setGrupoPropiedad}
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
+                            tipoDeGrupoPropiedad={tipoDeGrupoPropiedad}
                         />
 
                         <div className="flex justify-content-end mt-2">

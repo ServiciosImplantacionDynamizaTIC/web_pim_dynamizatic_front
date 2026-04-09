@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const getMenuLateral = async () => {
     // Este objeto contiene las rutas y los iconos asociados a cada permiso
-    const jsonRutas: Record<string, Record<string, { path: string; icon: string }>> = {
+    const jsonRutas: Record<string, Record<string, { path: string; icon: string; label?: string }>> = {
       "Gestión": {
         "Usuarios": {
           "path": "/usuarios",
@@ -156,13 +156,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/parametro-global",
           "icon": "pi pi-fw pi-cog"
         },
-        "GrupoPropiedades": {
-          "path": "/grupo-propiedades",
-          "icon": "pi pi-fw pi-sitemap"
+        "GruposAtributos": {
+          "path": "/grupos-atributos",
+          "icon": "pi pi-fw pi-sitemap",
+          "label": "Grupos de Atributos"
         },
-        "Propiedades": {
-          "path": "/propiedades",
-          "icon": "pi pi-fw pi-tags"
+        "Atributos": {
+          "path": "/atributos",
+          "icon": "pi pi-fw pi-tags",
+          "label": "Atributos"
+        },
+        "GruposCamposDinamicos": {
+          "path": "/grupos-campos-dinamicos",
+          "icon": "pi pi-fw pi-th-large",
+          "label": "Grupos de Campos Dinámicos"
+        },
+        "CamposDinamicos": {
+          "path": "/campos-dinamicos",
+          "icon": "pi pi-fw pi-sliders-h",
+          "label": "Campos Dinámicos"
         },
         "Catalogos": {
           "path": "/catalogos",
@@ -234,7 +246,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           // Significa que el usuario tiene acceso a esa pantalla y por lo tanto la añadimos al menu
           if (permisosAcceder.some((permiso) => permiso.permisoControlador === subCategoria)) {
             categoriaItems.push({
-              label: `${subCategoria}`,
+              label: jsonRutas[categoria][subCategoria].label || subCategoria,
               icon: jsonRutas[categoria][subCategoria].icon,
               // command: () => {
               //     router.push(jsonRutas[categoria][subCategoria].path, { shallow: true });

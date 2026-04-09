@@ -143,21 +143,37 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Parámetros globales-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parámetros globales-Borrar' },
 
-                // Grupos de Propiedades
-                { header: intl.formatMessage({ id: 'Grupos de Propiedades' }), seccion: 'GrupoPropiedades' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GrupoPropiedades-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GrupoPropiedades-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GrupoPropiedades-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GrupoPropiedades-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GrupoPropiedades-Borrar' },
+                // Grupos de Atributos
+                { header: intl.formatMessage({ id: 'Grupos de Atributos' }), seccion: 'GruposAtributos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GruposAtributos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GruposAtributos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GruposAtributos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GruposAtributos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GruposAtributos-Borrar' },
 
-                // Propiedades
-                { header: intl.formatMessage({ id: 'Propiedades' }), seccion: 'Propiedades' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Propiedades-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Propiedades-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Propiedades-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Propiedades-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Propiedades-Borrar' },
+                // Atributos
+                { header: intl.formatMessage({ id: 'Atributos' }), seccion: 'Atributos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Atributos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Atributos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Atributos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Atributos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Atributos-Borrar' },
+
+                // Grupos de Campos dinamicos
+                { header: intl.formatMessage({ id: 'Grupos de Campos Dinámicos' }), seccion: 'GruposCamposDinamicos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GruposCamposDinamicos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GruposCamposDinamicos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GruposCamposDinamicos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GruposCamposDinamicos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GruposCamposDinamicos-Borrar' },
+
+                // Campos Dinamicos
+                { header: intl.formatMessage({ id: 'Campos Dinámicos' }), seccion: 'CamposDinamicos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'CamposDinamicos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'CamposDinamicos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'CamposDinamicos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'CamposDinamicos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'CamposDinamicos-Borrar' },
 
                 // Catálogos
                 { header: intl.formatMessage({ id: 'Catálogos' }), seccion: 'Catalogos' },

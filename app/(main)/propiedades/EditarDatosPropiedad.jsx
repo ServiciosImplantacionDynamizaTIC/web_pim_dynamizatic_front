@@ -8,9 +8,17 @@ import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { useIntl } from 'react-intl';
 
-const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit, listaGrupoPropiedades = [] }) => {
+const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit, listaGrupoPropiedades = [], tipoDePropiedad = 'atributo' }) => {
     const intl = useIntl();
     const [nuevoValor, setNuevoValor] = useState('');
+
+    const esAtributo = tipoDePropiedad === 'atributo';
+    const labelFieldset = esAtributo ? intl.formatMessage({ id: 'Datos del atributo' }) : intl.formatMessage({ id: 'Datos del campo dinámico' });
+    const labelGrupo = esAtributo ? intl.formatMessage({ id: 'Grupo de Atributos' }) : intl.formatMessage({ id: 'Grupo de Campos Dinámicos' });
+    const placeholderGrupo = esAtributo ? intl.formatMessage({ id: 'Selecciona un grupo de atributos' }) : intl.formatMessage({ id: 'Selecciona un grupo de campos dinámicos' });
+    const placeholderNombre = esAtributo ? intl.formatMessage({ id: 'Nombre del atributo' }) : intl.formatMessage({ id: 'Nombre del campo dinámico' });
+    const placeholderDescripcion = esAtributo ? intl.formatMessage({ id: 'Descripción del atributo' }) : intl.formatMessage({ id: 'Descripción del campo dinámico' });
+    const emptyGrupoMsg = esAtributo ? intl.formatMessage({ id: 'No hay grupos de atributos disponibles' }) : intl.formatMessage({ id: 'No hay grupos de campos dinámicos disponibles' });
     
     const tiposDato = [
         { label: 'Texto', value: 'texto' },
@@ -70,10 +78,10 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
 
     return (
         <>
-            <Fieldset legend={intl.formatMessage({ id: 'Datos del atributo' })}>
+            <Fieldset legend={labelFieldset}>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="grupoPropiedadId"><b>{intl.formatMessage({ id: 'Grupo de Propiedades' })}*</b></label>
+                        <label htmlFor="grupoPropiedadId"><b>{labelGrupo}*</b></label>
                         <Dropdown 
                             id="grupoPropiedadId"
                             value={atributo.grupoPropiedadId}
@@ -82,12 +90,12 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
                                 value: grupo.id
                             }))}
                             onChange={(e) => setPropiedad({ ...atributo, grupoPropiedadId: e.value })}
-                            placeholder={intl.formatMessage({ id: 'Selecciona un grupo de propiedades' })}
+                            placeholder={placeholderGrupo}
                             disabled={estadoGuardando}
                             className={`${(estadoGuardando && !atributo.grupoPropiedadId) ? "p-invalid" : ""}`}
                             filter
                             filterBy="label"
-                            emptyMessage={intl.formatMessage({ id: 'No hay grupos disponibles' })}
+                            emptyMessage={emptyGrupoMsg}
                         />
                     </div>
 
@@ -96,7 +104,7 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
                         <InputText 
                             id="nombre"
                             value={atributo.nombre}
-                            placeholder={intl.formatMessage({ id: 'Nombre del atributo' })}
+                            placeholder={placeholderNombre}
                             onChange={(e) => setPropiedad({ ...atributo, nombre: e.target.value })}
                             className={`${(estadoGuardando && atributo.nombre === "") ? "p-invalid" : ""}`}
                             maxLength={100}
@@ -207,7 +215,7 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
                         <InputTextarea 
                             id="descripcion"
                             value={atributo.descripcion || ''}
-                            placeholder={intl.formatMessage({ id: 'Descripción del atributo' })}
+                            placeholder={placeholderDescripcion}
                             onChange={(e) => setPropiedad({ ...atributo, descripcion: e.target.value })}
                             rows={3}
                             disabled={estadoGuardando}

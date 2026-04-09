@@ -1,44 +1,14 @@
 "use client";
-import { deleteGrupoPropiedad, getGrupoPropiedades, getGrupoPropiedadesCount } from "@/app/api-endpoints/grupo_propiedad";
-import { gePropiedades } from "@/app/api-endpoints/propiedad";
-import Crud from "../../components/shared/crud";
-import EditarGrupoPropiedad from "./editar";
-import { useIntl } from 'react-intl'
-import { getUsuarioSesion } from "../../utility/Utils";
+/**
+ * page.jsx /grupo-propiedades
+ *
+ * Redirige al componente genérico
+ * GrupoPropiedadCrud con tipoDeGrupoPropiedad="grupo_atributos".
+ * Los nuevos puntos de menú usan /grupos-atributos y /grupos-campos-dinamicos en su lugar.
+ */
+import GrupoPropiedadCrud from "./GrupoPropiedadCrud";
 
 const GrupoPropiedad = () => {
-    const intl = useIntl();
-
-    const eliminarGrupoPropiedadConValidacion = async (id) => {
-        const filtro = JSON.stringify({ where: { and: { grupoPropiedadId: id } } });
-        const atributosAsociados = await gePropiedades(filtro);
-        if (atributosAsociados && atributosAsociados.length > 0) {
-            throw new Error(intl.formatMessage({ id: 'No se puede eliminar el grupo de propiedades porque tiene propiedades asociados' }));
-        }
-        return await deleteGrupoPropiedad(id);
-    };
-
-    const columnas = [
-        { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'number' },
-        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
-    ]
-    
-    return (
-        <div>
-            <Crud
-                headerCrud={intl.formatMessage({ id: 'Grupos de Propiedades' })}
-                getRegistros={getGrupoPropiedades}
-                getRegistrosCount={getGrupoPropiedadesCount}
-                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"GrupoPropiedades"}
-                editarComponente={<EditarGrupoPropiedad />}
-                filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
-                seccion={"GrupoPropiedades"}
-                columnas={columnas}
-                deleteRegistro={eliminarGrupoPropiedadConValidacion}
-            />
-        </div>
-    );
+    return <GrupoPropiedadCrud tipoDeGrupoPropiedad="grupo_atributos" />;
 };
 export default GrupoPropiedad;

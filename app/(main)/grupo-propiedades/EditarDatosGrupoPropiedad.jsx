@@ -8,8 +8,13 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl';
 
-const EditarDatosGrupoPropiedad = ({ grupoPropiedad, setGrupoPropiedad, estadoGuardando, isEdit, listaTipoArchivos }) => {
+const EditarDatosGrupoPropiedad = ({ grupoPropiedad, setGrupoPropiedad, estadoGuardando, isEdit, listaTipoArchivos, tipoDeGrupoPropiedad = 'grupo_atributos' }) => {
     const intl = useIntl();
+
+    const esGrupoAtributos = tipoDeGrupoPropiedad === 'grupo_atributos';
+    const labelFieldset = esGrupoAtributos ? intl.formatMessage({ id: 'Datos del grupo de atributos' }) : intl.formatMessage({ id: 'Datos del grupo de campos dinámicos' });
+    const placeholderNombre = esGrupoAtributos ? intl.formatMessage({ id: 'Nombre del grupo de atributos' }) : intl.formatMessage({ id: 'Nombre del grupo de campos dinámicos' });
+    const placeholderDescripcion = esGrupoAtributos ? intl.formatMessage({ id: 'Descripción del grupo de atributos' }) : intl.formatMessage({ id: 'Descripción del grupo de campos dinámicos' });
     
     //Crear inputs de archivos
     const inputsDinamicos = [];
@@ -53,14 +58,14 @@ const EditarDatosGrupoPropiedad = ({ grupoPropiedad, setGrupoPropiedad, estadoGu
 
     return (
         <>
-            <Fieldset legend={intl.formatMessage({ id: 'Datos del grupo de atributo' })}>
+            <Fieldset legend={labelFieldset}>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                         <InputText 
                             id="nombre"
                             value={grupoPropiedad.nombre}
-                            placeholder={intl.formatMessage({ id: 'Nombre del grupo de atributo' })}
+                            placeholder={placeholderNombre}
                             onChange={(e) => setGrupoPropiedad({ ...grupoPropiedad, nombre: e.target.value })}
                             className={`${(estadoGuardando && grupoPropiedad.nombre === "") ? "p-invalid" : ""}`}
                             maxLength={100}
@@ -100,7 +105,7 @@ const EditarDatosGrupoPropiedad = ({ grupoPropiedad, setGrupoPropiedad, estadoGu
                         <InputTextarea 
                             id="descripcion"
                             value={grupoPropiedad.descripcion || ''}
-                            placeholder={intl.formatMessage({ id: 'Descripción del grupo de atributo' })}
+                            placeholder={placeholderDescripcion}
                             onChange={(e) => setGrupoPropiedad({ ...grupoPropiedad, descripcion: e.target.value })}
                             rows={3}
                             disabled={estadoGuardando}

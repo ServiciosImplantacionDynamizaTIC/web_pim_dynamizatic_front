@@ -10,9 +10,13 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, tipoDePropiedad = 'atributo' }) => {
     const intl = useIntl();
     const toast = useRef(null);
+
+    const esAtributo = tipoDePropiedad === 'atributo';
+    const nombreTipoSingular = esAtributo ? intl.formatMessage({ id: 'Atributo' }) : intl.formatMessage({ id: 'Campo Dinámico' });
+    const tipoGrupoCorrespondiente = esAtributo ? 'grupo_atributos' : 'grupo_campos_dinamicos';
 
     const [atributo, setPropiedad] = useState(emptyRegistro || {
         nombre: "",
@@ -24,7 +28,8 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
         multivalorSn: "N",
         valoresPermitidos: "",
         orden: 0,
-        activoSn: "S"
+        activoSn: "S",
+        tipoDePropiedad: tipoDePropiedad
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -34,9 +39,9 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
 
     useEffect(() => {
         const fetchData = async () => {
-            // Cargar grupos de propiedades disponibles
+            // Cargar grupos de propiedades disponibles (filtrados por tipo correspondiente)
             try {
-                const filtro = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId, activoSn: 'S' }, } });
+                const filtro = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId, activoSn: 'S', tipoDeGrupoPropiedad: tipoGrupoCorrespondiente } } });
                 const grupopropiedades = await getGrupoPropiedades(filtro);
                 setListaGrupoPropiedades(grupopropiedades || []);
             } catch (error) {
@@ -132,6 +137,7 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
+                objGuardar['tipoDePropiedad'] = tipoDePropiedad;
 
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
@@ -165,6 +171,7 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                     orden: objGuardar.orden || 0,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
+                    tipoDePropiedad: tipoDePropiedad,
                 };
 
                 await patchPropiedad(objGuardar.id, atributoAeditar);
@@ -189,7 +196,7 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Propiedad' })).toLowerCase()}</h2>
+                        <h2>{header} {nombreTipoSingular.toLowerCase()}</h2>
                         <EditarDatosPropiedad
                             atributo={atributo}
                             setPropiedad={setPropiedad}
@@ -197,6 +204,7 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
                             listaGrupoPropiedades={listaGrupoPropiedades}
+                            tipoDePropiedad={tipoDePropiedad}
                         />
 
                         <div className="flex justify-content-end mt-2">
