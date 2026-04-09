@@ -1,33 +1,33 @@
-import { GrupoAtributoControllerApi, settings } from "@/app/api-programa";
+import { GrupoPropiedadControllerApi, settings } from "@/app/api-programa";
 
-const apiGrupoAtributo = new GrupoAtributoControllerApi(settings)
+const apiGrupoPropiedad = new GrupoPropiedadControllerApi(settings)
 
-export const getGrupoAtributos = async (filtro) => {
-    const { data: dataGrupoAtributos } = await apiGrupoAtributo.grupoAtributoControllerFind(filtro)
-    return dataGrupoAtributos
+export const getGrupoPropiedades = async (filtro) => {
+    const { data: dataGrupoPropiedades } = await apiGrupoPropiedad.grupoPropiedadControllerFind(filtro)
+    return dataGrupoPropiedades
 }
 
-export const getGrupoAtributosCount = async (filtro) => {
-    const { data: dataGrupoAtributos } = await apiGrupoAtributo.grupoAtributoControllerCount(filtro)
-    return dataGrupoAtributos
+export const getGrupoPropiedadesCount = async (filtro) => {
+    const { data: dataGrupoPropiedades } = await apiGrupoPropiedad.grupoPropiedadControllerCount(filtro)
+    return dataGrupoPropiedades
 }
 
-export const getGrupoAtributo = async (id) => {
-    const { data: dataGrupoAtributo } = await apiGrupoAtributo.grupoAtributoControllerFindById(id)
-    return dataGrupoAtributo
+export const getGrupoPropiedad = async (id) => {
+    const { data: dataGrupoPropiedad } = await apiGrupoPropiedad.grupoPropiedadControllerFindById(id)
+    return dataGrupoPropiedad
 }
 
-export const postGrupoAtributo = async (objGrupoAtributo) => {
-    const { data: dataGrupoAtributo } = await apiGrupoAtributo.grupoAtributoControllerCreate(objGrupoAtributo)
-    return dataGrupoAtributo
+export const postGrupoPropiedad = async (objGrupoPropiedad) => {
+    const { data: dataGrupoPropiedad } = await apiGrupoPropiedad.grupoPropiedadControllerCreate(objGrupoPropiedad)
+    return dataGrupoPropiedad
 }
 
-export const deleteGrupoAtributo = async (idGrupoAtributo) => {
-    const { data: dataGrupoAtributo } = await apiGrupoAtributo.grupoAtributoControllerDeleteById(idGrupoAtributo)
-    return dataGrupoAtributo
+export const deleteGrupoPropiedad = async (idGrupoPropiedad) => {
+    const { data: dataGrupoPropiedad } = await apiGrupoPropiedad.grupoPropiedadControllerDeleteById(idGrupoPropiedad)
+    return dataGrupoPropiedad
 }
 
-export const patchGrupoAtributo = async (idGrupoAtributo, objGrupoAtributo) => {
-    const { data: dataGrupoAtributo } = await apiGrupoAtributo.grupoAtributoControllerUpdateById(idGrupoAtributo, objGrupoAtributo)
-    return dataGrupoAtributo
+export const patchGrupoPropiedad = async (idGrupoPropiedad, objGrupoPropiedad) => {
+    const { data: dataGrupoPropiedad } = await apiGrupoPropiedad.grupoPropiedadControllerUpdateById(idGrupoPropiedad, objGrupoPropiedad)
+    return dataGrupoPropiedad
 }

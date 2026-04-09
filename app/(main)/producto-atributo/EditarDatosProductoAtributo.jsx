@@ -5,18 +5,18 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { getProductos } from "@/app/api-endpoints/producto";
-import { getAtributos } from "@/app/api-endpoints/atributo";
+import { gePropiedades } from "@/app/api-endpoints/atributo";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, estadoGuardando, editable, idProducto, rowData }) => {
+const EditarDatosProductoPropiedad = ({ productoPropiedad, setProductoPropiedad, estadoGuardando, editable, idProducto, rowData }) => {
     const intl = useIntl();
     
     const [productos, setProductos] = useState([]);
-    const [atributos, setAtributos] = useState([]);
-    const [atributosCompletos, setAtributosCompletos] = useState([]);
+    const [propiedades, setPropiedades] = useState([]);
+    const [atributosCompletos, setPropiedadesCompletos] = useState([]);
     const [cargandoProductos, setCargandoProductos] = useState(false);
-    const [cargandoAtributos, setCargandoAtributos] = useState(false);
+    const [cargandoPropiedades, setCargandoPropiedades] = useState(false);
 
     // Cargar productos para el dropdown
     useEffect(() => {
@@ -64,10 +64,10 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
         cargarProductos();
     }, [idProducto]);
 
-    // Cargar atributos para el dropdown
+    // Cargar propiedades para el dropdown
     useEffect(() => {
-        const cargarAtributos = async () => {
-            setCargandoAtributos(true);
+        const cargarPropiedades = async () => {
+            setCargandoPropiedades(true);
             try {
                 const filtro = JSON.stringify({
                     where: {
@@ -78,14 +78,14 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
                     }
                 });
                 
-                const data = await getAtributos(filtro);
-                setAtributosCompletos(data);
+                const data = await gePropiedades(filtro);
+                setPropiedadesCompletos(data);
                 
-                // Filtrar atributos ya usados para este producto (excepto el actual si estamos editando)
+                // Filtrar propiedades ya usados para este producto (excepto el actual si estamos editando)
                 let atributosDisponibles = data;
                 if (rowData && idProducto) {
                     const atributosUsados = rowData
-                        .filter(registro => registro.productoId === idProducto && registro.id !== productoAtributo?.id)
+                        .filter(registro => registro.productoId === idProducto && registro.id !== productoPropiedad?.id)
                         .map(registro => registro.atributoId);
                     
                     atributosDisponibles = data.filter(atributo => !atributosUsados.includes(atributo.id));
@@ -95,24 +95,24 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
                     label: atributo.nombre,
                     value: atributo.id
                 }));
-                setAtributos(atributosFormateados);
+                setPropiedades(atributosFormateados);
                 
             } catch (error) {
-                console.error('Error cargando atributos:', error);
+                console.error('Error cargando propiedades:', error);
             } finally {
-                setCargandoAtributos(false);
+                setCargandoPropiedades(false);
             }
         };
 
-        cargarAtributos();
-    }, [rowData, idProducto, productoAtributo?.id]);
+        cargarPropiedades();
+    }, [rowData, idProducto, productoPropiedad?.id]);
 
     //
     // Efecto separado para auto-seleccionar el producto cuando está disponible
     //
     useEffect(() => {
         if (idProducto && productos.length === 1 && productos[0].value === idProducto) {
-            setProductoAtributo(prev => {
+            setProductoPropiedad(prev => {
                 //
                 // Solo actualizar si no tiene productoId o es diferente
                 //
@@ -126,19 +126,19 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
 
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;
-        setProductoAtributo(prev => ({ ...prev, [nombreCampo]: valor }));
+        setProductoPropiedad(prev => ({ ...prev, [nombreCampo]: valor }));
     };
 
     const manejarCambioDropdown = (e, nombreCampo) => {
         const valor = e.value;
-        setProductoAtributo(prev => ({ ...prev, [nombreCampo]: valor }));
+        setProductoPropiedad(prev => ({ ...prev, [nombreCampo]: valor }));
     };
 
-    const manejarCambioAtributo = (e) => {
+    const manejarCambioPropiedad = (e) => {
         const atributoId = e.value;
         const atributoSeleccionado = atributosCompletos.find(atributo => atributo.id === atributoId);
         
-        setProductoAtributo(prev => ({ 
+        setProductoPropiedad(prev => ({ 
             ...prev, 
             atributoId: atributoId,
             // Si el atributo tiene una unidad por defecto, usarla
@@ -148,7 +148,7 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
 
     const manejarCambioNumero = (e, nombreCampo) => {
         const valor = e.value;
-        setProductoAtributo(prev => ({ ...prev, [nombreCampo]: valor }));
+        setProductoPropiedad(prev => ({ ...prev, [nombreCampo]: valor }));
     };
 
     return (
@@ -159,7 +159,7 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
                         <label htmlFor="productoId">{intl.formatMessage({ id: 'Producto' })} *</label>
                         <Dropdown
                             inputId="productoId"
-                            value={productoAtributo?.productoId}
+                            value={productoPropiedad?.productoId}
                             options={productos}
                             onChange={(e) => manejarCambioDropdown(e, 'productoId')}
                             placeholder={cargandoProductos ? intl.formatMessage({ id: 'Cargando productos...' }) : intl.formatMessage({ id: 'Seleccione un producto' })}
@@ -167,42 +167,42 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
                             loading={cargandoProductos}
                             filter
                             showClear
-                            className={(!productoAtributo?.productoId) ? 'p-invalid' : ''}
+                            className={(!productoPropiedad?.productoId) ? 'p-invalid' : ''}
                         />
                     </div>
                 </div>
             </Fieldset>
 
-            <Fieldset legend={intl.formatMessage({ id: 'Información del Atributo' })} collapsed={false} toggleable>
+            <Fieldset legend={intl.formatMessage({ id: 'Información del Propiedad' })} collapsed={false} toggleable>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="ordenEnGrupo">{intl.formatMessage({ id: 'Orden en Grupo' })}</label>
                         <InputNumber
                             inputId="ordenEnGrupo"
-                            value={productoAtributo?.ordenEnGrupo}
+                            value={productoPropiedad?.ordenEnGrupo}
                             onValueChange={(e) => manejarCambioNumero(e, 'ordenEnGrupo')}
                             disabled={!editable || estadoGuardando}
                             min={0}
                             showButtons
-                            placeholder={intl.formatMessage({ id: 'Orden dentro del grupo de atributos' })}
+                            placeholder={intl.formatMessage({ id: 'Orden dentro del grupo de propiedades' })}
                         />
                     </div>
                 </div>
                 <div className="formgrid grid">
                     
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="atributoId"><b>{intl.formatMessage({ id: 'Atributo' })} *</b></label>
+                        <label htmlFor="atributoId"><b>{intl.formatMessage({ id: 'Propiedad' })} *</b></label>
                         <Dropdown
                             inputId="atributoId"
-                            value={productoAtributo?.atributoId}
-                            options={atributos}
-                            onChange={manejarCambioAtributo}
-                            placeholder={cargandoAtributos ? intl.formatMessage({ id: 'Cargando atributos...' }) : intl.formatMessage({ id: 'Seleccione un atributo' })}
-                            disabled={!editable || estadoGuardando || cargandoAtributos}
-                            loading={cargandoAtributos}
+                            value={productoPropiedad?.atributoId}
+                            options={propiedades}
+                            onChange={manejarCambioPropiedad}
+                            placeholder={cargandoPropiedades ? intl.formatMessage({ id: 'Cargando propiedades...' }) : intl.formatMessage({ id: 'Seleccione un atributo' })}
+                            disabled={!editable || estadoGuardando || cargandoPropiedades}
+                            loading={cargandoPropiedades}
                             filter
                             showClear
-                            className={(!productoAtributo?.atributoId) ? 'p-invalid' : ''}
+                            className={(!productoPropiedad?.atributoId) ? 'p-invalid' : ''}
                         />
                     </div>
                     
@@ -210,7 +210,7 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
                         <label htmlFor="unidad">{intl.formatMessage({ id: 'Unidad' })}</label>
                         <InputText
                             inputId="unidad"
-                            value={productoAtributo?.unidad || ''}
+                            value={productoPropiedad?.unidad || ''}
                             onChange={(e) => manejarCambioInput(e, 'unidad')}
                             disabled={!editable || estadoGuardando}
                             maxLength={50}
@@ -225,13 +225,13 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
                         <label htmlFor="valor"><b>{intl.formatMessage({ id: 'Valor' })} *</b></label>
                         <InputTextarea
                             inputId="valor"
-                            value={productoAtributo?.valor || ''}
+                            value={productoPropiedad?.valor || ''}
                             onChange={(e) => manejarCambioInput(e, 'valor')}
                             disabled={!editable || estadoGuardando}
                             rows={3}
                             autoResize
                             placeholder={intl.formatMessage({ id: 'Valor del atributo para este producto' })}
-                            className={(!productoAtributo?.valor || productoAtributo?.valor.trim() === '') ? 'p-invalid' : ''}
+                            className={(!productoPropiedad?.valor || productoPropiedad?.valor.trim() === '') ? 'p-invalid' : ''}
                         />
                     </div>
                 </div>
@@ -240,4 +240,4 @@ const EditarDatosProductoAtributo = ({ productoAtributo, setProductoAtributo, es
     );
 };
 
-export default EditarDatosProductoAtributo;
+export default EditarDatosProductoPropiedad;

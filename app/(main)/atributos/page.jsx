@@ -1,28 +1,28 @@
 "use client";
-import { deleteAtributo, getAtributos, getAtributosCount } from "@/app/api-endpoints/atributo";
-import { getProductosAtributo } from "@/app/api-endpoints/producto_atributo";
+import { deletePropiedad, gePropiedades, gePropiedadesCount } from "@/app/api-endpoints/atributo";
+import { getProductosPropiedad } from "@/app/api-endpoints/producto_atributo";
 import Crud from "../../components/shared/crud";
-import EditarAtributo from "./editar";
+import EditarPropiedad from "./editar";
 import { useIntl } from 'react-intl'
 import { getUsuarioSesion } from "../../utility/Utils";
 
-const Atributo = () => {
+const Propiedad = () => {
     const intl = useIntl();
 
-    const eliminarAtributoConValidacion = async (id) => {
+    const eliminarPropiedadConValidacion = async (id) => {
         const filtro = JSON.stringify({ where: { and: { atributoId: id } } });
-        const productosAtributo = await getProductosAtributo(filtro);
-        if (productosAtributo && productosAtributo.length > 0) {
-            const tieneValor = productosAtributo.some(productoAtributo => productoAtributo.valor !== null && productoAtributo.valor !== undefined && productoAtributo.valor !== '');
+        const productosPropiedad = await getProductosPropiedad(filtro);
+        if (productosPropiedad && productosPropiedad.length > 0) {
+            const tieneValor = productosPropiedad.some(productoPropiedad => productoPropiedad.valor !== null && productoPropiedad.valor !== undefined && productoPropiedad.valor !== '');
             if (tieneValor) {
                 throw new Error(intl.formatMessage({ id: 'No se puede eliminar el atributo porque tiene valores asignados a un producto' }));
             }
         }
-        return await deleteAtributo(id);
+        return await deletePropiedad(id);
     };
 
     const columnas = [
-        { campo: 'grupoAtributoNombre', header: intl.formatMessage({ id: 'Grupo Atributo' }), tipo: 'string' },
+        { campo: 'grupoPropiedadNombre', header: intl.formatMessage({ id: 'Grupo Propiedad' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'tipoDato', header: intl.formatMessage({ id: 'Tipo de Dato' }), tipo: 'string' },
         { campo: 'unidadMedida', header: intl.formatMessage({ id: 'Unidad Medida' }), tipo: 'string' },
@@ -33,18 +33,18 @@ const Atributo = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Atributos' })}
-                getRegistros={getAtributos}
-                getRegistrosCount={getAtributosCount}
+                headerCrud={intl.formatMessage({ id: 'Propiedades' })}
+                getRegistros={gePropiedades}
+                getRegistrosCount={gePropiedadesCount}
                 botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"Atributos"}
+                controlador={"Propiedades"}
                 // filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
-                editarComponente={<EditarAtributo />}
-                seccion={"Atributos"}
+                editarComponente={<EditarPropiedad />}
+                seccion={"Propiedades"}
                 columnas={columnas}
-                deleteRegistro={eliminarAtributoConValidacion}
+                deleteRegistro={eliminarPropiedadConValidacion}
             />
         </div>
     );
 };
-export default Atributo;
+export default Propiedad;

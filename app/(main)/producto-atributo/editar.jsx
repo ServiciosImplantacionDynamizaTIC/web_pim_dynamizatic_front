@@ -2,16 +2,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getProductoAtributo, postProductoAtributo, patchProductoAtributo } from "@/app/api-endpoints/producto_atributo";
-import EditarDatosProductoAtributo from "./EditarDatosProductoAtributo";
+import { getProductoPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_atributo";
+import EditarDatosProductoPropiedad from "./EditarDatosProductoPropiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setIdEditarAtributo, rowData, emptyRegistro, setRegistroResult, editable, idProducto }) => {
+const EditarProductoPropiedad = ({ idEditar: idEditarPropiedad, setIdEditar: setIdEditarPropiedad, rowData, emptyRegistro, setRegistroResult, editable, idProducto }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
-    const [productoAtributo, setProductoAtributo] = useState(emptyRegistro || {
+    const [productoPropiedad, setProductoPropiedad] = useState(emptyRegistro || {
         productoId: null,
         atributoId: null,
         valor: "",
@@ -24,19 +24,19 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
 
     useEffect(() => {
         const fetchData = async () => {
-            if (idEditarAtributo !== 0) {
-                const registro = rowData.find((element) => element.id === idEditarAtributo);
-                setProductoAtributo(registro);
+            if (idEditarPropiedad !== 0) {
+                const registro = rowData.find((element) => element.id === idEditarPropiedad);
+                setProductoPropiedad(registro);
                 setIsEdit(true);
             }
         };
         fetchData();
-    }, [idEditarAtributo, rowData]);  
+    }, [idEditarPropiedad, rowData]);  
 
     const validaciones = async () => {
-        const validaProducto = productoAtributo.productoId === undefined || productoAtributo.productoId === null || productoAtributo.productoId === "";
-        const validaAtributo = productoAtributo.atributoId === undefined || productoAtributo.atributoId === null || productoAtributo.atributoId === "";
-        const validaValor = productoAtributo.valor === undefined || productoAtributo.valor === null || productoAtributo.valor.trim() === "";
+        const validaProducto = productoPropiedad.productoId === undefined || productoPropiedad.productoId === null || productoPropiedad.productoId === "";
+        const validaPropiedad = productoPropiedad.atributoId === undefined || productoPropiedad.atributoId === null || productoPropiedad.atributoId === "";
+        const validaValor = productoPropiedad.valor === undefined || productoPropiedad.valor === null || productoPropiedad.valor.trim() === "";
         
         if (validaProducto) {
             toast.current?.show({
@@ -47,7 +47,7 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
             });
         }
         
-        if (validaAtributo) {
+        if (validaPropiedad) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -65,10 +65,10 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
             });
         }
         
-        return (!validaProducto && !validaAtributo && !validaValor);
+        return (!validaProducto && !validaPropiedad && !validaValor);
     };
 
-    const guardarProductoAtributo = async () => {
+    const guardarProductoPropiedad = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
 
@@ -76,12 +76,12 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
             try {
                 const usuarioSesion = getUsuarioSesion();
                 
-                const productoAtributoData = {
-                    productoId: productoAtributo.productoId,
-                    atributoId: productoAtributo.atributoId,
-                    valor: productoAtributo.valor,
-                    unidad: productoAtributo.unidad || null,
-                    ordenEnGrupo: productoAtributo.ordenEnGrupo || 0,
+                const productoPropiedadData = {
+                    productoId: productoPropiedad.productoId,
+                    atributoId: productoPropiedad.atributoId,
+                    valor: productoPropiedad.valor,
+                    unidad: productoPropiedad.unidad || null,
+                    ordenEnGrupo: productoPropiedad.ordenEnGrupo || 0,
                     ...(isEdit 
                         ? { usuarioModificacion: usuarioSesion.id } 
                         : { usuarioCreacion: usuarioSesion.id })
@@ -89,10 +89,10 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
 
                 let resultado;
                 if (isEdit) {
-                    resultado = await patchProductoAtributo(idEditarAtributo, productoAtributoData);
+                    resultado = await patchProductoPropiedad(idEditarPropiedad, productoPropiedadData);
                     setRegistroResult("editado");
                 } else {
-                    resultado = await postProductoAtributo(productoAtributoData);
+                    resultado = await postProductoPropiedad(productoPropiedadData);
                     setRegistroResult("insertado");
                 }
                 
@@ -105,7 +105,7 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
                     life: 3000
                 });
 
-                setIdEditarAtributo(null);  // null para volver al CRUD
+                setIdEditarPropiedad(null);  // null para volver al CRUD
                 setIsEdit(false);
             } catch (error) {
                 console.error('Error al guardar:', error);
@@ -123,7 +123,7 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
     };
 
     const cancelarEdicion = () => {
-        setIdEditarAtributo(null);  // null para volver al CRUD
+        setIdEditarPropiedad(null);  // null para volver al CRUD
         setIsEdit(false);
         // Usar el emptyRegistro si está disponible, o crear uno nuevo manteniendo el idProducto
         const registroReset = emptyRegistro || {
@@ -133,19 +133,19 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
             unidad: "",
             ordenEnGrupo: 0
         };
-        setProductoAtributo(registroReset);
+        setProductoPropiedad(registroReset);
     };
 
     return (
         <div>
-            <div className="grid ProductoAtributo">
+            <div className="grid ProductoPropiedad">
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} />
                         
-                        <EditarDatosProductoAtributo
-                            productoAtributo={productoAtributo}
-                            setProductoAtributo={setProductoAtributo}
+                        <EditarDatosProductoPropiedad
+                            productoPropiedad={productoPropiedad}
+                            setProductoPropiedad={setProductoPropiedad}
                             estadoGuardando={estadoGuardando}
                             editable={editable}
                             idProducto={idProducto}
@@ -157,7 +157,7 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
                                 <Button
                                     label={intl.formatMessage({ id: 'Guardar' })}
                                     className="mr-2"
-                                    onClick={guardarProductoAtributo}
+                                    onClick={guardarProductoPropiedad}
                                     loading={estadoGuardandoBoton}
                                     disabled={estadoGuardandoBoton || !editable}
                                 />
@@ -171,4 +171,4 @@ const EditarProductoAtributo = ({ idEditar: idEditarAtributo, setIdEditar: setId
     );
 };
 
-export default EditarProductoAtributo;
+export default EditarProductoPropiedad;

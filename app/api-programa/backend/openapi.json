@@ -345,309 +345,6 @@
         "operationId": "ArchivoController.find"
       }
     },
-    "/atributos/count": {
-      "get": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "count",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Atributo model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Atributo.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Atributo>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "AtributoController.count"
-      }
-    },
-    "/atributos/{id}": {
-      "put": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Atributo PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Atributo"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "AtributoController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Atributo PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AtributoPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "AtributoController.updateById"
-      },
-      "get": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "findById",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Atributo model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AtributoWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Atributo.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "AtributoController.findById"
-      },
-      "delete": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Atributo DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "AtributoController.deleteById"
-      }
-    },
-    "/atributos": {
-      "post": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "create",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Atributo model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Atributo"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewAtributo"
-              }
-            }
-          }
-        },
-        "operationId": "AtributoController.create"
-      },
-      "patch": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Atributo PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Atributo.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Atributo>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AtributoPartial"
-              }
-            }
-          }
-        },
-        "operationId": "AtributoController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "AtributoController",
-        "x-operation-name": "find",
-        "tags": [
-          "AtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of Atributo model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AtributoWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Atributo.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "AtributoController.find"
-      }
-    },
     "/auditorias/count": {
       "get": {
         "x-controller-name": "AuditoriaController",
@@ -4354,16 +4051,16 @@
         "operationId": "FileUploadController.deleteFolderByName"
       }
     },
-    "/grupo-atributos/count": {
+    "/grupo-propiedades/count": {
       "get": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "count",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "200": {
-            "description": "GrupoAtributo model count",
+            "description": "GrupoPropiedad model count",
             "content": {
               "application/json": {
                 "schema": {
@@ -4381,23 +4078,23 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "title": "GrupoAtributo.WhereFilter",
+                  "title": "GrupoPropiedad.WhereFilter",
                   "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<GrupoAtributo>"
+                  "x-typescript-type": "@loopback/repository#Where<GrupoPropiedad>"
                 }
               }
             }
           }
         ],
-        "operationId": "GrupoAtributoController.count"
+        "operationId": "GrupoPropiedadController.count"
       }
     },
-    "/grupo-atributos/{id}": {
+    "/grupo-propiedades/{id}": {
       "put": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "replaceById",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "204": {
@@ -4405,7 +4102,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "GrupoAtributo PUT success"
+                  "description": "GrupoPropiedad PUT success"
                 }
               }
             }
@@ -4425,19 +4122,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GrupoAtributo"
+                "$ref": "#/components/schemas/GrupoPropiedad"
               }
             }
           },
           "x-parameter-index": 1
         },
-        "operationId": "GrupoAtributoController.replaceById"
+        "operationId": "GrupoPropiedadController.replaceById"
       },
       "patch": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "updateById",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "204": {
@@ -4445,7 +4142,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "GrupoAtributo PATCH success"
+                  "description": "GrupoPropiedad PATCH success"
                 }
               }
             }
@@ -4465,27 +4162,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GrupoAtributoPartial"
+                "$ref": "#/components/schemas/GrupoPropiedadPartial"
               }
             }
           },
           "x-parameter-index": 1
         },
-        "operationId": "GrupoAtributoController.updateById"
+        "operationId": "GrupoPropiedadController.updateById"
       },
       "get": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "findById",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "200": {
-            "description": "GrupoAtributo model instance",
+            "description": "GrupoPropiedad model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GrupoAtributoWithRelations"
+                  "$ref": "#/components/schemas/GrupoPropiedadWithRelations"
                 }
               }
             }
@@ -4506,19 +4203,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GrupoAtributo.Filter"
+                  "$ref": "#/components/schemas/GrupoPropiedad.Filter"
                 }
               }
             }
           }
         ],
-        "operationId": "GrupoAtributoController.findById"
+        "operationId": "GrupoPropiedadController.findById"
       },
       "delete": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "deleteById",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "204": {
@@ -4526,7 +4223,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "GrupoAtributo DELETE success"
+                  "description": "GrupoPropiedad DELETE success"
                 }
               }
             }
@@ -4542,23 +4239,23 @@
             "required": true
           }
         ],
-        "operationId": "GrupoAtributoController.deleteById"
+        "operationId": "GrupoPropiedadController.deleteById"
       }
     },
-    "/grupo-atributos": {
+    "/grupo-propiedades": {
       "post": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "create",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "200": {
-            "description": "GrupoAtributo model instance",
+            "description": "GrupoPropiedad model instance",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GrupoAtributo"
+                  "$ref": "#/components/schemas/GrupoPropiedad"
                 }
               }
             }
@@ -4568,22 +4265,22 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewGrupoAtributo"
+                "$ref": "#/components/schemas/NewGrupoPropiedad"
               }
             }
           }
         },
-        "operationId": "GrupoAtributoController.create"
+        "operationId": "GrupoPropiedadController.create"
       },
       "patch": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "updateAll",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "200": {
-            "description": "GrupoAtributo PATCH success count",
+            "description": "GrupoPropiedad PATCH success count",
             "content": {
               "application/json": {
                 "schema": {
@@ -4601,9 +4298,9 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "title": "GrupoAtributo.WhereFilter",
+                  "title": "GrupoPropiedad.WhereFilter",
                   "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<GrupoAtributo>"
+                  "x-typescript-type": "@loopback/repository#Where<GrupoPropiedad>"
                 }
               }
             }
@@ -4613,28 +4310,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GrupoAtributoPartial"
+                "$ref": "#/components/schemas/GrupoPropiedadPartial"
               }
             }
           }
         },
-        "operationId": "GrupoAtributoController.updateAll"
+        "operationId": "GrupoPropiedadController.updateAll"
       },
       "get": {
-        "x-controller-name": "GrupoAtributoController",
+        "x-controller-name": "GrupoPropiedadController",
         "x-operation-name": "find",
         "tags": [
-          "GrupoAtributoController"
+          "GrupoPropiedadController"
         ],
         "responses": {
           "200": {
-            "description": "Array of GrupoAtributo model instances",
+            "description": "Array of GrupoPropiedad model instances",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/GrupoAtributoWithRelations"
+                    "$ref": "#/components/schemas/GrupoPropiedadWithRelations"
                   }
                 }
               }
@@ -4648,13 +4345,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GrupoAtributo.Filter1"
+                  "$ref": "#/components/schemas/GrupoPropiedad.Filter1"
                 }
               }
             }
           }
         ],
-        "operationId": "GrupoAtributoController.find"
+        "operationId": "GrupoPropiedadController.find"
       }
     },
     "/iconos/count": {
@@ -10060,309 +9757,6 @@
         "operationId": "PlantillaEmailController.find"
       }
     },
-    "/producto-atributos/count": {
-      "get": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "count",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "ProductoAtributo model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "ProductoAtributo.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<ProductoAtributo>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "ProductoAtributoController.count"
-      }
-    },
-    "/producto-atributos/{id}": {
-      "put": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "ProductoAtributo PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductoAtributo"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "ProductoAtributoController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "ProductoAtributo PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductoAtributoPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "ProductoAtributoController.updateById"
-      },
-      "get": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "findById",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "ProductoAtributo model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductoAtributoWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductoAtributo.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "ProductoAtributoController.findById"
-      },
-      "delete": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "ProductoAtributo DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "ProductoAtributoController.deleteById"
-      }
-    },
-    "/producto-atributos": {
-      "post": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "create",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "ProductoAtributo model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductoAtributo"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewProductoAtributo"
-              }
-            }
-          }
-        },
-        "operationId": "ProductoAtributoController.create"
-      },
-      "patch": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "ProductoAtributo PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "ProductoAtributo.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<ProductoAtributo>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductoAtributoPartial"
-              }
-            }
-          }
-        },
-        "operationId": "ProductoAtributoController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "ProductoAtributoController",
-        "x-operation-name": "find",
-        "tags": [
-          "ProductoAtributoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of ProductoAtributo model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProductoAtributoWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductoAtributo.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "ProductoAtributoController.find"
-      }
-    },
     "/producto-campo-dinamicos/count": {
       "get": {
         "x-controller-name": "ProductoCampoDinamicoController",
@@ -11878,6 +11272,309 @@
         "operationId": "ProductoMultimediaController.find"
       }
     },
+    "/producto-propiedades/count": {
+      "get": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "count",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPropiedad model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoPropiedad.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoPropiedad>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoPropiedadController.count"
+      }
+    },
+    "/producto-propiedades/{id}": {
+      "put": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoPropiedad PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoPropiedad"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoPropiedadController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoPropiedad PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoPropiedadPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoPropiedadController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPropiedad model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPropiedadWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPropiedad.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoPropiedadController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoPropiedad DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoPropiedadController.deleteById"
+      }
+    },
+    "/producto-propiedades": {
+      "post": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "create",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPropiedad model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPropiedad"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProductoPropiedad"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoPropiedadController.create"
+      },
+      "patch": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPropiedad PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoPropiedad.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoPropiedad>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoPropiedadPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoPropiedadController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ProductoPropiedadController",
+        "x-operation-name": "find",
+        "tags": [
+          "ProductoPropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ProductoPropiedad model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoPropiedadWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPropiedad.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoPropiedadController.find"
+      }
+    },
     "/producto-seos/by-producto/{productoId}": {
       "get": {
         "x-controller-name": "ProductoSeoController",
@@ -12514,6 +12211,309 @@
           }
         ],
         "operationId": "ProductoController.find"
+      }
+    },
+    "/propiedades/count": {
+      "get": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "count",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Propiedad model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Propiedad.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Propiedad>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PropiedadController.count"
+      }
+    },
+    "/propiedades/{id}": {
+      "put": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Propiedad PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Propiedad"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PropiedadController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Propiedad PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropiedadPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PropiedadController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Propiedad model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropiedadWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Propiedad.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PropiedadController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Propiedad DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PropiedadController.deleteById"
+      }
+    },
+    "/propiedades": {
+      "post": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "create",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Propiedad model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Propiedad"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPropiedad"
+              }
+            }
+          }
+        },
+        "operationId": "PropiedadController.create"
+      },
+      "patch": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Propiedad PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Propiedad.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Propiedad>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropiedadPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PropiedadController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PropiedadController",
+        "x-operation-name": "find",
+        "tags": [
+          "PropiedadController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Propiedad model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PropiedadWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Propiedad.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PropiedadController.find"
       }
     },
     "/refrescar-tokens/count": {
@@ -14031,309 +14031,6 @@
         "operationId": "TipoArchivoController.find"
       }
     },
-    "/tipo-producto-atributo-detalles/count": {
-      "get": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "count",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoProductoAtributoDetalle model count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "TipoProductoAtributoDetalle.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<TipoProductoAtributoDetalle>"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoProductoAtributoDetalleController.count"
-      }
-    },
-    "/tipo-producto-atributo-detalles/{id}": {
-      "put": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoProductoAtributoDetalle PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoProductoAtributoDetalle"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TipoProductoAtributoDetalleController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoProductoAtributoDetalle PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoProductoAtributoDetallePartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "TipoProductoAtributoDetalleController.updateById"
-      },
-      "get": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "findById",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoProductoAtributoDetalle model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoProductoAtributoDetalleWithRelations"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoProductoAtributoDetalle.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoProductoAtributoDetalleController.findById"
-      },
-      "delete": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "TipoProductoAtributoDetalle DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "operationId": "TipoProductoAtributoDetalleController.deleteById"
-      }
-    },
-    "/tipo-producto-atributo-detalles": {
-      "post": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "create",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoProductoAtributoDetalle model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoProductoAtributoDetalle"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewTipoProductoAtributoDetalle"
-              }
-            }
-          }
-        },
-        "operationId": "TipoProductoAtributoDetalleController.create"
-      },
-      "patch": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "200": {
-            "description": "TipoProductoAtributoDetalle PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "TipoProductoAtributoDetalle.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<TipoProductoAtributoDetalle>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TipoProductoAtributoDetallePartial"
-              }
-            }
-          }
-        },
-        "operationId": "TipoProductoAtributoDetalleController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "TipoProductoAtributoDetalleController",
-        "x-operation-name": "find",
-        "tags": [
-          "TipoProductoAtributoDetalleController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of TipoProductoAtributoDetalle model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TipoProductoAtributoDetalleWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TipoProductoAtributoDetalle.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "TipoProductoAtributoDetalleController.find"
-      }
-    },
     "/tipo-producto-multimedia-detalles/count": {
       "get": {
         "x-controller-name": "TipoProductoMultimediaDetalleController",
@@ -14637,6 +14334,309 @@
         "operationId": "TipoProductoMultimediaDetalleController.find"
       }
     },
+    "/tipo-producto-propiedad-detalles/count": {
+      "get": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "count",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoPropiedadDetalle model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProductoPropiedadDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProductoPropiedadDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoPropiedadDetalleController.count"
+      }
+    },
+    "/tipo-producto-propiedad-detalles/{id}": {
+      "put": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoPropiedadDetalle PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoPropiedadDetalle"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoPropiedadDetalleController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoPropiedadDetalle PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoPropiedadDetallePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "TipoProductoPropiedadDetalleController.updateById"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoPropiedadDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoPropiedadDetalleWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoPropiedadDetalle.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoPropiedadDetalleController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TipoProductoPropiedadDetalle DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TipoProductoPropiedadDetalleController.deleteById"
+      }
+    },
+    "/tipo-producto-propiedad-detalles": {
+      "post": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "create",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoPropiedadDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoPropiedadDetalle"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTipoProductoPropiedadDetalle"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoPropiedadDetalleController.create"
+      },
+      "patch": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "TipoProductoPropiedadDetalle PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "TipoProductoPropiedadDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<TipoProductoPropiedadDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoProductoPropiedadDetallePartial"
+              }
+            }
+          }
+        },
+        "operationId": "TipoProductoPropiedadDetalleController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "TipoProductoPropiedadDetalleController",
+        "x-operation-name": "find",
+        "tags": [
+          "TipoProductoPropiedadDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of TipoProductoPropiedadDetalle model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoProductoPropiedadDetalleWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoProductoPropiedadDetalle.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TipoProductoPropiedadDetalleController.find"
+      }
+    },
     "/tipo-productos/count": {
       "get": {
         "x-controller-name": "TipoProductoController",
@@ -14759,7 +14759,7 @@
                   "descripcion": {
                     "type": "string"
                   },
-                  "atributosIds": {
+                  "propiedadesIds": {
                     "type": "array",
                     "items": {
                       "type": "number"
@@ -19397,6 +19397,81 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<TipoProducto>"
       },
+      "TipoProductoPropiedadDetalle": {
+        "title": "TipoProductoPropiedadDetalle",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewTipoProductoPropiedadDetalle": {
+        "title": "NewTipoProductoPropiedadDetalle",
+        "type": "object",
+        "description": "(tsType: Omit<TipoProductoPropiedadDetalle, 'id'>, schemaOptions: { title: 'NewTipoProductoPropiedadDetalle', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<TipoProductoPropiedadDetalle, 'id'>"
+      },
+      "TipoProductoPropiedadDetalleWithRelations": {
+        "title": "TipoProductoPropiedadDetalleWithRelations",
+        "type": "object",
+        "description": "(tsType: TipoProductoPropiedadDetalleWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "TipoProductoPropiedadDetalleWithRelations"
+      },
+      "TipoProductoPropiedadDetallePartial": {
+        "title": "TipoProductoPropiedadDetallePartial",
+        "type": "object",
+        "description": "(tsType: Partial<TipoProductoPropiedadDetalle>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoProductoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<TipoProductoPropiedadDetalle>"
+      },
       "TipoProductoMultimediaDetalle": {
         "title": "TipoProductoMultimediaDetalle",
         "type": "object",
@@ -19483,81 +19558,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<TipoProductoMultimediaDetalle>"
-      },
-      "TipoProductoAtributoDetalle": {
-        "title": "TipoProductoAtributoDetalle",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoProductoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "NewTipoProductoAtributoDetalle": {
-        "title": "NewTipoProductoAtributoDetalle",
-        "type": "object",
-        "description": "(tsType: Omit<TipoProductoAtributoDetalle, 'id'>, schemaOptions: { title: 'NewTipoProductoAtributoDetalle', exclude: [ 'id' ] })",
-        "properties": {
-          "tipoProductoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<TipoProductoAtributoDetalle, 'id'>"
-      },
-      "TipoProductoAtributoDetalleWithRelations": {
-        "title": "TipoProductoAtributoDetalleWithRelations",
-        "type": "object",
-        "description": "(tsType: TipoProductoAtributoDetalleWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoProductoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "TipoProductoAtributoDetalleWithRelations"
-      },
-      "TipoProductoAtributoDetallePartial": {
-        "title": "TipoProductoAtributoDetallePartial",
-        "type": "object",
-        "description": "(tsType: Partial<TipoProductoAtributoDetalle>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "tipoProductoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<TipoProductoAtributoDetalle>"
       },
       "TipoArchivo": {
         "title": "TipoArchivo",
@@ -20750,6 +20750,363 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<RefrescarToken>"
       },
+      "Propiedad": {
+        "title": "Propiedad",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoDePropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "atributo",
+              "campo_dinamico"
+            ]
+          },
+          "grupoPropiedadId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDato": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "multiselect"
+            ]
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "obligatorioSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "multivalorSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valoresPermitidos": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tipoDePropiedad",
+          "nombre",
+          "tipoDato",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPropiedad": {
+        "title": "NewPropiedad",
+        "type": "object",
+        "description": "(tsType: Omit<Propiedad, 'id'>, schemaOptions: { title: 'NewPropiedad', exclude: [ 'id' ] })",
+        "properties": {
+          "tipoDePropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "atributo",
+              "campo_dinamico"
+            ]
+          },
+          "grupoPropiedadId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDato": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "multiselect"
+            ]
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "obligatorioSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "multivalorSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valoresPermitidos": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tipoDePropiedad",
+          "nombre",
+          "tipoDato",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Propiedad, 'id'>"
+      },
+      "PropiedadWithRelations": {
+        "title": "PropiedadWithRelations",
+        "type": "object",
+        "description": "(tsType: PropiedadWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoDePropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "atributo",
+              "campo_dinamico"
+            ]
+          },
+          "grupoPropiedadId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDato": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "multiselect"
+            ]
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "obligatorioSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "multivalorSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valoresPermitidos": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "tipoDePropiedad",
+          "nombre",
+          "tipoDato",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PropiedadWithRelations"
+      },
+      "PropiedadPartial": {
+        "title": "PropiedadPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Propiedad>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "tipoDePropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "atributo",
+              "campo_dinamico"
+            ]
+          },
+          "grupoPropiedadId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDato": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "texto",
+              "numero",
+              "fecha",
+              "booleano",
+              "lista",
+              "multiselect"
+            ]
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "obligatorioSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "multivalorSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valoresPermitidos": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Propiedad>"
+      },
       "Producto": {
         "title": "Producto",
         "type": "object",
@@ -21466,6 +21823,216 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<ProductoSeo>"
+      },
+      "ProductoPropiedad": {
+        "title": "ProductoPropiedad",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordenEnGrupo": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "propiedadId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewProductoPropiedad": {
+        "title": "NewProductoPropiedad",
+        "type": "object",
+        "description": "(tsType: Omit<ProductoPropiedad, 'id'>, schemaOptions: { title: 'NewProductoPropiedad', exclude: [ 'id' ] })",
+        "properties": {
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordenEnGrupo": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "propiedadId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ProductoPropiedad, 'id'>"
+      },
+      "ProductoPropiedadWithRelations": {
+        "title": "ProductoPropiedadWithRelations",
+        "type": "object",
+        "description": "(tsType: ProductoPropiedadWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordenEnGrupo": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "propiedadId",
+          "usuarioCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ProductoPropiedadWithRelations"
+      },
+      "ProductoPropiedadPartial": {
+        "title": "ProductoPropiedadPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ProductoPropiedad>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "propiedadId": {
+            "type": "number",
+            "nullable": false
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordenEnGrupo": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ProductoPropiedad>"
       },
       "ProductoMultimedia": {
         "title": "ProductoMultimedia",
@@ -22394,216 +22961,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<ProductoCampoDinamico>"
-      },
-      "ProductoAtributo": {
-        "title": "ProductoAtributo",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "productoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "unidad": {
-            "type": "string",
-            "nullable": true
-          },
-          "ordenEnGrupo": {
-            "type": "number",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "productoId",
-          "atributoId",
-          "usuarioCreacion"
-        ],
-        "additionalProperties": false
-      },
-      "NewProductoAtributo": {
-        "title": "NewProductoAtributo",
-        "type": "object",
-        "description": "(tsType: Omit<ProductoAtributo, 'id'>, schemaOptions: { title: 'NewProductoAtributo', exclude: [ 'id' ] })",
-        "properties": {
-          "productoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "unidad": {
-            "type": "string",
-            "nullable": true
-          },
-          "ordenEnGrupo": {
-            "type": "number",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "productoId",
-          "atributoId",
-          "usuarioCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<ProductoAtributo, 'id'>"
-      },
-      "ProductoAtributoWithRelations": {
-        "title": "ProductoAtributoWithRelations",
-        "type": "object",
-        "description": "(tsType: ProductoAtributoWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "productoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "unidad": {
-            "type": "string",
-            "nullable": true
-          },
-          "ordenEnGrupo": {
-            "type": "number",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "productoId",
-          "atributoId",
-          "usuarioCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "ProductoAtributoWithRelations"
-      },
-      "ProductoAtributoPartial": {
-        "title": "ProductoAtributoPartial",
-        "type": "object",
-        "description": "(tsType: Partial<ProductoAtributo>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "productoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "atributoId": {
-            "type": "number",
-            "nullable": false
-          },
-          "valor": {
-            "type": "string",
-            "nullable": true
-          },
-          "unidad": {
-            "type": "string",
-            "nullable": true
-          },
-          "ordenEnGrupo": {
-            "type": "number",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<ProductoAtributo>"
       },
       "PlantillaEmail": {
         "title": "PlantillaEmail",
@@ -26895,8 +27252,8 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Icono>"
       },
-      "GrupoAtributo": {
-        "title": "GrupoAtributo",
+      "GrupoPropiedad": {
+        "title": "GrupoPropiedad",
         "type": "object",
         "properties": {
           "id": {
@@ -26905,6 +27262,14 @@
           "empresaId": {
             "type": "number",
             "nullable": false
+          },
+          "tipoDeGrupoPropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "grupo_atributos",
+              "grupo_campos_dinamicos"
+            ]
           },
           "nombre": {
             "type": "string",
@@ -26943,19 +27308,28 @@
         },
         "required": [
           "empresaId",
+          "tipoDeGrupoPropiedad",
           "nombre",
           "usuarioCreacion"
         ],
         "additionalProperties": false
       },
-      "NewGrupoAtributo": {
-        "title": "NewGrupoAtributo",
+      "NewGrupoPropiedad": {
+        "title": "NewGrupoPropiedad",
         "type": "object",
-        "description": "(tsType: Omit<GrupoAtributo, 'id'>, schemaOptions: { title: 'NewGrupoAtributo', exclude: [ 'id' ] })",
+        "description": "(tsType: Omit<GrupoPropiedad, 'id'>, schemaOptions: { title: 'NewGrupoPropiedad', exclude: [ 'id' ] })",
         "properties": {
           "empresaId": {
             "type": "number",
             "nullable": false
+          },
+          "tipoDeGrupoPropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "grupo_atributos",
+              "grupo_campos_dinamicos"
+            ]
           },
           "nombre": {
             "type": "string",
@@ -26994,16 +27368,17 @@
         },
         "required": [
           "empresaId",
+          "tipoDeGrupoPropiedad",
           "nombre",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
-        "x-typescript-type": "Omit<GrupoAtributo, 'id'>"
+        "x-typescript-type": "Omit<GrupoPropiedad, 'id'>"
       },
-      "GrupoAtributoWithRelations": {
-        "title": "GrupoAtributoWithRelations",
+      "GrupoPropiedadWithRelations": {
+        "title": "GrupoPropiedadWithRelations",
         "type": "object",
-        "description": "(tsType: GrupoAtributoWithRelations, schemaOptions: { includeRelations: true })",
+        "description": "(tsType: GrupoPropiedadWithRelations, schemaOptions: { includeRelations: true })",
         "properties": {
           "id": {
             "type": "number"
@@ -27011,6 +27386,14 @@
           "empresaId": {
             "type": "number",
             "nullable": false
+          },
+          "tipoDeGrupoPropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "grupo_atributos",
+              "grupo_campos_dinamicos"
+            ]
           },
           "nombre": {
             "type": "string",
@@ -27049,16 +27432,17 @@
         },
         "required": [
           "empresaId",
+          "tipoDeGrupoPropiedad",
           "nombre",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
-        "x-typescript-type": "GrupoAtributoWithRelations"
+        "x-typescript-type": "GrupoPropiedadWithRelations"
       },
-      "GrupoAtributoPartial": {
-        "title": "GrupoAtributoPartial",
+      "GrupoPropiedadPartial": {
+        "title": "GrupoPropiedadPartial",
         "type": "object",
-        "description": "(tsType: Partial<GrupoAtributo>, schemaOptions: { partial: true })",
+        "description": "(tsType: Partial<GrupoPropiedad>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
             "type": "number"
@@ -27066,6 +27450,14 @@
           "empresaId": {
             "type": "number",
             "nullable": false
+          },
+          "tipoDeGrupoPropiedad": {
+            "type": "string",
+            "nullable": false,
+            "enum": [
+              "grupo_atributos",
+              "grupo_campos_dinamicos"
+            ]
           },
           "nombre": {
             "type": "string",
@@ -27103,7 +27495,7 @@
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "Partial<GrupoAtributo>"
+        "x-typescript-type": "Partial<GrupoPropiedad>"
       },
       "Estado": {
         "title": "Estado",
@@ -29706,328 +30098,6 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Auditoria>"
       },
-      "Atributo": {
-        "title": "Atributo",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "grupoAtributoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": false
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoDato": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "texto",
-              "numero",
-              "fecha",
-              "booleano",
-              "lista",
-              "multiselect"
-            ]
-          },
-          "unidadMedida": {
-            "type": "string",
-            "nullable": true
-          },
-          "obligatorioSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "multivalorSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "valoresPermitidos": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
-          "activoSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "nombre",
-          "tipoDato",
-          "usuarioCreacion"
-        ],
-        "additionalProperties": false
-      },
-      "NewAtributo": {
-        "title": "NewAtributo",
-        "type": "object",
-        "description": "(tsType: Omit<Atributo, 'id'>, schemaOptions: { title: 'NewAtributo', exclude: [ 'id' ] })",
-        "properties": {
-          "grupoAtributoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": false
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoDato": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "texto",
-              "numero",
-              "fecha",
-              "booleano",
-              "lista",
-              "multiselect"
-            ]
-          },
-          "unidadMedida": {
-            "type": "string",
-            "nullable": true
-          },
-          "obligatorioSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "multivalorSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "valoresPermitidos": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
-          "activoSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "nombre",
-          "tipoDato",
-          "usuarioCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "Omit<Atributo, 'id'>"
-      },
-      "AtributoWithRelations": {
-        "title": "AtributoWithRelations",
-        "type": "object",
-        "description": "(tsType: AtributoWithRelations, schemaOptions: { includeRelations: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "grupoAtributoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": false
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoDato": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "texto",
-              "numero",
-              "fecha",
-              "booleano",
-              "lista",
-              "multiselect"
-            ]
-          },
-          "unidadMedida": {
-            "type": "string",
-            "nullable": true
-          },
-          "obligatorioSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "multivalorSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "valoresPermitidos": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
-          "activoSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "required": [
-          "nombre",
-          "tipoDato",
-          "usuarioCreacion"
-        ],
-        "additionalProperties": false,
-        "x-typescript-type": "AtributoWithRelations"
-      },
-      "AtributoPartial": {
-        "title": "AtributoPartial",
-        "type": "object",
-        "description": "(tsType: Partial<Atributo>, schemaOptions: { partial: true })",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "grupoAtributoId": {
-            "type": "number",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": false
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoDato": {
-            "type": "string",
-            "nullable": false,
-            "enum": [
-              "texto",
-              "numero",
-              "fecha",
-              "booleano",
-              "lista",
-              "multiselect"
-            ]
-          },
-          "unidadMedida": {
-            "type": "string",
-            "nullable": true
-          },
-          "obligatorioSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "multivalorSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "valoresPermitidos": {
-            "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
-          "activoSn": {
-            "type": "string",
-            "nullable": true
-          },
-          "fechaCreacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "usuarioCreacion": {
-            "type": "number",
-            "nullable": false
-          },
-          "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "Partial<Atributo>"
-      },
       "Archivo": {
         "title": "Archivo",
         "type": "object",
@@ -30514,241 +30584,6 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Archivo>"
-      },
-      "Atributo.Filter": {
-        "type": "object",
-        "title": "Atributo.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "grupoAtributoId": {
-                    "type": "boolean"
-                  },
-                  "nombre": {
-                    "type": "boolean"
-                  },
-                  "descripcion": {
-                    "type": "boolean"
-                  },
-                  "tipoDato": {
-                    "type": "boolean"
-                  },
-                  "unidadMedida": {
-                    "type": "boolean"
-                  },
-                  "obligatorioSn": {
-                    "type": "boolean"
-                  },
-                  "multivalorSn": {
-                    "type": "boolean"
-                  },
-                  "valoresPermitidos": {
-                    "type": "boolean"
-                  },
-                  "orden": {
-                    "type": "boolean"
-                  },
-                  "activoSn": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "grupoAtributoId",
-                    "nombre",
-                    "descripcion",
-                    "tipoDato",
-                    "unidadMedida",
-                    "obligatorioSn",
-                    "multivalorSn",
-                    "valoresPermitidos",
-                    "orden",
-                    "activoSn",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuarioCreacion",
-                    "usuarioModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "Atributo.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<Atributo>"
-      },
-      "Atributo.Filter1": {
-        "type": "object",
-        "title": "Atributo.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "Atributo.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "grupoAtributoId": {
-                    "type": "boolean"
-                  },
-                  "nombre": {
-                    "type": "boolean"
-                  },
-                  "descripcion": {
-                    "type": "boolean"
-                  },
-                  "tipoDato": {
-                    "type": "boolean"
-                  },
-                  "unidadMedida": {
-                    "type": "boolean"
-                  },
-                  "obligatorioSn": {
-                    "type": "boolean"
-                  },
-                  "multivalorSn": {
-                    "type": "boolean"
-                  },
-                  "valoresPermitidos": {
-                    "type": "boolean"
-                  },
-                  "orden": {
-                    "type": "boolean"
-                  },
-                  "activoSn": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "grupoAtributoId",
-                    "nombre",
-                    "descripcion",
-                    "tipoDato",
-                    "unidadMedida",
-                    "obligatorioSn",
-                    "multivalorSn",
-                    "valoresPermitidos",
-                    "orden",
-                    "activoSn",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuarioCreacion",
-                    "usuarioModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "Atributo.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<Atributo>"
       },
       "Auditoria.Filter": {
         "type": "object",
@@ -32999,9 +32834,9 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Estado>"
       },
-      "GrupoAtributo.Filter": {
+      "GrupoPropiedad.Filter": {
         "type": "object",
-        "title": "GrupoAtributo.Filter",
+        "title": "GrupoPropiedad.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -33040,6 +32875,9 @@
                   "empresaId": {
                     "type": "boolean"
                   },
+                  "tipoDeGrupoPropiedad": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -33074,6 +32912,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "tipoDeGrupoPropiedad",
                     "nombre",
                     "descripcion",
                     "orden",
@@ -33088,15 +32927,15 @@
                 "uniqueItems": true
               }
             ],
-            "title": "GrupoAtributo.Fields"
+            "title": "GrupoPropiedad.Fields"
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<GrupoAtributo>"
+        "x-typescript-type": "@loopback/repository#Filter<GrupoPropiedad>"
       },
-      "GrupoAtributo.Filter1": {
+      "GrupoPropiedad.Filter1": {
         "type": "object",
-        "title": "GrupoAtributo.Filter",
+        "title": "GrupoPropiedad.Filter",
         "properties": {
           "offset": {
             "type": "integer",
@@ -33125,7 +32964,7 @@
             ]
           },
           "where": {
-            "title": "GrupoAtributo.WhereFilter",
+            "title": "GrupoPropiedad.WhereFilter",
             "type": "object",
             "additionalProperties": true
           },
@@ -33138,6 +32977,9 @@
                     "type": "boolean"
                   },
                   "empresaId": {
+                    "type": "boolean"
+                  },
+                  "tipoDeGrupoPropiedad": {
                     "type": "boolean"
                   },
                   "nombre": {
@@ -33174,6 +33016,7 @@
                   "enum": [
                     "id",
                     "empresaId",
+                    "tipoDeGrupoPropiedad",
                     "nombre",
                     "descripcion",
                     "orden",
@@ -33188,11 +33031,11 @@
                 "uniqueItems": true
               }
             ],
-            "title": "GrupoAtributo.Fields"
+            "title": "GrupoPropiedad.Fields"
           }
         },
         "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<GrupoAtributo>"
+        "x-typescript-type": "@loopback/repository#Filter<GrupoPropiedad>"
       },
       "Icono.Filter": {
         "type": "object",
@@ -36765,201 +36608,6 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<PlantillaEmail>"
       },
-      "ProductoAtributo.Filter": {
-        "type": "object",
-        "title": "ProductoAtributo.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "productoId": {
-                    "type": "boolean"
-                  },
-                  "atributoId": {
-                    "type": "boolean"
-                  },
-                  "valor": {
-                    "type": "boolean"
-                  },
-                  "unidad": {
-                    "type": "boolean"
-                  },
-                  "ordenEnGrupo": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "productoId",
-                    "atributoId",
-                    "valor",
-                    "unidad",
-                    "ordenEnGrupo",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuarioCreacion",
-                    "usuarioModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "ProductoAtributo.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<ProductoAtributo>"
-      },
-      "ProductoAtributo.Filter1": {
-        "type": "object",
-        "title": "ProductoAtributo.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "ProductoAtributo.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "productoId": {
-                    "type": "boolean"
-                  },
-                  "atributoId": {
-                    "type": "boolean"
-                  },
-                  "valor": {
-                    "type": "boolean"
-                  },
-                  "unidad": {
-                    "type": "boolean"
-                  },
-                  "ordenEnGrupo": {
-                    "type": "boolean"
-                  },
-                  "fechaCreacion": {
-                    "type": "boolean"
-                  },
-                  "fechaModificacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioCreacion": {
-                    "type": "boolean"
-                  },
-                  "usuarioModificacion": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "productoId",
-                    "atributoId",
-                    "valor",
-                    "unidad",
-                    "ordenEnGrupo",
-                    "fechaCreacion",
-                    "fechaModificacion",
-                    "usuarioCreacion",
-                    "usuarioModificacion"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "ProductoAtributo.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<ProductoAtributo>"
-      },
       "ProductoCampoDinamico.Filter": {
         "type": "object",
         "title": "ProductoCampoDinamico.Filter",
@@ -37983,6 +37631,201 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ProductoMultimedia>"
       },
+      "ProductoPropiedad.Filter": {
+        "type": "object",
+        "title": "ProductoPropiedad.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "propiedadId": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "unidad": {
+                    "type": "boolean"
+                  },
+                  "ordenEnGrupo": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "propiedadId",
+                    "valor",
+                    "unidad",
+                    "ordenEnGrupo",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoPropiedad.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoPropiedad>"
+      },
+      "ProductoPropiedad.Filter1": {
+        "type": "object",
+        "title": "ProductoPropiedad.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ProductoPropiedad.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "propiedadId": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "unidad": {
+                    "type": "boolean"
+                  },
+                  "ordenEnGrupo": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "propiedadId",
+                    "valor",
+                    "unidad",
+                    "ordenEnGrupo",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoPropiedad.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoPropiedad>"
+      },
       "ProductoSeo.Filter": {
         "type": "object",
         "title": "ProductoSeo.Filter",
@@ -38516,6 +38359,249 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<Producto>"
+      },
+      "Propiedad.Filter": {
+        "type": "object",
+        "title": "Propiedad.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoDePropiedad": {
+                    "type": "boolean"
+                  },
+                  "grupoPropiedadId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "tipoDato": {
+                    "type": "boolean"
+                  },
+                  "unidadMedida": {
+                    "type": "boolean"
+                  },
+                  "obligatorioSn": {
+                    "type": "boolean"
+                  },
+                  "multivalorSn": {
+                    "type": "boolean"
+                  },
+                  "valoresPermitidos": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoDePropiedad",
+                    "grupoPropiedadId",
+                    "nombre",
+                    "descripcion",
+                    "tipoDato",
+                    "unidadMedida",
+                    "obligatorioSn",
+                    "multivalorSn",
+                    "valoresPermitidos",
+                    "orden",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Propiedad.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Propiedad>"
+      },
+      "Propiedad.Filter1": {
+        "type": "object",
+        "title": "Propiedad.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Propiedad.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoDePropiedad": {
+                    "type": "boolean"
+                  },
+                  "grupoPropiedadId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "tipoDato": {
+                    "type": "boolean"
+                  },
+                  "unidadMedida": {
+                    "type": "boolean"
+                  },
+                  "obligatorioSn": {
+                    "type": "boolean"
+                  },
+                  "multivalorSn": {
+                    "type": "boolean"
+                  },
+                  "valoresPermitidos": {
+                    "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoDePropiedad",
+                    "grupoPropiedadId",
+                    "nombre",
+                    "descripcion",
+                    "tipoDato",
+                    "unidadMedida",
+                    "obligatorioSn",
+                    "multivalorSn",
+                    "valoresPermitidos",
+                    "orden",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Propiedad.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Propiedad>"
       },
       "RefrescarToken.Filter": {
         "type": "object",
@@ -39524,145 +39610,6 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoArchivo>"
       },
-      "TipoProductoAtributoDetalle.Filter": {
-        "type": "object",
-        "title": "TipoProductoAtributoDetalle.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "tipoProductoId": {
-                    "type": "boolean"
-                  },
-                  "atributoId": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "tipoProductoId",
-                    "atributoId"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "TipoProductoAtributoDetalle.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<TipoProductoAtributoDetalle>"
-      },
-      "TipoProductoAtributoDetalle.Filter1": {
-        "type": "object",
-        "title": "TipoProductoAtributoDetalle.Filter",
-        "properties": {
-          "offset": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "example": 100
-          },
-          "skip": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "order": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "where": {
-            "title": "TipoProductoAtributoDetalle.WhereFilter",
-            "type": "object",
-            "additionalProperties": true
-          },
-          "fields": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "boolean"
-                  },
-                  "tipoProductoId": {
-                    "type": "boolean"
-                  },
-                  "atributoId": {
-                    "type": "boolean"
-                  }
-                },
-                "additionalProperties": false
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "id",
-                    "tipoProductoId",
-                    "atributoId"
-                  ],
-                  "example": "id"
-                },
-                "uniqueItems": true
-              }
-            ],
-            "title": "TipoProductoAtributoDetalle.Fields"
-          }
-        },
-        "additionalProperties": false,
-        "x-typescript-type": "@loopback/repository#Filter<TipoProductoAtributoDetalle>"
-      },
       "TipoProductoMultimediaDetalle.Filter": {
         "type": "object",
         "title": "TipoProductoMultimediaDetalle.Filter",
@@ -39801,6 +39748,145 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<TipoProductoMultimediaDetalle>"
+      },
+      "TipoProductoPropiedadDetalle.Filter": {
+        "type": "object",
+        "title": "TipoProductoPropiedadDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoProductoId": {
+                    "type": "boolean"
+                  },
+                  "propiedadId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoProductoId",
+                    "propiedadId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProductoPropiedadDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProductoPropiedadDetalle>"
+      },
+      "TipoProductoPropiedadDetalle.Filter1": {
+        "type": "object",
+        "title": "TipoProductoPropiedadDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "TipoProductoPropiedadDetalle.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "tipoProductoId": {
+                    "type": "boolean"
+                  },
+                  "propiedadId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "tipoProductoId",
+                    "propiedadId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "TipoProductoPropiedadDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<TipoProductoPropiedadDetalle>"
       },
       "TipoProducto.Filter": {
         "type": "object",

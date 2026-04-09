@@ -685,6 +685,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
                 {(botones.includes('eliminar') && puedeBorrar && puedeEliminarRegistro(rowData)) && (
                     <Button
                         icon="pi pi-trash"
+                        className="mr-2"
                         rounded
                         title={intl.formatMessage({ id: 'Eliminar' })}
                         severity="warning"
@@ -699,6 +700,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
                                 botonExtra.boton,
                                 {
                                     key: `boton-extra-${index}`,
+                                    className: `mr-2 ${botonExtra.boton.props.className || ''}`.trim(),
                                     onClick: () => botonExtra.funcionOnClick(rowData)
                                 }
                             );

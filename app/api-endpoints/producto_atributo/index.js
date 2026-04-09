@@ -1,33 +1,33 @@
-import { ProductoAtributoControllerApi, settings } from "@/app/api-programa";
+import { ProductoPropiedadControllerApi, settings } from "@/app/api-programa";
 
-const apiProductoAtributo = new ProductoAtributoControllerApi(settings)
+const apiProductoPropiedad = new ProductoPropiedadControllerApi(settings)
 
-export const getProductosAtributo = async (filtro) => {
-    const { data: dataProductosAtributo } = await apiProductoAtributo.productoAtributoControllerFind(filtro)
-    return dataProductosAtributo
+export const getProductosPropiedad = async (filtro) => {
+    const { data: dataProductosPropiedad } = await apiProductoPropiedad.productoPropiedadControllerFind(filtro)
+    return dataProductosPropiedad
 }
 
-export const getProductosAtributoCount = async (filtro) => {
-    const { data: dataProductosAtributo } = await apiProductoAtributo.productoAtributoControllerCount(filtro)
-    return dataProductosAtributo
+export const getProductosPropiedadCount = async (filtro) => {
+    const { data: dataProductosPropiedad } = await apiProductoPropiedad.productoPropiedadControllerCount(filtro)
+    return dataProductosPropiedad
 }
 
-export const getProductoAtributo = async (id) => {
-    const { data: dataProductoAtributo } = await apiProductoAtributo.productoAtributoControllerFindById(id)
-    return dataProductoAtributo
+export const getProductoPropiedad = async (id) => {
+    const { data: dataProductoPropiedad } = await apiProductoPropiedad.productoPropiedadControllerFindById(id)
+    return dataProductoPropiedad
 }
 
-export const postProductoAtributo = async (objProductoAtributo) => {
-    const { data: dataProductoAtributo } = await apiProductoAtributo.productoAtributoControllerCreate(objProductoAtributo)
-    return dataProductoAtributo
+export const postProductoPropiedad = async (objProductoPropiedad) => {
+    const { data: dataProductoPropiedad } = await apiProductoPropiedad.productoPropiedadControllerCreate(objProductoPropiedad)
+    return dataProductoPropiedad
 }
 
-export const deleteProductoAtributo = async (idProductoAtributo) => {
-    const { data: dataProductoAtributo } = await apiProductoAtributo.productoAtributoControllerDeleteById(idProductoAtributo)
-    return dataProductoAtributo
+export const deleteProductoPropiedad = async (idProductoPropiedad) => {
+    const { data: dataProductoPropiedad } = await apiProductoPropiedad.productoPropiedadControllerDeleteById(idProductoPropiedad)
+    return dataProductoPropiedad
 }
 
-export const patchProductoAtributo = async (idProductoAtributo, objProductoAtributo) => {
-    const { data: dataProductoAtributo } = await apiProductoAtributo.productoAtributoControllerUpdateById(idProductoAtributo, objProductoAtributo)
-    return dataProductoAtributo
+export const patchProductoPropiedad = async (idProductoPropiedad, objProductoPropiedad) => {
+    const { data: dataProductoPropiedad } = await apiProductoPropiedad.productoPropiedadControllerUpdateById(idProductoPropiedad, objProductoPropiedad)
+    return dataProductoPropiedad
 }

@@ -8,7 +8,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { useIntl } from 'react-intl';
 
-const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, listaGrupoAtributos = [] }) => {
+const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit, listaGrupoPropiedades = [] }) => {
     const intl = useIntl();
     const [nuevoValor, setNuevoValor] = useState('');
     
@@ -26,7 +26,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
         let _atributo = { ...atributo };
         const esTrue = valor === true ? 'S' : 'N';
         _atributo[`${nombreInputSwitch}`] = esTrue;
-        setAtributo(_atributo);
+        setPropiedad(_atributo);
     };
 
     const agregarValor = () => {
@@ -36,7 +36,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                 ? valoresActuales + ';' + nuevoValor.trim()
                 : nuevoValor.trim();
             
-            setAtributo({ ...atributo, valoresPermitidos: nuevosValores });
+            setPropiedad({ ...atributo, valoresPermitidos: nuevosValores });
             setNuevoValor('');
         }
     };
@@ -62,7 +62,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
             atributoActualizado.unidadMedida = '';
         }
         
-        setAtributo(atributoActualizado);
+        setPropiedad(atributoActualizado);
     };
 
     const mostrarCamposValores = atributo.tipoDato === 'lista' || atributo.tipoDato === 'multiselect';
@@ -73,18 +73,18 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
             <Fieldset legend={intl.formatMessage({ id: 'Datos del atributo' })}>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="grupoAtributoId"><b>{intl.formatMessage({ id: 'Grupo de Atributos' })}*</b></label>
+                        <label htmlFor="grupoPropiedadId"><b>{intl.formatMessage({ id: 'Grupo de Propiedades' })}*</b></label>
                         <Dropdown 
-                            id="grupoAtributoId"
-                            value={atributo.grupoAtributoId}
-                            options={listaGrupoAtributos.map(grupo => ({
+                            id="grupoPropiedadId"
+                            value={atributo.grupoPropiedadId}
+                            options={listaGrupoPropiedades.map(grupo => ({
                                 label: grupo.nombre,
                                 value: grupo.id
                             }))}
-                            onChange={(e) => setAtributo({ ...atributo, grupoAtributoId: e.value })}
-                            placeholder={intl.formatMessage({ id: 'Selecciona un grupo de atributos' })}
+                            onChange={(e) => setPropiedad({ ...atributo, grupoPropiedadId: e.value })}
+                            placeholder={intl.formatMessage({ id: 'Selecciona un grupo de propiedades' })}
                             disabled={estadoGuardando}
-                            className={`${(estadoGuardando && !atributo.grupoAtributoId) ? "p-invalid" : ""}`}
+                            className={`${(estadoGuardando && !atributo.grupoPropiedadId) ? "p-invalid" : ""}`}
                             filter
                             filterBy="label"
                             emptyMessage={intl.formatMessage({ id: 'No hay grupos disponibles' })}
@@ -97,7 +97,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                             id="nombre"
                             value={atributo.nombre}
                             placeholder={intl.formatMessage({ id: 'Nombre del atributo' })}
-                            onChange={(e) => setAtributo({ ...atributo, nombre: e.target.value })}
+                            onChange={(e) => setPropiedad({ ...atributo, nombre: e.target.value })}
                             className={`${(estadoGuardando && atributo.nombre === "") ? "p-invalid" : ""}`}
                             maxLength={100}
                             disabled={estadoGuardando}
@@ -110,7 +110,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                             id="orden"
                             value={atributo.orden || 0}
                             placeholder={intl.formatMessage({ id: 'Orden de visualización' })}
-                            onValueChange={(e) => setAtributo({ ...atributo, orden: e.value || 0 })}
+                            onValueChange={(e) => setPropiedad({ ...atributo, orden: e.value || 0 })}
                             disabled={estadoGuardando}
                             min={0}
                             inputStyle={{ textAlign: 'right' }}
@@ -158,7 +158,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                                 id="unidadMedida"
                                 value={atributo.unidadMedida || ''}
                                 placeholder={intl.formatMessage({ id: 'Ej: cm, kg, litros' })}
-                                onChange={(e) => setAtributo({ ...atributo, unidadMedida: e.target.value })}
+                                onChange={(e) => setPropiedad({ ...atributo, unidadMedida: e.target.value })}
                                 maxLength={50}
                                 disabled={estadoGuardando}
                             />
@@ -193,7 +193,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                                     id="valoresPermitidos"
                                     value={atributo.valoresPermitidos || ''}
                                     placeholder={intl.formatMessage({ id: 'Valores separados por punto y coma (;)' })}
-                                    onChange={(e) => setAtributo({ ...atributo, valoresPermitidos: e.target.value })}
+                                    onChange={(e) => setPropiedad({ ...atributo, valoresPermitidos: e.target.value })}
                                     rows={3}
                                     disabled={estadoGuardando}
                                     readOnly
@@ -208,7 +208,7 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
                             id="descripcion"
                             value={atributo.descripcion || ''}
                             placeholder={intl.formatMessage({ id: 'Descripción del atributo' })}
-                            onChange={(e) => setAtributo({ ...atributo, descripcion: e.target.value })}
+                            onChange={(e) => setPropiedad({ ...atributo, descripcion: e.target.value })}
                             rows={3}
                             disabled={estadoGuardando}
                         />
@@ -220,4 +220,4 @@ const EditarDatosAtributo = ({ atributo, setAtributo, estadoGuardando, isEdit, l
     );
 };
 
-export default EditarDatosAtributo;
+export default EditarDatosPropiedad;

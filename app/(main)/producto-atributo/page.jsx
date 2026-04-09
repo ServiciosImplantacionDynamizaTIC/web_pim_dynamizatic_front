@@ -14,19 +14,19 @@ import { InputSwitch } from "primereact/inputswitch";
 import { MultiSelect } from "primereact/multiselect";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { getProducto } from "@/app/api-endpoints/producto";
-import { getTipoProductoAtributoDetalles } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
-import { getProductosAtributo, postProductoAtributo, patchProductoAtributo } from "@/app/api-endpoints/producto_atributo";
-import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
+import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
+import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_atributo";
+import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_atributo";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { InputTextarea } from "primereact/inputtextarea";
 
-const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto }) => {
+const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
-    const [atributosDefinidos, setAtributosDefinidos] = useState([]);
-    const [gruposAtributos, setGruposAtributos] = useState([]);
-    const [valoresAtributos, setValoresAtributos] = useState({});
+    const [atributosDefinidos, setPropiedadesDefinidos] = useState([]);
+    const [gruposPropiedades, setGruposPropiedades] = useState([]);
+    const [valoresPropiedades, setValoresPropiedades] = useState({});
     const [cargando, setCargando] = useState(true);
     const [guardando, setGuardando] = useState(false);
     const [erroresValidacion, setErroresValidacion] = useState(new Set());
@@ -46,7 +46,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     order: 'orden ASC'
                 });
 
-                const filtroProductoAtributos = JSON.stringify({
+                const filtroProductoPropiedades = JSON.stringify({
                     where: { and: { productoId: idProducto }},
                     order: 'ordenEnGrupo ASC'
                 });
@@ -62,13 +62,13 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                 });
 
                 const [atributosOrdenados, valoresData, gruposData] = await Promise.all([
-                    getTipoProductoAtributoDetalles(filtroTipoProducto),
-                    getProductosAtributo(filtroProductoAtributos),
-                    getGrupoAtributos(filtroGrupos)
+                    getTipoProductoPropiedadDetalles(filtroTipoProducto),
+                    getProductosPropiedad(filtroProductoPropiedades),
+                    getGrupoPropiedades(filtroGrupos)
                 ]);
 
-                setAtributosDefinidos(atributosOrdenados);
-                setGruposAtributos(gruposData);
+                setPropiedadesDefinidos(atributosOrdenados);
+                setGruposPropiedades(gruposData);
 
                 const valoresMap = {};
                 valoresData.forEach(valor => {
@@ -79,7 +79,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                         ordenEnGrupo: valor.ordenEnGrupo
                     };
                 });
-                setValoresAtributos(valoresMap);
+                setValoresPropiedades(valoresMap);
                 
             } catch (error) {
                 console.error('Error cargando datos:', error);
@@ -97,8 +97,8 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         cargarDatos();
     }, [idProducto]);
 
-    const actualizarValorAtributo = (atributoId, campo, valor) => {
-        setValoresAtributos(prev => ({
+    const actualizarValorPropiedad = (atributoId, campo, valor) => {
+        setValoresPropiedades(prev => ({
             ...prev,
             [atributoId]: {
                 ...prev[atributoId],
@@ -115,8 +115,8 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         }
     };
 
-    const renderizarCampoAtributo = (atributoDetalle) => {
-        const valorActual = valoresAtributos[atributoDetalle.id] || {};
+    const renderizarCampoPropiedad = (atributoDetalle) => {
+        const valorActual = valoresPropiedades[atributoDetalle.id] || {};
         const deshabilitado = !estoyEditandoProducto || guardando;
 
         console.log('Renderizando atributo:', atributoDetalle, 'Valor actual:', valorActual);
@@ -126,7 +126,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                 return (
                     <InputText
                         value={valorActual.valor || ''}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.target.value)}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.target.value)}
                         placeholder={intl.formatMessage({ id: 'Ingrese el valor' })}
                         disabled={deshabilitado}
                         className="w-full"
@@ -137,7 +137,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                 return (
                     <InputNumber
                         value={valorActual.valor ? parseFloat(valorActual.valor) : null}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.value?.toString() || '')}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value?.toString() || '')}
                         placeholder={intl.formatMessage({ id: 'Ingrese el número' })}
                         disabled={deshabilitado}
                         inputStyle={{ textAlign: 'right' }}
@@ -149,7 +149,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                 return (
                     <Calendar
                         value={valorActual.valor ? new Date(valorActual.valor) : null}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.value?.toISOString().split('T')[0] || '')}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value?.toISOString().split('T')[0] || '')}
                         disabled={deshabilitado}
                         placeholder={intl.formatMessage({ id: 'Seleccione la fecha' })}
                         dateFormat="dd/mm/yy"
@@ -161,7 +161,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                 return (
                     <InputSwitch
                         checked={valorActual.valor === 'true' || valorActual.valor === '1' || valorActual.valor === 'S'}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.value ? 'S' : 'N')}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value ? 'S' : 'N')}
                         disabled={deshabilitado}
                     />
                 );
@@ -173,7 +173,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     <Dropdown
                         value={valorActual.valor || ''}
                         options={opcionesLista}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.value || '')}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value || '')}
                         placeholder={intl.formatMessage({ id: 'Seleccione una opción' })}
                         disabled={deshabilitado}
                         className="w-full"
@@ -189,7 +189,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     <MultiSelect
                         value={valoresSeleccionados}
                         options={opcionesMulti}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.value.join(', '))}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value.join(', '))}
                         placeholder={intl.formatMessage({ id: 'Seleccione opciones' })}
                         disabled={deshabilitado}
                         className="w-full"
@@ -201,7 +201,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                 return (
                     <InputTextarea
                         value={valorActual.valor || ''}
-                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'valor', e.target.value)}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.target.value)}
                         placeholder={intl.formatMessage({ id: 'Ingrese el valor' })}
                         disabled={deshabilitado}
                         rows={3}
@@ -217,11 +217,11 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
 
         atributosDefinidos.forEach(atributo => {
             if (atributo.obligatorioSn === 'S') {
-                const valor = valoresAtributos[atributo.id]?.valor;
+                const valor = valoresPropiedades[atributo.id]?.valor;
                 const vacio = valor === undefined || valor === null || valor.toString().trim() === '';
                 if (vacio) {
                     errores.add(atributo.id);
-                    const grupo = gruposAtributos.find(g => g.id === atributo.grupoAtributoId);
+                    const grupo = gruposPropiedades.find(g => g.id === atributo.grupoPropiedadId);
                     camposFaltantes.push({
                         grupo: grupo?.nombre || intl.formatMessage({ id: 'Sin grupo' }),
                         atributo: atributo.nombre
@@ -265,7 +265,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         return true;
     };
 
-    const guardarAtributos = async () => {
+    const guardarPropiedades = async () => {
         if (!validarObligatorios()) return;
 
         setGuardando(true);
@@ -274,10 +274,10 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         try {
             const promesasGuardado = [];
 
-            for (const [atributoId, valores] of Object.entries(valoresAtributos)) {
+            for (const [atributoId, valores] of Object.entries(valoresPropiedades)) {
                 // Solo guardar si hay un valor
                 if (valores.valor !== undefined && valores.valor !== null && valores.valor.toString().trim() !== '') {
-                    const datosAtributo = {
+                    const datosPropiedad = {
                         productoId: idProducto,
                         atributoId: parseInt(atributoId),
                         valor: valores.valor.toString(),
@@ -288,9 +288,9 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     };
 
                     if (valores.id) {
-                        promesasGuardado.push(patchProductoAtributo(valores.id, datosAtributo));
+                        promesasGuardado.push(patchProductoPropiedad(valores.id, datosPropiedad));
                     } else {
-                        promesasGuardado.push(postProductoAtributo(datosAtributo));
+                        promesasGuardado.push(postProductoPropiedad(datosPropiedad));
                     }
                 }
             }
@@ -300,14 +300,14 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
             toast.current?.show({
                 severity: 'success',
                 summary: intl.formatMessage({ id: 'Éxito' }),
-                detail: intl.formatMessage({ id: 'Atributos guardados correctamente' }),
+                detail: intl.formatMessage({ id: 'Propiedades guardados correctamente' }),
                 life: 3000,
             });
 
-            const filtroProductoAtributos = JSON.stringify({
+            const filtroProductoPropiedades = JSON.stringify({
                 where: { productoId: idProducto }
             });
-            const valoresData = await getProductosAtributo(filtroProductoAtributos);
+            const valoresData = await getProductosPropiedad(filtroProductoPropiedades);
             const valoresMap = {};
             valoresData.forEach(valor => {
                 valoresMap[valor.atributoId] = {
@@ -317,14 +317,14 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     ordenEnGrupo: valor.ordenEnGrupo
                 };
             });
-            setValoresAtributos(valoresMap);
+            setValoresPropiedades(valoresMap);
 
         } catch (error) {
-            console.error('Error guardando atributos:', error);
+            console.error('Error guardando propiedades:', error);
             toast.current?.show({
                 severity: 'error',
                 summary: 'Error',
-                detail: intl.formatMessage({ id: 'Error al guardar los atributos' }),
+                detail: intl.formatMessage({ id: 'Error al guardar los propiedades' }),
                 life: 3000,
             });
         } finally {
@@ -332,16 +332,16 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         }
     };
 
-    // Agrupar atributos por grupo y ordenar por ordenEnGrupo
+    // Agrupar propiedades por grupo y ordenar por ordenEnGrupo
     const atributosAgrupados = useMemo(() => {
         const mapa = new Map();
 
-        gruposAtributos.forEach(grupo => {
+        gruposPropiedades.forEach(grupo => {
             mapa.set(grupo.id, { grupo, items: [] });
         });
 
         atributosDefinidos.forEach(atributo => {
-            const grupoId = atributo.grupoAtributoId;
+            const grupoId = atributo.grupoPropiedadId;
             if (grupoId && mapa.has(grupoId)) {
                 mapa.get(grupoId).items.push(atributo);
             } else if (grupoId && !mapa.has(grupoId)) {
@@ -352,7 +352,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
             }
         });
 
-        const sinGrupo = atributosDefinidos.filter(a => !a.grupoAtributoId);
+        const sinGrupo = atributosDefinidos.filter(a => !a.grupoPropiedadId);
 
         const gruposConItems = Array.from(mapa.values()).filter(g => g.items.length > 0);
 
@@ -370,8 +370,8 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         // 3. Si NINGUNO tiene orden asignado, se mantiene el orden por defecto (atributo.orden)
         const ordenarItems = (arr) => {
             arr.sort((a, b) => {
-                const ordenEnGrupoA = valoresAtributos[a.id]?.ordenEnGrupo;
-                const ordenEnGrupoB = valoresAtributos[b.id]?.ordenEnGrupo;
+                const ordenEnGrupoA = valoresPropiedades[a.id]?.ordenEnGrupo;
+                const ordenEnGrupoB = valoresPropiedades[b.id]?.ordenEnGrupo;
 
                 const tieneOrdenA = ordenEnGrupoA && ordenEnGrupoA > 0;
                 const tieneOrdenB = ordenEnGrupoB && ordenEnGrupoB > 0;
@@ -398,10 +398,10 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         ordenarItems(sinGrupo);
 
         return { gruposOrdenados: gruposConItems, sinGrupo };
-    }, [atributosDefinidos, gruposAtributos, valoresAtributos, intl]);
+    }, [atributosDefinidos, gruposPropiedades, valoresPropiedades, intl]);
 
-    const renderAtributoCard = (atributoDetalle) => {
-        const valorActual = valoresAtributos[atributoDetalle.id] || {};
+    const renderPropiedadCard = (atributoDetalle) => {
+        const valorActual = valoresPropiedades[atributoDetalle.id] || {};
         const deshabilitado = !estoyEditandoProducto || guardando;
 
         return (
@@ -414,7 +414,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                                     <label className="text-xs font-semibold mb-1">{intl.formatMessage({ id: 'Orden' })}</label>
                                     <InputNumber
                                         value={valorActual.ordenEnGrupo || 0}
-                                        onChange={(e) => actualizarValorAtributo(atributoDetalle.id, 'ordenEnGrupo', e.value || 0)}
+                                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'ordenEnGrupo', e.value || 0)}
                                         disabled={deshabilitado}
                                         min={0}
                                         max={999}
@@ -433,7 +433,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     <div className="mb-2">
                         <div className="flex align-items-center gap-2">
                             <div className="flex-1">
-                                {renderizarCampoAtributo(atributoDetalle)}
+                                {renderizarCampoPropiedad(atributoDetalle)}
                             </div>
                             {atributoDetalle.unidadMedida && (
                                 <span className="text-sm text-gray-600 font-medium ml-2">
@@ -452,7 +452,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
         );
     };
 
-    const renderGrupoAtributos = ({ grupo, items: grupoItems }) => {
+    const renderGrupoPropiedades = ({ grupo, items: grupoItems }) => {
         return (
             <Fieldset
                 key={grupo.id}
@@ -465,7 +465,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                     <small className="p-text-secondary block mb-3">{grupo.descripcion}</small>
                 )}
                 <div className="formgrid grid">
-                    {grupoItems.map(renderAtributoCard)}
+                    {grupoItems.map(renderPropiedadCard)}
                 </div>
             </Fieldset>
         );
@@ -485,9 +485,9 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
 
     if (!atributosDefinidos.length) {
         return (
-            <Card title={intl.formatMessage({ id: 'Atributos del Producto' })}>
+            <Card title={intl.formatMessage({ id: 'Propiedades del Producto' })}>
                 <div className="text-center p-4">
-                    {intl.formatMessage({ id: 'No hay atributos definidos para este tipo de producto' })}
+                    {intl.formatMessage({ id: 'No hay propiedades definidos para este tipo de producto' })}
                 </div>
             </Card>
         );
@@ -496,8 +496,8 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
     return (
         <div>
             <Toast ref={toast} />
-            <Card title={intl.formatMessage({ id: 'Atributos del Producto' })}>
-                {atributosAgrupados.gruposOrdenados.map(renderGrupoAtributos)}
+            <Card title={intl.formatMessage({ id: 'Propiedades del Producto' })}>
+                {atributosAgrupados.gruposOrdenados.map(renderGrupoPropiedades)}
 
                 {atributosAgrupados.sinGrupo.length > 0 && (
                     <Fieldset
@@ -507,7 +507,7 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                         className="mb-3"
                     >
                         <div className="formgrid grid">
-                            {atributosAgrupados.sinGrupo.map(renderAtributoCard)}
+                            {atributosAgrupados.sinGrupo.map(renderPropiedadCard)}
                         </div>
                     </Fieldset>
                 )}
@@ -517,10 +517,10 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
                         <Button
                             label={guardando ? 
                                 `${intl.formatMessage({ id: 'Guardando' })}...` : 
-                                intl.formatMessage({ id: 'Guardar Atributos' })
+                                intl.formatMessage({ id: 'Guardar Propiedades' })
                             }
                             icon={guardando ? "pi pi-spin pi-spinner" : "pi pi-save"}
-                            onClick={guardarAtributos}
+                            onClick={guardarPropiedades}
                             disabled={guardando}
                             className="p-button-primary"
                         />
@@ -531,4 +531,4 @@ const ProductoAtributo = ({ idProducto, tipoProductoId, estoyEditandoProducto })
     );
 };
 
-export default ProductoAtributo;
+export default ProductoPropiedad;

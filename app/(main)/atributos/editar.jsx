@@ -2,22 +2,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getAtributo, postAtributo, patchAtributo, getAtributos } from "@/app/api-endpoints/atributo";
-import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
+import { getPropiedad, postPropiedad, patchPropiedad, gePropiedades } from "@/app/api-endpoints/atributo";
+import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_atributo";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
-import EditarDatosAtributo from "./EditarDatosAtributo";
+import EditarDatosPropiedad from "./EditarDatosPropiedad";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
 
-    const [atributo, setAtributo] = useState(emptyRegistro || {
+    const [atributo, setPropiedad] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
-        grupoAtributoId: null,
+        grupoPropiedadId: null,
         tipoDato: "texto",
         unidadMedida: "",
         obligatorioSn: "N",
@@ -30,23 +30,23 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
-    const [listaGrupoAtributos, setListaGrupoAtributos] = useState([]);
+    const [listaGrupoPropiedades, setListaGrupoPropiedades] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            // Cargar grupos de atributos disponibles
+            // Cargar grupos de propiedades disponibles
             try {
                 const filtro = JSON.stringify({ where: { and: { empresaId: getUsuarioSesion().empresaId, activoSn: 'S' }, } });
-                const grupoAtributos = await getGrupoAtributos(filtro);
-                setListaGrupoAtributos(grupoAtributos || []);
+                const grupopropiedades = await getGrupoPropiedades(filtro);
+                setListaGrupoPropiedades(grupopropiedades || []);
             } catch (error) {
-                console.error('Error cargando grupos de atributos:', error);
-                setListaGrupoAtributos([]);
+                console.error('Error cargando grupos de propiedades:', error);
+                setListaGrupoPropiedades([]);
             }
 
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
-                setAtributo(registro);
+                setPropiedad(registro);
 
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
@@ -62,7 +62,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     const validaciones = async () => {
         const validaNombre = atributo.nombre === undefined || atributo.nombre === "";
         const validaTipoDato = atributo.tipoDato === undefined || atributo.tipoDato === "";
-        const validaGrupoAtributo = !atributo.grupoAtributoId;
+        const validaGrupoPropiedad = !atributo.grupoPropiedadId;
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -76,25 +76,25 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         }
 
         // Validación de duplicados
-        if (!validaNombre && !validaGrupoAtributo) {
+        if (!validaNombre && !validaGrupoPropiedad) {
             try {
                 const filtro = JSON.stringify({
                     where: {
                         and: {
-                            grupoAtributoId: atributo.grupoAtributoId,
+                            grupoPropiedadId: atributo.grupoPropiedadId,
                             nombre: atributo.nombre.trim()
                         }
                     }
                 });
 
-                const existentes = await getAtributos(filtro);
+                const existentes = await gePropiedades(filtro);
                 const duplicado = existentes.find(a => a.id !== atributo.id);
 
                 if (duplicado) {
                     toast.current?.show({
                         severity: 'error',
                         summary: 'ERROR',
-                        detail: intl.formatMessage({ id: 'Ya existe un atributo con ese nombre dentro del grupo de atributos.' }),
+                        detail: intl.formatMessage({ id: 'Ya existe un atributo con ese nombre dentro del grupo de propiedades.' }),
                         life: 5000,
                     });
                     return false;
@@ -106,7 +106,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         }
 
         // Validación final de campos obligatorios
-        if (validaNombre || validaTipoDato || validaGrupoAtributo) {
+        if (validaNombre || validaTipoDato || validaGrupoPropiedad) {
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -119,7 +119,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         return true;
     };
 
-    const guardarAtributo = async () => {
+    const guardarPropiedad = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
 
@@ -127,7 +127,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             let objGuardar = { ...atributo };
             objGuardar['orden'] = objGuardar.orden || 0;
             const usuarioActual = getUsuarioSesion()?.id;
-            delete objGuardar.grupoAtributoNombre;
+            delete objGuardar.grupoPropiedadNombre;
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -137,7 +137,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     objGuardar.activoSn = 'S';
                 }
 
-                const nuevoRegistro = await postAtributo(objGuardar);
+                const nuevoRegistro = await postPropiedad(objGuardar);
 
                 if (nuevoRegistro?.id) {
                     await procesarArchivosNuevoRegistro(atributo, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
@@ -156,7 +156,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     id: objGuardar.id,
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
-                    grupoAtributoId: objGuardar.grupoAtributoId,
+                    grupoPropiedadId: objGuardar.grupoPropiedadId,
                     tipoDato: objGuardar.tipoDato || "texto",
                     unidadMedida: objGuardar.unidadMedida,
                     obligatorioSn: objGuardar.obligatorioSn || 'N',
@@ -167,7 +167,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     usuarioModificacion: usuarioActual,
                 };
 
-                await patchAtributo(objGuardar.id, atributoAeditar);
+                await patchPropiedad(objGuardar.id, atributoAeditar);
                 await editarArchivos(atributo, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
                 setIdEditar(null);
                 setRegistroResult("editado");
@@ -185,18 +185,18 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
     return (
         <div>
-            <div className="grid Atributo">
+            <div className="grid Propiedad">
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Atributo' })).toLowerCase()}</h2>
-                        <EditarDatosAtributo
+                        <h2>{header} {(intl.formatMessage({ id: 'Propiedad' })).toLowerCase()}</h2>
+                        <EditarDatosPropiedad
                             atributo={atributo}
-                            setAtributo={setAtributo}
+                            setPropiedad={setPropiedad}
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
-                            listaGrupoAtributos={listaGrupoAtributos}
+                            listaGrupoPropiedades={listaGrupoPropiedades}
                         />
 
                         <div className="flex justify-content-end mt-2">
@@ -204,7 +204,7 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                 <Button
                                     label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                    onClick={guardarAtributo}
+                                    onClick={guardarPropiedad}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
@@ -218,4 +218,4 @@ const EditarAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     );
 };
 
-export default EditarAtributo;
+export default EditarPropiedad;

@@ -1,21 +1,21 @@
 "use client";
-import { deleteGrupoAtributo, getGrupoAtributos, getGrupoAtributosCount } from "@/app/api-endpoints/grupo_atributo";
-import { getAtributos } from "@/app/api-endpoints/atributo";
+import { deleteGrupoPropiedad, getGrupoPropiedades, getGrupoPropiedadesCount } from "@/app/api-endpoints/grupo_atributo";
+import { gePropiedades } from "@/app/api-endpoints/atributo";
 import Crud from "../../components/shared/crud";
-import EditarGrupoAtributo from "./editar";
+import EditarGrupoPropiedad from "./editar";
 import { useIntl } from 'react-intl'
 import { getUsuarioSesion } from "../../utility/Utils";
 
-const GrupoAtributo = () => {
+const GrupoPropiedad = () => {
     const intl = useIntl();
 
-    const eliminarGrupoAtributoConValidacion = async (id) => {
-        const filtro = JSON.stringify({ where: { and: { grupoAtributoId: id } } });
-        const atributosAsociados = await getAtributos(filtro);
+    const eliminarGrupoPropiedadConValidacion = async (id) => {
+        const filtro = JSON.stringify({ where: { and: { grupoPropiedadId: id } } });
+        const atributosAsociados = await gePropiedades(filtro);
         if (atributosAsociados && atributosAsociados.length > 0) {
-            throw new Error(intl.formatMessage({ id: 'No se puede eliminar el grupo de atributos porque tiene atributos asociados' }));
+            throw new Error(intl.formatMessage({ id: 'No se puede eliminar el grupo de propiedades porque tiene propiedades asociados' }));
         }
-        return await deleteGrupoAtributo(id);
+        return await deleteGrupoPropiedad(id);
     };
 
     const columnas = [
@@ -27,18 +27,18 @@ const GrupoAtributo = () => {
     return (
         <div>
             <Crud
-                headerCrud={intl.formatMessage({ id: 'Grupos de Atributos' })}
-                getRegistros={getGrupoAtributos}
-                getRegistrosCount={getGrupoAtributosCount}
+                headerCrud={intl.formatMessage({ id: 'Grupos de Propiedades' })}
+                getRegistros={getGrupoPropiedades}
+                getRegistrosCount={getGrupoPropiedadesCount}
                 botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
-                controlador={"GrupoAtributos"}
-                editarComponente={<EditarGrupoAtributo />}
+                controlador={"GrupoPropiedades"}
+                editarComponente={<EditarGrupoPropiedad />}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
-                seccion={"GrupoAtributos"}
+                seccion={"GrupoPropiedades"}
                 columnas={columnas}
-                deleteRegistro={eliminarGrupoAtributoConValidacion}
+                deleteRegistro={eliminarGrupoPropiedadConValidacion}
             />
         </div>
     );
 };
-export default GrupoAtributo;
+export default GrupoPropiedad;

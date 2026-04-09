@@ -6,10 +6,10 @@ import { InputSwitch } from 'primereact/inputswitch';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Checkbox } from 'primereact/checkbox';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { getAtributos } from "@/app/api-endpoints/atributo";
-import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
+import { gePropiedades } from "@/app/api-endpoints/atributo";
+import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_atributo";
 import { getMultimedias } from "@/app/api-endpoints/multimedia";
-import { getTipoProductoAtributoDetalles } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
+import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
 import { getTipoProductoMultimediaDetalles } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -19,24 +19,24 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const intl = useIntl();
     const usuarioSesion = getUsuarioSesion();
     
-    const [atributos, setAtributos] = useState([]);
-    const [gruposAtributos, setGruposAtributos] = useState([]);
+    const [propiedades, setPropiedades] = useState([]);
+    const [gruposPropiedades, setGruposPropiedades] = useState([]);
     const [multimedias, setMultimedias] = useState([]);
-    const [cargandoAtributos, setCargandoAtributos] = useState(false);
+    const [cargandoPropiedades, setCargandoPropiedades] = useState(false);
     const [cargandoMultimedias, setCargandoMultimedias] = useState(false);
-    const [atributosSeleccionados, setAtributosSeleccionados] = useState(tipoProducto?.atributosIds || []);
+    const [atributosSeleccionados, setPropiedadesSeleccionados] = useState(tipoProducto?.atributosIds || []);
     const [multimediasSeleccionados, setMultimediasSeleccionados] = useState(tipoProducto?.multimediasIds || []);
     const [datosInicializeados, setDatosInicializeados] = useState(false);
     const [gruposOrdenModificados, setGruposOrdenModificados] = useState({});
-    const [atributosOrdenModificados, setAtributosOrdenModificados] = useState({});
+    const [atributosOrdenModificados, setPropiedadesOrdenModificados] = useState({});
     const [multimediasOrdenModificados, setMultimediasOrdenModificados] = useState({});
 
-    // Cargar atributos y sus grupos de la empresa
+    // Cargar propiedades y sus grupos de la empresa
     useEffect(() => {
-        const cargarAtributosYGrupos = async () => {
+        const cargarPropiedadesYGrupos = async () => {
             if (!isEdit || !idTipo) return;
             
-            setCargandoAtributos(true);
+            setCargandoPropiedades(true);
             try {
                 const filtroActivos = JSON.stringify({
                     where: {
@@ -48,28 +48,28 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                     order: 'orden ASC'
                 });
                 
-                const [dataAtributos, dataGrupos] = await Promise.all([
-                    getAtributos(filtroActivos),
-                    getGrupoAtributos(filtroActivos)
+                const [dataPropiedades, dataGrupos] = await Promise.all([
+                    gePropiedades(filtroActivos),
+                    getGrupoPropiedades(filtroActivos)
                 ]);
                 
-                setAtributos(dataAtributos);
-                setGruposAtributos(dataGrupos);
+                setPropiedades(dataPropiedades);
+                setGruposPropiedades(dataGrupos);
             } catch (error) {
-                console.error('Error cargando atributos y grupos:', error);
+                console.error('Error cargando propiedades y grupos:', error);
             } finally {
-                setCargandoAtributos(false);
+                setCargandoPropiedades(false);
             }
         };
 
         if (usuarioSesion?.empresaId && isEdit && idTipo) {
-            cargarAtributosYGrupos();
+            cargarPropiedadesYGrupos();
         }
     }, [usuarioSesion?.empresaId, isEdit, idTipo]);
 
-    // Cargar atributos seleccionados por defecto desde la tabla de detalle
+    // Cargar propiedades seleccionados por defecto desde la tabla de detalle
     useEffect(() => {
-        const cargarAtributosSeleccionados = async () => {
+        const cargarPropiedadesSeleccionados = async () => {
             if (!isEdit || !idTipo || !tipoProducto?.id || datosInicializeados) return;
             
             try {
@@ -81,18 +81,18 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                     }
                 });
                 
-                const detalles = await getTipoProductoAtributoDetalles(filtro);
+                const detalles = await getTipoProductoPropiedadDetalles(filtro);
                 if (detalles && detalles.length > 0) {
                     const atributosIds = detalles.map(detalle => detalle.id);
-                    setAtributosSeleccionados(atributosIds);
+                    setPropiedadesSeleccionados(atributosIds);
                 }
             } catch (error) {
-                console.error('Error cargando atributos seleccionados:', error);
+                console.error('Error cargando propiedades seleccionados:', error);
             }
         };
 
         if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id) {
-            cargarAtributosSeleccionados();
+            cargarPropiedadesSeleccionados();
         }
     }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id, datosInicializeados]);
 
@@ -189,18 +189,18 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         setMultimediasOrdenModificados(prev => ({ ...prev, [multimediaId]: nuevoOrden }));
     };
 
-    const manejarOrdenGrupoAtributo = (grupoId, nuevoOrden) => {
-        setGruposAtributos(prev => prev.map(g =>
+    const manejarOrdenGrupoPropiedad = (grupoId, nuevoOrden) => {
+        setGruposPropiedades(prev => prev.map(g =>
             g.id === grupoId ? { ...g, orden: nuevoOrden } : g
         ));
         setGruposOrdenModificados(prev => ({ ...prev, [grupoId]: nuevoOrden }));
     };
 
-    const manejarOrdenAtributo = (atributoId, nuevoOrden) => {
-        setAtributos(prev => prev.map(a =>
+    const manejarOrdenPropiedad = (atributoId, nuevoOrden) => {
+        setPropiedades(prev => prev.map(a =>
             a.id === atributoId ? { ...a, orden: nuevoOrden } : a
         ));
-        setAtributosOrdenModificados(prev => ({ ...prev, [atributoId]: nuevoOrden }));
+        setPropiedadesOrdenModificados(prev => ({ ...prev, [atributoId]: nuevoOrden }));
     };
 
     const renderItemMultimedia = (multimedia) => (
@@ -219,7 +219,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         </div>
     );
 
-    const renderItemAtributo = (atributo) => (
+    const renderItemPropiedad = (atributo) => (
         <div>
             <div className="font-bold">{atributo.nombre}</div>
             {atributo.descripcion && (
@@ -299,24 +299,24 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                 <Fieldset legend={intl.formatMessage({ id: 'Información de los registros asociados' })} collapsed={false} toggleable>
                     <div className="mt-4">
                         <TabView scrollable>
-                            <TabPanel header={`${intl.formatMessage({ id: 'Atributos' })} (${atributosSeleccionados.length})`}>
-                                {/* <Fieldset legend={intl.formatMessage({ id: 'Atributos Asociados' })} collapsed={false} toggleable> */}
+                            <TabPanel header={`${intl.formatMessage({ id: 'Propiedades' })} (${atributosSeleccionados.length})`}>
+                                {/* <Fieldset legend={intl.formatMessage({ id: 'Propiedades Asociados' })} collapsed={false} toggleable> */}
                                     <ListaCheckboxAgrupada
-                                        items={atributos}
-                                        grupos={gruposAtributos}
+                                        items={propiedades}
+                                        grupos={gruposPropiedades}
                                         seleccionados={atributosSeleccionados}
-                                        onSeleccionChange={setAtributosSeleccionados}
-                                        grupoIdField="grupoAtributoId"
-                                        cargando={cargandoAtributos}
+                                        onSeleccionChange={setPropiedadesSeleccionados}
+                                        grupoIdField="grupoPropiedadId"
+                                        cargando={cargandoPropiedades}
                                         editable={editable}
                                         disabled={estadoGuardando}
-                                        renderItem={renderItemAtributo}
-                                        textoVacio={intl.formatMessage({ id: 'No hay atributos disponibles en su empresa' })}
-                                        titulo={intl.formatMessage({ id: 'Seleccione los atributos que pertenecen a este tipo de producto' })}
+                                        renderItem={renderItemPropiedad}
+                                        textoVacio={intl.formatMessage({ id: 'No hay propiedades disponibles en su empresa' })}
+                                        titulo={intl.formatMessage({ id: 'Seleccione los propiedades que pertenecen a este tipo de producto' })}
                                         prefixId="atributo"
                                         mostrarOrden={editable}
-                                        onOrdenGrupoChange={manejarOrdenGrupoAtributo}
-                                        onOrdenItemChange={manejarOrdenAtributo}
+                                        onOrdenGrupoChange={manejarOrdenGrupoPropiedad}
+                                        onOrdenItemChange={manejarOrdenPropiedad}
                                     />
                                 {/* </Fieldset> */}
                             </TabPanel>

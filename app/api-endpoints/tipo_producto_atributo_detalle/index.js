@@ -1,33 +1,33 @@
-import { TipoProductoAtributoDetalleControllerApi, settings } from "@/app/api-programa";
+import { TipoProductoPropiedadDetalleControllerApi, settings } from "@/app/api-programa";
 
-const apiTipoProductoAtributoDetalle = new TipoProductoAtributoDetalleControllerApi(settings)
+const apiTipoProductoPropiedadDetalle = new TipoProductoPropiedadDetalleControllerApi(settings)
 
-export const getTipoProductoAtributoDetalles = async (filtro) => {
-    const { data: dataTipoProductoAtributoDetalles } = await apiTipoProductoAtributoDetalle.tipoProductoAtributoDetalleControllerFind(filtro)
-    return dataTipoProductoAtributoDetalles
+export const getTipoProductoPropiedadDetalles = async (filtro) => {
+    const { data: dataTipoProductoPropiedadDetalles } = await apiTipoProductoPropiedadDetalle.tipoProductoPropiedadDetalleControllerFind(filtro)
+    return dataTipoProductoPropiedadDetalles
 }
 
-export const getTipoProductoAtributoDetallesCount = async (filtro) => {
-    const { data: dataTipoProductoAtributoDetalles } = await apiTipoProductoAtributoDetalle.tipoProductoAtributoDetalleControllerCount(filtro)
-    return dataTipoProductoAtributoDetalles
+export const getTipoProductoPropiedadDetallesCount = async (filtro) => {
+    const { data: dataTipoProductoPropiedadDetalles } = await apiTipoProductoPropiedadDetalle.tipoProductoPropiedadDetalleControllerCount(filtro)
+    return dataTipoProductoPropiedadDetalles
 }
 
-export const getTipoProductoAtributoDetalle = async (id) => {
-    const { data: dataTipoProductoAtributoDetalle } = await apiTipoProductoAtributoDetalle.tipoProductoAtributoDetalleControllerFindById(id)
-    return dataTipoProductoAtributoDetalle
+export const getTipoProductoPropiedadDetalle = async (id) => {
+    const { data: dataTipoProductoPropiedadDetalle } = await apiTipoProductoPropiedadDetalle.tipoProductoPropiedadDetalleControllerFindById(id)
+    return dataTipoProductoPropiedadDetalle
 }
 
-export const postTipoProductoAtributoDetalle = async (objTipoProductoAtributoDetalle) => {
-    const { data: dataTipoProductoAtributoDetalle } = await apiTipoProductoAtributoDetalle.tipoProductoAtributoDetalleControllerCreate(objTipoProductoAtributoDetalle)
-    return dataTipoProductoAtributoDetalle
+export const postTipoProductoPropiedadDetalle = async (objTipoProductoPropiedadDetalle) => {
+    const { data: dataTipoProductoPropiedadDetalle } = await apiTipoProductoPropiedadDetalle.tipoProductoPropiedadDetalleControllerCreate(objTipoProductoPropiedadDetalle)
+    return dataTipoProductoPropiedadDetalle
 }
 
-export const deleteTipoProductoAtributoDetalle = async (idTipoProductoAtributoDetalle) => {
-    const { data: dataTipoProductoAtributoDetalle } = await apiTipoProductoAtributoDetalle.tipoProductoAtributoDetalleControllerDeleteById(idTipoProductoAtributoDetalle)
-    return dataTipoProductoAtributoDetalle
+export const deleteTipoProductoPropiedadDetalle = async (idTipoProductoPropiedadDetalle) => {
+    const { data: dataTipoProductoPropiedadDetalle } = await apiTipoProductoPropiedadDetalle.tipoProductoPropiedadDetalleControllerDeleteById(idTipoProductoPropiedadDetalle)
+    return dataTipoProductoPropiedadDetalle
 }
 
-export const patchTipoProductoAtributoDetalle = async (idTipoProductoAtributoDetalle, objTipoProductoAtributoDetalle) => {
-    const { data: dataTipoProductoAtributoDetalle } = await apiTipoProductoAtributoDetalle.tipoProductoAtributoDetalleControllerUpdateById(idTipoProductoAtributoDetalle, objTipoProductoAtributoDetalle)
-    return dataTipoProductoAtributoDetalle
+export const patchTipoProductoPropiedadDetalle = async (idTipoProductoPropiedadDetalle, objTipoProductoPropiedadDetalle) => {
+    const { data: dataTipoProductoPropiedadDetalle } = await apiTipoProductoPropiedadDetalle.tipoProductoPropiedadDetalleControllerUpdateById(idTipoProductoPropiedadDetalle, objTipoProductoPropiedadDetalle)
+    return dataTipoProductoPropiedadDetalle
 }

@@ -14,7 +14,7 @@ import ProductoMultimedia from "../producto-multimedia/page";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
-import ProductoAtributo from "../producto-atributo/page";
+import ProductoPropiedad from "../producto-atributo/page";
 
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
@@ -32,7 +32,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         estadoId: null,
         finalizadoSn: "N",
         imagenPrincipal: "",
-        ordenAtributos: "",
+        ordenPropiedades: "",
         dimensiones: "",
         color: "",
         peso: null,
@@ -246,8 +246,8 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                         idProducto={idEditar}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
-                                        <ProductoAtributo
+                                    <TabPanel header={intl.formatMessage({ id: 'Propiedades del Producto' })}>
+                                        <ProductoPropiedad
                                         idProducto={idEditar}
                                         tipoProductoId={producto?.tipoProductoId}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />

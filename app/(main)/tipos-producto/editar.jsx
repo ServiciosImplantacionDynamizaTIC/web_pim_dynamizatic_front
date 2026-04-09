@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { getTipoProducto, postTipoProducto, patchTipoProducto } from "@/app/api-endpoints/tipo_producto";
-import { patchGrupoAtributo } from "@/app/api-endpoints/grupo_atributo";
-import { patchAtributo } from "@/app/api-endpoints/atributo";
+import { patchGrupoPropiedad } from "@/app/api-endpoints/grupo_atributo";
+import { patchPropiedad } from "@/app/api-endpoints/atributo";
 import { patchMultimedia } from "@/app/api-endpoints/multimedia";
 import EditarDatosTipoProducto from "./EditarDatosTipoProducto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -56,7 +56,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
         if (!validaNombre && rowData) {
             nombreDuplicado = rowData.some(tipo => 
                 tipo.nombre.toLowerCase() === tipoProducto.nombre.toLowerCase() &&
-                tipo.empresaId === tipoProducto.empresaId &&
+                tipo.empresaId === usuarioSesion?.empresaId &&
                 tipo.id !== tipoProducto.id
             );
         }
@@ -100,20 +100,20 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     };
                     resultado = await patchTipoProducto(idEditarTipo, tipoProductoData);
 
-                    // Guardar órdenes de grupos de atributos modificados
+                    // Guardar órdenes de grupos de propiedades modificados
                     if (tipoProducto._gruposOrdenModificados) {
                         const promesasGrupos = Object.entries(tipoProducto._gruposOrdenModificados).map(
-                            ([grupoId, orden]) => patchGrupoAtributo(parseInt(grupoId), { orden })
+                            ([grupoId, orden]) => patchGrupoPropiedad(parseInt(grupoId), { orden })
                         );
                         await Promise.all(promesasGrupos);
                     }
 
-                    // Guardar órdenes de atributos modificados
+                    // Guardar órdenes de propiedades modificados
                     if (tipoProducto._atributosOrdenModificados) {
-                        const promesasAtributos = Object.entries(tipoProducto._atributosOrdenModificados).map(
-                            ([atributoId, orden]) => patchAtributo(parseInt(atributoId), { orden })
+                        const promesasPropiedades = Object.entries(tipoProducto._atributosOrdenModificados).map(
+                            ([atributoId, orden]) => patchPropiedad(parseInt(atributoId), { orden })
                         );
-                        await Promise.all(promesasAtributos);
+                        await Promise.all(promesasPropiedades);
                     }
 
                     // Guardar órdenes de multimedia modificados
@@ -130,7 +130,8 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                         empresaId: tipoProducto.empresaId || usuarioSesion?.empresaId,
                         nombre: tipoProducto.nombre.trim(),
                         activoSn: tipoProducto.activoSn || 'S',
-                        descripcion: tipoProducto.descripcion?.trim() || null
+                        descripcion: tipoProducto.descripcion?.trim() || null,
+                        usuarioCreacion: usuarioSesion?.id || null,
                     };
                     resultado = await postTipoProducto(tipoProductoData);
                     setRegistroResult("insertado");

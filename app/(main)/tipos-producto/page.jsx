@@ -1,6 +1,6 @@
 "use client";
 import { deleteTipoProducto, getTiposProducto, getTiposProductoCount, postTipoProducto } from "@/app/api-endpoints/tipo_producto";
-import { getTipoProductoAtributoDetalles, postTipoProductoAtributoDetalle } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
+import { getTipoProductoPropiedadDetalles, postTipoProductoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_atributo_detalle";
 import { getTipoProductoMultimediaDetalles, postTipoProductoMultimediaDetalle } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import Crud from "../../components/shared/crud";
 import EditarTipoProducto from "./editar";
@@ -42,6 +42,7 @@ const TiposProducto = () => {
                 nombre: `${tipoOrigen.nombre}_COPIA`,
                 descripcion: tipoOrigen.descripcion || null,
                 activoSn: tipoOrigen.activoSn || 'S',
+                usuarioCreacion: usuarioSesion?.id || null,
             });
 
             const nuevoTipoId = nuevoTipo?.id;
@@ -49,21 +50,21 @@ const TiposProducto = () => {
                 throw new Error('No se pudo obtener el ID del tipo de producto clonado');
             }
 
-            // 2. Obtener y clonar los atributos asociados (tipo_producto_atributo_detalle)
-            const filtroAtributos = JSON.stringify({
+            // 2. Obtener y clonar los propiedades asociados (tipo_producto_atributo_detalle)
+            const filtroPropiedades = JSON.stringify({
                 where: { and: { tipoProductoId: tipoOrigen.id } }
             });
-            const atributosDetalle = await getTipoProductoAtributoDetalles(filtroAtributos);
+            const atributosDetalle = await getTipoProductoPropiedadDetalles(filtroPropiedades);
             let atributosClonados = 0;
 
             if (atributosDetalle && atributosDetalle.length > 0) {
-                const promesasAtributos = atributosDetalle.map(detalle =>
-                    postTipoProductoAtributoDetalle({
+                const promesasPropiedades = atributosDetalle.map(detalle =>
+                    postTipoProductoPropiedadDetalle({
                         tipoProductoId: nuevoTipoId,
-                        atributoId: detalle.atributoId,
+                        atributoId: detalle.id,
                     })
                 );
-                await Promise.all(promesasAtributos);
+                await Promise.all(promesasPropiedades);
                 atributosClonados = atributosDetalle.length;
             }
 
@@ -78,7 +79,7 @@ const TiposProducto = () => {
                 const promesasMultimedias = multimediasDetalle.map(detalle =>
                     postTipoProductoMultimediaDetalle({
                         tipoProductoId: nuevoTipoId,
-                        multimediaId: detalle.multimediaId,
+                        multimediaId: detalle.id,
                     })
                 );
                 await Promise.all(promesasMultimedias);
@@ -86,15 +87,15 @@ const TiposProducto = () => {
             }
 
             // 4. Mostrar resumen del clonado
-            const detalles = [
-                `${atributosClonados} ${intl.formatMessage({ id: 'atributos' })}`,
-                `${multimediasClonados} ${intl.formatMessage({ id: 'multimedia' })}`,
-            ].join(' | ');
+            // const detalles = [
+            //     `${atributosClonados} ${intl.formatMessage({ id: 'propiedades' })}`,
+            //     `${multimediasClonados} ${intl.formatMessage({ id: 'multimedia' })}`,
+            // ].join(' | ');
 
             toast.current?.show({
                 severity: 'success',
                 summary: intl.formatMessage({ id: 'Tipo de producto clonado' }),
-                detail: `${intl.formatMessage({ id: 'Nuevo nombre' })}: "${nuevoTipo.nombre}" — ${detalles}`,
+                detail: `${intl.formatMessage({ id: 'Nuevo nombre' })}: "${nuevoTipo.nombre}"`,
                 life: 5000,
             });
 
@@ -181,7 +182,7 @@ const TiposProducto = () => {
             >
                 <p style={{ margin: 0 }}>
                     {intl.formatMessage({ id: 'Se va a clonar el tipo de producto' })} <strong>"{nombreTipoConfirmacion}"</strong>.
-                    {' '}{intl.formatMessage({ id: 'Se duplicarán todos los atributos y multimedia asociados.' })}
+                    {' '}{intl.formatMessage({ id: 'Se duplicarán todos los propiedades y multimedia asociados.' })}
                     {' '}{intl.formatMessage({ id: 'El nuevo nombre será' })}: <strong>"{nombreTipoConfirmacion}_COPIA"</strong>.
                     <br /><br />
                     {intl.formatMessage({ id: '¿Estás seguro?' })}

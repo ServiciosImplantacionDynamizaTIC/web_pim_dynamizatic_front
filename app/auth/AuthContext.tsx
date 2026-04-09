@@ -156,12 +156,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/parametro-global",
           "icon": "pi pi-fw pi-cog"
         },
-        "GrupoAtributos": {
-          "path": "/grupo-atributos",
+        "GrupoPropiedades": {
+          "path": "/grupo-propiedades",
           "icon": "pi pi-fw pi-sitemap"
         },
-        "Atributos": {
-          "path": "/atributos",
+        "Propiedades": {
+          "path": "/propiedades",
           "icon": "pi pi-fw pi-tags"
         },
         "Catalogos": {

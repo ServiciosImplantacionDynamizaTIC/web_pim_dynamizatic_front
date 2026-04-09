@@ -359,419 +359,6 @@ export interface ArchivoWithRelations {
 /**
  * 
  * @export
- * @interface Atributo
- */
-export interface Atributo {
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
-    'grupoAtributoId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'nombre': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'descripcion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'tipoDato': AtributoTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'obligatorioSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'multivalorSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'valoresPermitidos'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
-    'orden'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof Atributo
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
-    'usuarioCreacion': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Atributo
-     */
-    'usuarioModificacion'?: number | null;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum AtributoTipoDatoEnum {
-    Texto = 'texto',
-    Numero = 'numero',
-    Fecha = 'fecha',
-    Booleano = 'booleano',
-    Lista = 'lista',
-    Multiselect = 'multiselect'
-}
-
-/**
- * 
- * @export
- * @interface AtributoFilter
- */
-export interface AtributoFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof AtributoFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof AtributoFilter
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * 
- * @export
- * @interface AtributoFilter1
- */
-export interface AtributoFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof AtributoFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof AtributoFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof AtributoFilter1
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * (tsType: Partial<Atributo>, schemaOptions: { partial: true })
- * @export
- * @interface AtributoPartial
- */
-export interface AtributoPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
-    'grupoAtributoId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'nombre'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'descripcion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'tipoDato'?: AtributoPartialTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'obligatorioSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'multivalorSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'valoresPermitidos'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
-    'orden'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoPartial
-     */
-    'usuarioModificacion'?: number | null;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum AtributoPartialTipoDatoEnum {
-    Texto = 'texto',
-    Numero = 'numero',
-    Fecha = 'fecha',
-    Booleano = 'booleano',
-    Lista = 'lista',
-    Multiselect = 'multiselect'
-}
-
-/**
- * (tsType: AtributoWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface AtributoWithRelations
- */
-export interface AtributoWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'grupoAtributoId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'nombre': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'descripcion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'tipoDato': AtributoWithRelationsTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'obligatorioSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'multivalorSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'valoresPermitidos'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'orden'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AtributoWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'usuarioCreacion': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AtributoWithRelations
-     */
-    'usuarioModificacion'?: number | null;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum AtributoWithRelationsTipoDatoEnum {
-    Texto = 'texto',
-    Numero = 'numero',
-    Fecha = 'fecha',
-    Booleano = 'booleano',
-    Lista = 'lista',
-    Multiselect = 'multiselect'
-}
-
-/**
- * 
- * @export
  * @interface Auditoria
  */
 export interface Auditoria {
@@ -4241,284 +3828,332 @@ export interface EstadoWithRelations {
 /**
  * 
  * @export
- * @interface GrupoAtributo
+ * @interface GrupoPropiedad
  */
-export interface GrupoAtributo {
+export interface GrupoPropiedad {
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'id'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'empresaId': number;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
+     */
+    'tipoDeGrupoPropiedad': GrupoPropiedadTipoDeGrupoPropiedadEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GrupoPropiedad
      */
     'nombre': string;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'descripcion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'orden'?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'activoSn'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'fechaCreacion'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'fechaModificacion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'usuarioCreacion': number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributo
+     * @memberof GrupoPropiedad
      */
     'usuarioModificacion'?: number | null;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GrupoPropiedadTipoDeGrupoPropiedadEnum {
+    Atributos = 'grupo_atributos',
+    CamposDinamicos = 'grupo_campos_dinamicos'
+}
+
 /**
  * 
  * @export
- * @interface GrupoAtributoFilter
+ * @interface GrupoPropiedadFilter
  */
-export interface GrupoAtributoFilter {
+export interface GrupoPropiedadFilter {
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoFilter
+     * @memberof GrupoPropiedadFilter
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoFilter
+     * @memberof GrupoPropiedadFilter
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoFilter
+     * @memberof GrupoPropiedadFilter
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof GrupoAtributoFilter
+     * @memberof GrupoPropiedadFilter
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {object | Set<string>}
-     * @memberof GrupoAtributoFilter
+     * @memberof GrupoPropiedadFilter
      */
     'fields'?: object | Set<string>;
 }
 /**
  * 
  * @export
- * @interface GrupoAtributoFilter1
+ * @interface GrupoPropiedadFilter1
  */
-export interface GrupoAtributoFilter1 {
+export interface GrupoPropiedadFilter1 {
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoFilter1
+     * @memberof GrupoPropiedadFilter1
      */
     'offset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoFilter1
+     * @memberof GrupoPropiedadFilter1
      */
     'limit'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoFilter1
+     * @memberof GrupoPropiedadFilter1
      */
     'skip'?: number;
     /**
      * 
      * @type {string | Array<string>}
-     * @memberof GrupoAtributoFilter1
+     * @memberof GrupoPropiedadFilter1
      */
     'order'?: string | Array<string>;
     /**
      * 
      * @type {{ [key: string]: object; }}
-     * @memberof GrupoAtributoFilter1
+     * @memberof GrupoPropiedadFilter1
      */
     'where'?: { [key: string]: object; };
     /**
      * 
      * @type {object | Set<string>}
-     * @memberof GrupoAtributoFilter1
+     * @memberof GrupoPropiedadFilter1
      */
     'fields'?: object | Set<string>;
 }
 /**
- * (tsType: Partial<GrupoAtributo>, schemaOptions: { partial: true })
+ * (tsType: Partial<GrupoPropiedad>, schemaOptions: { partial: true })
  * @export
- * @interface GrupoAtributoPartial
+ * @interface GrupoPropiedadPartial
  */
-export interface GrupoAtributoPartial {
+export interface GrupoPropiedadPartial {
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'id'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'empresaId'?: number;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
+     */
+    'tipoDeGrupoPropiedad'?: GrupoPropiedadPartialTipoDeGrupoPropiedadEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GrupoPropiedadPartial
      */
     'nombre'?: string;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'descripcion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'orden'?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'activoSn'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'fechaCreacion'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'fechaModificacion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'usuarioCreacion'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoPartial
+     * @memberof GrupoPropiedadPartial
      */
     'usuarioModificacion'?: number | null;
 }
+
 /**
- * (tsType: GrupoAtributoWithRelations, schemaOptions: { includeRelations: true })
+    * @export
+    * @enum {string}
+    */
+export enum GrupoPropiedadPartialTipoDeGrupoPropiedadEnum {
+    Atributos = 'grupo_atributos',
+    CamposDinamicos = 'grupo_campos_dinamicos'
+}
+
+/**
+ * (tsType: GrupoPropiedadWithRelations, schemaOptions: { includeRelations: true })
  * @export
- * @interface GrupoAtributoWithRelations
+ * @interface GrupoPropiedadWithRelations
  */
-export interface GrupoAtributoWithRelations {
+export interface GrupoPropiedadWithRelations {
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'id'?: number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'empresaId': number;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
+     */
+    'tipoDeGrupoPropiedad': GrupoPropiedadWithRelationsTipoDeGrupoPropiedadEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof GrupoPropiedadWithRelations
      */
     'nombre': string;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'descripcion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'orden'?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'activoSn'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'fechaCreacion'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'fechaModificacion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'usuarioCreacion': number;
     /**
      * 
      * @type {number}
-     * @memberof GrupoAtributoWithRelations
+     * @memberof GrupoPropiedadWithRelations
      */
     'usuarioModificacion'?: number | null;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum GrupoPropiedadWithRelationsTipoDeGrupoPropiedadEnum {
+    Atributos = 'grupo_atributos',
+    CamposDinamicos = 'grupo_campos_dinamicos'
+}
+
 /**
  * 
  * @export
@@ -5166,7 +4801,7 @@ export interface InlineObject5 {
      * @type {Array<number>}
      * @memberof InlineObject5
      */
-    'atributosIds'?: Array<number>;
+    'propiedadesIds'?: Array<number>;
     /**
      * 
      * @type {Array<number>}
@@ -9011,111 +8646,6 @@ export interface NewArchivo {
     'usuarioModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<Atributo, \'id\'>, schemaOptions: { title: \'NewAtributo\', exclude: [ \'id\' ] })
- * @export
- * @interface NewAtributo
- */
-export interface NewAtributo {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
-    'grupoAtributoId'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'nombre': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'descripcion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'tipoDato': NewAtributoTipoDatoEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'unidadMedida'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'obligatorioSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'multivalorSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'valoresPermitidos'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
-    'orden'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'activoSn'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewAtributo
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
-    'usuarioCreacion': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewAtributo
-     */
-    'usuarioModificacion'?: number | null;
-}
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum NewAtributoTipoDatoEnum {
-    Texto = 'texto',
-    Numero = 'numero',
-    Fecha = 'fecha',
-    Booleano = 'booleano',
-    Lista = 'lista',
-    Multiselect = 'multiselect'
-}
-
-/**
  * (tsType: Omit<Auditoria, \'id\'>, schemaOptions: { title: \'NewAuditoria\', exclude: [ \'id\' ] })
  * @export
  * @interface NewAuditoria
@@ -9913,66 +9443,82 @@ export interface NewEstado {
     'descripcion'?: string | null;
 }
 /**
- * (tsType: Omit<GrupoAtributo, \'id\'>, schemaOptions: { title: \'NewGrupoAtributo\', exclude: [ \'id\' ] })
+ * (tsType: Omit<GrupoPropiedad, \'id\'>, schemaOptions: { title: \'NewGrupoPropiedad\', exclude: [ \'id\' ] })
  * @export
- * @interface NewGrupoAtributo
+ * @interface NewGrupoPropiedad
  */
-export interface NewGrupoAtributo {
+export interface NewGrupoPropiedad {
     /**
      * 
      * @type {number}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'empresaId': number;
     /**
      * 
      * @type {string}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
+     */
+    'tipoDeGrupoPropiedad': NewGrupoPropiedadTipoDeGrupoPropiedadEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewGrupoPropiedad
      */
     'nombre': string;
     /**
      * 
      * @type {string}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'descripcion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'orden'?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'activoSn'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'fechaCreacion'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'fechaModificacion'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'usuarioCreacion': number;
     /**
      * 
      * @type {number}
-     * @memberof NewGrupoAtributo
+     * @memberof NewGrupoPropiedad
      */
     'usuarioModificacion'?: number | null;
 }
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum NewGrupoPropiedadTipoDeGrupoPropiedadEnum {
+    Atributos = 'grupo_atributos',
+    CamposDinamicos = 'grupo_campos_dinamicos'
+}
+
 /**
  * (tsType: Omit<Icono, \'id\'>, schemaOptions: { title: \'NewIcono\', exclude: [ \'id\' ] })
  * @export
@@ -11393,67 +10939,6 @@ export interface NewProducto {
     'usuarioModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<ProductoAtributo, \'id\'>, schemaOptions: { title: \'NewProductoAtributo\', exclude: [ \'id\' ] })
- * @export
- * @interface NewProductoAtributo
- */
-export interface NewProductoAtributo {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewProductoAtributo
-     */
-    'productoId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewProductoAtributo
-     */
-    'atributoId': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoAtributo
-     */
-    'valor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoAtributo
-     */
-    'unidad'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewProductoAtributo
-     */
-    'ordenEnGrupo'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoAtributo
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewProductoAtributo
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewProductoAtributo
-     */
-    'usuarioCreacion': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewProductoAtributo
-     */
-    'usuarioModificacion'?: number | null;
-}
-/**
  * (tsType: Omit<ProductoCampoDinamico, \'id\'>, schemaOptions: { title: \'NewProductoCampoDinamico\', exclude: [ \'id\' ] })
  * @export
  * @interface NewProductoCampoDinamico
@@ -11717,6 +11202,67 @@ export interface NewProductoMultimedia {
     'usuarioModificacion'?: number | null;
 }
 /**
+ * (tsType: Omit<ProductoPropiedad, \'id\'>, schemaOptions: { title: \'NewProductoPropiedad\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewProductoPropiedad
+ */
+export interface NewProductoPropiedad {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPropiedad
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPropiedad
+     */
+    'propiedadId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPropiedad
+     */
+    'valor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPropiedad
+     */
+    'unidad'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPropiedad
+     */
+    'ordenEnGrupo'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPropiedad
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPropiedad
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPropiedad
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPropiedad
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
  * (tsType: Omit<ProductoSeo, \'id\'>, schemaOptions: { title: \'NewProductoSeo\', exclude: [ \'id\' ] })
  * @export
  * @interface NewProductoSeo
@@ -11831,6 +11377,125 @@ export interface NewProductoSeo {
      */
     'usuarioModificacion'?: number | null;
 }
+/**
+ * (tsType: Omit<Propiedad, \'id\'>, schemaOptions: { title: \'NewPropiedad\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewPropiedad
+ */
+export interface NewPropiedad {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'tipoDePropiedad': NewPropiedadTipoDePropiedadEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPropiedad
+     */
+    'grupoPropiedadId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'tipoDato': NewPropiedadTipoDatoEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'unidadMedida'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'obligatorioSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'multivalorSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'valoresPermitidos'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPropiedad
+     */
+    'orden'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPropiedad
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPropiedad
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPropiedad
+     */
+    'usuarioModificacion'?: number | null;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum NewPropiedadTipoDePropiedadEnum {
+    Atributo = 'atributo',
+    CampoDinamico = 'campo_dinamico'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum NewPropiedadTipoDatoEnum {
+    Texto = 'texto',
+    Numero = 'numero',
+    Fecha = 'fecha',
+    Booleano = 'booleano',
+    Lista = 'lista',
+    Multiselect = 'multiselect'
+}
+
 /**
  * (tsType: Omit<RefrescarToken, \'id\'>, schemaOptions: { title: \'NewRefrescarToken\', exclude: [ \'id\' ] })
  * @export
@@ -12248,25 +11913,6 @@ export interface NewTipoProducto {
     'usuarioModificacion'?: number | null;
 }
 /**
- * (tsType: Omit<TipoProductoAtributoDetalle, \'id\'>, schemaOptions: { title: \'NewTipoProductoAtributoDetalle\', exclude: [ \'id\' ] })
- * @export
- * @interface NewTipoProductoAtributoDetalle
- */
-export interface NewTipoProductoAtributoDetalle {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewTipoProductoAtributoDetalle
-     */
-    'tipoProductoId'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewTipoProductoAtributoDetalle
-     */
-    'atributoId'?: number | null;
-}
-/**
  * (tsType: Omit<TipoProductoMultimediaDetalle, \'id\'>, schemaOptions: { title: \'NewTipoProductoMultimediaDetalle\', exclude: [ \'id\' ] })
  * @export
  * @interface NewTipoProductoMultimediaDetalle
@@ -12284,6 +11930,25 @@ export interface NewTipoProductoMultimediaDetalle {
      * @memberof NewTipoProductoMultimediaDetalle
      */
     'multimediaId': number;
+}
+/**
+ * (tsType: Omit<TipoProductoPropiedadDetalle, \'id\'>, schemaOptions: { title: \'NewTipoProductoPropiedadDetalle\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewTipoProductoPropiedadDetalle
+ */
+export interface NewTipoProductoPropiedadDetalle {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProductoPropiedadDetalle
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewTipoProductoPropiedadDetalle
+     */
+    'propiedadId'?: number | null;
 }
 /**
  * (tsType: Omit<TipoUsoMultimedia, \'id\'>, schemaOptions: { title: \'NewTipoUsoMultimedia\', exclude: [ \'id\' ] })
@@ -14204,287 +13869,6 @@ export interface Producto {
 /**
  * 
  * @export
- * @interface ProductoAtributo
- */
-export interface ProductoAtributo {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributo
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributo
-     */
-    'productoId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributo
-     */
-    'atributoId': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributo
-     */
-    'valor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributo
-     */
-    'unidad'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributo
-     */
-    'ordenEnGrupo'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributo
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributo
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributo
-     */
-    'usuarioCreacion': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributo
-     */
-    'usuarioModificacion'?: number | null;
-}
-/**
- * 
- * @export
- * @interface ProductoAtributoFilter
- */
-export interface ProductoAtributoFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ProductoAtributoFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof ProductoAtributoFilter
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * 
- * @export
- * @interface ProductoAtributoFilter1
- */
-export interface ProductoAtributoFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof ProductoAtributoFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof ProductoAtributoFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof ProductoAtributoFilter1
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * (tsType: Partial<ProductoAtributo>, schemaOptions: { partial: true })
- * @export
- * @interface ProductoAtributoPartial
- */
-export interface ProductoAtributoPartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoPartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoPartial
-     */
-    'productoId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoPartial
-     */
-    'atributoId'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoPartial
-     */
-    'valor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoPartial
-     */
-    'unidad'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoPartial
-     */
-    'ordenEnGrupo'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoPartial
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoPartial
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoPartial
-     */
-    'usuarioCreacion'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoPartial
-     */
-    'usuarioModificacion'?: number | null;
-}
-/**
- * (tsType: ProductoAtributoWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface ProductoAtributoWithRelations
- */
-export interface ProductoAtributoWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'productoId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'atributoId': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'valor'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'unidad'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'ordenEnGrupo'?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'fechaCreacion'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'fechaModificacion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'usuarioCreacion': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProductoAtributoWithRelations
-     */
-    'usuarioModificacion'?: number | null;
-}
-/**
- * 
- * @export
  * @interface ProductoCampoDinamico
  */
 export interface ProductoCampoDinamico {
@@ -16060,6 +15444,287 @@ export interface ProductoPartial {
 /**
  * 
  * @export
+ * @interface ProductoPropiedad
+ */
+export interface ProductoPropiedad {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedad
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedad
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedad
+     */
+    'propiedadId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedad
+     */
+    'valor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedad
+     */
+    'unidad'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedad
+     */
+    'ordenEnGrupo'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedad
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedad
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedad
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedad
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoPropiedadFilter
+ */
+export interface ProductoPropiedadFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoPropiedadFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoPropiedadFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoPropiedadFilter1
+ */
+export interface ProductoPropiedadFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoPropiedadFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof ProductoPropiedadFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoPropiedadFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<ProductoPropiedad>, schemaOptions: { partial: true })
+ * @export
+ * @interface ProductoPropiedadPartial
+ */
+export interface ProductoPropiedadPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadPartial
+     */
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadPartial
+     */
+    'propiedadId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadPartial
+     */
+    'valor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadPartial
+     */
+    'unidad'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadPartial
+     */
+    'ordenEnGrupo'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadPartial
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * (tsType: ProductoPropiedadWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface ProductoPropiedadWithRelations
+ */
+export interface ProductoPropiedadWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'propiedadId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'valor'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'unidad'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'ordenEnGrupo'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPropiedadWithRelations
+     */
+    'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
  * @interface ProductoSeo
  */
 export interface ProductoSeo {
@@ -16621,6 +16286,461 @@ export interface ProductoWithRelations {
      */
     'usuarioModificacion'?: number | null;
 }
+/**
+ * 
+ * @export
+ * @interface Propiedad
+ */
+export interface Propiedad {
+    /**
+     * 
+     * @type {number}
+     * @memberof Propiedad
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'tipoDePropiedad': PropiedadTipoDePropiedadEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof Propiedad
+     */
+    'grupoPropiedadId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'tipoDato': PropiedadTipoDatoEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'unidadMedida'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'obligatorioSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'multivalorSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'valoresPermitidos'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Propiedad
+     */
+    'orden'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Propiedad
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Propiedad
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Propiedad
+     */
+    'usuarioModificacion'?: number | null;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PropiedadTipoDePropiedadEnum {
+    Atributo = 'atributo',
+    CampoDinamico = 'campo_dinamico'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PropiedadTipoDatoEnum {
+    Texto = 'texto',
+    Numero = 'numero',
+    Fecha = 'fecha',
+    Booleano = 'booleano',
+    Lista = 'lista',
+    Multiselect = 'multiselect'
+}
+
+/**
+ * 
+ * @export
+ * @interface PropiedadFilter
+ */
+export interface PropiedadFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PropiedadFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PropiedadFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface PropiedadFilter1
+ */
+export interface PropiedadFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof PropiedadFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof PropiedadFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof PropiedadFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<Propiedad>, schemaOptions: { partial: true })
+ * @export
+ * @interface PropiedadPartial
+ */
+export interface PropiedadPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'tipoDePropiedad'?: PropiedadPartialTipoDePropiedadEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadPartial
+     */
+    'grupoPropiedadId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'nombre'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'tipoDato'?: PropiedadPartialTipoDatoEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'unidadMedida'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'obligatorioSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'multivalorSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'valoresPermitidos'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadPartial
+     */
+    'orden'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadPartial
+     */
+    'usuarioCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadPartial
+     */
+    'usuarioModificacion'?: number | null;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PropiedadPartialTipoDePropiedadEnum {
+    Atributo = 'atributo',
+    CampoDinamico = 'campo_dinamico'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PropiedadPartialTipoDatoEnum {
+    Texto = 'texto',
+    Numero = 'numero',
+    Fecha = 'fecha',
+    Booleano = 'booleano',
+    Lista = 'lista',
+    Multiselect = 'multiselect'
+}
+
+/**
+ * (tsType: PropiedadWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface PropiedadWithRelations
+ */
+export interface PropiedadWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'tipoDePropiedad': PropiedadWithRelationsTipoDePropiedadEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadWithRelations
+     */
+    'grupoPropiedadId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'nombre': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'tipoDato': PropiedadWithRelationsTipoDatoEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'unidadMedida'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'obligatorioSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'multivalorSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'valoresPermitidos'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadWithRelations
+     */
+    'orden'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PropiedadWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadWithRelations
+     */
+    'usuarioCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PropiedadWithRelations
+     */
+    'usuarioModificacion'?: number | null;
+}
+
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PropiedadWithRelationsTipoDePropiedadEnum {
+    Atributo = 'atributo',
+    CampoDinamico = 'campo_dinamico'
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export enum PropiedadWithRelationsTipoDatoEnum {
+    Texto = 'texto',
+    Numero = 'numero',
+    Fecha = 'fecha',
+    Booleano = 'booleano',
+    Lista = 'lista',
+    Multiselect = 'multiselect'
+}
+
 /**
  * 
  * @export
@@ -18258,161 +18378,6 @@ export interface TipoProducto {
 /**
  * 
  * @export
- * @interface TipoProductoAtributoDetalle
- */
-export interface TipoProductoAtributoDetalle {
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalle
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalle
-     */
-    'tipoProductoId'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalle
-     */
-    'atributoId'?: number | null;
-}
-/**
- * 
- * @export
- * @interface TipoProductoAtributoDetalleFilter
- */
-export interface TipoProductoAtributoDetalleFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleFilter
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleFilter
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleFilter
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof TipoProductoAtributoDetalleFilter
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof TipoProductoAtributoDetalleFilter
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * 
- * @export
- * @interface TipoProductoAtributoDetalleFilter1
- */
-export interface TipoProductoAtributoDetalleFilter1 {
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleFilter1
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleFilter1
-     */
-    'limit'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleFilter1
-     */
-    'skip'?: number;
-    /**
-     * 
-     * @type {string | Array<string>}
-     * @memberof TipoProductoAtributoDetalleFilter1
-     */
-    'order'?: string | Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: object; }}
-     * @memberof TipoProductoAtributoDetalleFilter1
-     */
-    'where'?: { [key: string]: object; };
-    /**
-     * 
-     * @type {object | Set<string>}
-     * @memberof TipoProductoAtributoDetalleFilter1
-     */
-    'fields'?: object | Set<string>;
-}
-/**
- * (tsType: Partial<TipoProductoAtributoDetalle>, schemaOptions: { partial: true })
- * @export
- * @interface TipoProductoAtributoDetallePartial
- */
-export interface TipoProductoAtributoDetallePartial {
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetallePartial
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetallePartial
-     */
-    'tipoProductoId'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetallePartial
-     */
-    'atributoId'?: number | null;
-}
-/**
- * (tsType: TipoProductoAtributoDetalleWithRelations, schemaOptions: { includeRelations: true })
- * @export
- * @interface TipoProductoAtributoDetalleWithRelations
- */
-export interface TipoProductoAtributoDetalleWithRelations {
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleWithRelations
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleWithRelations
-     */
-    'tipoProductoId'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof TipoProductoAtributoDetalleWithRelations
-     */
-    'atributoId'?: number | null;
-}
-/**
- * 
- * @export
  * @interface TipoProductoFilter
  */
 export interface TipoProductoFilter {
@@ -18705,6 +18670,161 @@ export interface TipoProductoPartial {
      * @memberof TipoProductoPartial
      */
     'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoPropiedadDetalle
+ */
+export interface TipoProductoPropiedadDetalle {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalle
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalle
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalle
+     */
+    'propiedadId'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoPropiedadDetalleFilter
+ */
+export interface TipoProductoPropiedadDetalleFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoPropiedadDetalleFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoPropiedadDetalleFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TipoProductoPropiedadDetalleFilter1
+ */
+export interface TipoProductoPropiedadDetalleFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof TipoProductoPropiedadDetalleFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof TipoProductoPropiedadDetalleFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof TipoProductoPropiedadDetalleFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<TipoProductoPropiedadDetalle>, schemaOptions: { partial: true })
+ * @export
+ * @interface TipoProductoPropiedadDetallePartial
+ */
+export interface TipoProductoPropiedadDetallePartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetallePartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetallePartial
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetallePartial
+     */
+    'propiedadId'?: number | null;
+}
+/**
+ * (tsType: TipoProductoPropiedadDetalleWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface TipoProductoPropiedadDetalleWithRelations
+ */
+export interface TipoProductoPropiedadDetalleWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleWithRelations
+     */
+    'tipoProductoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof TipoProductoPropiedadDetalleWithRelations
+     */
+    'propiedadId'?: number | null;
 }
 /**
  * (tsType: TipoProductoWithRelations, schemaOptions: { includeRelations: true })
@@ -21509,612 +21629,6 @@ export class ArchivoControllerApi extends BaseAPI {
      */
     public archivoControllerVistaArchivoEmpresaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return ArchivoControllerApiFp(this.configuration).archivoControllerVistaArchivoEmpresaCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * AtributoControllerApi - axios parameter creator
- * @export
- */
-export const AtributoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/atributos/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewAtributo} [newAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerCreate: async (newAtributo?: NewAtributo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/atributos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newAtributo, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('atributoControllerDeleteById', 'id', id)
-            const localVarPath = `/atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {AtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerFind: async (filter?: AtributoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/atributos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {AtributoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerFindById: async (id: number, filter?: AtributoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('atributoControllerFindById', 'id', id)
-            const localVarPath = `/atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {Atributo} [atributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerReplaceById: async (id: number, atributo?: Atributo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('atributoControllerReplaceById', 'id', id)
-            const localVarPath = `/atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(atributo, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {AtributoPartial} [atributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerUpdateAll: async (where?: { [key: string]: object; }, atributoPartial?: AtributoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/atributos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(atributoPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {AtributoPartial} [atributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerUpdateById: async (id: number, atributoPartial?: AtributoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('atributoControllerUpdateById', 'id', id)
-            const localVarPath = `/atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(atributoPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * AtributoControllerApi - functional programming interface
- * @export
- */
-export const AtributoControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = AtributoControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewAtributo} [newAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerCreate(newAtributo?: NewAtributo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Atributo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerCreate(newAtributo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {AtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerFind(filter?: AtributoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AtributoWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {AtributoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerFindById(id: number, filter?: AtributoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AtributoWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {Atributo} [atributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerReplaceById(id: number, atributo?: Atributo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerReplaceById(id, atributo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {AtributoPartial} [atributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerUpdateAll(where?: { [key: string]: object; }, atributoPartial?: AtributoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerUpdateAll(where, atributoPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {AtributoPartial} [atributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async atributoControllerUpdateById(id: number, atributoPartial?: AtributoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.atributoControllerUpdateById(id, atributoPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * AtributoControllerApi - factory interface
- * @export
- */
-export const AtributoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AtributoControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.atributoControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewAtributo} [newAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerCreate(newAtributo?: NewAtributo, options?: any): AxiosPromise<Atributo> {
-            return localVarFp.atributoControllerCreate(newAtributo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.atributoControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {AtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerFind(filter?: AtributoFilter1, options?: any): AxiosPromise<Array<AtributoWithRelations>> {
-            return localVarFp.atributoControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {AtributoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerFindById(id: number, filter?: AtributoFilter, options?: any): AxiosPromise<AtributoWithRelations> {
-            return localVarFp.atributoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {Atributo} [atributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerReplaceById(id: number, atributo?: Atributo, options?: any): AxiosPromise<any> {
-            return localVarFp.atributoControllerReplaceById(id, atributo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {AtributoPartial} [atributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerUpdateAll(where?: { [key: string]: object; }, atributoPartial?: AtributoPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.atributoControllerUpdateAll(where, atributoPartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {AtributoPartial} [atributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        atributoControllerUpdateById(id: number, atributoPartial?: AtributoPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.atributoControllerUpdateById(id, atributoPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * AtributoControllerApi - object-oriented interface
- * @export
- * @class AtributoControllerApi
- * @extends {BaseAPI}
- */
-export class AtributoControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewAtributo} [newAtributo] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerCreate(newAtributo?: NewAtributo, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerCreate(newAtributo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {AtributoFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerFind(filter?: AtributoFilter1, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {AtributoFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerFindById(id: number, filter?: AtributoFilter, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {Atributo} [atributo] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerReplaceById(id: number, atributo?: Atributo, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerReplaceById(id, atributo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {AtributoPartial} [atributoPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerUpdateAll(where?: { [key: string]: object; }, atributoPartial?: AtributoPartial, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerUpdateAll(where, atributoPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {AtributoPartial} [atributoPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AtributoControllerApi
-     */
-    public atributoControllerUpdateById(id: number, atributoPartial?: AtributoPartial, options?: AxiosRequestConfig) {
-        return AtributoControllerApiFp(this.configuration).atributoControllerUpdateById(id, atributoPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -29538,10 +29052,10 @@ export class FileUploadControllerApi extends BaseAPI {
 
 
 /**
- * GrupoAtributoControllerApi - axios parameter creator
+ * GrupoPropiedadControllerApi - axios parameter creator
  * @export
  */
-export const GrupoAtributoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+export const GrupoPropiedadControllerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -29549,8 +29063,8 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/grupo-atributos/count`;
+        grupoPropiedadControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/grupo-propiedades/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -29583,12 +29097,12 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @param {NewGrupoAtributo} [newGrupoAtributo] 
+         * @param {NewGrupoPropiedad} [newGrupoPropiedad] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerCreate: async (newGrupoAtributo?: NewGrupoAtributo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/grupo-atributos`;
+        grupoPropiedadControllerCreate: async (newGrupoPropiedad?: NewGrupoPropiedad, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/grupo-propiedades`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -29611,7 +29125,7 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newGrupoAtributo, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(newGrupoPropiedad, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -29624,10 +29138,10 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        grupoPropiedadControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('grupoAtributoControllerDeleteById', 'id', id)
-            const localVarPath = `/grupo-atributos/{id}`
+            assertParamExists('grupoPropiedadControllerDeleteById', 'id', id)
+            const localVarPath = `/grupo-propiedades/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -29657,12 +29171,12 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @param {GrupoAtributoFilter1} [filter] 
+         * @param {GrupoPropiedadFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerFind: async (filter?: GrupoAtributoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/grupo-atributos`;
+        grupoPropiedadControllerFind: async (filter?: GrupoPropiedadFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/grupo-propiedades`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -29696,14 +29210,14 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributoFilter} [filter] 
+         * @param {GrupoPropiedadFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerFindById: async (id: number, filter?: GrupoAtributoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        grupoPropiedadControllerFindById: async (id: number, filter?: GrupoPropiedadFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('grupoAtributoControllerFindById', 'id', id)
-            const localVarPath = `/grupo-atributos/{id}`
+            assertParamExists('grupoPropiedadControllerFindById', 'id', id)
+            const localVarPath = `/grupo-propiedades/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -29738,14 +29252,14 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributo} [grupoAtributo] 
+         * @param {GrupoPropiedad} [grupoPropiedad] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerReplaceById: async (id: number, grupoAtributo?: GrupoAtributo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        grupoPropiedadControllerReplaceById: async (id: number, grupoPropiedad?: GrupoPropiedad, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('grupoAtributoControllerReplaceById', 'id', id)
-            const localVarPath = `/grupo-atributos/{id}`
+            assertParamExists('grupoPropiedadControllerReplaceById', 'id', id)
+            const localVarPath = `/grupo-propiedades/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -29769,7 +29283,7 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(grupoAtributo, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(grupoPropiedad, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -29779,12 +29293,12 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
-         * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+         * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerUpdateAll: async (where?: { [key: string]: object; }, grupoAtributoPartial?: GrupoAtributoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/grupo-atributos`;
+        grupoPropiedadControllerUpdateAll: async (where?: { [key: string]: object; }, grupoPropiedadPartial?: GrupoPropiedadPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/grupo-propiedades`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -29811,7 +29325,7 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(grupoAtributoPartial, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(grupoPropiedadPartial, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -29821,14 +29335,14 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+         * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerUpdateById: async (id: number, grupoAtributoPartial?: GrupoAtributoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        grupoPropiedadControllerUpdateById: async (id: number, grupoPropiedadPartial?: GrupoPropiedadPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('grupoAtributoControllerUpdateById', 'id', id)
-            const localVarPath = `/grupo-atributos/{id}`
+            assertParamExists('grupoPropiedadControllerUpdateById', 'id', id)
+            const localVarPath = `/grupo-propiedades/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -29852,7 +29366,7 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(grupoAtributoPartial, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(grupoPropiedadPartial, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -29863,11 +29377,11 @@ export const GrupoAtributoControllerApiAxiosParamCreator = function (configurati
 };
 
 /**
- * GrupoAtributoControllerApi - functional programming interface
+ * GrupoPropiedadControllerApi - functional programming interface
  * @export
  */
-export const GrupoAtributoControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GrupoAtributoControllerApiAxiosParamCreator(configuration)
+export const GrupoPropiedadControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GrupoPropiedadControllerApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -29875,93 +29389,93 @@ export const GrupoAtributoControllerApiFp = function(configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grupoAtributoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerCount(where, options);
+        async grupoPropiedadControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {NewGrupoAtributo} [newGrupoAtributo] 
+         * @param {NewGrupoPropiedad} [newGrupoPropiedad] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grupoAtributoControllerCreate(newGrupoAtributo?: NewGrupoAtributo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GrupoAtributo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerCreate(newGrupoAtributo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async grupoAtributoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {GrupoAtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async grupoAtributoControllerFind(filter?: GrupoAtributoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GrupoAtributoWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerFind(filter, options);
+        async grupoPropiedadControllerCreate(newGrupoPropiedad?: NewGrupoPropiedad, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GrupoPropiedad>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerCreate(newGrupoPropiedad, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributoFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grupoAtributoControllerFindById(id: number, filter?: GrupoAtributoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GrupoAtributoWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerFindById(id, filter, options);
+        async grupoPropiedadControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {GrupoPropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async grupoPropiedadControllerFind(filter?: GrupoPropiedadFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GrupoPropiedadWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerFind(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributo} [grupoAtributo] 
+         * @param {GrupoPropiedadFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grupoAtributoControllerReplaceById(id: number, grupoAtributo?: GrupoAtributo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerReplaceById(id, grupoAtributo, options);
+        async grupoPropiedadControllerFindById(id: number, filter?: GrupoPropiedadFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GrupoPropiedadWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {GrupoPropiedad} [grupoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async grupoPropiedadControllerReplaceById(id: number, grupoPropiedad?: GrupoPropiedad, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerReplaceById(id, grupoPropiedad, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
-         * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+         * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grupoAtributoControllerUpdateAll(where?: { [key: string]: object; }, grupoAtributoPartial?: GrupoAtributoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerUpdateAll(where, grupoAtributoPartial, options);
+        async grupoPropiedadControllerUpdateAll(where?: { [key: string]: object; }, grupoPropiedadPartial?: GrupoPropiedadPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerUpdateAll(where, grupoPropiedadPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+         * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async grupoAtributoControllerUpdateById(id: number, grupoAtributoPartial?: GrupoAtributoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoAtributoControllerUpdateById(id, grupoAtributoPartial, options);
+        async grupoPropiedadControllerUpdateById(id: number, grupoPropiedadPartial?: GrupoPropiedadPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.grupoPropiedadControllerUpdateById(id, grupoPropiedadPartial, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * GrupoAtributoControllerApi - factory interface
+ * GrupoPropiedadControllerApi - factory interface
  * @export
  */
-export const GrupoAtributoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GrupoAtributoControllerApiFp(configuration)
+export const GrupoPropiedadControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GrupoPropiedadControllerApiFp(configuration)
     return {
         /**
          * 
@@ -29969,176 +29483,176 @@ export const GrupoAtributoControllerApiFactory = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.grupoAtributoControllerCount(where, options).then((request) => request(axios, basePath));
+        grupoPropiedadControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.grupoPropiedadControllerCount(where, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {NewGrupoAtributo} [newGrupoAtributo] 
+         * @param {NewGrupoPropiedad} [newGrupoPropiedad] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerCreate(newGrupoAtributo?: NewGrupoAtributo, options?: any): AxiosPromise<GrupoAtributo> {
-            return localVarFp.grupoAtributoControllerCreate(newGrupoAtributo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        grupoAtributoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.grupoAtributoControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {GrupoAtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        grupoAtributoControllerFind(filter?: GrupoAtributoFilter1, options?: any): AxiosPromise<Array<GrupoAtributoWithRelations>> {
-            return localVarFp.grupoAtributoControllerFind(filter, options).then((request) => request(axios, basePath));
+        grupoPropiedadControllerCreate(newGrupoPropiedad?: NewGrupoPropiedad, options?: any): AxiosPromise<GrupoPropiedad> {
+            return localVarFp.grupoPropiedadControllerCreate(newGrupoPropiedad, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributoFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerFindById(id: number, filter?: GrupoAtributoFilter, options?: any): AxiosPromise<GrupoAtributoWithRelations> {
-            return localVarFp.grupoAtributoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        grupoPropiedadControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.grupoPropiedadControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {GrupoPropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        grupoPropiedadControllerFind(filter?: GrupoPropiedadFilter1, options?: any): AxiosPromise<Array<GrupoPropiedadWithRelations>> {
+            return localVarFp.grupoPropiedadControllerFind(filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributo} [grupoAtributo] 
+         * @param {GrupoPropiedadFilter} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerReplaceById(id: number, grupoAtributo?: GrupoAtributo, options?: any): AxiosPromise<any> {
-            return localVarFp.grupoAtributoControllerReplaceById(id, grupoAtributo, options).then((request) => request(axios, basePath));
+        grupoPropiedadControllerFindById(id: number, filter?: GrupoPropiedadFilter, options?: any): AxiosPromise<GrupoPropiedadWithRelations> {
+            return localVarFp.grupoPropiedadControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {GrupoPropiedad} [grupoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        grupoPropiedadControllerReplaceById(id: number, grupoPropiedad?: GrupoPropiedad, options?: any): AxiosPromise<any> {
+            return localVarFp.grupoPropiedadControllerReplaceById(id, grupoPropiedad, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {{ [key: string]: object; }} [where] 
-         * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+         * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerUpdateAll(where?: { [key: string]: object; }, grupoAtributoPartial?: GrupoAtributoPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.grupoAtributoControllerUpdateAll(where, grupoAtributoPartial, options).then((request) => request(axios, basePath));
+        grupoPropiedadControllerUpdateAll(where?: { [key: string]: object; }, grupoPropiedadPartial?: GrupoPropiedadPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.grupoPropiedadControllerUpdateAll(where, grupoPropiedadPartial, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id 
-         * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+         * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        grupoAtributoControllerUpdateById(id: number, grupoAtributoPartial?: GrupoAtributoPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.grupoAtributoControllerUpdateById(id, grupoAtributoPartial, options).then((request) => request(axios, basePath));
+        grupoPropiedadControllerUpdateById(id: number, grupoPropiedadPartial?: GrupoPropiedadPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.grupoPropiedadControllerUpdateById(id, grupoPropiedadPartial, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * GrupoAtributoControllerApi - object-oriented interface
+ * GrupoPropiedadControllerApi - object-oriented interface
  * @export
- * @class GrupoAtributoControllerApi
+ * @class GrupoPropiedadControllerApi
  * @extends {BaseAPI}
  */
-export class GrupoAtributoControllerApi extends BaseAPI {
+export class GrupoPropiedadControllerApi extends BaseAPI {
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
+     * @memberof GrupoPropiedadControllerApi
      */
-    public grupoAtributoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    public grupoPropiedadControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {NewGrupoAtributo} [newGrupoAtributo] 
+     * @param {NewGrupoPropiedad} [newGrupoPropiedad] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
+     * @memberof GrupoPropiedadControllerApi
      */
-    public grupoAtributoControllerCreate(newGrupoAtributo?: NewGrupoAtributo, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerCreate(newGrupoAtributo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
-     */
-    public grupoAtributoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {GrupoAtributoFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
-     */
-    public grupoAtributoControllerFind(filter?: GrupoAtributoFilter1, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    public grupoPropiedadControllerCreate(newGrupoPropiedad?: NewGrupoPropiedad, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerCreate(newGrupoPropiedad, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {GrupoAtributoFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
+     * @memberof GrupoPropiedadControllerApi
      */
-    public grupoAtributoControllerFindById(id: number, filter?: GrupoAtributoFilter, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    public grupoPropiedadControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {GrupoPropiedadFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GrupoPropiedadControllerApi
+     */
+    public grupoPropiedadControllerFind(filter?: GrupoPropiedadFilter1, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {GrupoAtributo} [grupoAtributo] 
+     * @param {GrupoPropiedadFilter} [filter] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
+     * @memberof GrupoPropiedadControllerApi
      */
-    public grupoAtributoControllerReplaceById(id: number, grupoAtributo?: GrupoAtributo, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerReplaceById(id, grupoAtributo, options).then((request) => request(this.axios, this.basePath));
+    public grupoPropiedadControllerFindById(id: number, filter?: GrupoPropiedadFilter, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {GrupoPropiedad} [grupoPropiedad] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GrupoPropiedadControllerApi
+     */
+    public grupoPropiedadControllerReplaceById(id: number, grupoPropiedad?: GrupoPropiedad, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerReplaceById(id, grupoPropiedad, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {{ [key: string]: object; }} [where] 
-     * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+     * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
+     * @memberof GrupoPropiedadControllerApi
      */
-    public grupoAtributoControllerUpdateAll(where?: { [key: string]: object; }, grupoAtributoPartial?: GrupoAtributoPartial, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerUpdateAll(where, grupoAtributoPartial, options).then((request) => request(this.axios, this.basePath));
+    public grupoPropiedadControllerUpdateAll(where?: { [key: string]: object; }, grupoPropiedadPartial?: GrupoPropiedadPartial, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerUpdateAll(where, grupoPropiedadPartial, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {number} id 
-     * @param {GrupoAtributoPartial} [grupoAtributoPartial] 
+     * @param {GrupoPropiedadPartial} [grupoPropiedadPartial] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GrupoAtributoControllerApi
+     * @memberof GrupoPropiedadControllerApi
      */
-    public grupoAtributoControllerUpdateById(id: number, grupoAtributoPartial?: GrupoAtributoPartial, options?: AxiosRequestConfig) {
-        return GrupoAtributoControllerApiFp(this.configuration).grupoAtributoControllerUpdateById(id, grupoAtributoPartial, options).then((request) => request(this.axios, this.basePath));
+    public grupoPropiedadControllerUpdateById(id: number, grupoPropiedadPartial?: GrupoPropiedadPartial, options?: AxiosRequestConfig) {
+        return GrupoPropiedadControllerApiFp(this.configuration).grupoPropiedadControllerUpdateById(id, grupoPropiedadPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -41142,612 +40656,6 @@ export class PlantillaEmailControllerApi extends BaseAPI {
 
 
 /**
- * ProductoAtributoControllerApi - axios parameter creator
- * @export
- */
-export const ProductoAtributoControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/producto-atributos/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewProductoAtributo} [newProductoAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerCreate: async (newProductoAtributo?: NewProductoAtributo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/producto-atributos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newProductoAtributo, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('productoAtributoControllerDeleteById', 'id', id)
-            const localVarPath = `/producto-atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {ProductoAtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerFind: async (filter?: ProductoAtributoFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/producto-atributos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerFindById: async (id: number, filter?: ProductoAtributoFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('productoAtributoControllerFindById', 'id', id)
-            const localVarPath = `/producto-atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributo} [productoAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerReplaceById: async (id: number, productoAtributo?: ProductoAtributo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('productoAtributoControllerReplaceById', 'id', id)
-            const localVarPath = `/producto-atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(productoAtributo, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerUpdateAll: async (where?: { [key: string]: object; }, productoAtributoPartial?: ProductoAtributoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/producto-atributos`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(productoAtributoPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerUpdateById: async (id: number, productoAtributoPartial?: ProductoAtributoPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('productoAtributoControllerUpdateById', 'id', id)
-            const localVarPath = `/producto-atributos/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(productoAtributoPartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ProductoAtributoControllerApi - functional programming interface
- * @export
- */
-export const ProductoAtributoControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProductoAtributoControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewProductoAtributo} [newProductoAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerCreate(newProductoAtributo?: NewProductoAtributo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoAtributo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerCreate(newProductoAtributo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {ProductoAtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerFind(filter?: ProductoAtributoFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProductoAtributoWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerFindById(id: number, filter?: ProductoAtributoFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoAtributoWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributo} [productoAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerReplaceById(id: number, productoAtributo?: ProductoAtributo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerReplaceById(id, productoAtributo, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerUpdateAll(where?: { [key: string]: object; }, productoAtributoPartial?: ProductoAtributoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerUpdateAll(where, productoAtributoPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async productoAtributoControllerUpdateById(id: number, productoAtributoPartial?: ProductoAtributoPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.productoAtributoControllerUpdateById(id, productoAtributoPartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * ProductoAtributoControllerApi - factory interface
- * @export
- */
-export const ProductoAtributoControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProductoAtributoControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.productoAtributoControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewProductoAtributo} [newProductoAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerCreate(newProductoAtributo?: NewProductoAtributo, options?: any): AxiosPromise<ProductoAtributo> {
-            return localVarFp.productoAtributoControllerCreate(newProductoAtributo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.productoAtributoControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ProductoAtributoFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerFind(filter?: ProductoAtributoFilter1, options?: any): AxiosPromise<Array<ProductoAtributoWithRelations>> {
-            return localVarFp.productoAtributoControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributoFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerFindById(id: number, filter?: ProductoAtributoFilter, options?: any): AxiosPromise<ProductoAtributoWithRelations> {
-            return localVarFp.productoAtributoControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributo} [productoAtributo] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerReplaceById(id: number, productoAtributo?: ProductoAtributo, options?: any): AxiosPromise<any> {
-            return localVarFp.productoAtributoControllerReplaceById(id, productoAtributo, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerUpdateAll(where?: { [key: string]: object; }, productoAtributoPartial?: ProductoAtributoPartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.productoAtributoControllerUpdateAll(where, productoAtributoPartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        productoAtributoControllerUpdateById(id: number, productoAtributoPartial?: ProductoAtributoPartial, options?: any): AxiosPromise<any> {
-            return localVarFp.productoAtributoControllerUpdateById(id, productoAtributoPartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ProductoAtributoControllerApi - object-oriented interface
- * @export
- * @class ProductoAtributoControllerApi
- * @extends {BaseAPI}
- */
-export class ProductoAtributoControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewProductoAtributo} [newProductoAtributo] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerCreate(newProductoAtributo?: NewProductoAtributo, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerCreate(newProductoAtributo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {ProductoAtributoFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerFind(filter?: ProductoAtributoFilter1, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ProductoAtributoFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerFindById(id: number, filter?: ProductoAtributoFilter, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ProductoAtributo} [productoAtributo] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerReplaceById(id: number, productoAtributo?: ProductoAtributo, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerReplaceById(id, productoAtributo, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerUpdateAll(where?: { [key: string]: object; }, productoAtributoPartial?: ProductoAtributoPartial, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerUpdateAll(where, productoAtributoPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {ProductoAtributoPartial} [productoAtributoPartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProductoAtributoControllerApi
-     */
-    public productoAtributoControllerUpdateById(id: number, productoAtributoPartial?: ProductoAtributoPartial, options?: AxiosRequestConfig) {
-        return ProductoAtributoControllerApiFp(this.configuration).productoAtributoControllerUpdateById(id, productoAtributoPartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
  * ProductoCampoDinamicoControllerApi - axios parameter creator
  * @export
  */
@@ -45384,6 +44292,612 @@ export class ProductoMultimediaControllerApi extends BaseAPI {
 
 
 /**
+ * ProductoPropiedadControllerApi - axios parameter creator
+ * @export
+ */
+export const ProductoPropiedadControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-propiedades/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewProductoPropiedad} [newProductoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerCreate: async (newProductoPropiedad?: NewProductoPropiedad, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-propiedades`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newProductoPropiedad, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPropiedadControllerDeleteById', 'id', id)
+            const localVarPath = `/producto-propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ProductoPropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerFind: async (filter?: ProductoPropiedadFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-propiedades`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedadFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerFindById: async (id: number, filter?: ProductoPropiedadFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPropiedadControllerFindById', 'id', id)
+            const localVarPath = `/producto-propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedad} [productoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerReplaceById: async (id: number, productoPropiedad?: ProductoPropiedad, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPropiedadControllerReplaceById', 'id', id)
+            const localVarPath = `/producto-propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoPropiedad, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerUpdateAll: async (where?: { [key: string]: object; }, productoPropiedadPartial?: ProductoPropiedadPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-propiedades`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoPropiedadPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerUpdateById: async (id: number, productoPropiedadPartial?: ProductoPropiedadPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPropiedadControllerUpdateById', 'id', id)
+            const localVarPath = `/producto-propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoPropiedadPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProductoPropiedadControllerApi - functional programming interface
+ * @export
+ */
+export const ProductoPropiedadControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProductoPropiedadControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewProductoPropiedad} [newProductoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerCreate(newProductoPropiedad?: NewProductoPropiedad, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoPropiedad>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerCreate(newProductoPropiedad, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {ProductoPropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerFind(filter?: ProductoPropiedadFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProductoPropiedadWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedadFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerFindById(id: number, filter?: ProductoPropiedadFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoPropiedadWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedad} [productoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerReplaceById(id: number, productoPropiedad?: ProductoPropiedad, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerReplaceById(id, productoPropiedad, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerUpdateAll(where?: { [key: string]: object; }, productoPropiedadPartial?: ProductoPropiedadPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerUpdateAll(where, productoPropiedadPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPropiedadControllerUpdateById(id: number, productoPropiedadPartial?: ProductoPropiedadPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPropiedadControllerUpdateById(id, productoPropiedadPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProductoPropiedadControllerApi - factory interface
+ * @export
+ */
+export const ProductoPropiedadControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProductoPropiedadControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoPropiedadControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewProductoPropiedad} [newProductoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerCreate(newProductoPropiedad?: NewProductoPropiedad, options?: any): AxiosPromise<ProductoPropiedad> {
+            return localVarFp.productoPropiedadControllerCreate(newProductoPropiedad, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.productoPropiedadControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ProductoPropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerFind(filter?: ProductoPropiedadFilter1, options?: any): AxiosPromise<Array<ProductoPropiedadWithRelations>> {
+            return localVarFp.productoPropiedadControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedadFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerFindById(id: number, filter?: ProductoPropiedadFilter, options?: any): AxiosPromise<ProductoPropiedadWithRelations> {
+            return localVarFp.productoPropiedadControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedad} [productoPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerReplaceById(id: number, productoPropiedad?: ProductoPropiedad, options?: any): AxiosPromise<any> {
+            return localVarFp.productoPropiedadControllerReplaceById(id, productoPropiedad, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerUpdateAll(where?: { [key: string]: object; }, productoPropiedadPartial?: ProductoPropiedadPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoPropiedadControllerUpdateAll(where, productoPropiedadPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPropiedadControllerUpdateById(id: number, productoPropiedadPartial?: ProductoPropiedadPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.productoPropiedadControllerUpdateById(id, productoPropiedadPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProductoPropiedadControllerApi - object-oriented interface
+ * @export
+ * @class ProductoPropiedadControllerApi
+ * @extends {BaseAPI}
+ */
+export class ProductoPropiedadControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewProductoPropiedad} [newProductoPropiedad] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerCreate(newProductoPropiedad?: NewProductoPropiedad, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerCreate(newProductoPropiedad, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ProductoPropiedadFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerFind(filter?: ProductoPropiedadFilter1, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoPropiedadFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerFindById(id: number, filter?: ProductoPropiedadFilter, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoPropiedad} [productoPropiedad] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerReplaceById(id: number, productoPropiedad?: ProductoPropiedad, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerReplaceById(id, productoPropiedad, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerUpdateAll(where?: { [key: string]: object; }, productoPropiedadPartial?: ProductoPropiedadPartial, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerUpdateAll(where, productoPropiedadPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoPropiedadPartial} [productoPropiedadPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPropiedadControllerApi
+     */
+    public productoPropiedadControllerUpdateById(id: number, productoPropiedadPartial?: ProductoPropiedadPartial, options?: AxiosRequestConfig) {
+        return ProductoPropiedadControllerApiFp(this.configuration).productoPropiedadControllerUpdateById(id, productoPropiedadPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * ProductoSeoControllerApi - axios parameter creator
  * @export
  */
@@ -46052,6 +45566,612 @@ export class ProductoSeoControllerApi extends BaseAPI {
      */
     public productoSeoControllerUpdateById(id: number, productoSeoPartial?: ProductoSeoPartial, options?: AxiosRequestConfig) {
         return ProductoSeoControllerApiFp(this.configuration).productoSeoControllerUpdateById(id, productoSeoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PropiedadControllerApi - axios parameter creator
+ * @export
+ */
+export const PropiedadControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/propiedades/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewPropiedad} [newPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerCreate: async (newPropiedad?: NewPropiedad, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/propiedades`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newPropiedad, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('propiedadControllerDeleteById', 'id', id)
+            const localVarPath = `/propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {PropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerFind: async (filter?: PropiedadFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/propiedades`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PropiedadFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerFindById: async (id: number, filter?: PropiedadFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('propiedadControllerFindById', 'id', id)
+            const localVarPath = `/propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Propiedad} [propiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerReplaceById: async (id: number, propiedad?: Propiedad, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('propiedadControllerReplaceById', 'id', id)
+            const localVarPath = `/propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(propiedad, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PropiedadPartial} [propiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerUpdateAll: async (where?: { [key: string]: object; }, propiedadPartial?: PropiedadPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/propiedades`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(propiedadPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PropiedadPartial} [propiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerUpdateById: async (id: number, propiedadPartial?: PropiedadPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('propiedadControllerUpdateById', 'id', id)
+            const localVarPath = `/propiedades/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(propiedadPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PropiedadControllerApi - functional programming interface
+ * @export
+ */
+export const PropiedadControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PropiedadControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewPropiedad} [newPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerCreate(newPropiedad?: NewPropiedad, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Propiedad>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerCreate(newPropiedad, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerFind(filter?: PropiedadFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PropiedadWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PropiedadFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerFindById(id: number, filter?: PropiedadFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropiedadWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Propiedad} [propiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerReplaceById(id: number, propiedad?: Propiedad, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerReplaceById(id, propiedad, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PropiedadPartial} [propiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerUpdateAll(where?: { [key: string]: object; }, propiedadPartial?: PropiedadPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerUpdateAll(where, propiedadPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PropiedadPartial} [propiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async propiedadControllerUpdateById(id: number, propiedadPartial?: PropiedadPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.propiedadControllerUpdateById(id, propiedadPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PropiedadControllerApi - factory interface
+ * @export
+ */
+export const PropiedadControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PropiedadControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.propiedadControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewPropiedad} [newPropiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerCreate(newPropiedad?: NewPropiedad, options?: any): AxiosPromise<Propiedad> {
+            return localVarFp.propiedadControllerCreate(newPropiedad, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.propiedadControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PropiedadFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerFind(filter?: PropiedadFilter1, options?: any): AxiosPromise<Array<PropiedadWithRelations>> {
+            return localVarFp.propiedadControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PropiedadFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerFindById(id: number, filter?: PropiedadFilter, options?: any): AxiosPromise<PropiedadWithRelations> {
+            return localVarFp.propiedadControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Propiedad} [propiedad] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerReplaceById(id: number, propiedad?: Propiedad, options?: any): AxiosPromise<any> {
+            return localVarFp.propiedadControllerReplaceById(id, propiedad, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {PropiedadPartial} [propiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerUpdateAll(where?: { [key: string]: object; }, propiedadPartial?: PropiedadPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.propiedadControllerUpdateAll(where, propiedadPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {PropiedadPartial} [propiedadPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        propiedadControllerUpdateById(id: number, propiedadPartial?: PropiedadPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.propiedadControllerUpdateById(id, propiedadPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PropiedadControllerApi - object-oriented interface
+ * @export
+ * @class PropiedadControllerApi
+ * @extends {BaseAPI}
+ */
+export class PropiedadControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewPropiedad} [newPropiedad] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerCreate(newPropiedad?: NewPropiedad, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerCreate(newPropiedad, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PropiedadFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerFind(filter?: PropiedadFilter1, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PropiedadFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerFindById(id: number, filter?: PropiedadFilter, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {Propiedad} [propiedad] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerReplaceById(id: number, propiedad?: Propiedad, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerReplaceById(id, propiedad, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {PropiedadPartial} [propiedadPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerUpdateAll(where?: { [key: string]: object; }, propiedadPartial?: PropiedadPartial, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerUpdateAll(where, propiedadPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {PropiedadPartial} [propiedadPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropiedadControllerApi
+     */
+    public propiedadControllerUpdateById(id: number, propiedadPartial?: PropiedadPartial, options?: AxiosRequestConfig) {
+        return PropiedadControllerApiFp(this.configuration).propiedadControllerUpdateById(id, propiedadPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -49427,612 +49547,6 @@ export class TipoArchivoControllerApi extends BaseAPI {
 
 
 /**
- * TipoProductoAtributoDetalleControllerApi - axios parameter creator
- * @export
- */
-export const TipoProductoAtributoDetalleControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/tipo-producto-atributo-detalles/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerCreate: async (newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/tipo-producto-atributo-detalles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newTipoProductoAtributoDetalle, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('tipoProductoAtributoDetalleControllerDeleteById', 'id', id)
-            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {TipoProductoAtributoDetalleFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerFind: async (filter?: TipoProductoAtributoDetalleFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/tipo-producto-atributo-detalles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetalleFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerFindById: async (id: number, filter?: TipoProductoAtributoDetalleFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('tipoProductoAtributoDetalleControllerFindById', 'id', id)
-            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (filter !== undefined) {
-                localVarQueryParameter['filter'] = filter;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerReplaceById: async (id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('tipoProductoAtributoDetalleControllerReplaceById', 'id', id)
-            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoAtributoDetalle, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerUpdateAll: async (where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/tipo-producto-atributo-detalles`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (where !== undefined) {
-                localVarQueryParameter['where'] = where;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoAtributoDetallePartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerUpdateById: async (id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('tipoProductoAtributoDetalleControllerUpdateById', 'id', id)
-            const localVarPath = `/tipo-producto-atributo-detalles/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication jwt required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoAtributoDetallePartial, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * TipoProductoAtributoDetalleControllerApi - functional programming interface
- * @export
- */
-export const TipoProductoAtributoDetalleControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TipoProductoAtributoDetalleControllerApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerCount(where, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoAtributoDetalle>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerDeleteById(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {TipoProductoAtributoDetalleFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerFind(filter?: TipoProductoAtributoDetalleFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoProductoAtributoDetalleWithRelations>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerFind(filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetalleFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerFindById(id: number, filter?: TipoProductoAtributoDetalleFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoAtributoDetalleWithRelations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerFindById(id, filter, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerReplaceById(id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerReplaceById(id, tipoProductoAtributoDetalle, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerUpdateAll(where, tipoProductoAtributoDetallePartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tipoProductoAtributoDetalleControllerUpdateById(id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoAtributoDetalleControllerUpdateById(id, tipoProductoAtributoDetallePartial, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * TipoProductoAtributoDetalleControllerApi - factory interface
- * @export
- */
-export const TipoProductoAtributoDetalleControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = TipoProductoAtributoDetalleControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.tipoProductoAtributoDetalleControllerCount(where, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options?: any): AxiosPromise<TipoProductoAtributoDetalle> {
-            return localVarFp.tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
-            return localVarFp.tipoProductoAtributoDetalleControllerDeleteById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {TipoProductoAtributoDetalleFilter1} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerFind(filter?: TipoProductoAtributoDetalleFilter1, options?: any): AxiosPromise<Array<TipoProductoAtributoDetalleWithRelations>> {
-            return localVarFp.tipoProductoAtributoDetalleControllerFind(filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetalleFilter} [filter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerFindById(id: number, filter?: TipoProductoAtributoDetalleFilter, options?: any): AxiosPromise<TipoProductoAtributoDetalleWithRelations> {
-            return localVarFp.tipoProductoAtributoDetalleControllerFindById(id, filter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerReplaceById(id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options?: any): AxiosPromise<any> {
-            return localVarFp.tipoProductoAtributoDetalleControllerReplaceById(id, tipoProductoAtributoDetalle, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {{ [key: string]: object; }} [where] 
-         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: any): AxiosPromise<LoopbackCount> {
-            return localVarFp.tipoProductoAtributoDetalleControllerUpdateAll(where, tipoProductoAtributoDetallePartial, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tipoProductoAtributoDetalleControllerUpdateById(id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: any): AxiosPromise<any> {
-            return localVarFp.tipoProductoAtributoDetalleControllerUpdateById(id, tipoProductoAtributoDetallePartial, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * TipoProductoAtributoDetalleControllerApi - object-oriented interface
- * @export
- * @class TipoProductoAtributoDetalleControllerApi
- * @extends {BaseAPI}
- */
-export class TipoProductoAtributoDetalleControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerCount(where, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {NewTipoProductoAtributoDetalle} [newTipoProductoAtributoDetalle] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle?: NewTipoProductoAtributoDetalle, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerCreate(newTipoProductoAtributoDetalle, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {TipoProductoAtributoDetalleFilter1} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerFind(filter?: TipoProductoAtributoDetalleFilter1, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {TipoProductoAtributoDetalleFilter} [filter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerFindById(id: number, filter?: TipoProductoAtributoDetalleFilter, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {TipoProductoAtributoDetalle} [tipoProductoAtributoDetalle] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerReplaceById(id: number, tipoProductoAtributoDetalle?: TipoProductoAtributoDetalle, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerReplaceById(id, tipoProductoAtributoDetalle, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {{ [key: string]: object; }} [where] 
-     * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerUpdateAll(where, tipoProductoAtributoDetallePartial, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {TipoProductoAtributoDetallePartial} [tipoProductoAtributoDetallePartial] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TipoProductoAtributoDetalleControllerApi
-     */
-    public tipoProductoAtributoDetalleControllerUpdateById(id: number, tipoProductoAtributoDetallePartial?: TipoProductoAtributoDetallePartial, options?: AxiosRequestConfig) {
-        return TipoProductoAtributoDetalleControllerApiFp(this.configuration).tipoProductoAtributoDetalleControllerUpdateById(id, tipoProductoAtributoDetallePartial, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
  * TipoProductoControllerApi - axios parameter creator
  * @export
  */
@@ -51240,6 +50754,612 @@ export class TipoProductoMultimediaDetalleControllerApi extends BaseAPI {
      */
     public tipoProductoMultimediaDetalleControllerUpdateById(id: number, tipoProductoMultimediaDetallePartial?: TipoProductoMultimediaDetallePartial, options?: AxiosRequestConfig) {
         return TipoProductoMultimediaDetalleControllerApiFp(this.configuration).tipoProductoMultimediaDetalleControllerUpdateById(id, tipoProductoMultimediaDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TipoProductoPropiedadDetalleControllerApi - axios parameter creator
+ * @export
+ */
+export const TipoProductoPropiedadDetalleControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-propiedad-detalles/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewTipoProductoPropiedadDetalle} [newTipoProductoPropiedadDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerCreate: async (newTipoProductoPropiedadDetalle?: NewTipoProductoPropiedadDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-propiedad-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newTipoProductoPropiedadDetalle, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoPropiedadDetalleControllerDeleteById', 'id', id)
+            const localVarPath = `/tipo-producto-propiedad-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TipoProductoPropiedadDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerFind: async (filter?: TipoProductoPropiedadDetalleFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-propiedad-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerFindById: async (id: number, filter?: TipoProductoPropiedadDetalleFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoPropiedadDetalleControllerFindById', 'id', id)
+            const localVarPath = `/tipo-producto-propiedad-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetalle} [tipoProductoPropiedadDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerReplaceById: async (id: number, tipoProductoPropiedadDetalle?: TipoProductoPropiedadDetalle, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoPropiedadDetalleControllerReplaceById', 'id', id)
+            const localVarPath = `/tipo-producto-propiedad-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoPropiedadDetalle, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerUpdateAll: async (where?: { [key: string]: object; }, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tipo-producto-propiedad-detalles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoPropiedadDetallePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerUpdateById: async (id: number, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('tipoProductoPropiedadDetalleControllerUpdateById', 'id', id)
+            const localVarPath = `/tipo-producto-propiedad-detalles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tipoProductoPropiedadDetallePartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TipoProductoPropiedadDetalleControllerApi - functional programming interface
+ * @export
+ */
+export const TipoProductoPropiedadDetalleControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TipoProductoPropiedadDetalleControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewTipoProductoPropiedadDetalle} [newTipoProductoPropiedadDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerCreate(newTipoProductoPropiedadDetalle?: NewTipoProductoPropiedadDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoPropiedadDetalle>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerCreate(newTipoProductoPropiedadDetalle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TipoProductoPropiedadDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerFind(filter?: TipoProductoPropiedadDetalleFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TipoProductoPropiedadDetalleWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerFindById(id: number, filter?: TipoProductoPropiedadDetalleFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TipoProductoPropiedadDetalleWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetalle} [tipoProductoPropiedadDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerReplaceById(id: number, tipoProductoPropiedadDetalle?: TipoProductoPropiedadDetalle, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerReplaceById(id, tipoProductoPropiedadDetalle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerUpdateAll(where, tipoProductoPropiedadDetallePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tipoProductoPropiedadDetalleControllerUpdateById(id: number, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tipoProductoPropiedadDetalleControllerUpdateById(id, tipoProductoPropiedadDetallePartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TipoProductoPropiedadDetalleControllerApi - factory interface
+ * @export
+ */
+export const TipoProductoPropiedadDetalleControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TipoProductoPropiedadDetalleControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewTipoProductoPropiedadDetalle} [newTipoProductoPropiedadDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerCreate(newTipoProductoPropiedadDetalle?: NewTipoProductoPropiedadDetalle, options?: any): AxiosPromise<TipoProductoPropiedadDetalle> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerCreate(newTipoProductoPropiedadDetalle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TipoProductoPropiedadDetalleFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerFind(filter?: TipoProductoPropiedadDetalleFilter1, options?: any): AxiosPromise<Array<TipoProductoPropiedadDetalleWithRelations>> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetalleFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerFindById(id: number, filter?: TipoProductoPropiedadDetalleFilter, options?: any): AxiosPromise<TipoProductoPropiedadDetalleWithRelations> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetalle} [tipoProductoPropiedadDetalle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerReplaceById(id: number, tipoProductoPropiedadDetalle?: TipoProductoPropiedadDetalle, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerReplaceById(id, tipoProductoPropiedadDetalle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerUpdateAll(where, tipoProductoPropiedadDetallePartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tipoProductoPropiedadDetalleControllerUpdateById(id: number, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options?: any): AxiosPromise<any> {
+            return localVarFp.tipoProductoPropiedadDetalleControllerUpdateById(id, tipoProductoPropiedadDetallePartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TipoProductoPropiedadDetalleControllerApi - object-oriented interface
+ * @export
+ * @class TipoProductoPropiedadDetalleControllerApi
+ * @extends {BaseAPI}
+ */
+export class TipoProductoPropiedadDetalleControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewTipoProductoPropiedadDetalle} [newTipoProductoPropiedadDetalle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerCreate(newTipoProductoPropiedadDetalle?: NewTipoProductoPropiedadDetalle, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerCreate(newTipoProductoPropiedadDetalle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TipoProductoPropiedadDetalleFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerFind(filter?: TipoProductoPropiedadDetalleFilter1, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoPropiedadDetalleFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerFindById(id: number, filter?: TipoProductoPropiedadDetalleFilter, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoPropiedadDetalle} [tipoProductoPropiedadDetalle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerReplaceById(id: number, tipoProductoPropiedadDetalle?: TipoProductoPropiedadDetalle, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerReplaceById(id, tipoProductoPropiedadDetalle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerUpdateAll(where?: { [key: string]: object; }, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerUpdateAll(where, tipoProductoPropiedadDetallePartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {TipoProductoPropiedadDetallePartial} [tipoProductoPropiedadDetallePartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TipoProductoPropiedadDetalleControllerApi
+     */
+    public tipoProductoPropiedadDetalleControllerUpdateById(id: number, tipoProductoPropiedadDetallePartial?: TipoProductoPropiedadDetallePartial, options?: AxiosRequestConfig) {
+        return TipoProductoPropiedadDetalleControllerApiFp(this.configuration).tipoProductoPropiedadDetalleControllerUpdateById(id, tipoProductoPropiedadDetallePartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

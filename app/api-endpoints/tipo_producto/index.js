@@ -18,8 +18,14 @@ export const getTipoProducto = async (id) => {
 }
 
 export const postTipoProducto = async (objTipoProducto) => {
-    const { data: dataTipoProducto } = await apiTipoProducto.tipoProductoControllerCreate(objTipoProducto)
-    return dataTipoProducto
+    try {
+        const { data: dataTipoProducto } = await apiTipoProducto.tipoProductoControllerCreate(objTipoProducto)
+        return dataTipoProducto
+    } catch (error) {
+        console.error('Error en postTipoProducto:', error);
+        throw error;
+    }
+
 }
 
 export const deleteTipoProducto = async (idTipoProducto) => {

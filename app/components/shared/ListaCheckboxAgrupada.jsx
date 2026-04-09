@@ -12,11 +12,11 @@ import { useIntl } from 'react-intl';
  * con checkboxes para seleccionar/deseleccionar y control de orden.
  *
  * Props:
- * - items:              Array de ítems a mostrar (ej: atributos, campos dinámicos)
+ * - items:              Array de ítems a mostrar (ej: propiedades, campos dinámicos)
  * - grupos:             Array de grupos (ej: grupo_atributo, grupo_campo_dinamico)
  * - seleccionados:      Array de IDs seleccionados
  * - onSeleccionChange:  Callback que recibe el nuevo array de IDs seleccionados
- * - grupoIdField:       Nombre del campo en cada ítem que apunta al grupo (ej: 'grupoAtributoId')
+ * - grupoIdField:       Nombre del campo en cada ítem que apunta al grupo (ej: 'grupoPropiedadId')
  * - cargando:           Boolean indicando si se están cargando los datos
  * - editable:           Boolean indicando si se pueden modificar las selecciones
  * - disabled:           Boolean adicional para deshabilitar (ej: estadoGuardando)
