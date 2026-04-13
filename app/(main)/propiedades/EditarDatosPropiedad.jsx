@@ -22,7 +22,7 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
     
     const tiposDato = [
         { label: 'Texto', value: 'texto' },
-        { label: 'Textarea', value: 'textarea' },
+        { label: 'Texto largo', value: 'textarea' },
         { label: 'Número', value: 'numero' },
         { label: 'Fecha', value: 'fecha' },
         { label: 'Booleano', value: 'booleano' },

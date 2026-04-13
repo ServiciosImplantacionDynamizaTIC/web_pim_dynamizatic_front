@@ -382,7 +382,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             onChange={(e) => setProducto({ ...producto, tipoProductoId: e.value })}
                             placeholder={intl.formatMessage({ id: 'Selecciona un tipo de producto' })}
                             disabled={estadoGuardando || cargandoTiposProducto}
-                            showClear
+                            // showClear
                         />
                     </div>
 

@@ -218,12 +218,12 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
             case 'multiselect':
                 const opcionesMulti = atributoDetalle.valoresPermitidos ? 
                     atributoDetalle.valoresPermitidos.split(';').map(v => ({ label: v.trim(), value: v.trim() })) : [];
-                const valoresSeleccionados = valorActual.valor ? valorActual.valor.split(',').map(v => v.trim()) : [];
+                const valoresSeleccionados = valorActual.valor ? valorActual.valor.split(';').map(v => v.trim()).filter(v => v !== '') : [];
                 return (
                     <MultiSelect
                         value={valoresSeleccionados}
                         options={opcionesMulti}
-                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value.join(', '))}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value.join(';'))}
                         placeholder={intl.formatMessage({ id: 'Seleccione opciones' })}
                         disabled={deshabilitado}
                         className="w-full"
@@ -239,7 +239,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                         placeholder={intl.formatMessage({ id: 'Ingrese el texto' })}
                         disabled={deshabilitado}
                         rows={4}
-                        autoResize
+                        // autoResize
                         className="w-full"
                     />
                 );
