@@ -48,10 +48,11 @@ const TraduccionLiteral = () => {
                 headerCrud={intl.formatMessage({ id: 'Traducciones' })}
                 getRegistros={getTraduccionLiterales}
                 getRegistrosCount={getTraduccionLiteralesCount}
-                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo','ver', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                 controlador={"Traducciones"}
                 editarComponente={<EditarTraduccion />}
                 columnas={columnas}
+                importarTabla="traduccion_literal"
                 deleteRegistro={deleteTraduccionLiteral}
             />
         </div>

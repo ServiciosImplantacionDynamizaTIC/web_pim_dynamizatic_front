@@ -38,6 +38,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Empresas-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Empresas-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Empresas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Empresas-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Empresas-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Empresas-Borrar' },
 
@@ -46,6 +47,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Idiomas-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Idiomas-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Idiomas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Idiomas-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Idiomas-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Idiomas-Borrar' },
 
@@ -106,6 +108,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Traducciones-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Traducciones-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Traducciones-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Traducciones-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Traducciones-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Traducciones-Borrar' },
 
@@ -131,6 +134,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Usuarios-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Usuarios-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Usuarios-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Usuarios-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
                 { header: intl.formatMessage({ id: 'Ver Histórico Contraseñas' }), seccion: 'Usuarios-VerHistoricoPassword' },
@@ -172,6 +176,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Categorias-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Categorias-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Categorias-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Categorias-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Categorias-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Categorias-Borrar' },
 

@@ -242,7 +242,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, mostrarImportar, importarArchivo, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -268,6 +268,18 @@ const Header = ({ crearNuevo, generarCSV, mostrarQR, enviarCorreo, limpiarFiltro
                         severity="success"
                         onClick={generarCSV}
                         className="mr-2"
+                    />
+                )
+            }
+            {mostrarImportar &&
+                (
+                    <Button
+                        label={intl.formatMessage({ id: 'Importar' })}
+                        icon="pi pi-upload"
+                        severity="help"
+                        onClick={importarArchivo}
+                        className="mr-2"
+                        disabled={importarArchivo === null || importarArchivo === undefined}
                     />
                 )
             }
@@ -409,16 +421,9 @@ const formatearBytes = (bytes) => {
 const opcionesActivoSnTemplate = (option, obtenerSeverity) => {
     return <Badge value={option} severity={obtenerSeverity(option)} />;
 };
-/**
- * Genera y descarga un archivo CSV.
- * @param {Array} registros - Los datos a incluir en el archivo CSV.
- * @param {Array} encabezados - Los encabezados para las columnas del CSV.
- * @param {string} nombreArchivo - Nombre del archivo CSV a descargar.
- */
-const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
+const descargarArchivoCSV = (contenidoCSV, nombreArchivo) => {
     try {
-        const csv = parse(registros, { fields: encabezados, header: true, delimiter: ';' });
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const blob = new Blob([contenidoCSV], { type: 'text/csv;charset=utf-8;' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -431,6 +436,17 @@ const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
         console.error('Error al descargar el archivo CSV:', error);
         throw error;
     }
+};
+
+/**
+ * Genera y descarga un archivo CSV.
+ * @param {Array} registros - Los datos a incluir en el archivo CSV.
+ * @param {Array} encabezados - Los encabezados para las columnas del CSV.
+ * @param {string} nombreArchivo - Nombre del archivo CSV a descargar.
+ */
+const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
+    const csv = parse(registros, { fields: encabezados, header: true, delimiter: ';' });
+    descargarArchivoCSV(csv, nombreArchivo);
 };
 
 /**
@@ -543,7 +559,7 @@ export {
     comprobarImagen, manejarCambioImagen, templateGenerico, ErrorDetail,
     botonesDeAccionTemplate, eliminarDialogFooter, Header, dialogFooter,
     EliminarDialog, filtroActivoSnTemplate, opcionesActivoSnTemplate,
-    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog,
+    descargarArchivoCSV, generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog,
     formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
     obtenerTodosLosPermisos,
 

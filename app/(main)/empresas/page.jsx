@@ -10,24 +10,25 @@ const Empresa = () => {
     const columnas = [
         { campo: 'codigo', header: intl.formatMessage({ id: 'Código' }), tipo: 'string' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },      
+        { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
         { campo: 'logo', header: intl.formatMessage({ id: 'Logo' }), tipo: 'imagen' },
         { campo: 'imagen', header: intl.formatMessage({ id: 'Imagen' }), tipo: 'imagen' },
     ]
-    
+
     return (
         <div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Empresas' })}
                 getRegistros={getEmpresas}
                 getRegistrosCount={getEmpresasCount}
-                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                 controlador={"Empresas"}
                 empresaId={null}
                 editarComponente={<EditarEmpresa />}
                 seccion={"Empresas"}
                 columnas={columnas}
                 deleteRegistro={deleteEmpresa}
+                importarTabla="empresa"
             />
         </div>
     );

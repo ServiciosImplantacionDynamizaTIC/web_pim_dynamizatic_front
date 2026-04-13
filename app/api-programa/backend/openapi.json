@@ -3849,6 +3849,78 @@
         "operationId": "EmpresaController.find"
       }
     },
+    "/exportacion/{tabla}/plantilla/{tipo}": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "descargarPlantillaTabla",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve la plantilla CSV para insertar o actualizar",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "tipo",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ImportacionExportacionController.descargarPlantillaTabla"
+      }
+    },
+    "/exportacion/{tabla}/todo": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "descargarTodoTabla",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve todos los registros exportables de la tabla",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ImportacionExportacionController.descargarTodoTabla"
+      }
+    },
     "/files/table/{empresaId}/{tabla}/{tablaId}": {
       "delete": {
         "x-controller-name": "FileUploadController",
@@ -4984,6 +5056,200 @@
           "required": true
         },
         "operationId": "FileUploadController.imageUpload"
+      }
+    },
+    "/importacion/{tabla}/foreign-keys": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "obtenerForeignKeysTabla",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve las foreign keys de la tabla y las opciones para pintar los desplegables",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "campo": {
+                        "type": "string"
+                      },
+                      "tablaReferenciada": {
+                        "type": "string"
+                      },
+                      "columnaReferenciada": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "label": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ImportacionExportacionController.obtenerForeignKeysTabla"
+	   
+	  
+											  
+			  
+													 
+													  
+				 
+								 
+		  
+					  
+				  
+																				  
+						
+						   
+						   
+								  
+				 
+			   
+			 
+		   
+		  
+					   
+		   
+							
+						 
+					   
+							  
+			  
+							
+			
+		   
+						   
+						 
+					   
+							  
+			  
+							
+		   
+		  
+																	  
+	   
+	  
+								  
+			  
+													 
+												 
+				 
+								 
+		  
+					  
+				  
+																				  
+						
+						   
+						   
+								  
+				 
+			   
+			 
+		   
+		  
+					   
+		   
+							
+						 
+					   
+							  
+			  
+							
+		   
+		  
+																 
+      }
+    },
+    "/importacion/{tabla}": {
+      "post": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "importarTabla",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Importa datos en una tabla a partir de un fichero",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "x-parser": "stream",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "respuestas": {
+                    "type": "string",
+                    "description": "JSON con los valores de los desplegables"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Fichero CSV y respuestas del formulario dinámico",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "ImportacionExportacionController.importarTabla"
       }
     },
     "/limpiaLog": {
@@ -14694,6 +14960,46 @@
         "operationId": "UsuariosController.count"
       }
     },
+		
+	  
+			  
+			  
+	 
+		 
+	
+	   
+	  
+			  
+	  
+		   
+		 
+		  
+	 
+	  
+	
+	 
+	
+	  
+	   
+		 
+	 
+	   
+		
+	
+   
+	
+	 
+	
+  
+	  
+	
+	 
+	   
+  
+	
+			   
+	
+   
     "/usuarios/login": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -14753,6 +15059,28 @@
         "operationId": "UsuariosController.login"
       }
     },
+		  
+	 
+			  
+				
+	 
+		 
+	
+	   
+	  
+							
+	  
+		   
+		 
+		  
+	 
+	  
+	
+	 
+	
+					
+	
+   
     "/usuarios/recuperarPassword": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -14848,6 +15176,38 @@
         "operationId": "UsuariosController.register"
       }
     },
+		  
+	 
+			  
+			
+	 
+		 
+	
+	   
+	  
+						 
+	  
+		 
+		 
+		  
+	 
+	  
+	
+	 
+	
+		
+	 
+		 
+	   
+		
+		 
+	 
+	   
+	 
+	
+				
+	
+   
     "/usuarios/validarCodigoRecuperacion/{codigoRecuperacion}": {
       "get": {
         "x-controller-name": "UsuariosController",

@@ -19,14 +19,15 @@ const Idioma = () => {
                 headerCrud={intl.formatMessage({ id: 'Idiomas' })}
                 getRegistros={getIdiomas}
                 getRegistrosCount={getIdiomasCount}
-                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                 controlador={"Idiomas"}
                 empresaId={null}
                 editarComponente={<EditarIdioma />}
                 columnas={columnas}
+                importarTabla="idioma"
                 deleteRegistro={deleteIdioma}
-                validarEliminar={{ campo: 'nombre', valores: ['Español', 'Inglés'] }} // No permitir eliminar estos idiomas
-                validarEditar={{ campo: 'nombre', valores: ['Español', 'Inglés'] }} // No permitir editar estos idiomas
+                validarEliminar={{ campo: 'nombre', valores: ['Español', 'Inglés'] }}
+                validarEditar={{ campo: 'nombre', valores: ['Español', 'Inglés'] }}
             />
         </div>
     );
