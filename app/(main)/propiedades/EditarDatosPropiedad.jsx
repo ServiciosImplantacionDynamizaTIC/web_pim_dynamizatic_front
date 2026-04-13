@@ -22,6 +22,7 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
     
     const tiposDato = [
         { label: 'Texto', value: 'texto' },
+        { label: 'Textarea', value: 'textarea' },
         { label: 'Número', value: 'numero' },
         { label: 'Fecha', value: 'fecha' },
         { label: 'Booleano', value: 'booleano' },
@@ -65,8 +66,8 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
             atributoActualizado.valoresPermitidos = '';
         }
         
-        // Si no es número, texto o booleano, limpiar unidad de medida
-        if (nuevoTipoDato !== 'numero' && nuevoTipoDato !== 'texto' && nuevoTipoDato !== 'booleano') {
+        // Si no es número, texto, textarea o booleano, limpiar unidad de medida
+        if (nuevoTipoDato !== 'numero' && nuevoTipoDato !== 'texto' && nuevoTipoDato !== 'textarea' && nuevoTipoDato !== 'booleano') {
             atributoActualizado.unidadMedida = '';
         }
         
@@ -74,7 +75,7 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
     };
 
     const mostrarCamposValores = atributo.tipoDato === 'lista' || atributo.tipoDato === 'multiselect';
-    const mostrarUnidadMedida = atributo.tipoDato === 'numero' || atributo.tipoDato === 'texto' || atributo.tipoDato === 'booleano';
+    const mostrarUnidadMedida = atributo.tipoDato === 'numero' || atributo.tipoDato === 'texto' || atributo.tipoDato === 'textarea' || atributo.tipoDato === 'booleano';
 
     return (
         <>

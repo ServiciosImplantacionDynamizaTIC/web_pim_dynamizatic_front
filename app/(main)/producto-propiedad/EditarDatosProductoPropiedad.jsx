@@ -14,7 +14,7 @@ const EditarDatosProductoPropiedad = ({ productoPropiedad, setProductoPropiedad,
     
     const [productos, setProductos] = useState([]);
     const [propiedades, setPropiedades] = useState([]);
-    const [atributosCompletos, setPropiedadesCompletos] = useState([]);
+    const [propiedadesCompletos, setPropiedadesCompletos] = useState([]);
     const [cargandoProductos, setCargandoProductos] = useState(false);
     const [cargandoPropiedades, setCargandoPropiedades] = useState(false);
 
@@ -82,20 +82,20 @@ const EditarDatosProductoPropiedad = ({ productoPropiedad, setProductoPropiedad,
                 setPropiedadesCompletos(data);
                 
                 // Filtrar propiedades ya usados para este producto (excepto el actual si estamos editando)
-                let atributosDisponibles = data;
+                let propiedadesDisponibles = data;
                 if (rowData && idProducto) {
-                    const atributosUsados = rowData
+                    const propiedadesUsadas = rowData
                         .filter(registro => registro.productoId === idProducto && registro.id !== productoPropiedad?.id)
-                        .map(registro => registro.atributoId);
+                        .map(registro => registro.propiedadId);
                     
-                    atributosDisponibles = data.filter(atributo => !atributosUsados.includes(atributo.id));
+                    propiedadesDisponibles = data.filter(propiedad => !propiedadesUsadas.includes(propiedad.id));
                 }
                 
-                const atributosFormateados = atributosDisponibles.map(atributo => ({
-                    label: atributo.nombre,
-                    value: atributo.id
+                const propiedadesFormateadas = propiedadesDisponibles.map(propiedad => ({
+                    label: propiedad.nombre,
+                    value: propiedad.id
                 }));
-                setPropiedades(atributosFormateados);
+                setPropiedades(propiedadesFormateadas);
                 
             } catch (error) {
                 console.error('Error cargando propiedades:', error);
@@ -135,14 +135,14 @@ const EditarDatosProductoPropiedad = ({ productoPropiedad, setProductoPropiedad,
     };
 
     const manejarCambioPropiedad = (e) => {
-        const atributoId = e.value;
-        const atributoSeleccionado = atributosCompletos.find(atributo => atributo.id === atributoId);
+        const propiedadId = e.value;
+        const propiedadSeleccionada = propiedadesCompletos.find(propiedad => propiedad.id === propiedadId);
         
         setProductoPropiedad(prev => ({ 
             ...prev, 
-            atributoId: atributoId,
-            // Si el atributo tiene una unidad por defecto, usarla
-            unidad: atributoSeleccionado?.unidadMedida || prev?.unidad || ''
+            propiedadId: propiedadId,
+            // Si la propiedad tiene una unidad por defecto, usarla
+            unidad: propiedadSeleccionada?.unidadMedida || prev?.unidad || ''
         }));
     };
 
@@ -191,18 +191,18 @@ const EditarDatosProductoPropiedad = ({ productoPropiedad, setProductoPropiedad,
                 <div className="formgrid grid">
                     
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="atributoId"><b>{intl.formatMessage({ id: 'Propiedad' })} *</b></label>
+                        <label htmlFor="propiedadId"><b>{intl.formatMessage({ id: 'Propiedad' })} *</b></label>
                         <Dropdown
-                            inputId="atributoId"
-                            value={productoPropiedad?.atributoId}
+                            inputId="propiedadId"
+                            value={productoPropiedad?.propiedadId}
                             options={propiedades}
                             onChange={manejarCambioPropiedad}
-                            placeholder={cargandoPropiedades ? intl.formatMessage({ id: 'Cargando propiedades...' }) : intl.formatMessage({ id: 'Seleccione un atributo' })}
+                            placeholder={cargandoPropiedades ? intl.formatMessage({ id: 'Cargando propiedades...' }) : intl.formatMessage({ id: 'Seleccione una propiedad' })}
                             disabled={!editable || estadoGuardando || cargandoPropiedades}
                             loading={cargandoPropiedades}
                             filter
                             showClear
-                            className={(!productoPropiedad?.atributoId) ? 'p-invalid' : ''}
+                            className={(!productoPropiedad?.propiedadId) ? 'p-invalid' : ''}
                         />
                     </div>
                     

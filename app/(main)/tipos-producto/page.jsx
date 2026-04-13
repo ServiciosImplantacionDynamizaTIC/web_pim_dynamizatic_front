@@ -50,22 +50,22 @@ const TiposProducto = () => {
                 throw new Error('No se pudo obtener el ID del tipo de producto clonado');
             }
 
-            // 2. Obtener y clonar los propiedades asociados (tipo_producto_atributo_detalle)
+            // 2. Obtener y clonar los propiedades asociados (tipo_producto_propiedad_detalle)
             const filtroPropiedades = JSON.stringify({
                 where: { and: { tipoProductoId: tipoOrigen.id } }
             });
-            const atributosDetalle = await getTipoProductoPropiedadDetalles(filtroPropiedades);
-            let atributosClonados = 0;
+            const propiedadesDetalle = await getTipoProductoPropiedadDetalles(filtroPropiedades);
+            let propiedadesClonadas = 0;
 
-            if (atributosDetalle && atributosDetalle.length > 0) {
-                const promesasPropiedades = atributosDetalle.map(detalle =>
+            if (propiedadesDetalle && propiedadesDetalle.length > 0) {
+                const promesasPropiedades = propiedadesDetalle.map(detalle =>
                     postTipoProductoPropiedadDetalle({
                         tipoProductoId: nuevoTipoId,
-                        atributoId: detalle.id,
+                        propiedadId: detalle.id,
                     })
                 );
                 await Promise.all(promesasPropiedades);
-                atributosClonados = atributosDetalle.length;
+                propiedadesClonadas = propiedadesDetalle.length;
             }
 
             // 3. Obtener y clonar los multimedia asociados (tipo_producto_multimedia_detalle)
@@ -202,7 +202,7 @@ const TiposProducto = () => {
                         empresaId: usuarioSesion?.empresaId,
                         nombre: "",
                         descripcion: "",
-                        atributosIds: [],
+                        propiedadesIds: [],
                         multimediasIds: [],
                         activoSn: 'S'
                     }} />}

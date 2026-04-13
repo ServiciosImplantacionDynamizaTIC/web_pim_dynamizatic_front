@@ -18,8 +18,13 @@ export const getPropiedad = async (id) => {
 }
 
 export const postPropiedad = async (objPropiedad) => {
-    const { data: dataPropiedad } = await apiPropiedad.propiedadControllerCreate(objPropiedad)
-    return dataPropiedad
+    try {
+        const { data: dataPropiedad } = await apiPropiedad.propiedadControllerCreate(objPropiedad)
+        return dataPropiedad
+    } catch (error) {
+        console.error('Error en postPropiedad:', error);
+        throw error;
+    }
 }
 
 export const deletePropiedad = async (idPropiedad) => {

@@ -19,7 +19,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
         empresaId: usuarioSesion?.empresaId,
         nombre: "",
         descripcion: "",
-        atributosIds: [],
+        propiedadesIds: [],
         multimediasIds: []
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -39,7 +39,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     empresaId: usuarioSesion?.empresaId,
                     nombre: "",
                     descripcion: "",
-                    atributosIds: [],
+                    propiedadesIds: [],
                     multimediasIds: []
                 };
                 setTipoProducto(registroReset);
@@ -95,7 +95,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                         nombre: tipoProducto.nombre.trim(),
                         activoSn: tipoProducto.activoSn || 'S',
                         descripcion: tipoProducto.descripcion?.trim() || null,
-                        atributosIds: tipoProducto.atributosIds || [],
+                        propiedadesIds: tipoProducto.propiedadesIds || [],
                         multimediasIds: tipoProducto.multimediasIds || []
                     };
                     resultado = await patchTipoProducto(idEditarTipo, tipoProductoData);
@@ -111,7 +111,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     // Guardar órdenes de propiedades modificados
                     if (tipoProducto._atributosOrdenModificados) {
                         const promesasPropiedades = Object.entries(tipoProducto._atributosOrdenModificados).map(
-                            ([atributoId, orden]) => patchPropiedad(parseInt(atributoId), { orden })
+                            ([propiedadId, orden]) => patchPropiedad(parseInt(propiedadId), { orden })
                         );
                         await Promise.all(promesasPropiedades);
                     }
@@ -170,7 +170,7 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
             empresaId: usuarioSesion?.empresaId,
             nombre: "",
             descripcion: "",
-            atributosIds: [],
+            propiedadesIds: [],
             multimediasIds: []
         };
         setTipoProducto(registroReset);

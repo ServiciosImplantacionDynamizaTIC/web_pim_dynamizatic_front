@@ -44,7 +44,7 @@ const PropiedadCrud = ({ tipoDePropiedad = 'atributo' }) => {
 
     // Antes de eliminar, se comprueba que la propiedad no tenga valores asignados a productos
     const eliminarPropiedadConValidacion = async (id) => {
-        const filtro = JSON.stringify({ where: { and: { atributoId: id } } });
+        const filtro = JSON.stringify({ where: { and: { propiedadId: id } } });
         const productosPropiedad = await getProductosPropiedad(filtro);
         if (productosPropiedad && productosPropiedad.length > 0) {
             const tieneValor = productosPropiedad.some(productoPropiedad => productoPropiedad.valor !== null && productoPropiedad.valor !== undefined && productoPropiedad.valor !== '');

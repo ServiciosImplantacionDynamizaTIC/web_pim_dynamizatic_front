@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -24,12 +24,20 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const [multimedias, setMultimedias] = useState([]);
     const [cargandoPropiedades, setCargandoPropiedades] = useState(false);
     const [cargandoMultimedias, setCargandoMultimedias] = useState(false);
-    const [atributosSeleccionados, setPropiedadesSeleccionados] = useState(tipoProducto?.atributosIds || []);
+    const [atributosSeleccionados, setAtributosSeleccionados] = useState([]);
+    const [camposDinamicosSeleccionados, setCamposDinamicosSeleccionados] = useState([]);
     const [multimediasSeleccionados, setMultimediasSeleccionados] = useState(tipoProducto?.multimediasIds || []);
     const [datosInicializeados, setDatosInicializeados] = useState(false);
+    const [propiedadesInicializados, setPropiedadesInicializados] = useState(false);
     const [gruposOrdenModificados, setGruposOrdenModificados] = useState({});
     const [atributosOrdenModificados, setPropiedadesOrdenModificados] = useState({});
     const [multimediasOrdenModificados, setMultimediasOrdenModificados] = useState({});
+
+    // Filtrar propiedades y grupos por tipo
+    const atributos = useMemo(() => propiedades.filter(p => p.tipoDePropiedad === 'atributo'), [propiedades]);
+    const camposDinamicos = useMemo(() => propiedades.filter(p => p.tipoDePropiedad === 'campo_dinamico'), [propiedades]);
+    const gruposAtributos = useMemo(() => gruposPropiedades.filter(g => g.tipoDeGrupoPropiedad === 'grupo_atributos'), [gruposPropiedades]);
+    const gruposCamposDinamicos = useMemo(() => gruposPropiedades.filter(g => g.tipoDeGrupoPropiedad === 'grupo_campos_dinamicos'), [gruposPropiedades]);
 
     // Cargar propiedades y sus grupos de la empresa
     useEffect(() => {
@@ -70,7 +78,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     // Cargar propiedades seleccionados por defecto desde la tabla de detalle
     useEffect(() => {
         const cargarPropiedadesSeleccionados = async () => {
-            if (!isEdit || !idTipo || !tipoProducto?.id || datosInicializeados) return;
+            if (!isEdit || !idTipo || !tipoProducto?.id || propiedadesInicializados || propiedades.length === 0) return;
             
             try {
                 const filtro = JSON.stringify({
@@ -83,18 +91,23 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                 
                 const detalles = await getTipoProductoPropiedadDetalles(filtro);
                 if (detalles && detalles.length > 0) {
-                    const atributosIds = detalles.map(detalle => detalle.id);
-                    setPropiedadesSeleccionados(atributosIds);
+                    const propiedadIds = detalles.map(detalle => detalle.id);
+                    const atributosSet = new Set(propiedades.filter(p => p.tipoDePropiedad === 'atributo').map(p => p.id));
+                    const camposSet = new Set(propiedades.filter(p => p.tipoDePropiedad === 'campo_dinamico').map(p => p.id));
+                    
+                    setAtributosSeleccionados(propiedadIds.filter(id => atributosSet.has(id)));
+                    setCamposDinamicosSeleccionados(propiedadIds.filter(id => camposSet.has(id)));
                 }
+                setPropiedadesInicializados(true);
             } catch (error) {
                 console.error('Error cargando propiedades seleccionados:', error);
             }
         };
 
-        if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id) {
+        if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id && propiedades.length > 0) {
             cargarPropiedadesSeleccionados();
         }
-    }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id, datosInicializeados]);
+    }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id, propiedadesInicializados, propiedades]);
 
     // Cargar multimedia de la empresa
     useEffect(() => {
@@ -161,13 +174,13 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     useEffect(() => {
         setTipoProducto(prev => ({
             ...prev,
-            atributosIds: atributosSeleccionados,
+            propiedadesIds: [...atributosSeleccionados, ...camposDinamicosSeleccionados],
             multimediasIds: multimediasSeleccionados,
             _gruposOrdenModificados: gruposOrdenModificados,
             _atributosOrdenModificados: atributosOrdenModificados,
             _multimediasOrdenModificados: multimediasOrdenModificados
         }));
-    }, [atributosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados]);
+    }, [atributosSeleccionados, camposDinamicosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados]);
 
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;
@@ -196,11 +209,11 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         setGruposOrdenModificados(prev => ({ ...prev, [grupoId]: nuevoOrden }));
     };
 
-    const manejarOrdenPropiedad = (atributoId, nuevoOrden) => {
+    const manejarOrdenPropiedad = (propiedadId, nuevoOrden) => {
         setPropiedades(prev => prev.map(a =>
-            a.id === atributoId ? { ...a, orden: nuevoOrden } : a
+            a.id === propiedadId ? { ...a, orden: nuevoOrden } : a
         ));
-        setPropiedadesOrdenModificados(prev => ({ ...prev, [atributoId]: nuevoOrden }));
+        setPropiedadesOrdenModificados(prev => ({ ...prev, [propiedadId]: nuevoOrden }));
     };
 
     const renderItemMultimedia = (multimedia) => (
@@ -299,26 +312,44 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                 <Fieldset legend={intl.formatMessage({ id: 'Información de los registros asociados' })} collapsed={false} toggleable>
                     <div className="mt-4">
                         <TabView scrollable>
-                            <TabPanel header={`${intl.formatMessage({ id: 'Propiedades' })} (${atributosSeleccionados.length})`}>
-                                {/* <Fieldset legend={intl.formatMessage({ id: 'Propiedades Asociados' })} collapsed={false} toggleable> */}
+                            <TabPanel header={`${intl.formatMessage({ id: 'Atributos' })} (${atributosSeleccionados.length})`}>
                                     <ListaCheckboxAgrupada
-                                        items={propiedades}
-                                        grupos={gruposPropiedades}
+                                        items={atributos}
+                                        grupos={gruposAtributos}
                                         seleccionados={atributosSeleccionados}
-                                        onSeleccionChange={setPropiedadesSeleccionados}
+                                        onSeleccionChange={setAtributosSeleccionados}
                                         grupoIdField="grupoPropiedadId"
                                         cargando={cargandoPropiedades}
                                         editable={editable}
                                         disabled={estadoGuardando}
                                         renderItem={renderItemPropiedad}
-                                        textoVacio={intl.formatMessage({ id: 'No hay propiedades disponibles en su empresa' })}
-                                        titulo={intl.formatMessage({ id: 'Seleccione los propiedades que pertenecen a este tipo de producto' })}
+                                        textoVacio={intl.formatMessage({ id: 'No hay atributos disponibles en su empresa' })}
+                                        titulo={intl.formatMessage({ id: 'Seleccione los atributos que pertenecen a este tipo de producto' })}
                                         prefixId="atributo"
                                         mostrarOrden={editable}
                                         onOrdenGrupoChange={manejarOrdenGrupoPropiedad}
                                         onOrdenItemChange={manejarOrdenPropiedad}
                                     />
-                                {/* </Fieldset> */}
+                            </TabPanel>
+
+                            <TabPanel header={`${intl.formatMessage({ id: 'Campos Dinámicos' })} (${camposDinamicosSeleccionados.length})`}>
+                                    <ListaCheckboxAgrupada
+                                        items={camposDinamicos}
+                                        grupos={gruposCamposDinamicos}
+                                        seleccionados={camposDinamicosSeleccionados}
+                                        onSeleccionChange={setCamposDinamicosSeleccionados}
+                                        grupoIdField="grupoPropiedadId"
+                                        cargando={cargandoPropiedades}
+                                        editable={editable}
+                                        disabled={estadoGuardando}
+                                        renderItem={renderItemPropiedad}
+                                        textoVacio={intl.formatMessage({ id: 'No hay campos dinámicos disponibles en su empresa' })}
+                                        titulo={intl.formatMessage({ id: 'Seleccione los campos dinámicos que pertenecen a este tipo de producto' })}
+                                        prefixId="campo-dinamico"
+                                        mostrarOrden={editable}
+                                        onOrdenGrupoChange={manejarOrdenGrupoPropiedad}
+                                        onOrdenItemChange={manejarOrdenPropiedad}
+                                    />
                             </TabPanel>
 
                             <TabPanel header={`${intl.formatMessage({ id: 'Multimedia' })} (${multimediasSeleccionados.length})`}>

@@ -246,10 +246,18 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                         idProducto={idEditar}
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Propiedades del Producto' })}>
+                                    <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
                                         <ProductoPropiedad
                                         idProducto={idEditar}
                                         tipoProductoId={producto?.tipoProductoId}
+                                        tipoDePropiedad="atributo"
+                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                    </TabPanel>
+                                    <TabPanel header={intl.formatMessage({ id: 'Campos Dinámicos del Producto' })}>
+                                        <ProductoPropiedad
+                                        idProducto={idEditar}
+                                        tipoProductoId={producto?.tipoProductoId}
+                                        tipoDePropiedad="campo_dinamico"
                                         estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Multimedia del Producto' })}>

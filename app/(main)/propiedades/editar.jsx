@@ -93,13 +93,13 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                 });
 
                 const existentes = await gePropiedades(filtro);
-                const duplicado = existentes.find(a => a.id !== atributo.id);
+                const duplicado = existentes.find(a => a.id !== atributo.id && a.nombre.trim().toLowerCase() === atributo.nombre.trim().toLowerCase());
 
                 if (duplicado) {
                     toast.current?.show({
                         severity: 'error',
                         summary: 'ERROR',
-                        detail: intl.formatMessage({ id: 'Ya existe un atributo con ese nombre dentro del grupo de propiedades.' }),
+                        detail: intl.formatMessage({ id: 'Ya existe un registro con ese nombre dentro del mismo grupo.' }),
                         life: 5000,
                     });
                     return false;

@@ -20,11 +20,33 @@ import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { InputTextarea } from "primereact/inputtextarea";
 
-const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }) => {
+/**
+ * ProductoPropiedad — Componente genérico para gestionar propiedades de un producto.
+ *
+ * Recibe `tipoDePropiedad` ('atributo' | 'campo_dinamico') para filtrar
+ * y gestionar solo las propiedades del tipo correspondiente.
+ * Cada instancia tiene su propio botón de guardar y validación independiente.
+ */
+const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, tipoDePropiedad = 'atributo' }) => {
     const intl = useIntl();
     const toast = useRef(null);
+
+    const esAtributo = tipoDePropiedad === 'atributo';
+    const tipoGrupoCorrespondiente = esAtributo ? 'grupo_atributos' : 'grupo_campos_dinamicos';
+    const tituloSeccion = esAtributo
+        ? intl.formatMessage({ id: 'Atributos del Producto' })
+        : intl.formatMessage({ id: 'Campos Dinámicos del Producto' });
+    const textoVacio = esAtributo
+        ? intl.formatMessage({ id: 'No hay atributos definidos para este tipo de producto' })
+        : intl.formatMessage({ id: 'No hay campos dinámicos definidos para este tipo de producto' });
+    const textoGuardar = esAtributo
+        ? intl.formatMessage({ id: 'Guardar Atributos' })
+        : intl.formatMessage({ id: 'Guardar Campos Dinámicos' });
+    const textoGuardadoOk = esAtributo
+        ? intl.formatMessage({ id: 'Atributos guardados correctamente' })
+        : intl.formatMessage({ id: 'Campos dinámicos guardados correctamente' });
     
-    const [atributosDefinidos, setPropiedadesDefinidos] = useState([]);
+    const [propiedadesDefinidas, setPropiedadesDefinidas] = useState([]);
     const [gruposPropiedades, setGruposPropiedades] = useState([]);
     const [valoresPropiedades, setValoresPropiedades] = useState({});
     const [cargando, setCargando] = useState(true);
@@ -41,43 +63,55 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
             try {
                 const usuarioSesion = getUsuarioSesion();
 
+                // Cargar todas las propiedades del tipo de producto desde la vista
                 const filtroTipoProducto = JSON.stringify({
                     where: { and: { tipoProductoId: tipoProductoId }},
                     order: 'orden ASC'
                 });
 
+                // Cargar valores ya guardados para este producto
                 const filtroProductoPropiedades = JSON.stringify({
                     where: { and: { productoId: idProducto }},
                     order: 'ordenEnGrupo ASC'
                 });
 
+                // Cargar solo los grupos del tipo correspondiente
                 const filtroGrupos = JSON.stringify({
                     where: {
                         and: {
                             empresaId: usuarioSesion?.empresaId,
-                            activoSn: 'S'
+                            activoSn: 'S',
+                            tipoDeGrupoPropiedad: tipoGrupoCorrespondiente
                         }
                     },
                     order: 'orden ASC'
                 });
 
-                const [atributosOrdenados, valoresData, gruposData] = await Promise.all([
+                const [todasPropiedades, valoresData, gruposData] = await Promise.all([
                     getTipoProductoPropiedadDetalles(filtroTipoProducto),
                     getProductosPropiedad(filtroProductoPropiedades),
                     getGrupoPropiedades(filtroGrupos)
                 ]);
 
-                setPropiedadesDefinidos(atributosOrdenados);
+                // Filtrar propiedades que pertenecen a grupos del tipo correspondiente
+                const grupoIdsSet = new Set(gruposData.map(g => g.id));
+                const propiedadesFiltradas = todasPropiedades.filter(p => grupoIdsSet.has(p.grupoPropiedadId));
+
+                setPropiedadesDefinidas(propiedadesFiltradas);
                 setGruposPropiedades(gruposData);
 
+                // Mapear valores existentes (solo los que corresponden a propiedades filtradas)
+                const propiedadIdsSet = new Set(propiedadesFiltradas.map(p => p.id));
                 const valoresMap = {};
                 valoresData.forEach(valor => {
-                    valoresMap[valor.atributoId] = {
-                        id: valor.id,
-                        valor: valor.valor,
-                        unidad: valor.unidad,
-                        ordenEnGrupo: valor.ordenEnGrupo
-                    };
+                    if (propiedadIdsSet.has(valor.propiedadId)) {
+                        valoresMap[valor.propiedadId] = {
+                            id: valor.id,
+                            valor: valor.valor,
+                            unidad: valor.unidad,
+                            ordenEnGrupo: valor.ordenEnGrupo
+                        };
+                    }
                 });
                 setValoresPropiedades(valoresMap);
                 
@@ -95,21 +129,21 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
         };
 
         cargarDatos();
-    }, [idProducto]);
+    }, [idProducto, tipoProductoId, tipoDePropiedad]);
 
-    const actualizarValorPropiedad = (atributoId, campo, valor) => {
+    const actualizarValorPropiedad = (propiedadId, campo, valor) => {
         setValoresPropiedades(prev => ({
             ...prev,
-            [atributoId]: {
-                ...prev[atributoId],
+            [propiedadId]: {
+                ...prev[propiedadId],
                 [campo]: valor
             }
         }));
         // Limpiar error de validación al modificar el valor
-        if (campo === 'valor' && erroresValidacion.has(atributoId)) {
+        if (campo === 'valor' && erroresValidacion.has(propiedadId)) {
             setErroresValidacion(prev => {
                 const nuevo = new Set(prev);
-                nuevo.delete(atributoId);
+                nuevo.delete(propiedadId);
                 return nuevo;
             });
         }
@@ -197,6 +231,19 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
                     />
                 );
 
+            case 'textarea':
+                return (
+                    <InputTextarea
+                        value={valorActual.valor || ''}
+                        onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.target.value)}
+                        placeholder={intl.formatMessage({ id: 'Ingrese el texto' })}
+                        disabled={deshabilitado}
+                        rows={4}
+                        autoResize
+                        className="w-full"
+                    />
+                );
+
             default:
                 return (
                     <InputTextarea
@@ -215,7 +262,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
         const errores = new Set();
         const camposFaltantes = [];
 
-        atributosDefinidos.forEach(atributo => {
+        propiedadesDefinidas.forEach(atributo => {
             if (atributo.obligatorioSn === 'S') {
                 const valor = valoresPropiedades[atributo.id]?.valor;
                 const vacio = valor === undefined || valor === null || valor.toString().trim() === '';
@@ -271,15 +318,18 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
         setGuardando(true);
         const usuario = getUsuarioSesion();
 
+        // Solo guardar valores de las propiedades que pertenecen a este tipo
+        const propiedadIdsSet = new Set(propiedadesDefinidas.map(p => p.id));
+
         try {
             const promesasGuardado = [];
 
-            for (const [atributoId, valores] of Object.entries(valoresPropiedades)) {
-                // Solo guardar si hay un valor
-                if (valores.valor !== undefined && valores.valor !== null && valores.valor.toString().trim() !== '') {
+            for (const [propiedadId, valores] of Object.entries(valoresPropiedades)) {
+                // Solo guardar si pertenece a este tipo y tiene valor
+                if (propiedadIdsSet.has(parseInt(propiedadId)) && valores.valor !== undefined && valores.valor !== null && valores.valor.toString().trim() !== '') {
                     const datosPropiedad = {
                         productoId: idProducto,
-                        atributoId: parseInt(atributoId),
+                        propiedadId: parseInt(propiedadId),
                         valor: valores.valor.toString(),
                         unidad: valores.unidad || '',
                         ordenEnGrupo: valores.ordenEnGrupo || 0,
@@ -300,22 +350,26 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
             toast.current?.show({
                 severity: 'success',
                 summary: intl.formatMessage({ id: 'Éxito' }),
-                detail: intl.formatMessage({ id: 'Propiedades guardados correctamente' }),
+                detail: textoGuardadoOk,
                 life: 3000,
             });
 
+            // Recargar valores guardados para este producto (solo los de este tipo)
             const filtroProductoPropiedades = JSON.stringify({
-                where: { productoId: idProducto }
+                where: { and: { productoId: idProducto } },
+                order: 'ordenEnGrupo ASC'
             });
             const valoresData = await getProductosPropiedad(filtroProductoPropiedades);
             const valoresMap = {};
             valoresData.forEach(valor => {
-                valoresMap[valor.atributoId] = {
-                    id: valor.id,
-                    valor: valor.valor,
-                    unidad: valor.unidad,
-                    ordenEnGrupo: valor.ordenEnGrupo
-                };
+                if (propiedadIdsSet.has(valor.propiedadId)) {
+                    valoresMap[valor.propiedadId] = {
+                        id: valor.id,
+                        valor: valor.valor,
+                        unidad: valor.unidad,
+                        ordenEnGrupo: valor.ordenEnGrupo
+                    };
+                }
             });
             setValoresPropiedades(valoresMap);
 
@@ -332,15 +386,15 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
         }
     };
 
-    // Agrupar propiedades por grupo y ordenar por ordenEnGrupo
-    const atributosAgrupados = useMemo(() => {
+    // Agrupar propiedades por grupo y ordenar
+    const propiedadesAgrupadas = useMemo(() => {
         const mapa = new Map();
 
         gruposPropiedades.forEach(grupo => {
             mapa.set(grupo.id, { grupo, items: [] });
         });
 
-        atributosDefinidos.forEach(atributo => {
+        propiedadesDefinidas.forEach(atributo => {
             const grupoId = atributo.grupoPropiedadId;
             if (grupoId && mapa.has(grupoId)) {
                 mapa.get(grupoId).items.push(atributo);
@@ -352,11 +406,10 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
             }
         });
 
-        const sinGrupo = atributosDefinidos.filter(a => !a.grupoPropiedadId);
+        const sinGrupo = propiedadesDefinidas.filter(a => !a.grupoPropiedadId);
 
         const gruposConItems = Array.from(mapa.values()).filter(g => g.items.length > 0);
 
-        // Ordenar grupos por su campo orden
         gruposConItems.sort((a, b) => {
             const ordenA = a.grupo.orden ?? Number.MAX_SAFE_INTEGER;
             const ordenB = b.grupo.orden ?? Number.MAX_SAFE_INTEGER;
@@ -364,10 +417,6 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
             return (a.grupo.nombre || '').localeCompare(b.grupo.nombre || '');
         });
 
-        // Ordenar ítems dentro de cada grupo:
-        // 1. Items sin orden asignado (ordenEnGrupo=0 o undefined) van PRIMERO, ordenados por atributo.orden
-        // 2. Items con orden asignado (ordenEnGrupo>0) van DESPUÉS, ordenados por ordenEnGrupo
-        // 3. Si NINGUNO tiene orden asignado, se mantiene el orden por defecto (atributo.orden)
         const ordenarItems = (arr) => {
             arr.sort((a, b) => {
                 const ordenEnGrupoA = valoresPropiedades[a.id]?.ordenEnGrupo;
@@ -376,7 +425,6 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
                 const tieneOrdenA = ordenEnGrupoA && ordenEnGrupoA > 0;
                 const tieneOrdenB = ordenEnGrupoB && ordenEnGrupoB > 0;
 
-                // Ambos sin orden: ordenar por atributo.orden (orden por defecto)
                 if (!tieneOrdenA && !tieneOrdenB) {
                     const ordenAttrA = a.orden ?? Number.MAX_SAFE_INTEGER;
                     const ordenAttrB = b.orden ?? Number.MAX_SAFE_INTEGER;
@@ -384,11 +432,9 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
                     return (a.nombre || '').localeCompare(b.nombre || '');
                 }
 
-                // Sin orden va primero que con orden
                 if (!tieneOrdenA) return -1;
                 if (!tieneOrdenB) return 1;
 
-                // Ambos con orden: ordenar por ordenEnGrupo
                 if (ordenEnGrupoA !== ordenEnGrupoB) return ordenEnGrupoA - ordenEnGrupoB;
                 return (a.nombre || '').localeCompare(b.nombre || '');
             });
@@ -398,7 +444,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
         ordenarItems(sinGrupo);
 
         return { gruposOrdenados: gruposConItems, sinGrupo };
-    }, [atributosDefinidos, gruposPropiedades, valoresPropiedades, intl]);
+    }, [propiedadesDefinidas, gruposPropiedades, valoresPropiedades, intl]);
 
     const renderPropiedadCard = (atributoDetalle) => {
         const valorActual = valoresPropiedades[atributoDetalle.id] || {};
@@ -483,50 +529,46 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto }
         return <div className="text-center p-4">{intl.formatMessage({ id: 'Seleccione un producto' })}</div>;
     }
 
-    if (!atributosDefinidos.length) {
+    if (!propiedadesDefinidas.length) {
         return (
-            <Card title={intl.formatMessage({ id: 'Propiedades del Producto' })}>
-                <div className="text-center p-4">
-                    {intl.formatMessage({ id: 'No hay propiedades definidos para este tipo de producto' })}
-                </div>
-            </Card>
+            <div className="text-center p-4 text-gray-500">
+                {textoVacio}
+            </div>
         );
     }
 
     return (
         <div>
             <Toast ref={toast} />
-            <Card title={intl.formatMessage({ id: 'Propiedades del Producto' })}>
-                {atributosAgrupados.gruposOrdenados.map(renderGrupoPropiedades)}
+            {propiedadesAgrupadas.gruposOrdenados.map(renderGrupoPropiedades)}
 
-                {atributosAgrupados.sinGrupo.length > 0 && (
-                    <Fieldset
-                        legend={`${intl.formatMessage({ id: 'Sin grupo' })} (${atributosAgrupados.sinGrupo.length})`}
-                        collapsed={false}
-                        toggleable
-                        className="mb-3"
-                    >
-                        <div className="formgrid grid">
-                            {atributosAgrupados.sinGrupo.map(renderPropiedadCard)}
-                        </div>
-                    </Fieldset>
-                )}
-
-                {estoyEditandoProducto && (
-                    <div className="flex justify-content-end mt-4">
-                        <Button
-                            label={guardando ? 
-                                `${intl.formatMessage({ id: 'Guardando' })}...` : 
-                                intl.formatMessage({ id: 'Guardar Propiedades' })
-                            }
-                            icon={guardando ? "pi pi-spin pi-spinner" : "pi pi-save"}
-                            onClick={guardarPropiedades}
-                            disabled={guardando}
-                            className="p-button-primary"
-                        />
+            {propiedadesAgrupadas.sinGrupo.length > 0 && (
+                <Fieldset
+                    legend={`${intl.formatMessage({ id: 'Sin grupo' })} (${propiedadesAgrupadas.sinGrupo.length})`}
+                    collapsed={false}
+                    toggleable
+                    className="mb-3"
+                >
+                    <div className="formgrid grid">
+                        {propiedadesAgrupadas.sinGrupo.map(renderPropiedadCard)}
                     </div>
-                )}
-            </Card>
+                </Fieldset>
+            )}
+
+            {estoyEditandoProducto && (
+                <div className="flex justify-content-end mt-4">
+                    <Button
+                        label={guardando ? 
+                            `${intl.formatMessage({ id: 'Guardando' })}...` : 
+                            textoGuardar
+                        }
+                        icon={guardando ? "pi pi-spin pi-spinner" : "pi pi-save"}
+                        onClick={guardarPropiedades}
+                        disabled={guardando}
+                        className="p-button-primary"
+                    />
+                </div>
+            )}
         </div>
     );
 };

@@ -82,13 +82,13 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
             });
 
             const existentes = await getGrupoPropiedades(filtro);
-            const duplicado = existentes.find(g => g.id !== grupoPropiedad.id);
+            const duplicado = existentes.find(g => g.id !== grupoPropiedad.id && g.nombre.trim().toLowerCase() === grupoPropiedad.nombre.trim().toLowerCase());
 
             if (duplicado) {
                 toast.current?.show({
                     severity: 'error',
                     summary: 'ERROR',
-                    detail: intl.formatMessage({ id: 'Ya existe un Grupo de Propiedades con el mismo nombre, asigna uno diferente' }),
+                    detail: intl.formatMessage({ id: 'Ya existe un Grupo con el mismo nombre, asigna uno diferente' }),
                     life: 5000,
                 });
                 return false;

@@ -13,7 +13,7 @@ const EditarProductoPropiedad = ({ idEditar: idEditarPropiedad, setIdEditar: set
     
     const [productoPropiedad, setProductoPropiedad] = useState(emptyRegistro || {
         productoId: null,
-        atributoId: null,
+        propiedadId: null,
         valor: "",
         unidad: "",
         ordenEnGrupo: 0
@@ -35,7 +35,7 @@ const EditarProductoPropiedad = ({ idEditar: idEditarPropiedad, setIdEditar: set
 
     const validaciones = async () => {
         const validaProducto = productoPropiedad.productoId === undefined || productoPropiedad.productoId === null || productoPropiedad.productoId === "";
-        const validaPropiedad = productoPropiedad.atributoId === undefined || productoPropiedad.atributoId === null || productoPropiedad.atributoId === "";
+        const validaPropiedad = productoPropiedad.propiedadId === undefined || productoPropiedad.propiedadId === null || productoPropiedad.propiedadId === "";
         const validaValor = productoPropiedad.valor === undefined || productoPropiedad.valor === null || productoPropiedad.valor.trim() === "";
         
         if (validaProducto) {
@@ -78,7 +78,7 @@ const EditarProductoPropiedad = ({ idEditar: idEditarPropiedad, setIdEditar: set
                 
                 const productoPropiedadData = {
                     productoId: productoPropiedad.productoId,
-                    atributoId: productoPropiedad.atributoId,
+                    propiedadId: productoPropiedad.propiedadId,
                     valor: productoPropiedad.valor,
                     unidad: productoPropiedad.unidad || null,
                     ordenEnGrupo: productoPropiedad.ordenEnGrupo || 0,
@@ -128,7 +128,7 @@ const EditarProductoPropiedad = ({ idEditar: idEditarPropiedad, setIdEditar: set
         // Usar el emptyRegistro si está disponible, o crear uno nuevo manteniendo el idProducto
         const registroReset = emptyRegistro || {
             productoId: idProducto || null,
-            atributoId: null,
+            propiedadId: null,
             valor: "",
             unidad: "",
             ordenEnGrupo: 0
