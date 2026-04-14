@@ -10,15 +10,19 @@ import { InputSwitch } from 'primereact/inputswitch';
 import { FileUpload } from 'primereact/fileupload';
 import { Image } from 'primereact/image';
 import { Toast } from 'primereact/toast';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
 import { getTiposProducto, getTipoProducto } from "@/app/api-endpoints/tipo_producto";
+import { getProductosPropiedad, deleteProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
+import { patchProducto } from "@/app/api-endpoints/producto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import { devuelveBasePath } from "../../utility/Utils";
 
-const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEditandoProducto, listaTipoArchivos }) => {
+const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEditandoProducto, listaTipoArchivos, setRegistroResult }) => {
     const intl = useIntl();
     const toast = useRef(null);
     
@@ -31,6 +35,8 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
     const [cargandoEstados, setCargandoEstados] = useState(false);
     const [cargandoTiposProducto, setCargandoTiposProducto] = useState(false);
     const [imagenPrincipalPreview, setImagenPrincipalPreview] = useState(null);
+    const [dialogoCambioTipo, setDialogoCambioTipo] = useState({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
+    const [eliminandoPropiedades, setEliminandoPropiedades] = useState(false);
 
     // Cargar categorías
     useEffect(() => {
@@ -233,6 +239,97 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
         }
     }, [producto?.imagenPrincipal]);
 
+    /**
+     * Maneja el cambio de tipo de producto.
+     * Si el producto ya tiene valores en producto_propiedad, muestra un Dialog
+     * advirtiendo que se borrarán todos los valores de atributos y campos dinámicos.
+     */
+    const manejarCambioTipoProducto = async (nuevoTipoId) => {
+        // Si es producto nuevo (sin ID) o no tiene tipo asignado, cambiar directamente
+        if (!producto?.id || !producto?.tipoProductoId) {
+            setProducto({ ...producto, tipoProductoId: nuevoTipoId });
+            return;
+        }
+
+        // Si selecciona el mismo tipo, no hacer nada
+        if (nuevoTipoId === producto.tipoProductoId) return;
+
+        try {
+            // Consultar si existen registros en producto_propiedad para este producto
+            const filtro = JSON.stringify({
+                where: { and: { productoId: producto.id } }
+            });
+            const registros = await getProductosPropiedad(filtro);
+
+            // Verificar si alguno tiene valor asignado
+            const tieneValores = registros?.some(r =>
+                r.valor !== null && r.valor !== undefined && r.valor.toString().trim() !== ''
+            );
+
+            if (tieneValores) {
+                // Mostrar Dialog de confirmación
+                setDialogoCambioTipo({
+                    visible: true,
+                    nuevoTipoId,
+                    registrosAEliminar: registros
+                });
+                return;
+            }
+
+            // Si no hay valores pero sí hay registros vacíos, limpiarlos silenciosamente
+            if (registros?.length > 0) {
+                await Promise.all(registros.map(r => deleteProductoPropiedad(r.id)));
+            }
+
+            setProducto({ ...producto, tipoProductoId: nuevoTipoId });
+        } catch (error) {
+            console.error('Error verificando propiedades del producto:', error);
+            // En caso de error, permitir el cambio para no bloquear
+            setProducto({ ...producto, tipoProductoId: nuevoTipoId });
+        }
+    };
+
+    const confirmarCambioTipoProducto = async () => {
+        setEliminandoPropiedades(true);
+        try {
+            // 1. Borrar todos los registros de producto_propiedad para este producto
+            await Promise.all(
+                dialogoCambioTipo.registrosAEliminar.map(r => deleteProductoPropiedad(r.id))
+            );
+
+            // 2. Persistir el nuevo tipo de producto en BD
+            await patchProducto(producto.id, { tipoProductoId: dialogoCambioTipo.nuevoTipoId });
+
+            // 3. Actualizar el estado local
+            setProducto({ ...producto, tipoProductoId: dialogoCambioTipo.nuevoTipoId });
+
+            // 4. Notificar al Crud para que recargue la tabla
+            setRegistroResult?.(`tipo_cambiado_${Date.now()}`);
+
+            toast.current?.show({
+                severity: 'success',
+                summary: intl.formatMessage({ id: 'Tipo de producto cambiado' }),
+                detail: intl.formatMessage({ id: 'Se han eliminado los valores de atributos y campos dinámicos anteriores' }),
+                life: 5000,
+            });
+        } catch (error) {
+            console.error('Error eliminando propiedades del producto:', error);
+            toast.current?.show({
+                severity: 'error',
+                summary: 'Error',
+                detail: intl.formatMessage({ id: 'Error al eliminar las propiedades del producto' }),
+                life: 3000,
+            });
+        } finally {
+            setEliminandoPropiedades(false);
+            setDialogoCambioTipo({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
+        }
+    };
+
+    const cancelarCambioTipoProducto = () => {
+        setDialogoCambioTipo({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
+    };
+
     return (
         <>
             <Toast ref={toast} />
@@ -379,7 +476,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             id="tipoProducto"
                             value={producto?.tipoProductoId || null}
                             options={tiposProducto}
-                            onChange={(e) => setProducto({ ...producto, tipoProductoId: e.value })}
+                            onChange={(e) => manejarCambioTipoProducto(e.value)}
                             placeholder={intl.formatMessage({ id: 'Selecciona un tipo de producto' })}
                             disabled={estadoGuardando || cargandoTiposProducto}
                             // showClear
@@ -463,6 +560,50 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                     </div>
                 </Fieldset>
             )}
+
+            {/* Dialog de confirmación para cambio de tipo de producto */}
+            <Dialog
+                visible={dialogoCambioTipo.visible}
+                onHide={cancelarCambioTipoProducto}
+                header={intl.formatMessage({ id: 'Cambiar tipo de producto' })}
+                style={{ width: '36rem', maxWidth: '95vw' }}
+                modal
+                closable={!eliminandoPropiedades}
+                footer={
+                    <div className="flex gap-2 justify-content-end">
+                        <Button
+                            label={intl.formatMessage({ id: 'Cancelar' })}
+                            className="p-button-secondary"
+                            onClick={cancelarCambioTipoProducto}
+                            disabled={eliminandoPropiedades}
+                        />
+                        <Button
+                            label={eliminandoPropiedades
+                                ? intl.formatMessage({ id: 'Eliminando...' })
+                                : intl.formatMessage({ id: 'Sí, cambiar tipo de producto' })
+                            }
+                            icon={eliminandoPropiedades ? 'pi pi-spin pi-spinner' : 'pi pi-exclamation-triangle'}
+                            className="p-button-danger"
+                            onClick={confirmarCambioTipoProducto}
+                            disabled={eliminandoPropiedades}
+                        />
+                    </div>
+                }
+            >
+                <div className="flex align-items-center gap-3 mb-3">
+                    <i className="pi pi-exclamation-triangle text-4xl text-orange-500" />
+                    <span className="font-bold text-lg">
+                        {intl.formatMessage({ id: 'Atención: esta acción es irreversible' })}
+                    </span>
+                </div>
+                <p style={{ margin: 0, lineHeight: '1.6' }}>
+                    {intl.formatMessage({ id: 'Este producto ya tiene valores asignados en los campos de Atributos y/o Campos Dinámicos.' })}
+                    {' '}
+                    {intl.formatMessage({ id: 'Si continúa cambiando el tipo de producto, se borrarán todos los valores asignados para atributos y campos dinámicos de este producto.' })}
+                    <br /><br />
+                    <strong>{intl.formatMessage({ id: '¿Desea continuar?' })}</strong>
+                </p>
+            </Dialog>
         </>
     );
 };

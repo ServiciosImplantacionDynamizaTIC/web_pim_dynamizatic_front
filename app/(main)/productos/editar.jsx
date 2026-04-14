@@ -226,6 +226,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                             estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
+                            setRegistroResult={setRegistroResult}
                         />
                         
                         {(idEditar != null && idEditar !== 0) && (
