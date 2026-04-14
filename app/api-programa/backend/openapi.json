@@ -10,6 +10,38 @@
     }
   },
   "paths": {
+    "/archivos/by-url/{urlTexto}": {
+      "delete": {
+        "x-controller-name": "ArchivoController",
+        "x-operation-name": "deleteByUrl",
+        "tags": [
+          "ArchivoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Archivos DELETE by URL success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "urlTexto",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ArchivoController.deleteByUrl"
+      }
+    },
     "/archivos/count": {
       "get": {
         "x-controller-name": "ArchivoController",
@@ -37672,7 +37704,7 @@
   ],
   "servers": [
     {
-      "url": "http://localhost:8000"
+      "url": "/api"
     }
   ]
 }

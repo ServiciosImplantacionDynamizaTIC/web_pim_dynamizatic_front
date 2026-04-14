@@ -19631,6 +19631,43 @@ export const ArchivoControllerApiAxiosParamCreator = function (configuration?: C
         },
         /**
          * 
+         * @param {string} urlTexto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        archivoControllerDeleteByUrl: async (urlTexto: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'urlTexto' is not null or undefined
+            assertParamExists('archivoControllerDeleteByUrl', 'urlTexto', urlTexto)
+            const localVarPath = `/archivos/by-url/{urlTexto}`
+                .replace(`{${"urlTexto"}}`, encodeURIComponent(String(urlTexto)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {ArchivoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19951,6 +19988,16 @@ export const ArchivoControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} urlTexto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async archivoControllerDeleteByUrl(urlTexto: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.archivoControllerDeleteByUrl(urlTexto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {ArchivoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20062,6 +20109,15 @@ export const ArchivoControllerApiFactory = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {string} urlTexto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        archivoControllerDeleteByUrl(urlTexto: string, options?: any): AxiosPromise<any> {
+            return localVarFp.archivoControllerDeleteByUrl(urlTexto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {ArchivoFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -20168,6 +20224,17 @@ export class ArchivoControllerApi extends BaseAPI {
      */
     public archivoControllerDeleteById(id: number, options?: AxiosRequestConfig) {
         return ArchivoControllerApiFp(this.configuration).archivoControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} urlTexto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ArchivoControllerApi
+     */
+    public archivoControllerDeleteByUrl(urlTexto: string, options?: AxiosRequestConfig) {
+        return ArchivoControllerApiFp(this.configuration).archivoControllerDeleteByUrl(urlTexto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

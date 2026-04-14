@@ -30,7 +30,7 @@ export const MensajeExito: React.FC<MensajeExitoProps> = ({
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
 
   const baseDomain = process.env.NEXT_PUBLIC_BASE_DOMAIN || 'pim-dynamizatic.com';
-  const tenantUrl = `https://pim_${tenantData.subdominio}.${baseDomain}`;
+  const tenantUrl = `https://${tenantData.subdominio}.${baseDomain}`;
 
   const handleCopy = async (text: string, item: string) => {
     const success = await copyToClipboard(text);

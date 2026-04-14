@@ -176,10 +176,10 @@ export const generateSubdomainPreview = (subdominio: string, baseDomain?: string
   const domain = baseDomain || process.env.NEXT_PUBLIC_BASE_DOMAIN || 'pim-dynamizatic.com';
   
   if (!subdominio || subdominio.trim() === '') {
-    return `https://pim_[tu-subdominio].${domain}`;
+    return `https://[tu-subdominio].${domain}`;
   }
   
-  return `https://pim_${subdominio}.${domain}`;
+  return `https://${subdominio}.${domain}`;
 };
 
 // ============================================================================
