@@ -15,6 +15,7 @@ import { MultiSelect } from "primereact/multiselect";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { getProducto } from "@/app/api-endpoints/producto";
 import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
+import { getTipoProductoGrupoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_grupo_propiedad_detalle";
 import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
 import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -65,17 +66,15 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
 
                 // Cargar todas las propiedades del tipo de producto desde la vista
                 const filtroTipoProducto = JSON.stringify({
-                    where: { and: { tipoProductoId: tipoProductoId }},
-                    order: 'orden ASC'
+                    where: { and: { tipoProductoId: tipoProductoId }}
                 });
 
                 // Cargar valores ya guardados para este producto
                 const filtroProductoPropiedades = JSON.stringify({
-                    where: { and: { productoId: idProducto }},
-                    order: 'ordenEnGrupo ASC'
+                    where: { and: { productoId: idProducto }}
                 });
 
-                // Cargar solo los grupos del tipo correspondiente
+                // Cargar solo los grupos del tipo correspondiente (alfabético por defecto)
                 const filtroGrupos = JSON.stringify({
                     where: {
                         and: {
@@ -84,21 +83,44 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                             tipoDeGrupoPropiedad: tipoGrupoCorrespondiente
                         }
                     },
-                    order: 'orden ASC'
+                    order: 'nombre ASC'
                 });
 
-                const [todasPropiedades, valoresData, gruposData] = await Promise.all([
+                const [todasPropiedades, valoresData, gruposData, gruposDetalle] = await Promise.all([
                     getTipoProductoPropiedadDetalles(filtroTipoProducto),
                     getProductosPropiedad(filtroProductoPropiedades),
-                    getGrupoPropiedades(filtroGrupos)
+                    getGrupoPropiedades(filtroGrupos),
+                    getTipoProductoGrupoPropiedadDetalles(filtroTipoProducto)
                 ]);
 
                 // Filtrar propiedades que pertenecen a grupos del tipo correspondiente
                 const grupoIdsSet = new Set(gruposData.map(g => g.id));
                 const propiedadesFiltradas = todasPropiedades.filter(p => grupoIdsSet.has(p.grupoPropiedadId));
 
-                setPropiedadesDefinidas(propiedadesFiltradas);
-                setGruposPropiedades(gruposData);
+                // Aplicar órdenes específicos de este tipo de producto a los grupos
+                // (desde tipo_producto_grupo_propiedad_detalle.orden, sin fallback global)
+                const ordenPorGrupo = {};
+                if (gruposDetalle && gruposDetalle.length > 0) {
+                    gruposDetalle.forEach(d => {
+                        if (d.orden !== undefined && d.orden !== null) {
+                            ordenPorGrupo[d.grupoPropiedadId] = d.orden;
+                        }
+                    });
+                }
+                // Grupos: orden per-tipo o null (se ordenará alfabéticamente)
+                const gruposConOrden = gruposData.map(g => ({
+                    ...g,
+                    orden: ordenPorGrupo[g.id] !== undefined ? ordenPorGrupo[g.id] : null
+                }));
+
+                // Solo aseguro que null quede null para el orden alfabético
+                const propiedadesConOrden = propiedadesFiltradas.map(p => ({
+                    ...p,
+                    orden: (p.orden !== undefined && p.orden !== null) ? p.orden : null
+                }));
+
+                setPropiedadesDefinidas(propiedadesConOrden);
+                setGruposPropiedades(gruposConOrden);
 
                 // Mapear valores existentes (solo los que corresponden a propiedades filtradas)
                 const propiedadIdsSet = new Set(propiedadesFiltradas.map(p => p.id));
@@ -410,32 +432,32 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
 
         const gruposConItems = Array.from(mapa.values()).filter(g => g.items.length > 0);
 
+        // Ordenar grupos: por orden per-tipo si existe, si no alfabéticamente
         gruposConItems.sort((a, b) => {
-            const ordenA = a.grupo.orden ?? Number.MAX_SAFE_INTEGER;
-            const ordenB = b.grupo.orden ?? Number.MAX_SAFE_INTEGER;
-            if (ordenA !== ordenB) return ordenA - ordenB;
+            const tieneOrdenA = a.grupo.orden !== null && a.grupo.orden !== undefined;
+            const tieneOrdenB = b.grupo.orden !== null && b.grupo.orden !== undefined;
+
+            if (tieneOrdenA && tieneOrdenB) {
+                if (a.grupo.orden !== b.grupo.orden) return a.grupo.orden - b.grupo.orden;
+                return (a.grupo.nombre || '').localeCompare(b.grupo.nombre || '');
+            }
+            if (tieneOrdenA) return -1;
+            if (tieneOrdenB) return 1;
             return (a.grupo.nombre || '').localeCompare(b.grupo.nombre || '');
         });
 
+        // Ordenar propiedades: por orden per-tipo si existe, si no alfabéticamente
         const ordenarItems = (arr) => {
             arr.sort((a, b) => {
-                const ordenEnGrupoA = valoresPropiedades[a.id]?.ordenEnGrupo;
-                const ordenEnGrupoB = valoresPropiedades[b.id]?.ordenEnGrupo;
+                const tieneOrdenA = a.orden !== null && a.orden !== undefined;
+                const tieneOrdenB = b.orden !== null && b.orden !== undefined;
 
-                const tieneOrdenA = ordenEnGrupoA && ordenEnGrupoA > 0;
-                const tieneOrdenB = ordenEnGrupoB && ordenEnGrupoB > 0;
-
-                if (!tieneOrdenA && !tieneOrdenB) {
-                    const ordenAttrA = a.orden ?? Number.MAX_SAFE_INTEGER;
-                    const ordenAttrB = b.orden ?? Number.MAX_SAFE_INTEGER;
-                    if (ordenAttrA !== ordenAttrB) return ordenAttrA - ordenAttrB;
+                if (tieneOrdenA && tieneOrdenB) {
+                    if (a.orden !== b.orden) return a.orden - b.orden;
                     return (a.nombre || '').localeCompare(b.nombre || '');
                 }
-
-                if (!tieneOrdenA) return -1;
-                if (!tieneOrdenB) return 1;
-
-                if (ordenEnGrupoA !== ordenEnGrupoB) return ordenEnGrupoA - ordenEnGrupoB;
+                if (tieneOrdenA) return -1;
+                if (tieneOrdenB) return 1;
                 return (a.nombre || '').localeCompare(b.nombre || '');
             });
         };

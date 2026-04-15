@@ -2,6 +2,7 @@
 import { deleteTipoProducto, getTiposProducto, getTiposProductoCount, postTipoProducto } from "@/app/api-endpoints/tipo_producto";
 import { getTipoProductoPropiedadDetalles, postTipoProductoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
 import { getTipoProductoMultimediaDetalles, postTipoProductoMultimediaDetalle } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
+import { getTipoProductoGrupoPropiedadDetalles, postTipoProductoGrupoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_grupo_propiedad_detalle";
 import Crud from "../../components/shared/crud";
 import EditarTipoProducto from "./editar";
 import { useIntl } from 'react-intl'
@@ -51,6 +52,7 @@ const TiposProducto = () => {
             }
 
             // 2. Obtener y clonar los propiedades asociados (tipo_producto_propiedad_detalle)
+            // Incluye el orden específico de este tipo de producto
             const filtroPropiedades = JSON.stringify({
                 where: { and: { tipoProductoId: tipoOrigen.id } }
             });
@@ -61,7 +63,8 @@ const TiposProducto = () => {
                 const promesasPropiedades = propiedadesDetalle.map(detalle =>
                     postTipoProductoPropiedadDetalle({
                         tipoProductoId: nuevoTipoId,
-                        propiedadId: detalle.id,
+                        propiedadId: detalle.propiedadId,
+                        orden: detalle.orden,
                     })
                 );
                 await Promise.all(promesasPropiedades);
@@ -86,7 +89,24 @@ const TiposProducto = () => {
                 multimediasClonados = multimediasDetalle.length;
             }
 
-            // 4. Mostrar resumen del clonado
+            // 4. Obtener y clonar los órdenes de grupos (tipo_producto_grupo_propiedad_detalle)
+            const filtroGruposDetalle = JSON.stringify({
+                where: { and: { tipoProductoId: tipoOrigen.id } }
+            });
+            const gruposDetalle = await getTipoProductoGrupoPropiedadDetalles(filtroGruposDetalle);
+
+            if (gruposDetalle && gruposDetalle.length > 0) {
+                const promesasGrupos = gruposDetalle.map(detalle =>
+                    postTipoProductoGrupoPropiedadDetalle({
+                        tipoProductoId: nuevoTipoId,
+                        grupoPropiedadId: detalle.grupoPropiedadId,
+                        orden: detalle.orden,
+                    })
+                );
+                await Promise.all(promesasGrupos);
+            }
+
+            // 5. Mostrar resumen del clonado
             // const detalles = [
             //     `${atributosClonados} ${intl.formatMessage({ id: 'propiedades' })}`,
             //     `${multimediasClonados} ${intl.formatMessage({ id: 'multimedia' })}`,

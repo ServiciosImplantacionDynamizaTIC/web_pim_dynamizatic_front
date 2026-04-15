@@ -15,6 +15,7 @@ import { getProductosPropiedad } from "@/app/api-endpoints/producto_propiedad";
 import { getProductos } from "@/app/api-endpoints/producto";
 import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
 import { getTipoProductoMultimediaDetalles } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
+import { getTipoProductoGrupoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_grupo_propiedad_detalle";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import ListaCheckboxAgrupada from "@/app/components/shared/ListaCheckboxAgrupada";
@@ -44,75 +45,81 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const gruposAtributos = useMemo(() => gruposPropiedades.filter(g => g.tipoDeGrupoPropiedad === 'grupo_atributos'), [gruposPropiedades]);
     const gruposCamposDinamicos = useMemo(() => gruposPropiedades.filter(g => g.tipoDeGrupoPropiedad === 'grupo_campos_dinamicos'), [gruposPropiedades]);
 
-    // Cargar propiedades y sus grupos de la empresa
+    // Cargar propiedades, grupos y sus órdenes 
     useEffect(() => {
-        const cargarPropiedadesYGrupos = async () => {
-            if (!isEdit || !idTipo) return;
-            
+        const cargarTodo = async () => {
+            if (!isEdit || !idTipo || !tipoProducto?.id) return;
+
             setCargandoPropiedades(true);
             try {
                 const filtroActivos = JSON.stringify({
-                    where: {
-                        and: {
-                            empresaId: usuarioSesion?.empresaId,
-                            activoSn: 'S' 
-                        }
-                    },
-                    order: 'orden ASC'
+                    where: { and: { empresaId: usuarioSesion?.empresaId, activoSn: 'S' } },
+                    order: 'nombre ASC'
                 });
-                
-                const [dataPropiedades, dataGrupos] = await Promise.all([
+                const filtroDetalle = JSON.stringify({
+                    where: { and: { tipoProductoId: tipoProducto.id } }
+                });
+
+                // Todo en paralelo: propiedades, grupos y sus órdenes
+                const [dataPropiedades, dataGrupos, detalles, gruposDetalle] = await Promise.all([
                     gePropiedades(filtroActivos),
-                    getGrupoPropiedades(filtroActivos)
+                    getGrupoPropiedades(filtroActivos),
+                    getTipoProductoPropiedadDetalles(filtroDetalle),
+                    getTipoProductoGrupoPropiedadDetalles(filtroDetalle)
                 ]);
-                
-                setPropiedades(dataPropiedades);
-                setGruposPropiedades(dataGrupos);
+
+                // Construir mapa de órdenes para propiedades
+                const ordenPorPropiedad = {};
+                if (detalles && detalles.length > 0) {
+                    detalles.forEach(d => {
+                        if (d.orden !== undefined && d.orden !== null) {
+                            ordenPorPropiedad[d.propiedadId] = d.orden;
+                        }
+                    });
+                }
+
+                // Construir mapa de órdenes para grupos
+                const ordenPorGrupo = {};
+                if (gruposDetalle && gruposDetalle.length > 0) {
+                    gruposDetalle.forEach(d => {
+                        if (d.orden !== undefined && d.orden !== null) {
+                            ordenPorGrupo[d.grupoPropiedadId] = d.orden;
+                        }
+                    });
+                }
+
+                // Aplicar órdenes (o null si no hay) en un único setState
+                setPropiedades(dataPropiedades.map(propiedad => ({
+                    ...propiedad,
+                    orden: ordenPorPropiedad[propiedad.id] !== undefined ? ordenPorPropiedad[propiedad.id] : null
+                })));
+                setGruposPropiedades(dataGrupos.map(grupo => ({
+                    ...grupo,
+                    orden: ordenPorGrupo[grupo.id] !== undefined ? ordenPorGrupo[grupo.id] : null
+                })));
+
+                // Marcar las propiedades seleccionadas para este tipo de producto
+                if (detalles && detalles.length > 0) {
+                    const propiedadIds = detalles.map(d => d.propiedadId);
+                    const atributosSet = new Set(dataPropiedades.filter(propiedad => propiedad.tipoDePropiedad === 'atributo').map(propiedad => propiedad.id));
+                    const camposSet = new Set(dataPropiedades.filter(propiedad => propiedad.tipoDePropiedad === 'campo_dinamico').map(propiedad => propiedad.id));
+                    setAtributosSeleccionados(propiedadIds.filter(id => atributosSet.has(id)));
+                    setCamposDinamicosSeleccionados(propiedadIds.filter(id => camposSet.has(id)));
+                }
+
+                setPropiedadesInicializados(true);
             } catch (error) {
-                console.error('Error cargando propiedades y grupos:', error);
+                console.error('Error cargando propiedades, grupos y órdenes:', error);
             } finally {
                 setCargandoPropiedades(false);
             }
         };
 
-        if (usuarioSesion?.empresaId && isEdit && idTipo) {
-            cargarPropiedadesYGrupos();
+        if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id) {
+            setPropiedadesInicializados(false);
+            cargarTodo();
         }
-    }, [usuarioSesion?.empresaId, isEdit, idTipo]);
-
-    // Cargar propiedades seleccionados por defecto desde la tabla de detalle
-    useEffect(() => {
-        const cargarPropiedadesSeleccionados = async () => {
-            if (!isEdit || !idTipo || !tipoProducto?.id || propiedadesInicializados || propiedades.length === 0) return;
-            
-            try {
-                const filtro = JSON.stringify({
-                    where: {
-                        and: {
-                            tipoProductoId: tipoProducto.id
-                        }
-                    }
-                });
-                
-                const detalles = await getTipoProductoPropiedadDetalles(filtro);
-                if (detalles && detalles.length > 0) {
-                    const propiedadIds = detalles.map(detalle => detalle.id);
-                    const atributosSet = new Set(propiedades.filter(p => p.tipoDePropiedad === 'atributo').map(p => p.id));
-                    const camposSet = new Set(propiedades.filter(p => p.tipoDePropiedad === 'campo_dinamico').map(p => p.id));
-                    
-                    setAtributosSeleccionados(propiedadIds.filter(id => atributosSet.has(id)));
-                    setCamposDinamicosSeleccionados(propiedadIds.filter(id => camposSet.has(id)));
-                }
-                setPropiedadesInicializados(true);
-            } catch (error) {
-                console.error('Error cargando propiedades seleccionados:', error);
-            }
-        };
-
-        if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id && propiedades.length > 0) {
-            cargarPropiedadesSeleccionados();
-        }
-    }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id, propiedadesInicializados, propiedades]);
+    }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id]);
 
     // Cargar multimedia de la empresa
     useEffect(() => {
@@ -177,15 +184,26 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
 
     // Sincronizar selecciones y órdenes con el tipo de producto
     useEffect(() => {
+        // Construir mapa COMPLETO de órdenes de TODAS las propiedades seleccionadas
+        // (no solo las modificadas en esta sesión) para que al guardar no se pierdan
+        const propiedadesOrdenCompleto = {};
+        const selectedIds = new Set([...atributosSeleccionados, ...camposDinamicosSeleccionados]);
+        propiedades.forEach(p => {
+            if (selectedIds.has(p.id) && p.orden !== null && p.orden !== undefined) {
+                propiedadesOrdenCompleto[p.id] = p.orden;
+            }
+        });
+
         setTipoProducto(prev => ({
             ...prev,
             propiedadesIds: [...atributosSeleccionados, ...camposDinamicosSeleccionados],
             multimediasIds: multimediasSeleccionados,
             _gruposOrdenModificados: gruposOrdenModificados,
             _atributosOrdenModificados: atributosOrdenModificados,
-            _multimediasOrdenModificados: multimediasOrdenModificados
+            _multimediasOrdenModificados: multimediasOrdenModificados,
+            _propiedadesOrdenCompleto: propiedadesOrdenCompleto
         }));
-    }, [atributosSeleccionados, camposDinamicosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados]);
+    }, [atributosSeleccionados, camposDinamicosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados, propiedades]);
 
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;

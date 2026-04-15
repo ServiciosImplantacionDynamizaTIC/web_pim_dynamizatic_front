@@ -173,13 +173,13 @@ const ListaCheckboxAgrupada = ({
                             <div className="flex flex-column align-items-center mr-2">
                                 <label className="text-xs font-semibold mb-1">{intl.formatMessage({ id: 'Orden' })}</label>
                                 <InputNumber
-                                    value={item.orden || 0}
-                                    onChange={(e) => onOrdenItemChange?.(item.id, e.value || 0)}
+                                    value={item.orden}
+                                    onChange={(e) => onOrdenItemChange?.(item.id, e.value)}
                                     disabled={isDisabled}
                                     min={0}
                                     max={999}
                                     inputStyle={{ textAlign: 'right', width: '3.5rem' }}
-                                    placeholder="0"
+                                    placeholder=""
                                 />
                             </div>
                             <Divider layout="vertical" className="mx-2" />
@@ -236,13 +236,13 @@ const ListaCheckboxAgrupada = ({
                     <div className="flex flex-column align-items-center">
                         <label className="text-xs font-semibold mb-1">{intl.formatMessage({ id: 'Orden' })}</label>
                         <InputNumber
-                            value={grupo.orden || 0}
-                            onChange={(e) => onOrdenGrupoChange?.(grupo.id, e.value || 0)}
+                            value={grupo.orden}
+                            onChange={(e) => onOrdenGrupoChange?.(grupo.id, e.value)}
                             disabled={isDisabled}
                             min={0}
                             max={999}
                             inputStyle={{ textAlign: 'right', width: '3.5rem' }}
-                            placeholder="0"
+                            placeholder=""
                         />
                     </div>
                 </span>

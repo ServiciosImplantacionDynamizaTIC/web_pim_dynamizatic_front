@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { getTipoProducto, postTipoProducto, patchTipoProducto } from "@/app/api-endpoints/tipo_producto";
-import { patchGrupoPropiedad } from "@/app/api-endpoints/grupo_propiedad";
-import { patchPropiedad } from "@/app/api-endpoints/propiedad";
+import { getTipoProductoPropiedadDetalles, patchTipoProductoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
+import { getTipoProductoGrupoPropiedadDetalles, postTipoProductoGrupoPropiedadDetalle, patchTipoProductoGrupoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_grupo_propiedad_detalle";
 import { patchMultimedia } from "@/app/api-endpoints/multimedia";
 import EditarDatosTipoProducto from "./EditarDatosTipoProducto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
@@ -100,20 +100,61 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     };
                     resultado = await patchTipoProducto(idEditarTipo, tipoProductoData);
 
-                    // Guardar órdenes de grupos de propiedades modificados
-                    if (tipoProducto._gruposOrdenModificados) {
-                        const promesasGrupos = Object.entries(tipoProducto._gruposOrdenModificados).map(
-                            ([grupoId, orden]) => patchGrupoPropiedad(parseInt(grupoId), { orden })
-                        );
-                        await Promise.all(promesasGrupos);
+                    // ── Guardar órdenes de PROPIEDADES en tipo_producto_propiedad_detalle ──
+                    // Los órdenes son por tipo de producto, no globales.
+                    // Usamos _propiedadesOrdenCompleto (mapa COMPLETO de todas las propiedades
+                    // con orden) en vez de solo las modificadas, porque patchTipoProducto
+                    // puede recrear los registros detalle y perder los órdenes previos.
+                    if (tipoProducto._propiedadesOrdenCompleto && Object.keys(tipoProducto._propiedadesOrdenCompleto).length > 0) {
+                        // Obtener los registros detalle actuales (recién recreados por patchTipoProducto)
+                        const filtroDetalles = JSON.stringify({
+                            where: { and: { tipoProductoId: idEditarTipo } }
+                        });
+                        const detallesActuales = await getTipoProductoPropiedadDetalles(filtroDetalles);
+                        
+                        const promesasPropiedades = [];
+                        for (const [propiedadId, orden] of Object.entries(tipoProducto._propiedadesOrdenCompleto)) {
+                            // Buscar por propiedadId (viene de la VIEW)
+                            const detalle = detallesActuales.find(d => d.propiedadId === parseInt(propiedadId));
+                            if (detalle) {
+                                // Usar detalleId (PK real de tipo_producto_propiedad_detalle) para el PATCH
+                                promesasPropiedades.push(
+                                    patchTipoProductoPropiedadDetalle(detalle.detalleId, { orden })
+                                );
+                            }
+                        }
+                        await Promise.all(promesasPropiedades);
                     }
 
-                    // Guardar órdenes de propiedades modificados
-                    if (tipoProducto._atributosOrdenModificados) {
-                        const promesasPropiedades = Object.entries(tipoProducto._atributosOrdenModificados).map(
-                            ([propiedadId, orden]) => patchPropiedad(parseInt(propiedadId), { orden })
-                        );
-                        await Promise.all(promesasPropiedades);
+                    // Guardo el órden de GRUPOS en tipo_producto_grupo_propiedad_detalle
+                    // El ordenamiento se hace para cada tipo de producto Individualmente
+                    if (tipoProducto._gruposOrdenModificados && Object.keys(tipoProducto._gruposOrdenModificados).length > 0) {
+                        // Obtener los registros detalle de grupos actuales
+                        const filtroGruposDetalle = JSON.stringify({
+                            where: { and: { tipoProductoId: idEditarTipo } }
+                        });
+                        const gruposDetalleActuales = await getTipoProductoGrupoPropiedadDetalles(filtroGruposDetalle);
+                        
+                        const promesasGrupos = [];
+                        for (const [grupoId, orden] of Object.entries(tipoProducto._gruposOrdenModificados)) {
+                            const detalle = gruposDetalleActuales.find(d => d.grupoPropiedadId === parseInt(grupoId));
+                            if (detalle) {
+                                // Ya existe el registro, actualizar orden
+                                promesasGrupos.push(
+                                    patchTipoProductoGrupoPropiedadDetalle(detalle.id, { orden })
+                                );
+                            } else {
+                                // No existe, crear nuevo registro
+                                promesasGrupos.push(
+                                    postTipoProductoGrupoPropiedadDetalle({
+                                        tipoProductoId: idEditarTipo,
+                                        grupoPropiedadId: parseInt(grupoId),
+                                        orden
+                                    })
+                                );
+                            }
+                        }
+                        await Promise.all(promesasGrupos);
                     }
 
                     // Guardar órdenes de multimedia modificados
