@@ -19,7 +19,6 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
     const [grupoPropiedad, setGrupoPropiedad] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
-        orden: 0,
         activoSn: "S",
         tipoDeGrupoPropiedad: tipoDeGrupoPropiedad
     });
@@ -119,7 +118,7 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
         if (await validaciones()) {
             let objGuardar = { ...grupoPropiedad };
             const usuarioActual = getUsuarioSesion()?.id;
-            objGuardar['orden'] = objGuardar.orden || 0;
+            delete objGuardar.orden;
 
             if (idEditar === 0) {
                 delete objGuardar.id;
@@ -149,7 +148,6 @@ const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, s
                     id: objGuardar.id,
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
-                    orden: objGuardar.orden || 0,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                     empresaId: getUsuarioSesion()?.empresaId,

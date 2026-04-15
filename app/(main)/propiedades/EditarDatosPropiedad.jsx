@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
-import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
@@ -110,19 +109,6 @@ const EditarDatosPropiedad = ({ atributo, setPropiedad, estadoGuardando, isEdit,
                             className={`${(estadoGuardando && atributo.nombre === "") ? "p-invalid" : ""}`}
                             maxLength={100}
                             disabled={estadoGuardando}
-                        />
-                    </div>
-
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
-                        <InputNumber 
-                            id="orden"
-                            value={atributo.orden || 0}
-                            placeholder={intl.formatMessage({ id: 'Orden de visualización' })}
-                            onValueChange={(e) => setPropiedad({ ...atributo, orden: e.value || 0 })}
-                            disabled={estadoGuardando}
-                            min={0}
-                            inputStyle={{ textAlign: 'right' }}
                         />
                     </div>
 

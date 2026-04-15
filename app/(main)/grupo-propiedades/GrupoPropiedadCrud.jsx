@@ -54,7 +54,6 @@ const GrupoPropiedadCrud = ({ tipoDeGrupoPropiedad = 'grupo_atributos' }) => {
 
     const columnas = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
-        { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'number' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ];
 

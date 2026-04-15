@@ -20611,10 +20611,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -20699,10 +20695,6 @@
           },
           "valoresPermitidos": {
             "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -20795,10 +20787,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -20887,10 +20875,6 @@
           },
           "valoresPermitidos": {
             "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -26913,10 +26897,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -26971,10 +26951,6 @@
           },
           "descripcion": {
             "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -27037,10 +27013,6 @@
             "type": "string",
             "nullable": true
           },
-          "orden": {
-            "type": "number",
-            "nullable": true
-          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -27099,10 +27071,6 @@
           },
           "descripcion": {
             "type": "string",
-            "nullable": true
-          },
-          "orden": {
-            "type": "number",
             "nullable": true
           },
           "activoSn": {
@@ -31951,9 +31919,6 @@
                   "descripcion": {
                     "type": "boolean"
                   },
-                  "orden": {
-                    "type": "boolean"
-                  },
                   "activoSn": {
                     "type": "boolean"
                   },
@@ -31982,7 +31947,6 @@
                     "tipoDeGrupoPropiedad",
                     "nombre",
                     "descripcion",
-                    "orden",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -32055,9 +32019,6 @@
                   "descripcion": {
                     "type": "boolean"
                   },
-                  "orden": {
-                    "type": "boolean"
-                  },
                   "activoSn": {
                     "type": "boolean"
                   },
@@ -32086,7 +32047,6 @@
                     "tipoDeGrupoPropiedad",
                     "nombre",
                     "descripcion",
-                    "orden",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -37313,9 +37273,6 @@
                   "valoresPermitidos": {
                     "type": "boolean"
                   },
-                  "orden": {
-                    "type": "boolean"
-                  },
                   "activoSn": {
                     "type": "boolean"
                   },
@@ -37349,7 +37306,6 @@
                     "obligatorioSn",
                     "multivalorSn",
                     "valoresPermitidos",
-                    "orden",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -37437,9 +37393,6 @@
                   "valoresPermitidos": {
                     "type": "boolean"
                   },
-                  "orden": {
-                    "type": "boolean"
-                  },
                   "activoSn": {
                     "type": "boolean"
                   },
@@ -37473,7 +37426,6 @@
                     "obligatorioSn",
                     "multivalorSn",
                     "valoresPermitidos",
-                    "orden",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",

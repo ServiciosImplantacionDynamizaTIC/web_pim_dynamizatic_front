@@ -27,7 +27,6 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
         obligatorioSn: "N",
         multivalorSn: "N",
         valoresPermitidos: "",
-        orden: 0,
         activoSn: "S",
         tipoDePropiedad: tipoDePropiedad
     });
@@ -130,7 +129,7 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
 
         if (await validaciones()) {
             let objGuardar = { ...atributo };
-            objGuardar['orden'] = objGuardar.orden || 0;
+            delete objGuardar.orden;
             const usuarioActual = getUsuarioSesion()?.id;
             delete objGuardar.grupoPropiedadNombre;
 
@@ -168,7 +167,6 @@ const EditarPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
                     obligatorioSn: objGuardar.obligatorioSn || 'N',
                     multivalorSn: objGuardar.multivalorSn || 'N',
                     valoresPermitidos: objGuardar.valoresPermitidos,
-                    orden: objGuardar.orden || 0,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                     tipoDePropiedad: tipoDePropiedad,

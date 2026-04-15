@@ -3447,12 +3447,6 @@ export interface GrupoPropiedad {
     'descripcion'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof GrupoPropiedad
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof GrupoPropiedad
      */
@@ -3610,12 +3604,6 @@ export interface GrupoPropiedadPartial {
     'descripcion'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof GrupoPropiedadPartial
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof GrupoPropiedadPartial
      */
@@ -3691,12 +3679,6 @@ export interface GrupoPropiedadWithRelations {
      * @memberof GrupoPropiedadWithRelations
      */
     'descripcion'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof GrupoPropiedadWithRelations
-     */
-    'orden'?: number | null;
     /**
      * 
      * @type {string}
@@ -8952,12 +8934,6 @@ export interface NewGrupoPropiedad {
     'descripcion'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof NewGrupoPropiedad
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof NewGrupoPropiedad
      */
@@ -10866,12 +10842,6 @@ export interface NewPropiedad {
      * @memberof NewPropiedad
      */
     'valoresPermitidos'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPropiedad
-     */
-    'orden'?: number | null;
     /**
      * 
      * @type {string}
@@ -15571,12 +15541,6 @@ export interface Propiedad {
     'valoresPermitidos'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof Propiedad
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof Propiedad
      */
@@ -15778,12 +15742,6 @@ export interface PropiedadPartial {
     'valoresPermitidos'?: string | null;
     /**
      * 
-     * @type {number}
-     * @memberof PropiedadPartial
-     */
-    'orden'?: number | null;
-    /**
-     * 
      * @type {string}
      * @memberof PropiedadPartial
      */
@@ -15903,12 +15861,6 @@ export interface PropiedadWithRelations {
      * @memberof PropiedadWithRelations
      */
     'valoresPermitidos'?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof PropiedadWithRelations
-     */
-    'orden'?: number | null;
     /**
      * 
      * @type {string}

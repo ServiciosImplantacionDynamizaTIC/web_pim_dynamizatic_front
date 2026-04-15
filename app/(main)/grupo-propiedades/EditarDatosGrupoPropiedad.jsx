@@ -4,7 +4,6 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import ArchivoMultipleInput from "../../components/shared/archivo_multiple_input";
 import ArchivoInput from "../../components/shared/archivo_input";
-import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl';
 
@@ -70,19 +69,6 @@ const EditarDatosGrupoPropiedad = ({ grupoPropiedad, setGrupoPropiedad, estadoGu
                             className={`${(estadoGuardando && grupoPropiedad.nombre === "") ? "p-invalid" : ""}`}
                             maxLength={100}
                             disabled={estadoGuardando}
-                        />
-                    </div>
-
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
-                        <InputNumber 
-                            id="orden"
-                            value={grupoPropiedad.orden || 0}
-                            placeholder={intl.formatMessage({ id: 'Orden de visualización' })}
-                            onValueChange={(e) => setGrupoPropiedad({ ...grupoPropiedad, orden: e.value || 0 })}
-                            disabled={estadoGuardando}
-                            min={0}
-                            inputStyle={{ textAlign: 'right' }}
                         />
                     </div>
 
