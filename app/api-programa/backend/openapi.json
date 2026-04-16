@@ -3849,16 +3849,16 @@
         "operationId": "EmpresaController.find"
       }
     },
-    "/exportacion/{tabla}/plantilla/{tipo}": {
+    "/exportacion/{tabla}/plantilla-insertar": {
       "get": {
         "x-controller-name": "ImportacionExportacionController",
-        "x-operation-name": "descargarPlantillaTabla",
+        "x-operation-name": "descargarPlantillaInsertarTabla",
         "tags": [
           "ImportacionExportacionController"
         ],
         "responses": {
           "200": {
-            "description": "Devuelve la plantilla CSV para insertar o actualizar",
+            "description": "Plantilla CSV vacia lista para rellenar",
             "content": {
               "text/csv": {
                 "schema": {
@@ -3876,17 +3876,17 @@
               "type": "string"
             },
             "required": true
-          },
-          {
-            "name": "tipo",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+			
+		   
+						   
+						 
+					   
+							  
+			  
+							
           }
         ],
-        "operationId": "ImportacionExportacionController.descargarPlantillaTabla"
+        "operationId": "ImportacionExportacionController.descargarPlantillaInsertarTabla"
       }
     },
     "/exportacion/{tabla}/todo": {
@@ -3898,7 +3898,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Devuelve todos los registros exportables de la tabla",
+            "description": "Todos los registros exportables de la tabla",
             "content": {
               "text/csv": {
                 "schema": {
@@ -5067,7 +5067,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Devuelve las foreign keys de la tabla y las opciones para pintar los desplegables",
+            "description": "FK de la tabla con opciones para los desplegables",
             "content": {
               "application/json": {
                 "schema": {
@@ -5197,6 +5197,84 @@
 																 
       }
     },
+    "/importacion/{tabla}/inicio": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "obtenerInicioImportacion",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Fecha de inicio para una importacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ImportacionExportacionController.obtenerInicioImportacion"
+      }
+    },
+    "/importacion/{tabla}/progreso": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "obtenerProgresoImportacion",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Progreso de una importacion en curso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "fechaInicioImportacion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tipoImportacion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "ImportacionExportacionController.obtenerProgresoImportacion"
+      }
+    },
     "/importacion/{tabla}": {
       "post": {
         "x-controller-name": "ImportacionExportacionController",
@@ -5206,7 +5284,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Importa datos en una tabla a partir de un fichero",
+            "description": "Funcion que importa un CSV a la tabla, haciendo inserts o updates segun el caso",
             "content": {
               "application/json": {
                 "schema": {
@@ -5238,14 +5316,19 @@
                     "format": "binary"
                   },
                   "respuestas": {
-                    "type": "string",
-                    "description": "JSON con los valores de los desplegables"
+                    "type": "string"
+                  },
+                  "tipoImportacion": {
+                    "type": "string"
+                  },
+                  "fechaInicioImportacion": {
+                    "type": "string"
                   }
                 }
               }
             }
           },
-          "description": "Fichero CSV y respuestas del formulario dinámico",
+          "description": "Fichero CSV y respuestas del formulario dinamico",
           "required": true,
           "x-parameter-index": 1
         },
