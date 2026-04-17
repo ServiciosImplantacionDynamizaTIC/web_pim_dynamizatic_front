@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { getTipoProducto, postTipoProducto, patchTipoProducto } from "@/app/api-endpoints/tipo_producto";
 import { getTipoProductoPropiedadDetalles, patchTipoProductoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
 import { getTipoProductoGrupoPropiedadDetalles, postTipoProductoGrupoPropiedadDetalle, patchTipoProductoGrupoPropiedadDetalle } from "@/app/api-endpoints/tipo_producto_grupo_propiedad_detalle";
-import { patchMultimedia } from "@/app/api-endpoints/multimedia";
+import { getTipoProductoMultimediaDetalles, patchTipoProductoMultimediaDetalle } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import EditarDatosTipoProducto from "./EditarDatosTipoProducto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -100,11 +100,8 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                     };
                     resultado = await patchTipoProducto(idEditarTipo, tipoProductoData);
 
-                    // ── Guardar órdenes de PROPIEDADES en tipo_producto_propiedad_detalle ──
-                    // Los órdenes son por tipo de producto, no globales.
-                    // Usamos _propiedadesOrdenCompleto (mapa COMPLETO de todas las propiedades
-                    // con orden) en vez de solo las modificadas, porque patchTipoProducto
-                    // puede recrear los registros detalle y perder los órdenes previos.
+                    // Guardar órdenes de PROPIEDADES en tipo_producto_propiedad_detalle 
+                    // El ordenamiento es por tipo de producto, no global (un mismo atributo puede tener orden diferente en cada tipo de producto)
                     if (tipoProducto._propiedadesOrdenCompleto && Object.keys(tipoProducto._propiedadesOrdenCompleto).length > 0) {
                         // Obtener los registros detalle actuales (recién recreados por patchTipoProducto)
                         const filtroDetalles = JSON.stringify({
@@ -157,11 +154,24 @@ const EditarTipoProducto = ({ idEditar: idEditarTipo, setIdEditar: setIdEditarTi
                         await Promise.all(promesasGrupos);
                     }
 
-                    // Guardar órdenes de multimedia modificados
-                    if (tipoProducto._multimediasOrdenModificados) {
-                        const promesasMultimedias = Object.entries(tipoProducto._multimediasOrdenModificados).map(
-                            ([multimediaId, orden]) => patchMultimedia(parseInt(multimediaId), { orden })
-                        );
+                    // Guardar órdenes de MULTIMEDIA en tipo_producto_multimedia_detalle 
+                    // El ordenamiento es por tipo de producto, no global (mismo patrón que propiedades)
+                    if (tipoProducto._multimediasOrdenCompleto && Object.keys(tipoProducto._multimediasOrdenCompleto).length > 0) {
+                        const filtroMultimediaDetalles = JSON.stringify({
+                            where: { and: { tipoProductoId: idEditarTipo } }
+                        });
+                        const multimediaDetallesActuales = await getTipoProductoMultimediaDetalles(filtroMultimediaDetalles);
+                        
+                        const promesasMultimedias = [];
+                        for (const [multimediaId, orden] of Object.entries(tipoProducto._multimediasOrdenCompleto)) {
+                            // VIEW devuelve multimedia.id como id, necesitamos detalleId para PATCH
+                            const detalle = multimediaDetallesActuales.find(d => d.id === parseInt(multimediaId));
+                            if (detalle) {
+                                promesasMultimedias.push(
+                                    patchTipoProductoMultimediaDetalle(detalle.detalleId, { orden })
+                                );
+                            }
+                        }
                         await Promise.all(promesasMultimedias);
                     }
 

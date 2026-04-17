@@ -10363,6 +10363,309 @@
         "operationId": "ProductoMarketplaceController.find"
       }
     },
+    "/producto-multimedia-tipo-uso/count": {
+      "get": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "count",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMultimediaTipoUso model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoMultimediaTipoUso.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoMultimediaTipoUso>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoMultimediaTipoUsoController.count"
+      }
+    },
+    "/producto-multimedia-tipo-uso/{id}": {
+      "put": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoMultimediaTipoUso PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoMultimediaTipoUso"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoMultimediaTipoUsoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoMultimediaTipoUso PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoMultimediaTipoUsoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoMultimediaTipoUsoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMultimediaTipoUso model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMultimediaTipoUsoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMultimediaTipoUso.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoMultimediaTipoUsoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoMultimediaTipoUso DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoMultimediaTipoUsoController.deleteById"
+      }
+    },
+    "/producto-multimedia-tipo-uso": {
+      "post": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "create",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMultimediaTipoUso model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMultimediaTipoUso"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProductoMultimediaTipoUso"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoMultimediaTipoUsoController.create"
+      },
+      "patch": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoMultimediaTipoUso PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoMultimediaTipoUso.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoMultimediaTipoUso>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoMultimediaTipoUsoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoMultimediaTipoUsoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ProductoMultimediaTipoUsoController",
+        "x-operation-name": "find",
+        "tags": [
+          "ProductoMultimediaTipoUsoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ProductoMultimediaTipoUso model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoMultimediaTipoUsoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoMultimediaTipoUso.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoMultimediaTipoUsoController.find"
+      }
+    },
     "/producto-multimedias/count": {
       "get": {
         "x-controller-name": "ProductoMultimediaController",
@@ -19199,6 +19502,10 @@
           "multimediaId": {
             "type": "number",
             "nullable": false
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -19219,6 +19526,10 @@
           "multimediaId": {
             "type": "number",
             "nullable": false
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -19243,6 +19554,10 @@
           "multimediaId": {
             "type": "number",
             "nullable": false
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
@@ -19267,6 +19582,10 @@
           "multimediaId": {
             "type": "number",
             "nullable": false
+          },
+          "orden": {
+            "type": "number",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -21845,9 +22164,13 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUsoMultimediaId": {
-            "type": "number",
-            "nullable": false
+          "multimediaUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "multimediaNombre": {
+            "type": "string",
+            "nullable": true
           },
           "ordenEnGrupo": {
             "type": "number",
@@ -21875,7 +22198,6 @@
         "required": [
           "productoId",
           "multimediaId",
-          "tipoUsoMultimediaId",
           "usuarioCreacion"
         ],
         "additionalProperties": false
@@ -21893,9 +22215,13 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUsoMultimediaId": {
-            "type": "number",
-            "nullable": false
+          "multimediaUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "multimediaNombre": {
+            "type": "string",
+            "nullable": true
           },
           "ordenEnGrupo": {
             "type": "number",
@@ -21923,7 +22249,6 @@
         "required": [
           "productoId",
           "multimediaId",
-          "tipoUsoMultimediaId",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -21945,9 +22270,13 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUsoMultimediaId": {
-            "type": "number",
-            "nullable": false
+          "multimediaUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "multimediaNombre": {
+            "type": "string",
+            "nullable": true
           },
           "ordenEnGrupo": {
             "type": "number",
@@ -21975,7 +22304,6 @@
         "required": [
           "productoId",
           "multimediaId",
-          "tipoUsoMultimediaId",
           "usuarioCreacion"
         ],
         "additionalProperties": false,
@@ -21997,9 +22325,13 @@
             "type": "number",
             "nullable": false
           },
-          "tipoUsoMultimediaId": {
-            "type": "number",
-            "nullable": false
+          "multimediaUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "multimediaNombre": {
+            "type": "string",
+            "nullable": true
           },
           "ordenEnGrupo": {
             "type": "number",
@@ -22026,6 +22358,133 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<ProductoMultimedia>"
+      },
+      "ProductoMultimediaTipoUso": {
+        "title": "ProductoMultimediaTipoUso",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoMultimediaId",
+          "tipoUsoMultimediaId"
+        ],
+        "additionalProperties": false
+      },
+      "NewProductoMultimediaTipoUso": {
+        "title": "NewProductoMultimediaTipoUso",
+        "type": "object",
+        "description": "(tsType: Omit<ProductoMultimediaTipoUso, 'id'>, schemaOptions: { title: 'NewProductoMultimediaTipoUso', exclude: [ 'id' ] })",
+        "properties": {
+          "productoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoMultimediaId",
+          "tipoUsoMultimediaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ProductoMultimediaTipoUso, 'id'>"
+      },
+      "ProductoMultimediaTipoUsoWithRelations": {
+        "title": "ProductoMultimediaTipoUsoWithRelations",
+        "type": "object",
+        "description": "(tsType: ProductoMultimediaTipoUsoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoMultimediaId",
+          "tipoUsoMultimediaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ProductoMultimediaTipoUsoWithRelations"
+      },
+      "ProductoMultimediaTipoUsoPartial": {
+        "title": "ProductoMultimediaTipoUsoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ProductoMultimediaTipoUso>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "productoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tipoUsoMultimediaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ProductoMultimediaTipoUso>"
       },
       "ProductoMarketplace": {
         "title": "ProductoMarketplace",
@@ -36292,6 +36751,161 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ProductoMarketplace>"
       },
+      "ProductoMultimediaTipoUso.Filter": {
+        "type": "object",
+        "title": "ProductoMultimediaTipoUso.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoMultimediaId": {
+                    "type": "boolean"
+                  },
+                  "tipoUsoMultimediaId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoMultimediaId",
+                    "tipoUsoMultimediaId",
+                    "fechaCreacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoMultimediaTipoUso.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoMultimediaTipoUso>"
+      },
+      "ProductoMultimediaTipoUso.Filter1": {
+        "type": "object",
+        "title": "ProductoMultimediaTipoUso.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ProductoMultimediaTipoUso.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoMultimediaId": {
+                    "type": "boolean"
+                  },
+                  "tipoUsoMultimediaId": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoMultimediaId",
+                    "tipoUsoMultimediaId",
+                    "fechaCreacion",
+                    "fechaModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoMultimediaTipoUso.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoMultimediaTipoUso>"
+      },
       "ProductoMultimedia.Filter": {
         "type": "object",
         "title": "ProductoMultimedia.Filter",
@@ -36336,7 +36950,10 @@
                   "multimediaId": {
                     "type": "boolean"
                   },
-                  "tipoUsoMultimediaId": {
+                  "multimediaUrl": {
+                    "type": "boolean"
+                  },
+                  "multimediaNombre": {
                     "type": "boolean"
                   },
                   "ordenEnGrupo": {
@@ -36365,7 +36982,8 @@
                     "id",
                     "productoId",
                     "multimediaId",
-                    "tipoUsoMultimediaId",
+                    "multimediaUrl",
+                    "multimediaNombre",
                     "ordenEnGrupo",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -36432,7 +37050,10 @@
                   "multimediaId": {
                     "type": "boolean"
                   },
-                  "tipoUsoMultimediaId": {
+                  "multimediaUrl": {
+                    "type": "boolean"
+                  },
+                  "multimediaNombre": {
                     "type": "boolean"
                   },
                   "ordenEnGrupo": {
@@ -36461,7 +37082,8 @@
                     "id",
                     "productoId",
                     "multimediaId",
-                    "tipoUsoMultimediaId",
+                    "multimediaUrl",
+                    "multimediaNombre",
                     "ordenEnGrupo",
                     "fechaCreacion",
                     "fechaModificacion",
@@ -38640,6 +39262,9 @@
                   },
                   "multimediaId": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -38651,7 +39276,8 @@
                   "enum": [
                     "id",
                     "tipoProductoId",
-                    "multimediaId"
+                    "multimediaId",
+                    "orden"
                   ],
                   "example": "id"
                 },
@@ -38712,6 +39338,9 @@
                   },
                   "multimediaId": {
                     "type": "boolean"
+                  },
+                  "orden": {
+                    "type": "boolean"
                   }
                 },
                 "additionalProperties": false
@@ -38723,7 +39352,8 @@
                   "enum": [
                     "id",
                     "tipoProductoId",
-                    "multimediaId"
+                    "multimediaId",
+                    "orden"
                   ],
                   "example": "id"
                 },

@@ -3,16 +3,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { useIntl } from 'react-intl';
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { Card } from "primereact/card";
-import { InputNumber } from "primereact/inputnumber";
+import { Dialog } from "primereact/dialog";
 import { FileUpload } from "primereact/fileupload";
 import { Image } from "primereact/image";
-import { Dropdown } from "primereact/dropdown";
+import { MultiSelect } from "primereact/multiselect";
 import { getTipoProductoMultimediaDetalles } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import { getProductosMultimedia, postProductoMultimedia, patchProductoMultimedia, deleteProductoMultimedia } from "@/app/api-endpoints/producto_multimedia";
 import { postSubirImagen } from "@/app/api-endpoints/ficheros";
 import { getTiposUsoMultimedia } from "@/app/api-endpoints/tipo_uso_multimedia";
-import { getUsuarioSesion } from "@/app/utility/Utils";
+import { getProductoMultimediaTiposUso, postProductoMultimediaTipoUso, deleteProductoMultimediaTipoUso } from "@/app/api-endpoints/producto_multimedia_tipo_uso";
+import { getUsuarioSesion, devuelveBasePath } from "@/app/utility/Utils";
 
 const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto }) => {
     const intl = useIntl();
@@ -24,7 +24,74 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
     const [cargando, setCargando] = useState(true);
     const [guardando, setGuardando] = useState(false);
     const [subiendo, setSubiendo] = useState({});
+    const [dialogoTipoUso, setDialogoTipoUso] = useState(false);
+    const [dialogoEliminar, setDialogoEliminar] = useState({ visible: false, multimediaDetalleId: null, nombreArchivo: '' });
+    const [erroresValidacion, setErroresValidacion] = useState(new Set());
 
+    /**
+     * Devuelve el icono PrimeIcons correspondiente al tipo de multimedia.
+     */
+    const obtenerIconoMultimedia = (tipo) => {
+        switch (tipo?.toLowerCase()) {
+            case 'imagen': return 'pi pi-image';
+            case 'video': return 'pi pi-video';
+            case 'audio': return 'pi pi-volume-up';
+            case 'documento': return 'pi pi-file';
+            default: return 'pi pi-image';
+        }
+    };
+
+    /**
+     * Resuelve la URL de un archivo multimedia para mostrar en el navegador.
+     * Las URLs blob (previsualización local) y absolutas se devuelven tal cual.
+     * Las rutas relativas del servidor se prefijan con el basePath del backend.
+     */
+    const resolverUrlMultimedia = (url) => {
+        if (!url) return null;
+        if (url.startsWith('blob:') || url.startsWith('http://') || url.startsWith('https://')) return url;
+        return devuelveBasePath() + url;
+    };
+
+    /**
+     * Función reutilizable para cargar los valores de producto_multimedia desde BD
+     * y sus tipos de uso asociados. Devuelve un mapa indexado por multimediaId.
+     */
+    const cargarValoresDesdeDB = async () => {
+        const filtroProductoMultimedia = JSON.stringify({
+            where: { and: { productoId: idProducto } },
+            order: 'ordenEnGrupo ASC'
+        });
+        const registros = await getProductosMultimedia(filtroProductoMultimedia);
+
+        // Cargar tipos de uso asignados para cada producto_multimedia
+        const ids = registros.map(r => r.id).filter(Boolean);
+        let tiposUsoPorRegistro = {};
+        if (ids.length > 0) {
+            const filtroTiposUso = JSON.stringify({
+                where: { and: { productoMultimediaId: { inq: ids } } }
+            });
+            const tiposUsoAsignados = await getProductoMultimediaTiposUso(filtroTiposUso);
+            tiposUsoAsignados.forEach(tu => {
+                if (!tiposUsoPorRegistro[tu.productoMultimediaId]) {
+                    tiposUsoPorRegistro[tu.productoMultimediaId] = [];
+                }
+                tiposUsoPorRegistro[tu.productoMultimediaId].push(tu.tipoUsoMultimediaId);
+            });
+        }
+
+        const mapa = {};
+        registros.forEach(registro => {
+            mapa[registro.multimediaId] = {
+                id: registro.id,
+                archivo: registro.multimediaNombre,
+                url: registro.multimediaUrl,
+                tipoUsoMultimediaIds: tiposUsoPorRegistro[registro.id] || []
+            };
+        });
+        return mapa;
+    };
+
+    // Carga inicial de datos
     useEffect(() => {
         const cargarDatos = async () => {
             if (!idProducto || !tipoProductoId) {
@@ -33,43 +100,21 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
             }
 
             try {
-                // Cargamos los tipos de uso multimedia
+                // Cargar tipos de uso multimedia (catálogo)
                 const tiposUsoData = await getTiposUsoMultimedia();
-                const tiposUsoFormateados = tiposUsoData.map(tipo => ({
-                    label: tipo.nombre,
-                    value: tipo.id
-                }));
-                setTiposUso(tiposUsoFormateados);
+                setTiposUso(tiposUsoData.map(tipo => ({ label: tipo.nombre, value: tipo.id })));
                 
-                // Obtenemos los tipos de multimedia definidos para el tipo de producto
+                // Cargar multimedia definidos para este tipo de producto (plantilla)
                 const filtroTipoProducto = JSON.stringify({
-                    where: { and: { tipoProductoId: tipoProductoId }},
+                    where: { and: { tipoProductoId: tipoProductoId } },
                     order: 'orden ASC'
                 });
-                const multimediaOrdenados = await getTipoProductoMultimediaDetalles(filtroTipoProducto);
+                const multimediaPlantilla = await getTipoProductoMultimediaDetalles(filtroTipoProducto);
+                setMultimediaDefinidos(multimediaPlantilla);
                 
-                setMultimediaDefinidos(multimediaOrdenados);
-                
-                // Obtenemos los multimedia actuales del producto
-                const filtroProductoMultimedia = JSON.stringify({
-                    where: { and: { productoId: idProducto }},
-                    order: 'ordenEnGrupo ASC'
-                });
-                const valoresData = await getProductosMultimedia(filtroProductoMultimedia);
-                
-                // Creamos un objeto con los valores indexados por multimediaId
-                const valoresMap = {};
-                valoresData.forEach(valor => {
-                    valoresMap[valor.multimediaId] = {
-                        id: valor.id,
-                        archivo: valor.multimediaNombre,
-                        url: valor.multimediaUrl,
-                        tipoUsoMultimediaId: valor.tipoUsoMultimediaId,
-                        ordenEnGrupo: valor.ordenEnGrupo || 0
-                    };
-                });
-                
-                setValoresMultimedia(valoresMap);
+                // Cargar valores existentes del producto
+                const mapa = await cargarValoresDesdeDB();
+                setValoresMultimedia(mapa);
                 
             } catch (error) {
                 console.error('Error cargando datos:', error);
@@ -87,7 +132,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         cargarDatos();
     }, [idProducto, tipoProductoId]);
 
-    // Limpiar URLs de objeto al desmontar el componente
+    // Limpiar URLs blob al desmontar el componente
     useEffect(() => {
         return () => {
             Object.values(valoresMultimedia).forEach(valor => {
@@ -108,48 +153,89 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         }));
     };
 
-    const seleccionarArchivo = (multimediaDetalle, archivo) => {
-        // Crear URL local para previsualización inmediata
+    /**
+     * Cuando el usuario selecciona un archivo:
+     * 1. Verifico que la multimedia tenga al menos un TIPO DE USO  asignado
+     * 2. Subo el archivo al servidor
+     * 3. Creo o actualizo el registro en la tabla producto_multimedia inmediatamente
+     */
+    const seleccionarArchivo = async (multimediaDetalle, archivo) => {
+        const valorActual = valoresMultimedia[multimediaDetalle.id] || {};
+        const tienetiposUso = valorActual.tipoUsoMultimediaIds && valorActual.tipoUsoMultimediaIds.length > 0;
+
+        if (!tienetiposUso) {
+            setDialogoTipoUso(true);
+            return;
+        }
+
+        setSubiendo(prev => ({ ...prev, [multimediaDetalle.id]: true }));
+
+        // Previsualización local inmediata
         const urlLocal = URL.createObjectURL(archivo);
-        
-        // Actualizar el estado con la información del archivo seleccionado
         actualizarValorMultimedia(multimediaDetalle.id, 'archivo', archivo.name);
         actualizarValorMultimedia(multimediaDetalle.id, 'url', urlLocal);
-        actualizarValorMultimedia(multimediaDetalle.id, 'archivoLocal', archivo);
         actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', true);
-        
-        // Subir automáticamente el archivo
-        subirArchivo(multimediaDetalle, archivo);
-    };
 
-    const subirArchivo = async (multimediaDetalle, archivo) => {
-        setSubiendo(prev => ({ ...prev, [multimediaDetalle.id]: true }));
-        
         try {
+            // 1. Subir archivo al servidor
             const carpeta = `producto/${idProducto}/multimedia`;
-            const response = await postSubirImagen(carpeta, archivo.name, archivo);
-            
-            // Limpiar la URL local y actualizar con la URL del servidor
-            const valorActual = valoresMultimedia[multimediaDetalle.id];
-            if (valorActual?.url && valorActual.url.startsWith('blob:')) {
-                URL.revokeObjectURL(valorActual.url);
+            const respuestaSubida = await postSubirImagen(carpeta, archivo.name, archivo);
+
+            // Limpiar URL blob
+            URL.revokeObjectURL(urlLocal);
+
+            const urlServidor = respuestaSubida.originalUrl;
+            const nombreArchivo = archivo.name;
+
+            // 2. Crear o actualizar el registro en producto_multimedia
+            const usuario = getUsuarioSesion();
+            const datosGuardar = {
+                productoId: idProducto,
+                multimediaId: parseInt(multimediaDetalle.id),
+                multimediaUrl: urlServidor,
+                multimediaNombre: nombreArchivo,
+                usuarioModificacion: usuario.id
+            };
+
+            let productoMultimediaId;
+            if (valorActual.id) {
+                // Actualizar registro existente
+                await patchProductoMultimedia(valorActual.id, datosGuardar);
+                productoMultimediaId = valorActual.id;
+            } else {
+                // Crear nuevo registro
+                datosGuardar.usuarioCreacion = usuario.id;
+                const nuevoRegistro = await postProductoMultimedia(datosGuardar);
+                productoMultimediaId = nuevoRegistro.id;
             }
-            
-            actualizarValorMultimedia(multimediaDetalle.id, 'archivo', archivo.name);
-            actualizarValorMultimedia(multimediaDetalle.id, 'url', response.originalUrl);
-            actualizarValorMultimedia(multimediaDetalle.id, 'archivoLocal', null);
-            actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', false);
-            
+
+            // 3. Actualizar estado local con los datos guardados
+            setValoresMultimedia(prev => ({
+                ...prev,
+                [multimediaDetalle.id]: {
+                    ...prev[multimediaDetalle.id],
+                    id: productoMultimediaId,
+                    archivo: nombreArchivo,
+                    url: urlServidor,
+                    pendienteSubir: false
+                }
+            }));
+
             toast.current?.show({
                 severity: 'success',
                 summary: intl.formatMessage({ id: 'Éxito' }),
-                detail: intl.formatMessage({ id: 'Archivo subido correctamente' }),
+                detail: intl.formatMessage({ id: 'Archivo subido y guardado correctamente' }),
                 life: 3000,
             });
-            
+
         } catch (error) {
-            console.error('Error subiendo archivo:', error);
-            // En caso de error, mantener la previsualización local
+            console.error('Error subiendo/guardando archivo:', error);
+            // Limpiar previsualización en caso de error
+            URL.revokeObjectURL(urlLocal);
+            actualizarValorMultimedia(multimediaDetalle.id, 'url', valorActual.url || null);
+            actualizarValorMultimedia(multimediaDetalle.id, 'archivo', valorActual.archivo || null);
+            actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', false);
+            
             toast.current?.show({
                 severity: 'error',
                 summary: 'Error',
@@ -161,22 +247,36 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         }
     };
 
+    /**
+     * Elimina un registro de producto_multimedia y sus tipos de uso asociados.
+     * Primero borra los registros hijos (FK) y luego el padre.
+     */
     const eliminarMultimedia = async (multimediaDetalleId) => {
         const valorActual = valoresMultimedia[multimediaDetalleId];
-        
-        // Limpiar URL local si existe
+
         if (valorActual?.url && valorActual.url.startsWith('blob:')) {
             URL.revokeObjectURL(valorActual.url);
         }
         
         if (valorActual?.id) {
             try {
+                // Eliminar tipos de uso asociados (FK constraint)
+                const filtroTiposUso = JSON.stringify({
+                    where: { and: { productoMultimediaId: valorActual.id } }
+                });
+                const tiposUsoExistentes = await getProductoMultimediaTiposUso(filtroTiposUso);
+                if (tiposUsoExistentes.length > 0) {
+                    await Promise.all(tiposUsoExistentes.map(tu => deleteProductoMultimediaTipoUso(tu.id)));
+                }
+
+                // Eliminar el registro de producto_multimedia
                 await deleteProductoMultimedia(valorActual.id);
                 
-                // Limpiar del estado
-                const nuevosValores = { ...valoresMultimedia };
-                delete nuevosValores[multimediaDetalleId];
-                setValoresMultimedia(nuevosValores);
+                setValoresMultimedia(prev => {
+                    const nuevos = { ...prev };
+                    delete nuevos[multimediaDetalleId];
+                    return nuevos;
+                });
                 
                 toast.current?.show({
                     severity: 'success',
@@ -194,230 +294,351 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                 });
             }
         } else {
-            // Si no tiene id, solo limpiar del estado
-            const nuevosValores = { ...valoresMultimedia };
-            delete nuevosValores[multimediaDetalleId];
-            setValoresMultimedia(nuevosValores);
+            // Si no tiene id en BD, solo limpiar del estado local
+            setValoresMultimedia(prev => {
+                const nuevos = { ...prev };
+                delete nuevos[multimediaDetalleId];
+                return nuevos;
+            });
         }
     };
 
-    const renderizarCampoMultimedia = (multimediaDetalle) => {
-        const valorActual = valoresMultimedia[multimediaDetalle.id] || {};
-        const deshabilitado = !estoyEditandoProducto || guardando;
-        const estaSubiendo = subiendo[multimediaDetalle.id];
+    /**
+     * Maneja el cambio de tipos de uso en el MultiSelect.
+     * Guarda los cambios inmediatamente en la tabla producto_multimedia_tipo_uso.
+     * Si la multimedia aún no tiene registro en producto_multimedia, lo crea primero.
+     */
+    const manejarCambioTiposUso = async (multimediaDetalleId, nuevosIdsSeleccionados) => {
+        const valorActual = valoresMultimedia[multimediaDetalleId] || {};
 
-        return (
-            <div className="flex flex-column gap-3">
-                {/* Campo de subida de archivo */}
-                <div>
-                    <FileUpload
-                        mode="basic"
-                        accept="image/*,video/*,audio/*,.pdf"
-                        maxFileSize={10000000} // 10MB
-                        onSelect={(e) => seleccionarArchivo(multimediaDetalle, e.files[0])}
-                        disabled={deshabilitado || estaSubiendo}
-                        auto={false}
-                        chooseLabel={estaSubiendo ? 
-                            intl.formatMessage({ id: 'Subiendo...' }) : 
-                            intl.formatMessage({ id: 'Seleccionar archivo' })
-                        }
-                        className="w-full"
-                    />
-                    {valorActual.pendienteSubir && (
-                        <small className="text-orange-500 mt-1 block">
-                            <i className="pi pi-clock mr-1"></i>
-                            {intl.formatMessage({ id: 'Subiendo archivo...' })}
-                        </small>
-                    )}
-                </div>
+        // Actualizar estado local inmediatamente para que el UI refleje el cambio
+        actualizarValorMultimedia(multimediaDetalleId, 'tipoUsoMultimediaIds', nuevosIdsSeleccionados);
 
-                {/* Previsualización del archivo */}
-                {valorActual.url && (
-                    <div className="flex align-items-center gap-2">
-                        {valorActual.archivo && (
-                            <>
-                                {/* Previsualización de imágenes */}
-                                {valorActual.archivo.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i) ? (
-                                    <Image
-                                        src={valorActual.url}
-                                        alt={valorActual.archivo}
-                                        width="100"
-                                        height="100"
-                                        preview
-                                        className="border-round shadow-2"
-                                    />
-                                ) : valorActual.archivo.match(/\.(mp4|webm|ogg|avi|mov)$/i) ? (
-                                    /* Previsualización de videos */
-                                    <div className="border-round overflow-hidden shadow-2">
-                                        <video 
-                                            width="100" 
-                                            height="100" 
-                                            controls 
-                                            style={{ objectFit: 'cover' }}
-                                        >
-                                            <source src={valorActual.url} />
-                                            Tu navegador no soporta el elemento video.
-                                        </video>
-                                    </div>
-                                ) : valorActual.archivo.match(/\.(mp3|wav|ogg|flac|m4a)$/i) ? (
-                                    /* Previsualización de audio */
-                                    <div className="flex align-items-center gap-2 p-3 border-1 border-round surface-border shadow-2" style={{minWidth: '100px'}}>
-                                        <i className="pi pi-volume-up text-2xl text-blue-500"></i>
-                                        <div>
-                                            <div className="text-sm font-medium">{intl.formatMessage({ id: 'Audio' })}</div>
-                                            <audio controls style={{width: '150px', height: '30px'}}>
-                                                <source src={valorActual.url} />
-                                                Tu navegador no soporta el elemento audio.
-                                            </audio>
-                                        </div>
-                                    </div>
-                                ) : valorActual.archivo.match(/\.pdf$/i) ? (
-                                    /* Previsualización de PDF */
-                                    <div className="flex align-items-center gap-2 p-3 border-1 border-round surface-border shadow-2">
-                                        <i className="pi pi-file-pdf text-2xl text-red-500"></i>
-                                        <span className="text-sm font-medium">{intl.formatMessage({ id: 'Documento PDF' })}</span>
-                                    </div>
-                                ) : (
-                                    /* Otros archivos */
-                                    <div className="flex align-items-center gap-2 p-3 border-1 border-round surface-border shadow-2">
-                                        <i className="pi pi-file text-2xl text-gray-500"></i>
-                                        <span className="text-sm font-medium">{valorActual.archivo}</span>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                        
-                        {/* Información y acciones */}
-                        <div className="flex flex-column gap-1">
-                            <span className="text-xs text-gray-600">{valorActual.archivo}</span>
-                            {valorActual.pendienteSubir ? (
-                                <span className="text-xs text-orange-500">
-                                    <i className="pi pi-clock mr-1"></i>
-                                    {intl.formatMessage({ id: 'Subiendo...' })}
-                                </span>
-                            ) : (
-                                <a 
-                                    href={valorActual.url} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 text-xs"
-                                >
-                                    <i className="pi pi-external-link mr-1"></i>
-                                    {intl.formatMessage({ id: 'Ver archivo' })}
-                                </a>
-                            )}
-                        </div>
-                        
-                        {estoyEditandoProducto && (
-                            <Button
-                                icon="pi pi-trash"
-                                className="p-button-danger p-button-text p-button-sm"
-                                onClick={() => eliminarMultimedia(multimediaDetalle.id)}
-                                disabled={guardando}
-                                tooltip={intl.formatMessage({ id: 'Eliminar' })}
-                            />
-                        )}
-                    </div>
-                )}
+        // Limpiar error de validación si ahora tiene al menos un tipo de uso
+        if (nuevosIdsSeleccionados.length > 0 && erroresValidacion.has(parseInt(multimediaDetalleId))) {
+            setErroresValidacion(prev => {
+                const nuevos = new Set(prev);
+                nuevos.delete(parseInt(multimediaDetalleId));
+                return nuevos;
+            });
+        }
 
-                {/* Tipo de uso */}
-                <div>
-                    <label className="block text-sm font-medium mb-1">
-                        <b>{intl.formatMessage({ id: 'Tipo de Uso' })}*</b>
-                    </label>
-                    <Dropdown
-                        value={valorActual.tipoUsoMultimediaId}
-                        options={tiposUso}
-                        onChange={(e) => actualizarValorMultimedia(multimediaDetalle.id, 'tipoUsoMultimediaId', e.value)}
-                        placeholder={intl.formatMessage({ id: 'Seleccione el tipo de uso' })}
-                        disabled={deshabilitado}
-                        className="w-full"
-                    />
-                </div>
+        try {
+            const usuario = getUsuarioSesion();
+            let productoMultimediaId = valorActual.id;
 
-            </div>
-        );
-    };
+            // Si no existe registro en producto_multimedia, crearlo primero (sin archivo aún)
+            if (!productoMultimediaId) {
+                const nuevoRegistro = await postProductoMultimedia({
+                    productoId: idProducto,
+                    multimediaId: parseInt(multimediaDetalleId),
+                    usuarioCreacion: usuario.id,
+                    usuarioModificacion: usuario.id
+                });
+                productoMultimediaId = nuevoRegistro.id;
 
-    const validacionesGuardarMultimedia = (datosMultimedia) => {
-        if (!datosMultimedia.tipoUsoMultimediaId) {
+                // Actualizar el id en el estado local
+                actualizarValorMultimedia(multimediaDetalleId, 'id', productoMultimediaId);
+            }
+
+            // Obtener tipos de uso actuales en BD
+            const filtroExistentes = JSON.stringify({
+                where: { and: { productoMultimediaId: productoMultimediaId } }
+            });
+            const tiposUsoEnBD = await getProductoMultimediaTiposUso(filtroExistentes);
+            const idsEnBD = new Set(tiposUsoEnBD.map(tu => tu.tipoUsoMultimediaId));
+            const idsNuevos = new Set(nuevosIdsSeleccionados);
+
+            // Eliminar los que se desmarcaron
+            const aEliminar = tiposUsoEnBD.filter(tu => !idsNuevos.has(tu.tipoUsoMultimediaId));
+            if (aEliminar.length > 0) {
+                await Promise.all(aEliminar.map(tu => deleteProductoMultimediaTipoUso(tu.id)));
+            }
+
+            // Crear los nuevos que se seleccionaron
+            const aCrear = [...idsNuevos].filter(id => !idsEnBD.has(id));
+            if (aCrear.length > 0) {
+                await Promise.all(aCrear.map(tipoUsoId =>
+                    postProductoMultimediaTipoUso({
+                        productoMultimediaId: productoMultimediaId,
+                        tipoUsoMultimediaId: tipoUsoId
+                    })
+                ));
+            }
+
+        } catch (error) {
+            console.error('Error guardando tipos de uso:', error);
+            // Revertir el cambio local en caso de error
+            actualizarValorMultimedia(multimediaDetalleId, 'tipoUsoMultimediaIds', valorActual.tipoUsoMultimediaIds || []);
             toast.current?.show({
                 severity: 'error',
-                summary: intl.formatMessage({ id: 'Error' }),
-                detail: intl.formatMessage({ id: 'El tipo de uso es obligatorio' }),
+                summary: 'Error',
+                detail: intl.formatMessage({ id: 'Error al guardar los tipos de uso' }),
                 life: 3000,
+            });
+        }
+    };
+
+    /**
+     * Abro el diálogo de confirmación antes de eliminar un multimedia.
+     */
+    const confirmarEliminarMultimedia = (multimediaDetalleId) => {
+        const valorActual = valoresMultimedia[multimediaDetalleId] || {};
+        setDialogoEliminar({
+            visible: true,
+            multimediaDetalleId,
+            nombreArchivo: valorActual.archivo || intl.formatMessage({ id: 'este archivo' })
+        });
+    };
+
+    const ejecutarEliminarMultimedia = async () => {
+        const { multimediaDetalleId } = dialogoEliminar;
+        setDialogoEliminar({ visible: false, multimediaDetalleId: null, nombreArchivo: '' });
+        if (multimediaDetalleId) {
+            await eliminarMultimedia(multimediaDetalleId);
+        }
+    };
+
+    /**
+     * Valido que todas las multimedia que tienen archivo subido tengan al menos un tipo de uso.
+     * Marco con borde rojo las que no lo cumplen y muestro un toast con la lista.
+     * Retorna true si la validación pasa, false si hay errores.
+     */
+    const validarTiposUsoObligatorios = () => {
+        const errores = new Set();
+        const multimediasSinTipoUso = [];
+
+        multimediaDefinidos.forEach(detalle => {
+            const valor = valoresMultimedia[detalle.id];
+            // Solo validar multimedia que ya tiene archivo subido
+            if (valor && valor.archivo && valor.url) {
+                const tieneTipoUso = valor.tipoUsoMultimediaIds && valor.tipoUsoMultimediaIds.length > 0;
+                if (!tieneTipoUso) {
+                    errores.add(detalle.id);
+                    multimediasSinTipoUso.push(detalle.nombre);
+                }
+            }
+        });
+
+        setErroresValidacion(errores);
+
+        if (multimediasSinTipoUso.length > 0) {
+            const detalle = (
+                <div>
+                    <p className="m-0 mb-2">{intl.formatMessage({ id: 'Las siguientes multimedia necesitan al menos un tipo de uso:' })}</p>
+                    <ul className="m-0 pl-3">
+                        {multimediasSinTipoUso.map(nombre => <li key={nombre}>{nombre}</li>)}
+                    </ul>
+                </div>
+            );
+            toast.current?.show({
+                severity: 'error',
+                summary: intl.formatMessage({ id: 'Tipo de uso obligatorio' }),
+                detail: detalle,
+                life: 6000,
+                sticky: false
             });
             return false;
         }
         return true;
-    }
+    };
 
+    /**
+     * Renderizo la previsualización del archivo según su extensión.
+     */
+    const renderizarPrevisualizacion = (archivo, url) => {
+        const urlResuelta = resolverUrlMultimedia(url);
+
+        if (archivo.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i)) {
+            return (
+                <Image
+                    src={urlResuelta}
+                    alt={archivo}
+                    width="120"
+                    height="120"
+                    preview
+                    className="border-round shadow-2"
+                    style={{ objectFit: 'cover' }}
+                />
+            );
+        }
+        if (archivo.match(/\.(mp4|webm|ogg|avi|mov)$/i)) {
+            return (
+                <div className="border-round overflow-hidden shadow-2">
+                    <video width="120" height="90" controls style={{ objectFit: 'cover' }}>
+                        <source src={urlResuelta} />
+                    </video>
+                </div>
+            );
+        }
+        if (archivo.match(/\.(mp3|wav|ogg|flac|m4a)$/i)) {
+            return (
+                <div className="flex align-items-center gap-2 p-2 border-1 border-round surface-border">
+                    <i className="pi pi-volume-up text-xl text-blue-500"></i>
+                    <audio controls style={{ width: '100%', height: '30px' }}>
+                        <source src={urlResuelta} />
+                    </audio>
+                </div>
+            );
+        }
+        if (archivo.match(/\.pdf$/i)) {
+            return (
+                <div className="flex align-items-center gap-2 p-2 border-1 border-round surface-border">
+                    <i className="pi pi-file-pdf text-2xl text-red-500"></i>
+                    <span className="text-sm font-medium">{intl.formatMessage({ id: 'Documento PDF' })}</span>
+                </div>
+            );
+        }
+        return (
+            <div className="flex align-items-center gap-2 p-2 border-1 border-round surface-border">
+                <i className="pi pi-file text-2xl text-gray-500"></i>
+                <span className="text-sm font-medium">{archivo}</span>
+            </div>
+        );
+    };
+
+    /**
+     * Renderizo el campo completo de una multimedia: título, tipo de uso + subida en la misma fila,
+     * previsualización con acciones.
+     */
+    const renderizarCampoMultimedia = (multimediaDetalle) => {
+        const valorActual = valoresMultimedia[multimediaDetalle.id] || {};
+        const deshabilitado = !estoyEditandoProducto || guardando;
+        const estaSubiendo = subiendo[multimediaDetalle.id];
+        const tieneError = erroresValidacion.has(multimediaDetalle.id);
+
+        return (
+            <div className={`p-3 border-1 border-round h-full flex flex-column ${tieneError ? 'border-red-500 bg-red-50' : 'border-300'}`}>
+                {/* Título de la multimedia */}
+                <div className="mb-3 pb-2 border-bottom-1 border-200">
+                    <span className="text-lg font-bold">
+                        <i className={`${obtenerIconoMultimedia(multimediaDetalle.tipo)} mr-2 text-primary`}></i>
+                        {multimediaDetalle.nombre}
+                    </span>
+                    {multimediaDetalle.obligatorioSn === 'S' && <span className="text-red-500 ml-1 text-lg">*</span>}
+                    {multimediaDetalle.descripcion && (
+                        <small className="text-gray-500 block mt-1">{multimediaDetalle.descripcion}</small>
+                    )}
+                </div>
+
+                {/* Fila 1: Tipo de uso */}
+                <div className="mb-3">
+                    <label className="block text-sm font-medium mb-1">
+                        {intl.formatMessage({ id: 'Tipo de Uso' })}<span className="text-red-500">*</span>
+                    </label>
+                    <MultiSelect
+                        value={valorActual.tipoUsoMultimediaIds || []}
+                        options={tiposUso}
+                        onChange={(e) => manejarCambioTiposUso(multimediaDetalle.id, e.value)}
+                        placeholder={intl.formatMessage({ id: 'Seleccione' })}
+                        disabled={deshabilitado}
+                        className="w-full"
+                        display="chip"
+                    />
+                </div>
+
+                {/* Fila 2: Previsualización centrada */}
+                {valorActual.url && valorActual.archivo && (
+                    <div className="flex flex-column align-items-center gap-2 p-2 surface-50 border-round mb-3">
+                        <div>
+                            {renderizarPrevisualizacion(valorActual.archivo, valorActual.url)}
+                        </div>
+                        <span className="text-sm font-medium text-center text-overflow-ellipsis overflow-hidden white-space-nowrap w-full" title={valorActual.archivo}>
+                            {valorActual.archivo}
+                        </span>
+                        {valorActual.pendienteSubir ? (
+                            <span className="text-xs text-orange-500">
+                                <i className="pi pi-spin pi-spinner mr-1"></i>
+                                {intl.formatMessage({ id: 'Subiendo...' })}
+                            </span>
+                        ) : (
+                            <div className="flex gap-2">
+                                <a
+                                    href={resolverUrlMultimedia(valorActual.url)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary text-xs no-underline hover:underline"
+                                >
+                                    <i className="pi pi-external-link mr-1"></i>
+                                    {intl.formatMessage({ id: 'Ver archivo' })}
+                                </a>
+                                {estoyEditandoProducto && (
+                                    <span className="text-xs text-400">|</span>
+                                )}
+                                {estoyEditandoProducto && (
+                                    <button
+                                        className="p-0 border-none bg-transparent text-red-500 text-xs cursor-pointer hover:underline"
+                                        onClick={() => confirmarEliminarMultimedia(multimediaDetalle.id)}
+                                        disabled={guardando}
+                                    >
+                                        <i className="pi pi-trash mr-1"></i>
+                                        {intl.formatMessage({ id: 'Eliminar' })}
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Fila 3: Botón de carga */}
+                <div className="mt-auto">
+                    <FileUpload
+                        mode="basic"
+                        accept="image/*,video/*,audio/*,.pdf"
+                        maxFileSize={10000000}
+                        onSelect={(e) => seleccionarArchivo(multimediaDetalle, e.files[0])}
+                        disabled={deshabilitado || estaSubiendo}
+                        auto={false}
+                        chooseLabel={estaSubiendo ?
+                            intl.formatMessage({ id: 'Subiendo...' }) :
+                            intl.formatMessage({ id: 'Seleccionar archivo' })
+                        }
+                        className="w-full"
+                    />
+                </div>
+            </div>
+        );
+    };
+
+    /**
+     * Botón "Guardar Multimedia": sincroniza todos los registros de producto_multimedia
+     * que tengan archivo con sus datos actuales en BD (URL, nombre, tipos de uso).
+     */
     const guardarMultimedia = async () => {
+        // Validar que todas las multimedia con archivo tengan tipo de uso asignado antes de guardar
+        if (!validarTiposUsoObligatorios()) return;
+
         setGuardando(true);
         const usuario = getUsuarioSesion();
 
         try {
-            const promesasGuardado = [];
-            let esCorrecto = true;
-
             for (const [multimediaId, valores] of Object.entries(valoresMultimedia)) {
-                //
-                //Comprueba que la variable esCorrecto sea true ya que en el momento en el que un multimedia no cumpla las validaciones, se establecerá a false y se parará el proceso de guardado
-                //
-                if (esCorrecto) {
-                    const datosMultimedia = {
-                        productoId: idProducto,
-                        multimediaId: parseInt(multimediaId),
-                        tipoUsoMultimediaId: valores.tipoUsoMultimediaId,
-                        ordenEnGrupo: valores.ordenEnGrupo || 0,
-                        usuarioCreacion: usuario.id,
-                        usuarioModificacion: usuario.id
-                    };
-                    //
-                    //Lanzamos las validaciones, si encontramos algún error, se establecerá la variable esCorrecto a false y se parará el proceso de guardado
-                    //
-                    if(esCorrecto = validacionesGuardarMultimedia(datosMultimedia)){
-                        if (valores.id) {
-                            // Actualizar existente
-                            promesasGuardado.push(patchProductoMultimedia(valores.id, datosMultimedia));
-                        } else {
-                            // Crear nuevo
-                            promesasGuardado.push(postProductoMultimedia(datosMultimedia));
-                        }
-                    }
+                const datosGuardar = {
+                    productoId: idProducto,
+                    multimediaId: parseInt(multimediaId),
+                    multimediaUrl: valores.url || null,
+                    multimediaNombre: valores.archivo || null,
+                    usuarioModificacion: usuario.id
+                };
+
+                if (valores.id) {
+                    await patchProductoMultimedia(valores.id, datosGuardar);
+                } else {
+                    datosGuardar.usuarioCreacion = usuario.id;
+                    await postProductoMultimedia(datosGuardar);
                 }
             }
-            //
-            //Si todos los multimedia tratados cumplen las validaciones, guardamos los cambios
-            //
-            if (esCorrecto) {
 
-                await Promise.all(promesasGuardado);
+            toast.current?.show({
+                severity: 'success',
+                summary: intl.formatMessage({ id: 'Éxito' }),
+                detail: intl.formatMessage({ id: 'Multimedia guardado correctamente' }),
+                life: 3000,
+            });
 
-                toast.current?.show({
-                    severity: 'success',
-                    summary: intl.formatMessage({ id: 'Éxito' }),
-                    detail: intl.formatMessage({ id: 'Multimedia guardado correctamente' }),
-                    life: 3000,
-                });
-
-                // Recargar los datos
-                /*const filtroProductoMultimedia = JSON.stringify({
-                    where: { and: { productoId: idProducto }}
-                });
-                const valoresData = await getProductosMultimedia(filtroProductoMultimedia);
-                const valoresMap = {};
-                valoresData.forEach(valor => {
-                    valoresMap[valor.multimediaId] = {
-                        id: valor.id,
-                        archivo: valor.multimediaNombre,
-                        url: valor.multimediaUrl,
-                        tipoUsoMultimediaId: valor.tipoUsoMultimediaId,
-                        ordenEnGrupo: valor.ordenEnGrupo || 0
-                    };
-                });
-                setValoresMultimedia(valoresMap);*/
-            }
+            // Recargar desde BD para tener IDs y datos actualizados
+            const mapaRecargado = await cargarValoresDesdeDB();
+            setValoresMultimedia(mapaRecargado);
 
         } catch (error) {
             console.error('Error guardando multimedia:', error);
@@ -442,91 +663,104 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
 
     if (!multimediaDefinidos.length) {
         return (
-            <Card title={intl.formatMessage({ id: 'Multimedia del Producto' })}>
-                <div className="text-center p-4">
-                    {intl.formatMessage({ id: 'No hay tipos de multimedia definidos para este tipo de producto' })}
-                </div>
-            </Card>
+            <div className="text-center p-4">
+                {intl.formatMessage({ id: 'No hay tipos de multimedia definidos para este tipo de producto' })}
+            </div>
         );
     }
 
     return (
         <div>
             <Toast ref={toast} />
-            <Card title={intl.formatMessage({ id: 'Multimedia del Producto' })}>
-                <div className="formgrid grid">
-                    {multimediaDefinidos
-                        .sort((a, b) => {
-                            // Obtener el orden de cada multimedia
-                            const ordenA = valoresMultimedia[a.id]?.ordenEnGrupo || 0;
-                            const ordenB = valoresMultimedia[b.id]?.ordenEnGrupo || 0;
-                            
-                            // Ordenar por orden del multimedia, luego por nombre
-                            if (ordenA !== ordenB) {
-                                return ordenA - ordenB;
-                            }
-                            
-                            const ordenMultimediaA = a.orden || 0;
-                            const ordenMultimediaB = b.orden || 0;
-                            if (ordenMultimediaA !== ordenMultimediaB) {
-                                return ordenMultimediaA - ordenMultimediaB;
-                            }
-                            
-                            const nombreA = a.nombre || '';
-                            const nombreB = b.nombre || '';
-                            return nombreA.localeCompare(nombreB);
-                        })
-                        .map((multimediaDetalle) => {
-                        const valorActual = valoresMultimedia[multimediaDetalle.id] || {};
-                                                
-                        return (
-                            <div key={multimediaDetalle.id} className="field col-12 md:col-6 lg:col-6">
-                                <div className="flex align-items-center mb-2">
-                                    <InputNumber
-                                        id={`orden_${multimediaDetalle.id}`}
-                                        value={valorActual.ordenEnGrupo || 0}
-                                        onChange={(e) => actualizarValorMultimedia(multimediaDetalle.id, 'ordenEnGrupo', e.value || 0)}
-                                        disabled={!estoyEditandoProducto || guardando}
-                                        min={0}
-                                        max={999}
-                                        inputStyle={{ textAlign: 'right', width: '4rem' }}
-                                        size="small"
-                                        placeholder="000"
-                                    />
-                                    <label htmlFor={`multimedia_${multimediaDetalle.id}`} className="block font-medium ml-2">
-                                        <b>{multimediaDetalle.nombre}</b>
-                                        {multimediaDetalle.obligatorioSn === 'S' && <span className="text-red-500 ml-1">*</span>}
-                                    </label>
-                                </div>
-                                <div className="mb-2">
-                                    {renderizarCampoMultimedia(multimediaDetalle)}
-                                </div>
 
-                                {multimediaDetalle.descripcion && (
-                                    <small className="text-gray-600 block mt-1">
-                                       <b>{intl.formatMessage({ id: 'Descripción' })}:</b> {multimediaDetalle.descripcion}
-                                    </small>
-                                )}
-                            </div>
-                        );
-                    })}
+            {/* Dialog: el usuario debe asignar al menos un tipo de uso antes de subir archivos */}
+            <Dialog
+                visible={dialogoTipoUso}
+                onHide={() => setDialogoTipoUso(false)}
+                header={intl.formatMessage({ id: 'Tipo de uso requerido' })}
+                style={{ width: '28rem', maxWidth: '95vw' }}
+                modal
+                footer={
+                    <Button
+                        label={intl.formatMessage({ id: 'Entendido' })}
+                        onClick={() => setDialogoTipoUso(false)}
+                        autoFocus
+                    />
+                }
+            >
+                <div className="flex align-items-center gap-3">
+                    <i className="pi pi-exclamation-triangle text-4xl text-orange-500"></i>
+                    <p style={{ margin: 0 }}>
+                        {intl.formatMessage({ id: 'Debe asignar al menos un Tipo de uso a esta multimedia antes de subir un archivo.' })}
+                    </p>
                 </div>
+            </Dialog>
 
-                {estoyEditandoProducto && (
-                    <div className="flex justify-content-end mt-4">
+            {/* Dialog: confirmación antes de eliminar un archivo multimedia */}
+            <Dialog
+                visible={dialogoEliminar.visible}
+                onHide={() => setDialogoEliminar({ visible: false, multimediaDetalleId: null, nombreArchivo: '' })}
+                header={intl.formatMessage({ id: 'Confirmar eliminación' })}
+                style={{ width: '30rem', maxWidth: '95vw' }}
+                modal
+                footer={
+                    <div className="flex gap-2 justify-content-end">
                         <Button
-                            label={guardando ? 
-                                `${intl.formatMessage({ id: 'Guardando' })}...` : 
-                                intl.formatMessage({ id: 'Guardar Multimedia' })
-                            }
-                            icon={guardando ? "pi pi-spin pi-spinner" : "pi pi-save"}
-                            onClick={guardarMultimedia}
-                            disabled={guardando}
-                            className="p-button-primary"
+                            label={intl.formatMessage({ id: 'Cancelar' })}
+                            className="p-button-secondary"
+                            onClick={() => setDialogoEliminar({ visible: false, multimediaDetalleId: null, nombreArchivo: '' })}
+                        />
+                        <Button
+                            label={intl.formatMessage({ id: 'Eliminar' })}
+                            icon="pi pi-trash"
+                            className="p-button-danger"
+                            onClick={ejecutarEliminarMultimedia}
                         />
                     </div>
-                )}
-            </Card>
+                }
+            >
+                <div className="flex align-items-center gap-3">
+                    <i className="pi pi-exclamation-triangle text-4xl text-red-500"></i>
+                    <div>
+                        <p style={{ margin: 0 }}>
+                            {intl.formatMessage({ id: '¿Está seguro de que desea eliminar el archivo' })} <strong>"{dialogoEliminar.nombreArchivo}"</strong>?
+                        </p>
+                        <p className="text-sm text-gray-500 mt-2" style={{ margin: 0 }}>
+                            {intl.formatMessage({ id: 'Esta acción no se puede deshacer.' })}
+                        </p>
+                    </div>
+                </div>
+            </Dialog>
+
+            <div className="formgrid grid">
+                {multimediaDefinidos
+                    .sort((a, b) => {
+                        const ordenA = a.orden || 0;
+                        const ordenB = b.orden || 0;
+                        if (ordenA !== ordenB) return ordenA - ordenB;
+                        return (a.nombre || '').localeCompare(b.nombre || '');
+                    })
+                    .map((multimediaDetalle) => (
+                        <div key={multimediaDetalle.id} className="field col-12 md:col-6 lg:col-4">
+                            {renderizarCampoMultimedia(multimediaDetalle)}
+                        </div>
+                    ))}
+            </div>
+
+            {estoyEditandoProducto && (
+                <div className="flex justify-content-end mt-4">
+                    <Button
+                        label={guardando ?
+                            `${intl.formatMessage({ id: 'Guardando' })}...` :
+                            intl.formatMessage({ id: 'Guardar Multimedia' })
+                        }
+                        icon={guardando ? "pi pi-spin pi-spinner" : "pi pi-save"}
+                        onClick={guardarMultimedia}
+                        disabled={guardando}
+                        className="p-button-primary"
+                    />
+                </div>
+            )}
         </div>
     );
 };

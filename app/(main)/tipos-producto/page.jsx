@@ -83,6 +83,7 @@ const TiposProducto = () => {
                     postTipoProductoMultimediaDetalle({
                         tipoProductoId: nuevoTipoId,
                         multimediaId: detalle.id,
+                        orden: detalle.orden,
                     })
                 );
                 await Promise.all(promesasMultimedias);

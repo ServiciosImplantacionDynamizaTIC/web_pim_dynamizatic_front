@@ -12,6 +12,7 @@ import { gePropiedades } from "@/app/api-endpoints/propiedad";
 import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getMultimedias } from "@/app/api-endpoints/multimedia";
 import { getProductosPropiedad } from "@/app/api-endpoints/producto_propiedad";
+import { getProductosMultimedia } from "@/app/api-endpoints/producto_multimedia";
 import { getProductos } from "@/app/api-endpoints/producto";
 import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
 import { getTipoProductoMultimediaDetalles } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
@@ -32,7 +33,6 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
     const [atributosSeleccionados, setAtributosSeleccionados] = useState([]);
     const [camposDinamicosSeleccionados, setCamposDinamicosSeleccionados] = useState([]);
     const [multimediasSeleccionados, setMultimediasSeleccionados] = useState(tipoProducto?.multimediasIds || []);
-    const [datosInicializeados, setDatosInicializeados] = useState(false);
     const [propiedadesInicializados, setPropiedadesInicializados] = useState(false);
     const [gruposOrdenModificados, setGruposOrdenModificados] = useState({});
     const [atributosOrdenModificados, setPropiedadesOrdenModificados] = useState({});
@@ -121,76 +121,75 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
         }
     }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id]);
 
-    // Cargar multimedia de la empresa
+    // Cargar multimedia de la empresa y sus órdenes 
     useEffect(() => {
         const cargarMultimedias = async () => {
-            if (!isEdit || !idTipo) return;
+            if (!isEdit || !idTipo || !tipoProducto?.id) return;
             
             setCargandoMultimedias(true);
             try {
-                const filtro = JSON.stringify({
-                    where: {
-                        and: {
-                            empresaId: usuarioSesion?.empresaId,
-                            activoSn: 'S' 
-                        }
-                    },
-                    order: 'orden ASC'
+                const filtroActivos = JSON.stringify({
+                    where: { and: { empresaId: usuarioSesion?.empresaId, activoSn: 'S' } },
+                    order: 'nombre ASC'
                 });
-                
-                const data = await getMultimedias(filtro);
-                setMultimedias(data);
+                const filtroDetalle = JSON.stringify({
+                    where: { and: { tipoProductoId: tipoProducto.id } }
+                });
+
+                const [dataMultimedias, detalles] = await Promise.all([
+                    getMultimedias(filtroActivos),
+                    getTipoProductoMultimediaDetalles(filtroDetalle)
+                ]);
+
+                // Construir mapa de órdenes para multimedia
+                const ordenPorMultimedia = {};
+                if (detalles && detalles.length > 0) {
+                    detalles.forEach(d => {
+                        if (d.orden !== undefined && d.orden !== null) {
+                            ordenPorMultimedia[d.id] = d.orden;
+                        }
+                    });
+                }
+
+                // Aplicar órdenes
+                setMultimedias(dataMultimedias.map(m => ({
+                    ...m,
+                    orden: ordenPorMultimedia[m.id] !== undefined ? ordenPorMultimedia[m.id] : null
+                })));
+
+                // Marcar las multimedias seleccionadas para este tipo de producto
+                if (detalles && detalles.length > 0) {
+                    setMultimediasSeleccionados(detalles.map(d => d.id));
+                }
             } catch (error) {
-                console.error('Error cargando multimedias:', error);
+                console.error('Error cargando multimedias y órdenes:', error);
             } finally {
                 setCargandoMultimedias(false);
             }
         };
 
-        if (usuarioSesion?.empresaId && isEdit && idTipo) {
+        if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id) {
             cargarMultimedias();
         }
-    }, [usuarioSesion?.empresaId, isEdit, idTipo]);
-
-    // Cargar multimedia seleccionados por defecto desde la tabla de detalle
-    useEffect(() => {
-        const cargarMultimediasSeleccionados = async () => {
-            if (!isEdit || !idTipo || !tipoProducto?.id || datosInicializeados) return;
-            
-            try {
-                const filtro = JSON.stringify({
-                    where: {
-                        and: {
-                            tipoProductoId: tipoProducto.id
-                        }
-                    }
-                });
-                
-                const detalles = await getTipoProductoMultimediaDetalles(filtro);
-                if (detalles && detalles.length > 0) {
-                    const multimediasIds = detalles.map(detalle => detalle.id);
-                    setMultimediasSeleccionados(multimediasIds);
-                    setDatosInicializeados(true);
-                }
-            } catch (error) {
-                console.error('Error cargando multimedias seleccionados:', error);
-            }
-        };
-
-        if (usuarioSesion?.empresaId && isEdit && idTipo && tipoProducto?.id) {
-            cargarMultimediasSeleccionados();
-        }
-    }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id, datosInicializeados]);
+    }, [usuarioSesion?.empresaId, isEdit, idTipo, tipoProducto?.id]);
 
     // Sincronizar selecciones y órdenes con el tipo de producto
     useEffect(() => {
         // Construir mapa COMPLETO de órdenes de TODAS las propiedades seleccionadas
-        // (no solo las modificadas en esta sesión) para que al guardar no se pierdan
         const propiedadesOrdenCompleto = {};
-        const selectedIds = new Set([...atributosSeleccionados, ...camposDinamicosSeleccionados]);
+        const selectedPropIds = new Set([...atributosSeleccionados, ...camposDinamicosSeleccionados]);
         propiedades.forEach(p => {
-            if (selectedIds.has(p.id) && p.orden !== null && p.orden !== undefined) {
+            if (selectedPropIds.has(p.id) && p.orden !== null && p.orden !== undefined) {
                 propiedadesOrdenCompleto[p.id] = p.orden;
+            }
+        });
+
+        // Construir mapa COMPLETO de órdenes de TODAS las multimedias seleccionadas
+        const multimediasOrdenCompleto = {};
+        const selectedMultimediaIds = new Set(multimediasSeleccionados);
+        multimedias.forEach(m => {
+            if (selectedMultimediaIds.has(m.id) && m.orden !== null && m.orden !== undefined) {
+                multimediasOrdenCompleto[m.id] = m.orden;
             }
         });
 
@@ -201,9 +200,10 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
             _gruposOrdenModificados: gruposOrdenModificados,
             _atributosOrdenModificados: atributosOrdenModificados,
             _multimediasOrdenModificados: multimediasOrdenModificados,
-            _propiedadesOrdenCompleto: propiedadesOrdenCompleto
+            _propiedadesOrdenCompleto: propiedadesOrdenCompleto,
+            _multimediasOrdenCompleto: multimediasOrdenCompleto
         }));
-    }, [atributosSeleccionados, camposDinamicosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados, propiedades]);
+    }, [atributosSeleccionados, camposDinamicosSeleccionados, multimediasSeleccionados, gruposOrdenModificados, atributosOrdenModificados, multimediasOrdenModificados, propiedades, multimedias]);
 
     const manejarCambioInput = (e, nombreCampo) => {
         const valor = e.target.value;
@@ -334,6 +334,67 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
             setCamposDinamicosSeleccionados,
             intl.formatMessage({ id: 'Campos Dinámicos' })
         );
+    };
+
+    /**
+     * Valida si las multimedia que se van a desmarcar están siendo usadas en productos
+     * QUE PERTENECEN A ESTE TIPO DE PRODUCTO (plantilla).
+     * Si alguna tiene registros en producto_multimedia, muestra un Dialog y bloquea el cambio.
+     */
+    const manejarCambioMultimedia = async (nuevaSeleccion) => {
+        const nuevaSet = new Set(nuevaSeleccion);
+        const idsQuitados = multimediasSeleccionados.filter(id => !nuevaSet.has(id));
+
+        if (idsQuitados.length === 0) {
+            setMultimediasSeleccionados(nuevaSeleccion);
+            return;
+        }
+
+        try {
+            const tipoId = tipoProducto?.id;
+            if (!tipoId) {
+                setMultimediasSeleccionados(nuevaSeleccion);
+                return;
+            }
+
+            const filtroProductos = JSON.stringify({
+                where: { and: { tipoProductoId: tipoId } },
+                fields: { id: true }
+            });
+            const productosDeEsteTipo = await getProductos(filtroProductos);
+            const idsProductos = productosDeEsteTipo?.map(p => p.id) || [];
+
+            if (idsProductos.length === 0) {
+                setMultimediasSeleccionados(nuevaSeleccion);
+                return;
+            }
+
+            const multimediasConUso = [];
+            for (const multimediaId of idsQuitados) {
+                const filtro = JSON.stringify({
+                    where: { and: { multimediaId: multimediaId, productoId: { inq: idsProductos } } }
+                });
+                const registros = await getProductosMultimedia(filtro);
+                if (registros && registros.length > 0) {
+                    const mm = multimedias.find(m => m.id === multimediaId);
+                    multimediasConUso.push(mm || { id: multimediaId, nombre: `Multimedia #${multimediaId}` });
+                }
+            }
+
+            if (multimediasConUso.length > 0) {
+                setDialogoConflictoPropiedad({
+                    visible: true,
+                    propiedades: multimediasConUso,
+                    tipo: intl.formatMessage({ id: 'Multimedia' })
+                });
+                return;
+            }
+
+            setMultimediasSeleccionados(nuevaSeleccion);
+        } catch (error) {
+            console.error('Error validando deselección de multimedia:', error);
+            setMultimediasSeleccionados(nuevaSeleccion);
+        }
     };
 
     const renderItemMultimedia = (multimedia) => (
@@ -515,7 +576,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         items={multimedias}
                                         grupos={[]}
                                         seleccionados={multimediasSeleccionados}
-                                        onSeleccionChange={setMultimediasSeleccionados}
+                                        onSeleccionChange={manejarCambioMultimedia}
                                         grupoIdField="_sinGrupo"
                                         cargando={cargandoMultimedias}
                                         editable={editable}
