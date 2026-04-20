@@ -30,7 +30,7 @@ import { useRouter } from 'next/navigation';
 import { useTheme } from "@/app/providers/ThemeProvider";
 const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, editableInicial, onCancelar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar }) => {
     const intl = useIntl()
     const router = useRouter();
     const { themeConfig } = useTheme(); // Hook para obtener el tema actual
@@ -286,7 +286,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             }
 
             if (registroEditarFlag) {
-                setEditable(true);
+                setEditable(editableInicial !== false);
                 setIdEditar(registroEditar);
             }
 
@@ -783,7 +783,13 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         return React.cloneElement(editarComponente, {
             idEditar: idEditar,
             editable: editable,
-            setIdEditar: setIdEditar,
+            setIdEditar: (val) => {
+                if (val === null && onCancelar) {
+                    onCancelar();
+                } else {
+                    setIdEditar(val);
+                }
+            },
             rowData: registros,
             emptyRegistro: emptyRegistro,
             setRegistroResult: setRegistroResult,
