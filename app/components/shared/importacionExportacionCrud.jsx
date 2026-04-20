@@ -216,20 +216,73 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
         setProgreso(0);
     };
 
+    // Devuelve el icono grande que acompaña al estado actual del proceso.
+    const obtenerIconoResultado = () => {
+        if (!resultado) {
+            return { icono: "pi pi-spin pi-spinner", clase: "text-primary" };
+        }
+
+        if (resultado.estado === "OK") {
+            return { icono: "pi pi-check-circle", clase: "text-green-500" };
+        }
+
+        if (resultado.estado === "WARNING") {
+            return { icono: "pi pi-exclamation-triangle", clase: "text-orange-500" };
+        }
+
+        return { icono: "pi pi-times-circle", clase: "text-red-500" };
+    };
+
     // Devuelve el título del bloque de progreso según el estado actual de la operación.
     const obtenerTituloResultado = () => {
         if (!resultado) return intl.formatMessage({ id: "Procesando importación..." });
-        return resultado.estado === "OK"
-            ? intl.formatMessage({ id: "Proceso finalizado correctamente" })
-            : intl.formatMessage({ id: "Proceso finalizado con errores" });
+        if (resultado.estado === "OK") {
+            return intl.formatMessage({ id: "Proceso finalizado correctamente" });
+        }
+
+        if (resultado.estado === "WARNING") {
+            return intl.formatMessage({ id: "Proceso finalizado con errores" });
+        }
+
+        return intl.formatMessage({ id: "Proceso cancelado" });
     };
 
     // Devuelve el texto explicativo bajo la barra de progreso una vez finalizada la operación.
     const obtenerDescripcionResultado = () => {
         if (!resultado) return intl.formatMessage({ id: "No cierres esta ventana hasta que termine el proceso." });
-        return resultado.tieneErrores
-            ? intl.formatMessage({ id: "Se ha descargado un fichero con el detalle de los errores para que puedas revisarlos." })
-            : intl.formatMessage({ id: "Ya puedes cerrar esta ventana cuando quieras." });
+
+        if (resultado.estado === "WARNING" && resultado.tieneErrores) {
+            return (
+                <>
+                    {intl.formatMessage({ id: "Se ha descargado el archivo" })}{" "}
+                    <strong>{resultado.nombreArchivoErrores}</strong>.{" "}
+                    {intl.formatMessage({ id: "con el detalle de los errores para que puedas revisarlos. Entre y modifícalo según sea necesario." })}
+                </>
+            );
+        }
+
+        if (resultado.estado === "ERROR" && resultado.tieneErrores) {
+            return (
+                <>
+                    {intl.formatMessage({ id: "La importación no se ha podido completar. Se ha descargado el archivo" })}{" "}
+                    <strong>{resultado.nombreArchivoErrores}</strong>.{" "}
+                    {intl.formatMessage({ id: "Revísalo, corrige los errores e inténtalo de nuevo." })}
+                </>
+            );
+        }
+
+        if (resultado.estado === "ERROR") {
+
+            return (
+                <>
+                    {intl.formatMessage({ id: "La importación no se ha podido completar." })}{" "}
+                    <br />
+                    {intl.formatMessage({ id: ` ${resultado.mensaje}` })}
+                </>
+            );
+        }
+
+        return intl.formatMessage({ id: "Ya puedes cerrar esta ventana cuando quieras." });
     };
 
     // Ejecuta una acción de descarga bloqueando el diálogo hasta que termine.
@@ -282,6 +335,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
                 estado: respuestaBackend?.status || "OK",
                 mensaje: respuestaBackend?.message || intl.formatMessage({ id: "Importación lanzada correctamente" }),
                 tieneErrores: Boolean(respuestaBackend?.erroresCsv),
+                nombreArchivoErrores: respuestaBackend?.nombreArchivoErrores || `${tabla}_errores.csv`,
             });
 
             if (respuestaBackend?.erroresCsv) {
@@ -340,6 +394,8 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
             />
         </>
     );
+
+    const { icono, clase } = obtenerIconoResultado();
 
     return (
         <Dialog
@@ -435,12 +491,15 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
                 {(procesando || resultado) && (
                     <div className="flex flex-column align-items-center justify-content-center gap-3 py-3">
                         <ProgressBar value={progreso} style={{ width: "100%", height: "10px" }} />
+                        {!descargando && (
+                            <i className={`${icono} ${clase}`} style={{ fontSize: "6rem" }} />
+                        )}
                         <b>
                             {descargando
                                 ? intl.formatMessage({ id: "Preparando descarga..." })
                                 : obtenerTituloResultado()}
                         </b>
-                        <small>
+                        <small className="text-center">
                             {descargando
                                 ? intl.formatMessage({ id: "La descarga se está preparando. Espera un momento." })
                                 : obtenerDescripcionResultado()}
