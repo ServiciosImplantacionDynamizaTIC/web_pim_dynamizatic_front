@@ -623,7 +623,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                 {/* Fila 1: Tipo de uso */}
                 <div className="mb-3">
                     <label className="block text-sm font-medium mb-1">
-                        {intl.formatMessage({ id: 'Tipo de Uso' })}<span className="text-red-500">*</span>
+                        <b>{intl.formatMessage({ id: 'Tipo de Uso' })}<span className="text-red-500">*</span></b>
                     </label>
                     <MultiSelect
                         value={valorActual.tipoUsoMultimediaIds || []}
@@ -680,7 +680,8 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                 )}
 
                 {/* Fila 3: Botón de carga */}
-                <div className="mt-auto">
+                <div className="mt-auto multimedia-upload-btn">
+                    <style>{`.multimedia-upload-btn .p-fileupload { width: 100%; } .multimedia-upload-btn .p-fileupload .p-button { width: 100%; justify-content: center; }`}</style>
                     <FileUpload
                         mode="basic"
                         accept={obtenerLosTiposAceptadosPorTipo(multimediaDetalle.tipo)}

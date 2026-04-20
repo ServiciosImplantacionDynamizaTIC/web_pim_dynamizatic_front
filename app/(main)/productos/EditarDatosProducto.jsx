@@ -18,6 +18,9 @@ import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
 import { getTiposProducto, getTipoProducto } from "@/app/api-endpoints/tipo_producto";
 import { getProductosPropiedad, deleteProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
+import { getProductosMultimedia, deleteProductoMultimedia } from "@/app/api-endpoints/producto_multimedia";
+import { getProductoMultimediaTiposUso, deleteProductoMultimediaTipoUso } from "@/app/api-endpoints/producto_multimedia_tipo_uso";
+import { borrarFichero } from "@/app/api-endpoints/ficheros";
 import { patchProducto } from "@/app/api-endpoints/producto";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -38,7 +41,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
     const [imagenPrincipalPreview, setImagenPrincipalPreview] = useState(null);
     const [imagenPrincipalGrande, setImagenPrincipalGrande] = useState(null);
     const [visualizadorVisible, setVisualizadorVisible] = useState(false);
-    const [dialogoCambioTipo, setDialogoCambioTipo] = useState({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
+    const [dialogoCambioTipo, setDialogoCambioTipo] = useState({ visible: false, nuevoTipoId: null, registrosPropiedades: [], registrosMultimedia: [] });
     const [eliminandoPropiedades, setEliminandoPropiedades] = useState(false);
 
     // Cargar categorías
@@ -266,35 +269,45 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
         if (nuevoTipoId === producto.tipoProductoId) return;
 
         try {
-            // Consultar si existen registros en producto_propiedad para este producto
-            const filtro = JSON.stringify({
+            // Consultar propiedades (atributos + campos dinámicos) del producto
+            const filtroPropiedades = JSON.stringify({
                 where: { and: { productoId: producto.id } }
             });
-            const registros = await getProductosPropiedad(filtro);
+            const registrosPropiedades = await getProductosPropiedad(filtroPropiedades);
 
-            // Verificar si alguno tiene valor asignado
-            const tieneValores = registros?.some(r =>
+            // Consultar multimedia del producto
+            const filtroMultimedia = JSON.stringify({
+                where: { and: { productoId: producto.id } }
+            });
+            const registrosMultimedia = await getProductosMultimedia(filtroMultimedia);
+
+            // Verificar si alguna propiedad tiene valor asignado
+            const tieneValoresPropiedades = registrosPropiedades?.some(r =>
                 r.valor !== null && r.valor !== undefined && r.valor.toString().trim() !== ''
             );
 
-            if (tieneValores) {
-                // Mostrar Dialog de confirmación
+            // Verificar si hay multimedia con archivos subidos
+            const tieneMultimedia = registrosMultimedia?.length > 0;
+
+            if (tieneValoresPropiedades || tieneMultimedia) {
+                // Mostrar Dialog de confirmación con la información completa
                 setDialogoCambioTipo({
                     visible: true,
                     nuevoTipoId,
-                    registrosAEliminar: registros
+                    registrosPropiedades: registrosPropiedades || [],
+                    registrosMultimedia: registrosMultimedia || []
                 });
                 return;
             }
 
-            // Si no hay valores pero sí hay registros vacíos, limpiarlos silenciosamente
-            if (registros?.length > 0) {
-                await Promise.all(registros.map(r => deleteProductoPropiedad(r.id)));
+            // Si no hay valores ni multimedia, limpiar registros vacíos silenciosamente
+            if (registrosPropiedades?.length > 0) {
+                await Promise.all(registrosPropiedades.map(r => deleteProductoPropiedad(r.id)));
             }
 
             setProducto({ ...producto, tipoProductoId: nuevoTipoId });
         } catch (error) {
-            console.error('Error verificando propiedades del producto:', error);
+            console.error('Error verificando datos del producto:', error);
             // En caso de error, permitir el cambio para no bloquear
             setProducto({ ...producto, tipoProductoId: nuevoTipoId });
         }
@@ -303,42 +316,70 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
     const confirmarCambioTipoProducto = async () => {
         setEliminandoPropiedades(true);
         try {
-            // 1. Borrar todos los registros de producto_propiedad para este producto
-            await Promise.all(
-                dialogoCambioTipo.registrosAEliminar.map(r => deleteProductoPropiedad(r.id))
-            );
+            // 1. Borrar todos los registros de producto_propiedad (atributos + campos dinámicos)
+            if (dialogoCambioTipo.registrosPropiedades.length > 0) {
+                await Promise.all(
+                    dialogoCambioTipo.registrosPropiedades.map(r => deleteProductoPropiedad(r.id))
+                );
+            }
 
-            // 2. Persistir el nuevo tipo de producto en BD
+            // 2. Borrar multimedia: primero tipos de uso, luego ficheros del servidor, luego registros
+            if (dialogoCambioTipo.registrosMultimedia.length > 0) {
+                for (const multimedia of dialogoCambioTipo.registrosMultimedia) {
+                    // 2a. Eliminar tipos de uso asociados (FK constraint)
+                    const filtroTiposUso = JSON.stringify({
+                        where: { and: { productoMultimediaId: multimedia.id } }
+                    });
+                    const tiposUsoExistentes = await getProductoMultimediaTiposUso(filtroTiposUso);
+                    if (tiposUsoExistentes.length > 0) {
+                        await Promise.all(tiposUsoExistentes.map(tu => deleteProductoMultimediaTipoUso(tu.id)));
+                    }
+
+                    // 2b. Eliminar ficheros del servidor (el backend borra todas las versiones automáticamente)
+                    if (multimedia.multimediaUrl && !multimedia.multimediaUrl.startsWith('blob:')) {
+                        try {
+                            await borrarFichero(multimedia.multimediaUrl);
+                        } catch (err) {
+                            console.warn('Error eliminando fichero del servidor:', err);
+                        }
+                    }
+
+                    // 2c. Eliminar el registro de producto_multimedia
+                    await deleteProductoMultimedia(multimedia.id);
+                }
+            }
+
+            // 3. Persistir el nuevo tipo de producto en BD
             await patchProducto(producto.id, { tipoProductoId: dialogoCambioTipo.nuevoTipoId });
 
-            // 3. Actualizar el estado local
+            // 4. Actualizar el estado local
             setProducto({ ...producto, tipoProductoId: dialogoCambioTipo.nuevoTipoId });
 
-            // 4. Notificar al Crud para que recargue la tabla
+            // 5. Notificar al Crud para que recargue la tabla
             setRegistroResult?.(`tipo_cambiado_${Date.now()}`);
 
             toast.current?.show({
                 severity: 'success',
                 summary: intl.formatMessage({ id: 'Tipo de producto cambiado' }),
-                detail: intl.formatMessage({ id: 'Se han eliminado los valores de atributos y campos dinámicos anteriores' }),
+                detail: intl.formatMessage({ id: 'Se han eliminado los atributos, campos dinámicos y multimedia anteriores' }),
                 life: 5000,
             });
         } catch (error) {
-            console.error('Error eliminando propiedades del producto:', error);
+            console.error('Error eliminando datos del producto:', error);
             toast.current?.show({
                 severity: 'error',
                 summary: 'Error',
-                detail: intl.formatMessage({ id: 'Error al eliminar las propiedades del producto' }),
+                detail: intl.formatMessage({ id: 'Error al cambiar el tipo de producto' }),
                 life: 3000,
             });
         } finally {
             setEliminandoPropiedades(false);
-            setDialogoCambioTipo({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
+            setDialogoCambioTipo({ visible: false, nuevoTipoId: null, registrosPropiedades: [], registrosMultimedia: [] });
         }
     };
 
     const cancelarCambioTipoProducto = () => {
-        setDialogoCambioTipo({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
+        setDialogoCambioTipo({ visible: false, nuevoTipoId: null, registrosPropiedades: [], registrosMultimedia: [] });
     };
 
     return (
@@ -348,10 +389,9 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                         <label htmlFor="imagenPrincipal">{intl.formatMessage({ id: 'Imagen principal' })}</label>
-                        <div className="flex gap-3 align-items-start">
-                            <div className="flex-1">
+                        <div className="flex flex-column align-items-center gap-2">
                                 {imagenPrincipalPreview && (
-                                    <div className="flex flex-column align-items-start gap-2">
+                                    <div className="flex flex-column align-items-center gap-2 w-full">
                                         <img
                                             src={imagenPrincipalPreview}
                                             alt="Vista previa imagen principal"
@@ -369,43 +409,41 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                                             altText={intl.formatMessage({ id: 'Imagen principal' })}
                                         />
                                         {estoyEditandoProducto && (
-                                            <>
-                                                <button
-                                                    type="button"
-                                                    className="p-button p-button-sm p-button-danger p-button-text"
-                                                    onClick={eliminarImagenPrincipal}
-                                                    disabled={estadoGuardando}
-                                                    title={intl.formatMessage({ id: 'Eliminar imagen' })}
-                                                >
-                                                    <i className="pi pi-trash"></i>&nbsp;{intl.formatMessage({ id: 'Eliminar imagen' })}
-                                                </button>
-                                            </>
+                                            <button
+                                                type="button"
+                                                className="p-button p-button-sm p-button-danger p-button-text"
+                                                onClick={eliminarImagenPrincipal}
+                                                disabled={estadoGuardando}
+                                                title={intl.formatMessage({ id: 'Eliminar imagen' })}
+                                            >
+                                                <i className="pi pi-trash"></i>&nbsp;{intl.formatMessage({ id: 'Eliminar imagen' })}
+                                            </button>
                                         )}
                                     </div>
                                 )}
-                                {estoyEditandoProducto && (<>
-                                    <FileUpload
-                                        id="imagenPrincipal"
-                                        mode="basic"
-                                        accept="image/*"
-                                        maxFileSize={2000000}
-                                        onSelect={manejarSeleccionImagenPrincipal}
-                                        onValidationFail={() => {
-                                            toast.current?.show({
-                                                severity: 'error',
-                                                summary: intl.formatMessage({ id: 'Archivo demasiado grande' }),
-                                                detail: intl.formatMessage({ id: 'La imagen supera el tamaño máximo permitido de 2MB. Por favor, selecciona una imagen más pequeña.' }),
-                                                life: 5000
-                                            });
-                                        }}
-                                        chooseLabel={intl.formatMessage({ id: 'Seleccionar imagen' })}
-                                        disabled={estadoGuardando}
-                                        className="w-full"
-                                    />
-                                    <small className="text-muted">{intl.formatMessage({ id: 'Formatos soportados: JPG, PNG, GIF. Máximo 2MB' })}</small>
-                                    </>
+                                {estoyEditandoProducto && (
+                                    <div className="w-full imagen-principal-upload">
+                                        <style>{`.imagen-principal-upload .p-fileupload { width: 100%; } .imagen-principal-upload .p-fileupload .p-button { width: 100%; justify-content: center; }`}</style>
+                                        <FileUpload
+                                            id="imagenPrincipal"
+                                            mode="basic"
+                                            accept="image/*"
+                                            maxFileSize={2000000}
+                                            onSelect={manejarSeleccionImagenPrincipal}
+                                            onValidationFail={() => {
+                                                toast.current?.show({
+                                                    severity: 'error',
+                                                    summary: intl.formatMessage({ id: 'Archivo demasiado grande' }),
+                                                    detail: intl.formatMessage({ id: 'La imagen supera el tamaño máximo permitido de 2MB. Por favor, selecciona una imagen más pequeña.' }),
+                                                    life: 5000
+                                                });
+                                            }}
+                                            chooseLabel={intl.formatMessage({ id: 'Seleccionar imagen' })}
+                                            disabled={estadoGuardando}
+                                        />
+                                        <small className="text-muted">{intl.formatMessage({ id: 'Formatos soportados: JPG, PNG, GIF. Máximo 2MB' })}</small>
+                                    </div>
                                 )}
-                            </div>                            
                         </div>
                     </div>
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-8">
@@ -615,10 +653,15 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                     </span>
                 </div>
                 <p style={{ margin: 0, lineHeight: '1.6' }}>
-                    {intl.formatMessage({ id: 'Este producto ya tiene valores asignados en los campos de Atributos y/o Campos Dinámicos.' })}
-                    {' '}
-                    {intl.formatMessage({ id: 'Si continúa cambiando el tipo de producto, se borrarán todos los valores asignados para atributos y campos dinámicos de este producto.' })}
-                    <br /><br />
+                    {intl.formatMessage({ id: 'Este producto ya tiene datos asociados a la plantilla actual. Al cambiar el tipo de producto se eliminarán de forma permanente:' })}
+                </p>
+                <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+                    <li>{intl.formatMessage({ id: 'Atributos del producto' })}</li>
+                    <li>{intl.formatMessage({ id: 'Campos dinámicos del producto' })}</li>
+                    <li>{intl.formatMessage({ id: 'Archivos multimedia del producto' })}</li>
+                    {/* <li>{intl.formatMessage({ id: 'Tipos de uso asignados a la multimedia' })}</li> */}
+                </ul>
+                <p style={{ margin: 0, lineHeight: '1.6' }}>
                     <strong>{intl.formatMessage({ id: '¿Desea continuar?' })}</strong>
                 </p>
             </Dialog>
