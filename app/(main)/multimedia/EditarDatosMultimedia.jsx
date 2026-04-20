@@ -22,6 +22,39 @@ const EditarDatosMultimedia = ({ multimedia, setMultimedia, estadoGuardando, isE
         { label: 'Documento', value: 'documento' }
     ];
 
+    // Opciones de tamaño máximo por tipo de multimedia (en MB)
+    const tamanosPorTipo = {
+        imagen: [
+            { label: '2 MB', value: 2 },
+            { label: '5 MB', value: 5 },
+            { label: '10 MB', value: 10 },
+            { label: '20 MB', value: 20 },
+        ],
+        video: [
+            { label: '10 MB', value: 10 },
+            { label: '50 MB', value: 50 },
+            { label: '100 MB', value: 100 },
+            { label: '200 MB', value: 200 },
+            { label: '500 MB', value: 500 },
+        ],
+        audio: [
+            { label: '5 MB', value: 5 },
+            { label: '10 MB', value: 10 },
+            { label: '20 MB', value: 20 },
+            { label: '50 MB', value: 50 },
+            { label: '100 MB', value: 100 },
+        ],
+        documento: [
+            { label: '2 MB', value: 2 },
+            { label: '5 MB', value: 5 },
+            { label: '10 MB', value: 10 },
+            { label: '20 MB', value: 20 },
+            { label: '50 MB', value: 50 },
+        ],
+    };
+
+    const opcionesTamano = multimedia.tipo ? (tamanosPorTipo[multimedia.tipo] || []) : [];
+
     useEffect(() => {
         const cargarCategorias = async () => {
             try {
@@ -107,9 +140,25 @@ const EditarDatosMultimedia = ({ multimedia, setMultimedia, estadoGuardando, isE
                             id="tipo"
                             value={multimedia.tipo}
                             options={tiposMultimedia}
-                            onChange={(e) => setMultimedia({ ...multimedia, tipo: e.value })}
+                            onChange={(e) => setMultimedia({ ...multimedia, tipo: e.value, tamanoMaximoMb: null })}
                             placeholder={intl.formatMessage({ id: 'Seleccionar tipo' })}
                             disabled={estadoGuardando}
+                        />
+                    </div>
+
+                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
+                        <label htmlFor="tamanoMaximoMb"><b>{intl.formatMessage({ id: 'Tamaño máximo de archivo' })}*</b></label>
+                        <Dropdown
+                            id="tamanoMaximoMb"
+                            value={multimedia.tamanoMaximoMb}
+                            options={opcionesTamano}
+                            onChange={(e) => setMultimedia({ ...multimedia, tamanoMaximoMb: e.value })}
+                            placeholder={multimedia.tipo
+                                ? intl.formatMessage({ id: 'Seleccionar tamaño máximo' })
+                                : intl.formatMessage({ id: 'Seleccione primero un tipo' })
+                            }
+                            disabled={estadoGuardando || !multimedia.tipo}
+                            className={`${(estadoGuardando && !multimedia.tamanoMaximoMb) ? "p-invalid" : ""}`}
                         />
                     </div>
 

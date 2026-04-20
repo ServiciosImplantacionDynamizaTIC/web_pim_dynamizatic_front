@@ -7871,6 +7871,12 @@ export interface Multimedia {
     'tipo': string;
     /**
      * 
+     * @type {number}
+     * @memberof Multimedia
+     */
+    'tamanoMaximoMb'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof Multimedia
      */
@@ -7899,12 +7905,6 @@ export interface Multimedia {
      * @memberof Multimedia
      */
     'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof Multimedia
-     */
-    'orden'?: number | null;
 }
 /**
  * 
@@ -8024,6 +8024,12 @@ export interface MultimediaPartial {
     'tipo'?: string;
     /**
      * 
+     * @type {number}
+     * @memberof MultimediaPartial
+     */
+    'tamanoMaximoMb'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof MultimediaPartial
      */
@@ -8052,12 +8058,6 @@ export interface MultimediaPartial {
      * @memberof MultimediaPartial
      */
     'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaPartial
-     */
-    'orden'?: number | null;
 }
 /**
  * (tsType: MultimediaWithRelations, schemaOptions: { includeRelations: true })
@@ -8097,6 +8097,12 @@ export interface MultimediaWithRelations {
     'tipo': string;
     /**
      * 
+     * @type {number}
+     * @memberof MultimediaWithRelations
+     */
+    'tamanoMaximoMb'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof MultimediaWithRelations
      */
@@ -8125,12 +8131,6 @@ export interface MultimediaWithRelations {
      * @memberof MultimediaWithRelations
      */
     'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof MultimediaWithRelations
-     */
-    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<Archivo, \'id\'>, schemaOptions: { title: \'NewArchivo\', exclude: [ \'id\' ] })
@@ -9915,6 +9915,12 @@ export interface NewMultimedia {
     'tipo': string;
     /**
      * 
+     * @type {number}
+     * @memberof NewMultimedia
+     */
+    'tamanoMaximoMb'?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof NewMultimedia
      */
@@ -9943,12 +9949,6 @@ export interface NewMultimedia {
      * @memberof NewMultimedia
      */
     'usuarioModificacion'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewMultimedia
-     */
-    'orden'?: number | null;
 }
 /**
  * (tsType: Omit<Notificacion, \'id\'>, schemaOptions: { title: \'NewNotificacion\', exclude: [ \'id\' ] })

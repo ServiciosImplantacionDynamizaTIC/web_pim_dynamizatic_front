@@ -17,6 +17,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
         nombre: "",
         descripcion: "",
         tipo: "imagen",
+        tamanoMaximoMb: null,
         activoSn: "S"
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
@@ -44,6 +45,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     const validaciones = async () => {
         const validaNombre = multimedia.nombre === undefined || multimedia.nombre === "";
         const validaTipo = multimedia.tipo === undefined || multimedia.tipo === "";
+        const validaTamano = multimedia.tamanoMaximoMb === undefined || multimedia.tamanoMaximoMb === null;
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -54,8 +56,17 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 life: 3000,
             });
         }
+
+        if (validaTamano) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Debe seleccionar el tamaño máximo de archivo permitido' }),
+                life: 3000,
+            });
+        }
         
-        return (!validaNombre && !validaTipo);
+        return (!validaNombre && !validaTipo && !validaTamano);
     };
 
     const guardarMultimedia = async () => {
@@ -94,6 +105,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
                     tipo: objGuardar.tipo || "imagen",
+                    tamanoMaximoMb: objGuardar.tamanoMaximoMb,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                 };

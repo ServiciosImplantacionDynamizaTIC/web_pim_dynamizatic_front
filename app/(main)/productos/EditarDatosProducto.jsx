@@ -8,10 +8,11 @@ import ArchivoMultipleInput from "../../components/shared/archivo_multiple_input
 import ArchivoInput from "../../components/shared/archivo_input";
 import { InputSwitch } from 'primereact/inputswitch';
 import { FileUpload } from 'primereact/fileupload';
-import { Image } from 'primereact/image';
 import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import VisualizadorDeImagen from "@/app/components/shared/VisualizadorDeImagen";
+import { getUrlImagenMiniatura, getUrlImagenGrande } from "@/app/utility/ImageUtils";
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
 import { getEstados } from "@/app/api-endpoints/estado";
@@ -35,6 +36,8 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
     const [cargandoEstados, setCargandoEstados] = useState(false);
     const [cargandoTiposProducto, setCargandoTiposProducto] = useState(false);
     const [imagenPrincipalPreview, setImagenPrincipalPreview] = useState(null);
+    const [imagenPrincipalGrande, setImagenPrincipalGrande] = useState(null);
+    const [visualizadorVisible, setVisualizadorVisible] = useState(false);
     const [dialogoCambioTipo, setDialogoCambioTipo] = useState({ visible: false, nuevoTipoId: null, registrosAEliminar: [] });
     const [eliminandoPropiedades, setEliminandoPropiedades] = useState(false);
 
@@ -218,6 +221,7 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
             // Crear URL temporal para mostrar la vista previa
             const imageUrl = URL.createObjectURL(file);
             setImagenPrincipalPreview(imageUrl);
+            setImagenPrincipalGrande(null); // blob no tiene versión grande
             
             // Guardar el archivo en el producto para procesarlo al guardar
             setProducto({ ...producto, imagenPrincipalFile: file, imagenPrincipal: imageUrl });
@@ -229,13 +233,20 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
             URL.revokeObjectURL(imagenPrincipalPreview);
         }
         setImagenPrincipalPreview(null);
+        setImagenPrincipalGrande(null);
         setProducto({ ...producto, imagenPrincipal: null, imagenPrincipalFile: null });
     };
 
     // Efecto para cargar la imagen existente si está editando
     useEffect(() => {
         if (producto?.imagenPrincipal && !imagenPrincipalPreview) {
-            setImagenPrincipalPreview(devuelveBasePath() + producto.imagenPrincipal);
+            if (producto.imagenPrincipal.startsWith('blob:')) {
+                setImagenPrincipalPreview(producto.imagenPrincipal);
+                setImagenPrincipalGrande(null);
+            } else {
+                setImagenPrincipalPreview(devuelveBasePath() + getUrlImagenMiniatura(producto.imagenPrincipal));
+                setImagenPrincipalGrande(getUrlImagenGrande(producto.imagenPrincipal));
+            }
         }
     }, [producto?.imagenPrincipal]);
 
@@ -341,14 +352,21 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                             <div className="flex-1">
                                 {imagenPrincipalPreview && (
                                     <div className="flex flex-column align-items-start gap-2">
-                                        <Image
+                                        <img
                                             src={imagenPrincipalPreview}
                                             alt="Vista previa imagen principal"
                                             width="160"
                                             height="160"
                                             className="border-round shadow-2"
-                                            style={{ objectFit: 'cover' }}
-                                            preview
+                                            style={{ objectFit: 'cover', cursor: imagenPrincipalGrande ? 'zoom-in' : 'default' }}
+                                            onClick={() => { if (imagenPrincipalGrande) setVisualizadorVisible(true); }}
+                                            onError={(e) => { e.target.src = `${devuelveBasePath()}/multimedia/Sistema/200x200_imagen-no-disponible.jpeg`; }}
+                                        />
+                                        <VisualizadorDeImagen
+                                            visible={visualizadorVisible}
+                                            onHide={() => setVisualizadorVisible(false)}
+                                            imageUrl={imagenPrincipalGrande}
+                                            altText={intl.formatMessage({ id: 'Imagen principal' })}
                                         />
                                         {estoyEditandoProducto && (
                                             <>

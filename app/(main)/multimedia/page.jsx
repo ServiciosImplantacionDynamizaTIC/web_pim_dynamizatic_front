@@ -11,6 +11,7 @@ const Multimedia = () => {
     const columnas = [
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'tipo', header: intl.formatMessage({ id: 'Tipo' }), tipo: 'string' },
+        { campo: 'tamanoMaximoMb', header: intl.formatMessage({ id: 'Tamaño máx. (MB)' }), tipo: 'number' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ];
     return (

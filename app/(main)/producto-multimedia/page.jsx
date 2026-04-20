@@ -5,14 +5,44 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { FileUpload } from "primereact/fileupload";
-import { Image } from "primereact/image";
 import { MultiSelect } from "primereact/multiselect";
+import VisualizadorDeImagen from "@/app/components/shared/VisualizadorDeImagen";
+import { getUrlImagenMiniatura, getUrlImagenGrande } from "@/app/utility/ImageUtils";
 import { getTipoProductoMultimediaDetalles } from "@/app/api-endpoints/tipo_producto_multimedia_detalle";
 import { getProductosMultimedia, postProductoMultimedia, patchProductoMultimedia, deleteProductoMultimedia } from "@/app/api-endpoints/producto_multimedia";
-import { postSubirImagen } from "@/app/api-endpoints/ficheros";
+import { postSubirImagen, postSubirFichero, borrarFichero } from "@/app/api-endpoints/ficheros";
 import { getTiposUsoMultimedia } from "@/app/api-endpoints/tipo_uso_multimedia";
 import { getProductoMultimediaTiposUso, postProductoMultimediaTipoUso, deleteProductoMultimediaTipoUso } from "@/app/api-endpoints/producto_multimedia_tipo_uso";
 import { getUsuarioSesion, devuelveBasePath } from "@/app/utility/Utils";
+
+/**
+ * Muestra una imagen en miniatura (thumbnail). Al hacer clic, abre VisualizadorDeImagen
+ * con la versión grande (1250x850). No pre-carga la imagen grande.
+ */
+const ImagenConVisualizador = ({ urlThumbnail, urlGrande, alt }) => {
+    const [visible, setVisible] = React.useState(false);
+    const fallbackSrc = `/multimedia/Sistema/200x200_imagen-no-disponible.jpeg`;
+
+    return (
+        <>
+            <img
+                src={urlThumbnail}
+                alt={alt}
+                width="120"
+                height="120"
+                style={{ objectFit: 'cover', cursor: 'zoom-in', borderRadius: '6px', boxShadow: '0 1px 4px rgba(0,0,0,.25)' }}
+                onClick={() => setVisible(true)}
+                onError={(e) => { e.target.src = `${devuelveBasePath()}${fallbackSrc}`; }}
+            />
+            <VisualizadorDeImagen
+                visible={visible}
+                onHide={() => setVisible(false)}
+                imageUrl={urlGrande}
+                altText={alt}
+            />
+        </>
+    );
+};
 
 const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto }) => {
     const intl = useIntl();
@@ -154,13 +184,56 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
     };
 
     /**
+     * Extensiones permitidas por cada tipo de multimedia.
+     */
+    const extensionesPorTipo = {
+        imagen: /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i,
+        video: /\.(mp4|webm|ogg|avi|mov|mkv|flv|wmv)$/i,
+        audio: /\.(mp3|wav|ogg|flac|m4a|aac|wma)$/i,
+        documento: /\.(pdf|doc|docx|xls|xlsx|ppt|pptx|txt|csv|zip|rar)$/i
+    };
+
+    /**
+     * Devuelve el atributo accept del FileUpload según el tipo de multimedia.
+     */
+    const obtenerLosTiposAceptadosPorTipo = (tipo) => {
+        switch (tipo?.toLowerCase()) {
+            case 'imagen': return 'image/*';
+            case 'video': return 'video/*';
+            case 'audio': return 'audio/*';
+            case 'documento': return '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip,.rar';
+            default: return 'image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip,.rar';
+        }
+    };
+
+    /**
      * Cuando el usuario selecciona un archivo:
-     * 1. Verifico que la multimedia tenga al menos un TIPO DE USO  asignado
-     * 2. Subo el archivo al servidor
-     * 3. Creo o actualizo el registro en la tabla producto_multimedia inmediatamente
+     * 1. Valido que el archivo coincida con el tipo de multimedia definido
+     * 2. Verifico que la multimedia tenga al menos un TIPO DE USO asignado
+     * 3. Subo el archivo al servidor (postSubirImagen para imágenes, postSubirFichero para el resto)
+     * 4. Creo o actualizo el registro en la tabla producto_multimedia inmediatamente
      */
     const seleccionarArchivo = async (multimediaDetalle, archivo) => {
         const valorActual = valoresMultimedia[multimediaDetalle.id] || {};
+        const tipoMultimedia = multimediaDetalle.tipo?.toLowerCase();
+
+        // Validar que el archivo coincida con el tipo de multimedia
+        if (tipoMultimedia && extensionesPorTipo[tipoMultimedia]) {
+            if (!archivo.name.match(extensionesPorTipo[tipoMultimedia])) {
+                const tiposLegibles = { imagen: 'imagen', video: 'vídeo', audio: 'audio', documento: 'documento' };
+                toast.current?.show({
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'Tipo de archivo incorrecto' }),
+                    detail: intl.formatMessage(
+                        { id: 'El archivo seleccionado no es compatible con el tipo de multimedia' }) +
+                        ` "${tiposLegibles[tipoMultimedia] || tipoMultimedia}". ` +
+                        intl.formatMessage({ id: 'Por favor seleccione un archivo del tipo correcto.' }),
+                    life: 5000,
+                });
+                return;
+            }
+        }
+
         const tienetiposUso = valorActual.tipoUsoMultimediaIds && valorActual.tipoUsoMultimediaIds.length > 0;
 
         if (!tienetiposUso) {
@@ -177,9 +250,12 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', true);
 
         try {
-            // 1. Subir archivo al servidor
+            // 1. Subir archivo al servidor: imágenes con postSubirImagen, el resto con postSubirFichero
             const carpeta = `producto/${idProducto}/multimedia`;
-            const respuestaSubida = await postSubirImagen(carpeta, archivo.name, archivo);
+            const esImagen = tipoMultimedia === 'imagen' || (!tipoMultimedia && archivo.type?.startsWith('image/'));
+            const respuestaSubida = esImagen
+                ? await postSubirImagen(carpeta, archivo.name, archivo)
+                : await postSubirFichero(carpeta, archivo.name, archivo);
 
             // Limpiar URL blob
             URL.revokeObjectURL(urlLocal);
@@ -248,8 +324,23 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
     };
 
     /**
+     * Elimina los ficheros del servidor.
+     * El backend ya se encarga de eliminar todas las versiones (original + redimensionadas)
+     * automáticamente al recibir cualquier URL del archivo, buscando por nombre base.
+     */
+    const eliminarFicherosDelServidor = async (url) => {
+        if (!url || url.startsWith('blob:')) return;
+
+        try {
+            await borrarFichero(url);
+        } catch (error) {
+            console.warn('Error eliminando ficheros del servidor:', error);
+        }
+    };
+
+    /**
      * Elimina un registro de producto_multimedia y sus tipos de uso asociados.
-     * Primero borra los registros hijos (FK) y luego el padre.
+     * Primero elimina los ficheros del servidor, luego los registros hijos (FK) y finalmente el padre.
      */
     const eliminarMultimedia = async (multimediaDetalleId) => {
         const valorActual = valoresMultimedia[multimediaDetalleId];
@@ -260,7 +351,12 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         
         if (valorActual?.id) {
             try {
-                // Eliminar tipos de uso asociados (FK constraint)
+                // 1. Eliminar ficheros del servidor (original + web + thumbnail si es imagen)
+                if (valorActual.url && !valorActual.url.startsWith('blob:')) {
+                    await eliminarFicherosDelServidor(valorActual.url);
+                }
+
+                // 2. Eliminar tipos de uso asociados (FK constraint)
                 const filtroTiposUso = JSON.stringify({
                     where: { and: { productoMultimediaId: valorActual.id } }
                 });
@@ -269,7 +365,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                     await Promise.all(tiposUsoExistentes.map(tu => deleteProductoMultimediaTipoUso(tu.id)));
                 }
 
-                // Eliminar el registro de producto_multimedia
+                // 3. Eliminar el registro de producto_multimedia
                 await deleteProductoMultimedia(valorActual.id);
                 
                 setValoresMultimedia(prev => {
@@ -450,15 +546,13 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         const urlResuelta = resolverUrlMultimedia(url);
 
         if (archivo.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i)) {
+            const urlThumbnail = url.startsWith('blob:') ? url : resolverUrlMultimedia(getUrlImagenMiniatura(url));
+            const urlGrande = url.startsWith('blob:') ? url : getUrlImagenGrande(url);
             return (
-                <Image
-                    src={urlResuelta}
+                <ImagenConVisualizador
+                    urlThumbnail={urlThumbnail}
+                    urlGrande={urlGrande}
                     alt={archivo}
-                    width="120"
-                    height="120"
-                    preview
-                    className="border-round shadow-2"
-                    style={{ objectFit: 'cover' }}
                 />
             );
         }
@@ -516,6 +610,11 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                         {multimediaDetalle.nombre}
                     </span>
                     {multimediaDetalle.obligatorioSn === 'S' && <span className="text-red-500 ml-1 text-lg">*</span>}
+                    {multimediaDetalle.tamanoMaximoMb && (
+                        <span className="text-xs text-500 ml-2">
+                            ({intl.formatMessage({ id: 'Máx.' })} {multimediaDetalle.tamanoMaximoMb} MB)
+                        </span>
+                    )}
                     {multimediaDetalle.descripcion && (
                         <small className="text-gray-500 block mt-1">{multimediaDetalle.descripcion}</small>
                     )}
@@ -584,9 +683,22 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                 <div className="mt-auto">
                     <FileUpload
                         mode="basic"
-                        accept="image/*,video/*,audio/*,.pdf"
-                        maxFileSize={10000000}
-                        onSelect={(e) => seleccionarArchivo(multimediaDetalle, e.files[0])}
+                        accept={obtenerLosTiposAceptadosPorTipo(multimediaDetalle.tipo)}
+                        maxFileSize={multimediaDetalle.tamanoMaximoMb ? multimediaDetalle.tamanoMaximoMb * 1024 * 1024 : 20000000}
+                        onSelect={(e) => {
+                            const file = e.files?.[0];
+                            if (!file) {
+                                const maxMb = multimediaDetalle.tamanoMaximoMb || 20;
+                                toast.current?.show({
+                                    severity: 'error',
+                                    summary: intl.formatMessage({ id: 'Archivo demasiado grande' }),
+                                    detail: `${intl.formatMessage({ id: 'El archivo supera el tamaño máximo permitido de' })} ${maxMb} MB.`,
+                                    life: 5000,
+                                });
+                                return;
+                            }
+                            seleccionarArchivo(multimediaDetalle, file);
+                        }}
                         disabled={deshabilitado || estaSubiendo}
                         auto={false}
                         chooseLabel={estaSubiendo ?
@@ -747,7 +859,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                     ))}
             </div>
 
-            {estoyEditandoProducto && (
+            {/* {estoyEditandoProducto && (
                 <div className="flex justify-content-end mt-4">
                     <Button
                         label={guardando ?
@@ -760,7 +872,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                         className="p-button-primary"
                     />
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

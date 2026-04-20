@@ -24147,6 +24147,10 @@
             "type": "string",
             "nullable": false
           },
+          "tamanoMaximoMb": {
+            "type": "number",
+            "nullable": true
+          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -24166,10 +24170,6 @@
             "nullable": false
           },
           "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -24203,6 +24203,10 @@
             "type": "string",
             "nullable": false
           },
+          "tamanoMaximoMb": {
+            "type": "number",
+            "nullable": true
+          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -24222,10 +24226,6 @@
             "nullable": false
           },
           "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -24263,6 +24263,10 @@
             "type": "string",
             "nullable": false
           },
+          "tamanoMaximoMb": {
+            "type": "number",
+            "nullable": true
+          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -24282,10 +24286,6 @@
             "nullable": false
           },
           "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -24323,6 +24323,10 @@
             "type": "string",
             "nullable": false
           },
+          "tamanoMaximoMb": {
+            "type": "number",
+            "nullable": true
+          },
           "activoSn": {
             "type": "string",
             "nullable": true
@@ -24342,10 +24346,6 @@
             "nullable": false
           },
           "usuarioModificacion": {
-            "type": "number",
-            "nullable": true
-          },
-          "orden": {
             "type": "number",
             "nullable": true
           }
@@ -35073,6 +35073,9 @@
                   "tipo": {
                     "type": "boolean"
                   },
+                  "tamanoMaximoMb": {
+                    "type": "boolean"
+                  },
                   "activoSn": {
                     "type": "boolean"
                   },
@@ -35086,9 +35089,6 @@
                     "type": "boolean"
                   },
                   "usuarioModificacion": {
-                    "type": "boolean"
-                  },
-                  "orden": {
                     "type": "boolean"
                   }
                 },
@@ -35104,12 +35104,12 @@
                     "nombre",
                     "descripcion",
                     "tipo",
+                    "tamanoMaximoMb",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuarioModificacion",
-                    "orden"
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
@@ -35177,6 +35177,9 @@
                   "tipo": {
                     "type": "boolean"
                   },
+                  "tamanoMaximoMb": {
+                    "type": "boolean"
+                  },
                   "activoSn": {
                     "type": "boolean"
                   },
@@ -35190,9 +35193,6 @@
                     "type": "boolean"
                   },
                   "usuarioModificacion": {
-                    "type": "boolean"
-                  },
-                  "orden": {
                     "type": "boolean"
                   }
                 },
@@ -35208,12 +35208,12 @@
                     "nombre",
                     "descripcion",
                     "tipo",
+                    "tamanoMaximoMb",
                     "activoSn",
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuarioCreacion",
-                    "usuarioModificacion",
-                    "orden"
+                    "usuarioModificacion"
                   ],
                   "example": "id"
                 },
