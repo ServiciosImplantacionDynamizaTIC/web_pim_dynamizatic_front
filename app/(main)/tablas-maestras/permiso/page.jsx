@@ -85,6 +85,30 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Plantillas de email-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Plantillas de email-Borrar' },
 
+                // Categorias del planificador
+                { header: intl.formatMessage({ id: 'Categorias del planificador' }), seccion: 'Categorias del planificador' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Categorias del planificador-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Categorias del planificador-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Categorias del planificador-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Categorias del planificador-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Categorias del planificador-Borrar' },
+
+                // Estados del planificador
+                { header: intl.formatMessage({ id: 'Estados del planificador' }), seccion: 'Estados del planificador' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Estados del planificador-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Estados del planificador-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Estados del planificador-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados del planificador-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados del planificador-Borrar' },
+
+                // Gestor de proyectos
+                { header: intl.formatMessage({ id: 'Gestor de proyectos' }), seccion: 'Gestor de proyectos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Gestor de proyectos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Gestor de proyectos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Gestor de proyectos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Gestor de proyectos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Gestor de proyectos-Borrar' },
+
                 // Secciones
                 { header: intl.formatMessage({ id: 'Secciones' }), seccion: 'Secciones' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Secciones-Acceder' },

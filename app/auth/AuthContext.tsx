@@ -120,13 +120,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/permiso",
           "icon": "pi pi-fw pi-user-edit"
         },
-        "Planificador de categorias": {
+        "Categorias del planificador": {
           "path": "/tablas-maestras/planificador-categorias",
           "icon": "pi pi-fw pi-user-edit"
         },
-        "Planificador de estados": {
+        "Estados del planificador": {
           "path": "/tablas-maestras/planificador-estados",
           "icon": "pi pi-fw pi-user-edit"
+        },
+        "Gestor de proyectos": {
+          "path": "/planificador",
+          "icon": "pi pi-fw pi-calendar-plus"
         },
         "Plantillas de email": {
           "path": "/tablas-maestras/plantilla_email",
