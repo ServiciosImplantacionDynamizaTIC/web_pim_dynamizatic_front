@@ -15,19 +15,20 @@ const Categoria = () => {
         { campo: 'orden', header: intl.formatMessage({ id: 'Orden' }), tipo: 'number' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
-    
+
     return (
         <div>
             <Crud
                 headerCrud={intl.formatMessage({ id: 'Categorías' })}
                 getRegistros={getCategorias}
                 getRegistrosCount={getCategoriasCount}
-                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                 controlador={"Categorias"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarCategoria />}
                 seccion={"Categorias"}
                 columnas={columnas}
+                importarTabla="categoria"
                 deleteRegistro={deleteCategoria}
             />
         </div>

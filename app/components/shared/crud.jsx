@@ -31,7 +31,7 @@ import { useTheme } from "@/app/providers/ThemeProvider";
 const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
-    botonesExtra }, ref) => {
+    botonesExtra, importarTabla, onImportarClick }, ref) => {
     const intl = useIntl()
     const router = useRouter();
     const { themeConfig } = useTheme(); // Hook para obtener el tema actual
@@ -90,6 +90,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
+    const [importarDialog, setImportarDialog] = useState(false);
     const [mostarQRDialog, setMostarQRDialog] = useState(false);
     const [correoEnviarQR, setCorreoEnviarQR] = useState("");
     const [urlQREncriptado, setUrlQREncriptado] = useState("");
@@ -102,12 +103,12 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
     const [puedeVer, setPuedeVer] = useState(true);
     const [puedeEditar, setPuedeEditar] = useState(true);
     const [puedeBorrar, setPuedeBorrar] = useState(true);
+    const [puedeImportar, setPuedeImportar] = useState(!controlador);
     const [puedeRealizar, setPuedeRealizar] = useState(true);
     const [permisosBotonesExtra, setPermisosBotonesExtra] = useState({});
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
-
     const [totalRegistros, setTotalRegistros] = useState(0);
     //Parametros del dataTable que usara para cargar los datos
     const [parametrosCrud, setParametrosCrud] = useState(() => {
@@ -320,6 +321,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
         setPuedeVer(await tieneUsuarioPermiso(controlador, 'ver'))
         setPuedeEditar(await tieneUsuarioPermiso(controlador, 'actualizar'))
         setPuedeBorrar(await tieneUsuarioPermiso(controlador, 'borrar'))
+        setPuedeImportar(await tieneUsuarioPermiso(controlador, 'importar'))
         setPuedeRealizar(await tieneUsuarioPermiso(controlador, 'actualizar'));
 
         // Obtener permisos de los botones extra
@@ -860,6 +862,14 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
         if (botones.includes('descargarCSV')) {
             propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
         }
+        if (botones.includes('importar') && puedeImportar && importarTabla) {
+            propiedadesHeader['mostrarImportar'] = true
+            propiedadesHeader['importarArchivo'] = mostrarImportarDialog
+        }
+        if (botones.includes('importar') && puedeImportar && onImportarClick && !importarTabla) {
+            propiedadesHeader['mostrarImportar'] = true
+            propiedadesHeader['importarArchivo'] = onImportarClick
+        }
         return React.cloneElement(<Header />, propiedadesHeader);
     }
 
@@ -867,6 +877,13 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
     const confirmarEliminarRegistro = (registro) => {
         setRegistro({ ...registro });
         setEliminarRegistroDialog(true);
+    };
+
+    const mostrarImportarDialog = () => {
+        setImportarDialog(true);
+    };
+    const ocultarImportarDialog = () => {
+        setImportarDialog(false);
     };
 
     const eliminarRegistro = async () => {
@@ -1349,6 +1366,14 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
                                 header={intl.formatMessage({ id: 'Descargar archivo CSV' })}
                                 labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
                                 labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
+                            />
+                            <ImportacionExportacionCrud
+                                visible={importarDialog}
+                                onHide={ocultarImportarDialog}
+                                controlador={controlador}
+                                headerCrud={headerCrud}
+                                tabla={importarTabla}
+                                toast={toast}
                             />
                             {/* MODAL DE MOSTRAR QR */}
                             <Dialog

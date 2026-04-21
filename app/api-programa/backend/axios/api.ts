@@ -4303,21 +4303,21 @@ export interface IdiomaWithRelations {
 /**
  * 
  * @export
- * @interface InlineObject3
+ * @interface ImportacionTablaForeignKeysOptions
  */
-export interface InlineObject3 {
+export interface ImportacionTablaForeignKeysOptions {
     /**
      * 
-     * @type {Array<string>}
-     * @memberof InlineObject3
+     * @type {string}
+     * @memberof ImportacionTablaForeignKeysOptions
      */
-    'emails'?: Array<string>;
+    'label'?: string;
     /**
      * 
-     * @type {number}
-     * @memberof InlineObject3
+     * @type {string | number}
+     * @memberof ImportacionTablaForeignKeysOptions
      */
-    'empresaId'?: number;
+    'value'?: string | number;
 }
 /**
  * 
@@ -4352,7 +4352,7 @@ export interface InlineObject5 {
     'empresaId'?: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineObject5
      */
     'nombre'?: string;
@@ -4455,25 +4455,25 @@ export interface InlineResponse200 {
      * @type {string}
      * @memberof InlineResponse200
      */
-    'accessToken'?: string;
+    'campo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse200
      */
-    'expiresIn'?: string;
+    'tablaReferenciada'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineResponse200
      */
-    'refreshToken'?: string;
+    'columnaReferenciada'?: string;
     /**
      * 
-     * @type {Usuario}
+     * @type {Array<ImportacionTablaForeignKeysOptions>}
      * @memberof InlineResponse200
      */
-    'userData'?: Usuario;
+    'options'?: Array<ImportacionTablaForeignKeysOptions>;
 }
 /**
  * 
@@ -4483,14 +4483,45 @@ export interface InlineResponse200 {
 export interface InlineResponse2001 {
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof InlineResponse2001
+     */
+    'accessToken'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    'expiresIn'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2001
+     */
+    'refreshToken'?: string;
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse2001
+     */
+    'userData'?: Usuario;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2002
+ */
+export interface InlineResponse2002 {
+    /**
+     * 
+     * @type {object}
+     * @memberof InlineResponse2002
      */
     'user'?: object;
     /**
      * 
      * @type {string}
-     * @memberof InlineResponse2001
+     * @memberof InlineResponse2002
      */
     'token'?: string;
 }
@@ -10926,7 +10957,6 @@ export enum NewPropiedadTipoDePropiedadEnum {
 export enum NewPropiedadTipoDatoEnum {
     Texto = 'texto',
     Textarea = 'textarea',
-    Textarea = 'textarea',
     Numero = 'numero',
     Fecha = 'fecha',
     Booleano = 'booleano',
@@ -15838,7 +15868,6 @@ export enum PropiedadTipoDePropiedadEnum {
 export enum PropiedadTipoDatoEnum {
     Texto = 'texto',
     Textarea = 'textarea',
-    Textarea = 'textarea',
     Numero = 'numero',
     Fecha = 'fecha',
     Booleano = 'booleano',
@@ -16039,7 +16068,6 @@ export enum PropiedadPartialTipoDePropiedadEnum {
 export enum PropiedadPartialTipoDatoEnum {
     Texto = 'texto',
     Textarea = 'textarea',
-    Textarea = 'textarea',
     Numero = 'numero',
     Fecha = 'fecha',
     Booleano = 'booleano',
@@ -16159,7 +16187,6 @@ export enum PropiedadWithRelationsTipoDePropiedadEnum {
     */
 export enum PropiedadWithRelationsTipoDatoEnum {
     Texto = 'texto',
-    Textarea = 'textarea',
     Textarea = 'textarea',
     Numero = 'numero',
     Fecha = 'fecha',
@@ -29900,6 +29927,498 @@ export class IdiomaControllerApi extends BaseAPI {
 
 
 /**
+ * ImportacionExportacionControllerApi - axios parameter creator
+ * @export
+ */
+export const ImportacionExportacionControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerDescargarPlantillaInsertarTabla: async (tabla: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('importacionExportacionControllerDescargarPlantillaInsertarTabla', 'tabla', tabla)
+            const localVarPath = `/exportacion/{tabla}/plantilla-insertar`
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerDescargarTodoTabla: async (tabla: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('importacionExportacionControllerDescargarTodoTabla', 'tabla', tabla)
+            const localVarPath = `/exportacion/{tabla}/todo`
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {any} [file] 
+         * @param {string} [respuestas] 
+         * @param {string} [tipoImportacion] 
+         * @param {string} [fechaInicioImportacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerImportarTabla: async (tabla: string, file?: any, respuestas?: string, tipoImportacion?: string, fechaInicioImportacion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('importacionExportacionControllerImportarTabla', 'tabla', tabla)
+            const localVarPath = `/importacion/{tabla}`
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (respuestas !== undefined) { 
+                localVarFormParams.append('respuestas', respuestas as any);
+            }
+    
+            if (tipoImportacion !== undefined) { 
+                localVarFormParams.append('tipoImportacion', tipoImportacion as any);
+            }
+    
+            if (fechaInicioImportacion !== undefined) { 
+                localVarFormParams.append('fechaInicioImportacion', fechaInicioImportacion as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerObtenerForeignKeysTabla: async (tabla: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('importacionExportacionControllerObtenerForeignKeysTabla', 'tabla', tabla)
+            const localVarPath = `/importacion/{tabla}/foreign-keys`
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerObtenerInicioImportacion: async (tabla: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('importacionExportacionControllerObtenerInicioImportacion', 'tabla', tabla)
+            const localVarPath = `/importacion/{tabla}/inicio`
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {string} [fechaInicioImportacion] 
+         * @param {string} [tipoImportacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerObtenerProgresoImportacion: async (tabla: string, fechaInicioImportacion?: string, tipoImportacion?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tabla' is not null or undefined
+            assertParamExists('importacionExportacionControllerObtenerProgresoImportacion', 'tabla', tabla)
+            const localVarPath = `/importacion/{tabla}/progreso`
+                .replace(`{${"tabla"}}`, encodeURIComponent(String(tabla)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (fechaInicioImportacion !== undefined) {
+                localVarQueryParameter['fechaInicioImportacion'] = fechaInicioImportacion;
+            }
+
+            if (tipoImportacion !== undefined) {
+                localVarQueryParameter['tipoImportacion'] = tipoImportacion;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ImportacionExportacionControllerApi - functional programming interface
+ * @export
+ */
+export const ImportacionExportacionControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ImportacionExportacionControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importacionExportacionControllerDescargarPlantillaInsertarTabla(tabla: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importacionExportacionControllerDescargarPlantillaInsertarTabla(tabla, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importacionExportacionControllerDescargarTodoTabla(tabla: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importacionExportacionControllerDescargarTodoTabla(tabla, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {any} [file] 
+         * @param {string} [respuestas] 
+         * @param {string} [tipoImportacion] 
+         * @param {string} [fechaInicioImportacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importacionExportacionControllerImportarTabla(tabla: string, file?: any, respuestas?: string, tipoImportacion?: string, fechaInicioImportacion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importacionExportacionControllerImportarTabla(tabla, file, respuestas, tipoImportacion, fechaInicioImportacion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importacionExportacionControllerObtenerForeignKeysTabla(tabla: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse200>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importacionExportacionControllerObtenerForeignKeysTabla(tabla, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importacionExportacionControllerObtenerInicioImportacion(tabla: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importacionExportacionControllerObtenerInicioImportacion(tabla, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {string} [fechaInicioImportacion] 
+         * @param {string} [tipoImportacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async importacionExportacionControllerObtenerProgresoImportacion(tabla: string, fechaInicioImportacion?: string, tipoImportacion?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.importacionExportacionControllerObtenerProgresoImportacion(tabla, fechaInicioImportacion, tipoImportacion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ImportacionExportacionControllerApi - factory interface
+ * @export
+ */
+export const ImportacionExportacionControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ImportacionExportacionControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerDescargarPlantillaInsertarTabla(tabla: string, options?: any): AxiosPromise<string> {
+            return localVarFp.importacionExportacionControllerDescargarPlantillaInsertarTabla(tabla, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerDescargarTodoTabla(tabla: string, options?: any): AxiosPromise<string> {
+            return localVarFp.importacionExportacionControllerDescargarTodoTabla(tabla, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {any} [file] 
+         * @param {string} [respuestas] 
+         * @param {string} [tipoImportacion] 
+         * @param {string} [fechaInicioImportacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerImportarTabla(tabla: string, file?: any, respuestas?: string, tipoImportacion?: string, fechaInicioImportacion?: string, options?: any): AxiosPromise<object> {
+            return localVarFp.importacionExportacionControllerImportarTabla(tabla, file, respuestas, tipoImportacion, fechaInicioImportacion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerObtenerForeignKeysTabla(tabla: string, options?: any): AxiosPromise<Array<InlineResponse200>> {
+            return localVarFp.importacionExportacionControllerObtenerForeignKeysTabla(tabla, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerObtenerInicioImportacion(tabla: string, options?: any): AxiosPromise<object> {
+            return localVarFp.importacionExportacionControllerObtenerInicioImportacion(tabla, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} tabla 
+         * @param {string} [fechaInicioImportacion] 
+         * @param {string} [tipoImportacion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        importacionExportacionControllerObtenerProgresoImportacion(tabla: string, fechaInicioImportacion?: string, tipoImportacion?: string, options?: any): AxiosPromise<object> {
+            return localVarFp.importacionExportacionControllerObtenerProgresoImportacion(tabla, fechaInicioImportacion, tipoImportacion, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ImportacionExportacionControllerApi - object-oriented interface
+ * @export
+ * @class ImportacionExportacionControllerApi
+ * @extends {BaseAPI}
+ */
+export class ImportacionExportacionControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} tabla 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImportacionExportacionControllerApi
+     */
+    public importacionExportacionControllerDescargarPlantillaInsertarTabla(tabla: string, options?: AxiosRequestConfig) {
+        return ImportacionExportacionControllerApiFp(this.configuration).importacionExportacionControllerDescargarPlantillaInsertarTabla(tabla, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} tabla 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImportacionExportacionControllerApi
+     */
+    public importacionExportacionControllerDescargarTodoTabla(tabla: string, options?: AxiosRequestConfig) {
+        return ImportacionExportacionControllerApiFp(this.configuration).importacionExportacionControllerDescargarTodoTabla(tabla, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} tabla 
+     * @param {any} [file] 
+     * @param {string} [respuestas] 
+     * @param {string} [tipoImportacion] 
+     * @param {string} [fechaInicioImportacion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImportacionExportacionControllerApi
+     */
+    public importacionExportacionControllerImportarTabla(tabla: string, file?: any, respuestas?: string, tipoImportacion?: string, fechaInicioImportacion?: string, options?: AxiosRequestConfig) {
+        return ImportacionExportacionControllerApiFp(this.configuration).importacionExportacionControllerImportarTabla(tabla, file, respuestas, tipoImportacion, fechaInicioImportacion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} tabla 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImportacionExportacionControllerApi
+     */
+    public importacionExportacionControllerObtenerForeignKeysTabla(tabla: string, options?: AxiosRequestConfig) {
+        return ImportacionExportacionControllerApiFp(this.configuration).importacionExportacionControllerObtenerForeignKeysTabla(tabla, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} tabla 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImportacionExportacionControllerApi
+     */
+    public importacionExportacionControllerObtenerInicioImportacion(tabla: string, options?: AxiosRequestConfig) {
+        return ImportacionExportacionControllerApiFp(this.configuration).importacionExportacionControllerObtenerInicioImportacion(tabla, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} tabla 
+     * @param {string} [fechaInicioImportacion] 
+     * @param {string} [tipoImportacion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImportacionExportacionControllerApi
+     */
+    public importacionExportacionControllerObtenerProgresoImportacion(tabla: string, fechaInicioImportacion?: string, tipoImportacion?: string, options?: AxiosRequestConfig) {
+        return ImportacionExportacionControllerApiFp(this.configuration).importacionExportacionControllerObtenerProgresoImportacion(tabla, fechaInicioImportacion, tipoImportacion, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * LimpiaLogControllerApi - axios parameter creator
  * @export
  */
@@ -38912,15 +39431,15 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject3} inlineObject3 
+         * @param {InlineObject4} inlineObject4 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject3: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        plantillaEmailControllerEnviarEmails: async (nombrePlantilla: string, inlineObject4: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'nombrePlantilla' is not null or undefined
             assertParamExists('plantillaEmailControllerEnviarEmails', 'nombrePlantilla', nombrePlantilla)
-            // verify required parameter 'inlineObject3' is not null or undefined
-            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject3', inlineObject3)
+            // verify required parameter 'inlineObject4' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarEmails', 'inlineObject4', inlineObject4)
             const localVarPath = `/plantilla-emails/enviarEmails/{nombrePlantilla}`
                 .replace(`{${"nombrePlantilla"}}`, encodeURIComponent(String(nombrePlantilla)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -38945,7 +39464,7 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject3, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -38955,15 +39474,15 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
         /**
          * 
          * @param {string} url 
-         * @param {InlineObject4} inlineObject4 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarQR: async (url: string, inlineObject4: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        plantillaEmailControllerEnviarQR: async (url: string, inlineObject5: InlineObject5, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'url' is not null or undefined
             assertParamExists('plantillaEmailControllerEnviarQR', 'url', url)
-            // verify required parameter 'inlineObject4' is not null or undefined
-            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject4', inlineObject4)
+            // verify required parameter 'inlineObject5' is not null or undefined
+            assertParamExists('plantillaEmailControllerEnviarQR', 'inlineObject5', inlineObject5)
             const localVarPath = `/plantilla-emails/enviarQR/{url}`
                 .replace(`{${"url"}}`, encodeURIComponent(String(url)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -38988,7 +39507,7 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject4, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(inlineObject5, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -39318,23 +39837,23 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject3} inlineObject3 
+         * @param {InlineObject4} inlineObject4 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject3: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject3, options);
+        async plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject4, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} url 
-         * @param {InlineObject4} inlineObject4 
+         * @param {InlineObject5} inlineObject5 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerEnviarQR(url: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject4, options);
+        async plantillaEmailControllerEnviarQR(url: string, inlineObject5: InlineObject5, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerEnviarQR(url, inlineObject5, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -39451,22 +39970,22 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
         /**
          * 
          * @param {string} nombrePlantilla 
-         * @param {InlineObject3} inlineObject3 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject3: InlineObject3, options?: any): AxiosPromise<void> {
-            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject3, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} url 
          * @param {InlineObject4} inlineObject4 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerEnviarQR(url: string, inlineObject4: InlineObject4, options?: any): AxiosPromise<void> {
-            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject4, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject4: InlineObject4, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject4, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} url 
+         * @param {InlineObject5} inlineObject5 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plantillaEmailControllerEnviarQR(url: string, inlineObject5: InlineObject5, options?: any): AxiosPromise<void> {
+            return localVarFp.plantillaEmailControllerEnviarQR(url, inlineObject5, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -39581,25 +40100,25 @@ export class PlantillaEmailControllerApi extends BaseAPI {
     /**
      * 
      * @param {string} nombrePlantilla 
-     * @param {InlineObject3} inlineObject3 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PlantillaEmailControllerApi
-     */
-    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject3: InlineObject3, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject3, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} url 
      * @param {InlineObject4} inlineObject4 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerEnviarQR(url: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject4, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerEnviarEmails(nombrePlantilla: string, inlineObject4: InlineObject4, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarEmails(nombrePlantilla, inlineObject4, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} url 
+     * @param {InlineObject5} inlineObject5 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlantillaEmailControllerApi
+     */
+    public plantillaEmailControllerEnviarQR(url: string, inlineObject5: InlineObject5, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerEnviarQR(url, inlineObject5, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

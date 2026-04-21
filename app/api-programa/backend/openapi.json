@@ -3275,20 +3275,20 @@
         "operationId": "EmpresaController.find"
       }
     },
-    "/estados/count": {
+    "/exportacion/{tabla}/plantilla-insertar": {
       "get": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "count",
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "descargarPlantillaInsertarTabla",
         "tags": [
-          "EstadoController"
+          "ImportacionExportacionController"
         ],
         "responses": {
           "200": {
-            "description": "Estado model count",
+            "description": "Plantilla CSV vacia lista para rellenar",
             "content": {
-              "application/json": {
+              "text/csv": {
                 "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
+                  "type": "string"
                 }
               }
             }
@@ -3296,117 +3296,39 @@
         },
         "parameters": [
           {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Estado.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Estado>"
-                }
-              }
-            }
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+			
+		   
+						   
+						 
+					   
+							  
+			  
+							
           }
         ],
-        "operationId": "EstadoController.count"
+        "operationId": "ImportacionExportacionController.descargarPlantillaInsertarTabla"
       }
     },
-    "/estados/{id}": {
-      "put": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "replaceById",
-        "tags": [
-          "EstadoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Estado PUT success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Estado"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "EstadoController.replaceById"
-      },
-      "patch": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "updateById",
-        "tags": [
-          "EstadoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Estado PATCH success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
-            },
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EstadoPartial"
-              }
-            }
-          },
-          "x-parameter-index": 1
-        },
-        "operationId": "EstadoController.updateById"
-      },
+    "/exportacion/{tabla}/todo": {
       "get": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "findById",
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "descargarTodoTabla",
         "tags": [
-          "EstadoController"
+          "ImportacionExportacionController"
         ],
         "responses": {
           "200": {
-            "description": "Estado model instance",
+            "description": "Todos los registros exportables de la tabla",
             "content": {
-              "application/json": {
+              "text/csv": {
                 "schema": {
-                  "$ref": "#/components/schemas/EstadoWithRelations"
+                  "type": "string"
                 }
               }
             }
@@ -3414,168 +3336,15 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "tabla",
             "in": "path",
             "schema": {
-              "type": "number"
-            },
-            "required": true
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Estado.Filter"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "EstadoController.findById"
-      },
-      "delete": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "deleteById",
-        "tags": [
-          "EstadoController"
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Estado DELETE success"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "number"
+              "type": "string"
             },
             "required": true
           }
         ],
-        "operationId": "EstadoController.deleteById"
-      }
-    },
-    "/estados": {
-      "post": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "create",
-        "tags": [
-          "EstadoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Estado model instance",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Estado"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewEstado"
-              }
-            }
-          }
-        },
-        "operationId": "EstadoController.create"
-      },
-      "patch": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "updateAll",
-        "tags": [
-          "EstadoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Estado PATCH success count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loopback.Count"
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "where",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Estado.WhereFilter",
-                  "additionalProperties": true,
-                  "x-typescript-type": "@loopback/repository#Where<Estado>"
-                }
-              }
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EstadoPartial"
-              }
-            }
-          }
-        },
-        "operationId": "EstadoController.updateAll"
-      },
-      "get": {
-        "x-controller-name": "EstadoController",
-        "x-operation-name": "find",
-        "tags": [
-          "EstadoController"
-        ],
-        "responses": {
-          "200": {
-            "description": "Array of Estado model instances",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/EstadoWithRelations"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Estado.Filter1"
-                }
-              }
-            }
-          }
-        ],
-        "operationId": "EstadoController.find"
+        "operationId": "ImportacionExportacionController.descargarTodoTabla"
       }
     },
     "/files/table/{empresaId}/{tabla}/{tablaId}": {
@@ -4713,6 +4482,283 @@
           "required": true
         },
         "operationId": "FileUploadController.imageUpload"
+      }
+    },
+    "/importacion/{tabla}/foreign-keys": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "obtenerForeignKeysTabla",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "FK de la tabla con opciones para los desplegables",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "campo": {
+                        "type": "string"
+                      },
+                      "tablaReferenciada": {
+                        "type": "string"
+                      },
+                      "columnaReferenciada": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "label": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ImportacionExportacionController.obtenerForeignKeysTabla"
+	   
+	  
+											  
+			  
+													 
+													  
+				 
+								 
+		  
+					  
+				  
+																				  
+						
+						   
+						   
+								  
+				 
+			   
+			 
+		   
+		  
+					   
+		   
+							
+						 
+					   
+							  
+			  
+							
+			
+		   
+						   
+						 
+					   
+							  
+			  
+							
+		   
+		  
+																	  
+	   
+	  
+								  
+			  
+													 
+												 
+				 
+								 
+		  
+					  
+				  
+																				  
+						
+						   
+						   
+								  
+				 
+			   
+			 
+		   
+		  
+					   
+		   
+							
+						 
+					   
+							  
+			  
+							
+		   
+		  
+																 
+      }
+    },
+    "/importacion/{tabla}/inicio": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "obtenerInicioImportacion",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Fecha de inicio para una importacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ImportacionExportacionController.obtenerInicioImportacion"
+      }
+    },
+    "/importacion/{tabla}/progreso": {
+      "get": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "obtenerProgresoImportacion",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Progreso de una importacion en curso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "fechaInicioImportacion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tipoImportacion",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "ImportacionExportacionController.obtenerProgresoImportacion"
+      }
+    },
+    "/importacion/{tabla}": {
+      "post": {
+        "x-controller-name": "ImportacionExportacionController",
+        "x-operation-name": "importarTabla",
+        "tags": [
+          "ImportacionExportacionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Funcion que importa un CSV a la tabla, haciendo inserts o updates segun el caso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tabla",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "x-parser": "stream",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "respuestas": {
+                    "type": "string"
+                  },
+                  "tipoImportacion": {
+                    "type": "string"
+                  },
+                  "fechaInicioImportacion": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Fichero CSV y respuestas del formulario dinamico",
+          "required": true,
+          "x-parameter-index": 1
+        },
+        "operationId": "ImportacionExportacionController.importarTabla"
       }
     },
     "/limpiaLog": {
@@ -16902,6 +16948,46 @@
         "operationId": "UsuariosController.count"
       }
     },
+		
+	  
+			  
+			  
+	 
+		 
+	
+	   
+	  
+			  
+	  
+		   
+		 
+		  
+	 
+	  
+	
+	 
+	
+	  
+	   
+		 
+	 
+	   
+		
+	
+   
+	
+	 
+	
+  
+	  
+	
+	 
+	   
+  
+	
+			   
+	
+   
     "/usuarios/login": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -16961,6 +17047,28 @@
         "operationId": "UsuariosController.login"
       }
     },
+		  
+	 
+			  
+				
+	 
+		 
+	
+	   
+	  
+							
+	  
+		   
+		 
+		  
+	 
+	  
+	
+	 
+	
+					
+	
+   
     "/usuarios/recuperarPassword": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -17056,6 +17164,38 @@
         "operationId": "UsuariosController.register"
       }
     },
+		  
+	 
+			  
+			
+	 
+		 
+	
+	   
+	  
+						 
+	  
+		 
+		 
+		  
+	 
+	  
+	
+	 
+	
+		
+	 
+		 
+	   
+		
+		 
+	 
+	   
+	 
+	
+				
+	
+   
     "/usuarios/validarCodigoRecuperacion/{codigoRecuperacion}": {
       "get": {
         "x-controller-name": "UsuariosController",

@@ -4,18 +4,15 @@ import Crud from "../../components/shared/crud";
 import EditarUsuario from "./editar";
 import { useIntl } from 'react-intl'
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { getUsuarioSesion } from "@/app/utility/Utils";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 const Usuario = () => {
     const intl = useIntl();
-    const router = useRouter();
     const searchParams = useSearchParams();
     const [idUsuario, setIdUsuario] = useState(parseInt(searchParams.get("usuario") || localStorage.getItem("usuarioId")));
 
-    const columnas = [        
-        {campo: 'avatar', header:  intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen'},
+    const columnas = [
+        { campo: 'avatar', header: intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen' },
         { campo: 'nombre', header: intl.formatMessage({ id: 'Nombre' }), tipo: 'string' },
         { campo: 'nombreRol', header: intl.formatMessage({ id: 'Rol' }), tipo: 'string' },
         { campo: 'nombreIdioma', header: intl.formatMessage({ id: 'Idioma' }), tipo: 'string' },
@@ -23,6 +20,7 @@ const Usuario = () => {
         { campo: 'telefono', header: intl.formatMessage({ id: 'Telefono' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]
+
     return (
         <div>
             {(!isNaN(idUsuario) && idUsuario > 0) && (
@@ -30,7 +28,7 @@ const Usuario = () => {
                     headerCrud={intl.formatMessage({ id: 'Usuarios' })}
                     getRegistros={getUsuarios}
                     getRegistrosCount={getUsuariosCount}
-                    botones={['nuevo', 'editar', 'eliminar', 'descargarCSV']}
+                    botones={['nuevo', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                     filtradoBase={{
                         empresaId: Number(localStorage.getItem('empresa'))
                     }}
@@ -40,6 +38,7 @@ const Usuario = () => {
                     seccion={"Usuarios"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
+                    importarTabla="usuario"
                 />
             )}
             {(isNaN(idUsuario) && searchParams.get("usuario") == null && localStorage.getItem("usuarioId") == null) &&
@@ -47,7 +46,7 @@ const Usuario = () => {
                     headerCrud={intl.formatMessage({ id: 'Usuarios' })}
                     getRegistros={getUsuarios}
                     getRegistrosCount={getUsuariosCount}
-                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                    botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                     filtradoBase={{
                         empresaId: Number(localStorage.getItem('empresa'))
                     }}
@@ -56,6 +55,7 @@ const Usuario = () => {
                     seccion={"Usuario"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
+                    importarTabla="usuario"
                 />
             }
         </div>

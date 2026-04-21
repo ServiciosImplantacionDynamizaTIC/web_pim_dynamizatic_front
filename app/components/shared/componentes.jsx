@@ -242,7 +242,7 @@ const eliminarDialogFooter = (ocultarEliminarDialog, eliminar) => {
     );
 };
 
-const Header = ({ crearNuevo, generarCSV, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
+const Header = ({ crearNuevo, generarCSV, mostrarImportar, importarArchivo, mostrarQR, enviarCorreo, limpiarFiltros, valorDeFiltroGlobal, manejarCambioFiltroGlobal, nombre, manejarBusquedaFiltroGlobal,
     operadorSeleccionado, setOperadorSeleccionado, listaOperadores,
 }) => {
     const intl = useIntl()
@@ -250,51 +250,63 @@ const Header = ({ crearNuevo, generarCSV, mostrarQR, enviarCorreo, limpiarFiltro
         <div className="flex flex-column sm:flex-row align-items-start sm:align-items-center gap-3 flex-wrap">
             <h5 className="m-0 white-space-nowrap">{nombre}</h5>
             <div className="flex flex-wrap gap-3 w-full sm:w-auto">
-                {(crearNuevo !== null && crearNuevo !== undefined) &&
-                    (
-                        <Button
-                            label={intl.formatMessage({ id: 'Nuevo' })}
-                            icon="pi pi-plus"
-                            severity="success"
-                            onClick={crearNuevo}
-                            className="flex-1 sm:flex-initial"
-                        />
-                    )
-                }
-                {(generarCSV !== null && generarCSV !== undefined) &&
-                    (
-                        <Button
-                            label={`${intl.formatMessage({ id: 'Descargar' })} CSV`}
-                            icon="pi pi-download"
-                            severity="success"
-                            onClick={generarCSV}
-                            className="flex-1 sm:flex-initial"
-                        />
-                    )
-                }
-                {(mostrarQR !== null && mostrarQR !== undefined) &&
-                    (
-                        <Button
-                            label={`${intl.formatMessage({ id: 'Mostrar' })} QR`}
-                            icon="pi pi-download"
-                            severity="success"
-                            onClick={mostrarQR}
-                            className="flex-1 sm:flex-initial"
-                        />
-                    )
-                }
-                {(enviarCorreo !== null && enviarCorreo !== undefined) &&
-                    (
-                        <Button
-                            label={`${intl.formatMessage({ id: 'Enviar correos' })}`}
-                            icon="pi pi-download"
-                            severity="success"
-                            onClick={enviarCorreo}
-                            className="flex-1 sm:flex-initial"
-                        />
-                    )
-                }
-            </div>
+            {(crearNuevo !== null && crearNuevo !== undefined) &&     //Si no se envia la funcion de crearNuevo, no muestra el boton
+                (
+                    <Button
+                        label={intl.formatMessage({ id: 'Nuevo' })}
+                        icon="pi pi-plus"
+                        severity="success"
+                        onClick={crearNuevo}
+                        className="flex-1 sm:flex-initial"
+                    />
+                )
+            }
+            {(generarCSV !== null && generarCSV !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
+                (
+                    <Button
+                        label={`${intl.formatMessage({ id: 'Descargar' })} CSV`}
+                        icon="pi pi-download"
+                        severity="success"
+                        onClick={generarCSV}
+                        className="flex-1 sm:flex-initial"
+                    />
+                )
+            }
+                        {mostrarImportar &&
+                (
+                    <Button
+                        label={intl.formatMessage({ id: 'Importar' })}
+                        icon="pi pi-upload"
+                        severity="help"
+                        onClick={importarArchivo}
+                        className="mr-2"
+                        disabled={importarArchivo === null || importarArchivo === undefined}
+                    />
+                )
+            }
+            {(mostrarQR !== null && mostrarQR !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
+                (
+                    <Button
+                        label={`${intl.formatMessage({ id: 'Mostrar' })} QR`}
+                        icon="pi pi-download"
+                        severity="success"
+                        onClick={mostrarQR}
+                        className="flex-1 sm:flex-initial"
+                    />
+                )
+            }
+            {(enviarCorreo !== null && enviarCorreo !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
+                (
+                    <Button
+                        label={`${intl.formatMessage({ id: 'Enviar correos' })}`}
+                        icon="pi pi-download"
+                        severity="success"
+                        onClick={enviarCorreo}
+                        className="flex-1 sm:flex-initial"
+                    />
+                )
+            }
+        </div>
         </div>
         <div className="flex flex-column sm:flex-row flex-wrap gap-3 w-full lg:w-auto lg:ml-auto">
             <Dropdown
@@ -413,16 +425,9 @@ const formatearBytes = (bytes) => {
 const opcionesActivoSnTemplate = (option, obtenerSeverity) => {
     return <Badge value={option} severity={obtenerSeverity(option)} />;
 };
-/**
- * Genera y descarga un archivo CSV.
- * @param {Array} registros - Los datos a incluir en el archivo CSV.
- * @param {Array} encabezados - Los encabezados para las columnas del CSV.
- * @param {string} nombreArchivo - Nombre del archivo CSV a descargar.
- */
-const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
+const descargarArchivoCSV = (contenidoCSV, nombreArchivo) => {
     try {
-        const csv = parse(registros, { fields: encabezados, header: true, delimiter: ';' });
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const blob = new Blob([contenidoCSV], { type: 'text/csv;charset=utf-8;' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -435,6 +440,17 @@ const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
         console.error('Error al descargar el archivo CSV:', error);
         throw error;
     }
+};
+
+/**
+ * Genera y descarga un archivo CSV.
+ * @param {Array} registros - Los datos a incluir en el archivo CSV.
+ * @param {Array} encabezados - Los encabezados para las columnas del CSV.
+ * @param {string} nombreArchivo - Nombre del archivo CSV a descargar.
+ */
+const generarYDescargarCSV = (registros, encabezados, nombreArchivo) => {
+    const csv = parse(registros, { fields: encabezados, header: true, delimiter: ';' });
+    descargarArchivoCSV(csv, nombreArchivo);
 };
 
 /**
@@ -547,7 +563,7 @@ export {
     comprobarImagen, manejarCambioImagen, templateGenerico, ErrorDetail,
     botonesDeAccionTemplate, eliminarDialogFooter, Header, dialogFooter,
     EliminarDialog, filtroActivoSnTemplate, opcionesActivoSnTemplate,
-    generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog,
+    descargarArchivoCSV, generarYDescargarCSV, prepararRegistrosParaCSV, DescargarCSVDialog,
     formatearBytes, esUrlImagen, getIdiomaDefecto, tieneUsuarioPermiso,
     obtenerTodosLosPermisos,
 
