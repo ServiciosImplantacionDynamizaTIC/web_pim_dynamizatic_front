@@ -10,7 +10,7 @@ import { ProgressBar } from "primereact/progressbar";
 import { descargarErroresImportacion, descargarPlantillaInsertarImportacion, descargarTodoImportacion, getForeignKeysImportacion, 
     getInicioImportacion, getProgresoImportacion, postImportarTabla,} from "@/app/api-endpoints/importacion";
 
-const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, tabla, toast }) => {
+const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, tabla, toast, onImportacionFinalizada }) => {
     const intl = useIntl();
     const inputArchivoRef = useRef(null);
     const intervaloProgresoRef = useRef(null);
@@ -99,6 +99,10 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
         const estadoInvalido = resultado?.status && !estadosValidos.includes(resultado.status);
         const sinEstadoConError = !resultado?.status && mensajeError;
 
+        if (resultado?.status === "ERROR" && mensajeError) {
+            throw new Error(mensajeError);
+        }
+
         if (tieneCodigoError || tieneNombreError || resultado?.error?.message || estadoInvalido || sinEstadoConError) {
             throw new Error(mensajeError || mensajeFallback);
         }
@@ -123,7 +127,9 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
 
         getForeignKeysImportacion(tabla)
             .then((fks) => setPreguntas(mapearForeignKeysAPreguntas(fks, intl)))
-            .catch(() => setPreguntas([]));
+            .catch(() => {
+                setPreguntas([]);
+            });
     }, [intl, tabla, visible]);
 
     // Reinicia el formulario cuando el diálogo se abre (no depende de `preguntas`
@@ -131,7 +137,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
     useEffect(() => {
         if (!visible) return;
 
-        setArchivo(null);
+        limpiarArchivoSeleccionado();
         setTipoImportacion("insertar");
         setResultado(null);
         setProgreso(0);
@@ -159,7 +165,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
             try {
                 const { procesados = 0 } = await getProgresoImportacion(tabla, fechaInicio, tipo);
                 const porcentaje = totalFilas > 0 ? Math.floor((procesados / totalFilas) * 100) : 0;
-                setProgreso(Math.min(99, Math.max(0, porcentaje)));
+                setProgreso(Math.min(100, Math.max(0, porcentaje)));
             } catch {
                 // En caso de error, no actualizamos el progreso pero seguimos intentando consultar
             }
@@ -196,22 +202,30 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
     const actualizarRespuesta = (id, valor) =>
         setRespuestas((prev) => ({ ...prev, [id]: valor }));
 
+    // Limpia el estado de React y el valor real del input file.
+    const limpiarArchivoSeleccionado = () => {
+        setArchivo(null);
+        if (inputArchivoRef.current) {
+            inputArchivoRef.current.value = "";
+        }
+    };
+
     const abrirSelectorArchivo = () => inputArchivoRef.current?.click();
 
     // Cierra el diálogo y limpia el estado. Bloqueado mientras hay una operación en curso.
     const cerrarDialogo = () => {
         if (procesando) return;
+        const importacionTerminada = Boolean(resultado);
         onHide?.();
-        setArchivo(null);
-        setRespuestas({});
-        setResultado(null);
-        setProgreso(0);
+        if (importacionTerminada) {
+            onImportacionFinalizada?.();
+        }
     };
 
     // Limpia el archivo y el resultado para permitir importar otro fichero sin cerrar el modal.
     const prepararOtraImportacion = () => {
         if (procesando) return;
-        setArchivo(null);
+        limpiarArchivoSeleccionado();
         setResultado(null);
         setProgreso(0);
     };
@@ -533,7 +547,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
                                 icon="pi pi-trash"
                                 text
                                 severity="secondary"
-                                onClick={() => setArchivo(null)}
+                                onClick={limpiarArchivoSeleccionado}
                                 disabled={procesando}
                             />
                         )}

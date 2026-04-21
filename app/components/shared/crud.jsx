@@ -102,6 +102,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [puedeImportar, setPuedeImportar] = useState(!controlador);
     const [puedeRealizar, setPuedeRealizar] = useState(true);
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
+    const [buscando, setBuscando] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
     const [totalRegistros, setTotalRegistros] = useState(0);
@@ -164,6 +165,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         };
 
         try {
+            setBuscando(true);
             //Obtenemos los registros para rellenar el crud
             const registros = await getRegistros(JSON.stringify(queryParams));
 
@@ -298,6 +300,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         } catch (err) {
             console.log(err.message);
         } finally {
+            setBuscando(false);
             console.log('Carga completa');
         }
     };
@@ -808,6 +811,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             valorDeFiltroGlobal: valorDeFiltroGlobal,
             manejarCambioFiltroGlobal: manejarCambioFiltroGlobal,
             manejarBusquedaFiltroGlobal: manejarBusquedaFiltroGlobal,
+            buscando: buscando,
             nombre: headerCrud,
             operadorSeleccionado: operadorSeleccionado,
             setOperadorSeleccionado: setOperadorSeleccionado,
@@ -853,6 +857,11 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     };
     const ocultarImportarDialog = () => {
         setImportarDialog(false);
+    };
+
+    // Al cerrar el modal tras importar, relanza la búsqueda para refrescar la tabla.
+    const actualizarDespuesDeImportar = () => {
+        manejarBusquedaFiltroGlobal();
     };
 
     const eliminarRegistro = async () => {
@@ -1343,6 +1352,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 headerCrud={headerCrud}
                                 tabla={importarTabla}
                                 toast={toast}
+                                onImportacionFinalizada={actualizarDespuesDeImportar}
                             />
                             {/* MODAL DE MOSTRAR QR */}
                             <Dialog
