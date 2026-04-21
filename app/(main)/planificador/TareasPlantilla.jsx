@@ -169,13 +169,25 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
 
             for (const plantilla of plantillasFiltradas) {
                 // Cargar responsables - usar formato 'and' para que el backend lo procese
-                const filtroResponsables = crearFiltroRelacionesPlantilla(plantilla.id);
+                const filtroResponsables = JSON.stringify({
+                    where: {
+                        and: {
+                            planificadorPlantillaId: plantilla.id,
+                        },
+                    },
+                });
                 const responsables = await getPlanificadorPlantillaResponsables(filtroResponsables);
                 const responsablesIds = responsables.map(responsable => responsable.responsableId);
                 responsablesPorPlantilla[plantilla.id] = responsablesIds;
 
                 // Cargar emails - usar formato 'and' para que el backend lo procese
-                const filtroEmails = crearFiltroRelacionesPlantilla(plantilla.id);
+                const filtroEmails = JSON.stringify({
+                    where: {
+                        and: {
+                            planificadorPlantillaId: plantilla.id,
+                        },
+                    },
+                });
                 const emails = await getPlanificadorPlantillaEmails(filtroEmails);
                 const emailsIds = emails.map(email => email.usuarioId);
                 emailsPorPlantilla[plantilla.id] = emailsIds;
@@ -560,7 +572,13 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
             for (const tareaId of tareasAEliminarFinal) {
                 try {
                     // Primero eliminar responsables asociados
-                    const filtroResponsables = crearFiltroRelacionesPlantilla(tareaId);
+                    const filtroResponsables = JSON.stringify({
+                        where: {
+                            and: {
+                                planificadorPlantillaId: tareaId,
+                            },
+                        },
+                    });
                     const responsablesExistentes = await getPlanificadorPlantillaResponsables(filtroResponsables);
 
                     for (const responsable of responsablesExistentes) {
@@ -568,7 +586,13 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
                     }
 
                     // Luego eliminar emails asociados
-                    const filtroEmails = crearFiltroRelacionesPlantilla(tareaId);
+                    const filtroEmails = JSON.stringify({
+                        where: {
+                            and: {
+                                planificadorPlantillaId: tareaId,
+                            },
+                        },
+                    });
                     const emailsExistentes = await getPlanificadorPlantillaEmails(filtroEmails);
 
                     for (const email of emailsExistentes) {
@@ -688,7 +712,13 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
 
                     // Gestionar responsables (relación con tabla planificador_plantilla_responsable)
                     if (tareaId) {
-                        const filtroResponsables = crearFiltroRelacionesPlantilla(tareaId);
+                        const filtroResponsables = JSON.stringify({
+                            where: {
+                                and: {
+                                    planificadorPlantillaId: tareaId,
+                                },
+                            },
+                        });
                         const responsablesExistentes = await getPlanificadorPlantillaResponsables(filtroResponsables);
                         const responsablesSeleccionadosIds = Array.from(
                             new Set(
@@ -714,7 +744,13 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
                         );
 
                         // Gestionar emails (relación con tabla planificador_plantilla_email) - usar formato 'and'
-                        const filtroEmails = crearFiltroRelacionesPlantilla(tareaId);
+                        const filtroEmails = JSON.stringify({
+                            where: {
+                                and: {
+                                    planificadorPlantillaId: tareaId,
+                                },
+                            },
+                        });
                         const emailsExistentes = await getPlanificadorPlantillaEmails(filtroEmails);
                         const emailsSeleccionadosIds = Array.from(
                             new Set(
@@ -1149,13 +1185,6 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
     );
 });
 
-const crearFiltroRelacionesPlantilla = (planificadorPlantillaId) => JSON.stringify({
-    where: {
-        and: {
-            planificadorPlantillaId,
-        },
-    },
-});
 
 TareasPlantilla.displayName = 'TareasPlantilla';
 
