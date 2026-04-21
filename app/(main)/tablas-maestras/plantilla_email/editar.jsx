@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
-import { postPlantillaEmail, patchPlantillaEmail } from "@/app/api-endpoints/plantilla_email";
+import { getPlantillaEmails, postPlantillaEmail, patchPlantillaEmail } from "@/app/api-endpoints/plantilla_email";
 import { esUrlImagen } from "@/app/components/shared/componentes";
 import EditarDatosCorreoPlantilla from "./EditarDatosCorreoPlantilla";
 import 'primeicons/primeicons.css';
@@ -31,6 +31,8 @@ const EditarCorreoPlantilla = ({
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [listaArchivosAntiguos, setListaArchivosAntiguos] = useState([]);
+    const [accionSeleccionada, setAccionSeleccionada] = useState(null);
+    const [listaAcciones, setListaAcciones] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,6 +43,30 @@ const EditarCorreoPlantilla = ({
                 id: idioma.id,
                 activoSn: idioma.activoSn
             })).sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+            const accionesCorreo = [
+                { nombre: 'Recuperar contraseña', label: intl.formatMessage({ id: 'Recuperar contraseña' }) },
+                { nombre: 'Enviar un email a usuarios', label: intl.formatMessage({ id: 'Enviar un email a usuarios' }) },
+            ];
+
+            for (const accion of [...accionesCorreo]) {
+                if (accion.nombre === 'Enviar un email a usuarios') {
+                    continue;
+                }
+
+                const registrosAccion = await getPlantillaEmails(JSON.stringify({
+                    where: { and: { accion: accion.nombre } }
+                }));
+                const plantillaConAccion = registrosAccion.find(
+                    (registro) => registro.accion === accion.nombre && registro.id !== idEditar
+                );
+
+                if (plantillaConAccion) {
+                    accionesCorreo.splice(accionesCorreo.indexOf(accion), 1);
+                }
+            }
+
+            setListaAcciones(accionesCorreo);
 
             //Quitamos los registros inactivos
             const jsonIdiomasActivos = jsonIdiomas.filter(registro => registro.activoSn === 'S');
@@ -78,22 +104,32 @@ const EditarCorreoPlantilla = ({
                 const registroIdioma = registrosIdiomas.find((element) => element.id === registro.idiomaId).nombre;
                 setIdiomaSeleccionado(registroIdioma);
 
+                const accionActual = accionesCorreo.find((accion) => accion.nombre === registro.accion) || null;
+                setAccionSeleccionada(accionActual);
+
                 //Guardamos los archivos para luego poder compararlos
                 const _listaArchivosAntiguos = {}
                 for (const tipoArchivo of listaTipoArchivos) {
                     _listaArchivosAntiguos[tipoArchivo['nombre']] = registro[(tipoArchivo.nombre).toLowerCase()]
                 }
                 setListaArchivosAntiguos(_listaArchivosAntiguos)
+            } else {
+                setCorreoPlantilla(emptyRegistro);
+                setContenidoWysiwyg(null);
+                setIdiomaSeleccionado(null);
+                setAccionSeleccionada(null);
+                setListaArchivosAntiguos([]);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [emptyRegistro, idEditar, rowData]);
 
     const validaciones = async () => {
         const vadlidaNombre = correoPlantilla.nombrePlantilla === undefined || correoPlantilla.nombrePlantilla === "";
         const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado === "";
+        const validaAccion = accionSeleccionada == null || accionSeleccionada === "";
         
-        return (!vadlidaNombre && !validaIdioma)
+        return (!vadlidaNombre && !validaIdioma && !validaAccion)
     }
 
     const guardarPlantillaEmail = async () => {
@@ -115,6 +151,7 @@ const EditarCorreoPlantilla = ({
                 objGuardar['cuerpo'] = contenidoWysiwyg || '';
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
+                objGuardar['accion'] = accionSeleccionada.nombre;
                 
                 const registroSeleccionado = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)
                 if (registroSeleccionado) {
@@ -181,6 +218,7 @@ const EditarCorreoPlantilla = ({
                 // Enviar el contenido como string (Axios lo enviará con UTF-8)
                 objGuardar['cuerpo'] = contenidoWysiwyg || '';
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
+                objGuardar['accion'] = accionSeleccionada.nombre;
                 delete objGuardar.nombreIdioma;
                 delete objGuardar.archivos;
                 delete objGuardar.iso;
@@ -294,6 +332,9 @@ const EditarCorreoPlantilla = ({
                             idiomaSeleccionado={idiomaSeleccionado}
                             setIdiomaSeleccionado={setIdiomaSeleccionado}
                             listaTipoArchivos={listaTipoArchivos}
+                            accionesCorreo={listaAcciones}
+                            accionSeleccionada={accionSeleccionada}
+                            setAccionSeleccionada={setAccionSeleccionada}
                             estadoGuardando={estadoGuardando}
                         />
 
