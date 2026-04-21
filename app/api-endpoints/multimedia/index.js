@@ -18,8 +18,13 @@ export const getMultimedia = async (id) => {
 }
 
 export const postMultimedia = async (objMultimedia) => {
-    const { data: dataMultimedia } = await apiMultimedia.multimediaControllerCreate(objMultimedia)
-    return dataMultimedia
+    try {
+        const { data: dataMultimedia } = await apiMultimedia.multimediaControllerCreate(objMultimedia)
+        return dataMultimedia
+    } catch (error) {
+        console.error('Error en postMultimedia:', error);
+        throw error;
+    }
 }
 
 export const deleteMultimedia = async (idMultimedia) => {

@@ -536,7 +536,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         items={atributos}
                                         grupos={gruposAtributos}
                                         seleccionados={atributosSeleccionados}
-                                        onSeleccionChange={manejarCambioAtributos}
+                                        alCambiarSeleccion={manejarCambioAtributos}
                                         grupoIdField="grupoPropiedadId"
                                         cargando={cargandoPropiedades}
                                         editable={editable}
@@ -544,10 +544,10 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         renderItem={renderItemPropiedad}
                                         textoVacio={intl.formatMessage({ id: 'No hay atributos disponibles en su empresa' })}
                                         titulo={intl.formatMessage({ id: 'Seleccione los atributos que pertenecen a este tipo de producto' })}
-                                        prefixId="atributo"
+                                        prefijoId="atributo"
                                         mostrarOrden={editable}
-                                        onOrdenGrupoChange={manejarOrdenGrupoPropiedad}
-                                        onOrdenItemChange={manejarOrdenPropiedad}
+                                        alCambiarOrdenGrupo={manejarOrdenGrupoPropiedad}
+                                        alCambiarOrdenItem={manejarOrdenPropiedad}
                                     />
                             </TabPanel>
 
@@ -556,7 +556,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         items={camposDinamicos}
                                         grupos={gruposCamposDinamicos}
                                         seleccionados={camposDinamicosSeleccionados}
-                                        onSeleccionChange={manejarCambioCamposDinamicos}
+                                        alCambiarSeleccion={manejarCambioCamposDinamicos}
                                         grupoIdField="grupoPropiedadId"
                                         cargando={cargandoPropiedades}
                                         editable={editable}
@@ -564,10 +564,10 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         renderItem={renderItemPropiedad}
                                         textoVacio={intl.formatMessage({ id: 'No hay campos dinámicos disponibles en su empresa' })}
                                         titulo={intl.formatMessage({ id: 'Seleccione los campos dinámicos que pertenecen a este tipo de producto' })}
-                                        prefixId="campo-dinamico"
+                                        prefijoId="campo-dinamico"
                                         mostrarOrden={editable}
-                                        onOrdenGrupoChange={manejarOrdenGrupoPropiedad}
-                                        onOrdenItemChange={manejarOrdenPropiedad}
+                                        alCambiarOrdenGrupo={manejarOrdenGrupoPropiedad}
+                                        alCambiarOrdenItem={manejarOrdenPropiedad}
                                     />
                             </TabPanel>
 
@@ -576,7 +576,7 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         items={multimedias}
                                         grupos={[]}
                                         seleccionados={multimediasSeleccionados}
-                                        onSeleccionChange={manejarCambioMultimedia}
+                                        alCambiarSeleccion={manejarCambioMultimedia}
                                         grupoIdField="_sinGrupo"
                                         cargando={cargandoMultimedias}
                                         editable={editable}
@@ -584,9 +584,9 @@ const EditarDatosTipoProducto = ({ tipoProducto, setTipoProducto, estadoGuardand
                                         renderItem={renderItemMultimedia}
                                         textoVacio={intl.formatMessage({ id: 'No hay archivos multimedia disponibles en su empresa' })}
                                         titulo={intl.formatMessage({ id: 'Seleccione los archivos multimedia que pertenecen a este tipo de producto' })}
-                                        prefixId="multimedia"
+                                        prefijoId="multimedia"
                                         mostrarOrden={editable}
-                                        onOrdenItemChange={manejarOrdenMultimedia}
+                                        alCambiarOrdenItem={manejarOrdenMultimedia}
                                     />
                             </TabPanel>
                         </TabView>

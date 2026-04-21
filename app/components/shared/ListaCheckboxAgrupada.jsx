@@ -15,7 +15,7 @@ import { useIntl } from 'react-intl';
  * - items:              Array de ítems a mostrar (ej: propiedades, campos dinámicos)
  * - grupos:             Array de grupos (ej: grupo_atributo, grupo_campo_dinamico)
  * - seleccionados:      Array de IDs seleccionados
- * - onSeleccionChange:  Callback que recibe el nuevo array de IDs seleccionados
+ * - alCambiarSeleccion:  Callback que recibe el nuevo array de IDs seleccionados
  * - grupoIdField:       Nombre del campo en cada ítem que apunta al grupo (ej: 'grupoPropiedadId')
  * - cargando:           Boolean indicando si se están cargando los datos
  * - editable:           Boolean indicando si se pueden modificar las selecciones
@@ -23,16 +23,16 @@ import { useIntl } from 'react-intl';
  * - renderItem:         Función (item) => JSX que renderiza el contenido de cada ítem
  * - textoVacio:         Mensaje cuando no hay ítems disponibles
  * - titulo:             Texto descriptivo mostrado arriba de los grupos
- * - prefixId:           Prefijo para los IDs de los checkboxes (ej: 'atributo', 'campo')
+ * - prefijoId:           Prefijo para los IDs de los checkboxes (ej: 'atributo', 'campo')
  * - mostrarOrden:       Boolean para mostrar inputs numéricos de orden en grupos e ítems
- * - onOrdenGrupoChange: Callback (grupoId, nuevoOrden) cuando cambia el orden de un grupo
- * - onOrdenItemChange:  Callback (itemId, nuevoOrden) cuando cambia el orden de un ítem
+ * - alCambiarOrdenGrupo: Callback (grupoId, nuevoOrden) cuando cambia el orden de un grupo
+ * - alCambiarOrdenItem:  Callback (itemId, nuevoOrden) cuando cambia el orden de un ítem
  */
 const ListaCheckboxAgrupada = ({
     items = [],
     grupos = [],
     seleccionados = [],
-    onSeleccionChange,
+    alCambiarSeleccion,
     grupoIdField,
     cargando = false,
     editable = true,
@@ -40,10 +40,10 @@ const ListaCheckboxAgrupada = ({
     renderItem,
     textoVacio,
     titulo,
-    prefixId = 'item',
+    prefijoId = 'item',
     mostrarOrden = false,
-    onOrdenGrupoChange,
-    onOrdenItemChange
+    alCambiarOrdenGrupo,
+    alCambiarOrdenItem
 }) => {
     const intl = useIntl();
     const isDisabled = !editable || disabled;
@@ -138,30 +138,38 @@ const ListaCheckboxAgrupada = ({
         const nuevaSeleccion = isChecked
             ? [...seleccionados, itemId]
             : seleccionados.filter(id => id !== itemId);
-        onSeleccionChange(nuevaSeleccion);
+        alCambiarSeleccion(nuevaSeleccion);
     };
 
     const seleccionarTodos = () => {
-        onSeleccionChange(items.map(item => item.id));
+        alCambiarSeleccion(items.map(item => item.id));
     };
 
     const deseleccionarTodos = () => {
-        onSeleccionChange([]);
+        alCambiarSeleccion([]);
     };
 
     const seleccionarTodosDelGrupo = (grupoItems) => {
         const idsGrupo = grupoItems.map(item => item.id);
         const idsActualesSinGrupo = seleccionados.filter(id => !idsGrupo.includes(id));
-        onSeleccionChange([...idsActualesSinGrupo, ...idsGrupo]);
+        alCambiarSeleccion([...idsActualesSinGrupo, ...idsGrupo]);
     };
 
     const deseleccionarTodosDelGrupo = (grupoItems) => {
         const idsGrupo = new Set(grupoItems.map(item => item.id));
-        onSeleccionChange(seleccionados.filter(id => !idsGrupo.has(id)));
+        alCambiarSeleccion(seleccionados.filter(id => !idsGrupo.has(id)));
     };
 
     const contarSeleccionadosEnGrupo = (grupoItems) => {
         return grupoItems.filter(item => seleccionados.includes(item.id)).length;
+    };
+
+    const manejarCambioOrdenItem = (itemId, nuevoOrden) => {
+        alCambiarOrdenItem?.(itemId, nuevoOrden);
+        // Si el ítem no está seleccionado, seleccionarlo automáticamente al asignarle un orden
+        if (!seleccionados.includes(itemId)) {
+            alCambiarSeleccion([...seleccionados, itemId]);
+        }
     };
 
     const renderCheckboxItem = (item) => (
@@ -174,7 +182,7 @@ const ListaCheckboxAgrupada = ({
                                 <label className="text-xs font-semibold mb-1">{intl.formatMessage({ id: 'Orden' })}</label>
                                 <InputNumber
                                     value={item.orden}
-                                    onChange={(e) => onOrdenItemChange?.(item.id, e.value)}
+                                    onChange={(e) => manejarCambioOrdenItem(item.id, e.value)}
                                     disabled={isDisabled}
                                     min={0}
                                     max={999}
@@ -186,12 +194,12 @@ const ListaCheckboxAgrupada = ({
                         </>
                     )}
                     <Checkbox
-                        inputId={`${prefixId}-${item.id}`}
+                        inputId={`${prefijoId}-${item.id}`}
                         checked={seleccionados.includes(item.id)}
                         onChange={(e) => manejarCambio(item.id, e.checked)}
                         disabled={isDisabled}
                     />
-                    <label htmlFor={`${prefixId}-${item.id}`} className="ml-2 cursor-pointer">
+                    <label htmlFor={`${prefijoId}-${item.id}`} className="ml-2 cursor-pointer">
                         {renderItem ? renderItem(item) : (
                             <div>
                                 <div className="font-bold">{item.nombre}</div>
@@ -237,7 +245,7 @@ const ListaCheckboxAgrupada = ({
                         <label className="text-xs font-semibold mb-1">{intl.formatMessage({ id: 'Orden' })}</label>
                         <InputNumber
                             value={grupo.orden}
-                            onChange={(e) => onOrdenGrupoChange?.(grupo.id, e.value)}
+                            onChange={(e) => alCambiarOrdenGrupo?.(grupo.id, e.value)}
                             disabled={isDisabled}
                             min={0}
                             max={999}

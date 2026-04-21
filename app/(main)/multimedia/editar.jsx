@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getMultimedia, postMultimedia, patchMultimedia } from "@/app/api-endpoints/multimedia";
+import { getMultimedia, getMultimedias, postMultimedia, patchMultimedia } from "@/app/api-endpoints/multimedia";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
 import EditarDatosMultimedia from "./EditarDatosMultimedia";
 import 'primeicons/primeicons.css';
@@ -45,7 +45,7 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
     const validaciones = async () => {
         const validaNombre = multimedia.nombre === undefined || multimedia.nombre === "";
         const validaTipo = multimedia.tipo === undefined || multimedia.tipo === "";
-        const validaTamano = multimedia.tamanoMaximoMb === undefined || multimedia.tamanoMaximoMb === null;
+        const validaTamano = multimedia.tamanoMaximoMb === undefined || multimedia.tamanoMaximoMb === null || multimedia.tamanoMaximoMb === "";
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -65,8 +65,47 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 life: 3000,
             });
         }
-        
-        return (!validaNombre && !validaTipo && !validaTamano);
+
+        // Validación de duplicados por nombre dentro de la misma empresa
+        if (!validaNombre) {
+            try {
+                const filtro = JSON.stringify({
+                    where: {
+                        and: {
+                            empresaId: getUsuarioSesion()?.empresaId,
+                            nombre: multimedia.nombre.trim()
+                        }
+                    }
+                });
+                const existentes = await getMultimedias(filtro);
+                const duplicado = existentes.find(m => m.id !== multimedia.id && m.nombre.trim().toLowerCase() === multimedia.nombre.trim().toLowerCase());
+                if (duplicado) {
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'ERROR',
+                        detail: intl.formatMessage({ id: 'Ya existe un registro con ese nombre.' }),
+                        life: 5000,
+                    });
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error validando duplicados:', error);
+                return false;
+            }
+        }
+
+         // Validación final de campos obligatorios
+        if (validaNombre || validaTipo || validaTamano) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' }),
+                life: 3000,
+            });
+            return false;
+        }
+
+        return true;
     };
 
     const guardarMultimedia = async () => {
@@ -115,15 +154,6 @@ const EditarMultimedia = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRe
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
-        } else {
-            let errorMessage = intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' });
-                        
-            toast.current?.show({
-                severity: 'error',
-                summary: 'ERROR',
-                detail: errorMessage,
-                life: 3000,
-            });
         }
         setEstadoGuardandoBoton(false);
         setEstadoGuardando(false);
