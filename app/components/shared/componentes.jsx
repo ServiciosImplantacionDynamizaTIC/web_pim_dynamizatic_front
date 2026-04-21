@@ -58,7 +58,7 @@ export async function obtenerArchivosSeccion(registro, seccion) {
 
     if (registro && registro.id) {
         //Por cada tipo de archivo que tiene la seccion, intentamos obtener los archivos del tipo si existen
-         for (const tipoArchivo of registrosTipoArchivos) {
+        for (const tipoArchivo of registrosTipoArchivos) {
 
             const queryParamsArchivo = {
                 where: {
@@ -139,21 +139,21 @@ const comprobarImagen = (campo, cabecera) => (rowData) => {
             </>
         );
     }
-    
+
     return (
         <>
-            <div 
+            <div
                 onClick={() => handleImageClick(rowData[campo] || "/multimedia/Sistema/200x200_imagen-no-disponible.jpeg")}
                 style={{ cursor: 'pointer' }}
             >
-                <img 
-                    src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/Sistema/200x200_imagen-no-disponible.jpeg"}`} 
-                    alt="Imagen" 
-                    style={{ width: '100px', height: 'auto' }} 
+                <img
+                    src={`${devuelveBasePath()}${rowData[campo] || "/multimedia/Sistema/200x200_imagen-no-disponible.jpeg"}`}
+                    alt="Imagen"
+                    style={{ width: '100px', height: 'auto' }}
                 />
             </div>
             <span className="p-column-title">{cabecera}</span>
-            
+
             <VisualizadorDeImagen
                 visible={visualizadorDeImagenVisible}
                 onHide={() => setVisualizadorDeImagenVisible(false)}
@@ -174,24 +174,24 @@ const manejarCambioImagen = (event) => {
     return event.target.files[0];
 };
 
-const tieneUsuarioPermiso = async (controlador, permiso) => {    
+const tieneUsuarioPermiso = async (controlador, permiso) => {
     const usuario = getUsuarioSesion();
     return await compruebaPermiso(usuario.rolId, controlador, permiso);
 }
 
 const obtenerTodosLosPermisos = async accion => {
- const usuario = getUsuarioSesion();
- const permisos = await getVistaEmpresaRolPermiso(
-  JSON.stringify({
-   where: {
-    and: {
-     rolId: usuario.rolId,
-     permisoAccion: accion
-    }
-   }
-  })
- );
- return permisos;
+    const usuario = getUsuarioSesion();
+    const permisos = await getVistaEmpresaRolPermiso(
+        JSON.stringify({
+            where: {
+                and: {
+                    rolId: usuario.rolId,
+                    permisoAccion: accion
+                }
+            }
+        })
+    );
+    return permisos;
 };
 
 const ErrorDetail = () => {
@@ -250,63 +250,63 @@ const Header = ({ crearNuevo, generarCSV, mostrarImportar, importarArchivo, most
         <div className="flex flex-column sm:flex-row align-items-start sm:align-items-center gap-3 flex-wrap">
             <h5 className="m-0 white-space-nowrap">{nombre}</h5>
             <div className="flex flex-wrap gap-3 w-full sm:w-auto">
-            {(crearNuevo !== null && crearNuevo !== undefined) &&     //Si no se envia la funcion de crearNuevo, no muestra el boton
-                (
-                    <Button
-                        label={intl.formatMessage({ id: 'Nuevo' })}
-                        icon="pi pi-plus"
-                        severity="success"
-                        onClick={crearNuevo}
-                        className="flex-1 sm:flex-initial"
-                    />
-                )
-            }
-            {(generarCSV !== null && generarCSV !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
-                (
-                    <Button
-                        label={`${intl.formatMessage({ id: 'Descargar' })} CSV`}
-                        icon="pi pi-download"
-                        severity="success"
-                        onClick={generarCSV}
-                        className="flex-1 sm:flex-initial"
-                    />
-                )
-            }
-                        {mostrarImportar &&
-                (
-                    <Button
-                        label={intl.formatMessage({ id: 'Importar' })}
-                        icon="pi pi-upload"
-                        severity="help"
-                        onClick={importarArchivo}
-                        className="mr-2"
-                        disabled={importarArchivo === null || importarArchivo === undefined}
-                    />
-                )
-            }
-            {(mostrarQR !== null && mostrarQR !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
-                (
-                    <Button
-                        label={`${intl.formatMessage({ id: 'Mostrar' })} QR`}
-                        icon="pi pi-download"
-                        severity="success"
-                        onClick={mostrarQR}
-                        className="flex-1 sm:flex-initial"
-                    />
-                )
-            }
-            {(enviarCorreo !== null && enviarCorreo !== undefined) &&     //Si no se envia la funcion de generarCSV, no muestra el boton
-                (
-                    <Button
-                        label={`${intl.formatMessage({ id: 'Enviar correos' })}`}
-                        icon="pi pi-download"
-                        severity="success"
-                        onClick={enviarCorreo}
-                        className="flex-1 sm:flex-initial"
-                    />
-                )
-            }
-        </div>
+                {(crearNuevo !== null && crearNuevo !== undefined) &&  
+                    (
+                        <Button
+                            label={intl.formatMessage({ id: 'Nuevo' })}
+                            icon="pi pi-plus"
+                            severity="success"
+                            onClick={crearNuevo}
+                            className="flex-1 sm:flex-initial"
+                        />
+                    )
+                }
+                {(generarCSV !== null && generarCSV !== undefined) &&  
+                    (
+                        <Button
+                            label={`${intl.formatMessage({ id: 'Descargar' })} CSV`}
+                            icon="pi pi-download"
+                            severity="success"
+                            onClick={generarCSV}
+                            className="flex-1 sm:flex-initial"
+                        />
+                    )
+                }
+                {mostrarImportar &&
+                    (
+                        <Button
+                            label={intl.formatMessage({ id: 'Importar' })}
+                            icon="pi pi-upload"
+                            severity="help"
+                            onClick={importarArchivo}
+                            className="mr-2"
+                            disabled={importarArchivo === null || importarArchivo === undefined}
+                        />
+                    )
+                }
+                {(mostrarQR !== null && mostrarQR !== undefined) &&  
+                    (
+                        <Button
+                            label={`${intl.formatMessage({ id: 'Mostrar' })} QR`}
+                            icon="pi pi-download"
+                            severity="success"
+                            onClick={mostrarQR}
+                            className="flex-1 sm:flex-initial"
+                        />
+                    )
+                }
+                {(enviarCorreo !== null && enviarCorreo !== undefined) &&  
+                    (
+                        <Button
+                            label={`${intl.formatMessage({ id: 'Enviar correos' })}`}
+                            icon="pi pi-download"
+                            severity="success"
+                            onClick={enviarCorreo}
+                            className="flex-1 sm:flex-initial"
+                        />
+                    )
+                }
+            </div>
         </div>
         <div className="flex flex-column sm:flex-row flex-wrap gap-3 w-full lg:w-auto lg:ml-auto">
             <Dropdown

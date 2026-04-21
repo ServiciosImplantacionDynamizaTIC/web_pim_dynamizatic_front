@@ -28,6 +28,7 @@ import PhoneInput from 'react-phone-input-2'
 import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
 import { useTheme } from "@/app/providers/ThemeProvider";
+import ImportacionExportacionCrud from "@/app/components/shared/importacionExportacionCrud";
 const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
     parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
