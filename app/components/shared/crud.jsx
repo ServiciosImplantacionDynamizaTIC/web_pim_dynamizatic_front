@@ -108,6 +108,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
     const [puedeRealizar, setPuedeRealizar] = useState(true);
     const [permisosBotonesExtra, setPermisosBotonesExtra] = useState({});
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
+    const [buscando, setBuscando] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
     const [totalRegistros, setTotalRegistros] = useState(0);
@@ -170,6 +171,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
         };
 
         try {
+            setBuscando(true);
             //Obtenemos los registros para rellenar el crud
             const registros = await getRegistros(JSON.stringify(queryParams));
 
@@ -304,6 +306,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
         } catch (err) {
             console.log(err.message);
         } finally {
+            setBuscando(false);
             console.log('Carga completa');
         }
     };
@@ -840,6 +843,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
             valorDeFiltroGlobal: valorDeFiltroGlobal,
             manejarCambioFiltroGlobal: manejarCambioFiltroGlobal,
             manejarBusquedaFiltroGlobal: manejarBusquedaFiltroGlobal,
+            buscando: buscando,
             nombre: headerCrud,
             operadorSeleccionado: operadorSeleccionado,
             setOperadorSeleccionado: setOperadorSeleccionado,
@@ -885,6 +889,11 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
     };
     const ocultarImportarDialog = () => {
         setImportarDialog(false);
+    };
+
+    // Al cerrar el modal tras importar, relanza la búsqueda para refrescar la tabla.
+    const actualizarDespuesDeImportar = () => {
+        manejarBusquedaFiltroGlobal();
     };
 
     const eliminarRegistro = async () => {
@@ -1375,6 +1384,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
                                 headerCrud={headerCrud}
                                 tabla={importarTabla}
                                 toast={toast}
+                                onImportacionFinalizada={actualizarDespuesDeImportar}
                             />
                             {/* MODAL DE MOSTRAR QR */}
                             <Dialog
