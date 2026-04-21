@@ -9101,6 +9101,2127 @@
         "operationId": "PingController.ping"
       }
     },
+    "/planificador-categorias/count": {
+      "get": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorCategoria model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorCategoria.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorCategoria>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorCategoriaController.count"
+      }
+    },
+    "/planificador-categorias/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorCategoria PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorCategoria"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorCategoriaController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorCategoria PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorCategoriaPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorCategoriaController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorCategoria model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorCategoriaWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorCategoria.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorCategoriaController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorCategoria DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorCategoriaController.deleteById"
+      }
+    },
+    "/planificador-categorias": {
+      "post": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorCategoria model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorCategoria"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificadorCategoria"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorCategoriaController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorCategoria PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorCategoria.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorCategoria>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorCategoriaPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorCategoriaController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlanificadorCategoria model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorCategoriaWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorCategoria.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorCategoriaController.find"
+      }
+    },
+    "/planificador-detalles/count": {
+      "get": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorDetalle model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorDetalleController.count"
+      }
+    },
+    "/planificador-detalles/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorDetalle PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorDetalle"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorDetalleController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorDetalle PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorDetallePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorDetalleController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorDetalleWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorDetalle.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorDetalleController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorDetalle DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorDetalleController.deleteById"
+      }
+    },
+    "/planificador-detalles": {
+      "post": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorDetalle model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorDetalle"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificadorDetalle"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorDetalleController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorDetalle PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorDetalle.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorDetalle>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorDetallePartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorDetalleController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlanificadorDetalle model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorDetalleWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorDetalle.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorDetalleController.find"
+      }
+    },
+    "/planificador-estados/count": {
+      "get": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorEstado model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorEstado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorEstado>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorEstadoController.count"
+      }
+    },
+    "/planificador-estados/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorEstado PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorEstado"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorEstadoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorEstado PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorEstadoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorEstadoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorEstado model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorEstadoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorEstado.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorEstadoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorEstado DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorEstadoController.deleteById"
+      }
+    },
+    "/planificador-estados": {
+      "post": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorEstado model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorEstado"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificadorEstado"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorEstadoController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorEstado PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorEstado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorEstado>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorEstadoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorEstadoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlanificadorEstado model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorEstadoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorEstado.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorEstadoController.find"
+      }
+    },
+    "/planificador-plantilla-emails/count": {
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaEmail model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorPlantillaEmail.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorPlantillaEmail>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaEmailController.count"
+      }
+    },
+    "/planificador-plantilla-emails/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantillaEmail PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaEmail"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorPlantillaEmailController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantillaEmail PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaEmailPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorPlantillaEmailController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaEmail model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaEmailWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaEmail.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaEmailController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantillaEmail DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorPlantillaEmailController.deleteById"
+      }
+    },
+    "/planificador-plantilla-emails": {
+      "post": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaEmail model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaEmail"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificadorPlantillaEmail"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorPlantillaEmailController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaEmail PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorPlantillaEmail.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorPlantillaEmail>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaEmailPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorPlantillaEmailController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaEmailController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorPlantillaEmailController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlanificadorPlantillaEmail model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorPlantillaEmailWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaEmail.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaEmailController.find"
+      }
+    },
+    "/planificador-plantilla-responsables/count": {
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaResponsable model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorPlantillaResponsable.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorPlantillaResponsable>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaResponsableController.count"
+      }
+    },
+    "/planificador-plantilla-responsables/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantillaResponsable PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaResponsable"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorPlantillaResponsableController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantillaResponsable PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaResponsablePartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorPlantillaResponsableController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaResponsable model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaResponsableWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaResponsable.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaResponsableController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantillaResponsable DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorPlantillaResponsableController.deleteById"
+      }
+    },
+    "/planificador-plantilla-responsables": {
+      "post": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaResponsable model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaResponsable"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificadorPlantillaResponsable"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorPlantillaResponsableController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantillaResponsable PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorPlantillaResponsable.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorPlantillaResponsable>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaResponsablePartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorPlantillaResponsableController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaResponsableController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorPlantillaResponsableController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlanificadorPlantillaResponsable model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorPlantillaResponsableWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaResponsable.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaResponsableController.find"
+      }
+    },
+    "/planificador-plantillas/count": {
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantilla model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorPlantilla.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorPlantilla>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaController.count"
+      }
+    },
+    "/planificador-plantillas/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantilla PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantilla"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorPlantillaController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantilla PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorPlantillaController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantilla model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantillaWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantilla.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "PlanificadorPlantilla DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorPlantillaController.deleteById"
+      }
+    },
+    "/planificador-plantillas": {
+      "post": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantilla model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantilla"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificadorPlantilla"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorPlantillaController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "PlanificadorPlantilla PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorPlantilla.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorPlantilla>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPlantillaPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorPlantillaController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorPlantillaController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorPlantillaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of PlanificadorPlantilla model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorPlantillaWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorPlantilla.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorPlantillaController.find"
+      }
+    },
+    "/planificadores/count": {
+      "get": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "count",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Planificador model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Planificador.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Planificador>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorController.count"
+      }
+    },
+    "/planificadores/{id}": {
+      "put": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Planificador PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Planificador"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Planificador PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PlanificadorController.updateById"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "findById",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Planificador model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Planificador.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorController.findById"
+      },
+      "delete": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Planificador DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PlanificadorController.deleteById"
+      }
+    },
+    "/planificadores": {
+      "post": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "create",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Planificador model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Planificador"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlanificador"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorController.create"
+      },
+      "patch": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Planificador PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Planificador.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Planificador>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanificadorPartial"
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "PlanificadorController",
+        "x-operation-name": "find",
+        "tags": [
+          "PlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Planificador model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanificadorWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Planificador.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorController.find"
+      }
+    },
     "/plantilla-emails/count": {
       "get": {
         "x-controller-name": "PlantillaEmailController",
@@ -17820,6 +19941,152 @@
         "operationId": "UsuariosController.vistaEmpresaRolUsuarioCount"
       }
     },
+    "/vistaPlanificadorCategoriaEmpresa": {
+      "get": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "vistaPlanificadorCategoriaEmpresa",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve las categorías del planificador y su nombre de empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorCategoria.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorCategoriaController.vistaPlanificadorCategoriaEmpresa"
+      }
+    },
+    "/vistaPlanificadorCategoriaEmpresaCount": {
+      "get": {
+        "x-controller-name": "PlanificadorCategoriaController",
+        "x-operation-name": "vistaPlanificadorCategoriaEmpresaCount",
+        "tags": [
+          "PlanificadorCategoriaController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve las categorías del planificador y su nombre de empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorCategoria.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorCategoria>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorCategoriaController.vistaPlanificadorCategoriaEmpresaCount"
+      }
+    },
+    "/vistaPlanificadorEstadoEmpresa": {
+      "get": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "vistaPlanificadorEstadoEmpresa",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve los planificadores de estados y su nombre de empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanificadorEstado.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorEstadoController.vistaPlanificadorEstadoEmpresa"
+      }
+    },
+    "/vistaPlanificadorEstadoEmpresaCount": {
+      "get": {
+        "x-controller-name": "PlanificadorEstadoController",
+        "x-operation-name": "vistaPlanificadorEstadoEmpresaCount",
+        "tags": [
+          "PlanificadorEstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve las categorías del planificador y su nombre de empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "PlanificadorEstado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<PlanificadorEstado>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PlanificadorEstadoController.vistaPlanificadorEstadoEmpresaCount"
+      }
+    },
     "/vistaPlantillaEmailIdioma": {
       "get": {
         "x-controller-name": "PlantillaEmailController",
@@ -23454,6 +25721,1720 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<PlantillaEmail>"
+      },
+      "Planificador": {
+        "title": "Planificador",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+						 
+							 
+							
+			
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantillaSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificador": {
+        "title": "NewPlanificador",
+        "type": "object",
+        "description": "(tsType: Omit<Planificador, 'id'>, schemaOptions: { title: 'NewPlanificador', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+						 
+							 
+							
+			
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantillaSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Planificador, 'id'>"
+      },
+      "PlanificadorWithRelations": {
+        "title": "PlanificadorWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+						 
+							 
+							
+			
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantillaSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorWithRelations"
+      },
+      "PlanificadorPartial": {
+        "title": "PlanificadorPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Planificador>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+						 
+							 
+							
+			
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantillaSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Planificador>"
+      },
+      "PlanificadorPlantilla": {
+        "title": "PlanificadorPlantilla",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "terminaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "planificadorId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificadorPlantilla": {
+        "title": "NewPlanificadorPlantilla",
+        "type": "object",
+        "description": "(tsType: Omit<PlanificadorPlantilla, 'id'>, schemaOptions: { title: 'NewPlanificadorPlantilla', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "terminaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "planificadorId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlanificadorPlantilla, 'id'>"
+      },
+      "PlanificadorPlantillaWithRelations": {
+        "title": "PlanificadorPlantillaWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorPlantillaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "terminaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "planificadorId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorPlantillaWithRelations"
+      },
+      "PlanificadorPlantillaPartial": {
+        "title": "PlanificadorPlantillaPartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlanificadorPlantilla>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "terminaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlanificadorPlantilla>"
+      },
+      "PlanificadorPlantillaResponsable": {
+        "title": "PlanificadorPlantillaResponsable",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsableId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "responsableId",
+          "planificadorPlantillaId"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificadorPlantillaResponsable": {
+        "title": "NewPlanificadorPlantillaResponsable",
+        "type": "object",
+        "description": "(tsType: Omit<PlanificadorPlantillaResponsable, 'id'>, schemaOptions: { title: 'NewPlanificadorPlantillaResponsable', exclude: [ 'id' ] })",
+        "properties": {
+          "responsableId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "responsableId",
+          "planificadorPlantillaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlanificadorPlantillaResponsable, 'id'>"
+      },
+      "PlanificadorPlantillaResponsableWithRelations": {
+        "title": "PlanificadorPlantillaResponsableWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorPlantillaResponsableWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsableId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "responsableId",
+          "planificadorPlantillaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorPlantillaResponsableWithRelations"
+      },
+      "PlanificadorPlantillaResponsablePartial": {
+        "title": "PlanificadorPlantillaResponsablePartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlanificadorPlantillaResponsable>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsableId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlanificadorPlantillaResponsable>"
+      },
+      "PlanificadorPlantillaEmail": {
+        "title": "PlanificadorPlantillaEmail",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "usuarioId",
+          "planificadorPlantillaId"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificadorPlantillaEmail": {
+        "title": "NewPlanificadorPlantillaEmail",
+        "type": "object",
+        "description": "(tsType: Omit<PlanificadorPlantillaEmail, 'id'>, schemaOptions: { title: 'NewPlanificadorPlantillaEmail', exclude: [ 'id' ] })",
+        "properties": {
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "usuarioId",
+          "planificadorPlantillaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlanificadorPlantillaEmail, 'id'>"
+      },
+      "PlanificadorPlantillaEmailWithRelations": {
+        "title": "PlanificadorPlantillaEmailWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorPlantillaEmailWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "required": [
+          "usuarioId",
+          "planificadorPlantillaId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorPlantillaEmailWithRelations"
+      },
+      "PlanificadorPlantillaEmailPartial": {
+        "title": "PlanificadorPlantillaEmailPartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlanificadorPlantillaEmail>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorPlantillaId": {
+            "type": "number",
+            "nullable": false
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlanificadorPlantillaEmail>"
+      },
+      "PlanificadorEstado": {
+        "title": "PlanificadorEstado",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "finalizadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificadorEstado": {
+        "title": "NewPlanificadorEstado",
+        "type": "object",
+        "description": "(tsType: Omit<PlanificadorEstado, 'id'>, schemaOptions: { title: 'NewPlanificadorEstado', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "finalizadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlanificadorEstado, 'id'>"
+      },
+      "PlanificadorEstadoWithRelations": {
+        "title": "PlanificadorEstadoWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorEstadoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "finalizadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorEstadoWithRelations"
+      },
+      "PlanificadorEstadoPartial": {
+        "title": "PlanificadorEstadoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlanificadorEstado>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "finalizadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlanificadorEstado>"
+      },
+      "PlanificadorDetalle": {
+        "title": "PlanificadorDetalle",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorCategoriaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsable": {
+            "type": "number",
+            "nullable": false
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "finalizaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoEmails": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "planificadorCategoriaId",
+          "estado",
+          "planificadorId",
+          "responsable",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificadorDetalle": {
+        "title": "NewPlanificadorDetalle",
+        "type": "object",
+        "description": "(tsType: Omit<PlanificadorDetalle, 'id'>, schemaOptions: { title: 'NewPlanificadorDetalle', exclude: [ 'id' ] })",
+        "properties": {
+          "planificadorCategoriaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsable": {
+            "type": "number",
+            "nullable": false
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "finalizaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoEmails": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "planificadorCategoriaId",
+          "estado",
+          "planificadorId",
+          "responsable",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlanificadorDetalle, 'id'>"
+      },
+      "PlanificadorDetalleWithRelations": {
+        "title": "PlanificadorDetalleWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorDetalleWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorCategoriaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsable": {
+            "type": "number",
+            "nullable": false
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "finalizaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoEmails": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "planificadorCategoriaId",
+          "estado",
+          "planificadorId",
+          "responsable",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorDetalleWithRelations"
+      },
+      "PlanificadorDetallePartial": {
+        "title": "PlanificadorDetallePartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlanificadorDetalle>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorCategoriaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "estado": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "responsable": {
+            "type": "number",
+            "nullable": false
+          },
+          "empiezaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "finalizaEn": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "avisoEmails": {
+            "type": "string",
+            "nullable": true
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "diasAvisoDesdeInicio": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoAFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "diasAvisoDesdeFin": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlanificadorDetalle>"
+      },
+      "PlanificadorCategoria": {
+        "title": "PlanificadorCategoria",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewPlanificadorCategoria": {
+        "title": "NewPlanificadorCategoria",
+        "type": "object",
+        "description": "(tsType: Omit<PlanificadorCategoria, 'id'>, schemaOptions: { title: 'NewPlanificadorCategoria', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<PlanificadorCategoria, 'id'>"
+      },
+      "PlanificadorCategoriaWithRelations": {
+        "title": "PlanificadorCategoriaWithRelations",
+        "type": "object",
+        "description": "(tsType: PlanificadorCategoriaWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "PlanificadorCategoriaWithRelations"
+      },
+      "PlanificadorCategoriaPartial": {
+        "title": "PlanificadorCategoriaPartial",
+        "type": "object",
+        "description": "(tsType: Partial<PlanificadorCategoria>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<PlanificadorCategoria>"
       },
       "Permiso": {
         "title": "Permiso",
@@ -36014,6 +39995,1475 @@
             "additionalProperties": true
           }
         }
+      },
+      "PlanificadorCategoria.Filter": {
+        "type": "object",
+        "title": "PlanificadorCategoria.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorCategoria.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorCategoria>"
+      },
+      "PlanificadorCategoria.Filter1": {
+        "type": "object",
+        "title": "PlanificadorCategoria.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlanificadorCategoria.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "descripcion",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorCategoria.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorCategoria>"
+      },
+      "PlanificadorDetalle.Filter": {
+        "type": "object",
+        "title": "PlanificadorDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "planificadorCategoriaId": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "planificadorId": {
+                    "type": "boolean"
+                  },
+                  "responsable": {
+                    "type": "boolean"
+                  },
+                  "empiezaEn": {
+                    "type": "boolean"
+                  },
+                  "finalizaEn": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaFin": {
+                    "type": "boolean"
+                  },
+                  "codigo": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "avisoEmails": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoAFin": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+                  "fechaAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaAvisoAFin": {
+                    "type": "boolean"
+                  },
+                  "fechaAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "planificadorCategoriaId",
+                    "estado",
+                    "planificadorId",
+                    "responsable",
+                    "empiezaEn",
+                    "finalizaEn",
+                    "fechaInicio",
+                    "fechaFin",
+                    "codigo",
+                    "descripcion",
+                    "avisoEmails",
+                    "activoSn",
+                    "diasAvisoDesdeInicio",
+                    "diasAvisoAFin",
+                    "diasAvisoDesdeFin",
+                    "fechaAvisoDesdeInicio",
+                    "fechaAvisoAFin",
+                    "fechaAvisoDesdeFin",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorDetalle>"
+      },
+      "PlanificadorDetalle.Filter1": {
+        "type": "object",
+        "title": "PlanificadorDetalle.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlanificadorDetalle.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "planificadorCategoriaId": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "planificadorId": {
+                    "type": "boolean"
+                  },
+                  "responsable": {
+                    "type": "boolean"
+                  },
+                  "empiezaEn": {
+                    "type": "boolean"
+                  },
+                  "finalizaEn": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaFin": {
+                    "type": "boolean"
+                  },
+                  "codigo": {
+                    "type": "boolean"
+                  },
+                  "descripcion": {
+                    "type": "boolean"
+                  },
+                  "avisoEmails": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoAFin": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+                  "fechaAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaAvisoAFin": {
+                    "type": "boolean"
+                  },
+                  "fechaAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "planificadorCategoriaId",
+                    "estado",
+                    "planificadorId",
+                    "responsable",
+                    "empiezaEn",
+                    "finalizaEn",
+                    "fechaInicio",
+                    "fechaFin",
+                    "codigo",
+                    "descripcion",
+                    "avisoEmails",
+                    "activoSn",
+                    "diasAvisoDesdeInicio",
+                    "diasAvisoAFin",
+                    "diasAvisoDesdeFin",
+                    "fechaAvisoDesdeInicio",
+                    "fechaAvisoAFin",
+                    "fechaAvisoDesdeFin",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorDetalle.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorDetalle>"
+      },
+      "PlanificadorEstado.Filter": {
+        "type": "object",
+        "title": "PlanificadorEstado.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "finalizadoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "activoSn",
+                    "finalizadoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorEstado.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorEstado>"
+      },
+      "PlanificadorEstado.Filter1": {
+        "type": "object",
+        "title": "PlanificadorEstado.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlanificadorEstado.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "finalizadoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "activoSn",
+                    "finalizadoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorEstado.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorEstado>"
+      },
+      "PlanificadorPlantillaEmail.Filter": {
+        "type": "object",
+        "title": "PlanificadorPlantillaEmail.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "planificadorPlantillaId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "planificadorPlantillaId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorPlantillaEmail.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorPlantillaEmail>"
+      },
+      "PlanificadorPlantillaEmail.Filter1": {
+        "type": "object",
+        "title": "PlanificadorPlantillaEmail.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlanificadorPlantillaEmail.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "planificadorPlantillaId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "planificadorPlantillaId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorPlantillaEmail.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorPlantillaEmail>"
+      },
+      "PlanificadorPlantillaResponsable.Filter": {
+        "type": "object",
+        "title": "PlanificadorPlantillaResponsable.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "responsableId": {
+                    "type": "boolean"
+                  },
+                  "planificadorPlantillaId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "responsableId",
+                    "planificadorPlantillaId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorPlantillaResponsable.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorPlantillaResponsable>"
+      },
+      "PlanificadorPlantillaResponsable.Filter1": {
+        "type": "object",
+        "title": "PlanificadorPlantillaResponsable.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlanificadorPlantillaResponsable.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "responsableId": {
+                    "type": "boolean"
+                  },
+                  "planificadorPlantillaId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "responsableId",
+                    "planificadorPlantillaId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorPlantillaResponsable.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorPlantillaResponsable>"
+      },
+      "PlanificadorPlantilla.Filter": {
+        "type": "object",
+        "title": "PlanificadorPlantilla.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "planificadorId": {
+                    "type": "boolean"
+                  },
+                  "tareaAsociadaId": {
+                    "type": "boolean"
+                  },
+                  "nombreCategoria": {
+                    "type": "boolean"
+                  },
+                  "nombreTarea": {
+                    "type": "boolean"
+                  },
+                  "empiezaEn": {
+                    "type": "boolean"
+                  },
+                  "terminaEn": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoAFin": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "comentarios": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "planificadorId",
+                    "tareaAsociadaId",
+                    "nombreCategoria",
+                    "nombreTarea",
+                    "empiezaEn",
+                    "terminaEn",
+                    "diasAvisoDesdeInicio",
+                    "diasAvisoDesdeFin",
+                    "diasAvisoAFin",
+                    "estado",
+                    "comentarios",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorPlantilla.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorPlantilla>"
+      },
+      "PlanificadorPlantilla.Filter1": {
+        "type": "object",
+        "title": "PlanificadorPlantilla.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "PlanificadorPlantilla.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "planificadorId": {
+                    "type": "boolean"
+                  },
+                  "tareaAsociadaId": {
+                    "type": "boolean"
+                  },
+                  "nombreCategoria": {
+                    "type": "boolean"
+                  },
+                  "nombreTarea": {
+                    "type": "boolean"
+                  },
+                  "empiezaEn": {
+                    "type": "boolean"
+                  },
+                  "terminaEn": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+                  "diasAvisoAFin": {
+                    "type": "boolean"
+                  },
+                  "estado": {
+                    "type": "boolean"
+                  },
+                  "comentarios": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "planificadorId",
+                    "tareaAsociadaId",
+                    "nombreCategoria",
+                    "nombreTarea",
+                    "empiezaEn",
+                    "terminaEn",
+                    "diasAvisoDesdeInicio",
+                    "diasAvisoDesdeFin",
+                    "diasAvisoAFin",
+                    "estado",
+                    "comentarios",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "PlanificadorPlantilla.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<PlanificadorPlantilla>"
+      },
+      "Planificador.Filter": {
+        "type": "object",
+        "title": "Planificador.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "plantillaSn": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+								 
+                    "nombre",
+                    "activoSn",
+                    "plantillaSn",
+                    "fechaInicio",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Planificador.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Planificador>"
+      },
+      "Planificador.Filter1": {
+        "type": "object",
+        "title": "Planificador.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Planificador.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+								 
+									 
+					
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "plantillaSn": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+								 
+                    "nombre",
+                    "activoSn",
+                    "plantillaSn",
+                    "fechaInicio",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Planificador.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Planificador>"
       },
       "PlantillaEmail.Filter": {
         "type": "object",
