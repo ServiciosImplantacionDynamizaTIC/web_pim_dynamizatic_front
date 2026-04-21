@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const getMenuLateral = async () => {
     // Este objeto contiene las rutas y los iconos asociados a cada permiso
-    const jsonRutas: Record<string, Record<string, { path: string; icon: string }>> = {
+    const jsonRutas: Record<string, Record<string, { path: string; icon: string; label?: string }>> = {
       "Gestión": {
         "Usuarios": {
           "path": "/usuarios",
@@ -110,6 +110,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
         "Logs de acciones": {
           "path": "/tablas-maestras/log-acciones",
+          "icon": "pi pi-fw pi-history"
+        },
+        "Logs de sincronización Marketplaces": {
+          "path": "/producto-marketplace-sincronizacion",
           "icon": "pi pi-fw pi-history"
         },
         "Configuración de logs": {
@@ -152,13 +156,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/parametro-global",
           "icon": "pi pi-fw pi-cog"
         },
-        "GrupoAtributos": {
-          "path": "/grupo-atributos",
-          "icon": "pi pi-fw pi-sitemap"
+        "GruposAtributos": {
+          "path": "/grupos-atributos",
+          "icon": "pi pi-fw pi-sitemap",
+          "label": "Grupos de Atributos"
         },
         "Atributos": {
           "path": "/atributos",
-          "icon": "pi pi-fw pi-tags"
+          "icon": "pi pi-fw pi-tags",
+          "label": "Atributos"
+        },
+        "GruposCamposDinamicos": {
+          "path": "/grupos-campos-dinamicos",
+          "icon": "pi pi-fw pi-th-large",
+          "label": "Grupos de Campos Dinámicos"
+        },
+        "CamposDinamicos": {
+          "path": "/campos-dinamicos",
+          "icon": "pi pi-fw pi-sliders-h",
+          "label": "Campos Dinámicos"
         },
         "Catalogos": {
           "path": "/catalogos",
@@ -172,6 +188,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/iconos",
           "icon": "pi pi-fw pi-image"
         },
+        "Marketplaces": {
+          "path": "/marketplaces",
+          "icon": "pi pi-fw pi-image"
+        },
         "Marcas": {
           "path": "/marcas",
           "icon": "pi pi-fw pi-star"
@@ -179,7 +199,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Multimedia": {
           "path": "/multimedia",
           "icon": "pi pi-fw pi-camera"
-        }
+        },
+        "Estados": {
+          "path": "/estados",
+          "icon": "pi pi-fw pi-camera"
+        },
+        "Tipos de Producto": {
+          "path": "/tipos-producto",
+          "icon": "pi pi-fw pi-history"
+        },
+        "Tipos de Uso Multimedia": {
+          "path": "/tipo-uso-multimedia",
+          "icon": "pi pi-fw pi-history"
+        },
+      },
+      "Datos productos": {
+        "Productos": {
+          "path": "/productos",
+          "icon": "pi pi-fw pi-box"
+        },
       }
     }
  
@@ -208,7 +246,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           // Significa que el usuario tiene acceso a esa pantalla y por lo tanto la añadimos al menu
           if (permisosAcceder.some((permiso) => permiso.permisoControlador === subCategoria)) {
             categoriaItems.push({
-              label: `${subCategoria}`,
+              label: jsonRutas[categoria][subCategoria].label || subCategoria,
               icon: jsonRutas[categoria][subCategoria].icon,
               // command: () => {
               //     router.push(jsonRutas[categoria][subCategoria].path, { shallow: true });

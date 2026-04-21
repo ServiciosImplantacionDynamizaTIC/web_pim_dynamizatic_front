@@ -2,22 +2,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getGrupoAtributo, postGrupoAtributo, patchGrupoAtributo } from "@/app/api-endpoints/grupo_atributo";
+import { getGrupoPropiedad, getGrupoPropiedades, postGrupoPropiedad, patchGrupoPropiedad } from "@/app/api-endpoints/grupo_propiedad";
 import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
-import EditarDatosGrupoAtributo from "./EditarDatosGrupoAtributo";
+import EditarDatosGrupoPropiedad from "./EditarDatosGrupoPropiedad";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 
-const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarGrupoPropiedad = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, tipoDeGrupoPropiedad = 'grupo_atributos' }) => {
     const intl = useIntl();
     const toast = useRef(null);
-    
-    const [grupoAtributo, setGrupoAtributo] = useState(emptyRegistro || {
+
+    const esGrupoAtributos = tipoDeGrupoPropiedad === 'grupo_atributos';
+    const nombreTipoSingular = esGrupoAtributos ? intl.formatMessage({ id: 'Grupo de Atributos' }) : intl.formatMessage({ id: 'Grupo de Campos Dinámicos' });
+
+    const [grupoPropiedad, setGrupoPropiedad] = useState(emptyRegistro || {
         nombre: "",
         descripcion: "",
-        orden: 0,
-        activoSn: "S"
+        activoSn: "S",
+        tipoDeGrupoPropiedad: tipoDeGrupoPropiedad
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
@@ -28,21 +31,21 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
         const fetchData = async () => {
             if (idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
-                setGrupoAtributo(registro);
-                
+                setGrupoPropiedad(registro);
+
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);  
+    }, [idEditar, rowData]);
 
     const validacionesImagenes = () => {
-        return validarImagenes(grupoAtributo, listaTipoArchivos);
+        return validarImagenes(grupoPropiedad, listaTipoArchivos);
     }
 
     const validaciones = async () => {
-        const validaNombre = grupoAtributo.nombre === undefined || grupoAtributo.nombre === "";
+        const validaNombre = grupoPropiedad.nombre === undefined || grupoPropiedad.nombre === "";
         const validaImagenes = validacionesImagenes();
 
         if (validaImagenes) {
@@ -52,32 +55,84 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                 detail: intl.formatMessage({ id: 'Las imagenes deben de tener el formato correcto' }),
                 life: 3000,
             });
+            return false;
         }
-        
-        return (!validaNombre);
+
+        // if (validaNombre) {
+        //     toast.current?.show({
+        //         severity: 'error',
+        //         summary: 'ERROR',
+        //         detail: intl.formatMessage({ id: 'El nombre es obligatorio' }),
+        //         life: 3000,
+        //     });
+        //     return false;
+        // }
+
+        // Validación de duplicados
+        try {
+            const filtro = JSON.stringify({
+                where: {
+                    and: {
+                        nombre: grupoPropiedad.nombre.trim(),
+                        empresaId: getUsuarioSesion()?.empresaId,
+                        tipoDeGrupoPropiedad: tipoDeGrupoPropiedad
+                    }
+                }
+            });
+
+            const existentes = await getGrupoPropiedades(filtro);
+            const duplicado = existentes.find(g => g.id !== grupoPropiedad.id && g.nombre.trim().toLowerCase() === grupoPropiedad.nombre.trim().toLowerCase());
+
+            if (duplicado) {
+                toast.current?.show({
+                    severity: 'error',
+                    summary: 'ERROR',
+                    detail: intl.formatMessage({ id: 'Ya existe un Grupo con el mismo nombre, asigna uno diferente' }),
+                    life: 5000,
+                });
+                return false;
+            }
+        } catch (error) {
+            console.error('Error validando duplicados:', error);
+            return false;
+        }
+
+        // Validación final de campos obligatorios
+        if (validaNombre) {
+            toast.current?.show({
+                severity: 'error',
+                summary: 'ERROR',
+                detail: intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' }),
+                life: 3000,
+            });
+            return false;
+        }
+
+        return true;
     };
 
-    const guardarGrupoAtributo = async () => {
+    const guardarGrupoPropiedad = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        
+
         if (await validaciones()) {
-            let objGuardar = { ...grupoAtributo };
+            let objGuardar = { ...grupoPropiedad };
             const usuarioActual = getUsuarioSesion()?.id;
-            objGuardar['orden'] = objGuardar.orden || 0;
+            delete objGuardar.orden;
 
             if (idEditar === 0) {
                 delete objGuardar.id;
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                objGuardar['tipoDeGrupoPropiedad'] = tipoDeGrupoPropiedad;
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
                 }
-                
-                const nuevoRegistro = await postGrupoAtributo(objGuardar);
+
+                const nuevoRegistro = await postGrupoPropiedad(objGuardar);
 
                 if (nuevoRegistro?.id) {
-                    await procesarArchivosNuevoRegistro(grupoAtributo, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
+                    await procesarArchivosNuevoRegistro(grupoPropiedad, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
                     setRegistroResult("insertado");
                     setIdEditar(null);
                 } else {
@@ -89,30 +144,21 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
                     });
                 }
             } else {
-                const grupoAtributoAeditar = {
+                const grupoPropiedadAeditar = {
                     id: objGuardar.id,
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion,
-                    orden: objGuardar.orden || 0,
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                     empresaId: getUsuarioSesion()?.empresaId,
+                    tipoDeGrupoPropiedad: tipoDeGrupoPropiedad,
                 };
-                
-                await patchGrupoAtributo(objGuardar.id, grupoAtributoAeditar);
-                await editarArchivos(grupoAtributo, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
+
+                await patchGrupoPropiedad(objGuardar.id, grupoPropiedadAeditar);
+                await editarArchivos(grupoPropiedad, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
-        } else {
-            let errorMessage = intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' });
-                        
-            toast.current?.show({
-                severity: 'error',
-                summary: 'ERROR',
-                detail: errorMessage,
-                life: 3000,
-            });
         }
         setEstadoGuardandoBoton(false);
         setEstadoGuardando(false);
@@ -126,25 +172,26 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
 
     return (
         <div>
-            <div className="grid GrupoAtributo">
+            <div className="grid GrupoPropiedad">
                 <div className="col-12">
                     <div className="card">
                         <Toast ref={toast} position="top-right" />
-                        <h2>{header} {(intl.formatMessage({ id: 'Grupo de Atributo' })).toLowerCase()}</h2>
-                        <EditarDatosGrupoAtributo
-                            grupoAtributo={grupoAtributo}
-                            setGrupoAtributo={setGrupoAtributo}
+                        <h2>{header} {nombreTipoSingular.toLowerCase()}</h2>
+                        <EditarDatosGrupoPropiedad
+                            grupoPropiedad={grupoPropiedad}
+                            setGrupoPropiedad={setGrupoPropiedad}
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
+                            tipoDeGrupoPropiedad={tipoDeGrupoPropiedad}
                         />
-                       
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
-                                    onClick={guardarGrupoAtributo}
+                                    onClick={guardarGrupoPropiedad}
                                     className="mr-2"
                                     disabled={estadoGuardandoBoton}
                                 />
@@ -158,4 +205,4 @@ const EditarGrupoAtributo = ({ idEditar, setIdEditar, rowData, emptyRegistro, se
     );
 };
 
-export default EditarGrupoAtributo;
+export default EditarGrupoPropiedad;

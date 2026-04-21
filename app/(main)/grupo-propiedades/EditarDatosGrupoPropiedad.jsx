@@ -4,12 +4,16 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import ArchivoMultipleInput from "../../components/shared/archivo_multiple_input";
 import ArchivoInput from "../../components/shared/archivo_input";
-import { InputNumber } from 'primereact/inputnumber';
 import { InputSwitch } from 'primereact/inputswitch';
 import { useIntl } from 'react-intl';
 
-const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuardando, isEdit, listaTipoArchivos }) => {
+const EditarDatosGrupoPropiedad = ({ grupoPropiedad, setGrupoPropiedad, estadoGuardando, isEdit, listaTipoArchivos, tipoDeGrupoPropiedad = 'grupo_atributos' }) => {
     const intl = useIntl();
+
+    const esGrupoAtributos = tipoDeGrupoPropiedad === 'grupo_atributos';
+    const labelFieldset = esGrupoAtributos ? intl.formatMessage({ id: 'Datos del grupo de atributos' }) : intl.formatMessage({ id: 'Datos del grupo de campos dinámicos' });
+    const placeholderNombre = esGrupoAtributos ? intl.formatMessage({ id: 'Nombre del grupo de atributos' }) : intl.formatMessage({ id: 'Nombre del grupo de campos dinámicos' });
+    const placeholderDescripcion = esGrupoAtributos ? intl.formatMessage({ id: 'Descripción del grupo de atributos' }) : intl.formatMessage({ id: 'Descripción del grupo de campos dinámicos' });
     
     //Crear inputs de archivos
     const inputsDinamicos = [];
@@ -20,8 +24,8 @@ const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuard
                 <div className="flex flex-column field gap-2 mt-2 col-12">
                     <label>{tipoArchivo.nombre}</label>
                     <ArchivoMultipleInput
-                        registro={grupoAtributo}
-                        setRegistro={setGrupoAtributo}
+                        registro={grupoPropiedad}
+                        setRegistro={setGrupoPropiedad}
                         archivoTipo={tipoArchivo.tipo}
                         campoNombre={(tipoArchivo.nombre).toLowerCase()}
                     />
@@ -32,8 +36,8 @@ const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuard
             inputsDinamicos.push(
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <ArchivoInput
-                        registro={grupoAtributo}
-                        setRegistro={setGrupoAtributo}
+                        registro={grupoPropiedad}
+                        setRegistro={setGrupoPropiedad}
                         archivoTipo={tipoArchivo.tipo}
                         archivoHeader={tipoArchivo.nombre}
                         campoNombre={(tipoArchivo.nombre).toLowerCase()}
@@ -45,39 +49,26 @@ const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuard
 
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
-        let _grupoAtributo = { ...grupoAtributo };
+        let _grupoPropiedad = { ...grupoPropiedad };
         const esTrue = valor === true ? 'S' : 'N';
-        _grupoAtributo[`${nombreInputSwitch}`] = esTrue;
-        setGrupoAtributo(_grupoAtributo);
+        _grupoPropiedad[`${nombreInputSwitch}`] = esTrue;
+        setGrupoPropiedad(_grupoPropiedad);
     };
 
     return (
         <>
-            <Fieldset legend={intl.formatMessage({ id: 'Datos del grupo de atributo' })}>
+            <Fieldset legend={labelFieldset}>
                 <div className="formgrid grid">
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
                         <label htmlFor="nombre"><b>{intl.formatMessage({ id: 'Nombre' })}*</b></label>
                         <InputText 
                             id="nombre"
-                            value={grupoAtributo.nombre}
-                            placeholder={intl.formatMessage({ id: 'Nombre del grupo de atributo' })}
-                            onChange={(e) => setGrupoAtributo({ ...grupoAtributo, nombre: e.target.value })}
-                            className={`${(estadoGuardando && grupoAtributo.nombre === "") ? "p-invalid" : ""}`}
+                            value={grupoPropiedad.nombre}
+                            placeholder={placeholderNombre}
+                            onChange={(e) => setGrupoPropiedad({ ...grupoPropiedad, nombre: e.target.value })}
+                            className={`${(estadoGuardando && grupoPropiedad.nombre === "") ? "p-invalid" : ""}`}
                             maxLength={100}
                             disabled={estadoGuardando}
-                        />
-                    </div>
-
-                    <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-6">
-                        <label htmlFor="orden">{intl.formatMessage({ id: 'Orden' })}</label>
-                        <InputNumber 
-                            id="orden"
-                            value={grupoAtributo.orden || 0}
-                            placeholder={intl.formatMessage({ id: 'Orden de visualización' })}
-                            onValueChange={(e) => setGrupoAtributo({ ...grupoAtributo, orden: e.value || 0 })}
-                            disabled={estadoGuardando}
-                            min={0}
-                            inputStyle={{ textAlign: 'right' }}
                         />
                     </div>
 
@@ -85,7 +76,7 @@ const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuard
                         <label htmlFor="activo" className="font-bold block">{intl.formatMessage({ id: 'Activo' })}</label>
                         <InputSwitch
                             id="activo"
-                            checked={grupoAtributo.activoSn === 'S'}
+                            checked={grupoPropiedad.activoSn === 'S'}
                             onChange={(e) => manejarCambioInputSwitch(e, "activoSn")}
                             disabled={estadoGuardando}
                         />
@@ -99,9 +90,9 @@ const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuard
                         <label htmlFor="descripcion">{intl.formatMessage({ id: 'Descripción' })}</label>
                         <InputTextarea 
                             id="descripcion"
-                            value={grupoAtributo.descripcion || ''}
-                            placeholder={intl.formatMessage({ id: 'Descripción del grupo de atributo' })}
-                            onChange={(e) => setGrupoAtributo({ ...grupoAtributo, descripcion: e.target.value })}
+                            value={grupoPropiedad.descripcion || ''}
+                            placeholder={placeholderDescripcion}
+                            onChange={(e) => setGrupoPropiedad({ ...grupoPropiedad, descripcion: e.target.value })}
                             rows={3}
                             disabled={estadoGuardando}
                         />
@@ -112,4 +103,4 @@ const EditarDatosGrupoAtributo = ({ grupoAtributo, setGrupoAtributo, estadoGuard
     );
 };
 
-export default EditarDatosGrupoAtributo;
+export default EditarDatosGrupoPropiedad;
