@@ -31,7 +31,7 @@ import { useTheme } from "@/app/providers/ThemeProvider";
 import ImportacionExportacionCrud from "@/app/components/shared/importacionExportacionCrud";
 const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
+    parametrosEliminar, mensajeEliminar, registroEditar, editableInicial, onCancelar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
     botonesExtra, importarTabla, onImportarClick }, ref) => {
     const intl = useIntl()
     const router = useRouter();
@@ -299,7 +299,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
             }
 
             if (registroEditarFlag) {
-                setEditable(true);
+                setEditable(editableInicial !== false);
                 setIdEditar(registroEditar);
             }
 
@@ -824,7 +824,13 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
         return React.cloneElement(editarComponente, {
             idEditar: idEditar,
             editable: editable,
-            setIdEditar: setIdEditar,
+            setIdEditar: (val) => {
+                if (val === null && onCancelar) {
+                    onCancelar();
+                } else {
+                    setIdEditar(val);
+                }
+            },
             rowData: registros,
             emptyRegistro: emptyRegistro,
             setRegistroResult: setRegistroResult,

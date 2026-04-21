@@ -85,6 +85,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         "Empresas": {
           "path": "/empresas",
           "icon": "pi pi-fw pi-user-edit"
+        },
+        "Buscador global": {
+          "path": "/buscador-global",
+          "icon": "pi pi-fw pi-search"
         }
       },
       "Tablas maestras": {

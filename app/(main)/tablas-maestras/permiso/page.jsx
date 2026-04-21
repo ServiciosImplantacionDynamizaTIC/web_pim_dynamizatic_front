@@ -327,6 +327,11 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de Uso Multimedia-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de Uso Multimedia-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de Uso Multimedia-Borrar' },
+                // Buscador Global
+                { header: intl.formatMessage({ id: 'Buscador Global' }), seccion: 'Buscador global' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Buscador global-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Buscador global-Ver' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Buscador global-Actualizar' },
 
             ];
             // Obtenemos los roles
