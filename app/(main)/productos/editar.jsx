@@ -19,7 +19,7 @@ import ProductoPropiedad from "../producto-propiedad/page";
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
-    
+
     const [producto, setProducto] = useState(emptyRegistro || {
         sku: "",
         ean: "",
@@ -49,13 +49,13 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             if (idEditar && idEditar !== 0) {
                 const registro = rowData.find((element) => element.id === idEditar);
                 setProducto(registro);
-                
+
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
         };
         fetchData();
-    }, [idEditar, rowData]);  
+    }, [idEditar, rowData]);
 
     const validacionesImagenes = () => {
         return validarImagenes(producto, listaTipoArchivos);
@@ -79,7 +79,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                 life: 3000,
             });
         }*/
-        
+
         return (!validaSku && !validaEan && !validaNombre && !validaCategoria && !validaEstado && !validaMarca && !validaTipoProducto);
     };
 
@@ -102,7 +102,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     const guardarProducto = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        
+
         if (await validaciones()) {
             let objGuardar = { ...producto };
             const usuarioActual = getUsuarioSesion()?.id;
@@ -126,7 +126,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     usuarioCreacion: usuarioActual,
                     tipoProductoId: objGuardar.tipoProductoId || []
                 };
-                
+
                 const nuevoRegistro = await postProducto(objGuardar);
 
                 if (nuevoRegistro?.id) {
@@ -135,21 +135,21 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     if (rutaImagen) {
                         await patchProducto(nuevoRegistro.id, { imagenPrincipal: rutaImagen });
                     }
-                    
+
                     await procesarArchivosNuevoRegistro(producto, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
-                    
+
                     // Actualizar el producto con los datos del registro recién creado
-                    const productoActualizado = { 
-                        ...producto, 
+                    const productoActualizado = {
+                        ...producto,
                         id: nuevoRegistro.id,
                         imagenPrincipal: rutaImagen || producto.imagenPrincipal || ""
                     };
                     setProducto(productoActualizado);
-                    
+
                     // Crear lista de archivos antiguos para el nuevo registro
                     const _listaArchivosAntiguos = crearListaArchivosAntiguos(productoActualizado, listaTipoArchivos);
                     setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
-                    
+
                     setRegistroResult("insertado");
                     setIdEditar(nuevoRegistro.id);
                     toast.current?.show({
@@ -169,7 +169,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             } else {
                 // Procesar imagen principal antes de actualizar
                 const rutaImagen = await procesarImagenPrincipal(objGuardar.id);
-                
+
                 const productoAeditar = {
                     id: objGuardar.id,
                     categoriaId: objGuardar.categoriaId,
@@ -187,7 +187,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                     usuarioModificacion: usuarioActual,
                     tipoProductoId: objGuardar.tipoProductoId || []
                 };
-                
+
                 await patchProducto(objGuardar.id, productoAeditar);
                 await editarArchivos(producto, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
                 setIdEditar(null);
@@ -195,7 +195,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             }
         } else {
             let errorMessage = intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' });
-                        
+
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -208,6 +208,8 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     };
 
     const cancelarEdicion = () => {
+         //Notificar al Crud para que recargue la tabla
+        setRegistroResult?.(`tipo_cambiado_${Date.now()}`);
         setIdEditar(null);
     };
 
@@ -228,53 +230,53 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
                             setRegistroResult={setRegistroResult}
                         />
-                        
+
                         {(idEditar != null && idEditar !== 0) && (
                             <div className="mt-4">
                                 <TabView scrollable>
                                     <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>
                                         <ProductoSeo
-                                        idProducto={idEditar}
-                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                            idProducto={idEditar}
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Iconos del Producto' })}>
                                         <ProductoIcono
-                                        idProducto={idEditar}
-                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                            idProducto={idEditar}
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Marketplaces del Producto' })}>
                                         <ProductoMarketplace
-                                        idProducto={idEditar}
-                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                            idProducto={idEditar}
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
                                         <ProductoPropiedad
-                                        idProducto={idEditar}
-                                        tipoProductoId={producto?.tipoProductoId}
-                                        tipoDePropiedad="atributo"
-                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                            idProducto={idEditar}
+                                            tipoProductoId={producto?.tipoProductoId}
+                                            tipoDePropiedad="atributo"
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Campos Dinámicos del Producto' })}>
                                         <ProductoPropiedad
-                                        idProducto={idEditar}
-                                        tipoProductoId={producto?.tipoProductoId}
-                                        tipoDePropiedad="campo_dinamico"
-                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                            idProducto={idEditar}
+                                            tipoProductoId={producto?.tipoProductoId}
+                                            tipoDePropiedad="campo_dinamico"
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                     <TabPanel header={intl.formatMessage({ id: 'Multimedia del Producto' })}>
                                         <ProductoMultimedia
-                                        idProducto={idEditar}
-                                        tipoProductoId={producto?.tipoProductoId}
-                                        estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                            idProducto={idEditar}
+                                            tipoProductoId={producto?.tipoProductoId}
+                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
                                 </TabView>
                             </div>
                         )}
-                       
+
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarProducto}
                                     className="mr-2"

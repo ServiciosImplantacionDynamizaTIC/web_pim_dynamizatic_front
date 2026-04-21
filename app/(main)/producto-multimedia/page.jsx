@@ -250,6 +250,11 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
         actualizarValorMultimedia(multimediaDetalle.id, 'pendienteSubir', true);
 
         try {
+            // 0. Si ya existía un archivo anterior en el servidor, borrarlo (incluidas todas sus versiones)
+            if (valorActual.url && !valorActual.url.startsWith('blob:')) {
+                await eliminarFicherosDelServidor(valorActual.url);
+            }
+
             // 1. Subir archivo al servidor: imágenes con postSubirImagen, el resto con postSubirFichero
             const carpeta = `producto/${idProducto}/multimedia`;
             const esImagen = tipoMultimedia === 'imagen' || (!tipoMultimedia && archivo.type?.startsWith('image/'));

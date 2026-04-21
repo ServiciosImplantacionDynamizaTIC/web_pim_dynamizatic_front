@@ -13,10 +13,10 @@ import { Dropdown } from "primereact/dropdown";
 import { InputSwitch } from "primereact/inputswitch";
 import { MultiSelect } from "primereact/multiselect";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { getProducto } from "@/app/api-endpoints/producto";
+import { getProducto, patchProducto } from "@/app/api-endpoints/producto";
 import { getTipoProductoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_propiedad_detalle";
 import { getTipoProductoGrupoPropiedadDetalles } from "@/app/api-endpoints/tipo_producto_grupo_propiedad_detalle";
-import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
+import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad, deleteProductoPropiedad } from "@/app/api-endpoints/producto_propiedad";
 import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -227,12 +227,13 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                     atributoDetalle.valoresPermitidos.split(';').map(v => ({ label: v.trim(), value: v.trim() })) : [];
                 return (
                     <Dropdown
-                        value={valorActual.valor || ''}
+                        value={valorActual.valor || null}
                         options={opcionesLista}
                         onChange={(e) => actualizarValorPropiedad(atributoDetalle.id, 'valor', e.value || '')}
                         placeholder={intl.formatMessage({ id: 'Seleccione una opción' })}
                         disabled={deshabilitado}
                         className="w-full"
+                        showClear
                         emptyMessage={intl.formatMessage({ id: 'No hay opciones disponibles' })}
                     />
                 );
@@ -347,8 +348,12 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
             const promesasGuardado = [];
 
             for (const [propiedadId, valores] of Object.entries(valoresPropiedades)) {
-                // Solo guardar si pertenece a este tipo y tiene valor
-                if (propiedadIdsSet.has(parseInt(propiedadId)) && valores.valor !== undefined && valores.valor !== null && valores.valor.toString().trim() !== '') {
+                if (!propiedadIdsSet.has(parseInt(propiedadId))) continue;
+
+                const tieneValor = valores.valor !== undefined && valores.valor !== null && valores.valor.toString().trim() !== '';
+
+                if (tieneValor) {
+                    // Guardar o actualizar el valor
                     const datosPropiedad = {
                         productoId: idProducto,
                         propiedadId: parseInt(propiedadId),
@@ -364,10 +369,21 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                     } else {
                         promesasGuardado.push(postProductoPropiedad(datosPropiedad));
                     }
+                } else if (valores.id) {
+                    // Valor vaciado y existe registro en BD: eliminar el registro
+                    promesasGuardado.push(deleteProductoPropiedad(valores.id));
                 }
             }
 
             await Promise.all(promesasGuardado);
+
+            // Guardar también el tipoProductoId en el producto para mantener consistencia
+            if (idProducto && tipoProductoId) {
+                await patchProducto(idProducto, {
+                    tipoProductoId: tipoProductoId,
+                    usuarioModificacion: usuario.id
+                });
+            }
 
             toast.current?.show({
                 severity: 'success',
@@ -474,7 +490,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
 
         return (
             <div key={atributoDetalle.id} className="field col-12 md:col-6 lg:col-4">
-                <div className={`p-3 border-1 border-round ${erroresValidacion.has(atributoDetalle.id) ? 'border-red-500 bg-red-50' : 'border-300'}`}>
+                <div className={`p-3 border-1 border-round h-full flex flex-column ${erroresValidacion.has(atributoDetalle.id) ? 'border-red-500 bg-red-50' : 'border-300'}`}>
                     <div className="flex align-items-center mb-2">
                         {estoyEditandoProducto && (
                             <>
@@ -498,7 +514,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                             {atributoDetalle.obligatorioSn === 'S' && <span className="text-red-500 ml-1">*</span>}
                         </label>
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-2 flex-grow-1">
                         <div className="flex align-items-center gap-2">
                             <div className="flex-1">
                                 {renderizarCampoPropiedad(atributoDetalle)}
@@ -511,7 +527,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                         </div>
                     </div>
                     {atributoDetalle.descripcion && (
-                        <small className="text-gray-600 block mt-1">
+                        <small className="text-gray-600 block mt-auto">
                             {atributoDetalle.descripcion}
                         </small>
                     )}
@@ -525,7 +541,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
             <Fieldset
                 key={grupo.id}
                 legend={`${grupo.nombre} (${grupoItems.length})`}
-                collapsed={false}
+                collapsed={true}
                 toggleable
                 className="mb-3"
             >
@@ -567,7 +583,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
             {propiedadesAgrupadas.sinGrupo.length > 0 && (
                 <Fieldset
                     legend={`${intl.formatMessage({ id: 'Sin grupo' })} (${propiedadesAgrupadas.sinGrupo.length})`}
-                    collapsed={false}
+                    collapsed={true}
                     toggleable
                     className="mb-3"
                 >
