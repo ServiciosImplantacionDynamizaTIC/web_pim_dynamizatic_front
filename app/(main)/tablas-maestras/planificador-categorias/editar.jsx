@@ -71,7 +71,7 @@ const EditarPlanificadorCategoria = ({ idEditar, setIdEditar, rowData, emptyRegi
             <div className="col-12">
                 <div className="card">
                     <Toast ref={toast} position="top-right" />
-                    <h2>{header} {intl.formatMessage({ id: "categoría del planificador" })}</h2>
+                    <h2>{header} {intl.formatMessage({ id: "Categoría del planificador" })}</h2>
                     <EditarDatosPlanificadorCategoria
                         planificadorCategoria={planificadorCategoria}
                         setPlanificadorCategoria={setPlanificadorCategoria}

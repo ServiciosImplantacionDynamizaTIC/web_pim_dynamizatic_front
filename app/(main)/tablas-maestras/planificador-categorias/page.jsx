@@ -16,11 +16,11 @@ const PlanificadorCategoriasPage = () => {
 
     return (
         <Crud
-            headerCrud={intl.formatMessage({ id: "CategorÃ­as del planificador" })}
+            headerCrud={intl.formatMessage({ id: "Categorías del planificador" })}
             getRegistros={getVistaPlanificadorCategoriaEmpresas}
             getRegistrosCount={getVistaPlanificadorCategoriaEmpresasCount}
             botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
-            controlador={"Categorias del planificador"}
+            controlador={"Categorías del planificador"}
             filtradoBase={{ empresaId: getUsuarioSesion()?.empresaId }}
             editarComponente={<EditarPlanificadorCategoria />}
             columnas={columnas}
