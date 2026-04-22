@@ -7,6 +7,7 @@ const CorreoPlantilla = () => {
     const intl = useIntl();
     const columnas = [
         { campo: 'nombrePlantilla', header: intl.formatMessage({ id: 'Nombre de Plantilla' }), tipo: 'string' },
+        { campo: 'accion', header: intl.formatMessage({ id: 'Accion' }), tipo: 'string' },
         { campo: 'titulo', header: intl.formatMessage({ id: 'Título del Mail' }), tipo: 'string' },
         { campo: 'activoSn', header: intl.formatMessage({ id: 'Activo' }), tipo: 'booleano' },
     ]

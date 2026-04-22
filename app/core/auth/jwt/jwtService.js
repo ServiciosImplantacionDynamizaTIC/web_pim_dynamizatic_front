@@ -27,6 +27,20 @@ export default class JwtService {
     // Intercepta todas las peticiones salientes.
     axios.interceptors.request.use(
       config => {
+        const publicRoutes = [
+          '/auth/forgotpassword',
+          '/auth/newpassword',
+          '/usuario-password-historicos',
+          '/usuario-password-historicos/count',
+          '/usuario-credenciales',
+          '/usuariocredenciales'
+        ]
+        const requestUrl = config.url?.toLowerCase() || ''
+
+        if (publicRoutes.some(route => requestUrl.includes(route))) {
+          return config
+        }
+
         const accessToken = this.getToken() //-> Obtiene el token de localStorage
 
         //Si hay un token de acceso presente, lo añade al encabezado Authorization de la petición.

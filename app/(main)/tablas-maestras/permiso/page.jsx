@@ -38,6 +38,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Empresas-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Empresas-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Empresas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Empresas-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Empresas-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Empresas-Borrar' },
 
@@ -46,6 +47,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Idiomas-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Idiomas-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Idiomas-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Idiomas-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Idiomas-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Idiomas-Borrar' },
 
@@ -85,6 +87,30 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Plantillas de email-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Plantillas de email-Borrar' },
 
+                // Categorias del planificador
+                { header: intl.formatMessage({ id: 'Categorias del planificador' }), seccion: 'Categorias del planificador' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Categorias del planificador-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Categorias del planificador-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Categorias del planificador-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Categorias del planificador-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Categorias del planificador-Borrar' },
+
+                // Estados del planificador
+                { header: intl.formatMessage({ id: 'Estados del planificador' }), seccion: 'Estados del planificador' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Estados del planificador-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Estados del planificador-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Estados del planificador-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados del planificador-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados del planificador-Borrar' },
+
+                // Gestor de proyectos
+                { header: intl.formatMessage({ id: 'Gestor de proyectos' }), seccion: 'Gestor de proyectos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Gestor de proyectos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Gestor de proyectos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Gestor de proyectos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Gestor de proyectos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Gestor de proyectos-Borrar' },
+
                 // Secciones
                 { header: intl.formatMessage({ id: 'Secciones' }), seccion: 'Secciones' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Secciones-Acceder' },
@@ -106,6 +132,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Traducciones-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Traducciones-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Traducciones-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Traducciones-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Traducciones-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Traducciones-Borrar' },
 
@@ -131,6 +158,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Usuarios-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Usuarios-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Usuarios-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Usuarios-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Usuarios-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Usuarios-Borrar' },
                 { header: intl.formatMessage({ id: 'Ver Histórico Contraseñas' }), seccion: 'Usuarios-VerHistoricoPassword' },
@@ -144,12 +172,12 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Parámetros globales-Borrar' },
 
                 // Grupos de Atributos
-                { header: intl.formatMessage({ id: 'Grupos de Atributos' }), seccion: 'GrupoAtributos' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GrupoAtributos-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GrupoAtributos-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GrupoAtributos-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GrupoAtributos-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GrupoAtributos-Borrar' },
+                { header: intl.formatMessage({ id: 'Grupos de Atributos' }), seccion: 'GruposAtributos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GruposAtributos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GruposAtributos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GruposAtributos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GruposAtributos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GruposAtributos-Borrar' },
 
                 // Atributos
                 { header: intl.formatMessage({ id: 'Atributos' }), seccion: 'Atributos' },
@@ -158,6 +186,22 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Atributos-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Atributos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Atributos-Borrar' },
+
+                // Grupos de Campos dinamicos
+                { header: intl.formatMessage({ id: 'Grupos de Campos Dinámicos' }), seccion: 'GruposCamposDinamicos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'GruposCamposDinamicos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'GruposCamposDinamicos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'GruposCamposDinamicos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'GruposCamposDinamicos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'GruposCamposDinamicos-Borrar' },
+
+                // Campos Dinamicos
+                { header: intl.formatMessage({ id: 'Campos Dinámicos' }), seccion: 'CamposDinamicos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'CamposDinamicos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'CamposDinamicos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'CamposDinamicos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'CamposDinamicos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'CamposDinamicos-Borrar' },
 
                 // Catálogos
                 { header: intl.formatMessage({ id: 'Catálogos' }), seccion: 'Catalogos' },
@@ -172,6 +216,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Categorias-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Categorias-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Categorias-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Categorias-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Categorias-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Categorias-Borrar' },
 
@@ -198,6 +243,95 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Multimedia-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Multimedia-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Multimedia-Borrar' },
+
+                // Productos
+                { header: intl.formatMessage({ id: 'Productos' }), seccion: 'Productos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Productos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Productos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Productos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Productos-Borrar' },
+
+                // Estados
+                { header: intl.formatMessage({ id: 'Estados' }), seccion: 'Estados' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Estados-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Estados-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Estados-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados-Borrar' },
+                
+                //Marketplace
+                { header: intl.formatMessage({ id: 'Marketplaces' }), seccion: 'Marketplaces' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Marketplaces-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Marketplaces-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Marketplaces-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Marketplaces-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Marketplaces-Borrar' },
+                //ProductoSeo
+                { header: intl.formatMessage({ id: 'SEO de Productos' }), seccion: 'ProductoSeo' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoSeo-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoSeo-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoSeo-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoSeo-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoSeo-Borrar' },
+
+                //ProductoIcono
+                { header: intl.formatMessage({ id: 'Iconos de Productos' }), seccion: 'ProductoIcono' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoIcono-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoIcono-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoIcono-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoIcono-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoIcono-Borrar' },
+                
+                //ProductoMarketplace
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos' }), seccion: 'ProductoMarketplace' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoMarketplace-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoMarketplace-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoMarketplace-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoMarketplace-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoMarketplace-Borrar' },
+                
+                //Logs de sincronización Marketplaces
+                { header: intl.formatMessage({ id: 'Logs de sincronización Marketplaces' }), seccion: 'Logs de sincronización Marketplaces' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Logs de sincronización Marketplaces-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Logs de sincronización Marketplaces-Ver' },
+
+                //Propiedades de Productos
+                { header: intl.formatMessage({ id: 'Propiedades de Productos' }), seccion: 'Propiedades de Productos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Propiedades de Productos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Propiedades de Productos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Propiedades de Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Propiedades de Productos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Propiedades de Productos-Borrar' },
+
+                //Multimedia de Productos
+                { header: intl.formatMessage({ id: 'Multimedia de Productos' }), seccion: 'Multimedia de Productos' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Multimedia de Productos-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Multimedia de Productos-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Multimedia de Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Multimedia de Productos-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Multimedia de Productos-Borrar' },
+
+                //Tipos de Producto
+                { header: intl.formatMessage({ id: 'Tipos de Producto' }), seccion: 'Tipos de Producto' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de Producto-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de Producto-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de Producto-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de Producto-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de Producto-Borrar' },
+
+                //Tipos de Uso Multimedia
+                { header: intl.formatMessage({ id: 'Tipos de Uso Multimedia' }), seccion: 'Tipos de Uso Multimedia' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Tipos de Uso Multimedia-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Tipos de Uso Multimedia-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Tipos de Uso Multimedia-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Tipos de Uso Multimedia-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Tipos de Uso Multimedia-Borrar' },
+                // Buscador Global
+                { header: intl.formatMessage({ id: 'Buscador Global' }), seccion: 'Buscador global' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Buscador global-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Buscador global-Ver' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Buscador global-Actualizar' },
 
             ];
             // Obtenemos los roles

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { Toast } from "primereact/toast";
 import { DataTable } from "primereact/datatable";
@@ -28,12 +28,21 @@ import PhoneInput from 'react-phone-input-2'
 import es from 'react-phone-input-2/lang/es.json'
 import { useRouter } from 'next/navigation';
 import { useTheme } from "@/app/providers/ThemeProvider";
-const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
+import ImportacionExportacionCrud from "@/app/components/shared/importacionExportacionCrud";
+const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, deleteRegistro, headerCrud, seccion,
     editarComponente, editarComponenteParametrosExtra, filtradoBase, procesarDatosParaCSV, controlador,
-    parametrosEliminar, mensajeEliminar, registroEditar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar }) => {
+    parametrosEliminar, mensajeEliminar, registroEditar, editableInicial, onCancelar, urlQR, getRegistrosForaneos, validarEliminar, validarEditar,
+    botonesExtra, importarTabla, onImportarClick }, ref) => {
     const intl = useIntl()
     const router = useRouter();
     const { themeConfig } = useTheme(); // Hook para obtener el tema actual
+
+    // Exponer la función recargarDatos al componente padre
+    useImperativeHandle(ref, () => ({
+        recargarDatos: () => {
+            obtenerDatos();
+        }
+    }));
 
     // Función para obtener el color primario del tema actual
     const obtenerColorPrimario = () => {
@@ -82,6 +91,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
 
     const [eliminarRegistroDialog, setEliminarRegistroDialog] = useState(false);
     const [descargarCSVDialog, setDescargarCSVDialog] = useState(false);
+    const [importarDialog, setImportarDialog] = useState(false);
     const [mostarQRDialog, setMostarQRDialog] = useState(false);
     const [correoEnviarQR, setCorreoEnviarQR] = useState("");
     const [urlQREncriptado, setUrlQREncriptado] = useState("");
@@ -94,11 +104,13 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
     const [puedeVer, setPuedeVer] = useState(true);
     const [puedeEditar, setPuedeEditar] = useState(true);
     const [puedeBorrar, setPuedeBorrar] = useState(true);
+    const [puedeImportar, setPuedeImportar] = useState(!controlador);
     const [puedeRealizar, setPuedeRealizar] = useState(true);
+    const [permisosBotonesExtra, setPermisosBotonesExtra] = useState({});
     const [busquedaRealizada, setBusquedaRealizada] = useState(false);
+    const [buscando, setBuscando] = useState(false);
     const [registrosForaneos, setRegistrosForaneos] = useState({});
     const [operadorSeleccionado, setOperadorSeleccionado] = useState('or');
-
     const [totalRegistros, setTotalRegistros] = useState(0);
     //Parametros del dataTable que usara para cargar los datos
     const [parametrosCrud, setParametrosCrud] = useState(() => {
@@ -159,6 +171,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         };
 
         try {
+            setBuscando(true);
             //Obtenemos los registros para rellenar el crud
             const registros = await getRegistros(JSON.stringify(queryParams));
 
@@ -286,13 +299,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             }
 
             if (registroEditarFlag) {
-                setEditable(true);
+                setEditable(editableInicial !== false);
                 setIdEditar(registroEditar);
             }
 
         } catch (err) {
             console.log(err.message);
         } finally {
+            setBuscando(false);
             console.log('Carga completa');
         }
     };
@@ -311,7 +325,17 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setPuedeVer(await tieneUsuarioPermiso(controlador, 'ver'))
         setPuedeEditar(await tieneUsuarioPermiso(controlador, 'actualizar'))
         setPuedeBorrar(await tieneUsuarioPermiso(controlador, 'borrar'))
+        setPuedeImportar(await tieneUsuarioPermiso(controlador, 'importar'))
         setPuedeRealizar(await tieneUsuarioPermiso(controlador, 'actualizar'));
+
+        // Obtener permisos de los botones extra
+        if (botonesExtra && Array.isArray(botonesExtra)) {
+            const _permisosBotonesExtra = {};
+            for (const botonExtra of botonesExtra) {
+                _permisosBotonesExtra[botonExtra.boton.props.permiso] = await tieneUsuarioPermiso(controlador, botonExtra.boton.props.permiso);
+            }
+            setPermisosBotonesExtra(_permisosBotonesExtra);
+        }
 
     }
 
@@ -667,12 +691,29 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 {(botones.includes('eliminar') && puedeBorrar && puedeEliminarRegistro(rowData)) && (
                     <Button
                         icon="pi pi-trash"
+                        className="mr-2"
                         rounded
                         title={intl.formatMessage({ id: 'Eliminar' })}
                         severity="warning"
                         onClick={() => confirmarEliminarRegistro(rowData)}
                     />
-                )}                
+                )}
+                {/* Botones extra personalizados */}
+                {botonesExtra && botonesExtra.length > 0 &&
+                    botonesExtra.map((botonExtra, index) => {
+                        if (permisosBotonesExtra[botonExtra.boton.props.permiso]) {
+                            return React.cloneElement(
+                                botonExtra.boton,
+                                {
+                                    key: `boton-extra-${index}`,
+                                    className: `mr-2 ${botonExtra.boton.props.className || ''}`.trim(),
+                                    onClick: () => botonExtra.funcionOnClick(rowData)
+                                }
+                            );
+                        }
+                        return null;
+                    })
+                }
             </>
         );
     };
@@ -783,7 +824,13 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         return React.cloneElement(editarComponente, {
             idEditar: idEditar,
             editable: editable,
-            setIdEditar: setIdEditar,
+            setIdEditar: (val) => {
+                if (val === null && onCancelar) {
+                    onCancelar();
+                } else {
+                    setIdEditar(val);
+                }
+            },
             rowData: registros,
             emptyRegistro: emptyRegistro,
             setRegistroResult: setRegistroResult,
@@ -802,6 +849,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             valorDeFiltroGlobal: valorDeFiltroGlobal,
             manejarCambioFiltroGlobal: manejarCambioFiltroGlobal,
             manejarBusquedaFiltroGlobal: manejarBusquedaFiltroGlobal,
+            buscando: buscando,
             nombre: headerCrud,
             operadorSeleccionado: operadorSeleccionado,
             setOperadorSeleccionado: setOperadorSeleccionado,
@@ -825,6 +873,14 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         if (botones.includes('descargarCSV')) {
             propiedadesHeader['generarCSV'] = confirmarDescargarArchivoCSV
         }
+        if (botones.includes('importar') && puedeImportar && importarTabla) {
+            propiedadesHeader['mostrarImportar'] = true
+            propiedadesHeader['importarArchivo'] = mostrarImportarDialog
+        }
+        if (botones.includes('importar') && puedeImportar && onImportarClick && !importarTabla) {
+            propiedadesHeader['mostrarImportar'] = true
+            propiedadesHeader['importarArchivo'] = onImportarClick
+        }
         return React.cloneElement(<Header />, propiedadesHeader);
     }
 
@@ -834,12 +890,24 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
         setEliminarRegistroDialog(true);
     };
 
+    const mostrarImportarDialog = () => {
+        setImportarDialog(true);
+    };
+    const ocultarImportarDialog = () => {
+        setImportarDialog(false);
+    };
+
+    // Al cerrar el modal tras importar, relanza la búsqueda para refrescar la tabla.
+    const actualizarDespuesDeImportar = () => {
+        manejarBusquedaFiltroGlobal();
+    };
+
     const eliminarRegistro = async () => {
         try {
             //
             //Si tiene la seccion declarada, significa que tiene archivos, por lo que hay que borrar los archivos
             //
-            if (seccion) {
+            if (seccion && registrosTipoArchivos && registrosTipoArchivos.length > 0) {
                 //
                 //Obtenemos el nombre de la carpeta donde se guardan los archivos y la eliminamos
                 //
@@ -880,7 +948,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             obtenerDatos();
         } catch (error) {
             //Si ha habido un error borrando el registro lo muestra
-            if (error.message === 'Request failed with status code 500' || error.response.data.error.message === "No se pudo eliminar el registro porque tiene otros registros relacionados.") {
+            if (error?.message === 'Request failed with status code 500' || error?.response?.data?.error?.message === "No se pudo eliminar el registro porque tiene otros registros relacionados.") {
                 toast.current?.show({
                     severity: "error",
                     summary: "ERROR",
@@ -892,8 +960,8 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                 toast.current?.show({
                     severity: "error",
                     summary: "ERROR",
-                    detail: error.message,
-
+                    detail: error?.message || intl.formatMessage({ id: 'Ha ocurrido un error al eliminar el registro.' }),
+                    life: 3000,
                 });
             }
 
@@ -1261,7 +1329,7 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 {
                                     ...columnasDinamicas //Muestra las columnas generadas
                                 }
-                                {(botones.length > 0 && !(botones.length === 1 && botones.includes('descargarCSV'))) && (
+                                {((botones.length > 0 && !(botones.length === 1 && botones.includes('descargarCSV'))) || (botonesExtra && botonesExtra.length > 0)) && (
                                     <Column
                                         body={(rowData) => botonesDeAccionTemplate(rowData, botones)}
                                         header={intl.formatMessage({ id: 'Acciones' })}
@@ -1315,6 +1383,15 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
                                 labelMostrados={intl.formatMessage({ id: 'Registros mostrados' })}
                                 labelTodos={intl.formatMessage({ id: 'Todos los registros' })}
                             />
+                            <ImportacionExportacionCrud
+                                visible={importarDialog}
+                                onHide={ocultarImportarDialog}
+                                controlador={controlador}
+                                headerCrud={headerCrud}
+                                tabla={importarTabla}
+                                toast={toast}
+                                onImportacionFinalizada={actualizarDespuesDeImportar}
+                            />
                             {/* MODAL DE MOSTRAR QR */}
                             <Dialog
                                 visible={mostarQRDialog}
@@ -1352,6 +1429,6 @@ const Crud = ({ getRegistros, getRegistrosCount, botones, columnas, deleteRegist
             }
         </div>
     );
-};
+});
 
 export default Crud;

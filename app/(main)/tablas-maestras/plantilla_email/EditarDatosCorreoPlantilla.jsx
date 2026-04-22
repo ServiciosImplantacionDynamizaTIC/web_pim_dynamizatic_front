@@ -17,6 +17,9 @@ const EditarDatosCorreoPlantilla = ({
     idiomaSeleccionado, 
     setIdiomaSeleccionado, 
     listaTipoArchivos, 
+    accionesCorreo,
+    accionSeleccionada,
+    setAccionSeleccionada,
     estadoGuardando
 }) => {
     const intl = useIntl();
@@ -123,6 +126,19 @@ const EditarDatosCorreoPlantilla = ({
                         className={`p-column-filter ${(estadoGuardando && (idiomaSeleccionado == null || idiomaSeleccionado === "")) ? "p-invalid" : ""}`}
                         showClear
                         placeholder={intl.formatMessage({ id: 'Selecciona un idioma' })}
+                    />
+                </div>
+
+                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
+                    <label htmlFor="accion"> <b>{intl.formatMessage({ id: 'Accion' })}*</b></label>
+                    <Dropdown
+                        value={accionSeleccionada || ""}
+                        onChange={(e) => setAccionSeleccionada(e.value)}
+                        options={accionesCorreo}
+                        optionLabel="label"
+                        className={`p-column-filter ${(estadoGuardando && (accionSeleccionada == null || accionSeleccionada === "")) ? "p-invalid" : ""}`}
+                        showClear
+                        placeholder={intl.formatMessage({ id: 'Selecciona una accion' })}
                     />
                 </div>
  
