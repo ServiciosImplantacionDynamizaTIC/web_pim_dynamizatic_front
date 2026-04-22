@@ -3275,6 +3275,309 @@
         "operationId": "EmpresaController.find"
       }
     },
+    "/estados/count": {
+      "get": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "count",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Estado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Estado>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EstadoController.count"
+      }
+    },
+    "/estados/{id}": {
+      "put": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Estado"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EstadoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "EstadoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EstadoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Estado DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "EstadoController.deleteById"
+      }
+    },
+    "/estados": {
+      "post": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "create",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEstado"
+              }
+            }
+          }
+        },
+        "operationId": "EstadoController.create"
+      },
+      "patch": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Estado.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Estado>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "EstadoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "EstadoController",
+        "x-operation-name": "find",
+        "tags": [
+          "EstadoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Estado model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EstadoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estado.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "EstadoController.find"
+      }
+    },
     "/exportacion/{tabla}/plantilla-insertar": {
       "get": {
         "x-controller-name": "ImportacionExportacionController",
@@ -3284,7 +3587,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Plantilla CSV vacia lista para rellenar",
+            "description": "Plantilla CSV vacía lista para rellenar",
             "content": {
               "text/csv": {
                 "schema": {
@@ -3302,14 +3605,6 @@
               "type": "string"
             },
             "required": true
-			
-		   
-						   
-						 
-					   
-							  
-			  
-							
           }
         ],
         "operationId": "ImportacionExportacionController.descargarPlantillaInsertarTabla"
@@ -3818,6 +4113,679 @@
           }
         ],
         "operationId": "GrupoPropiedadController.find"
+      }
+    },
+    "/ia-proveedor-campos/count": {
+      "get": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "count",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedorCampos model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "IaProveedorCampos.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<IaProveedorCampos>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "IaProveedorCamposController.count"
+      }
+    },
+    "/ia-proveedor-campos/por-proveedor/{iaProveedorId}": {
+      "get": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "findByProveedor",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of IaProveedorCampos for a specific provider",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IaProveedorCampos"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "iaProveedorId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "IaProveedorCamposController.findByProveedor"
+      }
+    },
+    "/ia-proveedor-campos/{id}": {
+      "put": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "IaProveedorCampos PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IaProveedorCampos"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "IaProveedorCamposController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "IaProveedorCampos PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IaProveedorCamposPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "IaProveedorCamposController.updateById"
+      },
+      "get": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "findById",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedorCampos model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedorCamposWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedorCampos.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "IaProveedorCamposController.findById"
+      },
+      "delete": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "IaProveedorCampos DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "IaProveedorCamposController.deleteById"
+      }
+    },
+    "/ia-proveedor-campos": {
+      "post": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "create",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedorCampos model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedorCampos"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewIaProveedorCampos"
+              }
+            }
+          }
+        },
+        "operationId": "IaProveedorCamposController.create"
+      },
+      "patch": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedorCampos PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "IaProveedorCampos.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<IaProveedorCampos>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IaProveedorCamposPartial"
+              }
+            }
+          }
+        },
+        "operationId": "IaProveedorCamposController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "IaProveedorCamposController",
+        "x-operation-name": "find",
+        "tags": [
+          "IaProveedorCamposController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of IaProveedorCampos model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IaProveedorCamposWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedorCampos.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "IaProveedorCamposController.find"
+      }
+    },
+    "/ia-proveedores/activo/{empresaId}": {
+      "get": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "findActivo",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedor activo para la empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedorWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "empresaId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "IaProveedorController.findActivo"
+      }
+    },
+    "/ia-proveedores/count": {
+      "get": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "count",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedor model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "IaProveedor.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<IaProveedor>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "IaProveedorController.count"
+      }
+    },
+    "/ia-proveedores/{id}": {
+      "put": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "IaProveedor PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IaProveedor"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "IaProveedorController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "IaProveedor PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IaProveedorPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "IaProveedorController.updateById"
+      },
+      "get": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "findById",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedor model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedorWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedor.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "IaProveedorController.findById"
+      },
+      "delete": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "IaProveedor DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "IaProveedorController.deleteById"
+      }
+    },
+    "/ia-proveedores": {
+      "post": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "create",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedor model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedor"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewIaProveedor"
+              }
+            }
+          }
+        },
+        "operationId": "IaProveedorController.create"
+      },
+      "patch": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "IaProveedor PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "IaProveedor.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<IaProveedor>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IaProveedorPartial"
+              }
+            }
+          }
+        },
+        "operationId": "IaProveedorController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "IaProveedorController",
+        "x-operation-name": "find",
+        "tags": [
+          "IaProveedorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of IaProveedor model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IaProveedorWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IaProveedor.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "IaProveedorController.find"
       }
     },
     "/iconos/count": {
@@ -4549,78 +5517,6 @@
           }
         ],
         "operationId": "ImportacionExportacionController.obtenerForeignKeysTabla"
-	   
-	  
-											  
-			  
-													 
-													  
-				 
-								 
-		  
-					  
-				  
-																				  
-						
-						   
-						   
-								  
-				 
-			   
-			 
-		   
-		  
-					   
-		   
-							
-						 
-					   
-							  
-			  
-							
-			
-		   
-						   
-						 
-					   
-							  
-			  
-							
-		   
-		  
-																	  
-	   
-	  
-								  
-			  
-													 
-												 
-				 
-								 
-		  
-					  
-				  
-																				  
-						
-						   
-						   
-								  
-				 
-			   
-			 
-		   
-		  
-					   
-		   
-							
-						 
-					   
-							  
-			  
-							
-		   
-		  
-																 
       }
     },
     "/importacion/{tabla}/inicio": {
@@ -4664,7 +5560,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Progreso de una importacion en curso",
+            "description": "Progreso de una importación en curso",
             "content": {
               "application/json": {
                 "schema": {
@@ -4710,7 +5606,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Funcion que importa un CSV a la tabla, haciendo inserts o updates segun el caso",
+            "description": "Función que importa un CSV a la tabla, haciendo inserts o updates según el caso",
             "content": {
               "application/json": {
                 "schema": {
@@ -18077,6 +18973,203 @@
         "operationId": "TraduccionLiteralController.count"
       }
     },
+    "/traduccion-literals/traducir-con-ia/{literalId}/{idiomaId}": {
+      "get": {
+        "x-controller-name": "TraduccionLiteralController",
+        "x-operation-name": "traducirLiteralConIA",
+        "tags": [
+          "TraduccionLiteralController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Traduce un literal usando IA",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "literalId": {
+                      "type": "number"
+                    },
+                    "idiomaId": {
+                      "type": "number"
+                    },
+                    "textoOriginal": {
+                      "type": "string"
+                    },
+                    "textoTraducido": {
+                      "type": "string"
+                    },
+                    "proveedor": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "literalId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "idiomaId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TraduccionLiteralController.traducirLiteralConIA"
+      }
+    },
+    "/traduccion-literals/traducir-lote-con-ia": {
+      "post": {
+        "x-controller-name": "TraduccionLiteralController",
+        "x-operation-name": "traducirLiteralLoteConIA",
+        "tags": [
+          "TraduccionLiteralController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Traduce múltiples literales en lote usando IA",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number"
+                    },
+                    "traducciones": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "proveedor": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "literalIds",
+                  "idiomaId"
+                ],
+                "properties": {
+                  "literalIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "IDs de los literales a traducir"
+                  },
+                  "idiomaId": {
+                    "type": "number",
+                    "description": "ID del idioma destino"
+                  },
+                  "guardarEnBD": {
+                    "type": "boolean",
+                    "description": "Si true, guarda las traducciones en la base de datos",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TraduccionLiteralController.traducirLiteralLoteConIA"
+      }
+    },
+    "/traduccion-literals/traducir-todos-con-ia": {
+      "get": {
+        "x-controller-name": "TraduccionLiteralController",
+        "x-operation-name": "traducirTodosLiteralesConIA",
+        "tags": [
+          "TraduccionLiteralController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Traduce todos los literales del sistema a todos los idiomas activos usando IA",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "totalLiterales": {
+                      "type": "number"
+                    },
+                    "totalIdiomas": {
+                      "type": "number"
+                    },
+                    "totalTraducciones": {
+                      "type": "number"
+                    },
+                    "detalles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "literalId": {
+                            "type": "number"
+                          },
+                          "clave": {
+                            "type": "string"
+                          },
+                          "idiomaId": {
+                            "type": "number"
+                          },
+                          "idiomaNombre": {
+                            "type": "string"
+                          },
+                          "idiomaISO": {
+                            "type": "string"
+                          },
+                          "textoOriginal": {
+                            "type": "string"
+                          },
+                          "textoTraducido": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "estado": {
+                            "type": "string"
+                          },
+                          "error": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "proveedor": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "TraduccionLiteralController.traducirTodosLiteralesConIA"
+      }
+    },
     "/traduccion-literals/{id}": {
       "put": {
         "x-controller-name": "TraduccionLiteralController",
@@ -19069,46 +20162,6 @@
         "operationId": "UsuariosController.count"
       }
     },
-		
-	  
-			  
-			  
-	 
-		 
-	
-	   
-	  
-			  
-	  
-		   
-		 
-		  
-	 
-	  
-	
-	 
-	
-	  
-	   
-		 
-	 
-	   
-		
-	
-   
-	
-	 
-	
-  
-	  
-	
-	 
-	   
-  
-	
-			   
-	
-   
     "/usuarios/login": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -19168,28 +20221,6 @@
         "operationId": "UsuariosController.login"
       }
     },
-		  
-	 
-			  
-				
-	 
-		 
-	
-	   
-	  
-							
-	  
-		   
-		 
-		  
-	 
-	  
-	
-	 
-	
-					
-	
-   
     "/usuarios/recuperarPassword": {
       "post": {
         "x-controller-name": "UsuariosController",
@@ -19285,38 +20316,6 @@
         "operationId": "UsuariosController.register"
       }
     },
-		  
-	 
-			  
-			
-	 
-		 
-	
-	   
-	  
-						 
-	  
-		 
-		 
-		  
-	 
-	  
-	
-	 
-	
-		
-	 
-		 
-	   
-		
-		 
-	 
-	   
-	 
-	
-				
-	
-   
     "/usuarios/validarCodigoRecuperacion/{codigoRecuperacion}": {
       "get": {
         "x-controller-name": "UsuariosController",
@@ -25471,6 +26470,10 @@
             "type": "string",
             "nullable": true
           },
+          "accion": {
+            "type": "string",
+            "nullable": true
+          },
           "titulo": {
             "type": "string",
             "nullable": true
@@ -25535,6 +26538,10 @@
             "uniqueItems": true
           },
           "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "accion": {
             "type": "string",
             "nullable": true
           },
@@ -25610,6 +26617,10 @@
             "type": "string",
             "nullable": true
           },
+          "accion": {
+            "type": "string",
+            "nullable": true
+          },
           "titulo": {
             "type": "string",
             "nullable": true
@@ -25682,6 +26693,10 @@
             "type": "string",
             "nullable": true
           },
+          "accion": {
+            "type": "string",
+            "nullable": true
+          },
           "titulo": {
             "type": "string",
             "nullable": true
@@ -25734,10 +26749,6 @@
             "type": "number",
             "nullable": false
           },
-						 
-							 
-							
-			
           "nombre": {
             "type": "string",
             "nullable": true
@@ -25798,10 +26809,6 @@
             "type": "number",
             "nullable": false
           },
-						 
-							 
-							
-			
           "nombre": {
             "type": "string",
             "nullable": true
@@ -25867,10 +26874,6 @@
             "type": "number",
             "nullable": false
           },
-						 
-							 
-							
-			
           "nombre": {
             "type": "string",
             "nullable": true
@@ -25936,10 +26939,6 @@
             "type": "number",
             "nullable": false
           },
-						 
-							 
-							
-			
           "nombre": {
             "type": "string",
             "nullable": true
@@ -31450,6 +32449,464 @@
         "additionalProperties": false,
         "x-typescript-type": "Partial<Icono>"
       },
+      "IaProveedor": {
+        "title": "IaProveedor",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombre",
+          "codigo",
+          "activoSn"
+        ],
+        "additionalProperties": false
+      },
+      "NewIaProveedor": {
+        "title": "NewIaProveedor",
+        "type": "object",
+        "description": "(tsType: Omit<IaProveedor, 'id'>, schemaOptions: { title: 'NewIaProveedor', exclude: [ 'id' ] })",
+        "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombre",
+          "codigo",
+          "activoSn"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<IaProveedor, 'id'>"
+      },
+      "IaProveedorCamposWithRelations": {
+        "title": "IaProveedorCamposWithRelations",
+        "type": "object",
+        "description": "(tsType: IaProveedorCamposWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "iaProveedorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombreCampo": {
+            "type": "string",
+            "nullable": false
+          },
+          "etiqueta": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCampo": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "encriptadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "usarValorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "iaProveedorId",
+          "nombreCampo"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "IaProveedorCamposWithRelations"
+      },
+      "IaProveedorWithRelations": {
+        "title": "IaProveedorWithRelations",
+        "type": "object",
+        "description": "(tsType: IaProveedorWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "campos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IaProveedorCamposWithRelations"
+            }
+          }
+        },
+        "required": [
+          "empresaId",
+          "nombre",
+          "codigo",
+          "activoSn"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "IaProveedorWithRelations"
+      },
+      "IaProveedorPartial": {
+        "title": "IaProveedorPartial",
+        "type": "object",
+        "description": "(tsType: Partial<IaProveedor>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": false
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": false
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<IaProveedor>"
+      },
+      "IaProveedorCampos": {
+        "title": "IaProveedorCampos",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "iaProveedorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombreCampo": {
+            "type": "string",
+            "nullable": false
+          },
+          "etiqueta": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCampo": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "encriptadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "usarValorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "iaProveedorId",
+          "nombreCampo"
+        ],
+        "additionalProperties": false
+      },
+      "NewIaProveedorCampos": {
+        "title": "NewIaProveedorCampos",
+        "type": "object",
+        "description": "(tsType: Omit<IaProveedorCampos, 'id'>, schemaOptions: { title: 'NewIaProveedorCampos', exclude: [ 'id' ] })",
+        "properties": {
+          "iaProveedorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombreCampo": {
+            "type": "string",
+            "nullable": false
+          },
+          "etiqueta": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCampo": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "encriptadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "usarValorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "iaProveedorId",
+          "nombreCampo"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<IaProveedorCampos, 'id'>"
+      },
+      "IaProveedorCamposPartial": {
+        "title": "IaProveedorCamposPartial",
+        "type": "object",
+        "description": "(tsType: Partial<IaProveedorCampos>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "iaProveedorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "nombreCampo": {
+            "type": "string",
+            "nullable": false
+          },
+          "etiqueta": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoCampo": {
+            "type": "string",
+            "nullable": true
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          },
+          "encriptadoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "usarValorPorDefecto": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuarioModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<IaProveedorCampos>"
+      },
       "GrupoPropiedad": {
         "title": "GrupoPropiedad",
         "type": "object",
@@ -36644,6 +38101,516 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<GrupoPropiedad>"
       },
+      "IaProveedorCampos.Filter": {
+        "type": "object",
+        "title": "IaProveedorCampos.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "iaProveedorId": {
+                    "type": "boolean"
+                  },
+                  "nombreCampo": {
+                    "type": "boolean"
+                  },
+                  "etiqueta": {
+                    "type": "boolean"
+                  },
+                  "tipoCampo": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "encriptadoSn": {
+                    "type": "boolean"
+                  },
+                  "valorPorDefecto": {
+                    "type": "boolean"
+                  },
+                  "usarValorPorDefecto": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "iaProveedorId",
+                    "nombreCampo",
+                    "etiqueta",
+                    "tipoCampo",
+                    "valor",
+                    "encriptadoSn",
+                    "valorPorDefecto",
+                    "usarValorPorDefecto",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "IaProveedorCampos.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<IaProveedorCampos>"
+      },
+      "IaProveedorCampos.Filter1": {
+        "type": "object",
+        "title": "IaProveedorCampos.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "IaProveedorCampos.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "iaProveedorId": {
+                    "type": "boolean"
+                  },
+                  "nombreCampo": {
+                    "type": "boolean"
+                  },
+                  "etiqueta": {
+                    "type": "boolean"
+                  },
+                  "tipoCampo": {
+                    "type": "boolean"
+                  },
+                  "valor": {
+                    "type": "boolean"
+                  },
+                  "encriptadoSn": {
+                    "type": "boolean"
+                  },
+                  "valorPorDefecto": {
+                    "type": "boolean"
+                  },
+                  "usarValorPorDefecto": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "iaProveedorId",
+                    "nombreCampo",
+                    "etiqueta",
+                    "tipoCampo",
+                    "valor",
+                    "encriptadoSn",
+                    "valorPorDefecto",
+                    "usarValorPorDefecto",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "IaProveedorCampos.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<IaProveedorCampos>"
+      },
+      "IaProveedor.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "IaProveedor.ScopeFilter"
+      },
+      "IaProveedor.IncludeFilter.Items": {
+        "title": "IaProveedor.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "campos"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/IaProveedor.ScopeFilter"
+          }
+        }
+      },
+      "IaProveedor.Filter": {
+        "type": "object",
+        "title": "IaProveedor.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "codigo": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "codigo",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "IaProveedor.Fields"
+          },
+          "include": {
+            "title": "IaProveedor.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/IaProveedor.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<IaProveedor>"
+      },
+      "IaProveedor.Filter1": {
+        "type": "object",
+        "title": "IaProveedor.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "IaProveedor.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "codigo": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuarioModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "empresaId",
+                    "nombre",
+                    "codigo",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuarioCreacion",
+                    "usuarioModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "IaProveedor.Fields"
+          },
+          "include": {
+            "title": "IaProveedor.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/IaProveedor.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<IaProveedor>"
+      },
       "Icono.Filter": {
         "type": "object",
         "title": "Icono.Filter",
@@ -41287,9 +43254,6 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-                  "productoId": {
-                    "type": "boolean"
-                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -41330,7 +43294,6 @@
                   "enum": [
                     "id",
                     "empresaId",
-								 
                     "nombre",
                     "activoSn",
                     "plantillaSn",
@@ -41399,9 +43362,6 @@
                   "empresaId": {
                     "type": "boolean"
                   },
-								 
-									 
-					
                   "nombre": {
                     "type": "boolean"
                   },
@@ -41442,7 +43402,6 @@
                   "enum": [
                     "id",
                     "empresaId",
-								 
                     "nombre",
                     "activoSn",
                     "plantillaSn",
@@ -41515,6 +43474,9 @@
                   "activoSn": {
                     "type": "boolean"
                   },
+                  "accion": {
+                    "type": "boolean"
+                  },
                   "titulo": {
                     "type": "boolean"
                   },
@@ -41552,6 +43514,7 @@
                     "empresaId",
                     "nombrePlantilla",
                     "activoSn",
+                    "accion",
                     "titulo",
                     "cuerpo",
                     "fechaCreacion",
@@ -41627,6 +43590,9 @@
                   "activoSn": {
                     "type": "boolean"
                   },
+                  "accion": {
+                    "type": "boolean"
+                  },
                   "titulo": {
                     "type": "boolean"
                   },
@@ -41664,6 +43630,7 @@
                     "empresaId",
                     "nombrePlantilla",
                     "activoSn",
+                    "accion",
                     "titulo",
                     "cuerpo",
                     "fechaCreacion",
