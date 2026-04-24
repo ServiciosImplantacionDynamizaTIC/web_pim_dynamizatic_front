@@ -173,7 +173,7 @@ export const toSubdominio = (value: string): string => {
  * @returns URL completa
  */
 export const generateSubdomainPreview = (subdominio: string, baseDomain?: string): string => {
-  const domain = baseDomain || process.env.NEXT_PUBLIC_BASE_DOMAIN || 'pim-dynamizatic.com';
+  const domain = baseDomain || process.env.NEXT_PUBLIC_BASE_DOMAIN || 'dynamizatic.com';
   
   if (!subdominio || subdominio.trim() === '') {
     return `https://[tu-subdominio].${domain}`;

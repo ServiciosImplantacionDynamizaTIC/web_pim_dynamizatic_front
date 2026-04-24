@@ -29,7 +29,7 @@ export const MensajeExito: React.FC<MensajeExitoProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
 
-  const baseDomain = process.env.NEXT_PUBLIC_BASE_DOMAIN || 'pim-dynamizatic.com';
+  const baseDomain = process.env.NEXT_PUBLIC_BASE_DOMAIN || 'dynamizatic.com';
   const tenantUrl = `https://${tenantData.subdominio}.${baseDomain}`;
 
   const handleCopy = async (text: string, item: string) => {

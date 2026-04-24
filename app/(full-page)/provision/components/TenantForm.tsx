@@ -63,10 +63,6 @@ export const TenantForm: React.FC<TenantFormProps> = ({
     plan: 'profesional',
     maxProductos: PLAN_CONFIGS.profesional.maxProductos,
     maxUsuarios: PLAN_CONFIGS.profesional.maxUsuarios,
-    dbHost: 'localhost',
-    dbUsuario: 'root',
-    dbPassword: '',
-    dbPuerto: 3306,
     tema: 'teal',
     escala: 14,
     tiempoInactividad: 30,
@@ -517,83 +513,6 @@ export const TenantForm: React.FC<TenantFormProps> = ({
 
             {/* SECCIÓN 5 y 6: Accordions Colapsables */}
             <Accordion multiple className="mb-4">
-              {/* Configuración Avanzada de BBDD */}
-              <AccordionTab header="⚙️ Configuración Avanzada de Base de Datos">
-                <div className="grid">
-                  <div className="col-12">
-                    <Message
-                      severity="info"
-                      text={`El nombre de la base de datos será: pim_${formData.subdominio || '[subdominio]'}`}
-                      className="w-full mb-3"
-                    />
-                  </div>
-
-                  {/* Host BBDD */}
-                  <div className="col-12 md:col-6">
-                    <label htmlFor="dbHost" className="block text-900 font-medium mb-2">
-                      Host de Base de Datos
-                    </label>
-                    <InputText
-                      id="dbHost"
-                      value={formData.dbHost}
-                      onChange={(e) => handleInputChange('dbHost', e.target.value)}
-                      placeholder="localhost"
-                      className="w-full"
-                      disabled={loading}
-                    />
-                  </div>
-
-                  {/* Usuario BBDD */}
-                  <div className="col-12 md:col-6">
-                    <label htmlFor="dbUsuario" className="block text-900 font-medium mb-2">
-                      Usuario de Base de Datos
-                    </label>
-                    <InputText
-                      id="dbUsuario"
-                      value={formData.dbUsuario}
-                      onChange={(e) => handleInputChange('dbUsuario', e.target.value)}
-                      placeholder="root"
-                      className="w-full"
-                      disabled={loading}
-                    />
-                  </div>
-
-                  {/* Password BBDD */}
-                  <div className="col-12 md:col-6">
-                    <label htmlFor="dbPassword" className="block text-900 font-medium mb-2">
-                      Contraseña de Base de Datos
-                    </label>
-                    <Password
-                      id="dbPassword"
-                      value={formData.dbPassword}
-                      onChange={(e) => handleInputChange('dbPassword', e.target.value)}
-                      placeholder="Dejar vacío si no tiene contraseña"
-                      className="w-full"
-                      inputClassName="w-full"
-                      toggleMask
-                      feedback={false}
-                      disabled={loading}
-                    />
-                  </div>
-
-                  {/* Puerto BBDD */}
-                  <div className="col-12 md:col-6">
-                    <label htmlFor="dbPuerto" className="block text-900 font-medium mb-2">
-                      Puerto de Base de Datos
-                    </label>
-                    <InputNumber
-                      id="dbPuerto"
-                      value={formData.dbPuerto}
-                      onValueChange={(e) => handleInputChange('dbPuerto', e.value)}
-                      min={1}
-                      max={65535}
-                      className="w-full"
-                      disabled={loading}
-                    />
-                  </div>
-                </div>
-              </AccordionTab>
-
               {/* Personalización de Interfaz */}
               <AccordionTab header="🎨 Personalización de Interfaz">
                 <div className="grid">
