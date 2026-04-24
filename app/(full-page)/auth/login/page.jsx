@@ -122,28 +122,22 @@ const Login = () => {
         try {
             const data = await loginGenerico(usuario, password);
             if (data.accessToken) {
-                // Pasar el tenant al login (Multi-tenant)
-                loginSinDashboard(data.accessToken, rememberMe, data, tenant);
-                //await almacenarLogin(data);
-                //Obtenemos los roles del sistema
+                await loginSinDashboard(data.accessToken, rememberMe, data, tenant);
                 const rol = localStorage.getItem('rol');
-                // Restaurar cursor antes de redireccionar
-                document.body.style.cursor = 'default';
                 if (rol === 'Familia_acogida') {
                     document.cookie = `CrearRegistro=true; max-age=60; path=/; secure;`;
                     router.push(`/familia_acogida/`);
-                }
-                else {
-                    router.push(`/usuarios/?usuario=0`)
+                } else {
+                    router.push(`/usuarios/?usuario=0`);
                 }
             } else {
                 console.error('El token es undefined');
                 setMessage('Error en la autenticación. Intenta de nuevo.');
-                bloquearPantalla(false);
             }
         } catch (error) {
             console.error('Error en login de registro:', error);
             setMessage('Las credenciales del usuario son incorrectas.');
+        } finally {
             bloquearPantalla(false);
         }
     }
@@ -159,9 +153,9 @@ const Login = () => {
         try {
             const data = await loginGenerico(usuario, password);
             if (data.accessToken) {
-                // Primero guardamos el token y datos básicos SIN redirigir
-                loginSinDashboard(data.accessToken, rememberMe, data, tenant);
-                
+                // Guardar token y datos básicos SIN redirigir (await para capturar errores)
+                await loginSinDashboard(data.accessToken, rememberMe, data, tenant);
+
                 // Verificar si tiene permisos para provisioning
                 let tienePermisos = false;
                 try {
@@ -170,28 +164,22 @@ const Login = () => {
                 } catch (permError) {
                     // Usuario sin permisos de provisioning
                 }
-                
+
                 if (tienePermisos) {
-                    // Tiene permisos → Redirigir a provisioning
-                    document.body.style.cursor = 'default';
                     router.push('/provision');
                 } else {
-                    // No tiene permisos → Obtener dashboard y redirigir
-                    document.body.style.cursor = 'default';
                     const dashboard = await obtenerRolDashboard();
                     router.push(dashboard);
                 }
             } else {
                 console.error('El token es undefined');
                 setMessage('Error en la autenticación. Intenta de nuevo.');
-                bloquearPantalla(false);
             }
         } catch (error) {
             console.error('Error en login:', error);
             setMessage('Las credenciales del usuario son incorrectas.');
+        } finally {
             bloquearPantalla(false);
-            // Restaurar cursor si hay error
-            document.body.style.cursor = 'default';
         }
     }
 

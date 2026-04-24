@@ -11,8 +11,8 @@ import { useIntl } from "react-intl";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
-import { getAtributos } from "@/app/api-endpoints/atributo";
-import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
+import { gePropiedades } from "@/app/api-endpoints/propiedad";
+import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getCatalogos } from "@/app/api-endpoints/catalogo";
 import { getVistaUsuarios } from "@/app/api-endpoints/usuario";
 import Crud from "@/app/components/shared/crud";
@@ -143,8 +143,14 @@ const BuscadorGlobal = () => {
             switch (filtros.seccion) {
                 case "categorias":      datos = await getCategorias(filtro);       break;
                 case "marcas":          datos = await getMarcas(filtro);           break;
-                case "atributos":       datos = await getAtributos(filtro);        break;
-                case "grupo_atributos": datos = await getGrupoAtributos(filtro);   break;
+                case "atributos": {
+                    const wA = JSON.parse(filtro); if (!wA.where) wA.where = {}; if (!wA.where.and) wA.where.and = {}; wA.where.and.tipoDePropiedad = "atributo";
+                    datos = await gePropiedades(JSON.stringify(wA)); break;
+                }
+                case "grupo_atributos": {
+                    const wG = JSON.parse(filtro); if (!wG.where) wG.where = {}; if (!wG.where.and) wG.where.and = {}; wG.where.and.tipoDeGrupoPropiedad = "grupo_atributos";
+                    datos = await getGrupoPropiedades(JSON.stringify(wG)); break;
+                }
                 case "catalogos":       datos = await getCatalogos(filtro);        break;
                 case "usuarios":        datos = await getVistaUsuarios(filtro);    break;
                 default: datos = [];

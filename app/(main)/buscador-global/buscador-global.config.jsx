@@ -20,16 +20,45 @@
 
 import { getCategorias, getCategoriasCount } from "@/app/api-endpoints/categoria";
 import { getMarcas, getMarcasCount } from "@/app/api-endpoints/marca";
-import { getAtributos, getAtributosCount } from "@/app/api-endpoints/atributo";
-import { getGrupoAtributos, getGrupoAtributosCount } from "@/app/api-endpoints/grupo_atributo";
+import { gePropiedades, gePropiedadesCount } from "@/app/api-endpoints/propiedad";
+import { getGrupoPropiedades, getGrupoPropiedadesCount } from "@/app/api-endpoints/grupo_propiedad";
 import { getCatalogos, getCatalogosCount } from "@/app/api-endpoints/catalogo";
 import { getUsuarios, getUsuariosCount } from "@/app/api-endpoints/usuario";
 import EditarCategoria from "../categorias/editar";
 import EditarMarca from "../marcas/editar";
-import EditarAtributo from "../atributos/editar";
-import EditarGrupoAtributo from "../grupo-atributos/editar";
+import EditarPropiedad from "../propiedades/editar";
+import EditarGrupoPropiedad from "../grupo-propiedades/editar";
 import EditarCatalogo from "../catalogos/editar";
 import EditarUsuario from "../usuarios/editar";
+
+const getAtributos = (filtro) => {
+    const f = JSON.parse(filtro || "{}");
+    if (!f.where) f.where = {};
+    if (!f.where.and) f.where.and = {};
+    f.where.and.tipoDePropiedad = "atributo";
+    return gePropiedades(JSON.stringify(f));
+};
+const getAtributosCount = (filtro) => {
+    const f = JSON.parse(filtro || "{}");
+    if (!f.where) f.where = {};
+    if (!f.where.and) f.where.and = {};
+    f.where.and.tipoDePropiedad = "atributo";
+    return gePropiedadesCount(JSON.stringify(f));
+};
+const getGrupoAtributos = (filtro) => {
+    const f = JSON.parse(filtro || "{}");
+    if (!f.where) f.where = {};
+    if (!f.where.and) f.where.and = {};
+    f.where.and.tipoDeGrupoPropiedad = "grupo_atributos";
+    return getGrupoPropiedades(JSON.stringify(f));
+};
+const getGrupoAtributosCount = (filtro) => {
+    const f = JSON.parse(filtro || "{}");
+    if (!f.where) f.where = {};
+    if (!f.where.and) f.where.and = {};
+    f.where.and.tipoDeGrupoPropiedad = "grupo_atributos";
+    return getGrupoPropiedadesCount(JSON.stringify(f));
+};
 
 /**
  * Opciones del dropdown "Sección" del formulario de búsqueda.
@@ -130,7 +159,7 @@ export const CRUD_CONFIG_MAP = {
         getRegistrosCount: getAtributosCount,
         controlador: "Atributos",
         seccion: "Atributos",
-        editarComponente: <EditarAtributo />,
+        editarComponente: <EditarPropiedad />,
         columnas: [
             { campo: "grupoAtributonombre", header: "Grupo Atributo", tipo: "string" },
             { campo: "nombre",              header: "Nombre",         tipo: "string" },
@@ -146,7 +175,7 @@ export const CRUD_CONFIG_MAP = {
         getRegistrosCount: getGrupoAtributosCount,
         controlador: "GrupoAtributos",
         seccion: "GrupoAtributos",
-        editarComponente: <EditarGrupoAtributo />,
+        editarComponente: <EditarGrupoPropiedad />,
         columnas: [
             { campo: "nombre",   header: "Nombre", tipo: "string" },
             { campo: "orden",    header: "Orden",  tipo: "number" },
