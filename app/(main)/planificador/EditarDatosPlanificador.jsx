@@ -13,7 +13,7 @@ const EditarDatosPlanificador = ({ planificador, setPlanificador, estadoGuardand
     };
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: "Datos del gestor de proyectos" })}>
+        <Fieldset legend={intl.formatMessage({ id: "Datos del planificador de producto" })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="nombre">

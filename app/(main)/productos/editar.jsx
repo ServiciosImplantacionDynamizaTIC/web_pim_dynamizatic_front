@@ -11,6 +11,7 @@ import ProductoSeo from "../producto-seo/page";
 import ProductoIcono from "../producto-icono/page";
 import ProductoMarketplace from "../producto-marketplace/page";
 import ProductoMultimedia from "../producto-multimedia/page";
+import ProductoPlanificador from "../producto-planificador/page";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
@@ -47,7 +48,9 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     useEffect(() => {
         const fetchData = async () => {
             if (idEditar && idEditar !== 0) {
-                const registro = rowData.find((element) => element.id === idEditar);
+                const registroTabla = rowData.find((element) => element.id === idEditar);
+                const registroProducto = await getProducto(idEditar);
+                const registro = { ...registroTabla, ...registroProducto };
                 setProducto(registro);
 
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
@@ -268,6 +271,15 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                             idProducto={idEditar}
                                             tipoProductoId={producto?.tipoProductoId}
                                             estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
+                                    </TabPanel>
+                                    <TabPanel header={intl.formatMessage({ id: 'Planificador de producto' })}>
+                                        <ProductoPlanificador
+                                            producto={producto}
+                                            setProducto={setProducto}
+                                            editable={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
+                                            setRegistroResult={setRegistroResult}
+                                            toastRef={toast}
+                                        />
                                     </TabPanel>
                                 </TabView>
                             </div>

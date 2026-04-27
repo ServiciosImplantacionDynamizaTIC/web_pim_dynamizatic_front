@@ -103,13 +103,13 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Estados del planificador-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Estados del planificador-Borrar' },
 
-                // Gestor de proyectos
-                { header: intl.formatMessage({ id: 'Gestor de proyectos' }), seccion: 'Gestor de proyectos' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Gestor de proyectos-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Gestor de proyectos-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Gestor de proyectos-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Gestor de proyectos-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Gestor de proyectos-Borrar' },
+                // Planificador de producto
+                { header: intl.formatMessage({ id: 'Planificador de producto' }), seccion: 'Planificador de producto' },
+                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Planificador de producto-Acceder' },
+                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Planificador de producto-Ver' },
+                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Planificador de producto-Nuevo' },
+                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Planificador de producto-Actualizar' },
+                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Planificador de producto-Borrar' },
 
                 // Secciones
                 { header: intl.formatMessage({ id: 'Secciones' }), seccion: 'Secciones' },
