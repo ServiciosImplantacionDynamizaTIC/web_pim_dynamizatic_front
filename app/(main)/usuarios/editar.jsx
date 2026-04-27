@@ -14,9 +14,11 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
+import { useRouter } from 'next/navigation';
 
-const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable, setRegistroEditarFlag }) => {
     const intl = useIntl();
+    const router = useRouter();
     const toast = useRef(null);
     const [usuario, setUsuario] = useState(emptyRegistro || {
         nombre: "",
@@ -30,6 +32,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [puedeVerHistorico, setPuedeVerHistorico] = useState(false);
+    const [puedeAccederTabla, setPuedeAccederTabla] = useState(true);
     const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
     const [listaRoles, setListaRoles] = useState([]);
@@ -73,6 +76,10 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             // Verificar permiso para ver historial de contraseñas
             const permiso = await tieneUsuarioPermiso('Usuarios', 'VerHistoricoPassword');
             setPuedeVerHistorico(!!permiso);
+
+            // Verificar si el usuario puede acceder a la tabla de usuarios
+            const permisoAcceder = await tieneUsuarioPermiso('Usuarios', 'acceder');
+            setPuedeAccederTabla(!!permisoAcceder);
 
         };
         fetchData();
@@ -136,6 +143,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     //Sube las imagenes al servidor
                     await procesarArchivosNuevoRegistro(usuario, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
                     // Usamos una variable que luego se cargará en el useEffect de la página principal para mostrar el toast
+                    setRegistroEditarFlag?.(false);
                     setRegistroResult("insertado");
                     setIdEditar(null);
                 } else {
@@ -163,6 +171,11 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 
                 await patchUsuario(objGuardar.id, usuarioAeditar);
                 await editarArchivos(usuario, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
+                setRegistroEditarFlag?.(false);
+                if (!puedeAccederTabla) {
+                    router.push('/');
+                    return;
+                }
                 setIdEditar(null);
                 setRegistroResult("editado");
             }
@@ -181,6 +194,11 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     };
 
     const cancelarEdicion = () => {
+        setRegistroEditarFlag?.(false);
+        if (!puedeAccederTabla) {
+            router.push('/');
+            return;
+        }
         setIdEditar(null);
     };
 

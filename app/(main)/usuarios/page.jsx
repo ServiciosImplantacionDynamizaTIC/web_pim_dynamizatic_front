@@ -3,13 +3,36 @@ import { deleteUsuario, getUsuarios, getUsuariosCount } from "@/app/api-endpoint
 import Crud from "../../components/shared/crud";
 import EditarUsuario from "./editar";
 import { useIntl } from 'react-intl'
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
+import { getUsuarioSesion } from "@/app/utility/Utils";
 
 const Usuario = () => {
     const intl = useIntl();
     const searchParams = useSearchParams();
+    const router = useRouter();
+    const usuarioSesionId = getUsuarioSesion()?.id;
     const [idUsuario, setIdUsuario] = useState(parseInt(searchParams.get("usuario") || localStorage.getItem("usuarioId")));
+    const [crudKey, setCrudKey] = useState(0);
+    const esPrimerRender = useRef(true);
+
+    useEffect(() => {
+        // En el primer render no hacemos nada: el estado inicial ya leyó el parámetro de la URL
+        if (esPrimerRender.current) {
+            esPrimerRender.current = false;
+            return;
+        }
+        // En navegaciones posteriores (ej: clic en "Perfil" desde el sidebar estando ya en /usuarios)
+        const param = searchParams.get("usuario");
+        if (param) {
+            const nuevoId = parseInt(param);
+            if (!isNaN(nuevoId) && nuevoId > 0) {
+                setIdUsuario(nuevoId);
+                setCrudKey(prev => prev + 1);
+            }
+            router.replace('/usuarios', { scroll: false });
+        }
+    }, [searchParams]);
 
     const columnas = [
         { campo: 'avatar', header: intl.formatMessage({ id: 'Avatar' }), tipo: 'imagen' },
@@ -25,6 +48,7 @@ const Usuario = () => {
         <div>
             {(!isNaN(idUsuario) && idUsuario > 0) && (
                 <Crud
+                    key={crudKey}
                     headerCrud={intl.formatMessage({ id: 'Usuarios' })}
                     getRegistros={getUsuarios}
                     getRegistrosCount={getUsuariosCount}
@@ -35,9 +59,10 @@ const Usuario = () => {
                     controlador={"Usuarios"}
                     registroEditar={idUsuario}
                     editarComponente={<EditarUsuario />}
-                    seccion={"Usuarios"}
+                    seccion={"Usuario"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
+                    validarEliminar={{ campo: 'id', valores: [usuarioSesionId] }}
                     importarTabla="usuario"
                 />
             )}
@@ -55,6 +80,7 @@ const Usuario = () => {
                     seccion={"Usuario"}
                     columnas={columnas}
                     deleteRegistro={deleteUsuario}
+                    validarEliminar={{ campo: 'id', valores: [usuarioSesionId] }}
                     importarTabla="usuario"
                 />
             }
