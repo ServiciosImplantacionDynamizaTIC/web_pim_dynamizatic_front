@@ -63,7 +63,6 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
 
     const validaciones = async () => {
         const validaSku = producto.sku === undefined || producto.sku === "";
-        const validaEan = producto.ean === undefined || producto.ean === "";
         const validaNombre = producto.nombre === undefined || producto.nombre === "";
         const validaCategoria = producto.categoriaId === undefined || producto.categoriaId === null || producto.categoriaId === "";
         const validaEstado = producto.estadoId === undefined || producto.estadoId === null || producto.estadoId === "";
@@ -80,7 +79,7 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             });
         }*/
 
-        return (!validaSku && !validaEan && !validaNombre && !validaCategoria && !validaEstado && !validaMarca && !validaTipoProducto);
+        return (!validaSku && !validaNombre && !validaCategoria && !validaEstado && !validaMarca && !validaTipoProducto);
     };
 
     const procesarImagenPrincipal = async (productoId) => {

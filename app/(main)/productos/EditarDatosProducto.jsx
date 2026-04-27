@@ -473,13 +473,12 @@ const EditarDatosProducto = ({ producto, setProducto, estadoGuardando, estoyEdit
                     </div>
 
                     <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                        <label htmlFor="ean"><b>{intl.formatMessage({ id: 'EAN' })}*</b></label>
+                        <label htmlFor="ean">{intl.formatMessage({ id: 'EAN' })}</label>
                         <InputText 
                             id="ean"
                             value={producto?.ean || ''}
                             placeholder={intl.formatMessage({ id: 'Código EAN del producto' })}
                             onChange={(e) => setProducto({ ...producto, ean: e.target.value })}
-                            className={`${(estadoGuardando && !producto?.ean) ? "p-invalid" : ""}`}
                             maxLength={50}
                             disabled={estadoGuardando}
                         />
