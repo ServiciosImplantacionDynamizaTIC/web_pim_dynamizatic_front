@@ -11,7 +11,7 @@ const PlanificadorCategoriasPage = () => {
 
     const columnas = [
         { campo: "nombre", header: intl.formatMessage({ id: "Nombre" }), tipo: "string" },
-        { campo: "descripcion", header: intl.formatMessage({ id: "Descripcion" }), tipo: "string" },
+        { campo: "descripcion", header: intl.formatMessage({ id: "Descripción" }), tipo: "string" },
     ];
 
     return (

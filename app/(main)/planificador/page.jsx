@@ -15,11 +15,11 @@ const PlanificadorPage = () => {
 
     return (
         <Crud
-            headerCrud={intl.formatMessage({ id: "Gestor de proyectos" })}
+            headerCrud={intl.formatMessage({ id: "Planificadores de producto" })}
             getRegistros={getPlanificadores}
             getRegistrosCount={getPlanificadoresCount}
             botones={["nuevo", "ver", "editar", "eliminar", "descargarCSV"]}
-            controlador={"Gestor de proyectos"}
+            controlador={"Planificador de producto"}
             filtradoBase={{ empresaId: Number(localStorage.getItem("empresa")) }}
             editarComponente={<EditarPlanificador />}
             columnas={columnas}

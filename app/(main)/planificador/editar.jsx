@@ -143,7 +143,7 @@ const EditarPlanificador = ({ idEditar, setIdEditar, rowData, emptyRegistro, set
             <div className="col-12">
                 <div className="card">
                     <Toast ref={toast} position="top-right" />
-                    <h2>{header} {intl.formatMessage({ id: "gestor de proyectos" })}</h2>
+                    <h2>{header} {intl.formatMessage({ id: "Planificador de producto" })}</h2>
                     <EditarDatosPlanificador
                         planificador={planificador}
                         setPlanificador={setPlanificador}
@@ -155,6 +155,7 @@ const EditarPlanificador = ({ idEditar, setIdEditar, rowData, emptyRegistro, set
                         idPlanificador={planificadorIdActual}
                         toastRef={toast}
                         editable={editable}
+                        mostrarEstado={false}
                     />
                     <div className="flex justify-content-end mt-3">
                         {editable && (

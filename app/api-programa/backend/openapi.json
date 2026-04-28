@@ -10338,6 +10338,28 @@
         "operationId": "PlanificadorDetalleController.count"
       }
     },
+    "/planificador-detalles/enviar-correos-dia": {
+      "post": {
+        "x-controller-name": "PlanificadorDetalleController",
+        "x-operation-name": "enviarCorreosDelDia",
+        "tags": [
+          "PlanificadorDetalleController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Resultado del envío diario de correos del planificador"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PlanificadorDetalleController.enviarCorreosDelDia"
+      }
+    },
     "/planificador-detalles/{id}": {
       "put": {
         "x-controller-name": "PlanificadorDetalleController",
@@ -14030,6 +14052,331 @@
           }
         ],
         "operationId": "ProductoMultimediaController.find"
+      }
+    },
+    "/producto-planificadores/count": {
+      "get": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "count",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPlanificador model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoPlanificador.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoPlanificador>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoPlanificadorController.count"
+      }
+    },
+												  
+			   
+															  
+														
+				 
+										  
+		  
+					  
+				  
+								
+						
+								   
+						   
+																						  
+				 
+			   
+			 
+		   
+		  
+																				 
+	   
+	  
+    "/producto-planificadores/{id}": {
+      "put": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoPlanificador PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoPlanificador"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoPlanificadorController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoPlanificador PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoPlanificadorPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "ProductoPlanificadorController.updateById"
+      },
+      "get": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "findById",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPlanificador model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPlanificadorWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPlanificador.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoPlanificadorController.findById"
+      },
+      "delete": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "ProductoPlanificador DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "ProductoPlanificadorController.deleteById"
+      }
+    },
+    "/producto-planificadores": {
+      "post": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "create",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPlanificador model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPlanificador"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProductoPlanificador"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoPlanificadorController.create"
+      },
+      "patch": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "ProductoPlanificador PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "ProductoPlanificador.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<ProductoPlanificador>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoPlanificadorPartial"
+              }
+            }
+          }
+        },
+        "operationId": "ProductoPlanificadorController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "ProductoPlanificadorController",
+        "x-operation-name": "find",
+        "tags": [
+          "ProductoPlanificadorController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of ProductoPlanificador model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductoPlanificadorWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductoPlanificador.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "ProductoPlanificadorController.find"
       }
     },
     "/producto-propiedades/count": {
@@ -24643,6 +24990,15 @@
             "type": "number",
             "nullable": false
           },
+ 
+  
+ 
+   
+ 
+  
+ 
+ 
+   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -24734,6 +25090,15 @@
             "type": "number",
             "nullable": false
           },
+ 
+  
+ 
+   
+ 
+  
+ 
+ 
+   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -24829,6 +25194,15 @@
             "type": "number",
             "nullable": false
           },
+ 
+  
+ 
+   
+ 
+  
+ 
+ 
+   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -24924,6 +25298,15 @@
             "type": "number",
             "nullable": false
           },
+ 
+  
+ 
+   
+ 
+  
+ 
+ 
+   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -25554,6 +25937,246 @@
         },
         "additionalProperties": false,
         "x-typescript-type": "Partial<ProductoPropiedad>"
+      },
+      "ProductoPlanificador": {
+        "title": "ProductoPlanificador",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "planificadorId",
+          "fechaInicio",
+          "usuCreacion"
+        ],
+        "additionalProperties": false
+      },
+      "NewProductoPlanificador": {
+        "title": "NewProductoPlanificador",
+        "type": "object",
+        "description": "(tsType: Omit<ProductoPlanificador, 'id'>, schemaOptions: { title: 'NewProductoPlanificador', exclude: [ 'id' ] })",
+        "properties": {
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "planificadorId",
+          "fechaInicio",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<ProductoPlanificador, 'id'>"
+      },
+      "ProductoPlanificadorWithRelations": {
+        "title": "ProductoPlanificadorWithRelations",
+        "type": "object",
+        "description": "(tsType: ProductoPlanificadorWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "productoId",
+          "planificadorId",
+          "fechaInicio",
+          "usuCreacion"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "ProductoPlanificadorWithRelations"
+      },
+      "ProductoPlanificadorPartial": {
+        "title": "ProductoPlanificadorPartial",
+        "type": "object",
+        "description": "(tsType: Partial<ProductoPlanificador>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "productoId": {
+            "type": "number",
+            "nullable": false
+          },
+          "planificadorId": {
+            "type": "number",
+            "nullable": false
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": false
+          },
+          "activoSn": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuInactivo": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<ProductoPlanificador>"
       },
       "ProductoMultimedia": {
         "title": "ProductoMultimedia",
@@ -27782,30 +28405,58 @@
             "type": "number",
             "nullable": false
           },
+          "productoPlanificadorId": {
+            "type": "number",
+            "nullable": true
+          },
           "planificadorCategoriaId": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "estado": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "planificadorId": {
             "type": "number",
             "nullable": false
           },
+          "productoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "planificadorTareaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
           "responsable": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "empiezaEn": {
             "type": "number",
             "nullable": true
           },
-          "finalizaEn": {
+          "terminaEn": {
             "type": "number",
             "nullable": true
           },
+	   
+		
+	   
+   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -27821,6 +28472,10 @@
             "nullable": true
           },
           "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
             "type": "string",
             "nullable": true
           },
@@ -27859,6 +28514,58 @@
             "format": "date-time",
             "nullable": true
           },
+								   
+							 
+							
+			
+          "fechaEmailInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+									  
+							 
+							
+			
+											 
+							 
+							
+			
+          "fechaEmailAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+												
+							 
+							
+			
+									  
+							 
+							
+			
+          "fechaEmailAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+										 
+							 
+							
+			
+										  
+							 
+							
+			
+          "fechaEmailAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+											 
+							 
+							
+			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -27888,10 +28595,10 @@
           }
         },
         "required": [
-          "planificadorCategoriaId",
-          "estado",
+   
+	
           "planificadorId",
-          "responsable",
+   
           "usuCreacion"
         ],
         "additionalProperties": false
@@ -27901,30 +28608,58 @@
         "type": "object",
         "description": "(tsType: Omit<PlanificadorDetalle, 'id'>, schemaOptions: { title: 'NewPlanificadorDetalle', exclude: [ 'id' ] })",
         "properties": {
+          "productoPlanificadorId": {
+            "type": "number",
+            "nullable": true
+          },
           "planificadorCategoriaId": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "estado": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "planificadorId": {
             "type": "number",
             "nullable": false
           },
+          "productoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "planificadorTareaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
           "responsable": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "empiezaEn": {
             "type": "number",
             "nullable": true
           },
-          "finalizaEn": {
+          "terminaEn": {
             "type": "number",
             "nullable": true
           },
+	   
+		
+	   
+   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -27940,6 +28675,10 @@
             "nullable": true
           },
           "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
             "type": "string",
             "nullable": true
           },
@@ -27978,6 +28717,58 @@
             "format": "date-time",
             "nullable": true
           },
+								   
+							 
+							
+			
+          "fechaEmailInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+									  
+							 
+							
+			
+											 
+							 
+							
+			
+          "fechaEmailAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+												
+							 
+							
+			
+									  
+							 
+							
+			
+          "fechaEmailAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+										 
+							 
+							
+			
+										  
+							 
+							
+			
+          "fechaEmailAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+											 
+							 
+							
+			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -28007,10 +28798,7 @@
           }
         },
         "required": [
-          "planificadorCategoriaId",
-          "estado",
           "planificadorId",
-          "responsable",
           "usuCreacion"
         ],
         "additionalProperties": false,
@@ -28025,30 +28813,58 @@
             "type": "number",
             "nullable": false
           },
+          "productoPlanificadorId": {
+            "type": "number",
+            "nullable": true
+          },
           "planificadorCategoriaId": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "estado": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "planificadorId": {
             "type": "number",
             "nullable": false
           },
+          "productoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "planificadorTareaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
           "responsable": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "empiezaEn": {
             "type": "number",
             "nullable": true
           },
-          "finalizaEn": {
+          "terminaEn": {
             "type": "number",
             "nullable": true
           },
+	   
+		
+	   
+   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -28064,6 +28880,10 @@
             "nullable": true
           },
           "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
             "type": "string",
             "nullable": true
           },
@@ -28102,6 +28922,58 @@
             "format": "date-time",
             "nullable": true
           },
+								   
+							 
+							
+			
+          "fechaEmailInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+									  
+							 
+							
+			
+											 
+							 
+							
+			
+          "fechaEmailAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+												
+							 
+							
+			
+									  
+							 
+							
+			
+          "fechaEmailAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+										 
+							 
+							
+			
+										  
+							 
+							
+			
+          "fechaEmailAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+											 
+							 
+							
+			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -28131,10 +29003,10 @@
           }
         },
         "required": [
-          "planificadorCategoriaId",
-          "estado",
+   
+	
           "planificadorId",
-          "responsable",
+   
           "usuCreacion"
         ],
         "additionalProperties": false,
@@ -28149,30 +29021,58 @@
             "type": "number",
             "nullable": false
           },
+          "productoPlanificadorId": {
+            "type": "number",
+            "nullable": true
+          },
           "planificadorCategoriaId": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "estado": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "planificadorId": {
             "type": "number",
             "nullable": false
           },
+          "productoId": {
+            "type": "number",
+            "nullable": true
+          },
+          "planificadorTareaId": {
+            "type": "number",
+            "nullable": true
+          },
+          "nombreCategoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreTarea": {
+            "type": "string",
+            "nullable": true
+          },
+          "tareaAsociadaId": {
+            "type": "number",
+            "nullable": true
+          },
           "responsable": {
             "type": "number",
-            "nullable": false
+            "nullable": true
           },
           "empiezaEn": {
             "type": "number",
             "nullable": true
           },
-          "finalizaEn": {
+          "terminaEn": {
             "type": "number",
             "nullable": true
           },
+	   
+		
+	   
+   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -28188,6 +29088,10 @@
             "nullable": true
           },
           "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "comentarios": {
             "type": "string",
             "nullable": true
           },
@@ -28226,6 +29130,58 @@
             "format": "date-time",
             "nullable": true
           },
+								   
+							 
+							
+			
+          "fechaEmailInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+									  
+							 
+							
+			
+											 
+							 
+							
+			
+          "fechaEmailAvisoDesdeInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+												
+							 
+							
+			
+									  
+							 
+							
+			
+          "fechaEmailAvisoAFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+										 
+							 
+							
+			
+										  
+							 
+							
+			
+          "fechaEmailAvisoDesdeFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+											 
+							 
+							
+			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -42180,6 +43136,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "productoPlanificadorId": {
+                    "type": "boolean"
+                  },
                   "planificadorCategoriaId": {
                     "type": "boolean"
                   },
@@ -42189,15 +43148,33 @@
                   "planificadorId": {
                     "type": "boolean"
                   },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "planificadorTareaId": {
+                    "type": "boolean"
+                  },
+                  "nombreCategoria": {
+                    "type": "boolean"
+                  },
+                  "nombreTarea": {
+                    "type": "boolean"
+                  },
+                  "tareaAsociadaId": {
+                    "type": "boolean"
+                  },
                   "responsable": {
                     "type": "boolean"
                   },
                   "empiezaEn": {
                     "type": "boolean"
                   },
-                  "finalizaEn": {
+                  "terminaEn": {
                     "type": "boolean"
                   },
+		 
+		  
+	 
                   "fechaInicio": {
                     "type": "boolean"
                   },
@@ -42208,6 +43185,9 @@
                     "type": "boolean"
                   },
                   "descripcion": {
+                    "type": "boolean"
+                  },
+                  "comentarios": {
                     "type": "boolean"
                   },
                   "avisoEmails": {
@@ -42234,6 +43214,42 @@
                   "fechaAvisoDesdeFin": {
                     "type": "boolean"
                   },
+										   
+									 
+					
+                  "fechaEmailInicio": {
+                    "type": "boolean"
+                  },
+											  
+									 
+					
+													 
+									 
+					
+                  "fechaEmailAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+														
+									 
+					
+											  
+									 
+					
+                  "fechaEmailAvisoAFin": {
+                    "type": "boolean"
+                  },
+												 
+									 
+					
+												  
+									 
+					
+                  "fechaEmailAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+													 
+									 
+					
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -42261,16 +43277,24 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "productoPlanificadorId",
                     "planificadorCategoriaId",
                     "estado",
                     "planificadorId",
+                    "productoId",
+                    "planificadorTareaId",
+                    "nombreCategoria",
+                    "nombreTarea",
+                    "tareaAsociadaId",
                     "responsable",
                     "empiezaEn",
-                    "finalizaEn",
+                    "terminaEn",
+		 
                     "fechaInicio",
                     "fechaFin",
                     "codigo",
                     "descripcion",
+                    "comentarios",
                     "avisoEmails",
                     "activoSn",
                     "diasAvisoDesdeInicio",
@@ -42279,6 +43303,18 @@
                     "fechaAvisoDesdeInicio",
                     "fechaAvisoAFin",
                     "fechaAvisoDesdeFin",
+										   
+                    "fechaEmailInicio",
+											  
+													 
+                    "fechaEmailAvisoDesdeInicio",
+														
+											  
+                    "fechaEmailAvisoAFin",
+												 
+												  
+                    "fechaEmailAvisoDesdeFin",
+													 
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -42340,6 +43376,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "productoPlanificadorId": {
+                    "type": "boolean"
+                  },
                   "planificadorCategoriaId": {
                     "type": "boolean"
                   },
@@ -42349,15 +43388,33 @@
                   "planificadorId": {
                     "type": "boolean"
                   },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "planificadorTareaId": {
+                    "type": "boolean"
+                  },
+                  "nombreCategoria": {
+                    "type": "boolean"
+                  },
+                  "nombreTarea": {
+                    "type": "boolean"
+                  },
+                  "tareaAsociadaId": {
+                    "type": "boolean"
+                  },
                   "responsable": {
                     "type": "boolean"
                   },
                   "empiezaEn": {
                     "type": "boolean"
                   },
-                  "finalizaEn": {
+                  "terminaEn": {
                     "type": "boolean"
                   },
+		 
+		  
+	 
                   "fechaInicio": {
                     "type": "boolean"
                   },
@@ -42368,6 +43425,9 @@
                     "type": "boolean"
                   },
                   "descripcion": {
+                    "type": "boolean"
+                  },
+                  "comentarios": {
                     "type": "boolean"
                   },
                   "avisoEmails": {
@@ -42394,6 +43454,42 @@
                   "fechaAvisoDesdeFin": {
                     "type": "boolean"
                   },
+										   
+									 
+					
+                  "fechaEmailInicio": {
+                    "type": "boolean"
+                  },
+											  
+									 
+					
+													 
+									 
+					
+                  "fechaEmailAvisoDesdeInicio": {
+                    "type": "boolean"
+                  },
+														
+									 
+					
+											  
+									 
+					
+                  "fechaEmailAvisoAFin": {
+                    "type": "boolean"
+                  },
+												 
+									 
+					
+												  
+									 
+					
+                  "fechaEmailAvisoDesdeFin": {
+                    "type": "boolean"
+                  },
+													 
+									 
+					
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -42421,16 +43517,24 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "productoPlanificadorId",
                     "planificadorCategoriaId",
                     "estado",
                     "planificadorId",
+                    "productoId",
+                    "planificadorTareaId",
+                    "nombreCategoria",
+                    "nombreTarea",
+                    "tareaAsociadaId",
                     "responsable",
                     "empiezaEn",
-                    "finalizaEn",
+                    "terminaEn",
+		 
                     "fechaInicio",
                     "fechaFin",
                     "codigo",
                     "descripcion",
+                    "comentarios",
                     "avisoEmails",
                     "activoSn",
                     "diasAvisoDesdeInicio",
@@ -42439,6 +43543,18 @@
                     "fechaAvisoDesdeInicio",
                     "fechaAvisoAFin",
                     "fechaAvisoDesdeFin",
+										   
+                    "fechaEmailInicio",
+											  
+													 
+                    "fechaEmailAvisoDesdeInicio",
+														
+											  
+                    "fechaEmailAvisoAFin",
+												 
+												  
+                    "fechaEmailAvisoDesdeFin",
+													 
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -44658,6 +45774,209 @@
         "additionalProperties": false,
         "x-typescript-type": "@loopback/repository#Filter<ProductoMultimedia>"
       },
+      "ProductoPlanificador.Filter": {
+        "type": "object",
+        "title": "ProductoPlanificador.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "planificadorId": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "planificadorId",
+                    "fechaInicio",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoPlanificador.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoPlanificador>"
+      },
+      "ProductoPlanificador.Filter1": {
+        "type": "object",
+        "title": "ProductoPlanificador.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "ProductoPlanificador.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "productoId": {
+                    "type": "boolean"
+                  },
+                  "planificadorId": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  },
+                  "usuInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "productoId",
+                    "planificadorId",
+                    "fechaInicio",
+                    "activoSn",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo",
+                    "usuInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "ProductoPlanificador.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<ProductoPlanificador>"
+      },
       "ProductoPropiedad.Filter": {
         "type": "object",
         "title": "ProductoPropiedad.Filter",
@@ -45164,6 +46483,12 @@
                   "tipoProductoId": {
                     "type": "boolean"
                   },
+   
+ 
+  
+   
+ 
+  
                   "categoriaId": {
                     "type": "boolean"
                   },
@@ -45223,6 +46548,8 @@
                     "id",
                     "empresaId",
                     "tipoProductoId",
+   
+   
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -45300,6 +46627,12 @@
                   "tipoProductoId": {
                     "type": "boolean"
                   },
+   
+ 
+  
+   
+ 
+  
                   "categoriaId": {
                     "type": "boolean"
                   },
@@ -45359,6 +46692,8 @@
                     "id",
                     "empresaId",
                     "tipoProductoId",
+   
+   
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -48679,7 +50014,7 @@
   ],
   "servers": [
     {
-      "url": "http://[::1]:8000"
+      "url": "http://localhost:8000"
     }
   ]
 }
