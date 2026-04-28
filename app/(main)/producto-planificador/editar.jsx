@@ -10,6 +10,7 @@ import { deleteProductoPlanificador, getProductoPlanificadores, patchProductoPla
 import { formatearFechaLocal_a_toISOString, getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from "react-intl";
 import EditarDatosProductoPlanificador from "./EditarDatosProductoPlanificador";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 const EditarProductoPlanificador = ({ producto, editable, setRegistroResult, toastRef }) => {
     const intl = useIntl();
@@ -24,6 +25,9 @@ const EditarProductoPlanificador = ({ producto, editable, setRegistroResult, toa
     const [, setDetallesRellenados] = useState(false);
     const [dialogoCambioPlanificador, setDialogoCambioPlanificador] = useState({ visible: false, nuevoPlanificadorId: null });
     const [dialogoCambioFecha, setDialogoCambioFecha] = useState({ visible: false, nuevaFecha: null });
+    const [puedeEditarPlanificador, setPuedeEditarPlanificador] = useState(false);
+    const [puedeCrearPlanificador, setPuedeCrearPlanificador] = useState(false);
+    const [puedeBorrarPlanificador, setPuedeBorrarPlanificador] = useState(false);
 
     useEffect(() => {
         cargarPlanificadores();
@@ -32,6 +36,23 @@ const EditarProductoPlanificador = ({ producto, editable, setRegistroResult, toa
     useEffect(() => {
         cargarProductoPlanificador();
     }, [producto?.id]);
+
+    // Cargo los permisos internos del planificador de producto.
+    useEffect(() => {
+        const cargarPermisosPlanificador = async () => {
+            const [permisoEditar, permisoNuevo, permisoBorrar] = await Promise.all([
+                tieneUsuarioPermiso('ProductoPlanificador', 'actualizar'),
+                tieneUsuarioPermiso('ProductoPlanificador', 'nuevo'),
+                tieneUsuarioPermiso('ProductoPlanificador', 'borrar')
+            ]);
+
+            setPuedeEditarPlanificador(Boolean(permisoEditar));
+            setPuedeCrearPlanificador(Boolean(permisoNuevo));
+            setPuedeBorrarPlanificador(Boolean(permisoBorrar));
+        };
+
+        cargarPermisosPlanificador();
+    }, []);
 
     // Carga el catálogo de planificadores activos.
     const cargarPlanificadores = async () => {
@@ -469,7 +490,7 @@ const EditarProductoPlanificador = ({ producto, editable, setRegistroResult, toa
     return (
         <EditarDatosProductoPlanificador
             producto={producto}
-            editable={editable}
+            editable={editable && puedeEditarPlanificador}
             toastRef={toastRef}
             guardando={guardando}
             cargandoPlanificadores={cargandoPlanificadores}
@@ -488,6 +509,8 @@ const EditarProductoPlanificador = ({ producto, editable, setRegistroResult, toa
             confirmarCambioFechaInicio={confirmarCambioFechaInicio}
             guardarTareasProducto={guardarTareasProducto}
             setDetallesRellenados={setDetallesRellenados}
+            puedeCrearPlanificador={puedeCrearPlanificador}
+            puedeBorrarPlanificador={puedeBorrarPlanificador}
         />
     );
 };

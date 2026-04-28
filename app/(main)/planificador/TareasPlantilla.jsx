@@ -21,7 +21,7 @@ import { getPlanificadorPlantillaEmails, postPlanificadorPlantillaEmail, deleteP
 import { getPlanificadorEstados } from '@/app/api-endpoints/planificador_estado';
 import { formatearFechaLocal_a_toISOString } from '@/app/utility/Utils';
 
-const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable = true, ocultarRecuadro, origenDatos = 'plantilla', idProducto = null, idProductoPlanificador = null, onDatosRellenadosChange = null, mostrarEstado = true }, ref) => {
+const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable = true, permitirCrear = true, permitirBorrar = true, ocultarRecuadro, origenDatos = 'plantilla', idProducto = null, idProductoPlanificador = null, onDatosRellenadosChange = null, mostrarEstado = true }, ref) => {
     const toast = toastRef; // Usar el toast del componente padre
     const intl = useIntl();
     const categoriaRefs = useRef({});
@@ -1198,7 +1198,7 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
             {...(!ocultarRecuadro && { legend: intl.formatMessage({ id: 'Plantillas' }) })}
         >
             <div className="flex flex-column">
-                {editable && (
+                {editable && permitirCrear && (
                     <div className="flex justify-content-start align-items-center gap-3 flex-wrap mb-4 mt-4">
                         <Button
                             label={intl.formatMessage({ id: 'Nueva Categoría' })}
@@ -1238,14 +1238,14 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
                                         {erroresValidacionCategorias.has(categoria.uid) && (
                                             <small className="p-error">{intl.formatMessage({ id: 'Campo requerido' })}</small>
                                         )}
-                                        {editable && (
+                                        {editable && permitirCrear && (
                                             <Button
                                                 label={intl.formatMessage({ id: 'Nueva tarea' })}
                                                 onClick={() => agregarTarea(categoria.uid)}
                                                 disabled={!editable || !categoria.nombre || categoria.nombre.trim() === ''}
                                             />
                                         )}
-                                        {editable && (
+                                        {editable && permitirBorrar && (
                                             <Button
                                                 icon="pi pi-trash"
                                                 className="p-button-danger p-button-outlined"
@@ -1372,7 +1372,7 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
                                                             </div>
 
                                                             <div className="field col-12 md:col-1 flex align-items-end justify-content-end pr-2">
-                                                                {editable && (
+                                                                {editable && permitirBorrar && (
                                                                     <Button
                                                                         icon="pi pi-trash"
                                                                         className="p-button-danger p-button-outlined"

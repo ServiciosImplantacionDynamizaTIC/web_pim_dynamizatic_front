@@ -30,6 +30,8 @@ const EditarDatosProductoPlanificador = ({
     confirmarCambioFechaInicio,
     guardarTareasProducto,
     setDetallesRellenados,
+    puedeCrearPlanificador,
+    puedeBorrarPlanificador,
 }) => {
     const intl = useIntl();
 
@@ -78,6 +80,8 @@ const EditarDatosProductoPlanificador = ({
                         idProductoPlanificador={productoPlanificador.id}
                         toastRef={toastRef}
                         editable={editable}
+                        permitirCrear={puedeCrearPlanificador}
+                        permitirBorrar={puedeBorrarPlanificador}
                         ocultarRecuadro={true}
                         origenDatos="detalle"
                         onDatosRellenadosChange={setDetallesRellenados}
