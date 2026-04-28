@@ -85,7 +85,7 @@ const EditarDatosProductoPlanificador = ({
                     {editable && (
                         <div className="flex justify-content-end mt-3">
                             <Button
-                                label={intl.formatMessage({ id: "Guardar tareas" })}
+                                label={intl.formatMessage({ id: "Guardar Planificador" })}
                                 icon="pi pi-save"
                                 onClick={guardarTareasProducto}
                                 disabled={guardando}

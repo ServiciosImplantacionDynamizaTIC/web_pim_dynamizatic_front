@@ -251,6 +251,10 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Productos-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Productos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Productos-Borrar' },
+                // ProductoPlanificador
+                { header: intl.formatMessage({ id: 'Planificador de producto: Acceder' }), seccion: 'Productos-PlanificadorAcceder' },
+                { header: intl.formatMessage({ id: 'Planificador de producto: Ver' }), seccion: 'Productos-PlanificadorVer' },
+                { header: intl.formatMessage({ id: 'Planificador de producto: Editar' }), seccion: 'Productos-PlanificadorActualizar' },
 
                 // Estados
                 { header: intl.formatMessage({ id: 'Estados' }), seccion: 'Estados' },

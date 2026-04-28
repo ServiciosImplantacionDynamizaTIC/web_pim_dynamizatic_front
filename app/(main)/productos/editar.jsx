@@ -16,6 +16,7 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import ProductoPropiedad from "../producto-propiedad/page";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
@@ -44,6 +45,11 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
+    const [permisosPlanificador, setPermisosPlanificador] = useState({
+        acceder: false,
+        ver: false,
+        editar: false
+    });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,6 +65,25 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         };
         fetchData();
     }, [idEditar, rowData]);
+
+    // Cargo los permisos internos del planificador de producto.
+    useEffect(() => {
+        const cargarPermisosPlanificador = async () => {
+            const [acceder, ver, editar] = await Promise.all([
+                tieneUsuarioPermiso('Productos', 'PlanificadorAcceder'),
+                tieneUsuarioPermiso('Productos', 'PlanificadorVer'),
+                tieneUsuarioPermiso('Productos', 'PlanificadorActualizar')
+            ]);
+
+            setPermisosPlanificador({
+                acceder: Boolean(acceder),
+                ver: Boolean(ver),
+                editar: Boolean(editar)
+            });
+        };
+
+        cargarPermisosPlanificador();
+    }, []);
 
     const validacionesImagenes = () => {
         return validarImagenes(producto, listaTipoArchivos);
@@ -217,6 +242,11 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     };
 
     const header = (idEditar && idEditar > 0) ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
+    const mensajeSinPermisosVisualizacion = (
+        <div className="text-center p-4">
+            {intl.formatMessage({ id: 'No tiene permisos para visualizar esta sección. Contacte con un administrador.' })}
+        </div>
+    );
 
     return (
         <div>
@@ -272,15 +302,19 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                                             tipoProductoId={producto?.tipoProductoId}
                                             estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
                                     </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Planificador de producto' })}>
-                                        <ProductoPlanificador
-                                            producto={producto}
-                                            setProducto={setProducto}
-                                            editable={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
-                                            setRegistroResult={setRegistroResult}
-                                            toastRef={toast}
-                                        />
-                                    </TabPanel>
+                                    {permisosPlanificador.acceder && (
+                                        <TabPanel header={intl.formatMessage({ id: 'Planificador de producto' })}>
+                                            {permisosPlanificador.ver ? (
+                                                <ProductoPlanificador
+                                                    producto={producto}
+                                                    setProducto={setProducto}
+                                                    editable={((idEditar && idEditar > 0) ? (editable ? true : false) : true) && permisosPlanificador.editar}
+                                                    setRegistroResult={setRegistroResult}
+                                                    toastRef={toast}
+                                                />
+                                            ) : mensajeSinPermisosVisualizacion}
+                                        </TabPanel>
+                                    )}
                                 </TabView>
                             </div>
                         )}
