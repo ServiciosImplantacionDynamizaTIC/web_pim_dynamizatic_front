@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
-import { postProducto, patchProducto } from "@/app/api-endpoints/producto";
-import { editarArchivos, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils";
-import { postSubirImagen } from "@/app/api-endpoints/ficheros";
+import { getProducto, postProducto, patchProducto } from "@/app/api-endpoints/producto";
+import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
+import { postSubirImagen, borrarFichero } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
 import ProductoSeo from "../producto-seo/page";
 import ProductoIcono from "../producto-icono/page";
