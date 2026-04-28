@@ -249,6 +249,7 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Productos-Acceder' },
                 { header: intl.formatMessage({ id: 'Ver' }), seccion: 'Productos-Ver' },
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Productos-Nuevo' },
+                { header: intl.formatMessage({ id: 'Importar' }), seccion: 'Productos-Importar' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Productos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Productos-Borrar' },
                 // ProductoAtributo
