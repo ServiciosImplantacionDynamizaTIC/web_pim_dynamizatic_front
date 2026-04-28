@@ -31,7 +31,7 @@ npm install exceljs
 ### Pantalla específica (recomendado para pruebas puntuales)
 
 ```powershell
-$env:TEST_URL="/planificador"; npx playwright test tests/revision-pantallas.spec.ts --headed --workers=1
+$env:TEST_URL="/tipo-uso-multimedia"; npx playwright test tests/revision-pantallas.spec.ts --headed --workers=1
 ```
 
 ### Todas las pantallas (extrae rutas automáticamente de AuthContext.tsx)

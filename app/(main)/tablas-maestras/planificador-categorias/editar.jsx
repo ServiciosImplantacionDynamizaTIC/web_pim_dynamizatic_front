@@ -41,7 +41,7 @@ const EditarPlanificadorCategoria = ({ idEditar, setIdEditar, rowData, emptyRegi
 
         const usuarioActual = getUsuarioSesion()?.id;
         const objGuardar = { ...planificadorCategoria };
-        delete objGuardar.nombreEmpresa;
+        delete objGuardar.empresaNombre;
 
         if (idEditar === 0) {
             delete objGuardar.id;

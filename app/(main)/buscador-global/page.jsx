@@ -11,13 +11,11 @@ import { useIntl } from "react-intl";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { getCategorias } from "@/app/api-endpoints/categoria";
 import { getMarcas } from "@/app/api-endpoints/marca";
-import { getAtributos } from "@/app/api-endpoints/atributo";
-import { getGrupoAtributos } from "@/app/api-endpoints/grupo_atributo";
 import { getCatalogos } from "@/app/api-endpoints/catalogo";
 import { getVistaUsuarios } from "@/app/api-endpoints/usuario";
 import Crud from "@/app/components/shared/crud";
 import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
-import { SECCIONES, OPCIONES_ACTIVO, COLUMNAS_POR_SECCION, CRUD_CONFIG_MAP } from "./buscador-global.config";
+import { SECCIONES, OPCIONES_ACTIVO, COLUMNAS_POR_SECCION, CRUD_CONFIG_MAP, FILTROS_POR_SECCION } from "./buscador-global.config";
 import { Tooltip } from "primereact/tooltip";
 import { Badge } from "primereact/badge";
 
@@ -143,8 +141,6 @@ const BuscadorGlobal = () => {
             switch (filtros.seccion) {
                 case "categorias":      datos = await getCategorias(filtro);       break;
                 case "marcas":          datos = await getMarcas(filtro);           break;
-                case "atributos":       datos = await getAtributos(filtro);        break;
-                case "grupo_atributos": datos = await getGrupoAtributos(filtro);   break;
                 case "catalogos":       datos = await getCatalogos(filtro);        break;
                 case "usuarios":        datos = await getVistaUsuarios(filtro);    break;
                 default: datos = [];
@@ -224,60 +220,74 @@ const BuscadorGlobal = () => {
                                             id="seccion"
                                             value={filtros.seccion}
                                             options={seccionesPermitidas}
-                                            onChange={(e) => setFiltros({ ...filtros, seccion: e.value })}
+                                            onChange={(e) => setFiltros({
+                                                seccion: e.value,
+                                                nombre: "",
+                                                descripcion: "",
+                                                codigo: "",
+                                                activoSn: null,
+                                            })}
                                             placeholder={intl.formatMessage({ id: "Seleccione sección" })}
                                             className="w-full"
                                         />
                                     </div>
 
-                                    {/* Activo */}
-                                    <div className="flex flex-column field gap-2 col-12 lg:col-4">
-                                        <label htmlFor="activoSn">{intl.formatMessage({ id: "Estado" })}</label>
-                                        <Dropdown
-                                            id="activoSn"
-                                            value={filtros.activoSn}
-                                            options={OPCIONES_ACTIVO}
-                                            onChange={(e) => setFiltros({ ...filtros, activoSn: e.value })}
-                                            placeholder={intl.formatMessage({ id: "Todos" })}
-                                            className="w-full"
-                                        />
-                                    </div>
+                                    {/* Activo — solo si la sección lo soporta */}
+                                    {filtros.seccion && FILTROS_POR_SECCION[filtros.seccion]?.includes("activoSn") && (
+                                        <div className="flex flex-column field gap-2 col-12 lg:col-4">
+                                            <label htmlFor="activoSn">{intl.formatMessage({ id: "Estado" })}</label>
+                                            <Dropdown
+                                                id="activoSn"
+                                                value={filtros.activoSn}
+                                                options={OPCIONES_ACTIVO}
+                                                onChange={(e) => setFiltros({ ...filtros, activoSn: e.value })}
+                                                placeholder={intl.formatMessage({ id: "Todos" })}
+                                                className="w-full"
+                                            />
+                                        </div>
+                                    )}
 
-                                    {/* Nombre */}
-                                    <div className="flex flex-column field gap-2 col-12 lg:col-4">
-                                        <label htmlFor="nombre">{intl.formatMessage({ id: "Nombre" })}</label>
-                                        <InputText
-                                            id="nombre"
-                                            value={filtros.nombre}
-                                            onChange={(e) => setFiltros({ ...filtros, nombre: e.target.value })}
-                                            placeholder={intl.formatMessage({ id: "Buscar por nombre..." })}
-                                            className="w-full"
-                                        />
-                                    </div>
+                                    {/* Nombre — solo si la sección lo soporta */}
+                                    {filtros.seccion && FILTROS_POR_SECCION[filtros.seccion]?.includes("nombre") && (
+                                        <div className="flex flex-column field gap-2 col-12 lg:col-4">
+                                            <label htmlFor="nombre">{intl.formatMessage({ id: "Nombre" })}</label>
+                                            <InputText
+                                                id="nombre"
+                                                value={filtros.nombre}
+                                                onChange={(e) => setFiltros({ ...filtros, nombre: e.target.value })}
+                                                placeholder={intl.formatMessage({ id: "Buscar por nombre..." })}
+                                                className="w-full"
+                                            />
+                                        </div>
+                                    )}
 
-                                    {/* Descripción */}
-                                    <div className="flex flex-column field gap-2 col-12 lg:col-4">
-                                        <label htmlFor="descripcion">{intl.formatMessage({ id: "Descripción" })}</label>
-                                        <InputText
-                                            id="descripcion"
-                                            value={filtros.descripcion}
-                                            onChange={(e) => setFiltros({ ...filtros, descripcion: e.target.value })}
-                                            placeholder={intl.formatMessage({ id: "Buscar por descripción..." })}
-                                            className="w-full"
-                                        />
-                                    </div>
+                                    {/* Descripción — solo si la sección lo soporta */}
+                                    {filtros.seccion && FILTROS_POR_SECCION[filtros.seccion]?.includes("descripcion") && (
+                                        <div className="flex flex-column field gap-2 col-12 lg:col-4">
+                                            <label htmlFor="descripcion">{intl.formatMessage({ id: "Descripción" })}</label>
+                                            <InputText
+                                                id="descripcion"
+                                                value={filtros.descripcion}
+                                                onChange={(e) => setFiltros({ ...filtros, descripcion: e.target.value })}
+                                                placeholder={intl.formatMessage({ id: "Buscar por descripción..." })}
+                                                className="w-full"
+                                            />
+                                        </div>
+                                    )}
 
-                                    {/* Código */}
-                                    <div className="flex flex-column field gap-2 col-12 lg:col-4">
-                                        <label htmlFor="codigo">{intl.formatMessage({ id: "Código" })}</label>
-                                        <InputText
-                                            id="codigo"
-                                            value={filtros.codigo}
-                                            onChange={(e) => setFiltros({ ...filtros, codigo: e.target.value })}
-                                            placeholder={intl.formatMessage({ id: "Buscar por código..." })}
-                                            className="w-full"
-                                        />
-                                    </div>
+                                    {/* Código — solo si la sección lo soporta */}
+                                    {filtros.seccion && FILTROS_POR_SECCION[filtros.seccion]?.includes("codigo") && (
+                                        <div className="flex flex-column field gap-2 col-12 lg:col-4">
+                                            <label htmlFor="codigo">{intl.formatMessage({ id: "Código" })}</label>
+                                            <InputText
+                                                id="codigo"
+                                                value={filtros.codigo}
+                                                onChange={(e) => setFiltros({ ...filtros, codigo: e.target.value })}
+                                                placeholder={intl.formatMessage({ id: "Buscar por código..." })}
+                                                className="w-full"
+                                            />
+                                        </div>
+                                    )}
 
                                 </div>
                             </Fieldset>

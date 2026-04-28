@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -13,6 +13,8 @@ import { classNames } from 'primereact/utils';
 import { PrimeReactContext } from 'primereact/api';
 import { LayoutContext } from "@/layout/context/layoutcontext";
 import { getLayoutConfigFromEmpresa } from "@/app/utility/LayoutConfigService";
+import { getCurrentThemeConfig, applyThemeConfig } from "@/app/utility/ThemeService";
+import { ProgressSpinner } from 'primereact/progressspinner';
 import { useIntl } from 'react-intl';
 
 const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, listaTipoArchivos }) => {
@@ -26,12 +28,6 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
         onMenuToggle 
     } = useContext(LayoutContext);
     
-    // Debug de contextos - hacerlo fuera de useEffect
-    console.log('=== DEBUG CONTEXTOS (al renderizar) ===');
-    console.log('changeTheme disponible:', !!changeTheme);
-    console.log('setLayoutContextConfig disponible:', !!setLayoutContextConfig);
-    console.log('layoutContextConfig:', layoutContextConfig);
-    
     // Estado local para la configuración del layout
     const [configuracionLayoutLocal, setConfiguracionLayoutLocal] = useState({
         ripple: false,
@@ -42,6 +38,55 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
         theme: "mitema",
         scale: 14
     });
+
+    const [cargandoTema, setCargandoTema] = useState(false);
+
+    //
+    // Refs para restaurar el estado visual completo al desmontar.
+    // empresaIdRef se actualiza en el cuerpo del render (patrón válido para refs) para que el cleanup
+    // del useEffect siempre lea el id más reciente sin necesitar un segundo efecto de sincronización.
+    //
+    const temaOriginalRef = useRef(null);
+    const layoutConfigOriginalRef = useRef(null);
+    const escalaOriginalRef = useRef(null);
+    const empresaIdRef = useRef(empresa?.id);
+    empresaIdRef.current = empresa?.id;
+
+    useEffect(() => {
+        //
+        // Al montar, capturamos el estado visual completo: archivo CSS del tema, configuración del
+        // contexto de layout (modo menú, tema menú, esquema color, estilo input, ripple...) y la
+        // escala del DOM. Todo ello se restaura al desmontar si no es la empresa de sesión.
+        //
+        if (typeof window !== 'undefined') {
+            temaOriginalRef.current = getCurrentThemeConfig();
+            escalaOriginalRef.current = document.documentElement.style.fontSize;
+        }
+        layoutConfigOriginalRef.current = layoutContextConfig;
+
+        return () => {
+            //
+            // Al desmontar, restauramos el estado visual original solo si la empresa editada no es la
+            // empresa de sesión (comparando con el id guardado en localStorage).
+            // Esto evita que los cambios de vista previa persistan en la sesión tras cerrar el formulario.
+            //
+            const sesionEmpresaId = localStorage.getItem('empresa');
+            const esEmpresaSesion = sesionEmpresaId && empresaIdRef.current &&
+                String(empresaIdRef.current) === String(sesionEmpresaId);
+
+            if (!esEmpresaSesion) {
+                if (temaOriginalRef.current) {
+                    applyThemeConfig(temaOriginalRef.current);
+                }
+                if (layoutConfigOriginalRef.current && setLayoutContextConfig) {
+                    setLayoutContextConfig(layoutConfigOriginalRef.current);
+                }
+                if (escalaOriginalRef.current !== null && typeof window !== 'undefined') {
+                    document.documentElement.style.fontSize = escalaOriginalRef.current;
+                }
+            }
+        };
+    }, []);
     
     // Configuración de temas y escalas
     const escalas = [12, 13, 14, 15, 16];
@@ -66,26 +111,36 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
         }
     };
     
-    // Sincronizar configuración local con los datos de la empresa
     useEffect(() => {
-        if (empresa) {           
+        //
+        // Sincroniza el estado local, el contexto de layout y aplica el CSS del tema al cargar una empresa.
+        // Depende de empresa?.id en lugar de empresa para no dispararse en cada pulsación de teclado:
+        // los cambios manuales de configuración (colores, modo menú, escala...) los gestiona directamente
+        // actualizarConfiguracionEmpresaLayout, por lo que este efecto solo es necesario en la carga inicial.
+        // Esto permite la vista previa completa del tema de cualquier empresa al abrirla, de forma que un
+        // administrador global verá exactamente cómo queda antes de guardar.
+        //
+        if (empresa) {
             const configDesdeEmpresa = getLayoutConfigFromEmpresa(empresa);
             setConfiguracionLayoutLocal(configDesdeEmpresa);
-            
-            // Sincronizar con el contexto de layout global
+
             if (setLayoutContextConfig) {
                 setLayoutContextConfig(prevConfig => ({
                     ...prevConfig,
                     ...configDesdeEmpresa
                 }));
             }
-            
-            // Aplicar la escala inmediatamente cuando se carga la empresa
+
             if (configDesdeEmpresa.scale) {
                 aplicarEscala(configDesdeEmpresa.scale);
             }
+
+            applyThemeConfig({
+                colorScheme: configDesdeEmpresa.colorScheme,
+                theme: configDesdeEmpresa.theme
+            });
         }
-    }, [empresa]);
+    }, [empresa?.id]);
     
     // Aplicar la escala cuando cambie la configuración
     useEffect(() => {
@@ -234,67 +289,47 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
     };
 
     const cambiarEsquemaColor = (esquemaColor) => {
-        console.log(`=== CAMBIO DE ESQUEMA SIMPLIFICADO ===`);
-        console.log(`Cambiando a esquema: ${esquemaColor}`);
-        
-        // Solo guardar en la base de datos
         actualizarConfiguracionEmpresaLayout({ colorScheme: esquemaColor });
-        
-        // Obtener valores actuales del contexto global
-        const esquemaActualGlobal = layoutContextConfig?.colorScheme || "light";
-        const temaGlobal = layoutContextConfig?.theme || "mitema";
-        
-        console.log(`Esquema actual global: ${esquemaActualGlobal}, Tema global: ${temaGlobal}`);
-        
-        // Llamar directamente a changeTheme
+
         if (changeTheme) {
-            console.log(`Llamando: changeTheme("${esquemaActualGlobal}", "${esquemaColor}", "theme-link")`);
-            changeTheme(esquemaActualGlobal, esquemaColor, "theme-link", () => {
-                console.log(`✅ Esquema cambiado exitosamente a: ${esquemaColor}`);
-                
-                // Solo después del éxito, actualizar el contexto
+            //
+            // Leemos el esquema actual directamente del DOM (fuente de verdad real) en lugar del
+            // contexto React, que puede estar desincronizado. PrimeReact necesita que el valor
+            // "from" coincida exactamente con el href del <link> o la sustitución falla en silencio.
+            //
+            const { colorScheme: esquemaActual } = getCurrentThemeConfig();
+            setCargandoTema(true);
+            changeTheme(esquemaActual, esquemaColor, "theme-link", () => {
                 if (setLayoutContextConfig) {
                     setLayoutContextConfig(prevConfig => ({
                         ...prevConfig,
                         colorScheme: esquemaColor
                     }));
                 }
+                setCargandoTema(false);
             });
-        } else {
-            console.error(`❌ changeTheme no disponible`);
         }
     };
 
     const cambiarTema = (tema) => {
-        console.log(`=== CAMBIO DE TEMA SIMPLIFICADO ===`);
-        console.log(`Cambiando a tema: ${tema}`);
-        
-        // Solo guardar en la base de datos, NO interferir con el contexto por ahora
         actualizarConfiguracionEmpresaLayout({ theme: tema });
-        
-        // Obtener el esquema actual del contexto global (no del local)
-        const esquemaGlobal = layoutContextConfig?.colorScheme || "light";
-        const temaActualGlobal = layoutContextConfig?.theme || "mitema";
-        
-        console.log(`Esquema global: ${esquemaGlobal}, Tema actual global: ${temaActualGlobal}`);
-        console.log(`changeTheme disponible:`, !!changeTheme);
-        
-        // Llamar directamente a changeTheme sin modificar contextos
+
         if (changeTheme) {
-            console.log(`Llamando: changeTheme("${temaActualGlobal}", "${tema}", "theme-link")`);
-            changeTheme(temaActualGlobal, tema, "theme-link", () => {
-                console.log(`✅ Tema cambiado exitosamente a: ${tema}`);
-                
-                // SOLO después del éxito, actualizar el contexto
+            //
+            // Igual que en cambiarEsquemaColor: leemos el tema actual del DOM para garantizar
+            // que el "from" de changeTheme siempre sea correcto.
+            //
+            const { theme: temaActual } = getCurrentThemeConfig();
+            setCargandoTema(true);
+            changeTheme(temaActual, tema, "theme-link", () => {
                 if (setLayoutContextConfig) {
                     setLayoutContextConfig(prevConfig => ({
                         ...prevConfig,
                         theme: tema
                     }));
                 }
+                setCargandoTema(false);
             });
-        } else {
-            console.error(`❌ changeTheme no disponible`);
         }
     };
 
@@ -432,28 +467,34 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
                 {/* Temas */}
                 <div className="col-12 md:col-6">
                     <h6>{intl.formatMessage({ id: 'Temas' })}</h6>
-                    <div className="flex flex-wrap gap-2">
-                        {temasComponentes.map((tema, i) => {
-                            const config = obtenerConfiguracionLayout();
-                            return (
-                                <div
-                                    key={i}
-                                    className="w-2rem h-2rem"
-                                    onClick={() => cambiarTema(tema.name)}
-                                    style={{
-                                        backgroundColor: tema.color,
-                                        cursor: "pointer",
-                                        borderRadius: "18px",
-                                        border:
-                                            tema.name === config.theme
-                                                ? "2px solid var(--primary-color)"
-                                                : "2px solid transparent",
-                                    }}
-                                    title={tema.name}
-                                ></div>
-                            );
-                        })}
-                    </div>
+                    {cargandoTema ? (
+                        <div className="flex justify-content-center p-4">
+                            <ProgressSpinner style={{ width: '50px', height: '50px' }} />
+                        </div>
+                    ) : (
+                        <div className="flex flex-wrap gap-2">
+                            {temasComponentes.map((tema, i) => {
+                                const config = obtenerConfiguracionLayout();
+                                return (
+                                    <div
+                                        key={i}
+                                        className="w-2rem h-2rem"
+                                        onClick={() => cambiarTema(tema.name)}
+                                        style={{
+                                            backgroundColor: tema.color,
+                                            cursor: "pointer",
+                                            borderRadius: "18px",
+                                            border:
+                                                tema.name === config.theme
+                                                    ? "2px solid var(--primary-color)"
+                                                    : "2px solid transparent",
+                                        }}
+                                        title={tema.name}
+                                    ></div>
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
 
                 {/* Escala */}
@@ -632,6 +673,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
                                     onChange={(e) => cambiarEsquemaColor(e.value)}
                                     checked={obtenerConfiguracionLayout().colorScheme === "light"}
                                     inputId="colorscheme1"
+                                    disabled={cargandoTema}
                                 ></RadioButton>
                                 <label htmlFor="colorscheme1">{intl.formatMessage({ id: 'Claro' })}</label>
                             </div>
@@ -644,6 +686,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
                                     onChange={(e) => cambiarEsquemaColor(e.value)}
                                     checked={obtenerConfiguracionLayout().colorScheme === "dim"}
                                     inputId="colorscheme2"
+                                    disabled={cargandoTema}
                                 ></RadioButton>
                                 <label htmlFor="colorscheme2">{intl.formatMessage({ id: 'Tenue' })}</label>
                             </div>
@@ -656,6 +699,7 @@ const EditarDatosEmpresa = ({ empresa, setEmpresa, estadoGuardando, isEdit, list
                                     onChange={(e) => cambiarEsquemaColor(e.value)}
                                     checked={obtenerConfiguracionLayout().colorScheme === "dark"}
                                     inputId="colorscheme3"
+                                    disabled={cargandoTema}
                                 ></RadioButton>
                                 <label htmlFor="colorscheme3">{intl.formatMessage({ id: 'Oscuro' })}</label>
                             </div>

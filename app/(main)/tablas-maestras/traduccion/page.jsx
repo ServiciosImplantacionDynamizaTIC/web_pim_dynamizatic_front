@@ -22,7 +22,7 @@ const TraduccionLiteral = () => {
                 
                 // Añadir una columna por cada idioma
                 const columnasIdiomas = idiomasOrdenados.map(idioma => ({
-                    campo: idioma.nombre.toLowerCase(),
+                    campo: idioma.nombre.replace(/\s+/g, '_').toLowerCase(),
                     header: idioma.nombre,
                     tipo: 'string'
                 }));

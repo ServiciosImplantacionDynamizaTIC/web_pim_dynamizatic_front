@@ -12,11 +12,22 @@ const AppMenu = () => {
     const [menuLoaded, setMenuLoaded] = useState(false);
 
     useEffect(() => {
-        const savedMenu = localStorage.getItem("menuLateral");
-        if (savedMenu) {
-            setMenuModel(JSON.parse(savedMenu));
-        }
-        setMenuLoaded(true);
+        const cargarMenu = () => {
+            const savedMenu = localStorage.getItem("menuLateral");
+            if (savedMenu) {
+                setMenuModel(JSON.parse(savedMenu));
+            }
+            setMenuLoaded(true);
+        };
+
+        cargarMenu();
+
+        //
+        // Fallback: si el menú se guarda en localStorage después de que este componente montara
+        // (race condition durante el login), el evento menu-lateral-loaded vuelve a leerlo.
+        //
+        window.addEventListener('menu-lateral-loaded', cargarMenu);
+        return () => window.removeEventListener('menu-lateral-loaded', cargarMenu);
     }, []);
 
     const model: MenuModel[] = Object.values(menuModel) as MenuModel[];

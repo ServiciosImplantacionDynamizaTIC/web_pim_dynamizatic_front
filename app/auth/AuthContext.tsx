@@ -276,6 +276,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     }
     localStorage.setItem('menuLateral', JSON.stringify([jsonPermisos]));
+    window.dispatchEvent(new CustomEvent('menu-lateral-loaded'));
   }
 
   const almacenarLogin = async (data: any) => {

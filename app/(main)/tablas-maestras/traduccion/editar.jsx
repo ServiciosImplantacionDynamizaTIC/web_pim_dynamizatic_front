@@ -1,20 +1,18 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import { getIdiomas } from "@/app/api-endpoints/idioma";
-import { postTraduccionLiteral, patchTraduccionLiteral } from "@/app/api-endpoints/traduccion";
+import { postTraduccionLiteral } from "@/app/api-endpoints/traduccion";
 import EditarDatosTraduccion from "./EditarDatosTraduccion";
 import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
-const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
+const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, editable }) => {
     const intl = useIntl();
     const toast = useRef(null);
     const [traduccion, setTraduccion] = useState(emptyRegistro);
     const [listaIdiomas, setListaIdiomas] = useState([]);
-    const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
 
@@ -80,7 +78,7 @@ const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro
                             usuarioCreacion: usuarioActual,
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
-                            valor: objGuardar[idioma.nombre.toLowerCase()],
+                            valor: objGuardar[idioma.nombre.replace(/\s+/g, '_').toLowerCase()],
                         }
                         if (objTraduccion.valor && objTraduccion.valor.length > 0) {
                             await postTraduccionLiteral(objTraduccion);
@@ -105,7 +103,7 @@ const EditarTraduccionLiteral = ({ idEditar, setIdEditar, rowData, emptyRegistro
                             usuarioCreacion: usuarioActual,
                             idiomaId: idioma.id,
                             clave: objGuardar.clave,
-                            valor: objGuardar[idioma.nombre.toLowerCase()],
+                            valor: objGuardar[idioma.nombre.replace(/\s+/g, '_').toLowerCase()],
                             id: objGuardar.id
                         }
                         if (objTraduccion.valor && objTraduccion.valor.length > 0) {

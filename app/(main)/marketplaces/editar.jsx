@@ -130,12 +130,9 @@ const EditarMarketplace = ({ idEditar, setIdEditar, rowData, emptyRegistro, setR
                 }
                 
                 try {
-                    const registroEditado = await patchMarketplace(idEditar, marketplaceAeditar);
-                    
-                    if (registroEditado) {
-                        setIdEditar(null);
-                        setRegistroResult("editado");
-                    }
+                    await patchMarketplace(idEditar, marketplaceAeditar);
+                    setIdEditar(null);
+                    setRegistroResult("editado");
                 } catch (error) {
                     console.error('Error editando marketplace:', error);
                     toast.current?.show({

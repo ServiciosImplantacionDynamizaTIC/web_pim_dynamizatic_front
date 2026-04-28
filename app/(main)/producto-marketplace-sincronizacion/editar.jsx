@@ -32,14 +32,11 @@ const EditarProductoMarketplaceSincronizacion = ({ idEditar, setIdEditar, rowDat
             setCargandoProductosMarketplace(true);
             try {
                 const filtro = JSON.stringify({
-                    include: ['producto', 'marketplace'],
-                    where: {
-                        activoEnMarketplace: 'S'
-                    }
+                    where: { and: { activoEnMarketplace: 'S' } }
                 });
                 const data = await getProductosMarketplace(filtro);
                 const productosFormateados = data.map(pm => ({
-                    label: `${pm.producto?.nombre || 'Producto'} - ${pm.marketplace?.nombre || 'Marketplace'}`,
+                    label: pm.marketplaceNombre || `ID: ${pm.id}`,
                     value: pm.id
                 }));
                 setProductosMarketplace(productosFormateados);

@@ -110,7 +110,6 @@ const EditarDatosMarketplace = ({ marketplace, setMarketplace, estadoGuardando, 
                             onChange={(e) => manejarCambioDropdown(e, 'tipo')}
                             placeholder={cargandoTipos ? intl.formatMessage({ id: 'Cargando tipos...' }) : intl.formatMessage({ id: 'Seleccione el tipo de marketplace' })}
                             disabled={!editable || estadoGuardando || cargandoTipos}
-                            loading={cargandoTipos}
                             className={`${(estadoGuardando && !marketplace.tipo) ? "p-invalid" : ""}`}
                         />
                     </div>
