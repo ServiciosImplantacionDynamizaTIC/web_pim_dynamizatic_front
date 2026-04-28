@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
-import { getProducto, postProducto, patchProducto } from "@/app/api-endpoints/producto";
-import { editarArchivos, insertarArchivo, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils"
-import { postSubirImagen, borrarFichero } from "@/app/api-endpoints/ficheros";
+import { postProducto, patchProducto } from "@/app/api-endpoints/producto";
+import { editarArchivos, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils";
+import { postSubirImagen } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
 import ProductoSeo from "../producto-seo/page";
 import ProductoIcono from "../producto-icono/page";
@@ -15,6 +15,7 @@ import 'primeicons/primeicons.css';
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { useIntl } from 'react-intl';
 import ProductoPropiedad from "../producto-propiedad/page";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegistroResult, listaTipoArchivos, seccion, editable }) => {
     const intl = useIntl();
@@ -41,9 +42,20 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
     });
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
+    const [permisosPestanas, setPermisosPestanas] = useState({
+        seo: false,
+        iconos: false,
+        marketplaces: false,
+        atributos: false,
+        camposDinamicos: false,
+        multimedia: false,
+        atributosVer: false,
+        camposDinamicosVer: false,
+        multimediaVer: false
+    });
 
+    // Cargo el registro cuando entro en edición.
     useEffect(() => {
         const fetchData = async () => {
             if (idEditar && idEditar !== 0) {
@@ -55,7 +67,48 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             }
         };
         fetchData();
-    }, [idEditar, rowData]);
+    }, [idEditar, rowData, listaTipoArchivos]);
+
+    // Cargo los permisos de visibilidad de cada pestaña.
+    useEffect(() => {
+        const cargarPermisosPestanas = async () => {
+            const [
+                seo,
+                iconos,
+                marketplaces,
+                atributos,
+                camposDinamicos,
+                multimedia,
+                atributosVer,
+                camposDinamicosVer,
+                multimediaVer
+            ] = await Promise.all([
+                tieneUsuarioPermiso('ProductoSeo', 'acceder'),
+                tieneUsuarioPermiso('ProductoIcono', 'acceder'),
+                tieneUsuarioPermiso('ProductoMarketplace', 'acceder'),
+                tieneUsuarioPermiso('Productos', 'AtributosAcceder'),
+                tieneUsuarioPermiso('Productos', 'CamposDinamicosAcceder'),
+                tieneUsuarioPermiso('Productos', 'MultimediaAcceder'),
+                tieneUsuarioPermiso('Productos', 'AtributosVer'),
+                tieneUsuarioPermiso('Productos', 'CamposDinamicosVer'),
+                tieneUsuarioPermiso('Productos', 'MultimediaVer')
+            ]);
+
+            setPermisosPestanas({
+                seo: Boolean(seo),
+                iconos: Boolean(iconos),
+                marketplaces: Boolean(marketplaces),
+                atributos: Boolean(atributos),
+                camposDinamicos: Boolean(camposDinamicos),
+                multimedia: Boolean(multimedia),
+                atributosVer: Boolean(atributosVer),
+                camposDinamicosVer: Boolean(camposDinamicosVer),
+                multimediaVer: Boolean(multimediaVer)
+            });
+        };
+
+        cargarPermisosPestanas();
+    }, []);
 
     const validacionesImagenes = () => {
         return validarImagenes(producto, listaTipoArchivos);
@@ -108,7 +161,6 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
             const usuarioActual = getUsuarioSesion()?.id;
 
             if (!idEditar || idEditar === 0) {
-
                 objGuardar = {
                     empresaId: getUsuarioSesion()?.empresaId,
                     categoriaId: objGuardar.categoriaId,
@@ -213,7 +265,13 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         setIdEditar(null);
     };
 
+    const estoyEditandoProducto = (idEditar && idEditar > 0) ? (editable ? true : false) : true;
     const header = (idEditar && idEditar > 0) ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
+    const mensajeSinPermisosVisualizacion = (
+        <div className="text-center p-4">
+            {intl.formatMessage({ id: 'No tiene permisos para visualizar esta sección. Contacte con un administrador.' })}
+        </div>
+    );
 
     return (
         <div>
@@ -227,48 +285,77 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
                             setProducto={setProducto}
                             listaTipoArchivos={listaTipoArchivos}
                             estadoGuardando={estadoGuardando}
-                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true}
+                            estoyEditandoProducto={estoyEditandoProducto}
                             setRegistroResult={setRegistroResult}
                         />
 
                         {(idEditar != null && idEditar !== 0) && (
                             <div className="mt-4">
                                 <TabView scrollable>
-                                    <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>
-                                        <ProductoSeo
-                                            idProducto={idEditar}
-                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
-                                    </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Iconos del Producto' })}>
-                                        <ProductoIcono
-                                            idProducto={idEditar}
-                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
-                                    </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Marketplaces del Producto' })}>
-                                        <ProductoMarketplace
-                                            idProducto={idEditar}
-                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
-                                    </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
-                                        <ProductoPropiedad
-                                            idProducto={idEditar}
-                                            tipoProductoId={producto?.tipoProductoId}
-                                            tipoDePropiedad="atributo"
-                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
-                                    </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Campos Dinámicos del Producto' })}>
-                                        <ProductoPropiedad
-                                            idProducto={idEditar}
-                                            tipoProductoId={producto?.tipoProductoId}
-                                            tipoDePropiedad="campo_dinamico"
-                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
-                                    </TabPanel>
-                                    <TabPanel header={intl.formatMessage({ id: 'Multimedia del Producto' })}>
-                                        <ProductoMultimedia
-                                            idProducto={idEditar}
-                                            tipoProductoId={producto?.tipoProductoId}
-                                            estoyEditandoProducto={(idEditar && idEditar > 0) ? (editable ? true : false) : true} />
-                                    </TabPanel>
+                                    {permisosPestanas.seo && (
+                                        <TabPanel header={intl.formatMessage({ id: 'SEO del Producto' })}>
+                                            <ProductoSeo
+                                                idProducto={idEditar}
+                                                estoyEditandoProducto={estoyEditandoProducto}
+                                            />
+                                        </TabPanel>
+                                    )}
+
+                                    {permisosPestanas.iconos && (
+                                        <TabPanel header={intl.formatMessage({ id: 'Iconos del Producto' })}>
+                                            <ProductoIcono
+                                                idProducto={idEditar}
+                                                estoyEditandoProducto={estoyEditandoProducto}
+                                            />
+                                        </TabPanel>
+                                    )}
+
+                                    {permisosPestanas.marketplaces && (
+                                        <TabPanel header={intl.formatMessage({ id: 'Marketplaces del Producto' })}>
+                                            <ProductoMarketplace
+                                                idProducto={idEditar}
+                                                estoyEditandoProducto={estoyEditandoProducto}
+                                            />
+                                        </TabPanel>
+                                    )}
+
+                                    {permisosPestanas.atributos && (
+                                        <TabPanel header={intl.formatMessage({ id: 'Atributos del Producto' })}>
+                                            {permisosPestanas.atributosVer ? (
+                                                <ProductoPropiedad
+                                                    idProducto={idEditar}
+                                                    tipoProductoId={producto?.tipoProductoId}
+                                                    tipoDePropiedad="atributo"
+                                                    estoyEditandoProducto={estoyEditandoProducto}
+                                                />
+                                            ) : mensajeSinPermisosVisualizacion}
+                                        </TabPanel>
+                                    )}
+
+                                    {permisosPestanas.camposDinamicos && (
+                                        <TabPanel header={intl.formatMessage({ id: 'Campos Dinámicos del Producto' })}>
+                                            {permisosPestanas.camposDinamicosVer ? (
+                                                <ProductoPropiedad
+                                                    idProducto={idEditar}
+                                                    tipoProductoId={producto?.tipoProductoId}
+                                                    tipoDePropiedad="campo_dinamico"
+                                                    estoyEditandoProducto={estoyEditandoProducto}
+                                                />
+                                            ) : mensajeSinPermisosVisualizacion}
+                                        </TabPanel>
+                                    )}
+
+                                    {permisosPestanas.multimedia && (
+                                        <TabPanel header={intl.formatMessage({ id: 'Multimedia del Producto' })}>
+                                            {permisosPestanas.multimediaVer ? (
+                                                <ProductoMultimedia
+                                                    idProducto={idEditar}
+                                                    tipoProductoId={producto?.tipoProductoId}
+                                                    estoyEditandoProducto={estoyEditandoProducto}
+                                                />
+                                            ) : mensajeSinPermisosVisualizacion}
+                                        </TabPanel>
+                                    )}
                                 </TabView>
                             </div>
                         )}

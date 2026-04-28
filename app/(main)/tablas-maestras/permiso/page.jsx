@@ -251,7 +251,37 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Productos-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Productos-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Productos-Borrar' },
-
+                // ProductoAtributo
+                { header: intl.formatMessage({ id: 'Atributos del Producto: Acceder' }), seccion: 'Productos-AtributosAcceder' },
+                { header: intl.formatMessage({ id: 'Atributos del Producto: Ver' }), seccion: 'Productos-AtributosVer' },
+                { header: intl.formatMessage({ id: 'Atributos del Producto: Editar' }), seccion: 'Productos-AtributosActualizar' },
+                // ProductoCampoDinamico
+                { header: intl.formatMessage({ id: 'Campos Dinámicos del Producto: Acceder' }), seccion: 'Productos-CamposDinamicosAcceder' },
+                { header: intl.formatMessage({ id: 'Campos Dinámicos del Producto: Ver' }), seccion: 'Productos-CamposDinamicosVer' },
+                { header: intl.formatMessage({ id: 'Campos Dinámicos del Producto: Editar' }), seccion: 'Productos-CamposDinamicosActualizar' },
+                // MultimediaProducto
+                { header: intl.formatMessage({ id: 'Multimedia del Producto: Acceder' }), seccion: 'Productos-MultimediaAcceder' },
+                { header: intl.formatMessage({ id: 'Multimedia del Producto: Ver' }), seccion: 'Productos-MultimediaVer' },
+                { header: intl.formatMessage({ id: 'Multimedia del Producto: Nuevo' }), seccion: 'Productos-MultimediaNuevo' },
+                { header: intl.formatMessage({ id: 'Multimedia del Producto: Editar' }), seccion: 'Productos-MultimediaActualizar' },
+                // ProductoSeo
+                { header: intl.formatMessage({ id: 'SEO de Productos: Acceder' }), seccion: 'ProductoSeo-Acceder' },
+                { header: intl.formatMessage({ id: 'SEO de Productos: Ver' }), seccion: 'ProductoSeo-Ver' },
+                { header: intl.formatMessage({ id: 'SEO de Productos: Nuevo' }), seccion: 'ProductoSeo-Nuevo' },
+                { header: intl.formatMessage({ id: 'SEO de Productos: Actualizar' }), seccion: 'ProductoSeo-Actualizar' },
+                { header: intl.formatMessage({ id: 'SEO de Productos: Borrar' }), seccion: 'ProductoSeo-Borrar' },
+                // ProductoIcono
+                { header: intl.formatMessage({ id: 'Iconos de Productos: Acceder' }), seccion: 'ProductoIcono-Acceder' },
+                { header: intl.formatMessage({ id: 'Iconos de Productos: Ver' }), seccion: 'ProductoIcono-Ver' },
+                { header: intl.formatMessage({ id: 'Iconos de Productos: Nuevo' }), seccion: 'ProductoIcono-Nuevo' },
+                { header: intl.formatMessage({ id: 'Iconos de Productos: Actualizar' }), seccion: 'ProductoIcono-Actualizar' },
+                { header: intl.formatMessage({ id: 'Iconos de Productos: Borrar' }), seccion: 'ProductoIcono-Borrar' },
+                // ProductoMarketplace
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos: Acceder' }), seccion: 'ProductoMarketplace-Acceder' },
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos: Ver' }), seccion: 'ProductoMarketplace-Ver' },
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos: Nuevo' }), seccion: 'ProductoMarketplace-Nuevo' },
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos: Actualizar' }), seccion: 'ProductoMarketplace-Actualizar' },
+                { header: intl.formatMessage({ id: 'Marketplaces de Productos: Borrar' }), seccion: 'ProductoMarketplace-Borrar' },
                 // Estados
                 { header: intl.formatMessage({ id: 'Estados' }), seccion: 'Estados' },
                 { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'Estados-Acceder' },
@@ -267,29 +297,6 @@ const Permiso = () => {
                 { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'Marketplaces-Nuevo' },
                 { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'Marketplaces-Actualizar' },
                 { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'Marketplaces-Borrar' },
-                //ProductoSeo
-                { header: intl.formatMessage({ id: 'SEO de Productos' }), seccion: 'ProductoSeo' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoSeo-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoSeo-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoSeo-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoSeo-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoSeo-Borrar' },
-
-                //ProductoIcono
-                { header: intl.formatMessage({ id: 'Iconos de Productos' }), seccion: 'ProductoIcono' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoIcono-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoIcono-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoIcono-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoIcono-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoIcono-Borrar' },
-                
-                //ProductoMarketplace
-                { header: intl.formatMessage({ id: 'Marketplaces de Productos' }), seccion: 'ProductoMarketplace' },
-                { header: intl.formatMessage({ id: 'Acceder' }), seccion: 'ProductoMarketplace-Acceder' },
-                { header: intl.formatMessage({ id: 'Ver' }), seccion: 'ProductoMarketplace-Ver' },
-                { header: intl.formatMessage({ id: 'Nuevo' }), seccion: 'ProductoMarketplace-Nuevo' },
-                { header: intl.formatMessage({ id: 'Actualizar' }), seccion: 'ProductoMarketplace-Actualizar' },
-                { header: intl.formatMessage({ id: 'Borrar' }), seccion: 'ProductoMarketplace-Borrar' },
                 
                 //Logs de sincronización Marketplaces
                 { header: intl.formatMessage({ id: 'Logs de sincronización Marketplaces' }), seccion: 'Logs de sincronización Marketplaces' },

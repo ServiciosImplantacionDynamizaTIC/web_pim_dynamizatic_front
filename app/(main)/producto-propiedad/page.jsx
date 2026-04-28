@@ -20,6 +20,7 @@ import { getProductosPropiedad, postProductoPropiedad, patchProductoPropiedad, d
 import { getGrupoPropiedades } from "@/app/api-endpoints/grupo_propiedad";
 import { getUsuarioSesion } from "@/app/utility/Utils";
 import { InputTextarea } from "primereact/inputtextarea";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 /**
  * ProductoPropiedad — Componente genérico para gestionar propiedades de un producto.
@@ -53,6 +54,21 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
     const [cargando, setCargando] = useState(true);
     const [guardando, setGuardando] = useState(false);
     const [erroresValidacion, setErroresValidacion] = useState(new Set());
+
+    const permisoVerPestana = esAtributo ? 'AtributosVer' : 'CamposDinamicosVer';
+    const permisoEditarPestana = esAtributo ? 'AtributosActualizar' : 'CamposDinamicosActualizar';
+
+    const [puedeEditarPestana, setPuedeEditarPestana] = useState(false);
+
+    // Cargo los permisos internos de la pestaña.
+    useEffect(() => {
+        const cargarPermisosPestana = async () => {
+            const permisoEditar = await tieneUsuarioPermiso('Productos', permisoEditarPestana);
+            setPuedeEditarPestana(Boolean(permisoEditar));
+        };
+
+        cargarPermisosPestana();
+    }, [permisoEditarPestana]);
 
     useEffect(() => {
         const cargarDatos = async () => {
@@ -173,7 +189,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
 
     const renderizarCampoPropiedad = (atributoDetalle) => {
         const valorActual = valoresPropiedades[atributoDetalle.id] || {};
-        const deshabilitado = !estoyEditandoProducto || guardando;
+        const deshabilitado = !estoyEditandoProducto || guardando || !puedeEditarPestana;
 
         console.log('Renderizando atributo:', atributoDetalle, 'Valor actual:', valorActual);
 
@@ -486,7 +502,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
 
     const renderPropiedadCard = (atributoDetalle) => {
         const valorActual = valoresPropiedades[atributoDetalle.id] || {};
-        const deshabilitado = !estoyEditandoProducto || guardando;
+        const deshabilitado = !estoyEditandoProducto || guardando || !puedeEditarPestana;
 
         return (
             <div key={atributoDetalle.id} className="field col-12 md:col-6 lg:col-4">
@@ -602,7 +618,7 @@ const ProductoPropiedad = ({ idProducto, tipoProductoId, estoyEditandoProducto, 
                         }
                         icon={guardando ? "pi pi-spin pi-spinner" : "pi pi-save"}
                         onClick={guardarPropiedades}
-                        disabled={guardando}
+                        disabled={guardando || !puedeEditarPestana}
                         className="p-button-primary"
                     />
                 </div>
