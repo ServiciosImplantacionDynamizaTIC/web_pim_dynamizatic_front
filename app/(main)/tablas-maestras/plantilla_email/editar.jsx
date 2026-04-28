@@ -47,10 +47,15 @@ const EditarCorreoPlantilla = ({
             const accionesCorreo = [
                 { nombre: 'Recuperar contraseña', label: intl.formatMessage({ id: 'Recuperar contraseña' }) },
                 { nombre: 'Enviar un email a usuarios', label: intl.formatMessage({ id: 'Enviar un email a usuarios' }) },
+                { nombre: 'planificador_fecha_inicio', label: intl.formatMessage({ id: 'Planificador - Inicio tarea' }) },
+                { nombre: 'planificador_fecha_aviso_desde_inicio', label: intl.formatMessage({ id: 'Planificador - Aviso desde inicio' }) },
+                { nombre: 'planificador_fecha_aviso_a_fin', label: intl.formatMessage({ id: 'Planificador - Aviso a fin' }) },
+                { nombre: 'planificador_fecha_aviso_desde_fin', label: intl.formatMessage({ id: 'Planificador - Aviso desde fin' }) },
+                { nombre: 'planificador_resumen', label: intl.formatMessage({ id: 'Planificador - Resumen' }) },
             ];
 
             for (const accion of [...accionesCorreo]) {
-                if (accion.nombre === 'Enviar un email a usuarios') {
+                if (accion.nombre === 'Enviar un email a usuarios' || accion.nombre.startsWith('planificador_')) {
                     continue;
                 }
 

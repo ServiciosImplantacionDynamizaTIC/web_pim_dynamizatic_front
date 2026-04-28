@@ -39,6 +39,7 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
 
     // Estados para seguir eliminaciones pendientes
     const [tareasAEliminar, setTareasAEliminar] = useState([]); // IDs de tareas a eliminar al guardar
+    const ultimoToastValidacion = useRef({ key: null, tiempo: 0 }); // Evitar toasts duplicados
     // Estado para usuarios/emails
     const [usuariosDisponibles, setUsuariosDisponibles] = useState([]); // Para responsables (con filtro de rol)
     const [usuariosEmail, setUsuariosEmail] = useState([]); // Para envío de email (sin filtro de rol)
@@ -63,6 +64,7 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
     // Exponer la función guardarTareas al componente padre
     React.useImperativeHandle(ref, () => ({
         guardarTareas,
+        validarTareas,
         tieneDatosRellenados,
         recargarTareas: cargarDatos,
         recalcularFechasLocal,
@@ -409,6 +411,15 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
         }, 100);
     };
 
+    const mostrarToastValidacion = (key, opciones) => {
+        const ahora = Date.now();
+        if (ultimoToastValidacion.current.key === key && ahora - ultimoToastValidacion.current.tiempo < 500) {
+            return;
+        }
+        ultimoToastValidacion.current = { key, tiempo: ahora };
+        toast.current?.show(opciones);
+    };
+
     const validarDiasTarea = (tarea) => {
         if (esDetalleProducto) {
             return;
@@ -416,10 +427,19 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
 
         if (tarea.empiezaEn && tarea.terminaEn) {
             if (tarea.terminaEn < 1) {
-                toast.current?.show({
+                mostrarToastValidacion('terminaEn_menor1', {
                     severity: 'error',
                     summary: intl.formatMessage({ id: 'ERROR' }),
                     detail: intl.formatMessage({ id: 'La duración de la tarea debe ser mayor que 0' }),
+                    life: 3000,
+                });
+            }
+
+            if (tarea.empiezaEn > tarea.terminaEn) {
+                mostrarToastValidacion('empiezaEn_mayor_terminaEn', {
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'ERROR' }),
+                    detail: intl.formatMessage({ id: 'El día de inicio no puede ser mayor al día de fin' }),
                     life: 3000,
                 });
             }
@@ -431,13 +451,25 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
             return;
         }
 
-        // Validaciones opcionales para los días de aviso
-        if (tarea.diasAvisoDesdeInicio && tarea.empiezaEn) {
-            if (tarea.diasAvisoDesdeInicio > tarea.empiezaEn) {
-                toast.current?.show({
+        // Validar que el aviso desde inicio no caiga después de la fecha de fin
+        if (tarea.diasAvisoDesdeInicio && tarea.empiezaEn && tarea.terminaEn) {
+            if (tarea.empiezaEn + tarea.diasAvisoDesdeInicio > tarea.terminaEn) {
+                mostrarToastValidacion('avisoDesdeInicio_fuera_rango', {
                     severity: 'error',
                     summary: intl.formatMessage({ id: 'ERROR' }),
-                    detail: intl.formatMessage({ id: 'Los días de aviso desde inicio no pueden ser mayores al día de inicio' }),
+                    detail: intl.formatMessage({ id: 'El aviso desde inicio caerá después de la fecha de fin de la tarea' }),
+                    life: 3000,
+                });
+            }
+        }
+
+        // Validar que el aviso a fin no caiga antes de la fecha de inicio
+        if (tarea.diasAvisoAFin && tarea.empiezaEn && tarea.terminaEn) {
+            if (tarea.terminaEn - tarea.diasAvisoAFin < tarea.empiezaEn) {
+                mostrarToastValidacion('avisoAFin_fuera_rango', {
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'ERROR' }),
+                    detail: intl.formatMessage({ id: 'El aviso a fin caerá antes de la fecha de inicio de la tarea' }),
                     life: 3000,
                 });
             }
@@ -471,7 +503,7 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
                     validarDiasTarea(tareaActualizada);
                 }
 
-                if (campo === 'diasAvisoDesdeInicio' || campo === 'diasAvisoDesdeFin') {
+                if (campo === 'diasAvisoDesdeInicio' || campo === 'diasAvisoAFin' || campo === 'diasAvisoDesdeFin') {
                     validarAvisosTarea(tareaActualizada);
                 }
 
@@ -669,6 +701,125 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
 
 
 
+    const validarTareas = () => {
+        const erroresNombreCategorias = new Set();
+        categorias.forEach((categoria) => {
+            if (!categoria.nombre || categoria.nombre.trim() === '') {
+                erroresNombreCategorias.add(categoria.uid);
+            }
+        });
+        setErroresValidacionCategorias(erroresNombreCategorias);
+        if (erroresNombreCategorias.size > 0) {
+            toast.current?.show({
+                severity: 'error',
+                summary: intl.formatMessage({ id: 'Campos obligatorios vacíos' }),
+                detail: intl.formatMessage({ id: 'Hay categorías sin nombre. Complete todos los campos obligatorios marcados en rojo.' }),
+                life: 5000,
+            });
+            return false;
+        }
+
+        const nombresCategorias = categorias
+            .filter(cat => cat.nombre && cat.nombre.trim() !== '')
+            .map(cat => cat.nombre.trim().toLowerCase());
+        const nombresCategoriasUnicos = new Set(nombresCategorias);
+        if (nombresCategorias.length !== nombresCategoriasUnicos.size) {
+            const nombresDuplicados = [];
+            const nombresVistos = {};
+            categorias.forEach(cat => {
+                if (cat.nombre && cat.nombre.trim() !== '') {
+                    const nombreNormalizado = cat.nombre.trim().toLowerCase();
+                    if (nombresVistos[nombreNormalizado]) {
+                        if (!nombresDuplicados.includes(cat.nombre.trim())) nombresDuplicados.push(cat.nombre.trim());
+                    }
+                    nombresVistos[nombreNormalizado] = true;
+                }
+            });
+            toast.current?.show({
+                severity: 'error',
+                summary: intl.formatMessage({ id: 'Error - Nombres duplicados' }),
+                detail: intl.formatMessage({ id: 'Hay categorías con el mismo nombre: "' }) + nombresDuplicados.join('", "') + intl.formatMessage({ id: '". Cada categoría debe tener un nombre único.' }),
+                life: 6000,
+            });
+            return false;
+        }
+
+        const erroresNombreTareas = new Set();
+        for (const categoria of categorias) {
+            for (const [tareaIndex, tarea] of categoria.tareas.entries()) {
+                if (!tarea.nombreTarea || tarea.nombreTarea.trim() === '') {
+                    erroresNombreTareas.add(obtenerClaveTarea(categoria.uid, tarea, tareaIndex));
+                }
+            }
+        }
+        setErroresValidacionTareas(erroresNombreTareas);
+        if (erroresNombreTareas.size > 0) {
+            toast.current?.show({
+                severity: 'error',
+                summary: intl.formatMessage({ id: 'Campos obligatorios vacíos' }),
+                detail: intl.formatMessage({ id: 'Hay tareas sin nombre. Complete todos los campos obligatorios marcados en rojo.' }),
+                life: 5000,
+            });
+            return false;
+        }
+
+        for (const categoria of categorias) {
+            const nombresTareas = categoria.tareas
+                .filter(t => t.nombreTarea && t.nombreTarea.trim() !== '')
+                .map(t => t.nombreTarea.trim().toLowerCase());
+            const nombresUnicos = new Set(nombresTareas);
+            if (nombresTareas.length !== nombresUnicos.size) {
+                const nombresDuplicados = [];
+                const nombresVistos = {};
+                categoria.tareas.forEach(t => {
+                    if (t.nombreTarea && t.nombreTarea.trim() !== '') {
+                        const nombreNormalizado = t.nombreTarea.trim().toLowerCase();
+                        if (nombresVistos[nombreNormalizado]) {
+                            if (!nombresDuplicados.includes(t.nombreTarea.trim())) nombresDuplicados.push(t.nombreTarea.trim());
+                        }
+                        nombresVistos[nombreNormalizado] = true;
+                    }
+                });
+                toast.current?.show({
+                    severity: 'error',
+                    summary: intl.formatMessage({ id: 'Error - Nombres duplicados' }),
+                    detail: intl.formatMessage({ id: 'La categoría "' }) + categoria.nombre + intl.formatMessage({ id: '" tiene tareas con el mismo nombre: "' }) + nombresDuplicados.join('", "') + intl.formatMessage({ id: '". Cada tarea debe tener un nombre único dentro de su categoría.' }),
+                    life: 6000,
+                });
+                return false;
+            }
+        }
+
+        for (const categoria of categorias) {
+            for (const tarea of categoria.tareas) {
+                if (esDetalleProducto) continue;
+
+                if (tarea.empiezaEn !== null && tarea.empiezaEn < 1) {
+                    toast.current?.show({ severity: 'error', summary: intl.formatMessage({ id: 'ERROR' }), detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '" tiene un día de inicio menor a 1.' }), life: 5000 });
+                    return false;
+                }
+                if (tarea.terminaEn !== null && tarea.terminaEn < 1) {
+                    toast.current?.show({ severity: 'error', summary: intl.formatMessage({ id: 'ERROR' }), detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '" tiene un día de fin menor a 1.' }), life: 5000 });
+                    return false;
+                }
+                if (tarea.empiezaEn && tarea.terminaEn && tarea.empiezaEn > tarea.terminaEn) {
+                    toast.current?.show({ severity: 'error', summary: intl.formatMessage({ id: 'ERROR' }), detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '": el día de inicio no puede ser mayor al día de fin.' }), life: 5000 });
+                    return false;
+                }
+                if (tarea.diasAvisoDesdeInicio && tarea.empiezaEn && tarea.terminaEn && tarea.empiezaEn + tarea.diasAvisoDesdeInicio > tarea.terminaEn) {
+                    toast.current?.show({ severity: 'error', summary: intl.formatMessage({ id: 'ERROR' }), detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '": el aviso desde inicio cae después de la fecha de fin.' }), life: 5000 });
+                    return false;
+                }
+                if (tarea.diasAvisoAFin && tarea.empiezaEn && tarea.terminaEn && tarea.terminaEn - tarea.diasAvisoAFin < tarea.empiezaEn) {
+                    toast.current?.show({ severity: 'error', summary: intl.formatMessage({ id: 'ERROR' }), detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '": el aviso a fin cae antes de la fecha de inicio.' }), life: 5000 });
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
     const guardarTareas = async (planificadorIdParam = null) => {
         // Usar el parámetro si se proporciona, sino usar el estado
         const planificadorIdAUsar = planificadorIdParam || idPlanificador;
@@ -678,147 +829,9 @@ const TareasPlantilla = React.forwardRef(({ idPlanificador, toastRef, editable =
         const empresaId = parseInt(localStorage.getItem('empresa')?.trim() || 0, 10);
 
         try {
-            const erroresNombreCategorias = new Set();
-            categorias.forEach((categoria) => {
-                if (!categoria.nombre || categoria.nombre.trim() === '') {
-                    erroresNombreCategorias.add(categoria.uid);
-                }
-            });
-
-            setErroresValidacionCategorias(erroresNombreCategorias);
-
-            if (erroresNombreCategorias.size > 0) {
-                toast.current?.show({
-                    severity: 'error',
-                    summary: intl.formatMessage({ id: 'Campos obligatorios vacíos' }),
-                    detail: intl.formatMessage({ id: 'Hay categorías sin nombre. Complete todos los campos obligatorios marcados en rojo.' }),
-                    life: 5000,
-                });
+            if (!validarTareas()) {
                 setEstadoGuardando(false);
                 return false;
-            }
-
-            // Validar que no haya categorías con nombres duplicados
-            const nombresCategorias = categorias
-                .filter(cat => cat.nombre && cat.nombre.trim() !== '')
-                .map(cat => cat.nombre.trim().toLowerCase());
-
-            const nombresCategoriasUnicos = new Set(nombresCategorias);
-
-            if (nombresCategorias.length !== nombresCategoriasUnicos.size) {
-                // Encontrar cuál es el nombre duplicado
-                const nombresDuplicados = [];
-                const nombresVistos = {};
-
-                categorias.forEach(cat => {
-                    if (cat.nombre && cat.nombre.trim() !== '') {
-                        const nombreNormalizado = cat.nombre.trim().toLowerCase();
-                        if (nombresVistos[nombreNormalizado]) {
-                            if (!nombresDuplicados.includes(cat.nombre.trim())) {
-                                nombresDuplicados.push(cat.nombre.trim());
-                            }
-                        }
-                        nombresVistos[nombreNormalizado] = true;
-                    }
-                });
-
-                toast.current?.show({
-                    severity: 'error',
-                    summary: intl.formatMessage({ id: 'Error - Nombres duplicados' }),
-                    detail: intl.formatMessage({ id: 'Hay categorías con el mismo nombre: "' }) + nombresDuplicados.join('", "') + intl.formatMessage({ id: '". Cada categoría debe tener un nombre único.' }),
-                    life: 6000,
-                });
-                setEstadoGuardando(false);
-                return false;
-            }
-
-            // Validar que todas las tareas tengan nombre
-            const erroresNombreTareas = new Set();
-            for (const categoria of categorias) {
-                for (const [tareaIndex, tarea] of categoria.tareas.entries()) {
-                    if (!tarea.nombreTarea || tarea.nombreTarea.trim() === '') {
-                        erroresNombreTareas.add(obtenerClaveTarea(categoria.uid, tarea, tareaIndex));
-                    }
-                }
-            }
-
-            setErroresValidacionTareas(erroresNombreTareas);
-
-            if (erroresNombreTareas.size > 0) {
-                toast.current?.show({
-                    severity: 'error',
-                    summary: intl.formatMessage({ id: 'Campos obligatorios vacíos' }),
-                    detail: intl.formatMessage({ id: 'Hay tareas sin nombre. Complete todos los campos obligatorios marcados en rojo.' }),
-                    life: 5000,
-                });
-                setEstadoGuardando(false);
-                return false;
-            }
-
-            // Validar que no haya tareas con nombres duplicados en cada categoría
-            for (const categoria of categorias) {
-                const nombresTareas = categoria.tareas
-                    .filter(t => t.nombreTarea && t.nombreTarea.trim() !== '')
-                    .map(t => t.nombreTarea.trim().toLowerCase());
-
-                const nombresUnicos = new Set(nombresTareas);
-
-                if (nombresTareas.length !== nombresUnicos.size) {
-                    // Encontrar cuál es el nombre duplicado para mostrarlo en el error
-                    const nombresDuplicados = [];
-                    const nombresVistos = {};
-
-                    categoria.tareas.forEach(t => {
-                        if (t.nombreTarea && t.nombreTarea.trim() !== '') {
-                            const nombreNormalizado = t.nombreTarea.trim().toLowerCase();
-                            if (nombresVistos[nombreNormalizado]) {
-                                if (!nombresDuplicados.includes(t.nombreTarea.trim())) {
-                                    nombresDuplicados.push(t.nombreTarea.trim());
-                                }
-                            }
-                            nombresVistos[nombreNormalizado] = true;
-                        }
-                    });
-
-                    toast.current?.show({
-                        severity: 'error',
-                        summary: intl.formatMessage({ id: 'Error - Nombres duplicados' }),
-                        detail: intl.formatMessage({ id: 'La categoría "' }) + categoria.nombre + intl.formatMessage({ id: '" tiene tareas con el mismo nombre: "' }) + nombresDuplicados.join('", "') + intl.formatMessage({ id: '". Cada tarea debe tener un nombre único dentro de su categoría.' }),
-                        life: 6000,
-                    });
-                    setEstadoGuardando(false);
-                    return false;
-                }
-            }
-            for (const categoria of categorias) {
-                for (const tarea of categoria.tareas) {
-                    if (esDetalleProducto) {
-                        continue;
-                    }
-
-                    if (tarea.empiezaEn !== null && tarea.empiezaEn < 1) {
-                        toast.current?.show({
-                            severity: 'error',
-                            summary: intl.formatMessage({ id: 'ERROR' }),
-                            detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '" tiene un día de inicio menor a 1.' }),
-                            life: 5000,
-                        });
-                        setEstadoGuardando(false);
-                        return false;
-                    }
-
-                    if (tarea.terminaEn !== null && tarea.terminaEn < 1) {
-                        toast.current?.show({
-                            severity: 'error',
-                            summary: intl.formatMessage({ id: 'ERROR' }),
-                            detail: intl.formatMessage({ id: 'La tarea "' }) + tarea.nombreTarea + intl.formatMessage({ id: '" en la categoría "' }) + categoria.nombre + intl.formatMessage({ id: '" tiene un día de fin menor a 1.' }),
-                            life: 5000,
-                        });
-                        setEstadoGuardando(false);
-                        return false;
-                    }
-
-                }
             }
 
 

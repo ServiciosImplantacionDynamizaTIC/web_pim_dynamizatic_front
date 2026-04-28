@@ -81,6 +81,14 @@ const EditarPlanificador = ({ idEditar, setIdEditar, rowData, emptyRegistro, set
 
         try {
             if (idEditar === 0) {
+                // Validar tareas ANTES de crear el planificador en BD
+                if (tareasPlantillaRef.current) {
+                    if (!tareasPlantillaRef.current.validarTareas()) {
+                        setEstadoGuardandoBoton(false);
+                        return;
+                    }
+                }
+
                 const nuevoRegistro = await postPlanificador({
                     nombre: planificador.nombre?.trim(),
                     empresaId,
