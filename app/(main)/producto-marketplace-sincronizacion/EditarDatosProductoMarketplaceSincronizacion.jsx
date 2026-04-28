@@ -19,7 +19,7 @@ const EditarDatosProductoMarketplaceSincronizacion = ({
     const estadosDisponibles = [
         { label: 'Pendiente', value: 'pendiente' },
         { label: 'En progreso', value: 'en_progreso' },
-        { label: 'Exitoso', value: 'exitoso' },
+        { label: 'Exitoso', value: 'éxito' },
         { label: 'Error', value: 'error' },
         { label: 'Cancelado', value: 'cancelado' }
     ];

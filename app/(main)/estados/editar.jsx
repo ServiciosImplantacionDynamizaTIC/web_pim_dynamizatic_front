@@ -46,6 +46,7 @@ const EditarEstado = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegist
 
             if (idEditar === 0) {
                 objGuardar = {
+                    empresaId: getUsuarioSesion()?.empresaId,
                     nombre: objGuardar.nombre,
                     descripcion: objGuardar.descripcion
                 };

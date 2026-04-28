@@ -20,14 +20,10 @@
 
 import { getCategorias, getCategoriasCount } from "@/app/api-endpoints/categoria";
 import { getMarcas, getMarcasCount } from "@/app/api-endpoints/marca";
-import { gePropiedades, gePropiedadesCount } from "@/app/api-endpoints/propiedad";
-import { getGrupoPropiedades, getGrupoPropiedadesCount } from "@/app/api-endpoints/grupo_propiedad";
 import { getCatalogos, getCatalogosCount } from "@/app/api-endpoints/catalogo";
 import { getUsuarios, getUsuariosCount } from "@/app/api-endpoints/usuario";
 import EditarCategoria from "../categorias/editar";
 import EditarMarca from "../marcas/editar";
-import EditarPropiedad from "../propiedades/editar";
-import EditarGrupoPropiedad from "../grupo-propiedades/editar";
 import EditarCatalogo from "../catalogos/editar";
 import EditarUsuario from "../usuarios/editar";
 
@@ -68,8 +64,6 @@ const getGrupoAtributosCount = (filtro) => {
 export const SECCIONES = [
     { label: "Categorías",          value: "categorias" },
     { label: "Marcas",              value: "marcas" },
-    { label: "Atributos",           value: "atributos" },
-    { label: "Grupos de atributos", value: "grupo_atributos" },
     { label: "Catálogos",           value: "catalogos" },
     { label: "Usuarios",            value: "usuarios" },
 ];
@@ -99,8 +93,6 @@ export const OPCIONES_ACTIVO = [
 export const COLUMNAS_POR_SECCION = {
     categorias:      [{ field: "nombre", header: "Nombre" }, { field: "descripcion", header: "Descripción" }, { field: "activoSn", header: "Activo" }],
     marcas:          [{ field: "nombre", header: "Nombre" }, { field: "sitioWeb", header: "Sitio Web" }, { field: "activoSn", header: "Activo" }],
-    atributos:       [{ field: "nombre", header: "Nombre" }, { field: "descripcion", header: "Descripción" }, { field: "tipo", header: "Tipo" }, { field: "activoSn", header: "Activo" }],
-    grupo_atributos: [{ field: "nombre", header: "Nombre" }, { field: "descripcion", header: "Descripción" }, { field: "activoSn", header: "Activo" }],
     catalogos:       [{ field: "nombre", header: "Nombre" }, { field: "descripcion", header: "Descripción" }, { field: "tipo", header: "Tipo" }, { field: "estado", header: "Estado" }],
     usuarios:        [{ field: "nombre", header: "Nombre" }, { field: "email", header: "Email" }, { field: "activoSn", header: "Activo" }],
 };
@@ -122,6 +114,18 @@ export const COLUMNAS_POR_SECCION = {
  *                       Cada columna: { campo, header, tipo }
  *                       Tipos válidos: "string" | "number" | "booleano" | "fecha" | "fechaHora" | "imagen"
  */
+/**
+ * Campos de filtro disponibles para cada sección.
+ * Solo los campos listados aquí se mostrarán en el formulario de filtros.
+ * Valores posibles: "nombre" | "descripcion" | "codigo" | "activoSn"
+ */
+export const FILTROS_POR_SECCION = {
+    categorias: ["nombre", "descripcion", "activoSn"],
+    marcas:     ["nombre", "activoSn"],
+    catalogos:  ["nombre", "descripcion", "activoSn"],
+    usuarios:   ["nombre", "activoSn"],
+};
+
 export const CRUD_CONFIG_MAP = {
     categorias: {
         headerCrud: "Categorías",
@@ -151,35 +155,6 @@ export const CRUD_CONFIG_MAP = {
             { campo: "sitioWeb",   header: "Sitio Web",   tipo: "string" },
             { campo: "paisOrigen", header: "País Origen", tipo: "string" },
             { campo: "activoSn",   header: "Activo",      tipo: "booleano" },
-        ],
-    },
-    atributos: {
-        headerCrud: "Atributos",
-        getRegistros: getAtributos,
-        getRegistrosCount: getAtributosCount,
-        controlador: "Atributos",
-        seccion: "Atributos",
-        editarComponente: <EditarPropiedad />,
-        columnas: [
-            { campo: "grupoAtributonombre", header: "Grupo Atributo", tipo: "string" },
-            { campo: "nombre",              header: "Nombre",         tipo: "string" },
-            { campo: "tipoDato",            header: "Tipo de Dato",   tipo: "string" },
-            { campo: "unidadMedida",        header: "Unidad Medida",  tipo: "string" },
-            { campo: "obligatorioSn",       header: "Obligatorio",    tipo: "booleano" },
-            { campo: "activoSn",            header: "Activo",         tipo: "booleano" },
-        ],
-    },
-    grupo_atributos: {
-        headerCrud: "Grupos de Atributos",
-        getRegistros: getGrupoAtributos,
-        getRegistrosCount: getGrupoAtributosCount,
-        controlador: "GrupoAtributos",
-        seccion: "GrupoAtributos",
-        editarComponente: <EditarGrupoPropiedad />,
-        columnas: [
-            { campo: "nombre",   header: "Nombre", tipo: "string" },
-            { campo: "orden",    header: "Orden",  tipo: "number" },
-            { campo: "activoSn", header: "Activo", tipo: "booleano" },
         ],
     },
     catalogos: {

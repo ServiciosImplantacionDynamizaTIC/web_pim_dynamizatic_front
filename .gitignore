@@ -2,3 +2,14 @@ node_modules
 out
 .next
 nul
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Reporte de tests (estado interno y backup local)
+/tests/reporte-estado.json
+/tests/reporte-pruebas.xlsx

@@ -15,7 +15,7 @@ const ConfiguracionLogsPage = () => {
     const intl = useIntl();
     const toast = useRef(null);
     const [cargando, setCargando] = useState(true);
-    const [configs, setConfigs] = useState({ log_accion: 0, log_acceso: 0, log_sincronizacion: 0 });
+    const [configs, setConfigs] = useState({ log_accion: 1, log_acceso: 1, log_sincronizacion: 1 });
     const [guardando, setGuardando] = useState(false);
     const [editable, setEditable] = useState(false);
 
@@ -39,7 +39,7 @@ const ConfiguracionLogsPage = () => {
             const nuevas = {};
             TABLAS.forEach(tabla => {
                 const config = data.find(c => c.nombreTabla === tabla);
-                nuevas[tabla] = config ? config.numeroDiasRetencion : null;
+                nuevas[tabla] = config?.numeroDiasRetencion > 0 ? config.numeroDiasRetencion : 1;
             });
             setConfigs(nuevas);
         } catch (error) {
@@ -139,13 +139,13 @@ const ConfiguracionLogsPage = () => {
                                         <InputNumber
                                             id={`config-${tabla}`}
                                             value={configs[tabla]}
-                                            onValueChange={(e) => setConfigs({ ...configs, [tabla]: e.value })}
+                                            onValueChange={(e) => setConfigs({ ...configs, [tabla]: e.value < 1 || e.value == null ? 1 : e.value })}
                                             min={1}
                                             max={999}
                                             maxLength={3}
                                             useGrouping={false}
                                             disabled={!editable}
-                                            placeholder="Introduce un número"
+                                            inputClassName="text-right"
                                         />
                                         <span className="p-inputgroup-addon">
                                             {intl.formatMessage({ id: 'días' })}

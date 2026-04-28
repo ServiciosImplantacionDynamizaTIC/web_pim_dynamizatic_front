@@ -7,7 +7,7 @@ const EditarDatosPlanificadorCategoria = ({ planificadorCategoria, setPlanificad
     const intl = useIntl();
 
     return (
-        <Fieldset legend={intl.formatMessage({ id: "Datos para la categoria del planificador" })}>
+        <Fieldset legend={intl.formatMessage({ id: "Datos para la categoría del planificador" })}>
             <div className="formgrid grid">
                 <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
                     <label htmlFor="nombre">
@@ -16,19 +16,19 @@ const EditarDatosPlanificadorCategoria = ({ planificadorCategoria, setPlanificad
                     <InputText
                         id="nombre"
                         value={planificadorCategoria.nombre || ""}
-                        placeholder={intl.formatMessage({ id: "Nombre de la categoria del planificador" })}
+                        placeholder={intl.formatMessage({ id: "Nombre de la categoría del planificador" })}
                         onChange={(e) => setPlanificadorCategoria({ ...planificadorCategoria, nombre: e.target.value })}
                         className={estadoGuardando && !planificadorCategoria.nombre ? "p-invalid" : ""}
                         maxLength={50}
                     />
                 </div>
                 <div className="flex flex-column field gap-2 mt-2 col-12">
-                    <label htmlFor="descripcion">{intl.formatMessage({ id: "Descripcion" })}</label>
+                    <label htmlFor="descripcion">{intl.formatMessage({ id: "Descripción" })}</label>
                     <InputTextarea
                         id="descripcion"
                         value={planificadorCategoria.descripcion || ""}
                         autoResize
-                        placeholder={intl.formatMessage({ id: "Descipcion de la categoria del planificador" })}
+                        placeholder={intl.formatMessage({ id: "Descripción de la categoría del planificador" })}
                         onChange={(e) => setPlanificadorCategoria({ ...planificadorCategoria, descripcion: e.target.value })}
                         rows={5}
                         cols={30}

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
 import { useIntl } from 'react-intl';
-import { getIdiomas } from "@/app/api-endpoints/idioma";
 
 const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardando, idiomas, estaEditando }) => {
     const intl = useIntl();
@@ -25,11 +23,11 @@ const EditarDatosTraduccionLiteral = ({ traduccion, setTraduccion, estadoGuardan
                     <div key={idioma.id} className="flex flex-column field gap-2 mt-2 col-12 lg:col-12">
                         <label htmlFor={`valor-${idioma.nombre}`}>{idioma.nombre}</label>
                         <InputText 
-                            value={traduccion[idioma.nombre.toLowerCase()] || ''}
+                            value={traduccion[idioma.nombre.replace(/\s+/g, '_').toLowerCase()] || ''}
                             placeholder={intl.formatMessage({ id: 'Valor de la traduccion en' }) + ' ' + idioma.nombre}
                             onChange={(e) => setTraduccion({ 
                                 ...traduccion, 
-                                [idioma.nombre.toLowerCase()]: e.target.value 
+                                [idioma.nombre.replace(/\s+/g, '_').toLowerCase()]: e.target.value 
                             })}
                             rows={5} 
                             cols={30} 
