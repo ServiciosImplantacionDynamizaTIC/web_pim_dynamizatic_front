@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { Fieldset } from 'primereact/fieldset';
 import { InputText } from 'primereact/inputtext';
 import { Editor } from 'primereact/editor';
-import { Dropdown } from 'primereact/dropdown';
 import { InputSwitch } from 'primereact/inputswitch';
 import ArchivoMultipleInput from "../../../components/shared/archivo_multiple_input";
 import ArchivoInput from "../../../components/shared/archivo_input";
@@ -13,19 +12,11 @@ const EditarDatosCorreoPlantilla = ({
     setCorreoPlantilla, 
     contenidoWysiwyg, 
     setContenidoWysiwyg, 
-    listaIdiomas, 
-    idiomaSeleccionado, 
-    setIdiomaSeleccionado, 
     listaTipoArchivos, 
-    accionesCorreo,
-    accionSeleccionada,
-    setAccionSeleccionada,
     estadoGuardando
 }) => {
     const intl = useIntl();
-    // Referencia para el editor
     const editorRef = useRef(null);
-    const [dropdownAbierto, setDropdownAbierto] = useState(false);
     
     const manejarCambioInputSwitch = (e, nombreInputSwitch) => {
         const valor = (e.target && e.target.value) || "";
@@ -34,11 +25,8 @@ const EditarDatosCorreoPlantilla = ({
         objCorreoPlantilla[`${nombreInputSwitch}`] = esTrue;
         setCorreoPlantilla(objCorreoPlantilla);
     };
-    
-    //Para que el dropdown muestre el registro seleccionado aunque no este en la lista
-    const options = dropdownAbierto ? listaIdiomas.map(registro => registro.nombre) : [idiomaSeleccionado || '', ...listaIdiomas.map(registro => registro.nombre)];
 
-    //Crear inputs de archivos
+    // Crear inputs de archivos
     const inputsDinamicos = [];
     for (const tipoArchivo of listaTipoArchivos) {
         //Depende del tipo del input se genera multiple o no
@@ -113,32 +101,6 @@ const EditarDatosCorreoPlantilla = ({
                         rows={5}
                         cols={30}
                         maxLength={50}
-                    />
-                </div>
- 
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="idioma"> <b>{intl.formatMessage({ id: 'Idioma' })}*</b></label>
-                    <Dropdown
-                        value={idiomaSeleccionado || ""}
-                        onChange={(e) => setIdiomaSeleccionado(e.value)}
-                        options={options}
-                        onClick={() => setDropdownAbierto(true)}
-                        className={`p-column-filter ${(estadoGuardando && (idiomaSeleccionado == null || idiomaSeleccionado === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona un idioma' })}
-                    />
-                </div>
-
-                <div className="flex flex-column field gap-2 mt-2 col-12 lg:col-4">
-                    <label htmlFor="accion"> <b>{intl.formatMessage({ id: 'Accion' })}*</b></label>
-                    <Dropdown
-                        value={accionSeleccionada || ""}
-                        onChange={(e) => setAccionSeleccionada(e.value)}
-                        options={accionesCorreo}
-                        optionLabel="label"
-                        className={`p-column-filter ${(estadoGuardando && (accionSeleccionada == null || accionSeleccionada === "")) ? "p-invalid" : ""}`}
-                        showClear
-                        placeholder={intl.formatMessage({ id: 'Selecciona una accion' })}
                     />
                 </div>
  

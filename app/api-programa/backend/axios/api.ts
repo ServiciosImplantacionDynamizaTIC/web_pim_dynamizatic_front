@@ -5425,6 +5425,44 @@ export interface InlineResponse2005 {
 /**
  * 
  * @export
+ * @interface InlineResponse2006
+ */
+export interface InlineResponse2006 {
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse2006
+     */
+    'usuario'?: Usuario;
+    /**
+     * 
+     * @type {InlineResponse2006EmailStatus}
+     * @memberof InlineResponse2006
+     */
+    'emailStatus'?: InlineResponse2006EmailStatus;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2006EmailStatus
+ */
+export interface InlineResponse2006EmailStatus {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2006EmailStatus
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2006EmailStatus
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
  * @interface LogAcceso
  */
 export interface LogAcceso {
@@ -11770,12 +11808,6 @@ export interface NewPlantillaEmail {
      * @type {number}
      * @memberof NewPlantillaEmail
      */
-    'idiomaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPlantillaEmail
-     */
     'empresaId': number;
     /**
      * 
@@ -16652,12 +16684,6 @@ export interface PlantillaEmail {
      * @type {number}
      * @memberof PlantillaEmail
      */
-    'idiomaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlantillaEmail
-     */
     'empresaId': number;
     /**
      * 
@@ -16823,12 +16849,6 @@ export interface PlantillaEmailPartial {
      * @type {number}
      * @memberof PlantillaEmailPartial
      */
-    'idiomaId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlantillaEmailPartial
-     */
     'empresaId'?: number;
     /**
      * 
@@ -16909,12 +16929,6 @@ export interface PlantillaEmailWithRelations {
      * @memberof PlantillaEmailWithRelations
      */
     'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlantillaEmailWithRelations
-     */
-    'idiomaId': number;
     /**
      * 
      * @type {number}
@@ -49325,8 +49339,8 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdioma: async (filter?: PlantillaEmailFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/vistaPlantillaEmailIdioma`;
+        plantillaEmailControllerVistaPlantillaEmail: async (filter?: PlantillaEmailFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaPlantillaEmail`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -49363,8 +49377,8 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdiomaCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/vistaPlantillaEmailIdiomaCount`;
+        plantillaEmailControllerVistaPlantillaEmailCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaPlantillaEmailCount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -49517,8 +49531,8 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options);
+        async plantillaEmailControllerVistaPlantillaEmail(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmail(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -49527,8 +49541,8 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options);
+        async plantillaEmailControllerVistaPlantillaEmailCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -49643,8 +49657,8 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: any): AxiosPromise<object> {
-            return localVarFp.plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerVistaPlantillaEmail(filter?: PlantillaEmailFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.plantillaEmailControllerVistaPlantillaEmail(filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -49652,8 +49666,8 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
-            return localVarFp.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerVistaPlantillaEmailCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.plantillaEmailControllerVistaPlantillaEmailCount(where, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -49788,8 +49802,8 @@ export class PlantillaEmailControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerVistaPlantillaEmail(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmail(filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -49799,8 +49813,8 @@ export class PlantillaEmailControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerVistaPlantillaEmailCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -65799,7 +65813,7 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerCreate(newUsuario?: NewUsuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Usuario>> {
+        async usuariosControllerCreate(newUsuario?: NewUsuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerCreate(newUsuario, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -65973,7 +65987,7 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerCreate(newUsuario?: NewUsuario, options?: any): AxiosPromise<Usuario> {
+        usuariosControllerCreate(newUsuario?: NewUsuario, options?: any): AxiosPromise<InlineResponse2006> {
             return localVarFp.usuariosControllerCreate(newUsuario, options).then((request) => request(axios, basePath));
         },
         /**
