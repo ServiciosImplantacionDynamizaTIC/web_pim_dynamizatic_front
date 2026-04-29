@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from 'primereact/tabview';
-import { postProducto, patchProducto } from "@/app/api-endpoints/producto";
+import { postProducto, patchProducto, getProductosCount } from "@/app/api-endpoints/producto";
 import { editarArchivos, procesarArchivosNuevoRegistro, validarImagenes, crearListaArchivosAntiguos } from "@/app/utility/FileUtils";
 import { postSubirImagen } from "@/app/api-endpoints/ficheros";
 import EditarDatosProducto from "./EditarDatosProducto";
@@ -165,6 +165,17 @@ const EditarProducto = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegi
         setEstadoGuardandoBoton(true);
 
         if (await validaciones()) {
+            const skuOriginal = rowData?.find(r => r.id === idEditar)?.sku;
+            if (!idEditar || idEditar === 0 || skuOriginal !== producto.sku) {
+                const count = await getProductosCount(JSON.stringify({ and: { empresaId: getUsuarioSesion()?.empresaId, sku: producto.sku } }));
+                if (count?.count > 0) {
+                    toast.current?.show({ severity: 'error', summary: 'ERROR', detail: intl.formatMessage({ id: 'Ya existe un producto con ese SKU' }), life: 3000 });
+                    setEstadoGuardandoBoton(false);
+                    setEstadoGuardando(false);
+                    return;
+                }
+            }
+
             let objGuardar = { ...producto };
             const usuarioActual = getUsuarioSesion()?.id;
 
