@@ -60,7 +60,8 @@ const AppProfileSidebar = () => {
                         {permisoVerPerfil && (
                             <li >
                                 <Link className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"
-                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}>
+                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}
+                                    onClick={onProfileSidebarHide}>
                                     <span>
                                         <i className="pi pi-user text-xl text-primary"></i>
                                     </span>
@@ -85,9 +86,9 @@ const AppProfileSidebar = () => {
                 className="layout-profile-sidebar w-full sm:w-25rem"
             >
                 <div className="flex flex-column mx-auto md:mx-0">
-                    <span className="mb-2 font-semibold">Welcome</span>
+                    <span className="mb-2 font-semibold">{intl.formatMessage({ id: 'Bienvenido' })}</span>
                     <span className="text-color-secondary font-medium mb-5">
-                        Isabella Andolini
+                        {getUsuarioSesion()?.nombre}
                     </span>
                     <ul className="list-none m-0 p-0">
                         <li onClick={logout}>
@@ -105,7 +106,8 @@ const AppProfileSidebar = () => {
                         {permisoVerPerfil && (
                             <li >
                                 <Link className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150"
-                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}>
+                                    href={`/usuarios/?usuario=${getUsuarioSesion()?.id}`}
+                                    onClick={onProfileSidebarHide}>
                                     <span>
                                         <i className="pi pi-user text-xl text-primary"></i>
                                     </span>
@@ -118,7 +120,7 @@ const AppProfileSidebar = () => {
                             </li>
                         )}
 
-                        <li>
+                        {/* <li>
                             <a className="cursor-pointer flex surface-border mb-3 p-3 align-items-center border-1 surface-border border-round hover:surface-hover transition-colors transition-duration-150">
                                 <span>
                                     <i className="pi pi-money-bill text-xl text-primary"></i>
@@ -147,10 +149,10 @@ const AppProfileSidebar = () => {
                                     </p>
                                 </div>
                             </a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
-                <div className="flex flex-column mt-5 mx-auto md:mx-0">
+                {/* <div className="flex flex-column mt-5 mx-auto md:mx-0">
                     <span className="mb-2 font-semibold">Notifications</span>
                     <span className="text-color-secondary font-medium mb-5">
                         You have 3 notifications
@@ -202,8 +204,8 @@ const AppProfileSidebar = () => {
                             </a>
                         </li>
                     </ul>
-                </div>
-                <div className="flex flex-column mt-5 mx-auto md:mx-0">
+                </div> */}
+                {/* <div className="flex flex-column mt-5 mx-auto md:mx-0">
                     <span className="mb-2 font-semibold">Messages</span>
                     <span className="text-color-secondary font-medium mb-5">
                         You have new messages
@@ -270,7 +272,7 @@ const AppProfileSidebar = () => {
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> */}
             </Sidebar>
         );
     }

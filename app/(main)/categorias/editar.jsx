@@ -85,6 +85,7 @@ const EditarCategoria = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
 
             if (idEditar === 0) {
                 delete objGuardar.id;
+                delete objGuardar.categoriaPadreNombre;
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
                 if (objGuardar.activoSn === '') {

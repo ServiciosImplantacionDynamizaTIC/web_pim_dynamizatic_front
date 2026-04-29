@@ -20857,11 +20857,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Usuario model instance",
+            "description": "Usuario model instance con estado del envío de email de bienvenida",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Usuario"
+                  "type": "object",
+                  "properties": {
+                    "usuario": {
+                      "$ref": "#/components/schemas/Usuario"
+                    },
+                    "emailStatus": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -21433,16 +21449,16 @@
         "operationId": "PlanificadorEstadoController.vistaPlanificadorEstadoEmpresaCount"
       }
     },
-    "/vistaPlantillaEmailIdioma": {
+    "/vistaPlantillaEmail": {
       "get": {
         "x-controller-name": "PlantillaEmailController",
-        "x-operation-name": "vistaPlantillaEmailIdioma",
+        "x-operation-name": "vistaPlantillaEmail",
         "tags": [
           "PlantillaEmailController"
         ],
         "responses": {
           "200": {
-            "description": "Devuelve plantillas email y su idioma",
+            "description": "Devuelve plantillas email",
             "content": {
               "application/json": {
                 "schema": {
@@ -21465,19 +21481,19 @@
             }
           }
         ],
-        "operationId": "PlantillaEmailController.vistaPlantillaEmailIdioma"
+        "operationId": "PlantillaEmailController.vistaPlantillaEmail"
       }
     },
-    "/vistaPlantillaEmailIdiomaCount": {
+    "/vistaPlantillaEmailCount": {
       "get": {
         "x-controller-name": "PlantillaEmailController",
-        "x-operation-name": "vistaPlantillaEmailIdiomaCount",
+        "x-operation-name": "vistaPlantillaEmailCount",
         "tags": [
           "PlantillaEmailController"
         ],
         "responses": {
           "200": {
-            "description": "Devuelve plantillas email y su idioma",
+            "description": "Devuelve el conteo de plantillas email",
             "content": {
               "application/json": {
                 "schema": {
@@ -21503,7 +21519,7 @@
             }
           }
         ],
-        "operationId": "PlantillaEmailController.vistaPlantillaEmailIdiomaCount"
+        "operationId": "PlantillaEmailController.vistaPlantillaEmailCount"
       }
     },
     "/vistaTipoArchivoEmpresaSeccion": {
@@ -27076,10 +27092,6 @@
             "type": "number",
             "nullable": false
           },
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
           "empresaId": {
             "type": "number",
             "nullable": false
@@ -27135,7 +27147,6 @@
           }
         },
         "required": [
-          "idiomaId",
           "empresaId",
           "nombrePlantilla",
           "usuarioCreacion"
@@ -27147,10 +27158,6 @@
         "type": "object",
         "description": "(tsType: Omit<PlantillaEmail, 'id'>, schemaOptions: { title: 'NewPlantillaEmail', exclude: [ 'id' ] })",
         "properties": {
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
           "empresaId": {
             "type": "number",
             "nullable": false
@@ -27206,7 +27213,6 @@
           }
         },
         "required": [
-          "idiomaId",
           "empresaId",
           "nombrePlantilla",
           "usuarioCreacion"
@@ -27223,10 +27229,6 @@
             "type": "number",
             "nullable": false
           },
-          "idiomaId": {
-            "type": "number",
-            "nullable": false
-          },
           "empresaId": {
             "type": "number",
             "nullable": false
@@ -27282,7 +27284,6 @@
           }
         },
         "required": [
-          "idiomaId",
           "empresaId",
           "nombrePlantilla",
           "usuarioCreacion"
@@ -27296,10 +27297,6 @@
         "description": "(tsType: Partial<PlantillaEmail>, schemaOptions: { partial: true })",
         "properties": {
           "id": {
-            "type": "number",
-            "nullable": false
-          },
-          "idiomaId": {
             "type": "number",
             "nullable": false
           },
@@ -44578,9 +44575,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "idiomaId": {
-                    "type": "boolean"
-                  },
                   "empresaId": {
                     "type": "boolean"
                   },
@@ -44626,7 +44620,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "idiomaId",
                     "empresaId",
                     "nombrePlantilla",
                     "activoSn",
@@ -44694,9 +44687,6 @@
                   "id": {
                     "type": "boolean"
                   },
-                  "idiomaId": {
-                    "type": "boolean"
-                  },
                   "empresaId": {
                     "type": "boolean"
                   },
@@ -44742,7 +44732,6 @@
                   "type": "string",
                   "enum": [
                     "id",
-                    "idiomaId",
                     "empresaId",
                     "nombrePlantilla",
                     "activoSn",

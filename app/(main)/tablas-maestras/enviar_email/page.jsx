@@ -12,7 +12,7 @@ import { getUsuarioSesion } from "@/app/utility/Utils";
 import { borrarFichero, postSubirImagen, postSubirFichero } from "@/app/api-endpoints/ficheros"
 import { postArchivo, deleteArchivo } from "@/app/api-endpoints/archivo"
 import { useIntl } from 'react-intl';
-import { getVistaPlantillaEmailIdioma, postEnviarEmails } from "@/app/api-endpoints/plantilla_email";
+import { getVistaPlantillaEmail, postEnviarEmails } from "@/app/api-endpoints/plantilla_email";
 import { obtenerArchivosSeccion } from "@/app/components/shared/componentes";
 import { useRouter } from 'next/navigation';
 
@@ -38,7 +38,7 @@ const EnviarCorreoPlantilla = ({ }) => {
 
             if (plantillaSeleccionada) {
                 // Obtenemos el registro a editar
-                const registroArr = await getVistaPlantillaEmailIdioma(JSON.stringify({
+                const registroArr = await getVistaPlantillaEmail(JSON.stringify({
                     where: {
                         and: {
                             id: plantillaSeleccionada
@@ -99,7 +99,7 @@ const EnviarCorreoPlantilla = ({ }) => {
             setListaIdiomas(jsonIdiomasActivos);
 
             // Obtenemos las Plantillas de email
-            const registrosPlantillas = await getVistaPlantillaEmailIdioma(JSON.stringify({
+            const registrosPlantillas = await getVistaPlantillaEmail(JSON.stringify({
                 where: {
                     and: {
                         empresaId: Number(localStorage.getItem('empresa')),

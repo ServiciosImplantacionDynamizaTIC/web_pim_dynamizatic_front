@@ -2,8 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { getIdiomas } from "@/app/api-endpoints/idioma";
-import { getPlantillaEmails, postPlantillaEmail, patchPlantillaEmail } from "@/app/api-endpoints/plantilla_email";
+import { postPlantillaEmail, patchPlantillaEmail } from "@/app/api-endpoints/plantilla_email";
 import { esUrlImagen } from "@/app/components/shared/componentes";
 import EditarDatosCorreoPlantilla from "./EditarDatosCorreoPlantilla";
 import 'primeicons/primeicons.css';
@@ -25,14 +24,10 @@ const EditarCorreoPlantilla = ({
     const toast = useRef(null);
     const intl = useIntl();
     const [correoPlantilla, setCorreoPlantilla] = useState(emptyRegistro);
-    const [listaIdiomas, setListaIdiomas] = useState([]);
-    const [idiomaSeleccionado, setIdiomaSeleccionado] = useState(null);
     const [contenidoWysiwyg, setContenidoWysiwyg] = useState(null);
     const [estadoGuardando, setEstadoGuardando] = useState(false);
     const [estadoGuardandoBoton, setEstadoGuardandoBoton] = useState(false);
     const [listaArchivosAntiguos, setListaArchivosAntiguos] = useState([]);
-    const [accionSeleccionada, setAccionSeleccionada] = useState(null);
-    const [listaAcciones, setListaAcciones] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -82,16 +77,14 @@ const EditarCorreoPlantilla = ({
                 // Obtenemos el registro a editar por su ID
                 const registro = rowData.find((element) => element.id === idEditar);
                 setCorreoPlantilla(registro);
-                // setContenidoWysiwyg(registro.cuerpo)
-                 
-                 // Como el campo es de tipo BLOB tenemos que Convertir el Buffer a string
+
+                // Como el campo es de tipo BLOB tenemos que convertir el Buffer a string
                 let cuerpoTexto = '';
                 if (registro.cuerpo) {
                     if (registro.cuerpo.type === 'Buffer' && Array.isArray(registro.cuerpo.data)) {
-                        // Intentar con diferentes codificaciones
                         try {
                             cuerpoTexto = new TextDecoder('utf-8').decode(new Uint8Array(registro.cuerpo.data));
-                            if (cuerpoTexto.includes('�')) {
+                            if (cuerpoTexto.includes('\uFFFD')) {
                                 cuerpoTexto = new TextDecoder('iso-8859-1').decode(new Uint8Array(registro.cuerpo.data));
                             }
                         } catch (e) {
@@ -103,26 +96,17 @@ const EditarCorreoPlantilla = ({
                         cuerpoTexto = String(registro.cuerpo);
                     }
                 }
-                setContenidoWysiwyg(cuerpoTexto)
+                setContenidoWysiwyg(cuerpoTexto);
 
-                // Obtenemos el nombre del idioma seleccionado
-                const registroIdioma = registrosIdiomas.find((element) => element.id === registro.idiomaId).nombre;
-                setIdiomaSeleccionado(registroIdioma);
-
-                const accionActual = accionesCorreo.find((accion) => accion.nombre === registro.accion) || null;
-                setAccionSeleccionada(accionActual);
-
-                //Guardamos los archivos para luego poder compararlos
-                const _listaArchivosAntiguos = {}
+                // Guardamos los archivos para luego poder compararlos
+                const _listaArchivosAntiguos = {};
                 for (const tipoArchivo of listaTipoArchivos) {
-                    _listaArchivosAntiguos[tipoArchivo['nombre']] = registro[(tipoArchivo.nombre).toLowerCase()]
+                    _listaArchivosAntiguos[tipoArchivo['nombre']] = registro[(tipoArchivo.nombre).toLowerCase()];
                 }
-                setListaArchivosAntiguos(_listaArchivosAntiguos)
+                setListaArchivosAntiguos(_listaArchivosAntiguos);
             } else {
                 setCorreoPlantilla(emptyRegistro);
                 setContenidoWysiwyg(null);
-                setIdiomaSeleccionado(null);
-                setAccionSeleccionada(null);
                 setListaArchivosAntiguos([]);
             }
         };
@@ -130,11 +114,8 @@ const EditarCorreoPlantilla = ({
     }, [emptyRegistro, idEditar, rowData]);
 
     const validaciones = async () => {
-        const vadlidaNombre = correoPlantilla.nombrePlantilla === undefined || correoPlantilla.nombrePlantilla === "";
-        const validaIdioma = idiomaSeleccionado == null || idiomaSeleccionado === "";
-        const validaAccion = accionSeleccionada == null || accionSeleccionada === "";
-        
-        return (!vadlidaNombre && !validaIdioma && !validaAccion)
+        const validaNombre = correoPlantilla.nombrePlantilla === undefined || correoPlantilla.nombrePlantilla === "";
+        return !validaNombre;
     }
 
     const guardarPlantillaEmail = async () => {
@@ -151,17 +132,12 @@ const EditarCorreoPlantilla = ({
                 // Elimino y añado los campos que no se necesitan
                 delete objGuardar.id;
                 delete objGuardar.nombreIdioma;
+                delete objGuardar.idiomaId;
                 delete objGuardar.archivos;
-                // Enviar el contenido como string (Axios lo enviará con UTF-8)
                 objGuardar['cuerpo'] = contenidoWysiwyg || '';
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
-                objGuardar['accion'] = accionSeleccionada.nombre;
-                
-                const registroSeleccionado = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)
-                if (registroSeleccionado) {
-                    objGuardar['idiomaId'] = registroSeleccionado.id;
-                }
+                objGuardar['accion'] = null;
 
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'N';
@@ -214,17 +190,13 @@ const EditarCorreoPlantilla = ({
                 }
 
             } else {
-                //Si se edita un registro existente Hacemos el patch del registro
-                const registroSeleccionado = listaIdiomas.find(idioma => idioma.nombre === idiomaSeleccionado)
-                if (registroSeleccionado) {
-                    objGuardar['idiomaId'] = registroSeleccionado.id;
-                }
-                objGuardar['usuarioModificacion'] = getUsuarioSesion()?.id
-                // Enviar el contenido como string (Axios lo enviará con UTF-8)
+                // Si se edita un registro existente
+                objGuardar['usuarioModificacion'] = getUsuarioSesion()?.id;
                 objGuardar['cuerpo'] = contenidoWysiwyg || '';
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
-                objGuardar['accion'] = accionSeleccionada.nombre;
+                objGuardar['accion'] = null;
                 delete objGuardar.nombreIdioma;
+                delete objGuardar.idiomaId;
                 delete objGuardar.archivos;
                 delete objGuardar.iso;
                 
@@ -333,13 +305,7 @@ const EditarCorreoPlantilla = ({
                             setCorreoPlantilla={setCorreoPlantilla}
                             contenidoWysiwyg={contenidoWysiwyg}
                             setContenidoWysiwyg={setContenidoWysiwyg}
-                            listaIdiomas={listaIdiomas}
-                            idiomaSeleccionado={idiomaSeleccionado}
-                            setIdiomaSeleccionado={setIdiomaSeleccionado}
                             listaTipoArchivos={listaTipoArchivos}
-                            accionesCorreo={listaAcciones}
-                            accionSeleccionada={accionSeleccionada}
-                            setAccionSeleccionada={setAccionSeleccionada}
                             estadoGuardando={estadoGuardando}
                         />
 
