@@ -23,13 +23,14 @@ const Producto = () => {
                 headerCrud={intl.formatMessage({ id: 'Productos' })}
                 getRegistros={getProductos}
                 getRegistrosCount={getProductosCount}
-                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV', 'importar']}
                 controlador={"Productos"}
                 filtradoBase={{empresaId: getUsuarioSesion()?.empresaId}}
                 editarComponente={<EditarProducto />}
                 seccion={"Productos"}
                 columnas={columnas}
                 deleteRegistro={deleteProducto}
+                importarTabla="producto"
             />
         </div>
     );

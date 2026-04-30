@@ -166,7 +166,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           "path": "/tablas-maestras/planificador-estados",
           "icon": "pi pi-fw pi-user-edit"
         },
-        "Gestor de proyectos": {
+        "Planificador de producto": {
           "path": "/planificador",
           "icon": "pi pi-fw pi-calendar-plus"
         },

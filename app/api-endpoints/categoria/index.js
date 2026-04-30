@@ -18,8 +18,13 @@ export const getCategoria = async (id) => {
 }
 
 export const postCategoria = async (objCategoria) => {
-    const { data: dataCategoria } = await apiCategoria.categoriaControllerCreate(objCategoria)
-    return dataCategoria
+    try {
+        const { data: dataCategoria } = await apiCategoria.categoriaControllerCreate(objCategoria)
+        return dataCategoria
+    } catch (error) {
+        console.error('Error en postCategoria:', error);
+        throw error;
+    }
 }
 
 export const deleteCategoria = async (idCategoria) => {

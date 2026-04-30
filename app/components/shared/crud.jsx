@@ -384,6 +384,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
                 detail: intl.formatMessage({ id: 'Registro editado correctamente' }),
                 life: 3000,
             });
+            obtenerDatos();
         }
         else if (registroResult === "insertado") {
             toast.current?.show({
@@ -392,6 +393,7 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
                 detail: intl.formatMessage({ id: 'Registro insertado correctamente' }),
                 life: 3000,
             });
+            obtenerDatos();
         }
         if (registroEditarFlag) {
             obtenerDatos();

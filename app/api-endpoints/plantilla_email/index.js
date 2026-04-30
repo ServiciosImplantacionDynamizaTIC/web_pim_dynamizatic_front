@@ -3,9 +3,15 @@ import { PlantillaEmailControllerApi, settings } from "@/app/api-programa";
 const apiPlantillaEmail = new PlantillaEmailControllerApi(settings)
 
 export const getPlantillaEmails = async (filtro) => {
-    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerFind(filtro)
-    return dataPlantillaEmail
+    try {
+        const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerFind(filtro)
+        return dataPlantillaEmail
+    } catch (error) {
+        console.error('Error en getPlantillaEmails:', error);
+        throw error;
+    }
 }
+
 
 export const getPlantillaEmailsCount = async (filtro) => {
     const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerCount(filtro)
@@ -18,7 +24,7 @@ export const postEnviarQR = async (url, objPlantillaEmail) => {
 }
 
 export const postEnviarEmails = async (plantillaEmailId, emails) => {
-    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerEnviarEmails(plantillaEmailId, {emails: emails})
+    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerEnviarEmails(plantillaEmailId, { emails: emails })
     return dataPlantillaEmail
 }
 
@@ -37,12 +43,12 @@ export const deletePlantillaEmail = async (idPlantillaEmail) => {
     return dataPlantillaEmail
 }
 
-export const getVistaPlantillaEmailIdioma = async (filtrar) => {
-    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerVistaPlantillaEmailIdioma(filtrar)
+export const getVistaPlantillaEmail = async (filtrar) => {
+    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerVistaPlantillaEmail(filtrar)
     return dataPlantillaEmail
 }
 
-export const getVistaPlantillaEmailIdiomaCount = async (filtrar) => {
-    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(filtrar)
+export const getVistaPlantillaEmailCount = async (filtrar) => {
+    const { data: dataPlantillaEmail } = await apiPlantillaEmail.plantillaEmailControllerVistaPlantillaEmailCount(filtrar)
     return dataPlantillaEmail
 }

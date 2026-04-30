@@ -84,18 +84,15 @@ const EditarCategoria = ({ idEditar, setIdEditar, rowData, emptyRegistro, setReg
             objGuardar['orden'] = objGuardar.orden || 0;
 
             if (idEditar === 0) {
-                const categoriaAcrear = {
-                    nombre: objGuardar.nombre,
-                    descripcion: objGuardar.descripcion || null,
-                    categoriaPadreId: objGuardar.categoriaPadreId || null,
-                    imagen: objGuardar.imagen || null,
-                    orden: objGuardar.orden || 0,
-                    activoSn: objGuardar.activoSn || 'S',
-                    empresaId: getUsuarioSesion()?.empresaId,
-                    usuarioCreacion: usuarioActual,
-                };
-
-                const nuevoRegistro = await postCategoria(categoriaAcrear);
+                delete objGuardar.id;
+                delete objGuardar.categoriaPadreNombre;
+                objGuardar['usuarioCreacion'] = usuarioActual;
+                objGuardar['empresaId'] = getUsuarioSesion()?.empresaId;
+                if (objGuardar.activoSn === '') {
+                    objGuardar.activoSn = 'S';
+                }
+                
+                const nuevoRegistro = await postCategoria(objGuardar);
 
                 if (nuevoRegistro?.id) {
                     await procesarArchivosNuevoRegistro(categoria, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);

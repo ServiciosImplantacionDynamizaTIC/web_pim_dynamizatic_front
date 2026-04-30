@@ -5878,6 +5878,44 @@ export interface InlineResponse2009Detalles {
 /**
  * 
  * @export
+ * @interface InlineResponse2006
+ */
+export interface InlineResponse2006 {
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse2006
+     */
+    'usuario'?: Usuario;
+    /**
+     * 
+     * @type {InlineResponse2006EmailStatus}
+     * @memberof InlineResponse2006
+     */
+    'emailStatus'?: InlineResponse2006EmailStatus;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse2006EmailStatus
+ */
+export interface InlineResponse2006EmailStatus {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2006EmailStatus
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2006EmailStatus
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
  * @interface LogAcceso
  */
 export interface LogAcceso {
@@ -11882,13 +11920,19 @@ export interface NewPlanificadorDetalle {
      * @type {number}
      * @memberof NewPlanificadorDetalle
      */
-    'planificadorCategoriaId': number;
+    'productoPlanificadorId'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof NewPlanificadorDetalle
      */
-    'estado': number;
+    'planificadorCategoriaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlanificadorDetalle
+     */
+    'estado'?: number | null;
     /**
      * 
      * @type {number}
@@ -11900,7 +11944,37 @@ export interface NewPlanificadorDetalle {
      * @type {number}
      * @memberof NewPlanificadorDetalle
      */
-    'responsable': number;
+    'productoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlanificadorDetalle
+     */
+    'planificadorTareaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'nombreCategoria'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'nombreTarea'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlanificadorDetalle
+     */
+    'tareaAsociadaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewPlanificadorDetalle
+     */
+    'responsable'?: number | null;
     /**
      * 
      * @type {number}
@@ -11912,7 +11986,7 @@ export interface NewPlanificadorDetalle {
      * @type {number}
      * @memberof NewPlanificadorDetalle
      */
-    'finalizaEn'?: number | null;
+    'terminaEn'?: number | null;
     /**
      * 
      * @type {string}
@@ -11937,6 +12011,12 @@ export interface NewPlanificadorDetalle {
      * @memberof NewPlanificadorDetalle
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'comentarios'?: string | null;
     /**
      * 
      * @type {string}
@@ -11985,6 +12065,30 @@ export interface NewPlanificadorDetalle {
      * @memberof NewPlanificadorDetalle
      */
     'fechaAvisoDesdeFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'fechaEmailInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'fechaEmailAvisoDesdeInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'fechaEmailAvisoAFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewPlanificadorDetalle
+     */
+    'fechaEmailAvisoDesdeFin'?: string | null;
     /**
      * 
      * @type {string}
@@ -12254,12 +12358,6 @@ export interface NewPlanificadorPlantillaResponsable {
  * @interface NewPlantillaEmail
  */
 export interface NewPlantillaEmail {
-    /**
-     * 
-     * @type {number}
-     * @memberof NewPlantillaEmail
-     */
-    'idiomaId': number;
     /**
      * 
      * @type {number}
@@ -12698,6 +12796,73 @@ export interface NewProductoMultimediaTipoUso {
      * @memberof NewProductoMultimediaTipoUso
      */
     'fechaModificacion'?: string | null;
+}
+/**
+ * (tsType: Omit<ProductoPlanificador, \'id\'>, schemaOptions: { title: \'NewProductoPlanificador\', exclude: [ \'id\' ] })
+ * @export
+ * @interface NewProductoPlanificador
+ */
+export interface NewProductoPlanificador {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPlanificador
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPlanificador
+     */
+    'planificadorId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPlanificador
+     */
+    'fechaInicio': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPlanificador
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPlanificador
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPlanificador
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPlanificador
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPlanificador
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewProductoPlanificador
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewProductoPlanificador
+     */
+    'usuInactivo'?: number | null;
 }
 /**
  * (tsType: Omit<ProductoPropiedad, \'id\'>, schemaOptions: { title: \'NewProductoPropiedad\', exclude: [ \'id\' ] })
@@ -15282,13 +15447,19 @@ export interface PlanificadorDetalle {
      * @type {number}
      * @memberof PlanificadorDetalle
      */
-    'planificadorCategoriaId': number;
+    'productoPlanificadorId'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof PlanificadorDetalle
      */
-    'estado': number;
+    'planificadorCategoriaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalle
+     */
+    'estado'?: number | null;
     /**
      * 
      * @type {number}
@@ -15300,7 +15471,37 @@ export interface PlanificadorDetalle {
      * @type {number}
      * @memberof PlanificadorDetalle
      */
-    'responsable': number;
+    'productoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalle
+     */
+    'planificadorTareaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'nombreCategoria'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'nombreTarea'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalle
+     */
+    'tareaAsociadaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalle
+     */
+    'responsable'?: number | null;
     /**
      * 
      * @type {number}
@@ -15312,7 +15513,7 @@ export interface PlanificadorDetalle {
      * @type {number}
      * @memberof PlanificadorDetalle
      */
-    'finalizaEn'?: number | null;
+    'terminaEn'?: number | null;
     /**
      * 
      * @type {string}
@@ -15337,6 +15538,12 @@ export interface PlanificadorDetalle {
      * @memberof PlanificadorDetalle
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'comentarios'?: string | null;
     /**
      * 
      * @type {string}
@@ -15385,6 +15592,30 @@ export interface PlanificadorDetalle {
      * @memberof PlanificadorDetalle
      */
     'fechaAvisoDesdeFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'fechaEmailInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'fechaEmailAvisoDesdeInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'fechaEmailAvisoAFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalle
+     */
+    'fechaEmailAvisoDesdeFin'?: string | null;
     /**
      * 
      * @type {string}
@@ -15519,13 +15750,19 @@ export interface PlanificadorDetallePartial {
      * @type {number}
      * @memberof PlanificadorDetallePartial
      */
-    'planificadorCategoriaId'?: number;
+    'productoPlanificadorId'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof PlanificadorDetallePartial
      */
-    'estado'?: number;
+    'planificadorCategoriaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetallePartial
+     */
+    'estado'?: number | null;
     /**
      * 
      * @type {number}
@@ -15537,7 +15774,37 @@ export interface PlanificadorDetallePartial {
      * @type {number}
      * @memberof PlanificadorDetallePartial
      */
-    'responsable'?: number;
+    'productoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetallePartial
+     */
+    'planificadorTareaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'nombreCategoria'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'nombreTarea'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetallePartial
+     */
+    'tareaAsociadaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetallePartial
+     */
+    'responsable'?: number | null;
     /**
      * 
      * @type {number}
@@ -15549,7 +15816,7 @@ export interface PlanificadorDetallePartial {
      * @type {number}
      * @memberof PlanificadorDetallePartial
      */
-    'finalizaEn'?: number | null;
+    'terminaEn'?: number | null;
     /**
      * 
      * @type {string}
@@ -15574,6 +15841,12 @@ export interface PlanificadorDetallePartial {
      * @memberof PlanificadorDetallePartial
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'comentarios'?: string | null;
     /**
      * 
      * @type {string}
@@ -15622,6 +15895,30 @@ export interface PlanificadorDetallePartial {
      * @memberof PlanificadorDetallePartial
      */
     'fechaAvisoDesdeFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'fechaEmailInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'fechaEmailAvisoDesdeInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'fechaEmailAvisoAFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetallePartial
+     */
+    'fechaEmailAvisoDesdeFin'?: string | null;
     /**
      * 
      * @type {string}
@@ -15676,13 +15973,19 @@ export interface PlanificadorDetalleWithRelations {
      * @type {number}
      * @memberof PlanificadorDetalleWithRelations
      */
-    'planificadorCategoriaId': number;
+    'productoPlanificadorId'?: number | null;
     /**
      * 
      * @type {number}
      * @memberof PlanificadorDetalleWithRelations
      */
-    'estado': number;
+    'planificadorCategoriaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'estado'?: number | null;
     /**
      * 
      * @type {number}
@@ -15694,7 +15997,37 @@ export interface PlanificadorDetalleWithRelations {
      * @type {number}
      * @memberof PlanificadorDetalleWithRelations
      */
-    'responsable': number;
+    'productoId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'planificadorTareaId'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'nombreCategoria'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'nombreTarea'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'tareaAsociadaId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'responsable'?: number | null;
     /**
      * 
      * @type {number}
@@ -15706,7 +16039,7 @@ export interface PlanificadorDetalleWithRelations {
      * @type {number}
      * @memberof PlanificadorDetalleWithRelations
      */
-    'finalizaEn'?: number | null;
+    'terminaEn'?: number | null;
     /**
      * 
      * @type {string}
@@ -15731,6 +16064,12 @@ export interface PlanificadorDetalleWithRelations {
      * @memberof PlanificadorDetalleWithRelations
      */
     'descripcion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'comentarios'?: string | null;
     /**
      * 
      * @type {string}
@@ -15779,6 +16118,30 @@ export interface PlanificadorDetalleWithRelations {
      * @memberof PlanificadorDetalleWithRelations
      */
     'fechaAvisoDesdeFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'fechaEmailInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'fechaEmailAvisoDesdeInicio'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'fechaEmailAvisoAFin'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanificadorDetalleWithRelations
+     */
+    'fechaEmailAvisoDesdeFin'?: string | null;
     /**
      * 
      * @type {string}
@@ -17141,12 +17504,6 @@ export interface PlantillaEmail {
      * @type {number}
      * @memberof PlantillaEmail
      */
-    'idiomaId': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlantillaEmail
-     */
     'empresaId': number;
     /**
      * 
@@ -17312,12 +17669,6 @@ export interface PlantillaEmailPartial {
      * @type {number}
      * @memberof PlantillaEmailPartial
      */
-    'idiomaId'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlantillaEmailPartial
-     */
     'empresaId'?: number;
     /**
      * 
@@ -17398,12 +17749,6 @@ export interface PlantillaEmailWithRelations {
      * @memberof PlantillaEmailWithRelations
      */
     'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlantillaEmailWithRelations
-     */
-    'idiomaId': number;
     /**
      * 
      * @type {number}
@@ -19136,6 +19481,305 @@ export interface ProductoPartial {
      * @memberof ProductoPartial
      */
     'usuarioModificacion'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoPlanificador
+ */
+export interface ProductoPlanificador {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificador
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificador
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificador
+     */
+    'planificadorId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificador
+     */
+    'fechaInicio': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificador
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificador
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificador
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificador
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificador
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificador
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificador
+     */
+    'usuInactivo'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoPlanificadorFilter
+ */
+export interface ProductoPlanificadorFilter {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorFilter
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorFilter
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorFilter
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoPlanificadorFilter
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoPlanificadorFilter
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ProductoPlanificadorFilter1
+ */
+export interface ProductoPlanificadorFilter1 {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorFilter1
+     */
+    'offset'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorFilter1
+     */
+    'limit'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorFilter1
+     */
+    'skip'?: number;
+    /**
+     * 
+     * @type {string | Array<string>}
+     * @memberof ProductoPlanificadorFilter1
+     */
+    'order'?: string | Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: object; }}
+     * @memberof ProductoPlanificadorFilter1
+     */
+    'where'?: { [key: string]: object; };
+    /**
+     * 
+     * @type {object | Set<string>}
+     * @memberof ProductoPlanificadorFilter1
+     */
+    'fields'?: object | Set<string>;
+}
+/**
+ * (tsType: Partial<ProductoPlanificador>, schemaOptions: { partial: true })
+ * @export
+ * @interface ProductoPlanificadorPartial
+ */
+export interface ProductoPlanificadorPartial {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'productoId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'planificadorId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'fechaInicio'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'usuCreacion'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorPartial
+     */
+    'usuInactivo'?: number | null;
+}
+/**
+ * (tsType: ProductoPlanificadorWithRelations, schemaOptions: { includeRelations: true })
+ * @export
+ * @interface ProductoPlanificadorWithRelations
+ */
+export interface ProductoPlanificadorWithRelations {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'productoId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'planificadorId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'fechaInicio': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'activoSn'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'fechaCreacion'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'fechaModificacion'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'usuCreacion': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'usuModificacion'?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'fechaInactivo'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProductoPlanificadorWithRelations
+     */
+    'usuInactivo'?: number | null;
 }
 /**
  * 
@@ -46354,6 +46998,39 @@ export const PlanificadorDetalleControllerApiAxiosParamCreator = function (confi
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        planificadorDetalleControllerEnviarCorreosDelDia: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/planificador-detalles/enviar-correos-dia`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {PlanificadorDetalleFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -46598,6 +47275,15 @@ export const PlanificadorDetalleControllerApiFp = function(configuration?: Confi
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async planificadorDetalleControllerEnviarCorreosDelDia(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.planificadorDetalleControllerEnviarCorreosDelDia(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {PlanificadorDetalleFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -46689,6 +47375,14 @@ export const PlanificadorDetalleControllerApiFactory = function (configuration?:
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        planificadorDetalleControllerEnviarCorreosDelDia(options?: any): AxiosPromise<any> {
+            return localVarFp.planificadorDetalleControllerEnviarCorreosDelDia(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {PlanificadorDetalleFilter1} [filter] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -46777,6 +47471,16 @@ export class PlanificadorDetalleControllerApi extends BaseAPI {
      */
     public planificadorDetalleControllerDeleteById(id: number, options?: AxiosRequestConfig) {
         return PlanificadorDetalleControllerApiFp(this.configuration).planificadorDetalleControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlanificadorDetalleControllerApi
+     */
+    public planificadorDetalleControllerEnviarCorreosDelDia(options?: AxiosRequestConfig) {
+        return PlanificadorDetalleControllerApiFp(this.configuration).planificadorDetalleControllerEnviarCorreosDelDia(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -49814,8 +50518,8 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdioma: async (filter?: PlantillaEmailFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/vistaPlantillaEmailIdioma`;
+        plantillaEmailControllerVistaPlantillaEmail: async (filter?: PlantillaEmailFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaPlantillaEmail`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -49852,8 +50556,8 @@ export const PlantillaEmailControllerApiAxiosParamCreator = function (configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdiomaCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/vistaPlantillaEmailIdiomaCount`;
+        plantillaEmailControllerVistaPlantillaEmailCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/vistaPlantillaEmailCount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -50006,8 +50710,8 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options);
+        async plantillaEmailControllerVistaPlantillaEmail(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmail(filter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -50016,8 +50720,8 @@ export const PlantillaEmailControllerApiFp = function(configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options);
+        async plantillaEmailControllerVistaPlantillaEmailCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plantillaEmailControllerVistaPlantillaEmailCount(where, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -50132,8 +50836,8 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: any): AxiosPromise<object> {
-            return localVarFp.plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerVistaPlantillaEmail(filter?: PlantillaEmailFilter1, options?: any): AxiosPromise<object> {
+            return localVarFp.plantillaEmailControllerVistaPlantillaEmail(filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -50141,8 +50845,8 @@ export const PlantillaEmailControllerApiFactory = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
-            return localVarFp.plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options).then((request) => request(axios, basePath));
+        plantillaEmailControllerVistaPlantillaEmailCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<object> {
+            return localVarFp.plantillaEmailControllerVistaPlantillaEmailCount(where, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -50277,8 +50981,8 @@ export class PlantillaEmailControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerVistaPlantillaEmailIdioma(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailIdioma(filter, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerVistaPlantillaEmail(filter?: PlantillaEmailFilter1, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmail(filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -50288,8 +50992,8 @@ export class PlantillaEmailControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PlantillaEmailControllerApi
      */
-    public plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
-        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailIdiomaCount(where, options).then((request) => request(this.axios, this.basePath));
+    public plantillaEmailControllerVistaPlantillaEmailCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return PlantillaEmailControllerApiFp(this.configuration).plantillaEmailControllerVistaPlantillaEmailCount(where, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -53926,6 +54630,612 @@ export class ProductoMultimediaTipoUsoControllerApi extends BaseAPI {
      */
     public productoMultimediaTipoUsoControllerUpdateById(id: number, productoMultimediaTipoUsoPartial?: ProductoMultimediaTipoUsoPartial, options?: AxiosRequestConfig) {
         return ProductoMultimediaTipoUsoControllerApiFp(this.configuration).productoMultimediaTipoUsoControllerUpdateById(id, productoMultimediaTipoUsoPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ProductoPlanificadorControllerApi - axios parameter creator
+ * @export
+ */
+export const ProductoPlanificadorControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerCount: async (where?: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-planificadores/count`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {NewProductoPlanificador} [newProductoPlanificador] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerCreate: async (newProductoPlanificador?: NewProductoPlanificador, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-planificadores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newProductoPlanificador, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerDeleteById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPlanificadorControllerDeleteById', 'id', id)
+            const localVarPath = `/producto-planificadores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ProductoPlanificadorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerFind: async (filter?: ProductoPlanificadorFilter1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-planificadores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificadorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerFindById: async (id: number, filter?: ProductoPlanificadorFilter, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPlanificadorControllerFindById', 'id', id)
+            const localVarPath = `/producto-planificadores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificador} [productoPlanificador] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerReplaceById: async (id: number, productoPlanificador?: ProductoPlanificador, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPlanificadorControllerReplaceById', 'id', id)
+            const localVarPath = `/producto-planificadores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoPlanificador, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerUpdateAll: async (where?: { [key: string]: object; }, productoPlanificadorPartial?: ProductoPlanificadorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/producto-planificadores`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (where !== undefined) {
+                localVarQueryParameter['where'] = where;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoPlanificadorPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerUpdateById: async (id: number, productoPlanificadorPartial?: ProductoPlanificadorPartial, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('productoPlanificadorControllerUpdateById', 'id', id)
+            const localVarPath = `/producto-planificadores/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication jwt required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(productoPlanificadorPartial, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProductoPlanificadorControllerApi - functional programming interface
+ * @export
+ */
+export const ProductoPlanificadorControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProductoPlanificadorControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerCount(where, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {NewProductoPlanificador} [newProductoPlanificador] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerCreate(newProductoPlanificador?: NewProductoPlanificador, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoPlanificador>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerCreate(newProductoPlanificador, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerDeleteById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerDeleteById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {ProductoPlanificadorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerFind(filter?: ProductoPlanificadorFilter1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProductoPlanificadorWithRelations>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerFind(filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificadorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerFindById(id: number, filter?: ProductoPlanificadorFilter, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductoPlanificadorWithRelations>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerFindById(id, filter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificador} [productoPlanificador] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerReplaceById(id: number, productoPlanificador?: ProductoPlanificador, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerReplaceById(id, productoPlanificador, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerUpdateAll(where?: { [key: string]: object; }, productoPlanificadorPartial?: ProductoPlanificadorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoopbackCount>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerUpdateAll(where, productoPlanificadorPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async productoPlanificadorControllerUpdateById(id: number, productoPlanificadorPartial?: ProductoPlanificadorPartial, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.productoPlanificadorControllerUpdateById(id, productoPlanificadorPartial, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProductoPlanificadorControllerApi - factory interface
+ * @export
+ */
+export const ProductoPlanificadorControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProductoPlanificadorControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerCount(where?: { [key: string]: object; }, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoPlanificadorControllerCount(where, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {NewProductoPlanificador} [newProductoPlanificador] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerCreate(newProductoPlanificador?: NewProductoPlanificador, options?: any): AxiosPromise<ProductoPlanificador> {
+            return localVarFp.productoPlanificadorControllerCreate(newProductoPlanificador, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerDeleteById(id: number, options?: any): AxiosPromise<any> {
+            return localVarFp.productoPlanificadorControllerDeleteById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ProductoPlanificadorFilter1} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerFind(filter?: ProductoPlanificadorFilter1, options?: any): AxiosPromise<Array<ProductoPlanificadorWithRelations>> {
+            return localVarFp.productoPlanificadorControllerFind(filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificadorFilter} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerFindById(id: number, filter?: ProductoPlanificadorFilter, options?: any): AxiosPromise<ProductoPlanificadorWithRelations> {
+            return localVarFp.productoPlanificadorControllerFindById(id, filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificador} [productoPlanificador] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerReplaceById(id: number, productoPlanificador?: ProductoPlanificador, options?: any): AxiosPromise<any> {
+            return localVarFp.productoPlanificadorControllerReplaceById(id, productoPlanificador, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {{ [key: string]: object; }} [where] 
+         * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerUpdateAll(where?: { [key: string]: object; }, productoPlanificadorPartial?: ProductoPlanificadorPartial, options?: any): AxiosPromise<LoopbackCount> {
+            return localVarFp.productoPlanificadorControllerUpdateAll(where, productoPlanificadorPartial, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        productoPlanificadorControllerUpdateById(id: number, productoPlanificadorPartial?: ProductoPlanificadorPartial, options?: any): AxiosPromise<any> {
+            return localVarFp.productoPlanificadorControllerUpdateById(id, productoPlanificadorPartial, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProductoPlanificadorControllerApi - object-oriented interface
+ * @export
+ * @class ProductoPlanificadorControllerApi
+ * @extends {BaseAPI}
+ */
+export class ProductoPlanificadorControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerCount(where?: { [key: string]: object; }, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerCount(where, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {NewProductoPlanificador} [newProductoPlanificador] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerCreate(newProductoPlanificador?: NewProductoPlanificador, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerCreate(newProductoPlanificador, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerDeleteById(id: number, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerDeleteById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ProductoPlanificadorFilter1} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerFind(filter?: ProductoPlanificadorFilter1, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerFind(filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoPlanificadorFilter} [filter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerFindById(id: number, filter?: ProductoPlanificadorFilter, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerFindById(id, filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoPlanificador} [productoPlanificador] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerReplaceById(id: number, productoPlanificador?: ProductoPlanificador, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerReplaceById(id, productoPlanificador, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {{ [key: string]: object; }} [where] 
+     * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerUpdateAll(where?: { [key: string]: object; }, productoPlanificadorPartial?: ProductoPlanificadorPartial, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerUpdateAll(where, productoPlanificadorPartial, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {ProductoPlanificadorPartial} [productoPlanificadorPartial] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductoPlanificadorControllerApi
+     */
+    public productoPlanificadorControllerUpdateById(id: number, productoPlanificadorPartial?: ProductoPlanificadorPartial, options?: AxiosRequestConfig) {
+        return ProductoPlanificadorControllerApiFp(this.configuration).productoPlanificadorControllerUpdateById(id, productoPlanificadorPartial, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -66785,7 +68095,7 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerCreate(newUsuario?: NewUsuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Usuario>> {
+        async usuariosControllerCreate(newUsuario?: NewUsuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerCreate(newUsuario, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -66959,7 +68269,7 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerCreate(newUsuario?: NewUsuario, options?: any): AxiosPromise<Usuario> {
+        usuariosControllerCreate(newUsuario?: NewUsuario, options?: any): AxiosPromise<InlineResponse2006> {
             return localVarFp.usuariosControllerCreate(newUsuario, options).then((request) => request(axios, basePath));
         },
         /**

@@ -14,6 +14,7 @@ import { postSubirImagen, postSubirFichero, borrarFichero } from "@/app/api-endp
 import { getTiposUsoMultimedia } from "@/app/api-endpoints/tipo_uso_multimedia";
 import { getProductoMultimediaTiposUso, postProductoMultimediaTipoUso, deleteProductoMultimediaTipoUso } from "@/app/api-endpoints/producto_multimedia_tipo_uso";
 import { getUsuarioSesion, devuelveBasePath } from "@/app/utility/Utils";
+import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 
 /**
  * Muestra una imagen en miniatura (thumbnail). Al hacer clic, abre VisualizadorDeImagen
@@ -57,6 +58,23 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
     const [dialogoTipoUso, setDialogoTipoUso] = useState(false);
     const [dialogoEliminar, setDialogoEliminar] = useState({ visible: false, multimediaDetalleId: null, nombreArchivo: '' });
     const [erroresValidacion, setErroresValidacion] = useState(new Set());
+    const [puedeCrearMultimedia, setPuedeCrearMultimedia] = useState(false);
+    const [puedeEditarMultimedia, setPuedeEditarMultimedia] = useState(false);
+
+    // Cargo los permisos internos de la pestaña.
+    useEffect(() => {
+        const cargarPermisosPestana = async () => {
+            const [permisoNuevo, permisoEditar] = await Promise.all([
+                tieneUsuarioPermiso('Productos', 'MultimediaNuevo'),
+                tieneUsuarioPermiso('Productos', 'MultimediaActualizar')
+            ]);
+
+            setPuedeCrearMultimedia(Boolean(permisoNuevo));
+            setPuedeEditarMultimedia(Boolean(permisoEditar));
+        };
+
+        cargarPermisosPestana();
+    }, []);
 
     /**
      * Devuelve el icono PrimeIcons correspondiente al tipo de multimedia.
@@ -602,7 +620,7 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
      */
     const renderizarCampoMultimedia = (multimediaDetalle) => {
         const valorActual = valoresMultimedia[multimediaDetalle.id] || {};
-        const deshabilitado = !estoyEditandoProducto || guardando;
+        const deshabilitado = !estoyEditandoProducto || guardando || !puedeCrearMultimedia;
         const estaSubiendo = subiendo[multimediaDetalle.id];
         const tieneError = erroresValidacion.has(multimediaDetalle.id);
 
@@ -666,10 +684,10 @@ const ProductoMultimedia = ({ idProducto, tipoProductoId, estoyEditandoProducto 
                                     <i className="pi pi-external-link mr-1"></i>
                                     {intl.formatMessage({ id: 'Ver archivo' })}
                                 </a>
-                                {estoyEditandoProducto && (
+                                {estoyEditandoProducto && puedeEditarMultimedia && (
                                     <span className="text-xs text-400">|</span>
                                 )}
-                                {estoyEditandoProducto && (
+                                {estoyEditandoProducto && puedeEditarMultimedia && (
                                     <button
                                         className="p-0 border-none bg-transparent text-red-500 text-xs cursor-pointer hover:underline"
                                         onClick={() => confirmarEliminarMultimedia(multimediaDetalle.id)}
