@@ -31,46 +31,6 @@ const EditarCorreoPlantilla = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            // Obtenemos todos los idiomas
-            const registrosIdiomas = await getIdiomas();
-            const jsonIdiomas = registrosIdiomas.map(idioma => ({
-                nombre: idioma.nombre,
-                id: idioma.id,
-                activoSn: idioma.activoSn
-            })).sort((a, b) => a.nombre.localeCompare(b.nombre));
-
-            const accionesCorreo = [
-                { nombre: 'Recuperar contraseña', label: intl.formatMessage({ id: 'Recuperar contraseña' }) },
-                { nombre: 'Enviar un email a usuarios', label: intl.formatMessage({ id: 'Enviar un email a usuarios' }) },
-                { nombre: 'planificador_fecha_inicio', label: intl.formatMessage({ id: 'Planificador - Inicio tarea' }) },
-                { nombre: 'planificador_fecha_aviso_desde_inicio', label: intl.formatMessage({ id: 'Planificador - Aviso desde inicio' }) },
-                { nombre: 'planificador_fecha_aviso_a_fin', label: intl.formatMessage({ id: 'Planificador - Aviso a fin' }) },
-                { nombre: 'planificador_fecha_aviso_desde_fin', label: intl.formatMessage({ id: 'Planificador - Aviso desde fin' }) },
-                { nombre: 'planificador_resumen', label: intl.formatMessage({ id: 'Planificador - Resumen' }) },
-            ];
-
-            for (const accion of [...accionesCorreo]) {
-                if (accion.nombre === 'Enviar un email a usuarios' || accion.nombre.startsWith('planificador_')) {
-                    continue;
-                }
-
-                const registrosAccion = await getPlantillaEmails(JSON.stringify({
-                    where: { and: { accion: accion.nombre } }
-                }));
-                const plantillaConAccion = registrosAccion.find(
-                    (registro) => registro.accion === accion.nombre && registro.id !== idEditar
-                );
-
-                if (plantillaConAccion) {
-                    accionesCorreo.splice(accionesCorreo.indexOf(accion), 1);
-                }
-            }
-
-            setListaAcciones(accionesCorreo);
-
-            //Quitamos los registros inactivos
-            const jsonIdiomasActivos = jsonIdiomas.filter(registro => registro.activoSn === 'S');
-            setListaIdiomas(jsonIdiomasActivos);
             
             // Si el idEditar es diferente de 0, entonces se va a editar o visualizar
             if (idEditar !== 0) {

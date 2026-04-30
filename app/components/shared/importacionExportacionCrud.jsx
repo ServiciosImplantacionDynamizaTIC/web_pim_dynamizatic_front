@@ -14,6 +14,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
     const intl = useIntl();
     const inputArchivoRef = useRef(null);
     const intervaloProgresoRef = useRef(null);
+    const intervaloActivoRef = useRef(false);
     const [archivo, setArchivo] = useState(null);
     const [tipoImportacion, setTipoImportacion] = useState("insertar");
     const [importando, setImportando] = useState(false);
@@ -99,7 +100,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
         const estadoInvalido = resultado?.status && !estadosValidos.includes(resultado.status);
         const sinEstadoConError = !resultado?.status && mensajeError;
 
-        if (resultado?.status === "ERROR" && mensajeError) {
+        if (resultado?.status === "ERROR" && mensajeError && !resultado?.erroresCsv) {
             throw new Error(mensajeError);
         }
 
@@ -149,6 +150,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
 
 
     const limpiarIntervalo = () => {
+        intervaloActivoRef.current = false;
         if (intervaloProgresoRef.current) {
             window.clearInterval(intervaloProgresoRef.current);
             intervaloProgresoRef.current = null;
@@ -160,12 +162,14 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
     const iniciarSeguimientoProgreso = (fechaInicio, totalFilas, tipo) => {
         limpiarIntervalo();
         setProgreso(0);
+        intervaloActivoRef.current = true;
 
         const consultar = async () => {
             try {
                 const { procesados = 0 } = await getProgresoImportacion(tabla, fechaInicio, tipo);
+                if (!intervaloActivoRef.current) return;
                 const porcentaje = totalFilas > 0 ? Math.floor((procesados / totalFilas) * 100) : 0;
-                setProgreso(Math.min(100, Math.max(0, porcentaje)));
+                setProgreso(Math.min(99, Math.max(0, porcentaje)));
             } catch {
                 // En caso de error, no actualizamos el progreso pero seguimos intentando consultar
             }
@@ -258,7 +262,7 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
             return intl.formatMessage({ id: "Proceso finalizado con errores" });
         }
 
-        return intl.formatMessage({ id: "Proceso cancelado" });
+        return intl.formatMessage({ id: "Proceso finalizado con errores" });
     };
 
     // Devuelve el texto explicativo bajo la barra de progreso una vez finalizada la operación.
@@ -363,10 +367,16 @@ const ImportacionExportacionCrud = ({ visible, onHide, controlador, headerCrud, 
             toast.current?.show({ severity, summary, detail: respuestaBackend?.message, life: 5000 });
 
         } catch (error) {
-            setResultado(null);
+            setResultado({
+                estado: "ERROR",
+                mensaje: extraerMensajeError(error, mensajeFallback),
+                tieneErrores: false,
+                nombreArchivoErrores: null,
+            });
             mostrarError(extraerMensajeError(error, mensajeFallback));
         } finally {
             limpiarIntervalo();
+            setProgreso(100);
             setImportando(false);
         }
     };
