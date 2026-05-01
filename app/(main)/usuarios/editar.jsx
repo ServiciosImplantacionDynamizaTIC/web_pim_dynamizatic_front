@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { getUsuarios, postUsuario, patchUsuario } from "@/app/api-endpoints/usuario";
 import { getRol } from "@/app/api-endpoints/rol";
@@ -37,6 +38,8 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const [listaTipoArchivosAntiguos, setListaTipoArchivosAntiguos] = useState([]);
     const [listaRoles, setListaRoles] = useState([]);
     const [listaIdiomas, setListaIdiomas] = useState([]);
+    const [mostrarDialogUsuarioCreado, setMostrarDialogUsuarioCreado] = useState(false);
+    const [dialogExito, setDialogExito] = useState(true);
 
     useEffect(() => {
         //
@@ -55,7 +58,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 };
                 const rolesData = await getRol(JSON.stringify(queryParamsRol));
                 setListaRoles(rolesData || []);
-                
+
                 const idiomasData = await getIdiomas();
                 setListaIdiomas(idiomasData || []);
             } catch (error) {
@@ -67,12 +70,12 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 // Obtenemos el registro a editar
                 const registro = rowData.find((element) => element.id === idEditar);
                 setUsuario(registro);
-                
+
                 //Guardamos los archivos para luego poder compararlos
                 const _listaArchivosAntiguos = crearListaArchivosAntiguos(registro, listaTipoArchivos);
                 setListaTipoArchivosAntiguos(_listaArchivosAntiguos);
             }
-                    
+
             // Verificar permiso para ver historial de contraseñas
             const permiso = await tieneUsuarioPermiso('Usuarios', 'VerHistoricoPassword');
             setPuedeVerHistorico(!!permiso);
@@ -83,7 +86,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
         };
         fetchData();
-    }, [idEditar, rowData]);  
+    }, [idEditar, rowData]);
 
     const validacionesImagenes = () => {
         return validarImagenes(usuario, listaTipoArchivos);
@@ -105,7 +108,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                 life: 3000,
             });
         }
-        
+
         // Si existe algún campo obligatorio vacío, no se puede guardar
         return (!validaNombre && !validaMail && !validaRol && !validaIdioma);
     };
@@ -113,7 +116,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
     const guardarUsuario = async () => {
         setEstadoGuardando(true);
         setEstadoGuardandoBoton(true);
-        
+
         if (await validaciones()) {
             // Obtenemos el registro actual
             let objGuardar = { ...usuario };
@@ -130,29 +133,56 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
 
                 objGuardar['usuarioCreacion'] = usuarioActual;
                 objGuardar['empresaId'] = Number(localStorage.getItem('empresa'));
-                
+
                 if (objGuardar.activoSn === '') {
                     objGuardar.activoSn = 'S';
                 }
-                
-                // Hacemos el insert del registro
-                const nuevoRegistro = await postUsuario(objGuardar);
 
-                // Si se crea el registro mostramos el toast
-                if (nuevoRegistro?.id) {
-                    //Sube las imagenes al servidor
-                    await procesarArchivosNuevoRegistro(usuario, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
-                    // Usamos una variable que luego se cargará en el useEffect de la página principal para mostrar el toast
-                    setRegistroEditarFlag?.(false);
-                    setRegistroResult("insertado");
-                    setIdEditar(null);
-                } else {
-                    toast.current?.show({
-                        severity: 'error',
-                        summary: 'ERROR',
-                        detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el registro' }),
-                        life: 3000,
-                    });
+                // Hacemos el insert del registro
+                try {
+                    const resultado = await postUsuario(objGuardar);
+                    const nuevoRegistro = resultado?.usuario || resultado;
+
+                    // Si se crea el registro mostramos el toast
+                    if (nuevoRegistro?.id) {
+                        //Sube las imagenes al servidor
+                        await procesarArchivosNuevoRegistro(usuario, nuevoRegistro.id, listaTipoArchivos, seccion, usuarioActual);
+                        // Determinar el resultado según el estado del email
+                        const emailOk = resultado?.emailStatus?.status === 'OK';
+                        setDialogExito(emailOk);
+                        setMostrarDialogUsuarioCreado(true);
+                    } else {
+                        toast.current?.show({
+                            severity: 'error',
+                            summary: 'ERROR',
+                            detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el registro' }),
+                            life: 3000,
+                        });
+                    }
+                } catch (error) {
+                    const errorData = error?.response?.data?.error;
+                    if (errorData?.code === 'EMAIL_SEND_FAILED') {
+                        toast.current?.show({
+                            severity: 'error',
+                            summary: intl.formatMessage({ id: 'Usuario no creado' }),
+                            detail: intl.formatMessage({ id: 'Ha fallado el envío del correo de bienvenida. Inténtalo de nuevo o hable con un administrador.' }),
+                            life: 7000,
+                        });
+                    } else if (errorData?.code === 'ER_DUP_ENTRY') {
+                        toast.current?.show({
+                            severity: 'error',
+                            summary: intl.formatMessage({ id: 'No se pudo crear el usuario' }),
+                            detail: intl.formatMessage({ id: 'Ya existe una cuenta asociada a este correo electrónico. Prueba con otro email o inicia sesión.' }),
+                            life: 7000,
+                        });
+                    } else {
+                        toast.current?.show({
+                            severity: 'error',
+                            summary: intl.formatMessage({ id: 'ERROR' }),
+                            detail: intl.formatMessage({ id: 'Ha ocurrido un error creando el usuario' }),
+                            life: 3000,
+                        });
+                    }
                 }
             } else {
                 // Si se edita un registro existente, hacemos el patch del registro
@@ -168,7 +198,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     activoSn: objGuardar.activoSn || 'N',
                     usuarioModificacion: usuarioActual,
                 };
-                
+
                 await patchUsuario(objGuardar.id, usuarioAeditar);
                 await editarArchivos(usuario, objGuardar.id, listaTipoArchivos, listaTipoArchivosAntiguos, seccion, usuarioActual);
                 setRegistroEditarFlag?.(false);
@@ -181,7 +211,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
             }
         } else {
             let errorMessage = intl.formatMessage({ id: 'Todos los campos obligatorios deben ser rellenados' });
-                        
+
             toast.current?.show({
                 severity: 'error',
                 summary: 'ERROR',
@@ -202,10 +232,52 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
         setIdEditar(null);
     };
 
+    const cerrarDialogUsuarioCreado = () => {
+        setMostrarDialogUsuarioCreado(false);
+        setRegistroEditarFlag?.(false);
+        setRegistroResult(dialogExito ? "insertado" : "no_insertado");
+        setIdEditar(null);
+    };
+
     const header = idEditar > 0 ? (editable ? intl.formatMessage({ id: 'Editar' }) : intl.formatMessage({ id: 'Ver' })) : intl.formatMessage({ id: 'Nuevo' });
 
     return (
-        <div>
+        <>
+            <Dialog
+                header={intl.formatMessage({ id: dialogExito ? 'Usuario creado correctamente' : 'Error al crear el usuario' })}
+                visible={mostrarDialogUsuarioCreado}
+                style={{ width: '30rem' }}
+                onHide={cerrarDialogUsuarioCreado}
+                footer={
+                    <Button
+                        label={intl.formatMessage({ id: 'Aceptar' })}
+                        icon="pi pi-check"
+                        onClick={cerrarDialogUsuarioCreado}
+                        autoFocus
+                    />
+                }
+            >
+                <div className="flex align-items-start gap-3">
+                    <i
+                        className={`pi ${dialogExito ? 'pi-envelope' : 'pi-times-circle'} mt-1`}
+                        style={{ fontSize: '1.5rem', color: dialogExito ? 'var(--green-500)' : 'var(--red-500)' }}
+                    ></i>
+                    <div>
+                        <p className="m-0 mb-2" style={{ fontWeight: '600' }}>
+                            {dialogExito
+                                ? intl.formatMessage({ id: 'El usuario ha sido creado con éxito.' })
+                                : intl.formatMessage({ id: 'No se ha podido crear el usuario.' })
+                            }
+                        </p>
+                        <p className="m-0 text-600">
+                            {dialogExito
+                                ? intl.formatMessage({ id: 'Se le ha enviado un correo electrónico con un enlace y un código de verificación para que pueda establecer su contraseña y acceder al sistema.' })
+                                : intl.formatMessage({ id: 'Ha ocurrido un error al enviar el correo de bienvenida al usuario. Por favor, inténtalo de nuevo o contacta con un administrador.' })
+                            }
+                        </p>
+                    </div>
+                </div>
+            </Dialog>
             <div className="grid Usuario">
                 <div className="col-12">
                     <div className="card">
@@ -220,13 +292,13 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                             estadoGuardando={estadoGuardando}
                             isEdit={isEdit}
                         />
-                        
+
                         <Divider type="solid" />
-                        
+
                         {puedeVerHistorico && idEditar !== 0 && (
                             <TabView scrollable>
                                 <TabPanel header={intl.formatMessage({ id: 'Historico de contraseñas' })}>
-                                    <PasswordHistorico usuarioId={idEditar}/>
+                                    <PasswordHistorico usuarioId={idEditar} />
                                 </TabPanel>
                             </TabView>
                         )}
@@ -234,7 +306,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                         <div className="flex justify-content-end mt-2">
                             {editable && (
                                 <Button
-                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })} 
+                                    label={estadoGuardandoBoton ? `${intl.formatMessage({ id: 'Guardando' })}...` : intl.formatMessage({ id: 'Guardar' })}
                                     icon={estadoGuardandoBoton ? "pi pi-spin pi-spinner" : null}
                                     onClick={guardarUsuario}
                                     className="mr-2"
@@ -246,7 +318,7 @@ const EditarUsuario = ({ idEditar, setIdEditar, rowData, emptyRegistro, setRegis
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

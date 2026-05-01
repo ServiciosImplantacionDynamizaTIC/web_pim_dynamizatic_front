@@ -21,7 +21,13 @@ const Verification = () => {
     const [deshabilitarBotones, setDeshabilitarBotones] = useState(false);
     const [cargado, setCargado] = useState(false);
     useEffect(() => {
-        const storedEmail = localStorage.getItem('email') || "";
+        // Soportar email desde URL params (enlace de email de bienvenida) o desde localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email');
+        const storedEmail = emailParam || localStorage.getItem('email') || "";
+        if (emailParam) {
+            localStorage.setItem('email', emailParam);
+        }
         setEmail(storedEmail);
         if (!storedEmail || storedEmail.length === 0) {
             //Si no existe la variable, muestra la pantalla de login porque significa que el usuario ha entrado

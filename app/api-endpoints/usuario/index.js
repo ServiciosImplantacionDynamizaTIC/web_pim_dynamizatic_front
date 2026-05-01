@@ -59,8 +59,13 @@ export const getUsuarioAvatar = async (id) => {
 }
 
 export const postUsuario = async (objUsuario) => {
-    const { data: dataUsuario } = await apiUsuario.usuariosControllerCreate(objUsuario)
-    return dataUsuario
+    try {
+        const { data: dataUsuario } = await apiUsuario.usuariosControllerCreate(objUsuario)
+        return dataUsuario
+    } catch (error) {
+        console.error('Error en postUsuario:', error);
+        throw error;
+    }
 }
 
 export const recuperarPasswordUsuario = async (objEmail) => {
