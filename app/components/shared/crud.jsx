@@ -44,22 +44,8 @@ const Crud = forwardRef(({ getRegistros, getRegistrosCount, botones, columnas, d
         }
     }));
 
-    // Función para obtener el color primario del tema actual
-    const obtenerColorPrimario = () => {
-        const coloresTemas = {
-            'indigo': '#6366F1',
-            'blue': '#3B82F6', 
-            'purple': '#8B5CF6',
-            'teal': '#14B8A6',
-            'cyan': '#06B6D4',
-            'green': '#10B981',
-            'orange': '#F59E0B',
-            'pink': '#EC4899',
-            'mitema': '#db336e' // Color por defecto
-        };
-        
-        return coloresTemas[themeConfig?.theme] || coloresTemas['mitema'];
-    };
+    // var(--primary-color) refleja siempre el CSS cargado, sin depender del estado React
+    const obtenerColorPrimario = () => 'var(--primary-color)';
 
     //Crea el registro vacio con solo id para luego crear el resto de campos vacios dinamicamente
     let emptyRegistro = {

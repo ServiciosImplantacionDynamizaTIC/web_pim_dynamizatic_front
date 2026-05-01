@@ -5688,7 +5688,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ejecuta ahora mismo la limpieza de logs configurados para todas las empresas.",
+            "description": "Ejecuta ahora mismo la limpieza de logs del tenant actual.",
             "content": {
               "application/json": {
                 "schema": {
@@ -10351,7 +10351,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Resultado del envío diario de correos del planificador"
+                  "description": "Resultado del envio diario de correos del planificador"
                 }
               }
             }
@@ -14092,28 +14092,6 @@
         "operationId": "ProductoPlanificadorController.count"
       }
     },
-												  
-			   
-															  
-														
-				 
-										  
-		  
-					  
-				  
-								
-						
-								   
-						   
-																						  
-				 
-			   
-			 
-		   
-		  
-																				 
-	   
-	  
     "/producto-planificadores/{id}": {
       "put": {
         "x-controller-name": "ProductoPlanificadorController",
@@ -25438,15 +25416,6 @@
             "type": "number",
             "nullable": false
           },
- 
-  
- 
-   
- 
-  
- 
- 
-   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -25538,15 +25507,6 @@
             "type": "number",
             "nullable": false
           },
- 
-  
- 
-   
- 
-  
- 
- 
-   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -25642,15 +25602,6 @@
             "type": "number",
             "nullable": false
           },
- 
-  
- 
-   
- 
-  
- 
- 
-   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -25746,15 +25697,6 @@
             "type": "number",
             "nullable": false
           },
- 
-  
- 
-   
- 
-  
- 
- 
-   
           "categoriaId": {
             "type": "number",
             "nullable": false
@@ -28882,10 +28824,6 @@
             "type": "number",
             "nullable": true
           },
-	   
-		
-	   
-   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -28943,58 +28881,26 @@
             "format": "date-time",
             "nullable": true
           },
-								   
-							 
-							
-			
           "fechaEmailInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-									  
-							 
-							
-			
-											 
-							 
-							
-			
           "fechaEmailAvisoDesdeInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-												
-							 
-							
-			
-									  
-							 
-							
-			
           "fechaEmailAvisoAFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-										 
-							 
-							
-			
-										  
-							 
-							
-			
           "fechaEmailAvisoDesdeFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-											 
-							 
-							
-			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -29024,10 +28930,7 @@
           }
         },
         "required": [
-   
-	
           "planificadorId",
-   
           "usuCreacion"
         ],
         "additionalProperties": false
@@ -29085,10 +28988,6 @@
             "type": "number",
             "nullable": true
           },
-	   
-		
-	   
-   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -29146,58 +29045,26 @@
             "format": "date-time",
             "nullable": true
           },
-								   
-							 
-							
-			
           "fechaEmailInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-									  
-							 
-							
-			
-											 
-							 
-							
-			
           "fechaEmailAvisoDesdeInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-												
-							 
-							
-			
-									  
-							 
-							
-			
           "fechaEmailAvisoAFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-										 
-							 
-							
-			
-										  
-							 
-							
-			
           "fechaEmailAvisoDesdeFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-											 
-							 
-							
-			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -29290,10 +29157,6 @@
             "type": "number",
             "nullable": true
           },
-	   
-		
-	   
-   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -29351,58 +29214,26 @@
             "format": "date-time",
             "nullable": true
           },
-								   
-							 
-							
-			
           "fechaEmailInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-									  
-							 
-							
-			
-											 
-							 
-							
-			
           "fechaEmailAvisoDesdeInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-												
-							 
-							
-			
-									  
-							 
-							
-			
           "fechaEmailAvisoAFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-										 
-							 
-							
-			
-										  
-							 
-							
-			
           "fechaEmailAvisoDesdeFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-											 
-							 
-							
-			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -29432,10 +29263,7 @@
           }
         },
         "required": [
-   
-	
           "planificadorId",
-   
           "usuCreacion"
         ],
         "additionalProperties": false,
@@ -29498,10 +29326,6 @@
             "type": "number",
             "nullable": true
           },
-	   
-		
-	   
-   
           "fechaInicio": {
             "type": "string",
             "format": "date-time",
@@ -29559,58 +29383,26 @@
             "format": "date-time",
             "nullable": true
           },
-								   
-							 
-							
-			
           "fechaEmailInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-									  
-							 
-							
-			
-											 
-							 
-							
-			
           "fechaEmailAvisoDesdeInicio": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-												
-							 
-							
-			
-									  
-							 
-							
-			
           "fechaEmailAvisoAFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-										 
-							 
-							
-			
-										  
-							 
-							
-			
           "fechaEmailAvisoDesdeFin": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-											 
-							 
-							
-			
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -34528,6 +34320,10 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
           "nombre": {
             "type": "string",
             "nullable": true
@@ -34537,6 +34333,9 @@
             "nullable": true
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false
       },
       "NewEstado": {
@@ -34544,6 +34343,10 @@
         "type": "object",
         "description": "(tsType: Omit<Estado, 'id'>, schemaOptions: { title: 'NewEstado', exclude: [ 'id' ] })",
         "properties": {
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
           "nombre": {
             "type": "string",
             "nullable": true
@@ -34553,6 +34356,9 @@
             "nullable": true
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "Omit<Estado, 'id'>"
       },
@@ -34564,6 +34370,10 @@
           "id": {
             "type": "number"
           },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
+          },
           "nombre": {
             "type": "string",
             "nullable": true
@@ -34573,6 +34383,9 @@
             "nullable": true
           }
         },
+        "required": [
+          "empresaId"
+        ],
         "additionalProperties": false,
         "x-typescript-type": "EstadoWithRelations"
       },
@@ -34583,6 +34396,10 @@
         "properties": {
           "id": {
             "type": "number"
+          },
+          "empresaId": {
+            "type": "number",
+            "nullable": false
           },
           "nombre": {
             "type": "string",
@@ -39334,6 +39151,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -39349,6 +39169,7 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "nombre",
                     "descripcion"
                   ],
@@ -39406,6 +39227,9 @@
                   "id": {
                     "type": "boolean"
                   },
+                  "empresaId": {
+                    "type": "boolean"
+                  },
                   "nombre": {
                     "type": "boolean"
                   },
@@ -39421,6 +39245,7 @@
                   "type": "string",
                   "enum": [
                     "id",
+                    "empresaId",
                     "nombre",
                     "descripcion"
                   ],
@@ -43745,9 +43570,6 @@
                   "terminaEn": {
                     "type": "boolean"
                   },
-		 
-		  
-	 
                   "fechaInicio": {
                     "type": "boolean"
                   },
@@ -43787,42 +43609,18 @@
                   "fechaAvisoDesdeFin": {
                     "type": "boolean"
                   },
-										   
-									 
-					
                   "fechaEmailInicio": {
                     "type": "boolean"
                   },
-											  
-									 
-					
-													 
-									 
-					
                   "fechaEmailAvisoDesdeInicio": {
                     "type": "boolean"
                   },
-														
-									 
-					
-											  
-									 
-					
                   "fechaEmailAvisoAFin": {
                     "type": "boolean"
                   },
-												 
-									 
-					
-												  
-									 
-					
                   "fechaEmailAvisoDesdeFin": {
                     "type": "boolean"
                   },
-													 
-									 
-					
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -43862,7 +43660,6 @@
                     "responsable",
                     "empiezaEn",
                     "terminaEn",
-		 
                     "fechaInicio",
                     "fechaFin",
                     "codigo",
@@ -43876,18 +43673,10 @@
                     "fechaAvisoDesdeInicio",
                     "fechaAvisoAFin",
                     "fechaAvisoDesdeFin",
-										   
                     "fechaEmailInicio",
-											  
-													 
                     "fechaEmailAvisoDesdeInicio",
-														
-											  
                     "fechaEmailAvisoAFin",
-												 
-												  
                     "fechaEmailAvisoDesdeFin",
-													 
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -43985,9 +43774,6 @@
                   "terminaEn": {
                     "type": "boolean"
                   },
-		 
-		  
-	 
                   "fechaInicio": {
                     "type": "boolean"
                   },
@@ -44027,42 +43813,18 @@
                   "fechaAvisoDesdeFin": {
                     "type": "boolean"
                   },
-										   
-									 
-					
                   "fechaEmailInicio": {
                     "type": "boolean"
                   },
-											  
-									 
-					
-													 
-									 
-					
                   "fechaEmailAvisoDesdeInicio": {
                     "type": "boolean"
                   },
-														
-									 
-					
-											  
-									 
-					
                   "fechaEmailAvisoAFin": {
                     "type": "boolean"
                   },
-												 
-									 
-					
-												  
-									 
-					
                   "fechaEmailAvisoDesdeFin": {
                     "type": "boolean"
                   },
-													 
-									 
-					
                   "fechaCreacion": {
                     "type": "boolean"
                   },
@@ -44102,7 +43864,6 @@
                     "responsable",
                     "empiezaEn",
                     "terminaEn",
-		 
                     "fechaInicio",
                     "fechaFin",
                     "codigo",
@@ -44116,18 +43877,10 @@
                     "fechaAvisoDesdeInicio",
                     "fechaAvisoAFin",
                     "fechaAvisoDesdeFin",
-										   
                     "fechaEmailInicio",
-											  
-													 
                     "fechaEmailAvisoDesdeInicio",
-														
-											  
                     "fechaEmailAvisoAFin",
-												 
-												  
                     "fechaEmailAvisoDesdeFin",
-													 
                     "fechaCreacion",
                     "fechaModificacion",
                     "usuCreacion",
@@ -47048,12 +46801,6 @@
                   "tipoProductoId": {
                     "type": "boolean"
                   },
-   
- 
-  
-   
- 
-  
                   "categoriaId": {
                     "type": "boolean"
                   },
@@ -47113,8 +46860,6 @@
                     "id",
                     "empresaId",
                     "tipoProductoId",
-   
-   
                     "categoriaId",
                     "marcaId",
                     "sku",
@@ -47192,12 +46937,6 @@
                   "tipoProductoId": {
                     "type": "boolean"
                   },
-   
- 
-  
-   
- 
-  
                   "categoriaId": {
                     "type": "boolean"
                   },
@@ -47257,8 +46996,6 @@
                     "id",
                     "empresaId",
                     "tipoProductoId",
-   
-   
                     "categoriaId",
                     "marcaId",
                     "sku",

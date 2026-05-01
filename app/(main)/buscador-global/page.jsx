@@ -18,6 +18,7 @@ import { tieneUsuarioPermiso } from "@/app/components/shared/componentes";
 import { SECCIONES, OPCIONES_ACTIVO, COLUMNAS_POR_SECCION, CRUD_CONFIG_MAP, FILTROS_POR_SECCION } from "./buscador-global.config";
 import { Tooltip } from "primereact/tooltip";
 import { Badge } from "primereact/badge";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const activoSnTemplate = (cabecera) => (rowData) => (
     <>
@@ -75,6 +76,7 @@ const BuscadorGlobal = () => {
     const [buscando, setBuscando] = useState(false);
     const [buscado, setBuscado] = useState(false);
     const [registroVer, setRegistroVer] = useState(null);
+    const [cargandoVer, setCargandoVer] = useState(false);
     const [seccionesPermitidas, setSeccionesPermitidas] = useState([]);
 
     useEffect(() => {
@@ -156,6 +158,13 @@ const BuscadorGlobal = () => {
 
     const columnas = filtros.seccion ? (COLUMNAS_POR_SECCION[filtros.seccion] || []) : [];
 
+    const verRegistro = (seccion, id) => {
+        setCargandoVer(true);
+        setRegistroVer({ seccion, id });
+        // Ocultamos el overlay una vez que el CRUD ha tenido tiempo de cargar y abrir el registro
+        setTimeout(() => setCargandoVer(false), 1000);
+    };
+
     const accionesTemplate = (rowData) => (
         <Button
             icon="pi pi-eye"
@@ -163,13 +172,28 @@ const BuscadorGlobal = () => {
             rounded
             title="Ver"
             severity="info"
-            onClick={() => setRegistroVer({ seccion: filtros.seccion, id: rowData.id })}
+            onClick={() => verRegistro(filtros.seccion, rowData.id)}
         />
     );
 
     return (
         <>
             <Toast ref={toast} />
+
+            {/* Overlay de carga al navegar al registro */}
+            {cargandoVer && (
+                <div style={{
+                    position: 'fixed', inset: 0, zIndex: 9999,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: 'rgba(255,255,255,0.6)',
+                }}>
+                    <ProgressSpinner
+                        style={{ width: '50px', height: '50px' }}
+                        strokeWidth="4"
+                        animationDuration=".8s"
+                    />
+                </div>
+            )}
 
             {/* Vista Ver — Crud en modo solo lectura */}
             {registroVer && (() => {

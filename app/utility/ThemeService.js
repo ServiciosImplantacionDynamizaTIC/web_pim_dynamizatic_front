@@ -138,13 +138,11 @@ export const applyThemeConfig = (themeConfig, callback) => {
         //
         //Si la url actual es diferente a la nueva (porque hemos cambiado el tema) entramos en el if para realizar los cambios a todo 
         //
-        const currentHref = linkElement.getAttribute('href');
-        
+        // Quitamos el timestamp del href guardado antes de comparar para evitar bucles infinitos
+        const currentHref = (linkElement.getAttribute('href') || '').split('?')[0];
+
         if (currentHref !== newHref) {
-            //
-            // Forzamos la recarga del CSS
-            //
-            linkElement.setAttribute('href', newHref + '?t=' + Date.now());
+            linkElement.setAttribute('href', newHref);
             
             //
             // Aplicamos el nuevo tema

@@ -22,20 +22,40 @@ export const LayoutProvider = (props: ChildContainerProps) => {
     //
     const { themeConfig } = useEmpresaTheme(); 
     //
-    //Definimos el layoutConfig y establecemos los valores por defecto
-    //Nota: LayoutConfig es un objeto de configuración central que controla el comportamiento y la apariencia visual de toda la interfaz. Funciona como el "centro de control" del layout.
+    //Definimos el layoutConfig y establecemos los valores por defecto.
+    //Usamos un inicializador lazy para leer localStorage sincrónicamente y evitar que
+    //el primer render use los valores por defecto (ej. layout-colorscheme-menu en vez de layout-primarycolor-menu).
     //
-    const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>({
-        ripple: false,
-        inputStyle: "outlined",
-        menuMode: "static",
-        menuTheme: "colorScheme",
-        colorScheme: "light",
-        theme: "mitema",
-        scale: 14,
+    const [layoutConfig, setLayoutConfig] = useState<LayoutConfig>(() => {
+        if (typeof window !== 'undefined') {
+            try {
+                const raw = localStorage.getItem('empresaThemeConfig');
+                if (raw) {
+                    const cfg = JSON.parse(raw);
+                    return {
+                        ripple: Boolean(cfg.temaRipple ?? false),
+                        inputStyle: (cfg.estiloInput || 'outlined') as "outlined" | "filled",
+                        menuMode: (cfg.modoMenu || 'static') as MenuMode,
+                        menuTheme: (cfg.temaMenu || 'colorScheme') as MenuColorScheme,
+                        colorScheme: (cfg.esquemaColor || 'light') as ColorScheme,
+                        theme: cfg.tema || 'mitema',
+                        scale: cfg.escala || 14,
+                    };
+                }
+            } catch (e) {}
+        }
+        return {
+            ripple: false,
+            inputStyle: "outlined",
+            menuMode: "static",
+            menuTheme: "colorScheme",
+            colorScheme: "light",
+            theme: "mitema",
+            scale: 14,
+        };
     });
     //
-    //Una vez obtenida la configuración de la empresa, sincronizamos el layoutConfig con ella 
+    //Una vez obtenida la configuración de la empresa, sincronizamos el layoutConfig con ella
     //
     useEffect(() => {
         if (themeConfig) {
@@ -51,6 +71,55 @@ export const LayoutProvider = (props: ChildContainerProps) => {
             }));
         }
     }, [themeConfig]);
+
+    //
+    // Escuchamos login/logout directamente para actualizar layoutConfig sin esperar a useEmpresaTheme.
+    // Esto evita el flash de estilos incorrectos en el primer render tras el login (el useEffect sobre
+    // themeConfig siempre se ejecuta después del render, causando un ciclo extra).
+    //
+    useEffect(() => {
+        const buildConfig = (raw: string): LayoutConfig | null => {
+            try {
+                const cfg = JSON.parse(raw);
+                return {
+                    ripple: Boolean(cfg.temaRipple ?? false),
+                    inputStyle: (cfg.estiloInput || 'outlined') as "outlined" | "filled",
+                    menuMode: (cfg.modoMenu || 'static') as MenuMode,
+                    menuTheme: (cfg.temaMenu || 'colorScheme') as MenuColorScheme,
+                    colorScheme: (cfg.esquemaColor || 'light') as ColorScheme,
+                    theme: cfg.tema || 'mitema',
+                    scale: cfg.escala || 14,
+                };
+            } catch { return null; }
+        };
+
+        const handleLogin = () => {
+            const raw = localStorage.getItem('empresaThemeConfig');
+            if (raw) {
+                const config = buildConfig(raw);
+                if (config) setLayoutConfig(config);
+            }
+        };
+
+        const handleLogout = () => {
+            setLayoutConfig({
+                ripple: false,
+                inputStyle: "outlined",
+                menuMode: "static",
+                menuTheme: "colorScheme",
+                colorScheme: "light",
+                theme: "mitema",
+                scale: 14,
+            });
+        };
+
+        window.addEventListener('user-logged-in', handleLogin);
+        window.addEventListener('user-logged-out', handleLogout);
+        return () => {
+            window.removeEventListener('user-logged-in', handleLogin);
+            window.removeEventListener('user-logged-out', handleLogout);
+        };
+    }, []);
 
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,

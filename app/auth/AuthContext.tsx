@@ -333,12 +333,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Almacenar configuración de tema de la empresa
     if (empresa) {
       const themeConfig = {
-        tema: empresa.tema || 'indigo',
+        tema: empresa.tema || 'mitema',
         esquemaColor: empresa.esquemaColor || 'light',
         escala: empresa.escala || 14,
-        temaRipple: empresa.temaRipple || 'N'
+        temaRipple: empresa.temaRipple || 'N',
+        temaMenu: empresa.temaMenu || 'colorScheme',
+        modoMenu: empresa.modoMenu || 'static',
+        estiloInput: empresa.estiloInput || 'outlined'
       };
       localStorage.setItem('empresaThemeConfig', JSON.stringify(themeConfig));
+      // Actualizar el <link> del tema ya durante el login, antes de navegar.
+      // almacenarLogin tarda varios segundos (idioma, permisos, logs...) así que
+      // el CSS tiene tiempo de cargar antes de que router.push() ejecute.
+      if (typeof window !== 'undefined') {
+        const link = document.getElementById('theme-link') as HTMLLinkElement | null;
+        if (link) {
+          const newHref = `/theme/theme-${themeConfig.esquemaColor}/${themeConfig.tema}/theme.css`;
+          const currentHref = (link.getAttribute('href') || '').split('?')[0];
+          if (currentHref !== newHref) {
+            await new Promise<void>((resolve) => {
+              const timeout = setTimeout(resolve, 2000); // máximo 2s de espera
+              link.onload = () => { clearTimeout(timeout); resolve(); };
+              link.onerror = () => { clearTimeout(timeout); resolve(); };
+              link.href = newHref;
+            });
+          }
+        }
+      }
     }
     
     if (await compruebaRolUsuario({ ...data })) {

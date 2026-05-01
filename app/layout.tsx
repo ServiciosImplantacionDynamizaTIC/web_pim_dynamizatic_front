@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { LayoutProvider } from "../layout/context/layoutcontext";
 import { AuthProvider } from "./auth/AuthContext";
 import { AbilityProvider } from '@/app/utility/Can'; // Importa AbilityProvider
@@ -75,9 +75,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
                                 <AbilityProvider> {/* Envolvemos con AbilityProvider */}
                                     <MenuProvider>
                                         <LayoutProvider>
-                                            <LayoutContainer>
-                                                {children}
-                                            </LayoutContainer>
+                                            <Suspense>
+                                                <LayoutContainer>
+                                                    {children}
+                                                </LayoutContainer>
+                                            </Suspense>
                                         </LayoutProvider>
                                     </MenuProvider>
                                 </AbilityProvider>

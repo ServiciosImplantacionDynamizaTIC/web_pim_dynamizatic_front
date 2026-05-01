@@ -55,7 +55,27 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
         try {
             setLoading(true);
             //
-            // Obtenemos el ID de la empresa desde localStorage
+            // Primero intentamos leer de localStorage (guardado por AuthContext en login).
+            // Esto evita llamar a la API antes de que el JWT esté listo y aplica el tema instantáneamente,
+            // incluyendo menuTheme que determina el color de fondo de la sidebar.
+            //
+            const raw = localStorage.getItem('empresaThemeConfig');
+            if (raw) {
+                const cfg = JSON.parse(raw);
+                const config: ThemeConfig = {
+                    colorScheme: cfg.esquemaColor || cfg.colorScheme || 'light',
+                    theme:       cfg.tema        || cfg.theme       || 'mitema',
+                    scale:       cfg.escala      || cfg.scale       || 14,
+                    ripple:      Boolean(cfg.temaRipple ?? cfg.ripple ?? false),
+                    inputStyle:  cfg.estiloInput || cfg.inputStyle  || 'outlined',
+                    menuMode:    cfg.modoMenu    || cfg.menuMode    || 'static',
+                    menuTheme:   cfg.temaMenu    || cfg.menuTheme   || 'colorScheme',
+                };
+                setThemeConfig(config);
+                return config;
+            }
+            //
+            // Fallback: si no hay config en localStorage, llamamos a la API
             //
             let empresaId = localStorage.getItem('empresa');
             //
@@ -76,9 +96,6 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
             // Si no hay empresa, usamos configuración por defecto
             //
             if (!empresaId) {
-                //
-                // Configuración por defecto cuando no hay empresa
-                //
                 const defaultConfig: ThemeConfig = {
                     colorScheme: 'light',
                     theme: 'mitema',
@@ -95,23 +112,17 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
             // Si hay empresa cargamos su configuración desde el backend
             //
             const empresa = await getEmpresa(Number(empresaId));
-            
+
             if (empresa) {
                 setEmpresaData(empresa);
-                //
-                // Usamos el servicio para extraer la configuración
-                //
                 const layoutConfig = getLayoutConfigFromEmpresa(empresa);
                 setThemeConfig(layoutConfig);
                 return layoutConfig;
             }
-            
+
             return null;
         } catch (error) {
             console.error('Error al cargar la configuración del tema:', error);
-            //
-            // En caso de error, usamos la configuración por defecto
-            //
             const defaultConfig: ThemeConfig = {
                 colorScheme: 'light',
                 theme: 'mitema',
@@ -280,10 +291,30 @@ export const useEmpresaTheme = (): UseEmpresaThemeReturn => {
             }
         };
         //
-        //Controlamos eventos personalizados de login y logout para recargar o restaurar configuración
+        // En login, AuthContext ya guardó empresaThemeConfig antes de disparar el evento.
+        // Leemos directamente de localStorage para no depender de JWT/API.
         //
         const handleLoginEvent = () => {
-            setTimeout(() => loadEmpresaThemeConfig(), 100);
+            const raw = localStorage.getItem('empresaThemeConfig');
+            if (raw) {
+                try {
+                    const cfg = JSON.parse(raw);
+                    const config: ThemeConfig = {
+                        colorScheme: cfg.esquemaColor || cfg.colorScheme || 'light',
+                        theme:       cfg.tema        || cfg.theme       || 'mitema',
+                        scale:       cfg.escala      || cfg.scale       || 14,
+                        ripple:      Boolean(cfg.temaRipple ?? cfg.ripple ?? false),
+                        inputStyle:  cfg.estiloInput || cfg.inputStyle  || 'outlined',
+                        menuMode:    cfg.modoMenu    || cfg.menuMode    || 'static',
+                        menuTheme:   cfg.temaMenu    || cfg.menuTheme   || 'colorScheme',
+                    };
+                    setThemeConfig(config);
+                } catch (e) {
+                    setTimeout(() => loadEmpresaThemeConfig(), 100);
+                }
+            } else {
+                setTimeout(() => loadEmpresaThemeConfig(), 100);
+            }
         };
         //
         //Controlamos evento de logout para restaurar configuración por defecto

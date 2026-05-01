@@ -3376,6 +3376,12 @@ export interface Estado {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof Estado
+     */
+    'empresaId': number;
+    /**
+     * 
      * @type {string}
      * @memberof Estado
      */
@@ -3481,6 +3487,12 @@ export interface EstadoPartial {
     'id'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof EstadoPartial
+     */
+    'empresaId'?: number;
+    /**
+     * 
      * @type {string}
      * @memberof EstadoPartial
      */
@@ -3504,6 +3516,12 @@ export interface EstadoWithRelations {
      * @memberof EstadoWithRelations
      */
     'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EstadoWithRelations
+     */
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -5550,6 +5568,44 @@ export interface InlineResponse20011 {
 /**
  * 
  * @export
+ * @interface InlineResponse20012
+ */
+export interface InlineResponse20012 {
+    /**
+     * 
+     * @type {Usuario}
+     * @memberof InlineResponse20012
+     */
+    'usuario'?: Usuario;
+    /**
+     * 
+     * @type {InlineResponse20012EmailStatus}
+     * @memberof InlineResponse20012
+     */
+    'emailStatus'?: InlineResponse20012EmailStatus;
+}
+/**
+ * 
+ * @export
+ * @interface InlineResponse20012EmailStatus
+ */
+export interface InlineResponse20012EmailStatus {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012EmailStatus
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse20012EmailStatus
+     */
+    'message'?: string;
+}
+/**
+ * 
+ * @export
  * @interface InlineResponse2001UserInfo
  */
 export interface InlineResponse2001UserInfo {
@@ -5874,44 +5930,6 @@ export interface InlineResponse2009Detalles {
      * @memberof InlineResponse2009Detalles
      */
     'error'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2006
- */
-export interface InlineResponse2006 {
-    /**
-     * 
-     * @type {Usuario}
-     * @memberof InlineResponse2006
-     */
-    'usuario'?: Usuario;
-    /**
-     * 
-     * @type {InlineResponse2006EmailStatus}
-     * @memberof InlineResponse2006
-     */
-    'emailStatus'?: InlineResponse2006EmailStatus;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2006EmailStatus
- */
-export interface InlineResponse2006EmailStatus {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006EmailStatus
-     */
-    'status'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006EmailStatus
-     */
-    'message'?: string;
 }
 /**
  * 
@@ -10344,6 +10362,12 @@ export interface NewEmpresa {
  * @interface NewEstado
  */
 export interface NewEstado {
+    /**
+     * 
+     * @type {number}
+     * @memberof NewEstado
+     */
+    'empresaId': number;
     /**
      * 
      * @type {string}
@@ -68095,7 +68119,7 @@ export const UsuariosControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usuariosControllerCreate(newUsuario?: NewUsuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+        async usuariosControllerCreate(newUsuario?: NewUsuario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse20012>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usuariosControllerCreate(newUsuario, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -68269,7 +68293,7 @@ export const UsuariosControllerApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usuariosControllerCreate(newUsuario?: NewUsuario, options?: any): AxiosPromise<InlineResponse2006> {
+        usuariosControllerCreate(newUsuario?: NewUsuario, options?: any): AxiosPromise<InlineResponse20012> {
             return localVarFp.usuariosControllerCreate(newUsuario, options).then((request) => request(axios, basePath));
         },
         /**

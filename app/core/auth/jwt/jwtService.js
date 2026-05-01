@@ -67,23 +67,40 @@ export default class JwtService {
         const originalRequest = config
 
         // Si una respuesta tiene un estado 401 (no autorizado), intenta refrescar el token.
-        if (response && response.status === 401) {
+        // Solo si: hay un refreshToken guardado Y la petición que falló no es el propio login/refresh
+        const isLoginRequest = config?.url?.includes('/usuarios/login') || config?.url?.includes('/jwt/refresh-token')
+        const storedRefreshToken = this.getRefreshToken()
+        if (response && response.status === 401 && !isLoginRequest && storedRefreshToken) {
           if (!this.isAlreadyFetchingAccessToken) {
             this.isAlreadyFetchingAccessToken = true
-            this.refreshToken().then(r => {
-              this.isAlreadyFetchingAccessToken = false
-
-              // Actualiza accessToken en el localStorage
-              this.setToken(r.data.accessToken)
-              this.setRefreshToken(r.data.refreshToken)
-
-              this.onAccessTokenFetched(r.data.accessToken)
-            })
+            this.refreshToken()
+              .then(r => {
+                this.isAlreadyFetchingAccessToken = false
+                this.setToken(r.data.accessToken)
+                this.setRefreshToken(r.data.refreshToken)
+                this.onAccessTokenFetched(r.data.accessToken)
+              })
+              .catch(() => {
+                // El refresh falló (token expirado, servidor caído, etc.)
+                // Reseteamos el estado para no dejar la app pillada
+                this.isAlreadyFetchingAccessToken = false
+                this.subscribers = []
+                // Limpiamos tokens inválidos y mandamos al login
+                localStorage.removeItem(this.jwtConfig.storageTokenKeyName)
+                localStorage.removeItem(this.jwtConfig.storageRefreshTokenKeyName)
+                if (typeof window !== 'undefined') {
+                  window.location.href = '/auth/login'
+                }
+              })
           }
           // Si se obtiene un nuevo token, reintenta la solicitud original con el nuevo token.
-          const retryOriginalRequest = new Promise(resolve => {
+          // Usamos Promise con reject para no dejar peticiones colgadas si el refresh falla.
+          const retryOriginalRequest = new Promise((resolve, reject) => {
             this.addSubscriber(accessToken => {
-              // Cambia el encabezado de la Authorization
+              if (!accessToken) {
+                reject(new Error('Sesión expirada'))
+                return
+              }
               originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
               resolve(this.axios(originalRequest))
             })
